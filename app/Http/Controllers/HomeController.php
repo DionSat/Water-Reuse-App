@@ -23,4 +23,9 @@ class HomeController extends Controller
 
         return view('home', compact("allUsers"));
     }
+
+    // returns the info page
+    public function getInfo() {
+        return view('info');
+    }
 }

@@ -15,8 +15,14 @@ Route::get('/', function () {
     return view('mainpage');
 });
 
+Route::get('/info', function() {
+    return view('info');
+});
+
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->middleware('auth')->name('home');
 
+Route::get('/home', 'HomeController@index')->middleware('auth')->name('home');
+Route::get('/info', 'HomeController@getInfo')->name('info');
 Route::get('/search', 'SearchController@mainPage')->name('search');
+
