@@ -45,6 +45,8 @@
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('info') }}">{{ __('Info') }}</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link  @if (Route::current()->getName() == "search") active @endif" href="{{ route('search') }}"> Search</a>
                         </li>
                     </ul>
