@@ -22,3 +22,5 @@ Route::get('/info', function() {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/info', 'HomeController@getInfo')->name('info');
