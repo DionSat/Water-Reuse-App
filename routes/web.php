@@ -25,4 +25,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->middleware('auth')->name('home');
 Route::get('/info', 'HomeController@getInfo')->name('info');
 Route::get('/search', 'SearchController@mainPage')->name('search');
-
+Route::get('/account', 'AccountController@view')->middleware('auth')->name('account');
