@@ -2,70 +2,70 @@
 
 @section('body')
     <div class="container">
-        <form action = {{ route('updateAccount') }} method="POST">
+        <form action={{ route('updateAccount') }} method="POST">
             {{ csrf_field() }}
             <div class="form-row">
                 <div class="form-group col-md-4">
-                    <label for="inputName">Name</label><input type="text" class="form-control" id="inputName"
-                                                              value=" {{ Auth::user()->name }} ">
+                    <label for="inputName">Name</label><input type="text" class="form-control" name="inputName"
+                                                              value="{{ Auth::user()->name }}">
                 </div>
                 <div class="form-group col-md-4">
                     <label
-                        for="inputEmail">Email</label><input type="email" class="form-control" id="inputEmail"
+                        for="inputEmail">Email</label><input type="email" class="form-control" name="inputEmail"
                                                              value="{{ Auth::user()->email }}">
                 </div>
                 <div class="form-group col-md-4">
                     <label
-                        for="inputPhone">Phone Number</label><input type="tel" class="form-control" id="inputPhone"
-                                                                    placeholder="(123)-456-7890">
+                        for="inputPhone">Phone Number</label><input type="tel" class="form-control" name="inputPhone"
+                                                                    value="{{Auth::user()->phoneNumber}}">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="inputPasswordOld1">Old Password</label><input type="password" class="form-control"
-                                                                              id="inputPasswordOld1"
+                                                                              name="inputPasswordOld1"
                                                                               placeholder="Password">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="inputPasswordOld2">Verify Password</label>
-                    <input type="password" class="form-control" id="inputPasswordOld2"
+                    <input type="password" class="form-control" name="inputPasswordOld2"
                            placeholder="Re-enter Password">
                 </div>
                 <div class="form-group col-md-4">
                     <label
                         for="inputPasswordNew">New Password</label>
-                    <input type="password" class="form-control" id="inputPassword" placeholder="New Password">
+                    <input type="password" class="form-control" name="inputPassword" placeholder="New Password">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputCompany">Company</label>
-                    <input type="text" class="form-control" id="inputCompany" placeholder="Company Name">
+                    <input type="text" class="form-control" name="inputCompany" value="{{Auth::user()->company}}">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputJob">Job Title</label>
-                    <input type="text" class="form-control" id="inputJob" placeholder="Job">
+                    <input type="text" class="form-control" name="inputJob" value="{{Auth::user()->jobTitle}}">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="inputAddress">Address</label>
-                    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                    <label for="inputAddress">Street Address</label>
+                    <input type="text" class="form-control" name="inputAddress" value="{{Auth::user()->streetAddress}}">
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="inputAddress2">Address 2</label>
-                    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                    <label for="inputAddress2">Address 2 (Apt #, Suite #, Room #, etc..)</label>
+                    <input type="text" class="form-control" name="inputAddress2" value="{{Auth::user()->address2}}">
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputCity">City</label>
-                    <input type="text" class="form-control" id="inputCity">
+                    <input type="text" class="form-control" name="inputCity" value="{{Auth::user()->city}}">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="inputState">State</label>
-                    <select id="inputState" class="form-control">
+                    <select name="inputState" class="form-control" value="{{Auth::user()->state}}">
                         <option selected>Choose...</option>
                         <option value="AL">AL</option>
                         <option value="AK">AK</option>
@@ -122,10 +122,16 @@
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputZip">Zip</label>
-                    <input type="number" class="form-control" id="inputZip">
+                    <input type="number" class="form-control" name="inputZip" value="{{Auth::user()->zipCode}}">
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Save</button>
+            <div class="form-row col-auto" >
+                <label for="RecodeUse">Reason for Recode Usage</label>
+                <input type="text" class="form-control" name="RecodeUse" placeholder="Why do you use Recode?">
+            </div>
+            <div class="form row p-3">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
         </form>
     </div>
 @endsection
