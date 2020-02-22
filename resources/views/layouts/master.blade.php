@@ -15,6 +15,10 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js">
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/38fcbdb4da.js" crossorigin="anonymous"></script>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -49,6 +53,15 @@
                         <li class="nav-item">
                             <a class="nav-link  @if (Route::current()->getName() == "search") active @endif" href="{{ route('search') }}"> Search</a>
                         </li>
+                        {{--We'll want to do an actual check for "admin" here later --}}
+                        {{--@if (Auth::user()->)--}}
+                            <li class="nav-item pl-3">
+                                <span class="nav-link">Admin:</span>
+                            </li>
+                            <li class="nav-item @if (Route::current()->getName() == "admin") active @endif">
+                                <a class="nav-link" href="{{ route('admin') }}"><i class="fa fa-cogs"></i> Dashboard </a>
+                            </li>
+                        {{--@endif--}}
                     </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -87,6 +100,7 @@
         </nav>
 
         <main class="py-4">
+            @include('layouts.alerts')
             @yield('body')
         </main>
     </div>
