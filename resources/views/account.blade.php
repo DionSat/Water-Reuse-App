@@ -2,7 +2,8 @@
 
 @section('body')
     <div class="container">
-        <form method="POST">
+        <form action = {{ route('updateAccount') }} method="POST">
+            {{ csrf_field() }}
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="inputName">Name</label><input type="text" class="form-control" id="inputName"

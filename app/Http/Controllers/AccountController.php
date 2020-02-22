@@ -11,8 +11,13 @@ class AccountController extends Controller
     {
         return view('account');
     }
-    public function update()
+
+    public function updateAccount(Request $request)
     {
+        $newName = $request->inputName;
+        $newEmail = $request->inputEmail;
+        $newPhone = $request->inputPhone;
+        echo $newName;
 
     }
 }
