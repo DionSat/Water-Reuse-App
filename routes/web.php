@@ -26,3 +26,12 @@ Route::get('/home', 'HomeController@index')->middleware('auth')->name('home');
 Route::get('/info', 'HomeController@getInfo')->name('info');
 Route::get('/search', 'SearchController@mainPage')->name('search');
 Route::get('/account', 'AccountController@view')->middleware('auth')->name('account');
+
+
+
+//This is a example of how to do a page and handle a form submission on that page
+
+Route::get('/admin', 'AdminController@getBasicAdminPage')->name('admin');
+Route::post('/admin', 'AdminController@updateAdminInformation')->name('adminSave');
+Route::post('/adminSave', 'AdminController@updateAdminRedirect')->name('adminRedirect');
+
