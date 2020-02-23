@@ -6,10 +6,6 @@
             <div class="alert alert-success">
                 {{ session('status') }}
             </div>
-        @elseif (session('danger'))
-            <div class="alert alert-danger" role="alert">
-                {{ session('danger') }}
-            </div>
         @elseif(session('nothing'))
             <div class="alert alert-warning" role="alert">
                 {{ session('nothing') }}
@@ -31,23 +27,6 @@
                     <label
                         for="inputPhone">Phone Number</label><input type="tel" class="form-control" name="inputPhone"
                                                                     value="{{Auth::user()->phoneNumber}}">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label for="inputPasswordOld1">Old Password</label><input type="password" class="form-control"
-                                                                              name="inputPasswordOld1"
-                                                                              placeholder="Password">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="inputPasswordOld2">Verify Password</label>
-                    <input type="password" class="form-control" name="inputPasswordOld2"
-                           placeholder="Re-enter Password">
-                </div>
-                <div class="form-group col-md-4">
-                    <label
-                        for="inputPasswordNew">New Password</label>
-                    <input type="password" class="form-control" name="inputPassword" placeholder="New Password">
                 </div>
             </div>
             <div class="form-row">
