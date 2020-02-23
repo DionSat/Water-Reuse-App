@@ -27,7 +27,8 @@ Route::get('/info', 'HomeController@getInfo')->name('info');
 Route::get('/search', 'SearchController@mainPage')->name('search');
 
 Route::get('/account', 'AccountController@view')->middleware('auth')->name('account');
-Route::post('/updateAccount', 'AccountController@updateAccount')->middleware('auth')->name('updateAccount');
+Route::get('/accountUpdate', 'AccountController@getUpdatePage')->middleware('auth')->name('updatePage');
+Route::post('/accountUpdate', 'AccountController@updateAccount')->middleware('auth')->name('updateAccount');
 
 //This is a example of how to do a page and handle a form submission on that page
 

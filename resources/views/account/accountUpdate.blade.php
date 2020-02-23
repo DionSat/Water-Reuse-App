@@ -2,6 +2,19 @@
 
 @section('body')
     <div class="container">
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @elseif (session('danger'))
+            <div class="alert alert-danger" role="alert">
+                {{ session('danger') }}
+            </div>
+        @elseif(session('nothing'))
+            <div class="alert alert-warning" role="alert">
+                {{ session('nothing') }}
+            </div>
+        @endif
         <form action={{ route('updateAccount') }} method="POST">
             {{ csrf_field() }}
             <div class="form-row">
@@ -125,7 +138,7 @@
                     <input type="number" class="form-control" name="inputZip" value="{{Auth::user()->zipCode}}">
                 </div>
             </div>
-            <div class="form-row col-auto" >
+            <div class="form-row col-auto">
                 <label for="RecodeUse">Reason for Recode Usage</label>
                 <input type="text" class="form-control" name="RecodeUse" placeholder="Why do you use Recode?">
             </div>
