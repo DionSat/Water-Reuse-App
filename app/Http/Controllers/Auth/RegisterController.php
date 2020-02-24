@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use mysql_xdevapi\Statement;
 
 class RegisterController extends Controller
 {
@@ -53,6 +54,16 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'streetAddress' => ['required', 'string'],
+            'streetAddress2' => ['string'],
+            'city' => ['required', 'string'],
+            'state' => ['required', 'string'],
+            'zipCode' => ['required', 'numeric'],
+            'jobTitle' => ['string'],
+            'company' => ['string'],
+            'reason' => ['string'],
+            'contactList' => ['boolean', 'required'],
+            'phoneNumber' => ['required', 'numeric'],
         ]);
     }
 
@@ -68,6 +79,16 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'streetAddress' => $data['streetAddress'],
+            'address2' => $data['streetAddress2'],
+            'city' => $data['city'],
+            'state' => $data['state'],
+            'zipCode' => $data['zipCode'],
+            'jobTitle' => $data['jobTitle'],
+            'company' => $data['company'],
+            'reason' => $data['reason'],
+            'contactList' => $data['contactList'],
+            'phoneNumber' => $data['phoneNumber'],
         ]);
     }
 }

@@ -14,14 +14,16 @@ class UpdateUserModel extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('streetAddress')->nullable();
+            $table->string('streetAddress');
             $table->string('address2')->nullable();
-            $table->string('city')->nullable();
-            $table->string('state')->nullable();
-            $table->string('zipCode')->nullable();
+            $table->string('city');
+            $table->string('state');
+            $table->string('zipCode');
             $table->string('jobTitle')->nullable();
             $table->string('company')->nullable();
             $table->string('reason')->nullable();
+            $table->boolean('contactList');
+            $table->biginteger('phoneNumber');
         });
     }
 
