@@ -22,7 +22,7 @@ class UpdateUserModel extends Migration
             $table->string('jobTitle')->nullable();
             $table->string('company')->nullable();
             $table->string('reason')->nullable();
-            $table->boolean('contactList');
+            $table->boolean('contactList')->nullable();
             $table->biginteger('phoneNumber');
         });
     }

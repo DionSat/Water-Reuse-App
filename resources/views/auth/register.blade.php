@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('body')
+    @dump($errors)
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -93,11 +94,27 @@
                                 </div>
                             </div>
 
+                            <div class="form-group row">
+                                <label for="city" class="col-md-4 col-form-label text-md-right">{{ __('City') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="City" type="text"
+                                           class="form-control @error('city') is-invalid @enderror" name="city"
+                                           value="{{ old('name') }}" required autocomplete="city" autofocus>
+
+                                    @error('city')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="form-group row ">
                                 <label for="city"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('City') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('State') }}</label>
                                 <div class="col-md-4 ">
-                                    <select class="form-control" name="city" id="city">
+                                    <select class="form-control" name="state" id="state">
                                         <option selected>Choose...</option>
                                         <option value="AL">AL</option>
                                         <option value="AK">AK</option>
