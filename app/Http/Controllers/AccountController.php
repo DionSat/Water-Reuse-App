@@ -78,11 +78,10 @@ class AccountController extends Controller
         $user = User::find(Auth::user()->id);
 
         $tableFields = array('name', 'email', 'streetAddress', 'address2',
-            'city', 'state', 'zipCode', 'jobTitle', 'company', 'reason', 'phoneNumber');
+            'city', 'state', 'zipCode', 'jobTitle', 'company', 'reason', 'phoneNumber', 'contactList');
 
         $formFields = array('inputName', 'inputEmail', 'inputAddress', 'inputAddress2',
-            'inputCity', 'inputState', 'inputZip', 'inputJob', 'inputCompany', 'recodeUse', 'inputPhone');
-
+            'inputCity', 'inputState', 'inputZip', 'inputJob', 'inputCompany', 'recodeUse', 'inputPhone', 'contact');
         # EXAMPLE db use
         # DB::table('users')->update(['email' => $request->inputEmail, 'phoneNumber' => $request->inputPhone]);
 

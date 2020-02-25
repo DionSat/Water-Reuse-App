@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('body')
-    @dump($errors)
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -115,7 +114,6 @@
                                        class="col-md-4 col-form-label text-md-right">{{ __('State') }}</label>
                                 <div class="col-md-4 ">
                                     <select class="form-control" name="state" id="state">
-                                        <option selected>Choose...</option>
                                         <option value="AL">AL</option>
                                         <option value="AK">AK</option>
                                         <option value="AR">AR</option>
@@ -226,8 +224,8 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <div class="btn-group btn-group-toggle " data-toggle="buttons">
+                            <div class="form-group row">
+                                <div class="btn-group btn-group-toggle col-form-label col-sm-8 offset-md-2" data-toggle="buttons">
                                     <label class="btn btn-secondary active">
                                         <input type="radio" name="contactList" id="notifOn" autocomplete="off" value="1"
                                                checked> Contact me (email newsletter, etc..)

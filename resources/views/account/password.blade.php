@@ -28,6 +28,9 @@
                     <input type="password" class="form-control" name="inputPasswordOld2"
                            placeholder="Re-enter Password">
                 </div>
+
+            </div>
+            <div class="form-row">
                 <div class="form-group col-md-4">
                     <label
                         for="newPW">New Password</label>
@@ -36,7 +39,7 @@
                 <div class="form-group col-md-4">
                     <label
                         for="newPW2">Verify new password</label>
-                    <input type="password" class="form-control" name="newPW2" placeholder="New Password">
+                    <input type="password" class="form-control" name="newPW2" placeholder="Verify new Password">
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Save</button>
