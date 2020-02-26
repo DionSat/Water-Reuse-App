@@ -4,17 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class County extends Model
+class City extends Model
 {
     /**
      * Table associated to county model
      */
-    protected $table = 'counties';
+    protected $table = 'cities';
 
     /**
      * Primary key associated with table
      */
-    protected $primaryKey = 'county_id';
+    protected $primaryKey = 'city_id';
 
     /**
      * Do not have eloquent create created_at and updated_at columns
@@ -25,14 +25,14 @@ class County extends Model
      * The attributes that are mass assignable.
      */
     protected $fillable = [
-        'countyName'
+        'cityName'
     ];
 
     /**
      * One to one relationship for a county to a state. Each county has 1 state
      */
-    public function state()
+    public function county()
     {
-        return $this->hasOne('state');
+        return $this->hasOne('county');
     }
 }

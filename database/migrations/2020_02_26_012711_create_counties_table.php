@@ -26,6 +26,7 @@ class CreateCountiesTable extends Migration
             $table->foreign('fk_state')
                 ->references('state_id')->on('states')
                 ->onDelete('cascade');*/
+            // Note the above is default behavior. Change 'cascade' to 'is null' to change.
         });
     }
 
