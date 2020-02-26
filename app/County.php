@@ -4,17 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class State extends Model
+class County extends Model
 {
     /**
-     * Table associated to state model
+     * Table associated to county model
      */
-    protected $table = 'states';
+    protected $table = 'counties';
 
     /**
      * Primary key associated with table
      */
-    protected $primaryKey = 'state_id';
+    protected $primaryKey = 'county_id';
 
     /**
      * Do not have eloquent create created_at and updated_at columns
@@ -29,11 +29,10 @@ class State extends Model
     ];
 
     /**
-     * One to many relationship for counties
-     * Assumes the foreign key on state side as state_id
+     * One to one relationship for a county to a state. Each county has 1 state
      */
-    public function counties()
+    public function state()
     {
-        return $this->hasMany('county');
+        return $this->hasOne('state');
     }
 }
