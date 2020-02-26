@@ -12,7 +12,8 @@ class AccountController extends Controller
 {
     public function view()
     {
-        return view('account.account');
+        $user = Auth::user();
+        return view('account.account', compact('user'));
     }
 
     public function getUpdatePage()
@@ -28,10 +29,10 @@ class AccountController extends Controller
     public function changePassword(Request $request)
     {
         $validatedData = $request->validate([
-            'inputoldPassword1' => 'bail|min:8|max:255|nullable',
-            'inputoldPassword2' => 'bail|min:8|max:255|nullable',
-            'inputPassword' => 'bail|min:8|max:255|nullable',
-            'inputPassword2' => 'bail|min:8|max:255|nullable',
+            'inputoldPassword1' => 'bail|min:8|max:255',
+            'inputoldPassword2' => 'bail|min:8|max:255',
+            'inputPassword' => 'bail|min:8|max:255',
+            'inputPassword2' => 'bail|min:8|max:255',
         ]);
         $updated = False;
 
@@ -78,7 +79,7 @@ class AccountController extends Controller
         $user = User::find(Auth::user()->id);
 
         $tableFields = array('name', 'email', 'streetAddress', 'address2',
-            'city', 'state', 'zipCode', 'jobTitle', 'company', 'reason', 'phoneNumber', 'contactList');
+            'city', 'state', 'zipCode', 'jobTitle', 'company', 'reason', 'phoneNumber', 'canContact');
 
         $formFields = array('inputName', 'inputEmail', 'inputAddress', 'inputAddress2',
             'inputCity', 'inputState', 'inputZip', 'inputJob', 'inputCompany', 'recodeUse', 'inputPhone', 'contact');
@@ -95,27 +96,15 @@ class AccountController extends Controller
                 # through 'db'
                 # DB::table('users')->update([$tableField => $formField]);
                 $user->$tableField = $formField;
-                $user->save();
                 if ($updated != True)
                     $updated = True;
             }
         }
 
-
-        if ($updated === True)
-            return redirect()->back()->with('status', 'Info update successful.');
-        else
-            return redirect()->back()->with('nothing', 'Nothing was updated (change a field)');
-        /*
-                # check if data was updated
-                if ($updated === True and $pwUpdated === True)
-                    return redirect()->back()->with('status', 'Info & password update successful.');
-                elseif ($updated === True and $pwUpdated === False)
-                    return redirect()->back()->with('status', 'Info update successful.');
-                elseif ($updated === False and $pwUpdated === True)
-                    return redirect()->back()->with('status', 'Password update successful.');
-                else
-                    return redirect()->back()->with('nothing', 'Nothing was updated (change a field)');
-        */
+        if ($updated === True) {
+            $user->save();
+            return redirect('/account')->with('status', 'Info update successful.');
+        } else
+            return redirect()->back()->with('nothing', 'Nothing was updated. ');
     }
 }

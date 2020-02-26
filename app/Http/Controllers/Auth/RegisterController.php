@@ -54,12 +54,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'streetAddress' => ['required', 'string'],
-            'city' => ['required', 'string'],
-            'state' => ['required', 'string'],
-            'zipCode' => ['required', 'numeric'],
-            'contactList' => ['boolean', 'required'],
-            'phoneNumber' => ['required', 'numeric'],
+
         ]);
     }
 
@@ -83,7 +78,7 @@ class RegisterController extends Controller
             'jobTitle' => $data['jobTitle'],
             'company' => $data['company'],
             'reason' => $data['reason'],
-            'contactList' => $data['contactList'],
+            'canContact' => $data['contactOption'],
             'phoneNumber' => $data['phoneNumber'],
         ]);
     }

@@ -2,11 +2,7 @@
 
 @section('body')
     <div class="container">
-        @if (session('status'))
-            <div class="alert alert-success">
-                {{ session('status') }}
-            </div>
-        @elseif(session('nothing'))
+        @if(session('nothing'))
             <div class="alert alert-warning" role="alert">
                 {{ session('nothing') }}
             </div>
@@ -61,6 +57,7 @@
                     <div class="form-group col-md-4">
                         <label for="inputState">State</label>
                         <select name="inputState" class="form-control" value="{{Auth::user()->state}}">
+                            <option value></option>
                             <option value="AL">AL</option>
                             <option value="AK">AK</option>
                             <option value="AR">AR</option>
@@ -125,12 +122,13 @@
                         <input type="text" class="form-control" name="RecodeUse" placeholder="Why do you use Recode?">
                     </div>
                 </div>
-                    <div class="form-row col-4">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="contactCheck" name="contact" value="True" checked>
-                            <label class="form-check-label" for="contactCheck">We can contact you</label>
-                        </div>
+                <div class="form-row col-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="contactCheck" name="contact" value="True"
+                               checked>
+                        <label class="form-check-label" for="contactCheck">We can contact you</label>
                     </div>
+                </div>
 
                 <div class="form row p-3">
                     <button type="submit" class="btn btn-primary">Save</button>
