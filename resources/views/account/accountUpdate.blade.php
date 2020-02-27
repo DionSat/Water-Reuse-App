@@ -13,50 +13,50 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="inputName">Name</label><input type="text" class="form-control" name="inputName"
-                                                                  value="{{ Auth::user()->name }}">
+                                                                  value="{{ $user->name }}">
                     </div>
                     <div class="form-group col-md-4">
                         <label
                             for="inputEmail">Email</label><input type="email" class="form-control" name="inputEmail"
-                                                                 value="{{ Auth::user()->email }}">
+                                                                 value="{{ $user->email }}">
                     </div>
                     <div class="form-group col-md-4">
                         <label
                             for="inputPhone">Phone Number</label><input type="tel" class="form-control"
                                                                         name="inputPhone"
-                                                                        value="{{Auth::user()->phoneNumber}}">
+                                                                        value="{{$user->phoneNumber}}">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputCompany">Company</label>
-                        <input type="text" class="form-control" name="inputCompany" value="{{Auth::user()->company}}">
+                        <input type="text" class="form-control" name="inputCompany" value="{{$user->company}}">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputJob">Job Title</label>
-                        <input type="text" class="form-control" name="inputJob" value="{{Auth::user()->jobTitle}}">
+                        <input type="text" class="form-control" name="inputJob" value="{{$user->jobTitle}}">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputAddress">Street Address</label>
                         <input type="text" class="form-control" name="inputAddress"
-                               value="{{Auth::user()->streetAddress}}">
+                               value="{{$user->streetAddress}}">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputAddress2">Address 2 (Apt #, Suite #, Room #, etc..)</label>
-                        <input type="text" class="form-control" name="inputAddress2" value="{{Auth::user()->address2}}">
+                        <input type="text" class="form-control" name="inputAddress2" value="{{$user->address2}}">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputCity">City</label>
-                        <input type="text" class="form-control" name="inputCity" value="{{Auth::user()->city}}">
+                        <input type="text" class="form-control" name="inputCity" value="{{$user->city}}">
                     </div>
                     <div class="form-group col-md-4">
                         <label for="inputState">State</label>
-                        <select name="inputState" class="form-control" value="{{Auth::user()->state}}">
+                        <select name="inputState" class="form-control" value="{{$user->state}}">
                             <option value></option>
                             <option value="AL">AL</option>
                             <option value="AK">AK</option>
@@ -113,7 +113,7 @@
                     </div>
                     <div class="form-group col-md-2">
                         <label for="inputZip">Zip</label>
-                        <input type="number" class="form-control" name="inputZip" value="{{Auth::user()->zipCode}}">
+                        <input type="number" class="form-control" name="inputZip" value="{{$user->zipCode}}">
                     </div>
                 </div>
                 <div class="form-row align-items-center">

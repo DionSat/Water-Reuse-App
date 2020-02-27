@@ -1,6 +1,5 @@
 @extends('layouts.master')
 @section('body')
-    @dump($errors)
     <div class="container">
         <form method="POST" action="{{ route('register') }}">
             @csrf

@@ -18,7 +18,7 @@ class AccountController extends Controller
 
     public function getUpdatePage()
     {
-        return view('account.accountUpdate');
+        return view('account.accountUpdate', compact('user'));
     }
 
     public function getPasswordPage()
@@ -75,7 +75,6 @@ class AccountController extends Controller
             'inputPhone' => 'bail|nullable|numeric',
         ]);
 
-        $updated = False;
         $user = User::find(Auth::user()->id);
 
         $tableFields = array('name', 'email', 'streetAddress', 'address2',
@@ -91,20 +90,15 @@ class AccountController extends Controller
             $tableField = $tableFields[$i];
             $formFieldElement = $formFields[$i];
 
-            if (Auth::user()->$tableField != $request->$formFieldElement) {
+            if ($user != $request->$formFieldElement) {
                 $formField = $request->$formFieldElement ?? $user->$tableField;
                 # through 'db'
                 # DB::table('users')->update([$tableField => $formField]);
                 $user->$tableField = $formField;
-                if ($updated != True)
-                    $updated = True;
             }
         }
 
-        if ($updated === True) {
-            $user->save();
-            return redirect('/account')->with('status', 'Info update successful.');
-        } else
-            return redirect()->back()->with('nothing', 'Nothing was updated. ');
+        $user->save();
+        return redirect('/account')->with('status', 'Info update successful.');
     }
 }
