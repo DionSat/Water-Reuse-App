@@ -18,6 +18,7 @@ class AccountController extends Controller
 
     public function getUpdatePage()
     {
+        $user = Auth::user();
         return view('account.accountUpdate', compact('user'));
     }
 
