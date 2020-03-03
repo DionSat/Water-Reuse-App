@@ -33,4 +33,4 @@ Route::get('/search', 'SearchController@mainPage')->name('search');
 Route::get('/admin', 'AdminController@getBasicAdminPage')->name('admin');
 Route::post('/admin', 'AdminController@updateAdminInformation')->name('adminSave');
 Route::post('/adminSave', 'AdminController@updateAdminRedirect')->name('adminRedirect');
-
+Route::get('/admin', 'AdminController@userList')->name('userList');

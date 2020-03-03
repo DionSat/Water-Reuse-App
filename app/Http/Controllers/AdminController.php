@@ -40,4 +40,8 @@ class AdminController extends Controller
 
          return redirect()->back()->with('alert','success')->with('alertMessage', "You entered: ".$someInfo);
     }
+
+    public function userList(){
+        return view("admin.userlist");
+    }
 }
