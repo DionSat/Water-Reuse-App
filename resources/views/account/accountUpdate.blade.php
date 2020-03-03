@@ -20,10 +20,15 @@
                             for="inputEmail">Email</label><input type="email" class="form-control" name="inputEmail"
                                                                  value="{{ $user->email }}">
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-2">
+                        <label for="countryCode">Country Code</label>
+                        <input type="text" class="form-control" name="countryCode" value="{{$user->countryCode}}">
+                    </div>
+                    <div class="form-group col-md-2">
                         <label
                             for="inputPhone">Phone Number</label><input type="tel" class="form-control"
                                                                         name="inputPhone"
+                                                                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                                                                         value="{{$user->phoneNumber}}">
                     </div>
                 </div>

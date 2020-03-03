@@ -111,7 +111,7 @@
                                 <label for="city"
                                        class="col-md-4 col-form-label text-md-right">{{ __('City') }}</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-2">
                                     <input id="City" type="text"
                                            class="form-control @error('city') is-invalid @enderror" name="city"
                                            value="{{ old('name') }}" autocomplete="city" autofocus>
@@ -122,11 +122,8 @@
                                     </span>
                                     @enderror
                                 </div>
-                            </div>
-
-                            <div class="form-group row ">
                                 <label for="city"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('State') }}</label>
+                                       class=" col-sm-2 col-form-label text-md-right">{{ __('State') }}</label>
                                 <div class="col-sm-2" >
 
                                     <select class="form-control" name="state" id="state">
@@ -228,11 +225,13 @@
 
 
                             <div class="form-group row ">
+                                <label for="countryCode"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Country Code') }}</label>
+                                <div class="col-md-2"> <input id="countryCode" type="text" class="form-control" name="countryCode"> </div>
                                 <label for="phone"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Phone number') }}</label>
-                                <div class="col-md-6">
-                                    <input id="phone" type="number" class="form-control" name="phoneNumber"
-                                            autocomplete="phone">
+                                       class="col-sm-2 col-form-label text-md-right">{{ __('Phone number') }}</label>
+                                <div class="col-md-2">
+                                    <input id="phone" type="tel" class="form-control" name="phoneNumber">
                                     @error('phone')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

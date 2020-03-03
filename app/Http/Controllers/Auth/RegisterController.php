@@ -79,6 +79,7 @@ class RegisterController extends Controller
             'reason' => $data['reason'],
             'canContact' => $data['contactOption'],
             'phoneNumber' => $data['phoneNumber'],
+            'countryCode' => $data['countryCode'],
         ]);
     }
 }

@@ -22,7 +22,11 @@
                     </tr>
                     <tr>
                         <th scope="row">Phone Number</th>
-                        <td>{{$user->phoneNumber}}</td>
+                        @if($user->countryCode)
+                            <td>{{$user->countryCode}}-{{$user->phoneNumber}}</td>
+                        @else
+                            <td>{{$user->phoneNumber}}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th scope="row">Street Address</th>

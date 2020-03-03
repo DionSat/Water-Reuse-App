@@ -31,6 +31,7 @@ class CreateUsersTable extends Migration
             $table->string('reason')->nullable();
             $table->boolean('canContact')->nullable();
             $table->biginteger('phoneNumber')->nullable();
+            $table->string('countryCode')->nullable();
         });
     }
 
