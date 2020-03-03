@@ -30,7 +30,7 @@ Route::get('/search', 'SearchController@mainPage')->name('search');
 
 //This is a example of how to do a page and handle a form submission on that page
 
+Route::get('/users', 'AdminController@userList')->name('users');
 Route::get('/admin', 'AdminController@getBasicAdminPage')->name('admin');
 Route::post('/admin', 'AdminController@updateAdminInformation')->name('adminSave');
 Route::post('/adminSave', 'AdminController@updateAdminRedirect')->name('adminRedirect');
-Route::get('/admin', 'AdminController@userList')->name('userList');

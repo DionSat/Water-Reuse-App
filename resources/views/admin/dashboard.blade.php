@@ -46,6 +46,9 @@
 
                     </div>
                 </div>
+                <div>
+                    <a href="{{route('users')}}"> Go to the User Page!</a>
+                </div>
             </div>
         </div>
     </div>

@@ -9,6 +9,9 @@ class AdminController extends Controller
     public function getBasicAdminPage(){
         return view("admin.dashboard");
     }
+    public function userList(){
+        return view("admin.userlist");
+    }
     public function updateAdminInformation(Request $request){
 
         //Here we can extract information from the request variable
@@ -41,7 +44,4 @@ class AdminController extends Controller
          return redirect()->back()->with('alert','success')->with('alertMessage', "You entered: ".$someInfo);
     }
 
-    public function userList(){
-        return view("admin.userlist");
-    }
 }
