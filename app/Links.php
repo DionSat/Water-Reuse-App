@@ -28,5 +28,17 @@ class Links extends Model
         'linkText'
     ];
 
-    // Define the one to many on link id to the fields in the merge tables
-}
+    public function stateMerge()
+    {
+        return $this->hasMany('StateMerge');
+    }
+
+    public function countyMerge()
+    {
+        return $this->hasMany('CountyMerge');
+    }
+
+    public function cityMerge()
+    {
+        return $this->hasMany('CityMerge');
+    }}

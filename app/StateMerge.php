@@ -22,4 +22,11 @@ class StateMerge extends Model
     protected $fillable = [
         'stateID', 'sourceID', 'destinationID', 'allowedID', 'codes', 'permit', 'incentives', 'moreInfo'
     ];
+
+    public function state()
+    {
+        return $this->hasOne('state');
+    }
+
+
 }

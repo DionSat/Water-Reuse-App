@@ -35,4 +35,14 @@ class County extends Model
     {
         return $this->hasOne('state');
     }
+
+    public function cities()
+    {
+        return $this->hasMany('city');
+    }
+
+    public function countyMerge()
+    {
+        return $this->hasMany('CountyMerge');
+    }
 }

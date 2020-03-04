@@ -27,4 +27,19 @@ class Allowed extends Model
     protected $fillable = [
         'allowedText'
     ];
+
+    public function stateMerge()
+    {
+        return $this->hasMany('StateMerge');
+    }
+
+    public function countyMerge()
+    {
+        return $this->hasMany('CountyMerge');
+    }
+
+    public function cityMerge()
+    {
+        return $this->hasMany('CityMerge');
+    }
 }

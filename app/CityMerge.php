@@ -22,4 +22,9 @@ class CityMerge extends Model
     protected $fillable = [
         'cityID', 'sourceID', 'destinationID', 'allowedID', 'codes', 'permit', 'incentives', 'moreInfo'
     ];
+
+    public function city()
+    {
+        return $this->hasOne('city');
+    }
 }

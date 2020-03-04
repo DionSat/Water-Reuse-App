@@ -28,12 +28,13 @@ class State extends Model
         'stateName'
     ];
 
-    /**
-     * One to many relationship for counties
-     * Assumes the foreign key on state side as state_id
-     */
     public function counties()
     {
         return $this->hasMany('county');
+    }
+
+    public function stateMerge()
+    {
+        return $this->hasMany('StateMerge');
     }
 }

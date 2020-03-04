@@ -22,4 +22,9 @@ class CountyMerge extends Model
     protected $fillable = [
         'countyID', 'sourceID', 'destinationID', 'allowedID', 'codes', 'permit', 'incentives', 'moreInfo'
     ];
+
+    public function county()
+    {
+        return $this->hasOne('county');
+    }
 }
