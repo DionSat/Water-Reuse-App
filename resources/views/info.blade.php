@@ -89,11 +89,19 @@
                 if(nBackChangedCount == 0)
                 {
                     var elements = document.getElementsByClassName('py-4'); // get all elements
-                    elements[0].style.background = "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)";
 	                for(var i = 0; i < elements.length; i++){
 		                elements[i].style.background = "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)";
-	                }
+                    }
+                    nBackChangedCount = 1;
                 }
+                else if (nBackChangedCount == 1){
+                    var elements = document.getElementsByClassName('py-4'); // get all elements
+	                for(var i = 0; i < elements.length; i++){
+		                elements[i].style.background = "rgb(0 , 0 , 0)";
+                    }
+                    nBackChangedCount = 0;
+                }
+
             }
 
             function changeFonts () {
