@@ -6,13 +6,14 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">User List</div>
-
                 <p>{{$allUsers}}</p>
+                
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
+                        <p>{{$allUsers}}</p>
                     @endif
 
                         <br>
