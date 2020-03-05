@@ -14,15 +14,6 @@
                         </div>
                         <p>{{$allUsers}}</p>
                     @endif
-<!--
-                        <br>
-                        <h3>Here is a list of everyone who's registered:</h3>
-                        <ul class="list-group">
-                            @foreach($allUsers as $user)
-                                <li class="list-group-item">{{$user->name}}</li>
-                            @endforeach
-                        </ul>
--->
                     <br>
                     <br>
                         <h3>User List:</h3>
@@ -67,7 +58,7 @@
                             </a>
                         </button>
                         <button>
-                            <a href="mailto:@foreach($emails as $em){{$em}};@endforeach">
+                            <a href="mailto:@foreach($canEmail as $em){{$em}};@endforeach">
                                 Email:{{print_r($canEmail)}}
                             </a>
                         </button>
