@@ -40,14 +40,17 @@
                                 @foreach($allUsers as $user)
                                     {{array_push($emails,$user->email)}}
                                     @if($user->canContact == 1)
-                                        {{array_push($canemail,$user->email)}}
+                                        {{array_push($canEmail,$user->email)}}
                                     @endif
                                     <tr>
                                         <th scope="row">{{$user->id}}</th>
-                                        <td>{{$user->company}}
-                                            @if($user->company && $user->jobTitle):@endif
-                                            {{$user->jobTitle}}
-                                            {{$user->name}}
+                                        <td>
+                                            <a href="{{viewUser($user->name)}}">
+                                                {{$user->company}}
+                                                @if($user->company &&   $user->jobTitle):@endif
+                                                {{$user->jobTitle}}
+                                                {{$user->name}}
+                                            </a>
                                         </td>
                                         <td>{{$user->email}}</td>
                                         <td>{{$user->state}}/{{$user->city}}</td>
@@ -65,12 +68,11 @@
                         </button>
                         <button>
                             <a href="mailto:@foreach($emails as $em){{$em}};@endforeach">
-                                Email:{{print_r($canemail)}}
+                                Email:{{print_r($canEmail)}}
                             </a>
                         </button>
                 </div>
                 <hr>
-                <p>{{$allUsers}}</p>
             </div>
         </div>
     </div>
