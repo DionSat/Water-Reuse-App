@@ -36,7 +36,7 @@
                                     <tr>
                                         <th scope="row">{{$user->id}}</th>
                                         <td>
-                                            <a href="{{viewUser($user->name)}}">
+                                            <a href="{{route(viewuser).'/'.$user->id}}">
                                                 {{$user->company}}
                                                 @if($user->company &&   $user->jobTitle):@endif
                                                 {{$user->jobTitle}}

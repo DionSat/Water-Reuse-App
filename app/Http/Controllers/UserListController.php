@@ -15,8 +15,8 @@ class UserListController extends Controller
         return view("admin.userlist", compact("allUsers","emails","canEmail"));
     }
 
-    public function viewUser($username){
-        $user = User::where("name", username)->get();
+    public function viewUser(Request $req){
+        $user = User::where("id", $req->user_id)->first();
         return view("admin.viewuser", compact("user"));
     }
 }
