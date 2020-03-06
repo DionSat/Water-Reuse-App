@@ -10,7 +10,4 @@ class SearchController extends Controller
         return view("search.searchpage");
     }
 
-    public function resultsPage(){
-       return view("search.results");
-    }
 }

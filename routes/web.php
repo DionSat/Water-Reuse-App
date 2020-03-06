@@ -26,7 +26,6 @@ Route::get('/home', 'HomeController@index')->middleware('auth')->name('home');
 Route::get('/info', 'HomeController@getInfo')->name('info');
 
 Route::get('/search', 'SearchController@mainPage')->name('search');
-Route::post('/results', 'SearchController@resultsPage')->name('searchResults');
 
 Route::get('/account', 'AccountController@view')->middleware('auth')->name('account');
 Route::get('/accountUpdate', 'AccountController@getUpdatePage')->middleware('auth')->name('updatePage');
