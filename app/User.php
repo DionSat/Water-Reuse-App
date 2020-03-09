@@ -17,7 +17,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'email', 'password', 'streetAddress', 'address2', 'city',
-        'state', 'zipCode', 'jobTitle', 'company', 'reason', 'phoneNumber', 'canContact', 'countryCode',
+        'state', 'zipCode', 'jobTitle', 'company', 'reason', 'phoneNumber', 'canContact', 'countryCode', 'is_admin',
+
     ];
 
     /**
@@ -26,7 +27,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'isAdmin' => false,
+        'password', 'remember_token',
     ];
 
     /**

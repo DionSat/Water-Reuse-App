@@ -34,6 +34,7 @@ Route::get('/changePassword', 'AccountController@getPasswordPage')->middleware('
 Route::post('changePassword', 'AccountController@changePassword')->middleware('auth')->name('changePassword');
 //This is a example of how to do a page and handle a form submission on that page
 
-Route::get('/admin', 'AdminController@getBasicAdminPage')->name('admin');
-Route::post('/admin', 'AdminController@updateAdminInformation')->name('adminSave');
-Route::post('/adminSave', 'AdminController@updateAdminRedirect')->name('adminRedirect');
+Route::get('/admin', 'AdminController@getBasicAdminPage')->middleware('auth')->name('admin');
+Route::post('/admin', 'AdminController@updateAdminInformation')->middleware('auth')->name('adminSave');
+Route::post('/updateUserAccess', 'AdminController@updateUserAccess')->middleware('auth')->name('updateUser');
+Route::post('/adminSave', 'AdminController@updateAdminRedirect')->middleware('auth')->name('adminRedirect');

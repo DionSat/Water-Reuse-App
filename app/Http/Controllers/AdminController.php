@@ -2,14 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use Auth;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function getBasicAdminPage(){
-        return view("admin.dashboard");
+    public function getBasicAdminPage()
+    {
+        $allUsers = User::all();
+        $user = Auth::user();
+        if ($user->is_admin === false)
+            abort(404);
+        else
+            return view("admin.dashboard", compact('allUsers'));
     }
-    public function updateAdminInformation(Request $request){
+
+    public function updateUserAccess(Request $request)
+    {
+        $user = Auth::user();
+        $isAdmin = false;
+
+        if ($user->is_admin === false)
+            abort(404);
+        else {
+            $userId = $request->userId;
+            $userToModify = User::find($userId);
+            if ($userToModify->is_admin === false) {
+                $isAdmin = true;
+                $userToModify->is_admin = true;
+            } else
+                $userToModify->is_admin = false;
+            $userToModify->save();
+        }
+        if ($isAdmin === true)
+            return redirect()->back()->with('status', 'The user ' . ($userToModify->name) . ' has been granted admin privileges.');
+        else
+            return redirect()->back()->with('status', 'The user ' . ($userToModify->name) . ' has been revoked of admin privileges.');
+    }
+
+    public function updateAdminInformation(Request $request)
+    {
 
         //Here we can extract information from the request variable
         $name = $request->name;
@@ -28,16 +61,18 @@ class AdminController extends Controller
         return view("admin.dashboardSubmit", compact("name", "int1", "int2", "sum"));
     }
 
-     private function addTwoInts($int1, $int2){
-        return $int1+$int2;
+    private function addTwoInts($int1, $int2)
+    {
+        return $int1 + $int2;
     }
 
-    public function updateAdminRedirect(Request $request){
-         //You can do stuff here as well, but I'm just going to extract the variable and add two pipes around it
+    public function updateAdminRedirect(Request $request)
+    {
+        //You can do stuff here as well, but I'm just going to extract the variable and add two pipes around it
 
-            $someInfo = $request->info;
-            $someInfo = "|".$someInfo."|";
+        $someInfo = $request->info;
+        $someInfo = "|" . $someInfo . "|";
 
-         return redirect()->back()->with('alert','success')->with('alertMessage', "You entered: ".$someInfo);
+        return redirect()->back()->with('alert', 'success')->with('alertMessage', "You entered: " . $someInfo);
     }
 }

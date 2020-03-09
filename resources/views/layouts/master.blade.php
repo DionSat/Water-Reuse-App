@@ -80,7 +80,7 @@
                     @else
                         {{--We'll want to do an actual check for "admin" here later --}}
                         {{--@if (Auth::user()->)--}}
-                        @if(Auth::user()->isAdmin === true)
+                        @if(Auth::user()->is_admin === true)
                             <li class="nav-item pl-3">
                                 <span class="nav-link">Admin:</span>
                             </li>
