@@ -18,27 +18,61 @@ class AdminController extends Controller
             return view("admin.dashboard", compact('allUsers'));
     }
 
+    public function getUsers()
+    {
+        $allUsers = User::all();
+        $user = Auth::user();
+
+        if ($user->is_admin === false)
+            abort(404);
+        else
+            return view("admin.adminUpdate", compact('allUsers'));
+    }
+
     public function updateUserAccess(Request $request)
     {
         $user = Auth::user();
-        $isAdmin = false;
 
         if ($user->is_admin === false)
             abort(404);
         else {
-            $userId = $request->userId;
-            $userToModify = User::find($userId);
-            if ($userToModify->is_admin === false) {
-                $isAdmin = true;
-                $userToModify->is_admin = true;
-            } else
-                $userToModify->is_admin = false;
-            $userToModify->save();
+            $userIds = $request['userId'];
+            $updated = false;
+            if (empty($userIds))
+                return redirect()->back()->with('nothing', 'No admins selected');
+            else {
+                foreach ($userIds as $userId) {
+                    $userToModify = User::find($userId);
+                    if ($userToModify->is_admin === false) {
+                        $userToModify->is_admin = true;
+                    } else {
+                        $userToModify->is_admin = false;
+                    }
+                    $updated = true;
+                    $userToModify->save();
+                }
+            }
         }
-        if ($isAdmin === true)
-            return redirect()->back()->with('status', 'The user ' . ($userToModify->name) . ' has been granted admin privileges.');
+
+        /*
+                if ($user->is_admin === false)
+                    abort(404);
+                else {
+                    $userId = $request->userId;
+                    $userToModify = User::find($userId);
+                    if ($userToModify->is_admin === false) {
+                        $isAdmin = true;
+                        $userToModify->is_admin = true;
+                    } else
+                        $userToModify->is_admin = false;
+                    $userToModify->save();
+                }
+
+        */
+        if ($updated === true)
+            return redirect()->back()->with('status', 'Admins updated.');
         else
-            return redirect()->back()->with('status', 'The user ' . ($userToModify->name) . ' has been revoked of admin privileges.');
+            return redirect()->back()->with('nothing', 'No update');
     }
 
     public function updateAdminInformation(Request $request)
