@@ -30,10 +30,6 @@
                             </thead>
                             <tbody>
                                 @foreach($allUsers as $user)
-                                    {{array_push($emails,$user->email)}}
-                                    @if($user->canContact == 1)
-                                        {{array_push($canEmail,$user->email)}}
-                                    @endif
                                     <tr>
                                         <th scope="row">{{$user->id}}</th>
                                         <td>
@@ -50,7 +46,7 @@
                                             <input type="checkbox" onclick="" @if($user->canContact == 1) checked @endif>
                                         </td>
                                         <td>
-                                            <input type="checkbox" onclick="" @if($user->isAdmin == 1) checked @endif>
+                                            <input type="checkbox" onclick="" @if($user->is_admin == 1) checked @endif>
                                         </td>
                                     </tr>
                                 @endforeach
