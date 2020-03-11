@@ -25,6 +25,7 @@
                                 <th scope="col">Email</th>
                                 <th scope="col">Location</th>
                                 <th scope="col">Contact</th>
+                                <th scope="col">Admin</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -36,7 +37,7 @@
                                     <tr>
                                         <th scope="row">{{$user->id}}</th>
                                         <td>
-                                            <a href="{{route(viewuser).'/'.$user->id}}">
+                                            <a href="{{route('viewuser',['user_id' => $user->id])}}">
                                                 {{$user->company}}
                                                 @if($user->company &&   $user->jobTitle):@endif
                                                 {{$user->jobTitle}}
@@ -46,7 +47,10 @@
                                         <td>{{$user->email}}</td>
                                         <td>{{$user->state}}/{{$user->city}}</td>
                                         <td>
-                                            <input type="checkbox" @if($user->canContact == 1) checked @endif>
+                                            <input type="checkbox" onclick="" @if($user->canContact == 1) checked @endif>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" onclick="" @if($user->isAdmin == 1) checked @endif>
                                         </td>
                                     </tr>
                                 @endforeach

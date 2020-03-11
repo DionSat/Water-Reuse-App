@@ -1,3 +1,5 @@
+@extends("layouts.master")
+
 @section('body')
     <div class="container">
         <div class="card col-8 mx-auto">
