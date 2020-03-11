@@ -17,7 +17,7 @@
                             @endif
                         </h3>
 
-                        <form  method="POST" class="form-inline mt-3">
+                        <form  method="POST" class="form-inline mt-3" action={{route('searchResults')}}>
                             {{--This is a required thing for forms in Laravel, to stop CSRF attacks --}}
                             {{ csrf_field() }}
 
@@ -25,7 +25,7 @@
                                 <label for="search">Address</label>
                                 <input type="text" class="form-control" id="search" placeholder="Address...">
                             </div>
-                            <button class="btn btn-primary"> Search </button>
+                            <button type="submit" class="btn btn-primary"> Search </button>
                         </form>
                         <br>
                         // Have a search form here or something

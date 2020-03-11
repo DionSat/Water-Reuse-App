@@ -3,7 +3,7 @@
 @section('body')
     <div class="container">
         <h1>Information</h1>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" style="margin: 3em">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Base User</div>
@@ -28,7 +28,7 @@
         </div>
 
 
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" style="margin: 3em">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Mid User</div>
@@ -53,7 +53,7 @@
         </div>
 
 
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" style="margin: 3em">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Super User</div>
@@ -78,3 +78,19 @@
         </div>
     </div>
 @endsection
+
+@push("css")
+    <style>
+        .py-4 {
+            background: rgb(2,0,36);
+            background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+            text-align: center;
+        }
+        h1{
+            color: white;
+        }
+        p {
+            margin-top: 3em;
+        }
+    </style>
+@endpush
