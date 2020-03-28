@@ -54,14 +54,17 @@
                             <a class="nav-link  @if (Route::current()->getName() == "search") active @endif" href="{{ route('search') }}"> Search</a>
                         </li>
                         {{--We'll want to do an actual check for "admin" here later --}}
-                        {{--@if (Auth::user()->)--}}
+                        @if (Auth::check() && Auth::user()->is_admin)
                             <li class="nav-item pl-3">
                                 <span class="nav-link">Admin:</span>
                             </li>
                             <li class="nav-item @if (Route::current()->getName() == "admin") active @endif">
                                 <a class="nav-link" href="{{ route('admin') }}"><i class="fa fa-cogs"></i> Dashboard </a>
                             </li>
-                        {{--@endif--}}
+                            <li class="nav-item @if (Route::current()->getName() == "database") active @endif">
+                                <a class="nav-link" href="{{ route('database') }}"><i class="fas fa-database"></i> Database </a>
+                            </li>
+                        @endif
                     </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
