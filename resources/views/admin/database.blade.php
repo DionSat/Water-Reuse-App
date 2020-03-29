@@ -57,10 +57,10 @@
                         <div class="card-footer">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <a href="#" class="btn btn-primary d-block"> <i class="fas fa-edit"></i> Manage </a>
+                                    <a href="{{$card["manageData"]}}" class="btn btn-primary d-block"> <i class="fas fa-edit"></i> Manage </a>
                                 </div>
                                 <div class="col-md-6">
-                                    <a href="#" class="btn btn-success d-block"> <i class="fas fa-plus-square"></i> Add </a>
+                                    <a href="{{$card["addData"]}}" class="btn btn-success d-block"> <i class="fas fa-plus-square"></i> Add </a>
                                 </div>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
             @endforeach
         </div>
 
-        <h3 class="mt-5"> Water Reuse Rules and Website Links</h3>
+        <h3 class="mt-5"> Website Links</h3>
         <hr>
 
         <div class="row mt-3 mb-5">
@@ -91,10 +91,10 @@
                         <div class="card-footer">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <a href="#" class="btn btn-primary d-block"> <i class="fas fa-edit"></i> Manage </a>
+                                    <a href="{{$card["manageData"]}}" class="btn btn-primary d-block"> <i class="fas fa-edit"></i> Manage </a>
                                 </div>
                                 <div class="col-md-6">
-                                    <a href="#" class="btn btn-success d-block"> <i class="fas fa-plus-square"></i> Add </a>
+                                    <a href="{{$card["addData"]}}" class="btn btn-success d-block"> <i class="fas fa-plus-square"></i> Add </a>
                                 </div>
                             </div>
                         </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\DataControllers;
 
+use App\City;
 use App\County;
 use App\State;
 use Illuminate\Http\Request;
@@ -10,12 +11,12 @@ use App\Http\Controllers\Controller;
 
 class CountyController extends Controller
 {
-    public function allCounties(Request $request) {
+    public function allCounties() {
         $counties = County::with('state')->get();
         return view("database.counties", compact('counties'));
     }
 
-    public function addCounty(Request $request) {
+    public function addCounty() {
         $states = State::all();
         return view("database.addCounty", compact( 'states'));
     }
@@ -35,6 +36,23 @@ class CountyController extends Controller
     public function deleteCounty(Request $request)
     {
         $county = County::where("county_id", $request->county_id)->get()->first();
+
+        $citiesInState = City::where("fk_county", $request->county_id)->get();
+        if($citiesInState->count() != 0) {
+            $backRoute = route("countyView");
+            $backName  = "Counties";
+            $item = $county->countyName." county";
+            $dependantCategory = "counties";
+            $dependantItems = [];
+
+            foreach ($citiesInState as $city){
+                $dependantItems [] = $city->cityName;
+            }
+
+            return view("database.dependencyError", compact('backName', 'backRoute', 'item', 'dependantCategory', 'dependantItems'));
+        }
+
+        //If no dependencies, then delete
         $county->delete();
 
         return redirect()->route('countyView')->with(['alert' => 'success', 'alertMessage' => $county->countyName . ', ' . $county->state->stateName . ' has been deleted.']);

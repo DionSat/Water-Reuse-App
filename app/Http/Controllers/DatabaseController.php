@@ -23,14 +23,14 @@ class DatabaseController extends Controller
         $locationCards = [];
         $locationCards[] = ["title" => "Cities", "subheading" => "Cities, under Counties", "count" => $cityNumber, "manageData" => route("cityView"), "addData" => route("cityAdd")];
         $locationCards[] = ["title" => "Counties", "subheading" => "Counties under States", "count" => $countyNumber, "manageData" => route("countyView"), "addData" => route("countyAdd")];
-        $locationCards[] = ["title" => "States", "subheading" => "States in the US", "count" => $stateNumber, "manageData" => "manageData", "addData" => "addLink"];
+        $locationCards[] = ["title" => "States", "subheading" => "States in the US", "count" => $stateNumber, "manageData" => route("stateView"), "addData" => route("stateAdd")];
 
         $sources = DB::table('sources')->count();
         $destinations = DB::table('destinations')->count();
 
         $sourcesAndDestinations = [];
-        $sourcesAndDestinations[] = ["title" => "Sources", "subheading" => "Water Sources", "count" => $sources, "manageData" => "manageData", "addData" => "addLink"];
-        $sourcesAndDestinations[] = ["title" => "Destinations", "subheading" => "Water Destinations", "count" => $destinations, "manageData" => "manageData", "addData" => "addLink"];
+        $sourcesAndDestinations[] = ["title" => "Sources", "subheading" => "Water Sources", "count" => $sources, "manageData" => route("sourceView"), "addData" => route("sourceAdd")];
+        $sourcesAndDestinations[] = ["title" => "Destinations", "subheading" => "Water Destinations", "count" => $destinations, "manageData" => route("destinationView"), "addData" => "addLink"];
 
         $linksNumber = DB::table('links')->count();
 
