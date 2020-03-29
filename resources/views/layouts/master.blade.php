@@ -59,7 +59,7 @@
                                 <span class="nav-link">Admin:</span>
                             </li>
                             <li class="nav-item @if (Route::current()->getName() == "admin") active @endif">
-                                <a class="nav-link" href="{{ route('admin') }}"><i class="fa fa-cogs"></i> Dashboard </a>
+                                <a class="nav-link" href="{{ route('admin') }}"><i class="fas fa-tachometer-alt"></i> Dashboard </a>
                             </li>
                             <li class="nav-item @if (Route::current()->getName() == "database") active @endif">
                                 <a class="nav-link" href="{{ route('database') }}"><i class="fas fa-database"></i> Database </a>
