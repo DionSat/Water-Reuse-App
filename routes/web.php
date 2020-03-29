@@ -76,11 +76,16 @@ Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function 
         Route::post('/sources/delete', 'DataControllers\SourceController@deleteSource')->name('deleteSource');
 
         // Destination Routes
-        Route::get('/destinations', 'DataControllers\destinationController@allDestinations')->name('destinationView');
-        // TODO
+        Route::get('/destinations', 'DataControllers\DestinationController@allDestinations')->name('destinationView');
+        Route::get('/destinations/add', 'DataControllers\DestinationController@addDestination')->name('destinationAdd');
+        Route::post('/destinations/add', 'DataControllers\DestinationController@addDestinationSubmit')->name('destinationAddSubmit');
+        Route::post('/destinations/delete', 'DataControllers\DestinationController@deleteDestination')->name('deleteDestination');
 
         // Link Routes
-        // TODO
+        Route::get('/links', 'DataControllers\LinkController@allLinks')->name('linkView');
+        Route::get('/links/add', 'DataControllers\LinkController@addLink')->name('linkAdd');
+        Route::post('/links/add', 'DataControllers\LinkController@addLinkSubmit')->name('linkAddSubmit');
+        Route::post('/links/delete', 'DataControllers\LinkController@deleteLink')->name('deleteLink');
 
 
     });

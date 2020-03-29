@@ -20,8 +20,7 @@
                     <th scope="row">{{$loop->index+1}}</th>
                     <td>{{$destination->destinationName}}</td>
                     <td>
-                        {{--<form method="POST" action="{{ route('deleteDestination') }}">--}}
-                        <form method="POST" action="#">
+                        <form method="POST" action="{{ route('deleteDestination') }}">
                             {{ csrf_field() }}
                             <input id="delete" name="delete" value="delete" hidden>
                             <input id="destinationId-{{$destination->destination_id}}" name="destination_id" value="{{$destination->destination_id}}" hidden>

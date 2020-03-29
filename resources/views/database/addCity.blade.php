@@ -13,7 +13,7 @@
                     <div class="input-group-prepend">
                         <label class="input-group-text"> City Name </label>
                     </div>
-                    <input type="text" class="form-control" id="city" name="city" placeholder="New York...">
+                    <input type="text" class="form-control" id="city" name="city" placeholder="New city name...">
                 </div>
                 <div class="col-md-4 input-group">
                     <div class="input-group-prepend">

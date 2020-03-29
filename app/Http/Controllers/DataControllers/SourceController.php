@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\DataControllers;
 
-use App\County;
+use App\CityMerge;
+use App\CountyMerge;
 use App\Source;
+use App\StateMerge;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -20,36 +22,37 @@ class SourceController extends Controller
     }
 
     public function addSourceSubmit(Request $request) {
-        if (empty($request->Source))
-            return redirect()->route('SourceAdd')->with(['alert' => 'danger', 'alertMessage' => 'Please enter a Source name!']);
+        if (empty($request->source))
+            return redirect()->route('sourceAdd')->with(['alert' => 'danger', 'alertMessage' => 'Please enter a source name!']);
 
-        $Source = new Source();
-        $Source->SourceName = $request->Source;
-        $Source->save();
+        $source = new Source();
+        $source->sourceName = $request->source;
+        $source->save();
 
-        return redirect()->route('SourceView')->with(['alert' => 'success', 'alertMessage' => $Source->SourceName . ' has been added.']);
+        return redirect()->route('sourceView')->with(['alert' => 'success', 'alertMessage' => $source->sourceName . ' has been added.']);
     }
 
     public function deleteSource(Request $request)
     {
-        $Source = Source::where("Source_id", $request->Source_id)->get()->first();
-        $countiesInSource = County::where("fk_Source", $request->Source_id)->get();
-        if($countiesInSource->count() != 0) {
-            $backRoute = route("SourceView");
+        $source = Source::where("source_id", $request->source_id)->get()->first();
+
+        $sourcesInMergeCount = CityMerge::where("sourceID", $request->source_id)->get()->count();
+        $sourcesInMergeCount += CountyMerge::where("sourceID", $request->source_id)->get()->count();
+        $sourcesInMergeCount += StateMerge::where("sourceID", $request->source_id)->get()->count();
+
+        if($sourcesInMergeCount != 0) {
+            $backRoute = route("sourceView");
             $backName  = "Sources";
-            $item = $Source->SourceName;
-            $dependantCategory = "counties";
+            $item = $source->sourceName;
+            $dependantCategory = "water reuse rules";
             $dependantItems = [];
-            foreach ($countiesInSource as $county){
-                $dependantItems [] = $county->countyName;
-            }
 
             return view("database.dependencyError", compact('backName', 'backRoute', 'item', 'dependantCategory', 'dependantItems'));
         }
 
         //If no dependencies, then delete
-        $Source->delete();
+        $source->delete();
 
-        return redirect()->route('SourceView')->with(['alert' => 'success', 'alertMessage' => $Source->SourceName . ' has been deleted.']);
+        return redirect()->route('sourceView')->with(['alert' => 'success', 'alertMessage' => $source->sourceName . ' has been deleted.']);
     }
 }
