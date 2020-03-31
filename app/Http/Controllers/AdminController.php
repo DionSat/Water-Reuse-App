@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\City;
+use App\County;
+use App\Destination;
+use App\Source;
+use App\State;
+use App\Links;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
