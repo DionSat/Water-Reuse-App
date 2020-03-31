@@ -46,48 +46,48 @@ Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function 
     Route::get('/', 'AdminController@getBasicAdminPage')->name('admin');
     Route::post('/', 'AdminController@updateAdminInformation')->name('adminSave');
     Route::post('/save', 'AdminController@updateAdminRedirect')->name('adminRedirect');
+    Route::get('/database', 'DatabaseController@getDatabasePage')->name('database');
+
 
     // Database CRUD Page Routes
-    Route::prefix('database')->group(function (){
-        Route::get('/', 'DatabaseController@getDatabasePage')->name('database');
+    Route::prefix('database')->namespace('DataControllers')->group(function (){
 
         // City Routes
-        Route::get('/cities', 'DataControllers\CityController@allCities')->name('cityView');
-        Route::get('/cities/add', 'DataControllers\CityController@addCity')->name('cityAdd');
-        Route::post('/cities/add', 'DataControllers\CityController@addCitySubmit')->name('cityAddSubmit');
-        Route::post('/cities/delete', 'DataControllers\CityController@deleteCity')->name('deleteCity');
+        Route::get('/cities', 'CityController@allCities')->name('cityView');
+        Route::get('/cities/add', 'CityController@addCity')->name('cityAdd');
+        Route::post('/cities/add', 'CityController@addCitySubmit')->name('cityAddSubmit');
+        Route::post('/cities/delete', 'CityController@deleteCity')->name('deleteCity');
 
         // County Routes
-        Route::get('/counties', 'DataControllers\CountyController@allCounties')->name('countyView');
-        Route::get('/counties/add', 'DataControllers\CountyController@addCounty')->name('countyAdd');
-        Route::post('/counties/add', 'DataControllers\CountyController@addCountySubmit')->name('countyAddSubmit');
-        Route::post('/counties/delete', 'DataControllers\CountyController@deleteCounty')->name('deleteCounty');
+        Route::get('/counties', 'CountyController@allCounties')->name('countyView');
+        Route::get('/counties/add', 'CountyController@addCounty')->name('countyAdd');
+        Route::post('/counties/add', 'CountyController@addCountySubmit')->name('countyAddSubmit');
+        Route::post('/counties/delete', 'CountyController@deleteCounty')->name('deleteCounty');
 
         // State Routes
-        Route::get('/states', 'DataControllers\StateController@allStates')->name('stateView');
-        Route::get('/states/add', 'DataControllers\StateController@addState')->name('stateAdd');
-        Route::post('/states/add', 'DataControllers\StateController@addStateSubmit')->name('stateAddSubmit');
-        Route::post('/states/delete', 'DataControllers\StateController@deleteState')->name('deleteState');
+        Route::get('/states', 'StateController@allStates')->name('stateView');
+        Route::get('/states/add', 'StateController@addState')->name('stateAdd');
+        Route::post('/states/add', 'StateController@addStateSubmit')->name('stateAddSubmit');
+        Route::post('/states/delete', 'StateController@deleteState')->name('deleteState');
 
         // Source Routes
-        Route::get('/sources', 'DataControllers\SourceController@allSources')->name('sourceView');
-        Route::get('/sources/add', 'DataControllers\SourceController@addSource')->name('sourceAdd');
-        Route::post('/sources/add', 'DataControllers\SourceController@addSourceSubmit')->name('sourceAddSubmit');
-        Route::post('/sources/delete', 'DataControllers\SourceController@deleteSource')->name('deleteSource');
+        Route::get('/sources', 'SourceController@allSources')->name('sourceView');
+        Route::get('/sources/add', 'SourceController@addSource')->name('sourceAdd');
+        Route::post('/sources/add', 'SourceController@addSourceSubmit')->name('sourceAddSubmit');
+        Route::post('/sources/delete', 'SourceController@deleteSource')->name('deleteSource');
 
         // Destination Routes
-        Route::get('/destinations', 'DataControllers\DestinationController@allDestinations')->name('destinationView');
-        Route::get('/destinations/add', 'DataControllers\DestinationController@addDestination')->name('destinationAdd');
-        Route::post('/destinations/add', 'DataControllers\DestinationController@addDestinationSubmit')->name('destinationAddSubmit');
-        Route::post('/destinations/delete', 'DataControllers\DestinationController@deleteDestination')->name('deleteDestination');
+        Route::get('/destinations', 'DestinationController@allDestinations')->name('destinationView');
+        Route::get('/destinations/add', 'DestinationController@addDestination')->name('destinationAdd');
+        Route::post('/destinations/add', 'DestinationController@addDestinationSubmit')->name('destinationAddSubmit');
+        Route::post('/destinations/delete', 'DestinationController@deleteDestination')->name('deleteDestination');
 
         // Link Routes
-        Route::get('/links', 'DataControllers\LinkController@allLinks')->name('linkView');
-        Route::get('/links/add', 'DataControllers\LinkController@addLink')->name('linkAdd');
-        Route::post('/links/add', 'DataControllers\LinkController@addLinkSubmit')->name('linkAddSubmit');
-        Route::post('/links/delete', 'DataControllers\LinkController@deleteLink')->name('deleteLink');
-
-
+        Route::get('/links', 'LinkController@allLinks')->name('linkView');
+        Route::get('/links/add', 'LinkController@addLink')->name('linkAdd');
+        Route::post('/links/add', 'LinkController@addLinkSubmit')->name('linkAddSubmit');
+        Route::post('/links/delete', 'LinkController@deleteLink')->name('deleteLink');
+        
     });
 
 });
