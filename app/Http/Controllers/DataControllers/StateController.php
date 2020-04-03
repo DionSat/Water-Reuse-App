@@ -52,4 +52,9 @@ class StateController extends Controller
 
         return redirect()->route('stateView')->with(['alert' => 'success', 'alertMessage' => $state->stateName . ' has been deleted.']);
     }
+
+    public function getAllStates(){
+        return response()->json(State::all());
+    }
+
 }

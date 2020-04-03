@@ -39,4 +39,9 @@ class CityController extends Controller
 
         return redirect()->route('cityView')->with(['alert' => 'success', 'alertMessage' => $city->cityName . ', ' . $city->county->state->stateName . ' has been deleted.']);
     }
+
+    public function getCitiesInCounty(Request $request){
+        $cities = City::where("fk_county", $request->county_id)->get();
+        return response()->json($cities);
+    }
 }

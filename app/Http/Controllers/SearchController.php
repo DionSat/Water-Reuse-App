@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\State;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
     public function mainPage(){
-        return view("search.searchpage");
+
+        $states = State::all();
+
+        return view("search.searchpage", compact('states'));
     }
 
 }
