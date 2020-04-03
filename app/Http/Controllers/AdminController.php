@@ -20,55 +20,39 @@ class AdminController extends Controller
 
     public function getUsers()
     {
-        $allUsers = User::all();
+        $allUsers = User::all()->sortBy("id");
         $user = Auth::user();
-
+        $canEmail = array();
+        foreach($allUsers as $users){
+            if($users->canContact === true)
+                array_push($canEmail, $users->email);
+        }
         if ($user->is_admin === false)
             abort(404);
         else
-            return view("admin.adminUpdate", compact('allUsers'));
+            return view("admin.adminUpdate", compact('allUsers', 'canEmail'));
     }
 
     public function updateUserAccess(Request $request)
     {
-        $user = Auth::user();
+        $updated = false;
+        $userIds = $request['userId'];
 
-        if ($user->is_admin === false)
-            abort(404);
+        if (empty($userIds))
+            return redirect()->back()->with('nothing', 'No admins selected');
         else {
-            $userIds = $request['userId'];
-            $updated = false;
-            if (empty($userIds))
-                return redirect()->back()->with('nothing', 'No admins selected');
-            else {
-                foreach ($userIds as $userId) {
-                    $userToModify = User::find($userId);
-                    if ($userToModify->is_admin === false) {
-                        $userToModify->is_admin = true;
-                    } else {
-                        $userToModify->is_admin = false;
-                    }
-                    $updated = true;
-                    $userToModify->save();
+            foreach ($userIds as $userId) {
+                $userToModify = User::find($userId);
+                if ($userToModify->is_admin === false) {
+                    $userToModify->is_admin = true;
+                } else {
+                    $userToModify->is_admin = false;
                 }
+                $updated = true;
+                $userToModify->save();
             }
         }
 
-        /*
-                if ($user->is_admin === false)
-                    abort(404);
-                else {
-                    $userId = $request->userId;
-                    $userToModify = User::find($userId);
-                    if ($userToModify->is_admin === false) {
-                        $isAdmin = true;
-                        $userToModify->is_admin = true;
-                    } else
-                        $userToModify->is_admin = false;
-                    $userToModify->save();
-                }
-
-        */
         if ($updated === true)
             return redirect()->back()->with('status', 'Admins updated.');
         else
@@ -108,5 +92,10 @@ class AdminController extends Controller
         $someInfo = "|" . $someInfo . "|";
 
         return redirect()->back()->with('alert', 'success')->with('alertMessage', "You entered: " . $someInfo);
+    }
+
+    public function viewUser(Request $req){
+        $user = User::where("id", $req->user_id)->first();
+        return view("admin.viewUser", compact("user"));
     }
 }

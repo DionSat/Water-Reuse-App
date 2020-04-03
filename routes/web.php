@@ -39,3 +39,4 @@ Route::get('/updateAdmins', 'AdminController@getUsers')->middleware('auth')->nam
 Route::post('/admin', 'AdminController@updateAdminInformation')->middleware('auth')->name('adminSave');
 Route::post('/updateUserAccess', 'AdminController@updateUserAccess')->middleware('auth')->name('updateUser');
 Route::post('/adminSave', 'AdminController@updateAdminRedirect')->middleware('auth')->name('adminRedirect');
+Route::get('/viewUser', 'AdminController@viewUser')->middleware('auth')->name('viewUser');

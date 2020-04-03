@@ -26,6 +26,7 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Email</th>
+                                    <th scope="col">Contact</th>
                                     <th scope="col">Admin</th>
                                     <th scope="col">Toggle Admin</th>
                                 </tr>
@@ -34,23 +35,47 @@
                                 @foreach($allUsers as $user)
                                     <tr>
                                         <th scope="row">{{$user->id}}</th>
-                                        <td>{{$user->name}}</td>
+                                        <td><a href="{{route('viewUser',['user_id' => $user->id])}}">{{$user->name}}</a>
+                                        </td>
                                         <td>{{$user->email}}</td>
-                                        @if($user->is_admin === true)
-                                            <td>Yes</td>
+                                        @if($user->canContact === true)
+                                            <td><input type="checkbox" ame="canContact[]" value={{$user->id}} checked
+                                                       disabled></td>
                                         @else
-                                            <td>No</td>
+                                            <td><input type="checkbox" disabled>
+                                            </td>
+                                        @endif
+                                        @if($user->is_admin === true)
+                                            <td><input type="checkbox"  checked disabled></td>
+                                        @else
+                                            <td><input type="checkbox"  disabled></td>
                                         @endif
                                         <td><input type="checkbox" name="userId[]" value={{$user->id}}></td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
-                            <button type="submit" class="btn btn-primary">
-                                {{ __('Update Admins') }}
-                            </button>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Update Admins') }}
+                                </button>
+                            </div>
+
                         </form>
+                            <div class="text-center">
+                                <button class="btn btn-link">
+                                    <a href="mailto:@foreach($allUsers as $user){{$user->email}};@endforeach">
+                                        Email to all
+                                    </a>
+                                </button>
+                                <button class="btn btn-link">
+                                    <a href="mailto:@foreach($canEmail as $email){{$email}};@endforeach">
+                                        Email to Users we can contact
+                                    </a>
+                                </button>
+                            </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -61,8 +86,9 @@
 @push('css')
     <style>
         .table th {
-            text-align:center;
+            text-align: center;
         }
+
         .table td {
             text-align: center;
         }

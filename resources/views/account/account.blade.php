@@ -62,7 +62,7 @@
                     </tr>
                     <tr>
                         <th scope="row">We can contact you</th>
-                        @if ($user->canContact === 'True')
+                        @if ($user->canContact === True)
                             <td>Yes</td>
                         @else
                             <td>No</td>
