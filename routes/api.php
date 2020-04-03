@@ -18,5 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::get("/states", "DataControllers\StateController@getAllStates")->name("statesApi");
-Route::get("/counties/{state_id?}", "DataControllers\CountyController@getCountiesInState")->name("countiesApi");
+Route::get("/states", "DataControllers\StateController@getAllStates")->name("states-api");
+Route::get("/counties/{state_id?}", "DataControllers\CountyController@getCountiesInState")->name("counties-api");
+Route::get("/cities/{county_id?}", "DataControllers\CityController@getCitiesInCounty")->name("cities-api");
