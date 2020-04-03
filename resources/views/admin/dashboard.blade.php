@@ -9,7 +9,7 @@
                     <div class="card-body">
 
                         <button type="button" onclick="window.location='{{ route("getUsers") }}'"
-                                class="btn btn-primary"> View Users
+                                class="btn btn-primary"> Update User Privileges
                         </button>
 
                         <button class="btn btn-primary">
