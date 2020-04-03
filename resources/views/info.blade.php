@@ -80,6 +80,8 @@
 
         <button type="button" class="btn btn-light" onclick="changeBackground()">Change Background</button>
         <button type="button" class="btn btn-dark"  onclick="changeFonts()">Change Font</button>
+        <p id="back">Background: 0</p>
+        <p id="font">Font: 0</p>
     </div>
 
     <script type='text/javascript'>
@@ -93,6 +95,7 @@
 		                elements[i].style.background = "linear-gradient(4deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)";
                     }
                     nBackChangedCount = 1;
+                    document.getElementById("back").innerHTML = "Backround: " + nBackChangedCount;
                 }
                 else if (nBackChangedCount == 1){
                     var elements = document.getElementsByClassName('py-4'); // get all elements
@@ -101,6 +104,7 @@
                     }
                     document.getElementById("h").style.color = "black";
                     nBackChangedCount = 2;
+                    document.getElementById("back").innerHTML = "Backround: " + nBackChangedCount;
                 }
                 else if (nBackChangedCount == 2){
                     var elements = document.getElementsByClassName('py-4'); // get all elements
@@ -109,6 +113,7 @@
                     }
                     document.getElementById("h").style.color = "white";
                     nBackChangedCount = 3;
+                    document.getElementById("back").innerHTML = "Backround: " + nBackChangedCount;
                 }
                 else if (nBackChangedCount == 3){
                     var elements = document.getElementsByClassName('py-4'); // get all elements
@@ -116,6 +121,7 @@
 		                elements[i].style.background = "#3DCCCC";
                     }
                     nBackChangedCount = 5;
+                    document.getElementById("back").innerHTML = "Backround: 4";
                 }
                 else if (nBackChangedCount == 4){
                     var elements = document.getElementsByClassName('py-4'); // get all elements
@@ -123,6 +129,7 @@
 		                elements[i].style.background = "rgb(0 , 0 , 0)";
                     }
                     nBackChangedCount = 0;
+                    document.getElementById("back").innerHTML = "Backround: " + nBackChangedCount;
                 }
 
                 //--------------------pictures
@@ -132,6 +139,7 @@
 		                elements[i].style.backgroundImage = "url('img/adrien-olichon-unsplash.jpg')";
                     }
                     nBackChangedCount = 6;
+                    document.getElementById("back").innerHTML = "Backround: 5";
                 }
                 else if (nBackChangedCount == 6){
                     var elements = document.getElementsByClassName('py-4'); // get all elements
@@ -140,6 +148,7 @@
                     }
                     document.getElementById("h").style.color = "black";
                     nBackChangedCount = 7;
+                    document.getElementById("back").innerHTML = "Backround: 6";
                 }
                 else if (nBackChangedCount == 7){
                     var elements = document.getElementsByClassName('py-4'); // get all elements
@@ -148,6 +157,7 @@
                     }
                     document.getElementById("h").style.color = "white";
                     nBackChangedCount = 8;
+                    document.getElementById("back").innerHTML = "Backround: 7";
                 }
                 else if (nBackChangedCount == 8){
                     var elements = document.getElementsByClassName('py-4'); // get all elements
@@ -155,39 +165,45 @@
 		                elements[i].style.backgroundImage = "url('img/manu-schwendener-unsplash.jpg')";
                     }
                     nBackChangedCount = 4;
+                    document.getElementById("back").innerHTML = "Backround: 8";
                 }
             }
 
             function changeFonts () {
                 if(nFontChangedCount == 0)
                 {
-                    document.getElementById("p").style.fontFamily = "Lato";
-                    document.getElementById("h").style.fontFamily = "Lobster";
+                    document.getElementById("p").style.fontFamily = "'Raleway'";
+                    document.getElementById("h").style.fontFamily = "'Playfair Display', serif";
                     nFontChangedCount = 1;
+                    document.getElementById("font").innerHTML = "Font: " + nFontChangedCount;
                 }
                 else if(nFontChangedCount == 1)
                 {
-                    document.getElementById("p").style.fontFamily = "'Raleway'";
-                    document.getElementById("h").style.fontFamily = "'Playfair Display', serif";
+                    document.getElementById("p").style.fontFamily = 'Poppins, sans-serif';
+                    document.getElementById("h").style.fontFamily = 'Mukta, sans-serif';
                     nFontChangedCount = 2;
+                    document.getElementById("font").innerHTML = "Font: " + nFontChangedCount;
                 }
                 else if(nFontChangedCount == 2)
                 {
-                    document.getElementById("p").style.fontFamily = 'Poppins, sans-serif';
-                    document.getElementById("h").style.fontFamily = 'Mukta, sans-serif';
+                    document.getElementById("p").style.fontFamily = 'Roboto, sans-serif';
+                    document.getElementById("h").style.fontFamily = 'Abril Fatface, cursive';
                     nFontChangedCount = 3;
+                    document.getElementById("font").innerHTML = "Font: " + nFontChangedCount;
                 }
                 else if(nFontChangedCount == 3)
                 {
-                    document.getElementById("p").style.fontFamily = 'Roboto, sans-serif';
-                    document.getElementById("h").style.fontFamily = 'Abril Fatface, cursive';
+                    document.getElementById("p").style.fontFamily = 'Poppins, sans-serif';
+                    document.getElementById("h").style.fontFamily = "Sen";
                     nFontChangedCount = 4;
+                    document.getElementById("font").innerHTML = "Font: " + nFontChangedCount;
                 }
                 else if(nFontChangedCount == 4)
                 {
-                    document.getElementById("p").style.fontFamily = 'Poppins, sans-serif';
-                    document.getElementById("h").style.fontFamily = "Sen";
+                    document.getElementById("p").style.fontFamily = "Lato";
+                    document.getElementById("h").style.fontFamily = "Lobster";
                     nFontChangedCount = 0;
+                    document.getElementById("font").innerHTML = "Font: " + nFontChangedCount;
                 }
             }
     </script>
@@ -206,6 +222,9 @@
         p {
             margin-top: 3em;
             font-family: 'Lato';
+        }
+        #back, #font {
+            color: white;
         }
     </style>
 @endpush
