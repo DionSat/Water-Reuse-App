@@ -15,6 +15,10 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js">
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/38fcbdb4da.js" crossorigin="anonymous"></script>
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lato|Lobster&display=swap" rel="stylesheet">
@@ -53,9 +57,22 @@
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('info') }}">{{ __('Info') }}</a>
-
                         </li>
-                        <li><a class="nav-link  @if (Route::current()->getName() == "search") active @endif" href="{{ route('search') }}"> Search</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link  @if (Route::current()->getName() == "search") active @endif" href="{{ route('search') }}"> Search</a>
+                        </li>
+                        {{--We'll want to do an actual check for "admin" here later --}}
+                        @if (Auth::check() && Auth::user()->is_admin)
+                            <li class="nav-item pl-3">
+                                <span class="nav-link">Admin:</span>
+                            </li>
+                            <li class="nav-item @if (Route::current()->getName() == "admin") active @endif">
+                                <a class="nav-link" href="{{ route('admin') }}"><i class="fas fa-tachometer-alt"></i> Dashboard </a>
+                            </li>
+                            <li class="nav-item @if (Route::current()->getName() == "database") active @endif">
+                                <a class="nav-link" href="{{ route('database') }}"><i class="fas fa-database"></i> Database </a>
+                            </li>
+                        @endif
                     </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -76,12 +93,19 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="{{ route('submission') }}">
+                                        {{__('Submission') }}
+                                        
+                                    <a class ="dropdown-item" href=" {{ route('account') }}">
+                                        {{ __('Account') }}
+
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
@@ -94,6 +118,7 @@
         </nav>
 
         <main class="py-4">
+            @include('layouts.alerts')
             @yield('body')
         </main>
     </div>

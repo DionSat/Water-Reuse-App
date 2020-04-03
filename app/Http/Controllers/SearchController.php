@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 class SearchController extends Controller
 {
     public function mainPage(){
-        return view("searchpage");
+        return view("search.searchpage");
     }
+
 }
