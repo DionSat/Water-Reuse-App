@@ -12,6 +12,11 @@
                                 class="btn btn-primary"> View Users
                         </button>
 
+                        <button class="btn btn-primary">
+                            <a href="mailto:@foreach($canEmail as $email){{$email}};@endforeach" style="color:white">
+                                Email Consenting Users
+                            </a>
+                        </button>
                     </div>
                 </div>
 

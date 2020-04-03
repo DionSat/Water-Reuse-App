@@ -12,17 +12,8 @@ class AdminController extends Controller
     {
         $allUsers = User::all();
         $user = Auth::user();
-        if ($user->is_admin === false)
-            abort(404);
-        else
-            return view("admin.dashboard", compact('allUsers'));
-    }
-
-    public function getUsers()
-    {
-        $allUsers = User::all()->sortBy("id");
-        $user = Auth::user();
         $canEmail = array();
+
         foreach($allUsers as $users){
             if($users->canContact === true)
                 array_push($canEmail, $users->email);
@@ -30,7 +21,19 @@ class AdminController extends Controller
         if ($user->is_admin === false)
             abort(404);
         else
-            return view("admin.adminUpdate", compact('allUsers', 'canEmail'));
+            return view("admin.dashboard", compact('allUsers', 'canEmail'));
+    }
+
+    public function getUsers()
+    {
+        $allUsers = User::all()->sortBy("id");
+        $user = Auth::user();
+
+
+        if ($user->is_admin === false)
+            abort(404);
+        else
+            return view("admin.adminUpdate", compact('allUsers'));
     }
 
     public function updateUserAccess(Request $request)

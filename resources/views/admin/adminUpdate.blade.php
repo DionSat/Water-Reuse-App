@@ -65,14 +65,10 @@
                             <div class="text-center">
                                 <button class="btn btn-link">
                                     <a href="mailto:@foreach($allUsers as $user){{$user->email}};@endforeach">
-                                        Email to all
+                                        Email all Users
                                     </a>
                                 </button>
-                                <button class="btn btn-link">
-                                    <a href="mailto:@foreach($canEmail as $email){{$email}};@endforeach">
-                                        Email to Users we can contact
-                                    </a>
-                                </button>
+
                             </div>
                     </div>
 
