@@ -33,7 +33,7 @@ class County extends Model
      */
     public function state()
     {
-        return $this->hasOne('state');
+        return $this->hasOne('App\State', 'state_id','fk_state');
     }
 
     public function cities()

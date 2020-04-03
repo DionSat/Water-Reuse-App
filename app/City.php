@@ -33,7 +33,7 @@ class City extends Model
      */
     public function county()
     {
-        return $this->hasOne('county');
+        return $this->hasOne('App\County', 'county_id','fk_county');
     }
 
     public function cityMerge()

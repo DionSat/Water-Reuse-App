@@ -17,7 +17,8 @@
                             @endif
                         </h3>
 
-                        <form  method="POST" class="form-inline mt-3" }>
+                        {{--<form  method="POST" class="form-inline mt-3" action={{route('searchResults')}}>--}}
+                            <form  method="POST" class="form-inline mt-3">
                             {{--This is a required thing for forms in Laravel, to stop CSRF attacks --}}
                             {{ csrf_field() }}
 
