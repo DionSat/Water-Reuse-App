@@ -44,8 +44,6 @@ Route::middleware('auth')->group(function () {
 Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function () {
     Route::get('/', 'AdminController@getBasicAdminPage')->name('admin');
     Route::get('Update', 'AdminController@getUsers')->name('getUsers');
-    Route::post('/', 'AdminController@updateAdminInformation')->name('adminSave');
-    Route::post('/Save', 'AdminController@updateAdminRedirect')->name('adminRedirect');
     Route::get('/database', 'DatabaseController@getDatabasePage')->name('database');
     Route::post('/Update', 'AdminController@updateUserAccess')->name('updateUser');
     Route::get('viewUser', 'AdminController@viewUser')->name('viewUser');
