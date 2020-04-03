@@ -1,17 +1,11 @@
-@extends('layouts.master')
+@extends("layouts.master")
 
 @section('body')
     <div class="container">
-        @if (session('status'))
-            <div class="alert alert-success">
-                {{ session('status') }}
-            </div>
-        @endif
         <div class="card col-8 mx-auto">
             <div class="card-body">
                 <table class="table table-striped">
                     <tbody>
-
                     <tr>
                         <th scope="row">Name</th>
                         <td>{{$user->name}}</td>
@@ -49,7 +43,7 @@
                         <td>{{$user->zipCode}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Email</th>
+                        <th scope="row">Job Title</th>
                         <td>{{$user->jobTitle}}</td>
                     </tr>
                     <tr>
@@ -62,7 +56,7 @@
                     </tr>
                     <tr>
                         <th scope="row">We can contact you</th>
-                        @if ($user->canContact === True)
+                        @if ($user->canContact === 'True')
                             <td>Yes</td>
                         @else
                             <td>No</td>
@@ -70,16 +64,6 @@
                     </tr>
                     </tbody>
                 </table>
-                <div class="bd-example">
-                    <button type="button" onclick="window.location='{{ route("updatePage") }}'"
-                            class="btn btn-primary"> Edit Account Information
-                    </button>
-                    <button type="button" onclick="window.location='{{ route("password") }}'"
-                            class="btn btn-primary">
-                        Change password
-                    </button>
-                </div>
             </div>
         </div>
-
 @endsection

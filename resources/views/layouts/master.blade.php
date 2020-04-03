@@ -96,7 +96,7 @@
 
                                     <a class="dropdown-item" href="{{ route('submission') }}">
                                         {{__('Submission') }}
-                                        
+
                                     <a class ="dropdown-item" href=" {{ route('account') }}">
                                         {{ __('Account') }}
 

@@ -19,7 +19,6 @@ Route::get('/info', function() {
     return view('info');
 });
 
-
 Auth::routes();
 
 
@@ -44,10 +43,10 @@ Route::middleware('auth')->group(function () {
 //Admin Routes
 Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function () {
     Route::get('/', 'AdminController@getBasicAdminPage')->name('admin');
-    Route::post('/', 'AdminController@updateAdminInformation')->name('adminSave');
-    Route::post('/save', 'AdminController@updateAdminRedirect')->name('adminRedirect');
+    Route::get('Update', 'AdminController@getUsers')->name('getUsers');
     Route::get('/database', 'DatabaseController@getDatabasePage')->name('database');
-
+    Route::post('/Update', 'AdminController@updateUserAccess')->name('updateUser');
+    Route::get('viewUser', 'AdminController@viewUser')->name('viewUser');
 
     // Database CRUD Page Routes
     Route::prefix('database')->namespace('DataControllers')->group(function (){
@@ -87,7 +86,7 @@ Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function 
         Route::get('/links/add', 'LinkController@addLink')->name('linkAdd');
         Route::post('/links/add', 'LinkController@addLinkSubmit')->name('linkAddSubmit');
         Route::post('/links/delete', 'LinkController@deleteLink')->name('deleteLink');
-        
+
     });
 
 });
