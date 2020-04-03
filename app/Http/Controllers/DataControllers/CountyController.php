@@ -7,6 +7,7 @@ use App\County;
 use App\State;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use PHPUnit\Framework\Constraint\Count;
 
 
 class CountyController extends Controller
@@ -57,4 +58,10 @@ class CountyController extends Controller
 
         return redirect()->route('countyView')->with(['alert' => 'success', 'alertMessage' => $county->countyName . ', ' . $county->state->stateName . ' has been deleted.']);
     }
+
+    public function getCountiesInState(Request $request){
+        $counties = County::where("fk_state", $request->state_id)->get();
+        return response()->json($counties);
+    }
+
 }

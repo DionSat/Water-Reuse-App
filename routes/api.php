@@ -16,3 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::get("/states", "DataControllers\StateController@getAllStates")->name("statesApi");
+Route::get("/counties/{state_id?}", "DataControllers\CountyController@getCountiesInState")->name("countiesApi");
