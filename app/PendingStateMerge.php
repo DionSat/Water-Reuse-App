@@ -2,9 +2,10 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
-class PendingStateMerge extends Model
+class PendingStateMerge extends StateMerge
 {
-    //
+    /**
+     * Table associated to state model
+     */
+    protected $table = 'pendingstatemerge';
 }

@@ -27,6 +27,4 @@ class StateMerge extends Model
     {
         return $this->hasOne('state');
     }
-
-
 }
