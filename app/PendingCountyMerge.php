@@ -2,9 +2,10 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
-class PendingCountyMerge extends Model
+class PendingCountyMerge extends CountyMerge
 {
-    //
+    /**
+     * Table associated to state model
+     */
+    protected $table = 'pendingcountymerge';
 }
