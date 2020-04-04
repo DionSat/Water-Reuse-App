@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePendingCityMergesTable extends Migration
+class CreatePendingCityMergeTable extends Migration
 {
     /**
      * Run the migrations.
