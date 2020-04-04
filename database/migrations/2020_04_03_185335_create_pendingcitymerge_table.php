@@ -13,9 +13,36 @@ class CreatePendingCityMergesTable extends Migration
      */
     public function up()
     {
-        Schema::create('pending_city_merges', function (Blueprint $table) {
+        Schema::create('pendingcitymerge', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
+
+            $table->unsignedBigInteger('cityID');
+            $table->foreign('cityID')->references('city_id')->on('cities');
+
+            $table->unsignedBigInteger('sourceID');
+            $table->foreign('sourceID')->references('source_id')->on('sources');
+
+            $table->unsignedBigInteger('destinationID');
+            $table->foreign('destinationID')->references('destination_id')->on('destinations');
+
+            $table->unsignedBigInteger('allowedID');
+            $table->foreign('allowedID')->references('allowed_id')->on('allowed');
+
+            $table->unsignedBigInteger('codes');
+            $table->foreign('codes')->references('link_id')->on('links');
+
+            $table->unsignedBigInteger('permit');
+            $table->foreign('permit')->references('link_id')->on('links');
+
+            $table->unsignedBigInteger('incentives');
+            $table->foreign('incentives')->references('link_id')->on('links');
+
+            $table->unsignedBigInteger('moreInfo');
+            $table->foreign('moreInfo')->references('link_id')->on('links');
+
+            $table->unsignedBigInteger('userID');
+            $table->foreign('userID')->references('id')->on('users');
         });
     }
 
@@ -26,6 +53,6 @@ class CreatePendingCityMergesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pending_city_merges');
+        Schema::dropIfExists('pendingcitymerge');
     }
 }
