@@ -31,23 +31,43 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="waterSource">Water Source</label>
-                                <input type="text" class="form-control" id="waterSource" placeholder="Sink, lake, etc.">
+                            <label for="waterSource">Water Source</label>
+                            <select id="waterSource" class="form-control">
+                                <option selected>Choose...</option>
+                                <option>...</option>
+                            </select>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="waterDestination">Water Destination</label>
-                                <input type="text" class="form-control" id="waterDestination" placeholder="Sink, Toilet, etc.">
+                            <label for="waterDestination">Water Destination</label>
+                            <select id="waterDestination" class="form-control">
+                                <option selected>Choose...</option>
+                                <option>...</option>
+                            </select>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="gridCheck">
-                            <label class="form-check-label" for="gridCheck">
-                                Check if reusing water from this source is aloud
-                            </label>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="form-check-label" for="gridCheck">
+                                    Is reusing water from this source permitted?
+                                </label>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="yes">
+                                <label class="form-check-label" for="yes">
+                                    Yes
+                                </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="no">
+                                <label class="form-check-label" for="no">
+                                    No
+                                </label>
+                                </div>
                             </div>
                         </div>
-
                         <div class="form-group">
                             <label for="codes">Link to Codes (Optional)</label>
                             <input type="text" class="form-control" id="codes" placeholder="">
