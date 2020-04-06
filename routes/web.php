@@ -68,6 +68,8 @@ Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function 
         Route::get('/states/add', 'StateController@addState')->name('stateAdd');
         Route::post('/states/add', 'StateController@addStateSubmit')->name('stateAddSubmit');
         Route::post('/states/delete', 'StateController@deleteState')->name('deleteState');
+        Route::get('/states/modify', 'StateController@modify')->name('modifyState');
+        Route::post('/states/modify', 'StateController@modifyStateSubmit')->name('modifyStateSubmit');
 
         // Source Routes
         Route::get('/sources', 'SourceController@allSources')->name('sourceView');

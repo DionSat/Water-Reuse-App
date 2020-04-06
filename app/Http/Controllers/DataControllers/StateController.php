@@ -57,4 +57,20 @@ class StateController extends Controller
         return response()->json(State::all());
     }
 
+    public function modify(Request $request) {
+        $state = State::where("state_id", $request->state_id)->get()->first();
+        return view('database.modifyState', compact('state'));
+    }
+
+    public function modifyStateSubmit(Request $request) {
+        $state = State::where("state_id", $request->state_id)->get()->first();
+        if(empty($request->newStateValue))
+            return redirect()->route('modifyState', ['state_id' => $state->state_id])->with(['alert' => 'danger', 'alertMessage' => 'Please enter a state name!']);
+
+        $oldStateName = $state->stateName;
+        $state->stateName = $request->newStateValue;
+        $state->save();
+
+        return redirect()->route('stateView')->with(['alert' => 'success', 'alertMessage' => $oldStateName . ' has been changed to ' . $state->stateName]);
+    }
 }
