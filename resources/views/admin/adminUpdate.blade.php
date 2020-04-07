@@ -6,17 +6,18 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#searchBox').on('input',function(){
-            console.log($("#searchBox").val());
             $(".justaclone").remove();
             if ($("#searchBox").val().trim() === "") {
                 $('form').removeAttr('hidden');
             }else{
                 $('form').attr('hidden', true);
                 <?php foreach ($allUsers as $user):?>
-                    if($('#searchBox').val() == "{{$user->name}}"){
+                    if("{{$user->name}}".search($('#searchBox').val()) > -1 || "{{$user->email}}".search($('#searchBox').val()) > -1){
                         $('#{{$user->id}}').clone().prop('class', "justaclone").appendTo(".card-body");
+                        $(".justaclone").find("input").remove();
                     }
                 <?php endforeach ?>
+
             }
         });
     });
