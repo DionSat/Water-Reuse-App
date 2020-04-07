@@ -1,6 +1,27 @@
 @extends('layouts.master')
 
 @section('body')
+<script src="https://code.jquery.com/jquery-1.11.1.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/gh/rexeze/formatTimeStamp/src/index-cdn.js" ></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#searchBox').on('input',function(){
+            console.log($("#searchBox").val());
+            $(".justaclone").remove();
+            if ($("#searchBox").val().trim() === "") {
+                $('form').removeAttr('hidden');
+            }else{
+                $('form').attr('hidden', true);
+                <?php foreach ($allUsers as $user):?>
+                    if($('#searchBox').val() == "{{$user->name}}"){
+                        $('#{{$user->id}}').clone().prop('class', "justaclone").appendTo(".card-body");
+                    }
+                <?php endforeach ?>
+            }
+        });
+    });
+</script>
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -18,7 +39,8 @@
                                 {{ session('nothing') }}
                             </div>
                         @endif
-                        <form action={{ route('updateUser') }} method="POST">
+                        <input type="text" id="searchBox">
+                        <form action={{ route('updateUser') }} method="POST" id="">
                             {{ csrf_field() }}
                             <table id="userTable" class="table">
                                 <thead>
@@ -33,7 +55,7 @@
                                 </thead>
                                 <tbody>
                                 @foreach($allUsers as $user)
-                                    <tr>
+                                    <tr class="userListItem" id="{{$user->id}}">
                                         <th scope="row">{{$user->id}}</th>
                                         <td><a href="{{route('viewUser',['user_id' => $user->id])}}">{{$user->name}}</a>
                                         </td>
