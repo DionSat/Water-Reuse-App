@@ -12,7 +12,7 @@
                 <th scope="col">#</th>
                 <th scope="col">County</th>
                 <th scope="col">State</th>
-                <th scope="col">Actions</th>
+                <th scope="col" colspan="2">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -28,6 +28,9 @@
                             <input id="countyId-{{$county->county_id}}" name="county_id" value="{{$county->county_id}}" hidden>
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
+                    </td>
+                    <td>
+                        <a href="{{route('modifyCounties', ['county_id' => $county->county_id])}}" class="btn btn-primary"><i class="fas fa-edit" aria-hidden="true"></i> Modify </a>
                     </td>
                 </tr>
             @endforeach
