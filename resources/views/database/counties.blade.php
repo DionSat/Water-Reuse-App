@@ -30,7 +30,7 @@
                         </form>
                     </td>
                     <td>
-                        <a href="{{route('modifyCounties', ['county_id' => $county->county_id])}}" class="btn btn-primary"><i class="fas fa-edit" aria-hidden="true"></i> Modify </a>
+                        <a href="{{route('modifyCounty', ['county_id' => $county->county_id])}}" class="btn btn-primary"><i class="fas fa-edit" aria-hidden="true"></i> Modify </a>
                     </td>
                 </tr>
             @endforeach
