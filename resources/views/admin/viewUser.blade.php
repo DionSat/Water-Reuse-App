@@ -55,8 +55,8 @@
                         <td>{{$user->reason}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">We can contact you</th>
-                        @if ($user->canContact === 'True')
+                        <th scope="row">Permission to Contact</th>
+                        @if ($user->can_contact === true)
                             <td>Yes</td>
                         @else
                             <td>No</td>
@@ -67,3 +67,4 @@
             </div>
         </div>
 @endsection
+

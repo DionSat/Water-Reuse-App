@@ -77,7 +77,7 @@ class RegisterController extends Controller
             'jobTitle' => $data['jobTitle'],
             'company' => $data['company'],
             'reason' => $data['reason'],
-            'canContact' => $data['contactOption'],
+            'can_contact' => $data['contactOption'],
             'phoneNumber' => $data['phoneNumber'],
             'countryCode' => $data['countryCode'],
         ]);
