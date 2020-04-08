@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('mainpage');
 });
@@ -47,6 +48,7 @@ Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function 
     Route::get('/database', 'DatabaseController@getDatabasePage')->name('database');
     Route::post('/Update', 'AdminController@updateUserAccess')->name('updateUser');
     Route::get('viewUser', 'AdminController@viewUser')->name('viewUser');
+    Route::get('/userSubmission', 'UserSubmissionController@basicPage')->name('userSubmission');
 
     // Database CRUD Page Routes
     Route::prefix('database')->namespace('DataControllers')->group(function (){
