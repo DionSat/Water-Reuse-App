@@ -20,7 +20,7 @@ class CountyMerge extends Model
      * The attributes that are mass assignable.
      */
     protected $fillable = [
-        'countyID', 'sourceID', 'destinationID', 'allowedID', 'codes', 'permit', 'incentives', 'moreInfo'
+        'countyID', 'sourceID', 'destinationID', 'allowedID', 'codes', 'permit', 'incentives', 'moreInfo', 'userID'
     ];
 
     public function county()
