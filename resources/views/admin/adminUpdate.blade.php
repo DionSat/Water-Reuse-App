@@ -10,14 +10,17 @@
             if ($("#searchBox").val().trim() === "") {
                 $('form').removeAttr('hidden');
             }else{
+                var resNum = 0;
                 $('form').attr('hidden', true);
+                $(".card-body").append("<table class='justaclone'><thead><tr><th scope='col'>#</th><th scope='col'>Name</th><th scope='col'>Email</th></tr></thread><tbody class='justaclone'>");
                 <?php foreach ($allUsers as $user):?>
-                    if("{{$user->name}}".search($('#searchBox').val()) > -1 || "{{$user->email}}".search($('#searchBox').val()) > -1){
-                        $('#{{$user->id}}').clone().prop('class', "justaclone").appendTo(".card-body");
-                        $(".justaclone").find("input").remove();
+                    if("{{$user->name}}".toLowerCase().search($('#searchBox').val()) > -1 || "{{$user->email}}".toLowerCase().search($('#searchBox').val()) > -1){
+                        $('#{{$user->id}}').clone().prop('class', "justaclone").appendTo("tbody.justaclone");
+                        resNum +=1;
                     }
                 <?php endforeach ?>
-
+                $(".justaclone").find("input").remove();
+                $("table.justaclone").prepend("<p class='justaclone'>Search results: "+resNum+"</p>");
             }
         });
     });
@@ -40,8 +43,10 @@
                                 {{ session('nothing') }}
                             </div>
                         @endif
-                        <input type="text" id="searchBox">
-                        <form action={{ route('updateUser') }} method="POST" id="">
+                        <p id="searchP">
+                            Search: <input type="text" id="searchBox">
+                        </p>
+                        <form action={{ route('updateUser') }} method="POST">
                             {{ csrf_field() }}
                             <table id="userTable" class="table">
                                 <thead>
