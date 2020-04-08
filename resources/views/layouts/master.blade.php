@@ -57,6 +57,12 @@
                         <li class="nav-item">
                             <a class="nav-link  @if (Route::current()->getName() == "search") active @endif" href="{{ route('search') }}"> Search</a>
                         </li>
+                        @guest
+                        @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('userSubmission') }}">{{ __('Submit a New Regulation') }}</a>
+                        </li>
+                        @endguest
                         {{--We'll want to do an actual check for "admin" here later --}}
                         @if (Auth::check() && Auth::user()->is_admin)
                             <li class="nav-item pl-3">
