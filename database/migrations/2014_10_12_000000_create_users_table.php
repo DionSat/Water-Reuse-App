@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration
             $table->string('jobTitle')->nullable();
             $table->string('company')->nullable();
             $table->string('reason')->nullable();
-            $table->boolean('canContact')->nullable();
+            $table->boolean('can_contact')->nullable();
             $table->biginteger('phoneNumber')->nullable();
             $table->string('countryCode')->nullable();
         });

@@ -79,11 +79,10 @@ class AccountController extends Controller
         $user = User::find(Auth::user()->id);
 
         $tableFields = array('name', 'email', 'streetAddress', 'address2',
-            'city', 'state', 'zipCode', 'jobTitle', 'company', 'reason', 'phoneNumber', 'canContact');
+            'city', 'state', 'zipCode', 'jobTitle', 'company', 'reason', 'phoneNumber');
 
         $formFields = array('inputName', 'inputEmail', 'inputAddress', 'inputAddress2',
-            'inputCity', 'inputState', 'inputZip', 'inputJob', 'inputCompany', 'recodeUse', 'inputPhone', 'contact');
-        # EXAMPLE db use
+            'inputCity', 'inputState', 'inputZip', 'inputJob', 'inputCompany', 'recodeUse', 'inputPhone');
         # DB::table('users')->update(['email' => $request->inputEmail, 'phoneNumber' => $request->inputPhone]);
 
         # updates tableFields
@@ -98,6 +97,11 @@ class AccountController extends Controller
                 $user->$tableField = $formField;
             }
         }
+
+        if($request->contact === 'true')
+            $user->can_contact = true;
+        else
+            $user->can_contact = false;
 
         $user->save();
         return redirect('/account')->with('status', 'Info update successful.');

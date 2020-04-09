@@ -38,8 +38,8 @@
                                         <td><a href="{{route('viewUser',['user_id' => $user->id])}}">{{$user->name}}</a>
                                         </td>
                                         <td>{{$user->email}}</td>
-                                        @if($user->canContact === true)
-                                            <td><input type="checkbox" ame="canContact[]" value={{$user->id}} checked
+                                        @if($user->can_contact === true)
+                                            <td><input type="checkbox" ame="can_contact[]" value={{$user->id}} checked
                                                        disabled></td>
                                         @else
                                             <td><input type="checkbox" disabled>
