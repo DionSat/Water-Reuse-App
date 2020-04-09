@@ -11,7 +11,7 @@
         {{ csrf_field() }}
         <div class="container">
             <div class="row mt-3 mb-5">
-                <div class="card h-100 shadow">
+                <div class="card h-100 shadow mx-auto text-center">
                     <div class="card-header">
                         <h3>Current City</h3>
                         <h4>{{$city->cityName}}</h4>
@@ -20,10 +20,10 @@
                         <div class="d-flex">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-default">New City</span>
+                                    <span class="input-group-text" id="inputGroup-sizing-default">New Name</span>
                                 </div>
                                 <input type="text" name="newCityValue" class="form-control" aria-label="Default"
-                                       aria-describedby="inputGroup-sizing-default">
+                                       aria-describedby="inputGroup-sizing-default" value="{{$city->cityName}}">
                             </div>
                             <input type="text" name="city_id" value="{{$city->city_id}}" hidden>
                         </div>
