@@ -37,14 +37,17 @@
                                 <option>...</option>
                             </select>
                             </div>
-                            <div class="form-group col-md-6">
-                            <label for="waterDestination">Water Destination</label>
-                            <select id="waterDestination" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>...</option>
-                            </select>
+                            <div id="waterDest" class="button-group col-md-6">
+                                <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Water Destinations</button>
+                                    <ul class="dropdown-menu">
+                                        <li><input type="checkbox"/>&nbsp;Option 1</li>
+                                        <li><input type="checkbox"/>&nbsp;Option 2</li>
+                                        <li><input type="checkbox"/>&nbsp;Option 3</li>
+                                        <li><input type="checkbox"/>&nbsp;Option 4</li>
+                                    </ul>
                             </div>
                         </div>
+
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label class="form-check-label" for="gridCheck">
