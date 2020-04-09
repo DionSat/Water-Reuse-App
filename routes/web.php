@@ -19,12 +19,16 @@ Route::get('/info', function() {
     return view('info');
 });
 
+Route::get('/userSubmission', function() {
+    return view('userSubmission');
+});
+
 Auth::routes();
 
 
 Route::get('/home', 'HomeController@index')->middleware('auth')->name('home');
 Route::get('/info', 'HomeController@getInfo')->name('info');
-
+Route::get('/userSubmission', 'HomeController@getUserSubmission')->name('userSubmission');
 Route::get('/search', 'SearchController@mainPage')->name('search');
 
 

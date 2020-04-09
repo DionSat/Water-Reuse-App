@@ -28,4 +28,9 @@ class HomeController extends Controller
     public function getInfo() {
         return view('info');
     }
+
+    // returns the userSubmission page
+    public function getUserSubmission() {
+        return view('userSubmission');
+    }
 }
