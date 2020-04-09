@@ -18,7 +18,9 @@
                             </div>
                             <div class="form-group col-md-6">
                             <label for="inputCity">City (Optional)</label>
-                            <input type="text" class="form-control" id="city">
+                            <select class="form-control" id="city">
+                                <option selected>Choose...</option>
+                            </select>
                             </div>
                             <div class="form-group col-md-2">
                             <label for="inputZip">Zip (Optional)</label>
@@ -27,7 +29,9 @@
                         </div>
                         <div class="form-group">
                             <label for="county">County (Optional)</label>
-                            <input type="text" class="form-control" id="county" placeholder="">
+                            <select class="form-control" id="county">
+                                <option selected>Choose...</option>
+                            </select>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
