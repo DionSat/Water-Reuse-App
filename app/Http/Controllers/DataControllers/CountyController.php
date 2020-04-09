@@ -63,4 +63,21 @@ class CountyController extends Controller
         return response()->json($counties);
     }
 
+    public function modify(Request $request) {
+        $county = County::where("county_id", $request->county_id)->get()->first();
+        return view('database.modifyCounty', compact('county'));
+    }
+
+    public function modifyCountySubmit(Request $request) {
+        $county = County::where("county_id", $request->county_id)->get()->first();
+        if(empty($request->newCountyValue))
+            return redirect()->route('modifyCounty', ['county_id' => $county->county_id])->with(['alert' => 'danger', 'alertMessage' => 'Please enter a county name!']);
+
+        $oldCountyName = $county->countyName;
+        $county->countyName = $request->newCountyValue;
+        $county->save();
+
+        return redirect()->route('countyView')->with(['alert' => 'success', 'alertMessage' => $oldCountyName . ' has been changed to ' . $county->countyName]);
+    }
+
 }

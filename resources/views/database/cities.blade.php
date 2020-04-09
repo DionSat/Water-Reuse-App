@@ -13,7 +13,7 @@
                 <th scope="col">City</th>
                 <th scope="col">County</th>
                 <th scope="col">State</th>
-                <th scope="col">Actions</th>
+                <th scope="col" colspan="2">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -30,6 +30,9 @@
                             <input id="cityId-{{$city->id}}" name="city_id" value="{{$city->city_id}}" hidden>
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
+                    </td>
+                    <td>
+                        <a href="{{route('modifyCity', ['city_id' => $city->city_id])}}" class="btn btn-primary"><i class="fas fa-edit" aria-hidden="true"></i> Modify </a>
                     </td>
                 </tr>
             @endforeach
