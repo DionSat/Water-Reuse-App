@@ -28,6 +28,5 @@ class UserSubmissionController extends Controller
         $citySubmissions = PendingCityMerge::all();
         $countySubmissions = PendingCountyMerge::all();
         return view('userSubmission.userSubmissionItem', compact('user', 'stateSubmissions', 'citySubmissions', 'countySubmissions'));
-
     }
 }
