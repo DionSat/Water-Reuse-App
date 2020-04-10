@@ -12,23 +12,15 @@
                 <div class="card-header">Dashboard</div>
                 <div class="card-body">
                         <h3>Heres what you submitted:</h3>
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th scope="col">Submission #</th>
-                                <th scope="col">State</th>
-                                <th scope="col">Source</th>
-                                <th scope="col">Destination</th>
-                                <th scope="col">Time Submitted</th>
-                                <th scope="col">Approved</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                    <tr>
-        
-                                    </tr>
-                            </tbody>
-                        </table>
+                        @foreach($stateSubmissions as $item)
+                            @include('common/reuse-item',['item'=>$item])
+                        @endforeach
+                        @foreach($citySubmissions as $item)
+                            @include('common/reuse-item',['item'=>$item])
+                        @endforeach
+                        @foreach($countySubmissions as $item)
+                            @include('common/reuse-item',['item'=>$item])
+                        @endforeach
                 </div>
             </div>
         </div>

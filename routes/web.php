@@ -52,7 +52,7 @@ Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function 
     Route::get('/database', 'DatabaseController@getDatabasePage')->name('database');
     Route::post('/Update', 'AdminController@updateUserAccess')->name('updateUser');
     Route::get('viewUser', 'AdminController@viewUser')->name('viewUser');
-    Route::get('/userSubmission', 'UserSubmissionController@basicPage')->name('userSubmission');
+    Route::get('/userSubmission2', 'UserSubmissionController@all')->name('userSubmission2');
 
     // Database CRUD Page Routes
     Route::prefix('database')->namespace('DataControllers')->group(function (){

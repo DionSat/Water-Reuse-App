@@ -13,12 +13,21 @@ use App\State;
 use App\Links;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\PendingStateMerge;
+use App\PendingCityMerge;
+use App\PendingCountyMerge;
 
 class UserSubmissionController extends Controller
 {
-    public function basicPage()
+    
+    public function all()
     {
         $user = Auth::user();
-        return view('userSubmission.userSubmission', compact('user'));
+        //getting access to database in state merge table as a collection()
+        $stateSubmissions = PendingStateMerge::all();
+        $citySubmissions = PendingCityMerge::all();
+        $countySubmissions = PendingCountyMerge::all();
+        return view('userSubmission.userSubmissionItem', compact('user', 'stateSubmissions', 'citySubmissions', 'countySubmissions'));
+
     }
 }
