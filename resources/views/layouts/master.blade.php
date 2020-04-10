@@ -74,14 +74,8 @@
                             <li class="nav-item @if (Route::current()->getName() == "database") active @endif">
                                 <a class="nav-link" href="{{ route('database') }}"><i class="fas fa-database"></i> Database </a>
                             </li> 
-<<<<<<< HEAD
                             <li class="nav-item @if (Route::current()->getName() == "admin-userSubmission") active @endif">
                                 <a class="nav-link" href="{{ route('userSubmission2') }}"><i class="fas fa-bars"></i> Submissions </a>
-=======
-                            <li class="nav-item @if (Route::current()->getName() == "userSubmission") active @endif">
-                                <a class="nav-link" href="{{ route('userSubmission') }}"><i class="fas fa-bars"></i> Submissions </a>
->>>>>>> e6ee73ddeb6082926c9ecda856c39fca5d93252f
-                            </li>
 
                         @endif
                     </ul>
