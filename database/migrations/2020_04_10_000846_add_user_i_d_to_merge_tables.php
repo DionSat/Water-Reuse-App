@@ -14,17 +14,17 @@ class AddUserIDToMergeTables extends Migration
     public function up()
     {
         Schema::table('statemerge', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->default('1');;
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
         });
 
         Schema::table('countymerge', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->default('1');;
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
         });
 
         Schema::table('citymerge', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->default('1');;
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }
