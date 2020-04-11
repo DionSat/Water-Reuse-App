@@ -69,13 +69,21 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group row mb-0">
+                        <div class="col-md-6 offset-md-4">
+                            <button type="submit" class="btn btn-primary">
+                                {{ __('Register') }}
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="accordion" id="accordion-1">
                 <div class="card">
                     <div class="card-header" id="card-header-2">
                         <h2>
-                            <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseOne"
+                            <button class="btn collapsed" type="button" data-toggle="collapse"
+                                    data-target="#collapseOne"
                                     aria-expanded="false" aria-controls="collapseOne">
                                 Optional
                             </button>
@@ -124,7 +132,7 @@
                                 </div>
                                 <label for="city"
                                        class=" col-sm-2 col-form-label text-md-right">{{ __('State') }}</label>
-                                <div class="col-sm-2" >
+                                <div class="col-sm-2">
 
                                     <select class="form-control" name="state" id="state">
                                         <option value></option>
@@ -188,7 +196,7 @@
                                        class="col-md-4 col-form-label text-md-right">{{ __('Zip Code') }}</label>
                                 <div class="col-md-6">
                                     <input id="zipCode" type="number" class="form-control" name="zipCode"
-                                            autocomplete="zip-code">
+                                           autocomplete="zip-code">
                                     @error('zipCode')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -227,7 +235,8 @@
                             <div class="form-group row ">
                                 <label for="countryCode"
                                        class="col-md-4 col-form-label text-md-right">{{ __('Country Code') }}</label>
-                                <div class="col-md-2"> <input id="countryCode" type="text" class="form-control" name="countryCode"> </div>
+                                <div class="col-md-2"><input id="countryCode" type="text" class="form-control"
+                                                             name="countryCode"></div>
                                 <label for="phone"
                                        class="col-sm-2 col-form-label text-md-right">{{ __('Phone number') }}</label>
                                 <div class="col-md-2">
@@ -259,16 +268,11 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Register') }}
-                                    </button>
-                                </div>
-                            </div>
+
                         </div>
 
                     </div>
+
                 </div>
             </div>
         </form>

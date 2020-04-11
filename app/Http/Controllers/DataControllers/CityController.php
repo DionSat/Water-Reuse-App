@@ -39,4 +39,26 @@ class CityController extends Controller
 
         return redirect()->route('cityView')->with(['alert' => 'success', 'alertMessage' => $city->cityName . ', ' . $city->county->state->stateName . ' has been deleted.']);
     }
+
+    public function getCitiesInCounty(Request $request){
+        $cities = City::where("fk_county", $request->county_id)->get();
+        return response()->json($cities);
+    }
+
+    public function modify(Request $request) {
+        $city = City::where("city_id", $request->city_id)->get()->first();
+        return view('database.modifyCity', compact('city'));
+    }
+
+    public function modifyCitySubmit(Request $request) {
+        $city = City::where("city_id", $request->city_id)->get()->first();
+        if(empty($request->newCityValue))
+            return redirect()->route('modifyCity', ['city_id' => $city->city_id])->with(['alert' => 'danger', 'alertMessage' => 'Please enter a city name!']);
+
+        $oldCityName = $city->cityName;
+        $city->cityName = $request->newCityValue;
+        $city->save();
+
+        return redirect()->route('cityView')->with(['alert' => 'success', 'alertMessage' => $oldCityName . ' has been changed to ' . $city->cityName]);
+    }
 }

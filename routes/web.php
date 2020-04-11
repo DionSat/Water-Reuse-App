@@ -19,13 +19,16 @@ Route::get('/info', function() {
     return view('info');
 });
 
+Route::get('/userSubmission', function() {
+    return view('userSubmission');
+});
 
 Auth::routes();
 
 
 Route::get('/home', 'HomeController@index')->middleware('auth')->name('home');
 Route::get('/info', 'HomeController@getInfo')->name('info');
-
+Route::get('/userSubmission', 'HomeController@getUserSubmission')->name('userSubmission');
 Route::get('/search', 'SearchController@mainPage')->name('search');
 
 
@@ -44,10 +47,10 @@ Route::middleware('auth')->group(function () {
 //Admin Routes
 Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function () {
     Route::get('/', 'AdminController@getBasicAdminPage')->name('admin');
-    Route::post('/', 'AdminController@updateAdminInformation')->name('adminSave');
-    Route::post('/save', 'AdminController@updateAdminRedirect')->name('adminRedirect');
+    Route::get('Update', 'AdminController@getUsers')->name('getUsers');
     Route::get('/database', 'DatabaseController@getDatabasePage')->name('database');
-
+    Route::post('/Update', 'AdminController@updateUserAccess')->name('updateUser');
+    Route::get('viewUser', 'AdminController@viewUser')->name('viewUser');
 
     // Database CRUD Page Routes
     Route::prefix('database')->namespace('DataControllers')->group(function (){
@@ -57,12 +60,16 @@ Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function 
         Route::get('/cities/add', 'CityController@addCity')->name('cityAdd');
         Route::post('/cities/add', 'CityController@addCitySubmit')->name('cityAddSubmit');
         Route::post('/cities/delete', 'CityController@deleteCity')->name('deleteCity');
+        Route::get('/cities/modify', 'CityController@modify')->name('modifyCity');
+        Route::post('/cities/modify', 'CityController@modifyCitySubmit')->name('modifyCitySubmit');
 
         // County Routes
         Route::get('/counties', 'CountyController@allCounties')->name('countyView');
         Route::get('/counties/add', 'CountyController@addCounty')->name('countyAdd');
         Route::post('/counties/add', 'CountyController@addCountySubmit')->name('countyAddSubmit');
         Route::post('/counties/delete', 'CountyController@deleteCounty')->name('deleteCounty');
+        Route::get('/counties/modify', 'CountyController@modify')->name('modifyCounty');
+        Route::post('/counties/modify', 'CountyController@modifyCountySubmit')->name('modifyCountySubmit');
 
         // State Routes
         Route::get('/states', 'StateController@allStates')->name('stateView');
@@ -87,7 +94,7 @@ Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function 
         Route::get('/links/add', 'LinkController@addLink')->name('linkAdd');
         Route::post('/links/add', 'LinkController@addLinkSubmit')->name('linkAddSubmit');
         Route::post('/links/delete', 'LinkController@deleteLink')->name('deleteLink');
-        
+
     });
 
 });

@@ -127,12 +127,27 @@
                         <input type="text" class="form-control" name="RecodeUse" placeholder="Why do you use Recode?">
                     </div>
                 </div>
-                <div class="form-row col-4">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="contactCheck" name="contact" value="True"
-                               checked>
-                        <label class="form-check-label" for="contactCheck">We can contact you</label>
+                <div class="form-row col-6" id="contactButton">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        @if($user->can_contact === true)
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="contact" value="true" checked> Yes
+                            </label>
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="contact" value="false"> No
+                            </label>
+                        @else
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="contact" value="true"> Yes
+                            </label>
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="contact" value="false" checked> No
+                            </label>
+                        @endif
                     </div>
+                    <span id="contactLabel">Permission to contact </span>
+                    {{--<input class="form-check-input" type="checkbox" id="contactCheck" name="contact" value="{{$user->can_contact}}"> --}}
+                    {{--<label class="form-check-label" for="contactCheck">We can contact you</label> --}}
                 </div>
 
                 <div class="form row p-3">
@@ -142,3 +157,16 @@
         </form>
     </div>
 @endsection
+
+@push('css')
+    <style>
+        #contactButton {
+            padding-left: 6px;
+        }
+
+        #contactLabel {
+            font-size: 20px;
+            padding-left: 20px;
+        }
+    </style>
+@endpush
