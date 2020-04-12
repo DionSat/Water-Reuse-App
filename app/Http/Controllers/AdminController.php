@@ -15,7 +15,7 @@ class AdminController extends Controller
         $canEmail = array();
 
         foreach($allUsers as $users){
-            if($users->canContact === true)
+            if($users->can_contact === true)
                 array_push($canEmail, $users->email);
         }
         if ($user->is_admin === false)
