@@ -185,7 +185,7 @@
                 $("#chooseCity").prop("disabled", true);
                 $("#chooseCity").prop("selected", false);
 
-                axios.get("{{route("my-counties-api")}}"+"/"+inputState.value)
+                axios.get("{{route("counties-api")}}"+"/"+inputState.value)
                 .then(function (response) {
 
 
@@ -233,7 +233,7 @@
             {
                 $("#chooseCity").prop("disabled", false);
 
-                axios.get("{{route("my-cities-api")}}"+"/"+county.value)
+                axios.get("{{route("cities-api")}}"+"/"+county.value)
                 .then(function (response) {
 
 

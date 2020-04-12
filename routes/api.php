@@ -22,7 +22,5 @@ Route::get("/states", "DataControllers\StateController@getAllStates")->name("sta
 Route::get("/counties/{state_id?}", "DataControllers\CountyController@getCountiesInState")->name("counties-api");
 Route::get("/cities/{county_id?}", "DataControllers\CityController@getCitiesInCounty")->name("cities-api");
 
-Route::get("/countie/{state_id?}", "RegulationController@getCountiesInState")->name("my-counties-api");
-Route::get("/city/{county_id?}", "RegulationController@getCitiesInCounty")->name("my-cities-api");
 Route::get('/mySources', 'RegulationController@getAllSources')->name('my-sources-api');
 Route::get('/myDestination', 'RegulationController@getAllDestinations')->name('my-destination-api');
