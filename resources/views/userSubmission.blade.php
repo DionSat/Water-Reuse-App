@@ -44,11 +44,8 @@
                             </div>
                             <div id="waterDest" class="button-group col-md-6">
                                 <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Water Destinations</button>
-                                    <ul class="dropdown-menu">
-                                        <li><input type="checkbox"/>&nbsp;Option 1</li>
-                                        <li><input type="checkbox"/>&nbsp;Option 2</li>
-                                        <li><input type="checkbox"/>&nbsp;Option 3</li>
-                                        <li><input type="checkbox"/>&nbsp;Option 4</li>
+                                    <ul class="dropdown-menu" id="destination">
+
                                     </ul>
                             </div>
                         </div>
@@ -111,6 +108,58 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
 
+        //Unclick yes or no depending on which one is selected
+        $("#no").click(function(){
+            $("#yes").prop("checked", false);
+        });
+
+        $("#yes").click(function(){
+            $("#no").prop("checked", false);
+        });
+
+
+
+        // get the water sources
+        axios.get("{{route("my-sources-api")}}")
+        .then(function (response) {
+
+
+            console.log("Response: " + response);
+            console.log("Data: " + response.data);
+            //get each county, and set them as options
+            $source = response.data.map(obj => ("<option class='sourceName' value=" + obj.source_id + " >" + obj.sourceName + "</option>"));
+            console.log($source);
+            $("#waterSource").append($source);
+        })
+        .catch(function (error) {
+            //Handle errors here
+
+            //Generally don't have to worry about errors too much,
+            // but maybe want to do "alert('There was a error, please try re-loading the page.')"
+            console.log(error);
+        });
+
+        // get the water sources
+        axios.get("{{route("my-destination-api")}}")
+        .then(function (response) {
+
+
+            console.log("Response: " + response);
+            console.log("Data: " + response.data);
+            //get each county, and set them as options
+            $destination = response.data.map(obj => ("<li><input type='checkbox' value=" + obj.destination_id + "/>&nbsp;" + obj.destinationName + "</li>"));
+            console.log($destination);
+            $("#destination").append($destination);
+        })
+        .catch(function (error) {
+            //Handle errors here
+
+            //Generally don't have to worry about errors too much,
+            // but maybe want to do "alert('There was a error, please try re-loading the page.')"
+            console.log(error);
+        });
+
+
         //for when the state changes
         $( "#inputState" ).change(function() {
 
@@ -153,7 +202,7 @@
                     //Generally don't have to worry about errors too much,
                     // but maybe want to do "alert('There was a error, please try re-loading the page.')"
                     console.log(error);
-                })
+                });
             }
             else {
                 $("#chooseCounty").prop("disabled", true);
