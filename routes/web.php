@@ -43,9 +43,10 @@ Route::middleware('auth')->group(function () {
 //Admin Routes
 Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function () {
     Route::get('/', 'AdminController@getBasicAdminPage')->name('admin');
-    Route::get('Update', 'AdminController@getUsers')->name('getUsers');
+    Route::get('update', 'AdminController@getUsers')->name('getUsers');
+    Route::get('update/search', 'AdminController@searchUsers')->name('searchUsers');
     Route::get('/database', 'DatabaseController@getDatabasePage')->name('database');
-    Route::post('/Update', 'AdminController@updateUserAccess')->name('updateUser');
+    Route::post('/update', 'AdminController@updateUserAccess')->name('updateUser');
     Route::get('viewUser', 'AdminController@viewUser')->name('viewUser');
 
     // Database CRUD Page Routes

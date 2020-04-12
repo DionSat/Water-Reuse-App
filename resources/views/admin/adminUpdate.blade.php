@@ -8,19 +8,17 @@
         $('#searchBox').on('input',function(){
             $(".justaclone").remove();
             if ($("#searchBox").val().trim() === "") {
-                $('form').removeAttr('hidden');
+                $('.userListItem').removeAttr('hidden');
             }else{
                 var resNum = 0;
-                $('form').attr('hidden', true);
-                $(".card-body").append("<table class='justaclone'><thead><tr><th scope='col'>#</th><th scope='col'>Name</th><th scope='col'>Email</th></tr></thread><tbody class='justaclone'>");
+                $('.userListItem').attr('hidden', true);
                 <?php foreach ($allUsers as $user):?>
                     if("{{$user->name}}".toLowerCase().search($('#searchBox').val()) > -1 || "{{$user->email}}".toLowerCase().search($('#searchBox').val()) > -1){
-                        $('#{{$user->id}}').clone().prop('class', "justaclone").appendTo("tbody.justaclone");
+                        $('#{{$user->id}}').removeAttr('hidden');
                         resNum +=1;
                     }
                 <?php endforeach ?>
-                $(".justaclone").find("input").remove();
-                $("table.justaclone").prepend("<p class='justaclone'>Search results: "+resNum+"</p>");
+                $("#searchP").append("<span class='justaclone'>Results: "+resNum+"</span>");
             }
         });
     });
@@ -43,11 +41,19 @@
                                 {{ session('nothing') }}
                             </div>
                         @endif
-                        <p id="searchP">
-                            Search: <input type="text" id="searchBox">
+                        <p id="searchP" style="font-size: 0.5em;display: inline-block;">
+                            Search Current Page: <input type="text" id="searchBox" style="max-width: 100px;">
+                            <div style="float: right;">
+                                <form action={{route('searchUsers')}} method="GET" style="display: inline-block;font-size: 0.5em;float: left;">
+                                    {{ csrf_field() }}
+                                    Search Database: <input type="text" id="searchDB" name="search" style="max-width: 100px;" >
+                                    <button type="submit" class="btn btn-primary" style="max-width: 40px;max-height: 20px;font-size:0.7em;margin-bottom: 4px;text-align: center;padding: 2px 4px 6px 4px;">Go</button>
+                                </form>
+                                @if (!$userListHome)
+                                    <button class="btn btn-primary" style="max-width: 40px;max-height: 20px;font-size:0.7em;margin-bottom: 4px;margin-left:2px;text-align: center;padding: 2px 4px 6px 4px;float: right;" onclick="window.location='{{ route('getUsers') }}'">Clear Search</button>
+                                @endif
+                            </div>
                         </p>
-                        <form action={{ route('updateUser') }} method="POST">
-                            {{ csrf_field() }}
                             <table id="userTable" class="table">
                                 <thead>
                                 <tr>
@@ -66,34 +72,33 @@
                                         <td><a href="{{route('viewUser',['user_id' => $user->id])}}">{{$user->name}}</a>
                                         </td>
                                         <td>{{$user->email}}</td>
-                                        @if($user->canContact === true)
-                                            <td><input type="checkbox" ame="canContact[]" value={{$user->id}} checked
-                                                       disabled></td>
-                                        @else
-                                            <td><input type="checkbox" disabled>
-                                            </td>
-                                        @endif
-                                        @if($user->is_admin === true)
-                                            <td><input type="checkbox"  checked disabled></td>
-                                        @else
-                                            <td><input type="checkbox"  disabled></td>
-                                        @endif
-                                        <td><input type="checkbox" name="userId[]" value={{$user->id}}></td>
+                                        <td>
+                                            <input type="checkbox" disabled style="height: 40px;width: 40px" @if($user->can_contact === true) checked @endif>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" disabled style="height: 40px;width: 40px;" @if($user->is_admin === true) checked @endif>
+                                        </td>
+                                        <td>
+                                            <form action={{ route('updateUser') }} method="POST">
+                                                {{ csrf_field() }}
+                                                <input type="number" name="userId" style="display: none;" value={{$user->id}}>
+                                                <button type="submit" class="btn btn-primary">
+                                                    {{ __('Toggle Admin') }}
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Update Admins') }}
-                                </button>
+                                {{ $allUsers->links() }}
+                                
                             </div>
-
-                        </form>
                             <div class="text-center">
                                 <button class="btn btn-link">
                                     <a href="mailto:@foreach($allUsers as $user){{$user->email}};@endforeach">
-                                        Email all Users
+                                        Email Every User
                                     </a>
                                 </button>
 
