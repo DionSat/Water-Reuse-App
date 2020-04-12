@@ -78,7 +78,7 @@
                 .then(function (response) {
 
                     // handle success, we can print out what we got back to console for debugging
-                    console.log(response);
+                    console.log("Response: " + response);
                     console.log(response.data);
 
                     // We can then set the html that we need to with the results

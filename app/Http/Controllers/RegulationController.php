@@ -18,4 +18,9 @@ Class RegulationController extends Controller{
         $counties = County::where("fk_state", $request->state_id)->get();
         return response()->json($counties);
     }
+
+    public function getCitiesInCounty(Request $request){
+        $cities = City::where("fk_county", $request->county_id)->get();
+        return response()->json($cities);
+    }
 }

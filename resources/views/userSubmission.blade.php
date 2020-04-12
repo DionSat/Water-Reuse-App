@@ -12,36 +12,34 @@
                         <div class="form-group col-md-4">
                             <label for="inputState">State</label>
                             <select id="inputState" class="form-control">
-                                <option selected>Choose...</option>
+                                <option value="choose" selected>Choose...</option>
                                 @foreach($states as $state)
                                     <option value="{{$state->state_id}}">{{$state->stateName}}</option>
                                 @endforeach
-                                <option>...</option>
                             </select>
                             </div>
-                            <div class="form-group col-md-6">
-                            <label for="inputCity">City (Optional)</label>
-                            <select class="form-control" id="city">
-                                <option selected>Choose...</option>
+                            <div class="form-group col-md-4">
+                            <label for="county">County (Optional)</label>
+                            <select class="form-control" id="county">
+                                <option id="chooseCounty" value="choose" disabled>Choose...</option>
                             </select>
                             </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-4">
                             <label for="inputZip">Zip (Optional)</label>
-                            <input type="text" class="form-control" id="zip">
+                            <input type="text" class="form-control" id="inputZip">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="county">County (Optional)</label>
-                            <select class="form-control" id="county">
-                                <option selected>Choose...</option>
+                            <label for="city">City (Optional)</label>
+                            <select class="form-control" id="city">
+                                <option id="chooseCity" value="choose" disabled>Choose...</option>
                             </select>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                             <label for="waterSource">Water Source</label>
                             <select id="waterSource" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>...</option>
+                                <option value="choose" disabled>Choose...</option>
                             </select>
                             </div>
                             <div id="waterDest" class="button-group col-md-6">
@@ -113,26 +111,38 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
 
-
+        //for when the state changes
         $( "#inputState" ).change(function() {
 
             // Here we can see the currently selected state (the state_id is the value)
             console.log(inputState.value);
 
+            // delete each county
+            $(".countyName").each(function () {
+                $(this).remove();
+            });
+
+            // delete each city
+            $(".cityName").each(function () {
+                $(this).remove();
+            });
+
             //This is the Axios call to the API
-            axios.get("{{route("my-counties-api")}}"+"/"+inputState.value)
+            if(inputState.value != "choose")
+            {
+                $("#chooseCounty").prop("disabled", false);
+
+
+                axios.get("{{route("my-counties-api")}}"+"/"+inputState.value)
                 .then(function (response) {
 
-                    // handle success, we can print out what we got back to console for debugging
-                    console.log(response);
-                    console.log(response.data);
 
-                    // We can then set the html that we need to with the results
-                    // $("#county").text(response.data.map(obj => obj.countyName).join(", "));
-                    $county = response.data.map(obj => obj.countyName).join(", ");
-                    $option = ("<option>" + $county + "</option>");
-                    console.log($option);
-                    $("#county").append($option);
+                    console.log("Response: " + response);
+                    console.log("Data: " + response.data);
+                    //get each county, and set them as options
+                    $county = response.data.map(obj => ("<option class='countyName' value=" + obj.county_id + " >" + obj.countyName + "</option>"));
+                    console.log($county);
+                    $("#county").append($county);
                 })
                 .catch(function (error) {
                     //Handle errors here
@@ -141,9 +151,61 @@
                     // but maybe want to do "alert('There was a error, please try re-loading the page.')"
                     console.log(error);
                 })
+            }
+            else {
+                $("#chooseCounty").prop("disabled", true);
+                $("#chooseCounty").prop("selected", false);
+                $("#chooseCity").prop("disabled", true);
+                $("#chooseCity").prop("selected", false);
+            }
+
         });
 
 
+
+
+        //Populate the cities
+        //for when the state changes
+        $( "#county" ).change(function() {
+
+            // Here we can see the currently selected state (the state_id is the value)
+            console.log(county.value);
+
+            // delete each city
+            $(".cityName").each(function () {
+                $(this).remove();
+            });
+
+            //This is the Axios call to the API
+            if(county.value != "choose")
+            {
+                $("#chooseCity").prop("disabled", false);
+
+                axios.get("{{route("my-cities-api")}}"+"/"+county.value)
+                .then(function (response) {
+
+
+                    console.log("Response: " + response);
+                    console.log("Data: " + response.data);
+                    //get each city, and set them as options
+                    $city = response.data.map(obj => ("<option class='cityName' value=" + obj.city_id + " >" + obj.cityName + "</option>"));
+                    console.log($city);
+                    $("#city").append($city);
+                })
+                .catch(function (error) {
+                    //Handle errors here
+
+                    //Generally don't have to worry about errors too much,
+                    // but maybe want to do "alert('There was a error, please try re-loading the page.')"
+                    console.log(error);
+                })
+            }
+            else{
+                $("#chooseCity").prop("disabled", true);
+                $("#chooseCity").prop("selected", false);
+            }
+
+        });
 
     </script>
 @endpush
