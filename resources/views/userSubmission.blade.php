@@ -130,8 +130,11 @@
             //This is the Axios call to the API
             if(inputState.value != "choose")
             {
+                //enable the basic 'choose' option
                 $("#chooseCounty").prop("disabled", false);
-
+                //disable cities
+                $("#chooseCity").prop("disabled", true);
+                $("#chooseCity").prop("selected", false);
 
                 axios.get("{{route("my-counties-api")}}"+"/"+inputState.value)
                 .then(function (response) {
