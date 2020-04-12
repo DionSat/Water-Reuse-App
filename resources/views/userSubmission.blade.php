@@ -13,6 +13,9 @@
                             <label for="inputState">State</label>
                             <select id="inputState" class="form-control">
                                 <option selected>Choose...</option>
+                                @foreach($states as $state)
+                                    <option value="{{$state->state_id}}">{{$state->stateName}}</option>
+                                @endforeach
                                 <option>...</option>
                             </select>
                             </div>
@@ -105,4 +108,43 @@
     </div>
 </div>
 @endsection
+
+@push("js")
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+
+
+        $( "#inputState" ).change(function() {
+
+            // Here we can see the currently selected state (the state_id is the value)
+            console.log(inputState.value);
+
+            //This is the Axios call to the API
+            axios.get("{{route("my-counties-api")}}"+"/"+inputState.value)
+                .then(function (response) {
+
+                    // handle success, we can print out what we got back to console for debugging
+                    console.log(response);
+                    console.log(response.data);
+
+                    // We can then set the html that we need to with the results
+                    // $("#county").text(response.data.map(obj => obj.countyName).join(", "));
+                    $county = response.data.map(obj => obj.countyName).join(", ");
+                    $option = ("<option>" + $county + "</option>");
+                    console.log($option);
+                    $("#county").append($option);
+                })
+                .catch(function (error) {
+                    //Handle errors here
+
+                    //Generally don't have to worry about errors too much,
+                    // but maybe want to do "alert('There was a error, please try re-loading the page.')"
+                    console.log(error);
+                })
+        });
+
+
+
+    </script>
+@endpush
 

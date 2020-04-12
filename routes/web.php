@@ -15,21 +15,13 @@ Route::get('/', function () {
     return view('mainpage');
 });
 
-Route::get('/info', function() {
-    return view('info');
-});
-
-Route::get('/userSubmission', function() {
-    return view('userSubmission');
-});
-
 Auth::routes();
 
 
 Route::get('/home', 'HomeController@index')->middleware('auth')->name('home');
 Route::get('/info', 'HomeController@getInfo')->name('info');
-Route::get('/userSubmission', 'HomeController@getUserSubmission')->name('userSubmission');
 Route::get('/search', 'SearchController@mainPage')->name('search');
+
 
 
 
@@ -41,7 +33,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/accountUpdate', 'AccountController@getUpdatePage')->middleware('auth')->name('updatePage');
     Route::post('/accountUpdate', 'AccountController@updateAccount')->middleware('auth')->name('updateAccount');
     Route::get('/changePassword', 'AccountController@getPasswordPage')->middleware('auth')->name('password');
-    Route::post('changePassword', 'AccountController@changePassword')->middleware('auth')->name('changePassword');
+    Route::post('/changePassword', 'AccountController@changePassword')->middleware('auth')->name('changePassword');
+
+    Route::get('/userSubmission', 'RegulationController@allStates')->name('userSubmission');
 });
 
 //Admin Routes
@@ -51,6 +45,7 @@ Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function 
     Route::get('/database', 'DatabaseController@getDatabasePage')->name('database');
     Route::post('/Update', 'AdminController@updateUserAccess')->name('updateUser');
     Route::get('viewUser', 'AdminController@viewUser')->name('viewUser');
+
 
     // Database CRUD Page Routes
     Route::prefix('database')->namespace('DataControllers')->group(function (){
@@ -92,6 +87,5 @@ Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function 
         Route::post('/links/delete', 'LinkController@deleteLink')->name('deleteLink');
 
     });
-
 });
 
