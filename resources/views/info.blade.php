@@ -31,46 +31,42 @@
         <div class="row justify-content-center" style="margin: 3em">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Mid User</div>
+                    <div class="card-header">Registered User</div>
 
                     <div class="card-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel bibendum ipsum.
-                        Pellentesque sed justo dui.
-                        Vivamus pretium venenatis diam, quis sollicitudin turpis facilisis sit amet.
-                        Suspendisse laoreet diam quis laoreet euismod. Mauris in velit vitae
-                        ligula porta tempus vitae non nunc. Mauris maximus aliquam mi,
-                        sed egestas libero feugiat vel. Phasellus iaculis posuere velit,
-                        accumsan varius sem scelerisque eu. Vivamus euismod lacinia sapien sed ullamcorper.
-                        Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                        Aliquam consectetur tortor massa, ut commodo velit lacinia eu. Donec consectetur dolor et orci porta,
-                        non feugiat libero finibus. Nunc ullamcorper orci quis euismod aliquam. Ut vehicula orci eu tempor tristique.
-                        Donec ut dapibus dui. Nunc sed tincidunt tortor.
-                        Pellentesque id ex tortor.
+                    <h3>Add a New Regulation</h3>
+                    <p id="p">1. Navigate to the <a href="#">'Submit New Regulation'</a></p>
                         </p>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="row justify-content-center" style="margin: 3em">
+        <div class="row justify-content-center @if (Route::current()->getName() == "admin") active @endif"  style="margin: 3em">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Super User</div>
+                    <div class="card-header">Administrator</div>
 
                     <div class="card-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel bibendum ipsum.
+                    <h2>User Manipulation</h2>
+                    <h3>Add or Delete a User</h3>
+                    <p id="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel bibendum ipsum.
                         Pellentesque sed justo dui.
                         Vivamus pretium venenatis diam, quis sollicitudin turpis facilisis sit amet.
                         Suspendisse laoreet diam quis laoreet euismod. Mauris in velit vitae
                         ligula porta tempus vitae non nunc. Mauris max
                         imus aliquam mi,
                         sed egestas libero feugiat vel. Phasellus iaculis posuere velit,
-                        accumsan varius sem scelerisque eu. Vivamus euismod lacinia sapien sed ullamcorper.
-                        Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                        Aliquam consectetur tortor massa, ut commodo velit lacinia eu. Donec consectetur dolor et orci porta,
-                        non feugiat libero finibus. Nunc ullamcorper orci quis euismod aliquam. Ut vehicula orci eu tempor tristique.
-                        Donec ut dapibus dui. Nunc sed tincidunt tortor.
-                        Pellentesque id ex tortor.
+                        accumsan varius sem scelerisque eu.
+                        </p>
+                    <h3>Give a User 'Administrator' Access</h3>
+                    <p id="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel bibendum ipsum.
+                        Pellentesque sed justo dui.
+                        Vivamus pretium venenatis diam, quis sollicitudin turpis facilisis sit amet.
+                        Suspendisse laoreet diam quis laoreet euismod. Mauris in velit vitae
+                        ligula porta tempus vitae non nunc. Mauris max
+                        imus aliquam mi,
+                        sed egestas libero feugiat vel. Phasellus iaculis posuere velit,
+                        accumsan varius sem scelerisque eu.
                         </p>
                     </div>
                 </div>
@@ -84,7 +80,30 @@
         <p id="font">Font: 0</p>
     </div>
 
-    <script type='text/javascript'>
+
+@endsection
+
+@push("css")
+    <style>
+        .py-4 {
+            background: rgb(2,0,36);
+            text-align: center;
+        }
+        h1{
+            color: white;
+            font-family: 'Lobster';
+        }
+        p {
+            margin-top: 3em;
+            font-family: 'Lato';
+        }
+        #back, #font {
+            color: white;
+        }
+    </style>
+@endpush
+@push("js")
+        <script type='text/javascript'>
             let nBackChangedCount = 0;
             let nFontChangedCount = 0;
             function changeBackground () {
@@ -207,24 +226,4 @@
                 }
             }
     </script>
-@endsection
-
-@push("css")
-    <style>
-        .py-4 {
-            background: rgb(2,0,36);
-            text-align: center;
-        }
-        h1{
-            color: white;
-            font-family: 'Lobster';
-        }
-        p {
-            margin-top: 3em;
-            font-family: 'Lato';
-        }
-        #back, #font {
-            color: white;
-        }
-    </style>
 @endpush
