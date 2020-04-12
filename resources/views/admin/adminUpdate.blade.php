@@ -67,7 +67,7 @@
                                 </thead>
                                 <tbody>
                                 @foreach($allUsers as $user)
-                                    <tr class="userListItem" id="{{$user->id}}">
+                                    <tr class="userListItem" id="{{$user->id}}" title="{{$user->company}},{{$user->jobTitle}},{{$user->city}},{{$user->state}}">
                                         <th scope="row">{{$user->id}}</th>
                                         <td><a href="{{route('viewUser',['user_id' => $user->id])}}">{{$user->name}}</a>
                                         </td>
