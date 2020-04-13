@@ -1,8 +1,6 @@
 @extends('layouts.master')
 
 @section('body')
-<script src="https://code.jquery.com/jquery-1.11.1.min.js" ></script>
-<script src="https://cdn.jsdelivr.net/gh/rexeze/formatTimeStamp/src/index-cdn.js" ></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#searchBox').on('input',function(){
