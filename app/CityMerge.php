@@ -23,6 +23,11 @@ class CityMerge extends Model
         'cityID', 'sourceID', 'destinationID', 'allowedID', 'codes', 'permit', 'incentives', 'moreInfo', 'userID'
     ];
 
+    public function user()
+    {
+        return $this->hasOne('App\User', 'id','userID');
+    }
+    
     public function city()
     {
         return $this->hasOne('App\City', 'city_id','cityID');

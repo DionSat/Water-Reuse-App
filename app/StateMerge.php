@@ -23,6 +23,11 @@ class StateMerge extends Model
         'stateID', 'sourceID', 'destinationID', 'allowedID', 'codes', 'permit', 'incentives', 'moreInfo', 'userID'
     ];
 
+    public function user()
+    {
+        return $this->hasOne('App\User', 'id','userID');
+    }
+    
     public function state()
     {
         return $this->hasOne('App\State', 'state_id','stateID');
