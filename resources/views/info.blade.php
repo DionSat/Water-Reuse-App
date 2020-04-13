@@ -7,21 +7,15 @@
         <div class="row justify-content-center" style="margin: 3em">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Base User</div>
-
+                    <div class="card-header">How to Navigate the Website</div>
                     <div class="card-body">
-                        <p id="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel bibendum ipsum.
+                    <h2>How to Search For a Regulation</h2>
+                        <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel bibendum ipsum.
                         Pellentesque sed justo dui.
                         Vivamus pretium venenatis diam, quis sollicitudin turpis facilisis sit amet.
                         Suspendisse laoreet diam quis laoreet euismod. Mauris in velit vitae
                         ligula porta tempus vitae non nunc. Mauris maximus aliquam mi,
-                        sed egestas libero feugiat vel. Phasellus iaculis posuere velit,
-                        accumsan varius sem scelerisque eu. Vivamus euismod lacinia sapien sed ullamcorper.
-                        Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                        Aliquam consectetur tortor massa, ut commodo velit lacinia eu. Donec consectetur dolor et orci porta,
-                        non feugiat libero finibus. Nunc ullamcorper orci quis euismod aliquam. Ut vehicula orci eu tempor tristique.
-                        Donec ut dapibus dui. Nunc sed tincidunt tortor.
-                        Pellentesque id ex tortor.
+                        sed egestas libero feugiat vel.
                         </p>
                     </div>
                 </div>
@@ -31,46 +25,61 @@
         <div class="row justify-content-center" style="margin: 3em">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Mid User</div>
-
+                    <div class="card-header">Basic Website Functionality</div>
+                    <h2>How to Search For a Regulation</h2>
                     <div class="card-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel bibendum ipsum.
+                        <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel bibendum ipsum.
                         Pellentesque sed justo dui.
                         Vivamus pretium venenatis diam, quis sollicitudin turpis facilisis sit amet.
                         Suspendisse laoreet diam quis laoreet euismod. Mauris in velit vitae
                         ligula porta tempus vitae non nunc. Mauris maximus aliquam mi,
-                        sed egestas libero feugiat vel. Phasellus iaculis posuere velit,
-                        accumsan varius sem scelerisque eu. Vivamus euismod lacinia sapien sed ullamcorper.
-                        Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                        Aliquam consectetur tortor massa, ut commodo velit lacinia eu. Donec consectetur dolor et orci porta,
-                        non feugiat libero finibus. Nunc ullamcorper orci quis euismod aliquam. Ut vehicula orci eu tempor tristique.
-                        Donec ut dapibus dui. Nunc sed tincidunt tortor.
-                        Pellentesque id ex tortor.
+                        sed egestas libero feugiat vel.
                         </p>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="row justify-content-center" style="margin: 3em">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Super User</div>
+                    <div class="card-header">Registered User Functionality</div>
 
                     <div class="card-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel bibendum ipsum.
+                    <h3>Add a New Regulation</h3>
+                    <p class="p">1. Navigate to the <a href="{{ route('userSubmission') }}">'Submit New Regulation' </a>page</p>
+                    <p class="p">2. At the very least, enter the State you wish to submit a regulation for. You can also add County and City, but that is not a requirement.</p>
+                    <p class="p">3. Enter any other required information, and then click 'Submit'. Your regulation will be reviewed by an administrator.</p>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center @if (Route::current()->getName() == "admin") active @endif"  style="margin: 3em">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Administrator Functionality</div>
+
+                    <div class="card-body">
+                    <h2>User Manipulation</h2>
+                    <h3>Add or Delete a User</h3>
+                    <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel bibendum ipsum.
                         Pellentesque sed justo dui.
                         Vivamus pretium venenatis diam, quis sollicitudin turpis facilisis sit amet.
                         Suspendisse laoreet diam quis laoreet euismod. Mauris in velit vitae
                         ligula porta tempus vitae non nunc. Mauris max
                         imus aliquam mi,
                         sed egestas libero feugiat vel. Phasellus iaculis posuere velit,
-                        accumsan varius sem scelerisque eu. Vivamus euismod lacinia sapien sed ullamcorper.
-                        Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                        Aliquam consectetur tortor massa, ut commodo velit lacinia eu. Donec consectetur dolor et orci porta,
-                        non feugiat libero finibus. Nunc ullamcorper orci quis euismod aliquam. Ut vehicula orci eu tempor tristique.
-                        Donec ut dapibus dui. Nunc sed tincidunt tortor.
-                        Pellentesque id ex tortor.
+                        accumsan varius sem scelerisque eu.
+                        </p>
+                    <h3>Give a User 'Administrator' Access</h3>
+                    <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel bibendum ipsum.
+                        Pellentesque sed justo dui.
+                        Vivamus pretium venenatis diam, quis sollicitudin turpis facilisis sit amet.
+                        Suspendisse laoreet diam quis laoreet euismod. Mauris in velit vitae
+                        ligula porta tempus vitae non nunc. Mauris max
+                        imus aliquam mi,
+                        sed egestas libero feugiat vel. Phasellus iaculis posuere velit,
+                        accumsan varius sem scelerisque eu.
                         </p>
                     </div>
                 </div>
@@ -84,7 +93,30 @@
         <p id="font">Font: 0</p>
     </div>
 
-    <script type='text/javascript'>
+
+@endsection
+
+@push("css")
+    <style>
+        .py-4 {
+            background: rgb(2,0,36);
+            text-align: center;
+        }
+        h1{
+            color: white;
+            font-family: 'Lobster';
+        }
+        p {
+            margin-top: 3em;
+            font-family: 'Lato';
+        }
+        #back, #font {
+            color: white;
+        }
+    </style>
+@endpush
+@push("js")
+        <script type='text/javascript'>
             let nBackChangedCount = 0;
             let nFontChangedCount = 0;
             function changeBackground () {
@@ -172,59 +204,54 @@
             function changeFonts () {
                 if(nFontChangedCount == 0)
                 {
-                    document.getElementById("p").style.fontFamily = "'Raleway'";
+                    var elements = document.getElementsByClassName('p'); // get all elements
+	                for(var i = 0; i < elements.length; i++){
+		                elements[i].style.fontFamily = "'Raleway'";
+                    }
                     document.getElementById("h").style.fontFamily = "'Playfair Display', serif";
                     nFontChangedCount = 1;
                     document.getElementById("font").innerHTML = "Font: " + nFontChangedCount;
                 }
                 else if(nFontChangedCount == 1)
                 {
-                    document.getElementById("p").style.fontFamily = 'Poppins, sans-serif';
+                    var elements = document.getElementsByClassName('p'); // get all elements
+	                for(var i = 0; i < elements.length; i++){
+		                elements[i].style.fontFamily = "'Poppins, sans-serif'";
+                    }
                     document.getElementById("h").style.fontFamily = 'Mukta, sans-serif';
                     nFontChangedCount = 2;
                     document.getElementById("font").innerHTML = "Font: " + nFontChangedCount;
                 }
                 else if(nFontChangedCount == 2)
                 {
-                    document.getElementById("p").style.fontFamily = 'Roboto, sans-serif';
+                    var elements = document.getElementsByClassName('p'); // get all elements
+	                for(var i = 0; i < elements.length; i++){
+		                elements[i].style.fontFamily = "'Roboto, sans-serif'";
+                    }
                     document.getElementById("h").style.fontFamily = 'Abril Fatface, cursive';
                     nFontChangedCount = 3;
                     document.getElementById("font").innerHTML = "Font: " + nFontChangedCount;
                 }
                 else if(nFontChangedCount == 3)
                 {
-                    document.getElementById("p").style.fontFamily = 'Poppins, sans-serif';
+                    var elements = document.getElementsByClassName('p'); // get all elements
+	                for(var i = 0; i < elements.length; i++){
+		                elements[i].style.fontFamily = "'Poppins, sans-serif'";
+                    }
                     document.getElementById("h").style.fontFamily = "Sen";
                     nFontChangedCount = 4;
                     document.getElementById("font").innerHTML = "Font: " + nFontChangedCount;
                 }
                 else if(nFontChangedCount == 4)
                 {
-                    document.getElementById("p").style.fontFamily = "Lato";
+                    var elements = document.getElementsByClassName('p'); // get all elements
+	                for(var i = 0; i < elements.length; i++){
+		                elements[i].style.fontFamily = "Lato";
+                    }
                     document.getElementById("h").style.fontFamily = "Lobster";
                     nFontChangedCount = 0;
                     document.getElementById("font").innerHTML = "Font: " + nFontChangedCount;
                 }
             }
     </script>
-@endsection
-
-@push("css")
-    <style>
-        .py-4 {
-            background: rgb(2,0,36);
-            text-align: center;
-        }
-        h1{
-            color: white;
-            font-family: 'Lobster';
-        }
-        p {
-            margin-top: 3em;
-            font-family: 'Lato';
-        }
-        #back, #font {
-            color: white;
-        }
-    </style>
 @endpush
