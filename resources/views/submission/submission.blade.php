@@ -25,6 +25,7 @@
                         <td>
                             <a href="{{route('stateSubmission')."/".$state->id}}" class="btn btn-primary"> View </a>
                         </td>
+                        <td>Pending</td>
                     </tr>
                 @endforeach
                 @foreach($citySubmissions as $city)
@@ -35,6 +36,7 @@
                         <td>
                             <a href="{{route('citySubmission')."/".$city->id}}" class="btn btn-primary"> View </a>
                         </td>
+                        <td>Pending</td>
                     </tr>
                 @endforeach
                 @foreach($countySubmissions as $county)
@@ -45,6 +47,40 @@
                         <td>
                             <a href="{{route('countySubmission')."/".$county->id}}" class="btn btn-primary"> View </a>
                         </td>
+                        <td>Pending</td>
+                    </tr>
+                @endforeach
+                @foreach($stateApproved as $stateAp)
+                    <tr>
+                        <th scope="row">{{$a++}}</th>
+                        <td> {{$stateAp->source->sourceName}}</td>
+                        <td>{{$stateAp->destination->destinationName}}</td>
+                        <td>
+                            <a href="{{route('stateApprove')."/".$stateAp->id}}" class="btn btn-primary"> View </a>
+                        </td>
+                        <td>Approved</td>
+                    </tr>
+                @endforeach
+                @foreach($cityApproved as $cityAp)
+                    <tr>
+                        <th scope="row">{{$a++}}</th>
+                        <td> {{$cityAp->source->sourceName}}</td>
+                        <td>{{$cityAp->destination->destinationName}}</td>
+                        <td>
+                            <a href="{{route('cityApprove')."/".$cityAp->id}}" class="btn btn-primary"> View </a>
+                        </td>
+                        <td>Approved</td>
+                    </tr>
+                @endforeach
+                @foreach($countyApproved as $countyAp)
+                    <tr>
+                        <th scope="row">{{$a++}}</th>
+                        <td> {{$countyAp->source->sourceName}}</td>
+                        <td>{{$countyAp->destination->destinationName}}</td>
+                        <td>
+                            <a href="{{route('countyApprove')."/".$countyAp->id}}" class="btn btn-primary"> View </a>
+                        </td>
+                        <td>Approved</td>
                     </tr>
                 @endforeach
             </tbody>

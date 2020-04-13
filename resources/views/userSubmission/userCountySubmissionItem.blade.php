@@ -11,9 +11,15 @@
                 <div class="card">
                     <div class="card-header"></div>
                     <div class="card-body">
-                    @foreach($countySubmissions as $county)
-                        @include('common/reuse-item', ['item'=>$county])
-                    @endforeach
+                    @if('countySubmissions')
+                        @foreach($countySubmissions as $county)
+                            @include('common/reuse-item', ['item'=>$county])
+                        @endforeach
+                    @elseif
+                        @foreach($countyApprove as $county)
+                            @include('common/reuse-item', ['item'=>$county])
+                        @endforeach
+                    @endif
                     </div>
                 </div>
             </div>

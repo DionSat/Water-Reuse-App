@@ -39,6 +39,7 @@
                         <td>
                             <form method="POST" action="{{ route('addCountyMergeSubmit') }}">
                                 {{ csrf_field() }}
+                                <input id="countyId-{{$county->id}}" name="id" value="{{$county->id}}" hidden>
                                 <button type="submit" class="btn btn-success">Approve</button>
                             </form>
                         </td>

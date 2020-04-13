@@ -11,9 +11,15 @@
                 <div class="card">
                     <div class="card-header"></div>
                     <div class="card-body">
-                    @foreach($stateSubmissions as $state)
-                        @include('common/reuse-item',['item'=>$state])
-                    @endforeach
+                    @if('$stateSubmissions')
+                        @foreach($stateSubmissions as $state)
+                            @include('common/reuse-item',['item'=>$state])
+                        @endforeach
+                    @elseif
+                        @foreach($stateApprove as $state)
+                            @include('common/reuse-item',['item'=>$state])
+                        @endforeach
+                    @endif
                     </div>
                 </div>
             </div>

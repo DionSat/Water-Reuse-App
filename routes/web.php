@@ -38,9 +38,14 @@ Route::get('/search', 'SearchController@mainPage')->name('search');
 Route::middleware('auth')->group(function () {
     //submission routes for each indiviual user
     Route::get('/submission', 'SubmissionController@view')->middleware('auth')->name('submission');
-    Route::get('/submission/citySubmissionItem/{itemId?}', 'SubmissionController@city')->middleware('auth')->name('citySubmission');
-    Route::get('/submission/stateSubmissionItem/{itemId?}', 'SubmissionController@state')->middleware('auth')->name('stateSubmission');
-    Route::get('/submission/countySubmissionItem/{itemId?}', 'SubmissionController@county')->middleware('auth')->name('countySubmission');
+    Route::get('/submission/citySubmissionItem/{itemId?}', 'SubmissionController@pendingCity')->middleware('auth')->name('citySubmission');
+    Route::get('/submission/stateSubmissionItem/{itemId?}', 'SubmissionController@pendingState')->middleware('auth')->name('stateSubmission');
+    Route::get('/submission/countySubmissionItem/{itemId?}', 'SubmissionController@pendingCounty')->middleware('auth')->name('countySubmission');
+
+    //Approved submissions
+    Route::get('/submission/Approved/citySubmissionItem/{itemId?}', 'SubmissionController@city')->middleware('auth')->name('cityApprove');
+    Route::get('/submission/Approved/stateSubmissionItem/{itemId?}', 'SubmissionController@state')->middleware('auth')->name('stateApprove');
+    Route::get('/submission/Approved/countySubmissionItem/{itemId?}', 'SubmissionController@county')->middleware('auth')->name('countyApprove');
 
     Route::get('/account', 'AccountController@view')->middleware('auth')->name('account');
     Route::get('/accountUpdate', 'AccountController@getUpdatePage')->middleware('auth')->name('updatePage');
