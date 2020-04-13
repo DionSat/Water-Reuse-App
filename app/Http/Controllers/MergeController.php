@@ -34,7 +34,8 @@ class MergeController extends Controller
         $city->moreInfo = $pending->moreInfo;
         $city->user_id = $pending->userID;
         $city->save();
-
+        
+        $pending->delete();
         return redirect()->route('userCityView')->with(['alert' => 'success', 'alertMessage' => ' Submission has been added.']);
     }
 
@@ -53,7 +54,8 @@ class MergeController extends Controller
         $state->moreInfo = $pending->moreInfo;
         $state->user_id = $pending->userID;
         $state->save();
-
+        
+        $pending->delete();
         return redirect()->route('userStateView')->with(['alert' => 'success', 'alertMessage' => ' submission has been added.']);
     }
 
@@ -70,10 +72,9 @@ class MergeController extends Controller
         $county->incentives = $pending->incentives;
         $county->moreInfo = $pending->moreInfo;
         $county->user_id = $pending->userID;
-        $county->save(['timestamps' => false]);
+        $county->save();
 
-        $county = PendingCountyMerge::where("id", $request->id)->get()->first();
-        $county->delete();
+        $pending->delete();
         return redirect()->route('userCountyView')->with(['alert' => 'success', 'alertMessage' => ' submission has been added.']);
     }
 
