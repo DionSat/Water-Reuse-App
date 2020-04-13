@@ -52,20 +52,20 @@ class SubmissionController extends Controller
     {
         $user = Auth::user();
         $stateApproved = StateMerge::where('id', $request->itemId)->get();
-        return view('submission.stateSubmissionItem', compact('user','stateApproved'));
+        return view('submission.stateApprovedItem', compact('user','stateApproved'));
     }
 
     public function city(Request $request)
     {
         $user = Auth::user();
         $cityApproved = CityMerge::where('id', $request->itemId)->get();
-        return view('submission.citySubmissionItem', compact('user','cityApproved'));
+        return view('submission.cityApprovedItem', compact('user','cityApproved'));
     }
 
     public function county(Request $request)
     {
         $user = Auth::user();
         $countyApproved = CountyMerge::where('id', $request->itemId)->get();
-        return view('submission.countySubmissionItem', compact('user','countyApproved'));
+        return view('submission.countyApprovedItem', compact('user','countyApproved'));
     }
 }

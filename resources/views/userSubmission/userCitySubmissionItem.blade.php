@@ -11,15 +11,9 @@
                 <div class="card">
                     <div class="card-header"></div>
                     <div class="card-body">
-                    @if('$citySubmissions')
-                        @foreach($citySubmissions as $city)
-                            @include('common/reuse-item', ['item'=>$city])
-                        @endforeach
-                    @elseif
-                        @foreach($cityApprove as $city)
-                            @include('common/reuse-item', ['item'=>$city])
-                        @endforeach
-                    @endif
+                    @foreach($citySubmissions as $city)
+                        @include('common/reuse-item', ['item'=>$city])
+                    @endforeach
                     </div>
                 </div>
             </div>
