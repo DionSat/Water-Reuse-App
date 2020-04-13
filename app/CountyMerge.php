@@ -23,6 +23,11 @@ class CountyMerge extends Model
         'countyID', 'sourceID', 'destinationID', 'allowedID', 'codes', 'permit', 'incentives', 'moreInfo', 'userID'
     ];
 
+    public function user()
+    {
+        return $this->hasOne('App\User', 'id','userID');
+    }
+
     public function county()
     {
         return $this->hasOne('App\County', 'county_id','countyID');
