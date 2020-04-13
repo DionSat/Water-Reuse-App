@@ -76,6 +76,7 @@
                             </li> 
                             <li class="nav-item @if (Route::current()->getName() == "admin-userSubmission") active @endif">
                                 <a class="nav-link" href="{{ route('userSubmission2') }}"><i class="fas fa-bars"></i> Submissions </a>
+                            </li>
 
                         @endif
                     </ul>
