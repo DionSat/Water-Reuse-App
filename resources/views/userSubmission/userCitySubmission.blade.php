@@ -15,6 +15,7 @@
                     <th scope="col">Destination</th>
                     <th scope="col">View</th>
                     <th scope="col">Action</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <body>
@@ -28,8 +29,18 @@
                             <a href="{{route('userCitySubmissionItem')."/".$city->id}}" class="btn btn-primary"> View </a>
                         </td>
                         <td>
-                            <a class="btn btn-danger">Decline</a>
-                            <a class="btn btn-success">Approve</a>
+                            <form method="POST" action="{{ route('cityDelete') }}">
+                                {{ csrf_field() }}
+                                <input id="delete" name="delete" value="delete" hidden>
+                                <input id="cityId-{{$city->id}}" name="id" value="{{$city->id}}" hidden>
+                                <button type="submit" class="btn btn-danger">Decline</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="POST" action="{{ route('addCityMergeSubmit') }}">
+                                {{ csrf_field() }}
+                                <button type="submit" class="btn btn-success">Approve</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

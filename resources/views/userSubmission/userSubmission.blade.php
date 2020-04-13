@@ -3,7 +3,7 @@
 @section('body')
     <h2 class="text-center my-3"> User Submissions</h2>
     <div class="container">
-        <h3 class="mt-4"> Locations </h3>
+        <h3 class="text-center my-3"> Locations </h3>
         <hr>
         <div class="row">
             @foreach($locationCards as $card)
