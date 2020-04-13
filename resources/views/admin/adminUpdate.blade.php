@@ -42,9 +42,9 @@
                             </div>
                         @endif
                         <center id="searchP" style="font-size: 0.9em;display: inline-block;margin-bottom: 12px;">
-                            <span style="margin-top: 10px">Search Current Page: <input type="text" id="searchBox" style="max-width: 150px;height: 35px;margin-top: 3px;margin-right:35px;"></span>
+                            <span style="margin-top: 10px">Search Current Page: <input type="text" id="searchBox" style="max-width: 150px;height: 35px;margin-top: 3px;margin-right:30px;"></span>
                             <div style="float: right;">
-                                <form action={{route('searchUsers')}} method="GET" style="display: inline-block;font-size: 0.9em;float: left;margin-top: 2px">
+                                <form action={{route('searchUsers')}} method="GET" style="display: inline-block;font-size: 1.0em;float: left;margin-top: 2px">
                                     {{ csrf_field() }}
                                     Search Database: <input type="text" id="searchDB" name="search" style="max-width: 150px;height: 35px;" >
                                     <button type="submit" class="btn btn-primary" style="width: 50px;height: 38px;font-size:1.3em;margin-bottom: 2px;text-align: center;padding: 2px 4px 6px 4px;">Go</button>
