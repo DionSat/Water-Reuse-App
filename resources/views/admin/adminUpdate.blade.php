@@ -1,27 +1,6 @@
 @extends('layouts.master')
 
 @section('body')
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#searchBox').on('input',function(){
-            $(".justaclone").remove();
-            if ($("#searchBox").val().trim() === "") {
-                $('.userListItem').removeAttr('hidden');
-            }else{
-                var resNum = 0;
-                $('.userListItem').attr('hidden', true);
-                <?php foreach ($allUsers as $user):?>
-                    if("{{$user->name}}".toLowerCase().search($('#searchBox').val()) > -1 || "{{$user->email}}".toLowerCase().search($('#searchBox').val()) > -1){
-                        $('#{{$user->id}}').removeAttr('hidden');
-                        resNum +=1;
-                    }
-                <?php endforeach ?>
-                $("#searchP").append("<span class='justaclone'>Results: "+resNum+"</span>");
-            }
-        });
-    });
-</script>
-
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -113,6 +92,29 @@ State: {{$user->state}}">
     </div>
 
 @endsection
+
+@push("js")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#searchBox').on('input',function(){
+                $(".justaclone").remove();
+                if ($("#searchBox").val().trim() === "") {
+                    $('.userListItem').removeAttr('hidden');
+                }else{
+                    var resNum = 0;
+                    $('.userListItem').attr('hidden', true);
+                    <?php foreach ($allUsers as $user):?>
+                    if("{{$user->name}}".toLowerCase().search($('#searchBox').val()) > -1 || "{{$user->email}}".toLowerCase().search($('#searchBox').val()) > -1){
+                        $('#{{$user->id}}').removeAttr('hidden');
+                        resNum +=1;
+                    }
+                    <?php endforeach ?>
+                    $("#searchP").append("<span class='justaclone'>Results: "+resNum+"</span>");
+                }
+            });
+        });
+    </script>
+@endpush
 
 @push('css')
     <style>
