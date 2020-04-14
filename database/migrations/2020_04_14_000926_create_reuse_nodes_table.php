@@ -16,9 +16,9 @@ class CreateReuseNodesTable extends Migration
         Schema::create('reusenodes', function (Blueprint $table) {
             $table->bigIncrements('node_id');
             $table->string('node_name');
-            $table->string('is_source');
-            $table->string('is_destination');
-            $table->string('is_fixture');
+            $table->boolean('is_source');
+            $table->boolean('is_destination');
+            $table->boolean('is_fixture');
         });
     }
 
