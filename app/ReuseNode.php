@@ -52,6 +52,6 @@ class ReuseNode extends Model
     }
 
     public static function fixtures() {
-        return self::where("is_destination", true)->get();
+        return self::where("is_fixture", true)->get();
     }
 }
