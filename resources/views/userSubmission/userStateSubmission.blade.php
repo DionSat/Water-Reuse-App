@@ -23,8 +23,8 @@
                     <tr>
                         <th scope="row">{{$loop->index+1}}</th>
                         <td>{{$state->user->name}}</td>
-                        <td> {{$state->source->sourceName}}</td>
-                        <td>{{$state->destination->destinationName}}</td>
+                        <td> {{$state->source->node_name}}</td>
+                        <td>{{$state->destination->node_name}}</td>
                         <td>
                             <a href="{{route('userStateSubmissionItem')."/".$state->id}}" class="btn btn-primary"> View </a>
                         </td>

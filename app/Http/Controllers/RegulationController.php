@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\City;
 use App\County;
+use App\ReuseNode;
 use App\State;
-use App\Source;
-use App\Destination;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -17,11 +16,11 @@ Class RegulationController extends Controller{
     }
 
     public function getAllSources(){
-        return response()->json(Source::all());
+        return response()->json(ReuseNode::sources());
     }
 
     public function getAllDestinations() {
-        return response()->json(Destination::all());
+        return response()->json(ReuseNode::destinations());
     }
 
 }
