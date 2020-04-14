@@ -13,6 +13,7 @@
                     <th scope="col">Status</th>
                 </tr>
             </thead>
+            <tbody>
             @php
             $a = 1
             @endphp

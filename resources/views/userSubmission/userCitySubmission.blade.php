@@ -18,7 +18,7 @@
                     <th scope="col">Action</th>
                 </tr>
             </thead>
-            <body>
+            <tbody>
                 @foreach($citySubmissions as $city)
                     <tr>
                         <th scope="row">{{$loop->index+1}}</th>
