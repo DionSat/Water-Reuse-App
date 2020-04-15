@@ -127,7 +127,7 @@
             console.log("Response: " + response);
             console.log("Data: " + response.data);
             //get each county, and set them as options
-            $source = response.data.map(obj => ("<option class='sourceName' value=" + obj.source_id + " >" + obj.sourceName + "</option>"));
+            $source = response.data.map(obj => ("<option class='sourceName' value=" + obj.source_id + " >" + obj.node_name + "</option>"));
             console.log($source);
             $("#waterSource").append($source);
         })
@@ -147,7 +147,7 @@
             console.log("Response: " + response);
             console.log("Data: " + response.data);
             //get each county, and set them as options
-            $destination = response.data.map(obj => ("<li><input type='checkbox' value=" + obj.destination_id + "/>&nbsp;" + obj.destinationName + "</li>"));
+            $destination = response.data.map(obj => ("<li><input type='checkbox' value=" + obj.destination_id + "/>&nbsp;" + obj.node_name + "</li>"));
             console.log($destination);
             $("#destination").append($destination);
         })

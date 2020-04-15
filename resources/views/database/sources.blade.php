@@ -18,12 +18,12 @@
             @foreach($sources as $source)
                 <tr>
                     <th scope="row">{{$loop->index+1}}</th>
-                    <td>{{$source->sourceName}}</td>
+                    <td>{{$source->node_name}}</td>
                     <td>
                         <form method="POST" action="{{ route('deleteSource') }}">
                             {{ csrf_field() }}
                             <input id="delete" name="delete" value="delete" hidden>
-                            <input id="sourceId-{{$source->source_id}}" name="source_id" value="{{$source->source_id}}" hidden>
+                            <input id="sourceId-{{$source->node_id}}" name="node_id" value="{{$source->node_id}}" hidden>
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </td>

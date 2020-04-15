@@ -18,13 +18,13 @@
                     <th scope="col">Action</th>
                 </tr>
             </thead>
-            <body>
+            <tbody>
                 @foreach($countySubmissions as $county)
                     <tr>
                         <th scope="row">{{$loop->index+1}}</th>
                         <td>{{$county->user->name}}</td>
-                        <td> {{$county->source->sourceName}}</td>
-                        <td>{{$county->destination->destinationName}}</td>
+                        <td> {{$county->source->node_name}}</td>
+                        <td>{{$county->destination->node_name}}</td>
                         <td>
                             <a href="{{route('userCountySubmissionItem')."/".$county->id}}" class="btn btn-primary"> View </a>
                         </td>

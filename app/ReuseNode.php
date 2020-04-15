@@ -42,4 +42,16 @@ class ReuseNode extends Model
     {
         return $this->hasMany('CityMerge');
     }
+
+    public static function sources() {
+        return self::where("is_source", true)->get();
+    }
+
+    public static function destinations() {
+        return self::where("is_destination", true)->get();
+    }
+
+    public static function fixtures() {
+        return self::where("is_fixture", true)->get();
+    }
 }
