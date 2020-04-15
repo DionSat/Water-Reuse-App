@@ -74,4 +74,5 @@ class UserSubmissionController extends Controller
         $submissions = PendingCountyMerge::where('id', $request->itemid)->get();
         return view('userSubmission.userSubmissionItem', compact('user', 'submissions'));
     }
+    
 }
