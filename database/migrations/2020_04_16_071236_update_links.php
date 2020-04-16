@@ -16,7 +16,7 @@ class UpdateLinks extends Migration
         Schema::table('links', function (Blueprint $table) {
             $table->string('name')->nullable();
             $table->enum('status', ['valid', 'broken', 'unknown'])->nullable();
-            $table->dateTime('updated_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 
