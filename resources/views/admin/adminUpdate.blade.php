@@ -76,14 +76,14 @@ State: {{$user->state}}">
                                 {{ $allUsers->links() }}
                                 
                             </div>
-                            <div class="text-center">
+                            <!-- <div class="text-center">
                                 <button class="btn btn-link">
                                     <a href="mailto:@foreach($allUsers as $user){{$user->email}};@endforeach">
                                         Email Every User
                                     </a>
                                 </button>
 
-                            </div>
+                            </div> -->
                     </div>
 
                 </div>

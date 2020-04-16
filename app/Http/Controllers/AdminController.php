@@ -11,17 +11,24 @@ class AdminController extends Controller
     public function getBasicAdminPage()
     {
         $allUsers = User::all();
+        $allUserCount = User::all()->count();
         $user = Auth::user();
         $canEmail = array();
-
+        $canEmailCount = 0;
         foreach($allUsers as $users){
             if($users->can_contact === true)
+            {
                 array_push($canEmail, $users->email);
+                $canEmailCount++;
+            }
         }
+        $userAndEmail = [];
+        $userAndEmail[] = ["title" => "user", "count" => $allUserCount, "view" => route("getUsers")];
+        $userAndEmail[] = ["title" => "email", "count" => $canEmailCount, "view" => route("userCityView")];
         if ($user->is_admin === false)
             abort(404);
         else
-            return view("admin.dashboard", compact('canEmail'));
+            return view("admin.dashboard", compact('canEmail', 'userAndEmail', 'allUsers'));
     }
 
     public function getUsers()
