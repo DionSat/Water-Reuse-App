@@ -57,32 +57,22 @@ class UserSubmissionController extends Controller
     public function userCityView(Request $request) 
     {
         $user = Auth::user();
-        $citySubmissions = PendingCityMerge::where('id', $request->itemid)->get();
-        return view('userSubmission.userCitySubmissionItem', compact('user', 'citySubmissions'));
-
+        $submissions = PendingCityMerge::where('id', $request->itemid)->get();
+        return view('userSubmission.userSubmissionItem', compact('user', 'submissions'));
     }
 
     public function userStateView(Request $request) 
     {
         $user = Auth::user();
-        $stateSubmissions = PendingStateMerge::where('id', $request->itemid)->get();
-        return view('userSubmission.userStateSubmissionItem', compact('user', 'stateSubmissions'));
+        $submissions = PendingStateMerge::where('id', $request->itemid)->get();
+        return view('userSubmission.userSubmissionItem', compact('user', 'submissions'));
     }
 
     public function userCountyView(Request $request) 
     {
         $user = Auth::user();
-        $countySubmissions = PendingCountyMerge::where('id', $request->itemid)->get();
-        return view('userSubmission.userCountySubmissionItem', compact('user', 'countySubmissions'));
+        $submissions = PendingCountyMerge::where('id', $request->itemid)->get();
+        return view('userSubmission.userSubmissionItem', compact('user', 'submissions'));
     }
-
-    public function viewPending(Request $request)
-    {
-        $user = Auth::user();
-        $stateSubmissions = PendingStateMerge::where('id', $request->itemid)->get();
-        $citySubmissions = PendingCityMerge::where('id', $request->itemid)->get();
-        $countySubmissions = PendingCountyMerge::where('id', $request->itemid)->get();
-        return view('userSubmission.userSubmissionItem', compact('user', 'stateSubmissions', 'citySubmissions', 'countySubmissions'));
-
-    }
+    
 }
