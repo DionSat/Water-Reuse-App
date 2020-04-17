@@ -2,13 +2,12 @@
 
 @section('body')
     <div class="container">
-        <div class="card">
         <h2 class="text-center my-4"> Dashboard</h2>
-            <div class="card-body">
-                <div class="row"> 
+        <hr>
+            <div class="row justify-content-center">
                     @foreach($userAndEmail as $card)
-                        <div class="col-6">
-                            <div class="card h-100 shadow">
+                        <div class="col-md-3">
+                            <div class="card h-80 shadow">
                                 <div class="card-body">
                                     <div class="d-flex">
                                         <div class="p-2 mr-3 w-75">
@@ -20,9 +19,9 @@
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <div class="form-row mt-5 justify-content-center">  
+                                    <div class="form-row mt-3 justify-content-center">  
                                         <div class="col-md-6">
-                                            <a href="{{$card["view"]}}" class="btn btn-primary d-block"> <i class="fas fa-edit"></i> View </a>
+                                            <a href="{{$card["view"]}}" class="btn btn-primary d-block"> <i class="fas fa-eye"></i> View </a>
                                         </div>
                                     </div>
                                 </div>
@@ -31,6 +30,5 @@
                     @endforeach
                 </div>
             </div>
-        </div> 
     </div>
 @endsection

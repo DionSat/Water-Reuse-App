@@ -46,9 +46,9 @@
                                 @foreach($allUsers as $user)
                                     <tr class="userListItem" id="{{$user->id}}" 
                                         title="Company: {{$user->company}}
-Job Title: {{$user->jobTitle}}
-City: {{$user->city}}
-State: {{$user->state}}">
+                                        Job Title: {{$user->jobTitle}}
+                                        City: {{$user->city}}
+                                        State: {{$user->state}}">
                                         <th scope="row">{{$user->id}}</th>
                                         <td><a href="{{route('viewUser',['user_id' => $user->id])}}">{{$user->name}}</a>
                                         </td>
@@ -76,14 +76,6 @@ State: {{$user->state}}">
                                 {{ $allUsers->links() }}
                                 
                             </div>
-                            <!-- <div class="text-center">
-                                <button class="btn btn-link">
-                                    <a href="mailto:@foreach($allUsers as $user){{$user->email}};@endforeach">
-                                        Email Every User
-                                    </a>
-                                </button>
-
-                            </div> -->
                     </div>
 
                 </div>

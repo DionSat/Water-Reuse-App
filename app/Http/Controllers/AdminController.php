@@ -13,22 +13,38 @@ class AdminController extends Controller
         $allUsers = User::all();
         $allUserCount = User::all()->count();
         $user = Auth::user();
-        $canEmail = array();
         $canEmailCount = 0;
         foreach($allUsers as $users){
             if($users->can_contact === true)
             {
-                array_push($canEmail, $users->email);
                 $canEmailCount++;
             }
         }
         $userAndEmail = [];
         $userAndEmail[] = ["title" => "user", "count" => $allUserCount, "view" => route("getUsers")];
-        $userAndEmail[] = ["title" => "email", "count" => $canEmailCount, "view" => route("userCityView")];
+        $userAndEmail[] = ["title" => "email", "count" => $canEmailCount, "view" => route("viewEmail")];
         if ($user->is_admin === false)
             abort(404);
         else
-            return view("admin.dashboard", compact('canEmail', 'userAndEmail', 'allUsers'));
+            return view("admin.dashboard", compact('userAndEmail', 'allUsers'));
+    }
+
+    public function viewEmail()
+    {
+        $allUsers = User::all();
+        $all = User::orderBy('id')->paginate(6);
+        $user = Auth::user();
+        $canEmail = array();
+        $canBeEmailed = User::where('can_contact', true)->orderBy('id')->paginate(6);
+
+        foreach($allUsers as $users){
+            if($users->can_contact === true)
+                array_push($canEmail, $users->email);
+        }
+        if ($user->is_admin === false)
+            abort(404);
+        else
+            return view("admin.viewEmail", compact('canEmail', 'allUsers', 'all', 'canBeEmailed'));
     }
 
     public function getUsers()

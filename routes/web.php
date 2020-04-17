@@ -57,6 +57,7 @@ Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function 
     Route::get('/database', 'DatabaseController@getDatabasePage')->name('database');
     Route::post('/update', 'AdminController@updateUserAccess')->name('updateUser');
     Route::get('viewUser', 'AdminController@viewUser')->name('viewUser');
+    Route::get('/viewEmail', 'AdminController@viewEmail')->name('viewEmail');
 
     //User submission Routes
     Route::get('/userSubmission2', 'UserSubmissionController@all')->name('userSubmission2');
