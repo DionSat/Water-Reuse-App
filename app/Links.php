@@ -16,16 +16,12 @@ class Links extends Model
      */
     protected $primaryKey = 'link_id';
 
-    /**
-     * Do not have eloquent create created_at and updated_at columns
-     */
-    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
      */
     protected $fillable = [
-        'linkText'
+        'linkText', 'status', 'name', 'updated_at',
     ];
 
     public function stateMerge()

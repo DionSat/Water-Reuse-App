@@ -4,7 +4,7 @@ namespace App\Http\Controllers\DataControllers;
 
 use App\CityMerge;
 use App\CountyMerge;
-use App\Source;
+use App\ReuseNode;
 use App\StateMerge;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -13,7 +13,7 @@ use App\Http\Controllers\Controller;
 class SourceController extends Controller
 {
     public function allSources() {
-        $sources = Source::all();
+        $sources = ReuseNode::sources();
         return view("database.sources", compact('sources'));
     }
 
@@ -25,25 +25,28 @@ class SourceController extends Controller
         if (empty($request->source))
             return redirect()->route('sourceAdd')->with(['alert' => 'danger', 'alertMessage' => 'Please enter a source name!']);
 
-        $source = new Source();
-        $source->sourceName = $request->source;
+        $source = new ReuseNode();
+        $source->node_name = $request->source;
+        $source->is_source = true;
+        $source->is_destination = false;
+        $source->is_fixture = false;
         $source->save();
 
-        return redirect()->route('sourceView')->with(['alert' => 'success', 'alertMessage' => $source->sourceName . ' has been added.']);
+        return redirect()->route('sourceView')->with(['alert' => 'success', 'alertMessage' => $source->node_name . ' has been added.']);
     }
 
     public function deleteSource(Request $request)
     {
-        $source = Source::where("source_id", $request->source_id)->get()->first();
+        $source = ReuseNode::where("node_id", $request->node_id)->get()->first();
 
-        $sourcesInMergeCount = CityMerge::where("sourceID", $request->source_id)->get()->count();
-        $sourcesInMergeCount += CountyMerge::where("sourceID", $request->source_id)->get()->count();
-        $sourcesInMergeCount += StateMerge::where("sourceID", $request->source_id)->get()->count();
+        $sourcesInMergeCount = CityMerge::where("sourceID", $request->node_id)->get()->count();
+        $sourcesInMergeCount += CountyMerge::where("sourceID", $request->node_id)->get()->count();
+        $sourcesInMergeCount += StateMerge::where("sourceID", $request->node_id)->get()->count();
 
         if($sourcesInMergeCount != 0) {
             $backRoute = route("sourceView");
             $backName  = "Sources";
-            $item = $source->sourceName;
+            $item = $source->node_name;
             $dependantCategory = "water reuse rules";
             $dependantItems = [];
 
@@ -53,6 +56,6 @@ class SourceController extends Controller
         //If no dependencies, then delete
         $source->delete();
 
-        return redirect()->route('sourceView')->with(['alert' => 'success', 'alertMessage' => $source->sourceName . ' has been deleted.']);
+        return redirect()->route('sourceView')->with(['alert' => 'success', 'alertMessage' => $source->node_name . ' has been deleted.']);
     }
 }
