@@ -73,9 +73,12 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @php
+                                $index = 1
+                                @endphp
                                 @foreach($canBeEmailed as $user)
                                     <tr class="list" id="{{$user->id}}">                                       
-                                        <th scope="row">{{$user->id}}</th>
+                                        <th scope="row">{{$index++}}</th>
                                         <td><a href="{{route('viewUser',['user_id' => $user->id])}}">{{$user->name}}</a>
                                         </td>
                                         <td>{{$user->email}}</td>
