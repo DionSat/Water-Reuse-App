@@ -5,14 +5,32 @@ namespace App\Http\Controllers;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Pagination\Paginator;
 
 class AdminController extends Controller
 {
     public function getBasicAdminPage()
     {
         $allUsers = User::all();
+        $allUserCount = User::all()->count();
+        $user = Auth::user();
+        $canEmailCount = User::where('can_contact', true)->count();
+        $userAndEmail = [];
+        $userAndEmail[] = ["title" => "All Users", "count" => $allUserCount, "view" => route("getUsers")];
+        $userAndEmail[] = ["title" => "Users Emails", "count" => $canEmailCount, "view" => route("viewEmail")];
+        if ($user->is_admin === false)
+            abort(404);
+        else
+            return view("admin.dashboard", compact('userAndEmail', 'allUsers'));
+    }
+
+    public function viewEmail()
+    {
+        $allUsers = User::all();
+        $all = User::orderBy('id')->paginate(6, ['*'], 'users');
         $user = Auth::user();
         $canEmail = array();
+        $canBeEmailed = User::where('can_contact', true)->orderBy('id')->paginate(6, ['*'], 'contactable');
 
         foreach($allUsers as $users){
             if($users->can_contact === true)
@@ -21,7 +39,7 @@ class AdminController extends Controller
         if ($user->is_admin === false)
             abort(404);
         else
-            return view("admin.dashboard", compact('canEmail'));
+            return view("admin.viewEmail", compact('canEmail', 'allUsers', 'all', 'canBeEmailed'));
     }
 
     public function getUsers()

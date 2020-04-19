@@ -5,9 +5,9 @@
     <div class="container">
         <h3 class="text-center my-3"> Locations </h3>
         <hr>
-        <div class="row">
+        <div class="row justify-content-center">
             @foreach($locationCards as $card)
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="card h-100 shadow">
                         <div class="card-body">
                             <div class="d-flex">
@@ -21,7 +21,7 @@
                         </div>
 
                         <div class="card-footer">
-                            <div class="form-row mt-5 justify-content-center">  
+                            <div class="form-row mt-3 justify-content-center">  
                                 <div class="col-md-6">
                                     <a href="{{$card["view"]}}" class="btn btn-primary d-block"> <i class="fas fa-edit"></i> View </a>
                                 </div>
