@@ -4,17 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Source extends Model
+class ReuseNode extends Model
 {
     /**
      * Table associated to state model
      */
-    protected $table = 'sources';
+    protected $table = 'reusenodes';
 
     /**
      * Primary key associated with table
      */
-    protected $primaryKey = 'source_id';
+    protected $primaryKey = 'node_id';
 
     /**
      * Do not have eloquent create created_at and updated_at columns
@@ -25,7 +25,7 @@ class Source extends Model
      * The attributes that are mass assignable.
      */
     protected $fillable = [
-        'sourceName'
+        'node_name', 'is_source', 'is_destination', 'is_fixture'
     ];
 
     public function stateMerge()
@@ -41,5 +41,17 @@ class Source extends Model
     public function cityMerge()
     {
         return $this->hasMany('CityMerge');
+    }
+
+    public static function sources() {
+        return self::where("is_source", true)->get();
+    }
+
+    public static function destinations() {
+        return self::where("is_destination", true)->get();
+    }
+
+    public static function fixtures() {
+        return self::where("is_fixture", true)->get();
     }
 }

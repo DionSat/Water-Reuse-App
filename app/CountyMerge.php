@@ -23,6 +23,11 @@ class CountyMerge extends Model
         'countyID', 'sourceID', 'destinationID', 'allowedID', 'codes', 'permit', 'incentives', 'moreInfo', 'userID'
     ];
 
+    public function user()
+    {
+        return $this->hasOne('App\User', 'id','userID');
+    }
+
     public function county()
     {
         return $this->hasOne('App\County', 'county_id','countyID');
@@ -30,7 +35,7 @@ class CountyMerge extends Model
 
     public function destination()
     {
-        return $this->hasOne('App\Destination', 'destination_id','destinationID');
+        return $this->hasOne('App\ReuseNode', 'node_id','destinationID');
     }
 
     public function allowed()
@@ -40,7 +45,7 @@ class CountyMerge extends Model
 
     public function source()
     {
-        return $this->hasOne('App\Source', 'source_id','sourceID');
+        return $this->hasOne('App\ReuseNode', 'node_id','sourceID');
     }
 
     public function codesObj()

@@ -15,7 +15,7 @@
             </div>
             <div class="p-2 d-block">
                 <h3>Source</h3>
-                <h5 class="text-muted">{{$item->source->sourceName ?? "N/A"}}</h5>
+                <h5 class="text-muted">{{$item->source->node_name ?? "N/A"}}</h5>
             </div>
             <div class="p-2 d-block">
                 <h3>Destination</h3>

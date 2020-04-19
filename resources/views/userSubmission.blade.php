@@ -141,11 +141,11 @@
             $("#waterSourceDiv").append($source);
             getWaterSources(numOfRegs);
             getWaterDestinations(numOfRegs);
-        });
 
+        });
         $('#submit').click(function(){
             $state = $("#inputState").children("option:selected").text();
-
+            
             if($state == "Choose...")
             {
                 alert("You have not chosen a state. Please select the state you wish to create a regulation for.");
