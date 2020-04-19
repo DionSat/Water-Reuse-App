@@ -2,7 +2,7 @@
 
 @section('body')
 <div class="container">
-    <a href="{{url()->previous()}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> Back </a>
+    <a href="{{route("admin")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> Back </a>
         <h3 class="text-center">Email Options</h3>
             <hr>
                 <div class="row">
