@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Pagination\Paginator;
 
 class AdminController extends Controller
 {
@@ -13,16 +14,10 @@ class AdminController extends Controller
         $allUsers = User::all();
         $allUserCount = User::all()->count();
         $user = Auth::user();
-        $canEmailCount = 0;
-        foreach($allUsers as $users){
-            if($users->can_contact === true)
-            {
-                $canEmailCount++;
-            }
-        }
+        $canEmailCount = User::where('can_contact', true)->count();
         $userAndEmail = [];
-        $userAndEmail[] = ["title" => "user", "count" => $allUserCount, "view" => route("getUsers")];
-        $userAndEmail[] = ["title" => "email", "count" => $canEmailCount, "view" => route("viewEmail")];
+        $userAndEmail[] = ["title" => "All Users", "count" => $allUserCount, "view" => route("getUsers")];
+        $userAndEmail[] = ["title" => "Users Emails", "count" => $canEmailCount, "view" => route("viewEmail")];
         if ($user->is_admin === false)
             abort(404);
         else
@@ -32,10 +27,10 @@ class AdminController extends Controller
     public function viewEmail()
     {
         $allUsers = User::all();
-        $all = User::orderBy('id')->paginate(6);
+        $all = User::orderBy('id')->paginate(6, ['*'], 'users');
         $user = Auth::user();
         $canEmail = array();
-        $canBeEmailed = User::where('can_contact', true)->orderBy('id')->paginate(6);
+        $canBeEmailed = User::where('can_contact', true)->orderBy('id')->paginate(6, ['*'], 'contactable');
 
         foreach($allUsers as $users){
             if($users->can_contact === true)

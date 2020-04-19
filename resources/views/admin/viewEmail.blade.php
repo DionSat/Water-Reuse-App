@@ -38,7 +38,7 @@
                                 </tbody>
                             </table>
                             <div class="text-center">
-                                {{ $all->links() }}
+                                {{ $all->appends(['users' => $all->currentPage(), 'contactable' => $canBeEmailed->currentPage()])->links() }}
                             </div>
                         <div class="text-center">
                                 <a href="mailto:@foreach($allUsers as $user){{$user->email}};@endforeach" class="btn btn-primary">
@@ -51,7 +51,7 @@
 
             <div class="col-md-6">
                 <div class="card">
-                    <div align="center" class="card-header"><h3>All Users who want to be contact</h3></div>
+                    <div align="center" class="card-header" data-toggle="tooltip" data-placement="bottom" title="Users that agreed to be contacted by email"><h3>Contact Opt-In Users</h3></div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -73,12 +73,9 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @php
-                                $index = 1
-                                @endphp
                                 @foreach($canBeEmailed as $user)
                                     <tr class="list" id="{{$user->id}}">                                       
-                                        <th scope="row">{{$index++}}</th>
+                                        <th scope="row">{{$loop->iteration++}}</th>
                                         <td><a href="{{route('viewUser',['user_id' => $user->id])}}">{{$user->name}}</a>
                                         </td>
                                         <td>{{$user->email}}</td>
@@ -86,7 +83,7 @@
                                 </tbody>
                             </table>
                             <div class="text-center">
-                                {{ $canBeEmailed->links() }}
+                                {{$canBeEmailed->appends(['users' => $all->currentPage(), 'contactable' => $canBeEmailed->currentPage()])->links()}}
                             </div>
                         <div class="text-center">
                                 <a href="mailto:@foreach($canEmail as $email){{$email}};@endforeach" class="btn btn-primary">

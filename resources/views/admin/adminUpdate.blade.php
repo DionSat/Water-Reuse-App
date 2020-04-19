@@ -44,11 +44,8 @@
                                 </thead>
                                 <tbody>
                                 @foreach($allUsers as $user)
-                                    <tr class="userListItem" id="{{$user->id}}" 
-                                        title="Company: {{$user->company}}
-                                        Job Title: {{$user->jobTitle}}
-                                        City: {{$user->city}}
-                                        State: {{$user->state}}">
+                                        <!--13 is tha ascii value for return and in php its "\r"-->
+                                        <tr data-toggle="tooltip" data-placement="bottom" title="Company: {{$user->company}} &#13Job Title: {{$user->jobTitle}} &#13City: {{$user->city}} &#13State: {{$user->state}}">
                                         <th scope="row">{{$user->id}}</th>
                                         <td><a href="{{route('viewUser',['user_id' => $user->id])}}">{{$user->name}}</a>
                                         </td>
