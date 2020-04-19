@@ -23,5 +23,14 @@ Class RegulationController extends Controller{
     public function getAllDestinations() {
         return response()->json(Destination::all());
     }
+    public function addRegulationSubmit(Request $request) {
+        if (empty($request->newRegList))
+            return redirect()->route('regSubmit')->with(['alert' => 'danger', 'alertMessage' => 'You submitted an empty regulation']);
 
+        // $source = new Source();
+        // $source->sourceName = $request->source;
+        // $source->save();
+
+        return redirect()->route('regSubmit')->with(['alert' => 'success', 'alertMessage' => $request . ' has been added.']);
+    }
 }
