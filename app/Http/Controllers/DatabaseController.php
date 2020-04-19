@@ -20,11 +20,9 @@ class DatabaseController extends Controller
         $locationCards[] = ["title" => "States", "subheading" => "States in the US", "count" => $stateNumber, "manageData" => route("stateView"), "addData" => route("stateAdd")];
 
         $sources = DB::table('reusenodes')->where("is_source", true)->count();
-        $destinations = DB::table('reusenodes')->where("is_destination", true)->count();
 
         $sourcesAndDestinations = [];
-        $sourcesAndDestinations[] = ["title" => "Sources", "subheading" => "Water Sources", "count" => $sources, "manageData" => route("sourceView"), "addData" => route("sourceAdd")];
-        $sourcesAndDestinations[] = ["title" => "Destinations", "subheading" => "Water Destinations", "count" => $destinations, "manageData" => route("destinationView"), "addData" => route("destinationAdd")];
+        $sourcesAndDestinations[] = ["title" => "Reuse Nodes", "subheading" => "Water Sources, Destinations, and Fixtures ", "count" => $sources, "manageData" => route("sourceView"), "addData" => route("sourceAdd")];
 
         $linksNumber = DB::table('links')->count();
 

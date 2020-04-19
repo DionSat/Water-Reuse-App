@@ -109,12 +109,8 @@ Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function 
         Route::get('/sources/add', 'SourceController@addSource')->name('sourceAdd');
         Route::post('/sources/add', 'SourceController@addSourceSubmit')->name('sourceAddSubmit');
         Route::post('/sources/delete', 'SourceController@deleteSource')->name('deleteSource');
-
-        // Destination Routes
-        Route::get('/destinations', 'DestinationController@allDestinations')->name('destinationView');
-        Route::get('/destinations/add', 'DestinationController@addDestination')->name('destinationAdd');
-        Route::post('/destinations/add', 'DestinationController@addDestinationSubmit')->name('destinationAddSubmit');
-        Route::post('/destinations/delete', 'DestinationController@deleteDestination')->name('deleteDestination');
+        Route::get('/sources/modify', 'SourceController@modify')->name('modifySource');
+        Route::post('/sources/modify', 'SourceController@modifySourceSubmit')->name('modifySourceSubmit');
 
         // Link Routes
         Route::get('/links', 'LinkController@allLinks')->name('linkView');
