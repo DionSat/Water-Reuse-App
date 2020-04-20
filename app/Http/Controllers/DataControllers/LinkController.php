@@ -27,7 +27,6 @@ class LinkController extends Controller
 
         $link = new Links();
         $link->linkText = $request->link;
-        $link->updated_at = time();
 
         $link->save();
 
