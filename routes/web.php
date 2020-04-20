@@ -120,6 +120,8 @@ Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function 
         Route::get('/links/add', 'LinkController@addLink')->name('linkAdd');
         Route::post('/links/add', 'LinkController@addLinkSubmit')->name('linkAddSubmit');
         Route::post('/links/delete', 'LinkController@deleteLink')->name('deleteLink');
+        Route::get('/links/modify', 'LinkController@modify')->name('modifyLink');
+        Route::post('/links/modify', 'LinkController@modifyLinkSubmit')->name('modifyLinkSubmit');
 
     });
 });

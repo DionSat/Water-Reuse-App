@@ -27,6 +27,7 @@ class LinkController extends Controller
 
         $link = new Links();
         $link->linkText = $request->link;
+
         $link->save();
 
         return redirect()->route('linkView')->with(['alert' => 'success', 'alertMessage' => $link->linkText . ' has been added.']);
@@ -65,5 +66,24 @@ class LinkController extends Controller
         $link->delete();
 
         return redirect()->route('linkView')->with(['alert' => 'success', 'alertMessage' => $link->linkText . ' has been deleted.']);
+    }
+
+
+    public function modify(Request $request) {
+        $link = Links::where("link_id", $request->link_id)->get()->first();
+        return view('database.modifyLink', compact('link'));
+    }
+    public function modifyLinkSubmit(Request $request) {
+       $link = Links::where("link_id", $request->link_id)->get()->first();
+
+        if(empty($request->newLinkValue))
+            return redirect()->route('modifyLink', ['link_id' => $link->link_id])->with(['alert' => 'danger', 'alertMessage' => 'Please enter a link']);
+
+        $oldLink = $link->linkText;
+
+        $link->linkText = $request->newLinkValue;
+        $link->save();
+
+        return redirect()->route('linkView')->with(['alert' => 'success', 'alertMessage' => $oldLink . ' has been changed to ' . $link->linkText]);
     }
 }
