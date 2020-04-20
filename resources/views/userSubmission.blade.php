@@ -35,67 +35,59 @@
                                 <option id="chooseCity" value="choose" disabled>Choose...</option>
                             </select>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                            <label for="waterSource">Water Source</label>
-                            <select id="waterSource" class="form-control">
-                                <option value="choose" disabled>Choose...</option>
-                            </select>
-                            </div>
-                            <div id="waterDest" class="button-group col-md-6">
-                                <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Water Destinations</button>
-                                    <ul class="dropdown-menu" id="destination">
-
-                                    </ul>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label class="form-check-label" for="gridCheck">
-                                    Is reusing water from this source permitted?
-                                </label>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="yes">
-                                <label class="form-check-label" for="yes">
-                                    Yes
-                                </label>
+                        <hr>
+                        <div id="waterSourceDiv">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                <label for="waterSource0">Water Source</label>
+                                <select id="waterSource0" class="form-control">
+                                    <option value="choose" disabled>Choose...</option>
+                                </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                <label for="waterDestination0">Water Destination</label>
+                                <select id="waterDestination0" class="form-control">
+                                    <option value="choose" disabled>Choose...</option>
+                                </select>
                                 </div>
                             </div>
-                            <div class="form-group col-md-2">
-                                <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="no">
-                                <label class="form-check-label" for="no">
-                                    No
-                                </label>
+                            </br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="isPermitted0">
+                                <label class="form-check-label" for="isPermitted0">Check if reuse from this source is permitted</label>
+                            </div>
+                            <hr>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="codes0">Link to Codes (Optional)</label>
+                                    <input type="text" class="form-control" id="codes0" placeholder="">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="permits0">Link to Permit (Optional)</label>
+                                    <input type="text" class="form-control" id="permits0" placeholder="">
                                 </div>
                             </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="insentives0">Link to Insentives (Optional)</label>
+                                    <input type="text" class="form-control" id="insentives0" placeholder="">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="moreInfo0">Link to More Information (Optional)</label>
+                                    <input type="text" class="form-control" id="moreInfo0" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <label for="comments0">Comments (Optional)</label>
+                                <textarea class="form-control" id="comments0" rows="3"></textarea>
+                            </div>
+                            <hr>
                         </div>
-                        <div class="form-group">
-                            <label for="codes">Link to Codes (Optional)</label>
-                            <input type="text" class="form-control" id="codes" placeholder="">
+                        <div class="form-group" style="float: right;">
+                            <button type="button" class="btn btn-secondary" id="addSource">+</button>
+                            <label for="addSource"> Add Another Regulation For This Area</label>
                         </div>
-                        <div class="form-group">
-                            <label for="permits">Link to Permit (Optional)</label>
-                            <input type="text" class="form-control" id="permits" placeholder="">
-                        </div>
-                        <div class="form-group">
-                            <label for="insentives">Link to Insentives (Optional)</label>
-                            <input type="text" class="form-control" id="insentives" placeholder="">
-                        </div>
-                        <div class="form-group">
-                            <label for="moreInfo">Link to More Information (Optional)</label>
-                            <input type="text" class="form-control" id="moreInfo" placeholder="">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="comments">Comments (Optional)</label>
-                            <textarea class="form-control" id="comments" rows="3"></textarea>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary" id="submit">Submit</button>
                     </form>
                 </div>
             </div>
@@ -107,57 +99,90 @@
 @push("js")
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
-
-        //Unclick yes or no depending on which one is selected
-        $("#no").click(function(){
-            $("#yes").prop("checked", false);
-        });
-
-        $("#yes").click(function(){
-            $("#no").prop("checked", false);
-        });
-
-
+        //holds the number of regulations a user wishes to submit, using 0 indexing
+        numOfRegs = 0;
 
         // get the water sources
-        axios.get("{{route("my-sources-api")}}")
-        .then(function (response) {
+        function getWaterSources( idNum ) {
+            axios.get("{{route("my-sources-api")}}")
+            .then(function (response) {
+                //get each county, and set them as options
+                $source = response.data.map(obj => ("<option class='sourceName' value=" + obj.source_id + " >" + obj.sourceName + "</option>"));
+                $("#waterSource" + idNum).append($source);
+            })
+            .catch(function (error) {
+                //Handle errors here
+                console.log(error);
+            });
+        };
 
+        // get the water destinations
+        function getWaterDestinations( idNum ) {
+            axios.get("{{route("my-destination-api")}}")
+            .then(function (response) {
+                //get each county, and set them as options
+                $destination = response.data.map(obj => ("<option class='destinationName' value=" + obj.destination_id + " >" + obj.destinationName + "</option>"));
+                $("#waterDestination" + idNum).append($destination);
+            })
+            .catch(function (error) {
+                //Handle errors here
+                console.log(error);
+            });
+        };
 
-            console.log("Response: " + response);
-            console.log("Data: " + response.data);
-            //get each county, and set them as options
-            $source = response.data.map(obj => ("<option class='sourceName' value=" + obj.source_id + " >" + obj.node_name + "</option>"));
-            console.log($source);
-            $("#waterSource").append($source);
-        })
-        .catch(function (error) {
-            //Handle errors here
+        //populate the initial water source and destination
+        getWaterSources(numOfRegs);
+        getWaterDestinations(numOfRegs);
 
-            //Generally don't have to worry about errors too much,
-            // but maybe want to do "alert('There was a error, please try re-loading the page.')"
-            console.log(error);
+        //TESTING
+        $('#addSource').click(function(){
+            numOfRegs += 1;
+            $source = '<div class="form-row"><div class="form-group col-md-6"><label for="waterSource' + numOfRegs + '">Water Source</label><select id="waterSource' + numOfRegs + '" class="form-control"><option value="choose" disabled>Choose...</option></select></div><div class="form-group col-md-6"><label for="waterDestination' + numOfRegs + '">Water Destination</label><select id="waterDestination' + numOfRegs + '" class="form-control"><option value="choose" disabled>Choose...</option></select></div></div></br><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" id="isPermitted' + numOfRegs + '"><label class="form-check-label" for="isPermitted' + numOfRegs + '">Check if reuse from this source is permitted</label></div><hr><div class="form-row"><div class="form-group col-md-6"><label for="codes' + numOfRegs + '">Link to Codes (Optional)</label><input type="text" class="form-control" id="codes' + numOfRegs + '" placeholder=""></div><div class="form-group col-md-6"><label for="permits' + numOfRegs + '">Link to Permit (Optional)</label><input type="text" class="form-control" id="permits' + numOfRegs + '" placeholder=""></div></div><div class="form-row"><div class="form-group col-md-6"><label for="insentives' + numOfRegs + '">Link to Insentives (Optional)</label><input type="text" class="form-control" id="insentives' + numOfRegs + '" placeholder=""></div><div class="form-group col-md-6"><label for="moreInfo' + numOfRegs + '">Link to More Information (Optional)</label><input type="text" class="form-control" id="moreInfo' + numOfRegs + '" placeholder=""></div></div><div class="form-group"><label for="comments' + numOfRegs + '">Comments (Optional)</label><textarea class="form-control" id="comments' + numOfRegs + '" rows="3"></textarea><hr></div>';
+            $("#waterSourceDiv").append($source);
+            getWaterSources(numOfRegs);
+            getWaterDestinations(numOfRegs);
+
         });
+        $('#submit').click(function(){
+            $state = $("#inputState").children("option:selected").text();
+            
+            if($state == "Choose...")
+            {
+                alert("You have not chosen a state. Please select the state you wish to create a regulation for.");
+            }
+            else{
+                $county = $("#county").children("option:selected").text();
+                $city = $("#city").children("option:selected").text();
+                $regList = [];
 
-        // get the water sources
-        axios.get("{{route("my-destination-api")}}")
-        .then(function (response) {
+                for(i = 0; i <= numOfRegs; i++)
+                {
+                    $newReg = {
+                        $source: $('#waterSource' + i).children("option:selected").text(),
+                        $destination: $('#waterDestination' + i).children("option:selected").text(),
+                        $isPermitted: $("#isPermitted" + i).prop("checked"),
+                        $codesLink: $("#codes" + i).val(),
+                        $permitLink: $("#permits" + i).val(),
+                        $insentivesLink: $("#insentives" + i).val(),
+                        $moreInfoLink: $("#moreInfo" + i).val(),
+                        $comments: $("#comments" + i).val()
+                    };
+                    $regList.push($newReg);
+                }
 
-
-            console.log("Response: " + response);
-            console.log("Data: " + response.data);
-            //get each county, and set them as options
-            $destination = response.data.map(obj => ("<li><input type='checkbox' value=" + obj.destination_id + "/>&nbsp;" + obj.node_name + "</li>"));
-            console.log($destination);
-            $("#destination").append($destination);
+                axios.post('/regSubmit', {
+                    newRegList: $regList
+                })
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            }
         })
-        .catch(function (error) {
-            //Handle errors here
+        //TESTING END
 
-            //Generally don't have to worry about errors too much,
-            // but maybe want to do "alert('There was a error, please try re-loading the page.')"
-            console.log(error);
-        });
 
 
         //for when the state changes
@@ -189,11 +214,11 @@
                 .then(function (response) {
 
 
-                    console.log("Response: " + response);
-                    console.log("Data: " + response.data);
+                    // console.log("Response: " + response);
+                    // console.log("Data: " + response.data);
                     //get each county, and set them as options
                     $county = response.data.map(obj => ("<option class='countyName' value=" + obj.county_id + " >" + obj.countyName + "</option>"));
-                    console.log($county);
+                    // console.log($county);
                     $("#county").append($county);
                 })
                 .catch(function (error) {
@@ -237,11 +262,11 @@
                 .then(function (response) {
 
 
-                    console.log("Response: " + response);
-                    console.log("Data: " + response.data);
+                    // console.log("Response: " + response);
+                    // console.log("Data: " + response.data);
                     //get each city, and set them as options
                     $city = response.data.map(obj => ("<option class='cityName' value=" + obj.city_id + " >" + obj.cityName + "</option>"));
-                    console.log($city);
+                    // console.log($city);
                     $("#city").append($city);
                 })
                 .catch(function (error) {
@@ -258,6 +283,8 @@
             }
 
         });
+
+
 
     </script>
 @endpush

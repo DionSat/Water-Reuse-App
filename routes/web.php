@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/changePassword', 'AccountController@changePassword')->middleware('auth')->name('changePassword');
 
     Route::get('/userSubmission', 'RegulationController@allStates')->name('userSubmission');
+    Route::post('/regSubmit', 'RegulationController@addRegulationSubmit')->name('regSubmit');
 
 });
 
