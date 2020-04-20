@@ -107,7 +107,7 @@
             axios.get("{{route("my-sources-api")}}")
             .then(function (response) {
                 //get each county, and set them as options
-                $source = response.data.map(obj => ("<option class='sourceName' value=" + obj.source_id + " >" + obj.sourceName + "</option>"));
+                $source = response.data.map(obj => ("<option class='sourceName' value=" + obj.node_id + " >" + obj.node_name + "</option>"));
                 $("#waterSource" + idNum).append($source);
             })
             .catch(function (error) {
@@ -121,7 +121,7 @@
             axios.get("{{route("my-destination-api")}}")
             .then(function (response) {
                 //get each county, and set them as options
-                $destination = response.data.map(obj => ("<option class='destinationName' value=" + obj.destination_id + " >" + obj.destinationName + "</option>"));
+                $destination = response.data.map(obj => ("<option class='destinationName' value=" + obj.node_id + " >" + obj.node_name + "</option>"));
                 $("#waterDestination" + idNum).append($destination);
             })
             .catch(function (error) {
@@ -145,7 +145,7 @@
         });
         $('#submit').click(function(){
             $state = $("#inputState").children("option:selected").text();
-            
+
             if($state == "Choose...")
             {
                 alert("You have not chosen a state. Please select the state you wish to create a regulation for.");
