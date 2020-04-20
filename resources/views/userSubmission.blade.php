@@ -134,7 +134,7 @@
         getWaterSources(numOfRegs);
         getWaterDestinations(numOfRegs);
 
-        //TESTING
+
         $('#addSource').click(function(){
             numOfRegs += 1;
             $source = '<div class="form-row"><div class="form-group col-md-6"><label for="waterSource' + numOfRegs + '">Water Source</label><select id="waterSource' + numOfRegs + '" class="form-control"><option value="choose" disabled>Choose...</option></select></div><div class="form-group col-md-6"><label for="waterDestination' + numOfRegs + '">Water Destination</label><select id="waterDestination' + numOfRegs + '" class="form-control"><option value="choose" disabled>Choose...</option></select></div></div></br><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" id="isPermitted' + numOfRegs + '"><label class="form-check-label" for="isPermitted' + numOfRegs + '">Check if reuse from this source is permitted</label></div><hr><div class="form-row"><div class="form-group col-md-6"><label for="codes' + numOfRegs + '">Link to Codes (Optional)</label><input type="text" class="form-control" id="codes' + numOfRegs + '" placeholder=""></div><div class="form-group col-md-6"><label for="permits' + numOfRegs + '">Link to Permit (Optional)</label><input type="text" class="form-control" id="permits' + numOfRegs + '" placeholder=""></div></div><div class="form-row"><div class="form-group col-md-6"><label for="insentives' + numOfRegs + '">Link to Insentives (Optional)</label><input type="text" class="form-control" id="insentives' + numOfRegs + '" placeholder=""></div><div class="form-group col-md-6"><label for="moreInfo' + numOfRegs + '">Link to More Information (Optional)</label><input type="text" class="form-control" id="moreInfo' + numOfRegs + '" placeholder=""></div></div><div class="form-group"><label for="comments' + numOfRegs + '">Comments (Optional)</label><textarea class="form-control" id="comments' + numOfRegs + '" rows="3"></textarea><hr></div>';
@@ -181,7 +181,7 @@
                 });
             }
         })
-        //TESTING END
+
 
 
 
