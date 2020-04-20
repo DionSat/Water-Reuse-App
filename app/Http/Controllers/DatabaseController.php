@@ -22,7 +22,7 @@ class DatabaseController extends Controller
         $sources = DB::table('reusenodes')->where("is_source", true)->count();
 
         $sourcesAndDestinations = [];
-        $sourcesAndDestinations[] = ["title" => "Reuse Nodes", "subheading" => "Water Sources, Destinations, and Fixtures ", "count" => $sources, "manageData" => route("sourceView"), "addData" => route("sourceAdd")];
+        $sourcesAndDestinations[] = ["title" => "Reuse Nodes", "subheading" => "Water Sources, Destinations, and Fixtures ", "count" => $sources, "manageData" => route("reuseNodeView"), "addData" => route("reuseNodeAdd")];
 
         $linksNumber = DB::table('links')->count();
 

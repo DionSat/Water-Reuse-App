@@ -28,10 +28,8 @@ class SourceController extends Controller
         $is_source = $request->boolean('is_source');
         $is_destination = $request->boolean('is_destination');
         $is_fixture = $request->boolean('is_fixture');
-
         $source = new ReuseNode();
         $source->node_name = $request->source;
-
         if($is_source === true)
             $source->is_source = true;
         else
@@ -44,7 +42,21 @@ class SourceController extends Controller
             $source->is_fixture = true;
         else
             $source->is_fixture = false;
+        /*
+        if($request->has('is_source'))
+            $source->is_source = true;
+        else
+            $source->is_source = false;
 
+        if($request->has('is_destination'))
+            $source->is_destination = true;
+        else
+            $source->is_destination = false;
+        if($request->has('is_fixture'))
+            $source->is_fixture= true;
+        else
+            $source->is_fixture = false;
+        */
         $source->save();
 
         return redirect()->route('sourceView')->with(['alert' => 'success', 'alertMessage' => $source->node_name . ' has been added.']);

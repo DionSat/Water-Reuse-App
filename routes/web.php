@@ -103,14 +103,16 @@ Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function 
         Route::get('/states/add', 'StateController@addState')->name('stateAdd');
         Route::post('/states/add', 'StateController@addStateSubmit')->name('stateAddSubmit');
         Route::post('/states/delete', 'StateController@deleteState')->name('deleteState');
+        Route::get('/states/modify', 'StateController@modify')->name('modifyState');
+        Route::post('/states/modify', 'StateController@modifyStateSubmit')->name('modifyStateSubmit');
 
-        // Source Routes
-        Route::get('/sources', 'SourceController@allSources')->name('sourceView');
-        Route::get('/sources/add', 'SourceController@addSource')->name('sourceAdd');
-        Route::post('/sources/add', 'SourceController@addSourceSubmit')->name('sourceAddSubmit');
-        Route::post('/sources/delete', 'SourceController@deleteSource')->name('deleteSource');
-        Route::get('/sources/modify', 'SourceController@modify')->name('modifySource');
-        Route::post('/sources/modify', 'SourceController@modifySourceSubmit')->name('modifySourceSubmit');
+        // ReuseNode Routes
+        Route::get('/reuseNodes', 'ReuseNodeController@allReuseNodes')->name('reuseNodeView');
+        Route::get('/reuseNodes/add', 'ReuseNodeController@addReuseNode')->name('reuseNodeAdd');
+        Route::post('/reuseNodes/add', 'ReuseNodeController@addReuseNodeSubmit')->name('reuseNodeAddSubmit');
+        Route::post('/reuseNodes/delete', 'ReuseNodeController@deleteReuseNode')->name('deleteReuseNode');
+        Route::get('/reuseNodes/modify', 'ReuseNodeController@modify')->name('modifyReuseNode');
+        Route::post('/reuseNodes/modify', 'ReuseNodeController@modifyReuseNodeSubmit')->name('modifyReuseNodeSubmit');
 
         // Link Routes
         Route::get('/links', 'LinkController@allLinks')->name('linkView');

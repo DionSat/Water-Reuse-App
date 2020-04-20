@@ -6,7 +6,7 @@
             <a href="{{route("database")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> Dashboard </a>
         </div>
         <h2 class="text-center"> Add Source, Destination, & Fixture </h2>
-        <form method="POST" action="{{ route('sourceAddSubmit') }}">
+        <form method="POST" action="{{ route('reuseNodeAddSubmit') }}">
             {{ csrf_field() }}
             <div class="form-row mt-3 justify-content-center">
                 <div class="col-md-4 input-group">
