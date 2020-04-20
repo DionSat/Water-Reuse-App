@@ -11,7 +11,7 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Link</th>
-                <th scope="col">Actions</th>
+                <th scope="col" colspan="2">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -26,6 +26,9 @@
                             <input id="linkId-{{$link->link_id}}" name="link_id" value="{{$link->link_id}}" hidden>
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
+                    </td>
+                    <td>
+                        <a href="{{route('modifyLink', ['link_id' => $link->link_id])}}" class="btn btn-primary"><i class="fas fa-edit" aria-hidden="true"></i> Modify </a>
                     </td>
                 </tr>
             @endforeach
