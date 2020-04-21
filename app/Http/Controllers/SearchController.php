@@ -10,7 +10,8 @@ class SearchController extends Controller
     public function mainPage(){
 
         $states = State::all();
-
+        //$counties = County::all();
+        
         return view("search.searchpage", compact('states'));
     }
 
