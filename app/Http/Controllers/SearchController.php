@@ -8,10 +8,8 @@ use Illuminate\Http\Request;
 class SearchController extends Controller
 {
     public function mainPage(){
-
-        $states = State::all();
-        //$counties = County::all();
         
+        $states = State::all();
         return view("search.searchpage", compact('states'));
     }
 

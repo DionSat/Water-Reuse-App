@@ -16,8 +16,7 @@
                             @endif
                         </h3>
 
-                        {{--<form  method="POST" class="form-inline mt-3" action={{route('searchResults')}}>--}}
-
+             
                             <form  method="POST" class="form-inline mt-3">
                         
                             {{ csrf_field() }}
@@ -37,8 +36,7 @@
                                 <label for="stateSelect" class="col-md-4 col-form-label"> State </label>
                                 <div class="col-md-6">
 
-                                    {{--Here in the select, we can generate the initial set of states with PHP --}}
-
+                       
                                     <select id="stateSelect" class="form-control">
                                         <option value="" disabled selected>Select a state</option>
                                         @foreach($states as $state)
