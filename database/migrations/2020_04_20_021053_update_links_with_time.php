@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateLinks extends Migration
+class UpdateLinksWithTime extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class UpdateLinks extends Migration
      */
     public function up()
     {
-        Schema::table('links', function (Blueprint $table) {
-            $table->string('name')->nullable();
-            $table->enum('status', ['valid', 'broken', 'unknown'])->nullable();
-
+        //
+        Schema::table('links', function (Blueprint $table)  {
+            $table->timestamps();
         });
+
     }
 
     /**
@@ -27,8 +27,6 @@ class UpdateLinks extends Migration
      */
     public function down()
     {
-        Schema::table('links', function (Blueprint $table) {
-            $table->dropColumn(['name', 'status', 'updated_at']);
-        });
+        //
     }
 }
