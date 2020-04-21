@@ -25,6 +25,9 @@
                         <td>
                             <a href="{{route('stateSubmission')."/".$state->id}}" class="btn btn-primary"> View </a>
                         </td>
+                        <td>
+                            <a href="{{route('submissionEdit')."/".'State'."/".$state->id}}" class="btn btn-primary"> Edit </a>
+                        </td>
                         <td>Pending</td>
                     </tr>
                 @endforeach

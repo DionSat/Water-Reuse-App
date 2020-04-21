@@ -68,4 +68,25 @@ class SubmissionController extends Controller
         $approved = CountyMerge::where('id', $request->itemId)->get();
         return view('submission.approvedItem', compact('user','approved'));
     }
+
+    public function submissionEdit(Request $request) 
+    {
+        $user = Auth::user();
+        switch ($request->type) {
+            case 'State':
+                $submissions = PendingCountyMerge::where('id', $request->itemid)->get();
+                break;
+            case 'County':
+                $submissions = PendingCountyMerge::where('id', $request->itemId)->get();
+                break;
+            case 'City':
+                $submissions = PendingCityMerge::where('id', $request->itemId)->get();
+                break;
+            default:
+                # Send to error page?
+                break;
+        }
+
+        return view('submission.submissionEdit', compact('user', 'submissions'));
+    }
 }
