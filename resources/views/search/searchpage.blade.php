@@ -16,7 +16,6 @@
                             @endif
                         </h3>
 
-             
                             <form  method="POST" class="form-inline mt-3">
                         
                             {{ csrf_field() }}
@@ -57,19 +56,18 @@
                             <option value="" disabled selected>Select a state first</option>
                         </select>
 
-
-                        
-
                         <div class="card">
                             <div id="stateOutput" class="card-body">
-                                Select A Cityy
+                                Select A City
                             </div>
                         </div>
-
 
                         <select id="citySelect" class="form-control">
                             <option value="" disabled selected>Select a County first</option>
                         </select>
+                        <br>
+                        <input class="btn btn-primary" type="submit" value="Submit">
+
 
                     </div>
                 </div>
