@@ -19,9 +19,9 @@ class SubmissionController extends Controller
     public function view()
     {
         $user = Auth::user();
-        $stateSubmissions = PendingStateMerge::where('userID', $user->id)->get();
-        $citySubmissions = PendingCityMerge::where('userID', $user->id)->get();
-        $countySubmissions = PendingCountyMerge::where('userID', $user->id)->get();
+        $stateSubmissions = PendingStateMerge::withTrashed()->where('userID', $user->id)->get();
+        $citySubmissions = PendingCityMerge::withTrashed()->where('userID', $user->id)->get();
+        $countySubmissions = PendingCountyMerge::withTrashed()->where('userID', $user->id)->get();
         $stateApproved = StateMerge::where('user_id', $user->id)->get();
         $cityApproved = CityMerge::where('user_id', $user->id)->get();
         $countyApproved = CountyMerge::where('user_id', $user->id)->get();
@@ -71,5 +71,5 @@ class SubmissionController extends Controller
         $submissions = CountyMerge::where('id', $request->itemId)->get();
         return view('submission.submissionItem', compact('user','submissions'));
     }
-    
+
 }
