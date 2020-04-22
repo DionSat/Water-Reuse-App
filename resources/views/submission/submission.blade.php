@@ -25,7 +25,7 @@
                         <td>
                             <a href="{{route('stateSubmission')."/".$state->id}}" class="btn btn-primary"> View </a>
                         </td>
-                        <td>Pending</td>
+                        <td>@if($state->trashed())Rejected @else Pending @endif</td>
                     </tr>
                 @endforeach
                 @foreach($citySubmissions as $city)
@@ -36,7 +36,7 @@
                         <td>
                             <a href="{{route('citySubmission')."/".$city->id}}" class="btn btn-primary"> View </a>
                         </td>
-                        <td>Pending</td>
+                        <td>@if($city->trashed())Rejected @else Pending @endif</td>
                     </tr>
                 @endforeach
                 @foreach($countySubmissions as $county)
@@ -47,7 +47,7 @@
                         <td>
                             <a href="{{route('countySubmission')."/".$county->id}}" class="btn btn-primary"> View </a>
                         </td>
-                        <td>Pending</td>
+                        <td>@if($county->trashed())Rejected @else Pending @endif</td>
                     </tr>
                 @endforeach
                 @foreach($stateApproved as $stateAp)
