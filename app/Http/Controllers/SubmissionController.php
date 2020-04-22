@@ -28,6 +28,7 @@ class SubmissionController extends Controller
         return view('submission.submission', compact('user', 'stateSubmissions', 'citySubmissions', 'countySubmissions', 'stateApproved', 'cityApproved', 'countyApproved'));
     }
 
+    //views of submission that are still pending
     public function pendingState(Request $request)
     {
         $user = Auth::user();
@@ -48,24 +49,27 @@ class SubmissionController extends Controller
         $submissions = PendingCountyMerge::where('id', $request->itemId)->get();
         return view('submission.submissionItem', compact('user','submissions'));
     }
+
+    //view of submission that have been aproved
     public function state(Request $request)
     {
         $user = Auth::user();
-        $approved = StateMerge::where('id', $request->itemId)->get();
-        return view('submission.approvedItem', compact('user','approved'));
+        $submissions = StateMerge::where('id', $request->itemId)->get();
+        return view('submission.submissionItem', compact('user','submissions'));
     }
 
     public function city(Request $request)
     {
         $user = Auth::user();
-        $approved = CityMerge::where('id', $request->itemId)->get();
-        return view('submission.approvedItem', compact('user','approved'));
+        $submissions = CityMerge::where('id', $request->itemId)->get();
+        return view('submission.submissionItem', compact('user','submissions'));
     }
 
     public function county(Request $request)
     {
         $user = Auth::user();
-        $approved = CountyMerge::where('id', $request->itemId)->get();
-        return view('submission.approvedItem', compact('user','approved'));
+        $submissions = CountyMerge::where('id', $request->itemId)->get();
+        return view('submission.submissionItem', compact('user','submissions'));
     }
+    
 }
