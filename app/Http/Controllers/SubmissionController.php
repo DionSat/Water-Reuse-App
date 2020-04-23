@@ -7,6 +7,7 @@ use Illuminate\Http\Requests;
 use App\State;
 use App\County;
 use App\City;
+use App\Allowed;
 use Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -82,34 +83,35 @@ class SubmissionController extends Controller
         $submissionState = -1;
         $submissionCounty = -1;
         $submissionCity = -1;
+        $allowed = Allowed::all();
 
         switch ($request->type) {
             case 'State':
                 $submission = PendingStateMerge::where('id', $request->itemId)->get()->first();
-                $submissionState = $submission;
+                $counties = County::where('fk_state', $submission->stateID)->get();
+                $submissionState = $submission->stateID;
                 break;
             case 'County':
                 $submission = PendingCountyMerge::where('id', $request->itemId)->get()->first();
+                $counties = County::where('fk_state', $submission->county->state->state_id)->get();
                 $cities = City::where('fk_county', $submission->countyID)->get();
                 $submissionCounty = $submission->countyID;
-                $submissionState = State::where('state_id', $submission->state()->state_id)->get()->first();
+                $submissionState = $submission->county->state->state_id;
                 break;
             case 'City':
                 $submission = PendingCityMerge::where('id', $request->itemId)->get()->first();
                 $submissionCity = $submission->cityID;
-                $submissionCounty = County::where('county_id', $submission->county()->county_id)->get()->first();
-                $submissionState = State::where('state_id', $submissionCounty->state()->state_id)->get()->first();
-                $cities = City::where('fk_county', $submissionCounty->countyID)->get();
-                $submissionCounty = $submissionCounty->countyID;
+                $submissionCounty = $submission->city->county->county_id;
+                $submissionState = $submission->city->county->state->state_id;
+                $cities = City::where('fk_county', $submission->city->county->county_id)->get();
+                $counties = County::where('fk_state', $submission->city->county->state->state_id)->get();
                 break;
             default:
                 # Send to error page?
                 break;
         }
 
-        $counties = County::where('fk_state', $submissionState->stateID)->get();
-
-        return view('submission.submissionEdit', compact('user', 'submission', 'states', 'counties', 'cities', 'type', 'submissionState', 'submissionCounty', 'submissionCity'));
+        return view('submission.submissionEdit', compact('user', 'submission', 'states', 'counties', 'cities', 'type', 'submissionState', 'submissionCounty', 'submissionCity', 'allowed'));
     }
 
     public function submissionEditSubmit(Request $request) {
@@ -119,17 +121,17 @@ class SubmissionController extends Controller
         if(!$request->city)
             $request->city = -1;
 
-        $userID = -1; 
-
         switch ($request->type) {
             case 'State':
                 $submission = PendingStateMerge::where('id', $request->id)->get()->first();
-                $userID = $submission->userID;
+                $submissionInfo = $submission->toArray();
                 if($request->county > -1 && $request->city > -1){
-                    $submission = new PendingCityMerge();
+                    $submission->delete();
+                    $submission = new PendingCityMerge($submissionInfo);
                     $submission->cityID = $request->city;
                 }else if($request->county > -1){
-                    $submission = new PendingCountyMerge();
+                    $submission->delete();
+                    $submission = new PendingCountyMerge($submissionInfo);
                     $submission->countyID = $request->county;
                 }else{
                     $submission->stateID = $request->state;
@@ -137,12 +139,14 @@ class SubmissionController extends Controller
                 break;
             case 'County':
                 $submission = PendingCountyMerge::where('id', $request->id)->get()->first();
-                $userID = $submission->userID;
+                $submissionInfo = $submission->toArray();
                 if($request->county == -1){
-                    $submission = new PendingStateMerge();
+                    $submission->delete();
+                    $submission = new PendingStateMerge($submissionInfo);
                     $submission->StateID = $request->State;
                 }else if($request->city > -1){
-                    $submission = new PendingCityMerge();
+                    $submission->delete();
+                    $submission = new PendingCityMerge($submissionInfo);
                     $submission->cityID = $request->city;
                 }else{    
                     $submission->countyID = $request->county;
@@ -150,12 +154,14 @@ class SubmissionController extends Controller
                 break;
             case 'City':
                 $submission = PendingCityMerge::where('id', $request->id)->get()->first();
-                $userID = $submission->userID;
+                $submissionInfo = $submission->toArray();
                 if($request->county == -1){
-                    $submission = new PendingStateMerge();
+                    $submission->delete();
+                    $submission = new PendingStateMerge($submissionInfo);
                     $submission->StateID = $request->State;
                 }else if($request->city == -1){
-                    $submission = new PendingCountyMerge();
+                    $submission->delete();
+                    $submission = new PendingCountyMerge($submissionInfo);
                     $submission->countyID = $request->county;
                 }else{
                     $submission->cityID = $request->city;
@@ -165,16 +171,17 @@ class SubmissionController extends Controller
                 return redirect()->route('submissionEdit', ['type' => $request->type, 'itemId' => $request->id])->with(['alert' => 'danger', 'alertMessage' => 'Error trying to update the submission.']);
                 break;
         }
-        $submission->allowedID = 5;
-        $submission->sourceID = 1;
-        $submission->destinationID = 1;
-        $submission->codesObj()->linkText = $request->codes;
+        $submission->allowedID = $request->allowed;
+        $submission->sourceID = $request->source;
+        $submission->destinationID = $request->destination;
+        $codes = $submission->codesObj()->first();
+        $codes->linkText = $request->codes;
+        $codes->save();
         $submission->permitObj()->linkText = $request->permit;
         $submission->incentivesObj()->linkText = $request->incentives;
         $submission->moreInfoObj()->linkText = $request->moreInfo;
-        $submission->userID = $userID;
-        //$submission->save();
+        $submission->save();
 
-        return redirect()->route('submission')->with(['alert' => 'success', 'alertMessage' => $submission->destinationID . ' has been updated.']);
+        return redirect()->route('submission')->with(['alert' => 'success', 'alertMessage' => 'The submission has been updated.']);
     }
 }

@@ -17,7 +17,7 @@
                                 <option value="-1" >Choose...</option>
                                 @foreach($states as $state)
                                     <option value="{{$state->state_id}}"
-                                        @if($type == 'State' && $state->state_id == $submissionState->stateID)
+                                        @if($state->state_id == $submissionState)
                                             selected
                                         @endif
                                     >{{$state->stateName}}</option>
@@ -40,10 +40,10 @@
                             <div class="form-group col-md-4">
                             <label for="city">City (Optional)</label>
                             <select class="form-control " id="city" name="city">
-                                <option id="chooseCity" value="-1" disabled>Choose...</option>
+                                <option id="chooseCity" value="-1" >Choose...</option>
                                 @foreach($cities as $city)
-                                    <option class="countyName" value="{{$cities->city_id}}"
-                                        @if($county->county_id == $submissionCity)
+                                    <option class="cityName" value="{{$city->city_id}}"
+                                        @if($city->city_id == $submissionCity)
                                             selected
                                         @endif
                                     >{{$city->cityName}}</option>
@@ -69,12 +69,16 @@
                                 </div>
                             </div>
                             </br>
-                            <div class="form-check form-check-inline">
-                                <label class="form-check-label" for="isPermitted">Is this permitted: </label>
-                                <select class="form-check-input" type="checkbox" id="isPermitted" name="allowed">
-                                    <option id="chooseAllowed" value="Yes" >Yes</option>
-                                    <option id="chooseAllowed" value="No" >No</option>
-                                    <option id="chooseAllowed" value="Maybe" >Maybe</option>
+                            <div class="form-group col-md-4">
+                                <label for="isPermitted">Is this permitted: </label>
+                                <select class="form-control " type="checkbox" id="isPermitted" name="allowed">
+                                    @foreach($allowed as $option)
+                                        <option id="chooseAllowed" value="{{$option->allowed_id}}" 
+                                            @if($option->allowed_id == $submission->allowedID)
+                                            selected
+                                            @endif
+                                        >{{$option->allowedText}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <hr>

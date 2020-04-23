@@ -39,6 +39,9 @@
                         <td>
                             <a href="{{route('citySubmission')."/".$city->id}}" class="btn btn-primary"> View </a>
                         </td>
+                        <td>
+                            <a href="{{route('submissionEdit')."/".'City'."/".$city->id}}" class="btn btn-primary"> Edit </a>
+                        </td>
                         <td>Pending</td>
                     </tr>
                 @endforeach
@@ -49,6 +52,9 @@
                         <td>{{$county->destination->node_name}}</td>
                         <td>
                             <a href="{{route('countySubmission')."/".$county->id}}" class="btn btn-primary"> View </a>
+                        </td>
+                        <td>
+                            <a href="{{route('submissionEdit')."/".'County'."/".$county->id}}" class="btn btn-primary"> Edit </a>
                         </td>
                         <td>Pending</td>
                     </tr>
