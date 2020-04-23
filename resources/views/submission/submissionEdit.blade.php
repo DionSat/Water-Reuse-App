@@ -5,89 +5,108 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Submit a New Water Reuse Regulation</div>
+                <div class="card-header">Edit Submission</div>
                 <div class="card-body">
-                    <form>
+                    {{var_dump($submission->toArray())}}
+                    <form action={{ route('submissionEditUpdate') }} method="POST">
+                        {{ csrf_field() }}
                         <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="inputState">State</label>
-                            <select id="inputState" class="form-control">
-                                <option value="choose" selected>Choose...</option>
+                            <select id="inputState" class="form-control" name="state">
+                                <option value="-1" >Choose...</option>
                                 @foreach($states as $state)
-                                    <option value="{{$state->state_id}}">{{$state->stateName}}</option>
+                                    <option value="{{$state->state_id}}"
+                                        @if($type == 'State' && $state->state_id == $submissionState->stateID)
+                                            selected
+                                        @endif
+                                    >{{$state->stateName}}</option>
                                 @endforeach
                             </select>
                             </div>
                             <div class="form-group col-md-4">
                             <label for="county">County (Optional)</label>
-                            <select class="form-control" id="county">
-                                <option id="chooseCounty" value="choose" disabled>Choose...</option>
+                            <select class="form-control" id="county" name="county">
+                                <option id="chooseCounty" value="-1" >Choose...</option>
+                                @foreach($counties as $county)
+                                    <option class="countyName" value="{{$county->county_id}}"
+                                        @if($county->county_id == $submissionCounty)
+                                            selected
+                                        @endif
+                                    >{{$county->countyName}}</option>
+                                @endforeach
                             </select>
                             </div>
                             <div class="form-group col-md-4">
-                            <label for="inputZip">Zip (Optional)</label>
-                            <input type="text" class="form-control" id="inputZip">
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label for="city">City (Optional)</label>
-                            <select class="form-control" id="city">
-                                <option id="chooseCity" value="choose" disabled>Choose...</option>
+                            <select class="form-control " id="city" name="city">
+                                <option id="chooseCity" value="-1" disabled>Choose...</option>
+                                @foreach($cities as $city)
+                                    <option class="countyName" value="{{$cities->city_id}}"
+                                        @if($county->county_id == $submissionCity)
+                                            selected
+                                        @endif
+                                    >{{$city->cityName}}</option>
+                                @endforeach
                             </select>
                         </div>
+                        </div>
+                        
                         <hr>
                         <div id="waterSourceDiv">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                <label for="waterSource0">Water Source</label>
-                                <select id="waterSource0" class="form-control">
-                                    <option value="choose" disabled>Choose...</option>
+                                <label for="waterSource">Water Source</label>
+                                <select id="waterSource" class="form-control" name="source">
+                                    <option value="-1" disabled>Choose...</option>
                                 </select>
                                 </div>
                                 <div class="form-group col-md-6">
-                                <label for="waterDestination0">Water Destination</label>
-                                <select id="waterDestination0" class="form-control">
-                                    <option value="choose" disabled>Choose...</option>
+                                <label for="waterDestination">Water Destination</label>
+                                <select id="waterDestination" class="form-control" name="destination">
+                                    <option value="-1" disabled>Choose...</option>
                                 </select>
                                 </div>
                             </div>
                             </br>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="isPermitted0">
-                                <label class="form-check-label" for="isPermitted0">Check if reuse from this source is permitted</label>
+                                <label class="form-check-label" for="isPermitted">Is this permitted: </label>
+                                <select class="form-check-input" type="checkbox" id="isPermitted" name="allowed">
+                                    <option id="chooseAllowed" value="Yes" >Yes</option>
+                                    <option id="chooseAllowed" value="No" >No</option>
+                                    <option id="chooseAllowed" value="Maybe" >Maybe</option>
+                                </select>
                             </div>
                             <hr>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="codes0">Link to Codes (Optional)</label>
-                                    <input type="text" class="form-control" id="codes0" placeholder="">
+                                    <label for="codes">Link to Codes (Optional)</label>
+                                    <input type="text" class="form-control" id="codes" placeholder="" value="{{$submission->codesObj->linkText}}" name="codes">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="permits0">Link to Permit (Optional)</label>
-                                    <input type="text" class="form-control" id="permits0" placeholder="">
+                                    <label for="permits">Link to Permit (Optional)</label>
+                                    <input type="text" class="form-control" id="permits" placeholder="" value="{{$submission->permitObj->linkText}}" name="permit">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="insentives0">Link to Insentives (Optional)</label>
-                                    <input type="text" class="form-control" id="insentives0" placeholder="">
+                                    <label for="insentives">Link to Insentives (Optional)</label>
+                                    <input type="text" class="form-control" id="insentives" placeholder="" value="{{$submission->incentivesObj->linkText}}" name="insentives">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="moreInfo0">Link to More Information (Optional)</label>
-                                    <input type="text" class="form-control" id="moreInfo0" placeholder="">
+                                    <label for="moreInfo">Link to More Information (Optional)</label>
+                                    <input type="text" class="form-control" id="moreInfo" placeholder="" value="{{$submission->moreInfoObj->linkText}}" name="moreInfo">
                                 </div>
                             </div>
                             <div class="form-group" >
-                                <label for="comments0">Comments (Optional)</label>
-                                <textarea class="form-control" id="comments0" rows="3"></textarea>
+                                <label for="comments">Comments (Optional)</label>
+                                <textarea class="form-control" id="comments" rows="3" name="comments"></textarea>
                             </div>
+                            <input type="text" name="type" style="display: none;" value="{{$type}}">
+                            <input type="number" name="id" style="display: none;" value={{$submission->id}}>
                             <hr>
                         </div>
-                        <div class="form-group" style="float: right;">
-                            <button type="button" class="btn btn-secondary" id="addSource">+</button>
-                            <label for="addSource"> Add Another Regulation For This Area</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+                        <button type="submit" class="btn btn-primary" id="submit">Re-Submit</button>
                     </form>
                 </div>
             </div>
@@ -99,16 +118,23 @@
 @push("js")
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
-        //holds the number of regulations a user wishes to submit, using 0 indexing
-        numOfRegs = 0;
 
         // get the water sources
-        function getWaterSources( idNum ) {
+        function getWaterSources() {
+            var current = {{$submission->sourceID}};
             axios.get("{{route("my-sources-api")}}")
             .then(function (response) {
                 //get each county, and set them as options
-                $source = response.data.map(obj => ("<option class='sourceName' value=" + obj.node_id + " >" + obj.node_name + "</option>"));
-                $("#waterSource" + idNum).append($source);
+                $source = response.data.map(obj => (
+                    "<option "
+                    + ( obj.node_id == current ? ' selected ' : "") 
+                    + " class='sourceName' value=" 
+                    + obj.node_id 
+                    + " >" 
+                    + obj.node_name 
+                    + "</option>"));
+                
+                $("#waterSource").append($source);
             })
             .catch(function (error) {
                 //Handle errors here
@@ -117,12 +143,20 @@
         };
 
         // get the water destinations
-        function getWaterDestinations( idNum ) {
+        function getWaterDestinations() {
+            var current = {{$submission->destinationID}};
             axios.get("{{route("my-destination-api")}}")
             .then(function (response) {
                 //get each county, and set them as options
-                $destination = response.data.map(obj => ("<option class='destinationName' value=" + obj.node_id + " >" + obj.node_name + "</option>"));
-                $("#waterDestination" + idNum).append($destination);
+                $destination = response.data.map(obj => (
+                    "<option "
+                    + ( obj.node_id == current ? 'selected' : "") 
+                    + " class='destinationName' value=" 
+                    + obj.node_id 
+                    + " >" 
+                    + obj.node_name 
+                    + "</option>"));
+                $("#waterDestination").append($destination);
             })
             .catch(function (error) {
                 //Handle errors here
@@ -131,59 +165,8 @@
         };
 
         //populate the initial water source and destination
-        getWaterSources(numOfRegs);
-        getWaterDestinations(numOfRegs);
-
-
-        $('#addSource').click(function(){
-            numOfRegs += 1;
-            $source = '<div class="form-row"><div class="form-group col-md-6"><label for="waterSource' + numOfRegs + '">Water Source</label><select id="waterSource' + numOfRegs + '" class="form-control"><option value="choose" disabled>Choose...</option></select></div><div class="form-group col-md-6"><label for="waterDestination' + numOfRegs + '">Water Destination</label><select id="waterDestination' + numOfRegs + '" class="form-control"><option value="choose" disabled>Choose...</option></select></div></div></br><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" id="isPermitted' + numOfRegs + '"><label class="form-check-label" for="isPermitted' + numOfRegs + '">Check if reuse from this source is permitted</label></div><hr><div class="form-row"><div class="form-group col-md-6"><label for="codes' + numOfRegs + '">Link to Codes (Optional)</label><input type="text" class="form-control" id="codes' + numOfRegs + '" placeholder=""></div><div class="form-group col-md-6"><label for="permits' + numOfRegs + '">Link to Permit (Optional)</label><input type="text" class="form-control" id="permits' + numOfRegs + '" placeholder=""></div></div><div class="form-row"><div class="form-group col-md-6"><label for="insentives' + numOfRegs + '">Link to Insentives (Optional)</label><input type="text" class="form-control" id="insentives' + numOfRegs + '" placeholder=""></div><div class="form-group col-md-6"><label for="moreInfo' + numOfRegs + '">Link to More Information (Optional)</label><input type="text" class="form-control" id="moreInfo' + numOfRegs + '" placeholder=""></div></div><div class="form-group"><label for="comments' + numOfRegs + '">Comments (Optional)</label><textarea class="form-control" id="comments' + numOfRegs + '" rows="3"></textarea><hr></div>';
-            $("#waterSourceDiv").append($source);
-            getWaterSources(numOfRegs);
-            getWaterDestinations(numOfRegs);
-
-        });
-        $('#submit').click(function(){
-            $state = $("#inputState").children("option:selected").text();
-
-            if($state == "Choose...")
-            {
-                alert("You have not chosen a state. Please select the state you wish to create a regulation for.");
-            }
-            else{
-                $county = $("#county").children("option:selected").text();
-                $city = $("#city").children("option:selected").text();
-                $regList = [];
-
-                for(i = 0; i <= numOfRegs; i++)
-                {
-                    $newReg = {
-                        $source: $('#waterSource' + i).children("option:selected").text(),
-                        $destination: $('#waterDestination' + i).children("option:selected").text(),
-                        $isPermitted: $("#isPermitted" + i).prop("checked"),
-                        $codesLink: $("#codes" + i).val(),
-                        $permitLink: $("#permits" + i).val(),
-                        $insentivesLink: $("#insentives" + i).val(),
-                        $moreInfoLink: $("#moreInfo" + i).val(),
-                        $comments: $("#comments" + i).val()
-                    };
-                    $regList.push($newReg);
-                }
-
-                axios.post('/regSubmit', {
-                    newRegList: $regList
-                })
-                .then(function (response) {
-                    console.log(response);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            }
-        })
-
-
-
+        getWaterSources();
+        getWaterDestinations();
 
         //for when the state changes
         $( "#inputState" ).change(function() {
@@ -202,7 +185,7 @@
             });
 
             //This is the Axios call to the API
-            if(inputState.value != "choose")
+            if(inputState.value != -1)
             {
                 //enable the basic 'choose' option
                 $("#chooseCounty").prop("disabled", false);
@@ -254,7 +237,7 @@
             });
 
             //This is the Axios call to the API
-            if(county.value != "choose")
+            if(county.value != -1)
             {
                 $("#chooseCity").prop("disabled", false);
 
