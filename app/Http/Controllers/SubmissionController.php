@@ -107,7 +107,7 @@ class SubmissionController extends Controller
                 $counties = County::where('fk_state', $submission->city->county->state->state_id)->get();
                 break;
             default:
-                # Send to error page?
+                return redirect()->route('submission')->with(['alert' => 'danger', 'alertMessage' => 'Error trying to update the submission.']);
                 break;
         }
 
@@ -177,9 +177,15 @@ class SubmissionController extends Controller
         $codes = $submission->codesObj()->first();
         $codes->linkText = $request->codes;
         $codes->save();
-        $submission->permitObj()->linkText = $request->permit;
-        $submission->incentivesObj()->linkText = $request->incentives;
-        $submission->moreInfoObj()->linkText = $request->moreInfo;
+        $permit = $submission->permitObj();
+        $permit->linkText = $request->permit;
+        $permit->save();
+        $incentives = $submission->incentivesObj();
+        $incentives->linkText = $request->incentives;
+        $incentives->save();
+        $moreInfo = $submission->moreInfoObj();
+        $moreInfo->linkText = $request->moreInfo;
+        $moreInfo->save();
         $submission->save();
 
         return redirect()->route('submission')->with(['alert' => 'success', 'alertMessage' => 'The submission has been updated.']);

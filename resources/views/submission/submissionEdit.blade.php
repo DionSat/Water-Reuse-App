@@ -7,7 +7,6 @@
             <div class="card">
                 <div class="card-header">Edit Submission</div>
                 <div class="card-body">
-                    {{var_dump($submission->toArray())}}
                     <form action={{ route('submissionEditUpdate') }} method="POST">
                         {{ csrf_field() }}
                         <div class="form-row">

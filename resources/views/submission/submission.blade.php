@@ -10,6 +10,7 @@
                     <th scope="col">Source</th>
                     <th scope="col">Destination</th>
                     <th scope="col">View</th>
+                    <th scope="col">Edit</th>
                     <th scope="col">Status</th>
                 </tr>
             </thead>
