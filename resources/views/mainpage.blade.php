@@ -1,9 +1,17 @@
 @extends("layouts.master")
 
 @section('body')
-    <div class="container main-content mt-5">
+    <div class="container-fluid main-content mt-5">
+
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-10 mx-auto">
+                <div class="jumbotron bg-white text-center">
+                    <h1 class="display-4 main-title">Water Reuse Directory</h1>
+                    <p class="lead"> A database of crowdsourced and verified re-use regulations. </p>
+                    <hr class="my-4">
+                    <p>In a time where access to usable water is becoming more scarce, enabling people to re-using water properly is a important step to take.</p>
+                    {{--<a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>--}}
+                </div>
                 <div class="heading-card text-center">
                     <h1 class="main-title text-muted-red roboto"> Water Reuse Directory</h1>
                     <h4 class="main-subtext mplus ml-1"> Helping make re-using water easier since 2020. </h4>
@@ -41,7 +49,7 @@
           crossorigin=""/>
 <style>
     html, body {
-        height: 125%;
+        height: 100%;
     }
     body {
         background: url("img/bird-s-eye-view-of-ocean-during-daytime-2707756.jpg");
