@@ -4,7 +4,7 @@
     <div class="container">
         <a href="{{route("admin")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> Back </a>
             <div class="row justify-content-center">
-                <div class="col-md-8">
+                <div class="col-md-8.1">
                     <div class="card">
                         <div align="center" class="card-header"><h3>Users</h3></div>
 
@@ -19,7 +19,7 @@
                                     {{ session('nothing') }}
                                 </div>
                             @endif
-                            <center id="searchP" style="font-size: 0.9em;display: inline-block;margin-bottom: 12px;">
+                            <!-- <center id="searchP" style="font-size: 0.9em;display: inline-block;margin-bottom: 12px;"> -->
                                 <span style="margin-top: 10px">Search Current Page: <input type="text" id="searchBox" style="max-width: 150px;height: 35px;margin-top: 3px;margin-right:30px;"></span>
                                 <div style="float: right;">
                                     <form action={{route('searchUsers')}} method="GET" style="display: inline-block;font-size: 1.0em;float: left;margin-top: 2px">
@@ -52,10 +52,20 @@
                                             </td>
                                             <td>{{$user->email}}</td>
                                             <td>
-                                                <input type="checkbox" disabled style="height: 40px;width: 40px" @if($user->can_contact === true) checked @endif>
+                                                <span style="font-size: 1em; color: red;">
+                                                @if($user->can_contact === false)<i class="fas fa-times"></i>@endif
+                                                </span>
+                                                <span style="font-size: 1em; color: green;">
+                                                @if($user->can_contact === true) <i class="fas fa-check"></i> @endif
+                                                </span>
                                             </td>
                                             <td>
-                                                <input type="checkbox" disabled style="height: 40px;width: 40px;" @if($user->is_admin === true) checked @endif>
+                                                <span style="font-size: 1em; color: red;">
+                                                @if($user->is_admin === false)<i class="fas fa-times" ></i>@endif
+                                                </span>
+                                                <span style="font-size: 1em; color: green;">
+                                                @if($user->is_admin === true) <i class="fas fa-check"></i> @endif
+                                                </span>
                                             </td>
                                             <td>
                                                 <form action={{ route('updateUser') }} method="POST">
