@@ -19,8 +19,7 @@
                                     {{ session('nothing') }}
                                 </div>
                             @endif
-                            <!-- <center id="searchP" style="font-size: 0.9em;display: inline-block;margin-bottom: 12px;"> -->
-                                <span style="margin-top: 10px">Search Current Page: <input type="text" id="searchBox" style="max-width: 150px;height: 35px;margin-top: 3px;margin-right:30px;"></span>
+                                Search Current Page: <input type="text" id="search" style="max-width: 150px;height: 35px;margin-top: 3px;margin-right:30px;">
                                 <div style="float: right;">
                                     <form action={{route('searchUsers')}} method="GET" style="display: inline-block;font-size: 1.0em;float: left;margin-top: 2px">
                                         {{ csrf_field() }}
@@ -93,6 +92,19 @@
 @endsection
 
 @push("js")
+    <script type="text/javascript">
+    //were looking at the usertable and finding the name of a user in the current page
+    var $rows = $('#userTable tr');
+    $('#search').keyup(function() {
+        var value = $.trim($(this).val()).toLowerCase();
+        $rows.show().filter(function() {
+            var text = $(this).text().toLowerCase();
+            //return the first occurence of the variable
+            return !~text.indexOf(value);
+        }).hide();
+    });
+    </script>
+
     <script type="text/javascript">
         $(document).ready(function () {
             $('#searchBox').on('input',function(){
