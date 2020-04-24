@@ -38,6 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/submissions/cityApprovedItem/{itemId?}', 'SubmissionController@city')->middleware('auth')->name('cityApprove');
     Route::get('/submissions/stateApprovedItem/{itemId?}', 'SubmissionController@state')->middleware('auth')->name('stateApprove');
     Route::get('/submissions/countyApprovedItem/{itemId?}', 'SubmissionController@county')->middleware('auth')->name('countyApprove');
+    Route::get('/submissions/submissionEdit/{type?}/{itemId?}', 'SubmissionController@submissionEdit')->middleware('auth')->name('submissionEdit');
+    Route::post('/submissions/submissionEdit/{type?}/{itemId?}', 'SubmissionController@submissionEditSubmit')->name('submissionEditUpdate');
 
     Route::get('/account', 'AccountController@view')->middleware('auth')->name('account');
     Route::get('/accountUpdate', 'AccountController@getUpdatePage')->middleware('auth')->name('updatePage');

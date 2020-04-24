@@ -1,0 +1,277 @@
+@extends('layouts.master')
+
+@section('body')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Edit Submission</div>
+                <div class="card-body">
+                    <form action={{ route('submissionEditUpdate') }} method="POST">
+                        {{ csrf_field() }}
+                        <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="inputState">State</label>
+                            <select id="inputState" class="form-control" name="state">
+                                <option value="-1" >Choose...</option>
+                                @foreach($states as $state)
+                                    <option value="{{$state->state_id}}"
+                                        @if($state->state_id == $submissionState)
+                                            selected
+                                        @endif
+                                    >{{$state->stateName}}</option>
+                                @endforeach
+                            </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                            <label for="county">County (Optional)</label>
+                            <select class="form-control" id="county" name="county">
+                                <option id="chooseCounty" value="-1" >Choose...</option>
+                                @foreach($counties as $county)
+                                    <option class="countyName" value="{{$county->county_id}}"
+                                        @if($county->county_id == $submissionCounty)
+                                            selected
+                                        @endif
+                                    >{{$county->countyName}}</option>
+                                @endforeach
+                            </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                            <label for="city">City (Optional)</label>
+                            <select class="form-control " id="city" name="city">
+                                <option id="chooseCity" value="-1" >Choose...</option>
+                                @foreach($cities as $city)
+                                    <option class="cityName" value="{{$city->city_id}}"
+                                        @if($city->city_id == $submissionCity)
+                                            selected
+                                        @endif
+                                    >{{$city->cityName}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        </div>
+                        
+                        <hr>
+                        <div id="waterSourceDiv">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                <label for="waterSource">Water Source</label>
+                                <select id="waterSource" class="form-control" name="source">
+                                    <option value="-1" disabled>Choose...</option>
+                                </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                <label for="waterDestination">Water Destination</label>
+                                <select id="waterDestination" class="form-control" name="destination">
+                                    <option value="-1" disabled>Choose...</option>
+                                </select>
+                                </div>
+                            </div>
+                            </br>
+                            <div class="form-group col-md-4">
+                                <label for="isPermitted">Is this permitted: </label>
+                                <select class="form-control " type="checkbox" id="isPermitted" name="allowed">
+                                    @foreach($allowed as $option)
+                                        <option id="chooseAllowed" value="{{$option->allowed_id}}" 
+                                            @if($option->allowed_id == $submission->allowedID)
+                                            selected
+                                            @endif
+                                        >{{$option->allowedText}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <hr>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="codes">Link to Codes (Optional)</label>
+                                    <input type="text" class="form-control" id="codes" placeholder="" value="{{$submission->codesObj->linkText}}" name="codes">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="permits">Link to Permit (Optional)</label>
+                                    <input type="text" class="form-control" id="permits" placeholder="" value="{{$submission->permitObj->linkText}}" name="permit">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="insentives">Link to Insentives (Optional)</label>
+                                    <input type="text" class="form-control" id="insentives" placeholder="" value="{{$submission->incentivesObj->linkText}}" name="insentives">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="moreInfo">Link to More Information (Optional)</label>
+                                    <input type="text" class="form-control" id="moreInfo" placeholder="" value="{{$submission->moreInfoObj->linkText}}" name="moreInfo">
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <label for="comments">Comments (Optional)</label>
+                                <textarea class="form-control" id="comments" rows="3" name="comments"></textarea>
+                            </div>
+                            <input type="text" name="type" style="display: none;" value="{{$type}}">
+                            <input type="number" name="id" style="display: none;" value={{$submission->id}}>
+                            <hr>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="submit">Re-Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+@push("js")
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+
+        // get the water sources
+        function getWaterSources() {
+            var current = {{$submission->sourceID}};
+            axios.get("{{route("my-sources-api")}}")
+            .then(function (response) {
+                //get each county, and set them as options
+                $source = response.data.map(obj => (
+                    "<option "
+                    + ( obj.node_id == current ? ' selected ' : "") 
+                    + " class='sourceName' value=" 
+                    + obj.node_id 
+                    + " >" 
+                    + obj.node_name 
+                    + "</option>"));
+                
+                $("#waterSource").append($source);
+            })
+            .catch(function (error) {
+                //Handle errors here
+                console.log(error);
+            });
+        };
+
+        // get the water destinations
+        function getWaterDestinations() {
+            var current = {{$submission->destinationID}};
+            axios.get("{{route("my-destination-api")}}")
+            .then(function (response) {
+                //get each county, and set them as options
+                $destination = response.data.map(obj => (
+                    "<option "
+                    + ( obj.node_id == current ? 'selected' : "") 
+                    + " class='destinationName' value=" 
+                    + obj.node_id 
+                    + " >" 
+                    + obj.node_name 
+                    + "</option>"));
+                $("#waterDestination").append($destination);
+            })
+            .catch(function (error) {
+                //Handle errors here
+                console.log(error);
+            });
+        };
+
+        //populate the initial water source and destination
+        getWaterSources();
+        getWaterDestinations();
+
+        //for when the state changes
+        $( "#inputState" ).change(function() {
+
+            // Here we can see the currently selected state (the state_id is the value)
+            console.log(inputState.value);
+
+            // delete each county
+            $(".countyName").each(function () {
+                $(this).remove();
+            });
+
+            // delete each city
+            $(".cityName").each(function () {
+                $(this).remove();
+            });
+
+            //This is the Axios call to the API
+            if(inputState.value != -1)
+            {
+                //enable the basic 'choose' option
+                $("#chooseCounty").prop("disabled", false);
+                //disable cities
+                $("#chooseCity").prop("disabled", true);
+                $("#chooseCity").prop("selected", false);
+
+                axios.get("{{route("counties-api")}}"+"/"+inputState.value)
+                .then(function (response) {
+
+
+                    // console.log("Response: " + response);
+                    // console.log("Data: " + response.data);
+                    //get each county, and set them as options
+                    $county = response.data.map(obj => ("<option class='countyName' value=" + obj.county_id + " >" + obj.countyName + "</option>"));
+                    // console.log($county);
+                    $("#county").append($county);
+                })
+                .catch(function (error) {
+                    //Handle errors here
+
+                    //Generally don't have to worry about errors too much,
+                    // but maybe want to do "alert('There was a error, please try re-loading the page.')"
+                    console.log(error);
+                });
+            }
+            else {
+                $("#chooseCounty").prop("disabled", true);
+                $("#chooseCounty").prop("selected", false);
+                $("#chooseCity").prop("disabled", true);
+                $("#chooseCity").prop("selected", false);
+            }
+
+        });
+
+
+
+
+        //Populate the cities
+        //for when the state changes
+        $( "#county" ).change(function() {
+
+            // Here we can see the currently selected state (the state_id is the value)
+            console.log(county.value);
+
+            // delete each city
+            $(".cityName").each(function () {
+                $(this).remove();
+            });
+
+            //This is the Axios call to the API
+            if(county.value != -1)
+            {
+                $("#chooseCity").prop("disabled", false);
+
+                axios.get("{{route("cities-api")}}"+"/"+county.value)
+                .then(function (response) {
+
+
+                    // console.log("Response: " + response);
+                    // console.log("Data: " + response.data);
+                    //get each city, and set them as options
+                    $city = response.data.map(obj => ("<option class='cityName' value=" + obj.city_id + " >" + obj.cityName + "</option>"));
+                    // console.log($city);
+                    $("#city").append($city);
+                })
+                .catch(function (error) {
+                    //Handle errors here
+
+                    //Generally don't have to worry about errors too much,
+                    // but maybe want to do "alert('There was a error, please try re-loading the page.')"
+                    console.log(error);
+                })
+            }
+            else{
+                $("#chooseCity").prop("disabled", true);
+                $("#chooseCity").prop("selected", false);
+            }
+
+        });
+
+
+
+    </script>
+@endpush
+
