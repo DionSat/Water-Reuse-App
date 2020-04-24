@@ -4,7 +4,7 @@
     <div class="container">
         <a href="{{route("admin")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> Back </a>
             <div class="row justify-content-center">
-                <div class="col-md-8.1">
+                <div class="col-md-10">
                     <div class="card">
                         <div align="center" class="card-header"><h3>Users</h3></div>
 
