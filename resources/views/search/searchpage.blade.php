@@ -30,13 +30,15 @@
                   
                         <br><br>
                         <hr>
-                        <form>
+                        <form method="POST" action="{{route("search-submit")}}">
+                            {{ csrf_field() }}
+
                             <div class="form-group row">
                                 <label for="stateSelect" class="col-md-4 col-form-label"> State </label>
                                 <div class="col-md-6">
 
                        
-                                    <select id="stateSelect" class="form-control">
+                                    <select id="stateSelect" name="state_id" class="form-control">
                                         <option value="" disabled selected>Select a state</option>
                                         @foreach($states as $state)
                                             <option value="{{$state->state_id}}">{{$state->stateName}}</option>
@@ -44,7 +46,6 @@
                                     </select>
                                 </div>
                             </div>
-                        </form>
 
                         <div class="card">
                             <div id="stateOutput" class="card-body">
@@ -52,7 +53,7 @@
                             </div>
                         </div>
 
-                        <select id="countySelect" class="form-control">
+                        <select id="countySelect" name="county_id" class="form-control">
                             <option value="" disabled selected>Select a state first</option>
                         </select>
 
@@ -62,18 +63,21 @@
                             </div>
                         </div>
 
-                        <select id="citySelect" class="form-control">
+                        <select id="citySelect" name="city_id" class="form-control">
                             <option value="" disabled selected>Select a County first</option>
                         </select>
                         <br>
-                        <input class="btn btn-primary" type="submit" value="Submit">
 
+                            <button class="btn btn-primary" type="submit"> Submit </button>
+                         </form>
 
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
 @endsection
 
 @push("js")
@@ -91,7 +95,6 @@
                     console.log(error);
                 })
         });
-
         $( "#countySelect" ).change(function() {
             axios.get("{{route("cities-api")}}"+"/"+countySelect.value)
                 .then(function (response) {
@@ -103,6 +106,6 @@
                     console.log(error);
                 })
         });
-    </script>
+  </script>
 @endpush
 
