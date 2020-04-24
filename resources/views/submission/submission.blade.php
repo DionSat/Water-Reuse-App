@@ -29,7 +29,7 @@
                         <td class="text-center">
                             <a href="{{route('submissionEdit')."/".'State'."/".$state->id}}" class="btn btn-primary"> Edit </a>
                         </td>
-                        <td>Pending</td>
+                        <td>@if($state->trashed())Rejected @else Pending @endif</td>
                     </tr>
                 @endforeach
                 @foreach($citySubmissions as $city)
@@ -43,7 +43,7 @@
                         <td class="text-center">
                             <a href="{{route('submissionEdit')."/".'City'."/".$city->id}}" class="btn btn-primary"> Edit </a>
                         </td>
-                        <td>Pending</td>
+                        <td>@if($city->trashed())Rejected @else Pending @endif</td>
                     </tr>
                 @endforeach
                 @foreach($countySubmissions as $county)
@@ -57,7 +57,7 @@
                         <td class="text-center">
                             <a href="{{route('submissionEdit')."/".'County'."/".$county->id}}" class="btn btn-primary"> Edit </a>
                         </td>
-                        <td>Pending</td>
+                        <td>@if($county->trashed())Rejected @else Pending @endif</td>
                     </tr>
                 @endforeach
                 @foreach($stateApproved as $stateAp)

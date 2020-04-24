@@ -6,7 +6,6 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header"><h3>Search for Location </h3></div>
-
                     <div class="card-body">
 
                         <h3>You are:
@@ -17,9 +16,9 @@
                             @endif
                         </h3>
 
-                        {{--<form  method="POST" class="form-inline mt-3" action={{route('searchResults')}}>--}}
+             
                             <form  method="POST" class="form-inline mt-3">
-                            {{--This is a required thing for forms in Laravel, to stop CSRF attacks --}}
+                        
                             {{ csrf_field() }}
 
                             <div class="form-group">
@@ -29,8 +28,7 @@
                             <button type="submit" class="btn btn-primary"> Search </button>
                         </form>
                         <br>
-                        // Have a search form here or something
-
+                  
                         <br><br>
                         <hr>
                         <form>
@@ -38,8 +36,7 @@
                                 <label for="stateSelect" class="col-md-4 col-form-label"> State </label>
                                 <div class="col-md-6">
 
-                                    {{--Here in the select, we can generate the initial set of states with PHP --}}
-
+                       
                                     <select id="stateSelect" class="form-control">
                                         <option value="" disabled selected>Select a state</option>
                                         @foreach($states as $state)
@@ -51,10 +48,28 @@
                         </form>
 
                         <div class="card">
-                            <div id="dataTest" class="card-body">
-                                Counties will appear here on select
+                            <div id="stateOutput" class="card-body">
+                                Select A county
                             </div>
                         </div>
+
+                        <select id="countySelect" class="form-control">
+                            <option value="" disabled selected>Select a state first</option>
+                        </select>
+
+
+                        
+
+                        <div class="card">
+                            <div id="stateOutput" class="card-body">
+                                Select A Cityy
+                            </div>
+                        </div>
+
+
+                        <select id="citySelect" class="form-control">
+                            <option value="" disabled selected>Select a County first</option>
+                        </select>
 
                     </div>
                 </div>
@@ -66,36 +81,30 @@
 @push("js")
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
-
-
         $( "#stateSelect" ).change(function() {
-
-            // Here we can see the currently selected state (the state_id is the value)
             console.log(stateSelect.value);
-
-            //This is the Axios call to the API
             axios.get("{{route("counties-api")}}"+"/"+stateSelect.value)
                 .then(function (response) {
-
-                    // handle success, we can print out what we got back to console for debugging
                     console.log("Response: " + response);
                     console.log(response.data);
-
-                    // We can then set the html that we need to with the results
-                    $("#dataTest").text(response.data.map(obj => obj.countyName).join(", "));
-
+                    $("#countySelect").html(response.data.map(obj => "<option value='"+obj.county_id+"'>"+obj.countyName+"</option>").join("\n"));
                 })
                 .catch(function (error) {
-                    //Handle errors here
-
-                    //Generally don't have to worry about errors too much,
-                    // but maybe want to do "alert('There was a error, please try re-loading the page.')"
                     console.log(error);
                 })
         });
 
-
-
+        $( "#countySelect" ).change(function() {
+            axios.get("{{route("cities-api")}}"+"/"+countySelect.value)
+                .then(function (response) {
+                    console.log("Response: " + response);
+                    console.log(response.data);
+                    $("#citySelect").html(response.data.map(obj => "<option value='"+obj.city_id+"'>"+obj.cityName+"</option>").join("\n"));
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+        });
     </script>
 @endpush
 
