@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/userSubmission', 'RegulationController@allStates')->name('userSubmission');
     Route::post('/regSubmit', 'RegulationController@addRegulationSubmit')->name('regSubmit');
 
+
 });
 
 //Admin Routes
