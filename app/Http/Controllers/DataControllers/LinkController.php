@@ -8,12 +8,13 @@ use App\StateMerge;
 use App\Links;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Pagination\Paginator;
 
 
 class LinkController extends Controller
 {
     public function allLinks() {
-        $links = Links::all();
+        $links = Links::orderBy('link_id')->paginate(10);
         return view("database.links", compact('links'));
     }
 
