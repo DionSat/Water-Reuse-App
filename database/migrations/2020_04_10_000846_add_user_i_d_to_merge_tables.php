@@ -62,7 +62,7 @@ class AddUserIDToMergeTables extends Migration
         Schema::table('citymerge', function (Blueprint $table) {
             $table->dropColumn('user_id');
         });
-        
+
         Schema::table('pendingstatemerge', function (Blueprint $table) {
             $table->dropColumn('user_id');
         });
