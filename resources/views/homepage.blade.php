@@ -1,8 +1,7 @@
 @extends("layouts.master")
 
 @section('body')
-    <div class="container-fluid main-content mt-5">
-
+    <div class="container-fluid main-content">
         <div class="row">
             <div class="col-md-9 mx-auto">
                 <div class="jumbotron bg-white text-center">
@@ -40,13 +39,13 @@
                         <hr>
                         <div class="card-text text-center">
                             <h5 class="lead mt-4">Search for water reuse regulations by City, County or State.</h5>
-                            <a href="{{route("search")}}">
-                                <button class="btn btn-primary"> Lookup Reuse Regulations </button>
+                            <a class="btn btn-primary btn-block" href="{{route("search")}}">
+                                Lookup Reuse Regulations
                             </a>
                             <hr class="mt-5">
-                            <h5 class="lead mt-5">Contibute your knowledge by adding to our database.</h5>
-                            <a href="{{route("register")}}">
-                                <button class="btn btn-primary"> Register To Contribute </button>
+                            <h5 class="lead mt-4">Contibute your knowledge by adding to our database.</h5>
+                            <a class="btn btn-primary btn-block mb-4" href="{{route("register")}}">
+                                Register To Contribute
                             </a>
                         </div>
                     </div>
@@ -62,6 +61,9 @@
                         <div class="card-text text-center">
                             <img src="img/recode-logo.jpg" class="img-fluid">
                             <h5 class="lead mt-5">A project backed by the Recode non-profit organization.</h5>
+                            <a class="btn btn-success btn-block mt-4" href="https://www.recodenow.org/">
+                                Visit Recode
+                            </a>
                         </div>
                     </div>
             </div>
