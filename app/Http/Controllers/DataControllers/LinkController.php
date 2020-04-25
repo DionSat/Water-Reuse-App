@@ -23,11 +23,17 @@ class LinkController extends Controller
     }
 
     public function addLinkSubmit(Request $request) {
-        if (empty($request->link))
-            return redirect()->route('linkAdd')->with(['alert' => 'danger', 'alertMessage' => 'Please enter a link name!']);
+        if (empty($request->link) || empty($request->name))
+            return redirect()->route('linkAdd')->with(['alert' => 'danger', 'alertMessage' => 'Please enter a link name & URL!']);
+
+        $statusArray = array("valid", "broken", "unknown");
+        if(!(in_array($request->status, $statusArray)))
+            return redirect()->route('linkAdd')->with(['alert' => 'danger', 'alertMessage' => 'Please enter a link status!']);
 
         $link = new Links();
         $link->linkText = $request->link;
+        $link->name = $request->name;
+        $link->status = $request->status;
 
         $link->save();
 
@@ -77,14 +83,23 @@ class LinkController extends Controller
     public function modifyLinkSubmit(Request $request) {
        $link = Links::where("link_id", $request->link_id)->get()->first();
 
-        if(empty($request->newLinkValue))
-            return redirect()->route('modifyLink', ['link_id' => $link->link_id])->with(['alert' => 'danger', 'alertMessage' => 'Please enter a link']);
+        if(empty($request->newLinkName) || empty($request->newLinkText))
+            return redirect()->route('modifyLink', ['link_id' => $link->link_id])->with(['alert' => 'danger', 'alertMessage' => 'Please enter a link name & URL']);
 
-        $oldLink = $link->linkText;
+        $statusArray = array("valid", "broken", "unknown");
+        if(!(in_array($request->newLinkStatus, $statusArray)))
+            return redirect()->route('modifyLink', ['link_id' => $link->link_id])->with(['alert' => 'danger', 'alertMessage' => 'Please enter a link status']);
 
-        $link->linkText = $request->newLinkValue;
+
+        $oldLinkName = $link->name;
+        $oldLinkText = $link->linkText;
+        $oldLinkStatus = $link->status;
+
+        $link->name = $request->newLinkName;
+        $link->linkText = $request->newLinkText;
+        $link->status = $request->newLinkStatus;
         $link->save();
 
-        return redirect()->route('linkView')->with(['alert' => 'success', 'alertMessage' => $oldLink . ' has been changed to ' . $link->linkText]);
+        return redirect()->route('linkView')->with(['alert' => 'success', 'alertMessage' => 'Link has been successfully updated.']);
     }
 }

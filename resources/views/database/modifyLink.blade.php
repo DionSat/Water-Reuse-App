@@ -20,23 +20,48 @@
                         <div class="d-flex">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-default">New Name</span>
+                                    <label class="input-group-text">New Name</label>
                                 </div>
-                                <input type="text" name="newLinkValue" class="form-control" aria-label="Default"
-                                       aria-describedby="inputGroup-sizing-default" value="{{$link->linkText}}">
+                                <input type="text" name="newLinkName" class="form-control" aria-label="Default"
+                                       aria-describedby="inputGroup-sizing-default" value="{{$link->name}}">
                             </div>
                             <input type="text" name="link_id" value="{{$link->link_id}}" hidden>
+                        </div>
+                        <div class="d-flex">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text">New Link URL </label>
+                                </div>
+                                <input type="text" name="newLinkText" class="form-control" aria-label="Default"
+                                       aria-describedby="inputGroup-sizing-default" value="{{$link->linkText}}">
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text">New Link Status</label>
+                            </div>
+                            <select class="custom-select" name="newLinkStatus">
+                                <option selected>Choose...</option>
+                                <option value="valid">Valid</option>
+                                <option value="broken">Broken</option>
+                                <option value="unknown">Unknown</option>
+                            </select>
                         </div>
                     </div>
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-md-6">
-                                <button type="submit" class="btn btn-success btn-large btn-block"><i class="fas fa-edit"></i> Edit </button>
+                                <button type="submit" class="btn btn-success btn-large btn-block"><i class="fas fa-edit"></i>
+                                    Edit
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+        </div>
+        </div>
         </div>
     </form>
 @endsection
