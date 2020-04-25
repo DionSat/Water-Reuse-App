@@ -25,7 +25,7 @@ class CountyMerge extends Model
 
     public function user()
     {
-        return $this->hasOne('App\User', 'id','userID');
+        return $this->hasOne('App\User', 'id','user_id');
     }
 
     public function county()

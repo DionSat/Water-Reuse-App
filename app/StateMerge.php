@@ -25,14 +25,14 @@ class StateMerge extends Model
 
     public function user()
     {
-        return $this->hasOne('App\User', 'id','userID');
+        return $this->hasOne('App\User', 'id','user_id');
     }
-    
+
     public function state()
     {
         return $this->hasOne('App\State', 'state_id','stateID');
     }
-  
+
     public function destination()
     {
         return $this->hasOne('App\ReuseNode', 'node_id','destinationID');

@@ -25,9 +25,9 @@ class CityMerge extends Model
 
     public function user()
     {
-        return $this->hasOne('App\User', 'id','userID');
+        return $this->hasOne('App\User', 'id','user_id');
     }
-    
+
     public function city()
     {
         return $this->hasOne('App\City', 'city_id','cityID');
