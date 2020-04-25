@@ -63,17 +63,25 @@ Class RegulationController extends Controller{
                 $moreInfoLink->linkText = $regList['$moreInfoLink'];
                 $moreInfoLink->save();
 
-                $stateMerge = new PendingStateMerge();
-                $stateMerge->stateID = $regList['$stateId'];
-                $stateMerge->sourceID = $regList['$sourceId'];
-                $stateMerge->destinationID = $regList['$destinationId'];
-                $stateMerge->allowedID = $regList['$isPermitted'];
-                $stateMerge->codes = $codesLink->link_id;
-                $stateMerge->permit = $permitLink->link_id;
-                $stateMerge->incentives = $insentivesLink->link_id;
-                $stateMerge->moreInfo = $moreInfoLink->link_id;
-                $stateMerge->user_id = Auth::user()->id;
-                $stateMerge->save();
+                $state = new PendingStateMerge();
+                $state->delete();
+                $state = new PendingStateMerge();
+                $state->stateID = $regList['$stateId'];
+                $state->sourceID = $regList['$sourceId'];
+                $state->destinationID = $regList['$destinationId'];
+                $state->allowedID = $regList['$isPermitted'];
+                $state->codes = $codesLink->link_id;
+                $state->permit = $permitLink->link_id;
+                $state->incentives = $insentivesLink->link_id;
+                $state->moreInfo = $moreInfoLink->link_id;
+                $state->userID = Auth::user()->id;
+                if($state->save() == false)
+                {
+                    $codesLink->delete();
+                    $permitLink->delete();
+                    $insentivesLink->delete();
+                    $moreInfoLink->delete();
+                }
             }
             $regArea = $regLists[0]['$state'];
         }
@@ -107,8 +115,8 @@ Class RegulationController extends Controller{
                 $countyMerge->permit = $permitLink->link_id;
                 $countyMerge->incentives = $insentivesLink->link_id;
                 $countyMerge->moreInfo = $moreInfoLink->link_id;
-                $countyMerge->user_id = Auth::user()->id;
-                $countyMerge-save();
+                $countyMerge->userID = Auth::user()->id;
+                $countyMerge->save();
             }
             $regArea = $regLists[0]['$county'];
         }
@@ -142,7 +150,7 @@ Class RegulationController extends Controller{
                 $cityMerge->permit = $permitLink->link_id;
                 $cityMerge->incentives = $insentivesLink->link_id;
                 $cityMerge->moreInfo = $moreInfoLink->link_id;
-                $cityMerge->user_id = Auth::user()->id;
+                $cityMerge->userID = Auth::user()->id;
                 $cityMerge->save();
             }
             $regArea = $regLists[0]['$city'];
