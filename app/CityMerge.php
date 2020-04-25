@@ -20,7 +20,7 @@ class CityMerge extends Model
      * The attributes that are mass assignable.
      */
     protected $fillable = [
-        'cityID', 'sourceID', 'destinationID', 'allowedID', 'codes', 'permit', 'incentives', 'moreInfo', 'userID'
+        'cityID', 'sourceID', 'destinationID', 'allowedID', 'codes', 'permit', 'incentives', 'moreInfo', 'user_id'
     ];
 
     public function user()
