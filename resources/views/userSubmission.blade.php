@@ -170,7 +170,12 @@
 
             if($state == "Choose...")
             {
-                alert("You have not chosen a state. Please select the state you wish to create a regulation for.");
+                Swal.fire({
+                        title: 'Error!',
+                        text: 'You did not pick a State. You need to at least pick a State to add a regulation to. Please try again.',
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    });
                 return;
             }
             else{
@@ -196,7 +201,6 @@
                         $moreInfoLink: $("#moreInfo" + i).val(),
                         $comments: $("#comments" + i).val()
                     };
-                    console.log($newReg.$state);
                     $regList.push($newReg);
                 }
 
@@ -255,20 +259,12 @@
 
                 axios.get("{{route("counties-api")}}"+"/"+inputState.value)
                 .then(function (response) {
-
-
-                    // console.log("Response: " + response);
-                    // console.log("Data: " + response.data);
                     //get each county, and set them as options
                     $county = response.data.map(obj => ("<option class='countyName' value=" + obj.county_id + " >" + obj.countyName + "</option>"));
-                    // console.log($county);
                     $("#county").append($county);
                 })
                 .catch(function (error) {
                     //Handle errors here
-
-                    //Generally don't have to worry about errors too much,
-                    // but maybe want to do "alert('There was a error, please try re-loading the page.')"
                     console.log(error);
                 });
             }
@@ -303,10 +299,6 @@
 
                 axios.get("{{route("cities-api")}}"+"/"+county.value)
                 .then(function (response) {
-
-
-                    // console.log("Response: " + response);
-                    // console.log("Data: " + response.data);
                     //get each city, and set them as options
                     $city = response.data.map(obj => ("<option class='cityName' value=" + obj.city_id + " >" + obj.cityName + "</option>"));
                     // console.log($city);
@@ -314,9 +306,6 @@
                 })
                 .catch(function (error) {
                     //Handle errors here
-
-                    //Generally don't have to worry about errors too much,
-                    // but maybe want to do "alert('There was a error, please try re-loading the page.')"
                     console.log(error);
                 })
             }
