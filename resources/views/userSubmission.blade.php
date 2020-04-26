@@ -172,7 +172,7 @@
             {
                 Swal.fire({
                         title: 'Error!',
-                        text: 'You did not pick a State. You need to at least pick a State to add a regulation to. Please try again.',
+                        text: 'You did not pick a State. You need to at least pick a State to add a regulation. Please try again.',
                         icon: 'error',
                         confirmButtonText: 'Ok'
                     });
