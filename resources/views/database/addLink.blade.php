@@ -13,7 +13,15 @@
                     <div class="input-group-prepend">
                         <label class="input-group-text"> Link Name </label>
                     </div>
-                    <input type="text" class="form-control" id="link" name="link" placeholder="New link name...">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="New link Name">
+                </div>
+            </div>
+            <div class="form-row mt-3 justify-content-center">
+                <div class="col-md-4 input-group">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text"> Link URL </label>
+                    </div>
+                    <input type="text" class="form-control" id="link" name="link" placeholder="New link URL">
                 </div>
             </div>
             <div class="form-row mt-5 justify-content-center">

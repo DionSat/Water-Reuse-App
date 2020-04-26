@@ -12,14 +12,10 @@
 */
 
 
-Route::get('/', function () {
-    return view('mainpage');
-});
-
 Auth::routes();
 
 
-Route::get('/home', 'HomeController@index')->middleware('auth')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/info', 'HomeController@getInfo')->name('info');
 Route::get('/search', 'SearchController@mainPage')->name('search');
 
@@ -38,6 +34,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/submissions/cityApprovedItem/{itemId?}', 'SubmissionController@city')->middleware('auth')->name('cityApprove');
     Route::get('/submissions/stateApprovedItem/{itemId?}', 'SubmissionController@state')->middleware('auth')->name('stateApprove');
     Route::get('/submissions/countyApprovedItem/{itemId?}', 'SubmissionController@county')->middleware('auth')->name('countyApprove');
+    Route::get('/submissions/submissionEdit/{type?}/{itemId?}', 'SubmissionController@submissionEdit')->middleware('auth')->name('submissionEdit');
+    Route::post('/submissions/submissionEdit/{type?}/{itemId?}', 'SubmissionController@submissionEditSubmit')->name('submissionEditUpdate');
 
     Route::get('/account', 'AccountController@view')->middleware('auth')->name('account');
     Route::get('/accountUpdate', 'AccountController@getUpdatePage')->middleware('auth')->name('updatePage');
@@ -106,24 +104,24 @@ Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function 
         Route::get('/states/add', 'StateController@addState')->name('stateAdd');
         Route::post('/states/add', 'StateController@addStateSubmit')->name('stateAddSubmit');
         Route::post('/states/delete', 'StateController@deleteState')->name('deleteState');
+        Route::get('/states/modify', 'StateController@modify')->name('modifyState');
+        Route::post('/states/modify', 'StateController@modifyStateSubmit')->name('modifyStateSubmit');
 
-        // Source Routes
-        Route::get('/sources', 'SourceController@allSources')->name('sourceView');
-        Route::get('/sources/add', 'SourceController@addSource')->name('sourceAdd');
-        Route::post('/sources/add', 'SourceController@addSourceSubmit')->name('sourceAddSubmit');
-        Route::post('/sources/delete', 'SourceController@deleteSource')->name('deleteSource');
-
-        // Destination Routes
-        Route::get('/destinations', 'DestinationController@allDestinations')->name('destinationView');
-        Route::get('/destinations/add', 'DestinationController@addDestination')->name('destinationAdd');
-        Route::post('/destinations/add', 'DestinationController@addDestinationSubmit')->name('destinationAddSubmit');
-        Route::post('/destinations/delete', 'DestinationController@deleteDestination')->name('deleteDestination');
+        // ReuseNode Routes
+        Route::get('/reuseNodes', 'ReuseNodeController@allReuseNodes')->name('reuseNodeView');
+        Route::get('/reuseNodes/add', 'ReuseNodeController@addReuseNode')->name('reuseNodeAdd');
+        Route::post('/reuseNodes/add', 'ReuseNodeController@addReuseNodeSubmit')->name('reuseNodeAddSubmit');
+        Route::post('/reuseNodes/delete', 'ReuseNodeController@deleteReuseNode')->name('deleteReuseNode');
+        Route::get('/reuseNodes/modify', 'ReuseNodeController@modify')->name('modifyReuseNode');
+        Route::post('/reuseNodes/modify', 'ReuseNodeController@modifyReuseNodeSubmit')->name('modifyReuseNodeSubmit');
 
         // Link Routes
         Route::get('/links', 'LinkController@allLinks')->name('linkView');
         Route::get('/links/add', 'LinkController@addLink')->name('linkAdd');
         Route::post('/links/add', 'LinkController@addLinkSubmit')->name('linkAddSubmit');
         Route::post('/links/delete', 'LinkController@deleteLink')->name('deleteLink');
+        Route::get('/links/modify', 'LinkController@modify')->name('modifyLink');
+        Route::post('/links/modify', 'LinkController@modifyLinkSubmit')->name('modifyLinkSubmit');
 
     });
 });

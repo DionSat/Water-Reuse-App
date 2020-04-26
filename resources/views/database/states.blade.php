@@ -27,6 +27,9 @@
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </td>
+                    <td>
+                        <a href="{{route('modifyState', ['state_id' => $state->state_id])}}" class="btn btn-primary"><i class="fas fa-edit" aria-hidden="true"></i> Modify </a>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

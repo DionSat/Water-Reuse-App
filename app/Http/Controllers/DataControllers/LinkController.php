@@ -8,12 +8,13 @@ use App\StateMerge;
 use App\Links;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Pagination\Paginator;
 
 
 class LinkController extends Controller
 {
     public function allLinks() {
-        $links = Links::all();
+        $links = Links::orderBy('link_id')->paginate(10);
         return view("database.links", compact('links'));
     }
 
@@ -22,11 +23,14 @@ class LinkController extends Controller
     }
 
     public function addLinkSubmit(Request $request) {
-        if (empty($request->link))
-            return redirect()->route('linkAdd')->with(['alert' => 'danger', 'alertMessage' => 'Please enter a link name!']);
+        if (empty($request->link) || empty($request->name))
+            return redirect()->route('linkAdd')->with(['alert' => 'danger', 'alertMessage' => 'Please enter a link name & URL!']);
 
         $link = new Links();
         $link->linkText = $request->link;
+        $link->name = $request->name;
+        $link->status = "valid";
+
         $link->save();
 
         return redirect()->route('linkView')->with(['alert' => 'success', 'alertMessage' => $link->linkText . ' has been added.']);
@@ -65,5 +69,33 @@ class LinkController extends Controller
         $link->delete();
 
         return redirect()->route('linkView')->with(['alert' => 'success', 'alertMessage' => $link->linkText . ' has been deleted.']);
+    }
+
+
+    public function modify(Request $request) {
+        $link = Links::where("link_id", $request->link_id)->get()->first();
+        return view('database.modifyLink', compact('link'));
+    }
+    public function modifyLinkSubmit(Request $request) {
+       $link = Links::where("link_id", $request->link_id)->get()->first();
+
+        if(empty($request->newLinkName) || empty($request->newLinkText))
+            return redirect()->route('modifyLink', ['link_id' => $link->link_id])->with(['alert' => 'danger', 'alertMessage' => 'Please enter a link name & URL']);
+
+        $statusArray = array("valid", "broken", "unknown");
+        if(!(in_array($request->newLinkStatus, $statusArray)))
+            return redirect()->route('modifyLink', ['link_id' => $link->link_id])->with(['alert' => 'danger', 'alertMessage' => 'Please enter a link status']);
+
+
+        $oldLinkName = $link->name;
+        $oldLinkText = $link->linkText;
+        $oldLinkStatus = $link->status;
+
+        $link->name = $request->newLinkName;
+        $link->linkText = $request->newLinkText;
+        $link->status = $request->newLinkStatus;
+        $link->save();
+
+        return redirect()->route('linkView')->with(['alert' => 'success', 'alertMessage' => 'Link has been successfully updated.']);
     }
 }

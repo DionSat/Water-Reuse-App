@@ -20,14 +20,14 @@ class CityMerge extends Model
      * The attributes that are mass assignable.
      */
     protected $fillable = [
-        'cityID', 'sourceID', 'destinationID', 'allowedID', 'codes', 'permit', 'incentives', 'moreInfo', 'userID'
+        'cityID', 'sourceID', 'destinationID', 'allowedID', 'codes', 'permit', 'incentives', 'moreInfo', 'user_id'
     ];
 
     public function user()
     {
-        return $this->hasOne('App\User', 'id','userID');
+        return $this->hasOne('App\User', 'id','user_id');
     }
-    
+
     public function city()
     {
         return $this->hasOne('App\City', 'city_id','cityID');

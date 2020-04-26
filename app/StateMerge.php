@@ -20,19 +20,19 @@ class StateMerge extends Model
      * The attributes that are mass assignable.
      */
     protected $fillable = [
-        'stateID', 'sourceID', 'destinationID', 'allowedID', 'codes', 'permit', 'incentives', 'moreInfo', 'userID'
+        'stateID', 'sourceID', 'destinationID', 'allowedID', 'codes', 'permit', 'incentives', 'moreInfo', 'user_id'
     ];
 
     public function user()
     {
-        return $this->hasOne('App\User', 'id','userID');
+        return $this->hasOne('App\User', 'id','user_id');
     }
-    
+
     public function state()
     {
         return $this->hasOne('App\State', 'state_id','stateID');
     }
-  
+
     public function destination()
     {
         return $this->hasOne('App\ReuseNode', 'node_id','destinationID');

@@ -11,7 +11,7 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Source</th>
-                <th scope="col">Actions</th>
+                <th scope="col" colspan="2">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -26,6 +26,9 @@
                             <input id="sourceId-{{$source->node_id}}" name="node_id" value="{{$source->node_id}}" hidden>
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
+                    </td>
+                    <td>
+                        <a href="{{route('modifySource', ['node_id' => $source->node_id])}}" class="btn btn-primary"><i class="fas fa-edit" aria-hidden="true"></i> Modify </a>
                     </td>
                 </tr>
             @endforeach
