@@ -26,14 +26,10 @@ class LinkController extends Controller
         if (empty($request->link) || empty($request->name))
             return redirect()->route('linkAdd')->with(['alert' => 'danger', 'alertMessage' => 'Please enter a link name & URL!']);
 
-        $statusArray = array("valid", "broken", "unknown");
-        if(!(in_array($request->status, $statusArray)))
-            return redirect()->route('linkAdd')->with(['alert' => 'danger', 'alertMessage' => 'Please enter a link status!']);
-
         $link = new Links();
         $link->linkText = $request->link;
         $link->name = $request->name;
-        $link->status = $request->status;
+        $link->status = "valid";
 
         $link->save();
 

@@ -24,19 +24,6 @@
                     <input type="text" class="form-control" id="link" name="link" placeholder="New link URL">
                 </div>
             </div>
-            <div class="form-row mt-3 justify-content-center">
-                <div class="col-md-4 input-group">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text">New Link Status</label>
-                    </div>
-                    <select class="custom-select" name="status">
-                        <option selected>Choose...</option>
-                        <option value="valid">Valid</option>
-                        <option value="broken">Broken</option>
-                        <option value="unknown">Unknown</option>
-                    </select>
-                </div>
-            </div>
             <div class="form-row mt-5 justify-content-center">
                 <div class="col-md-4">
                     <button type="submit" class="btn btn-success w-100"> <i class="fas fa-plus-circle"></i> Add Link </button>
