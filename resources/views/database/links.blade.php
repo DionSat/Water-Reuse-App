@@ -6,8 +6,8 @@
             <a href="{{route("database")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> Dashboard </a>
         </div>
         <h2 class="text-center"> Links </h2>
-        <div class="table-responsive text-align-center">
-            <table class="table w-auto mx-auto mt-4">
+        <div class="table-responsive text-align-center ">
+            <table class="table w-auto mx-auto mt-4 text-center">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -24,7 +24,8 @@
                         <th scope="row">{{$loop->index+1}}</th>
                         <td>{{$link->name}}</td>
                         <td>{{$link->linkText}}</td>
-                        <td>{{$link->status}}</td>
+                        <td><span class="badge @if($link->status === 'valid') badge-success @elseif($link->status === 'broken')
+                                badge-danger @else badge-warning @endif">{{$link->status}}</span></td>
                         <td>{{$link->updated_at}}</td>
                         <td>
                             <form method="POST" action="{{ route('deleteLink') }}">
@@ -41,9 +42,10 @@
                 @endforeach
                 </tbody>
             </table>
-            <div class="pagination">
-                {{ $links->links() }}
+            <div class="d-flex justify-content-center">
+                    {{ $links->links() }}
             </div>
+
         </div>
     </div>
 
@@ -51,16 +53,13 @@
 
 @push('css')
     <style>
+        /*
         .table th {
             text-align: center;
         }
 
         .table td {
             text-align: center;
-        }
-
-        .pagination {
-            justify-content: center;
         }
     </style>
 
