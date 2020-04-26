@@ -102,7 +102,10 @@
 
 @push("js")
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
     <script>
+
         //holds the number of regulations a user wishes to submit, using 0 indexing
         numOfRegs = 0;
 
@@ -201,13 +204,23 @@
                     newRegList: JSON.stringify($regList)
                 })
                 .then(function (response) {
-                    console.log(response);
-                    alert("Your Regulation Request For " + response.data + " has been submitted. Please give our admin time to approve you submission.");
-                    location.reload();
+                    Swal.fire({
+                        title: 'You Did It!',
+                        text: 'Your Regulation Request For ' + response.data + ' has been submitted. Please give our admin time to approve you submission.',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    }).then((result) => {
+                        location.reload();
+                    });
+
                 })
                 .catch(function (error) {
-                    console.log(error);
-                    alert("There was a problem submitting your regulation form. Please try again. It the problem persists, contact an admin.");
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'The regulation form you tried to turn in failed to submit. Please try again. If the problem continues, please contact an admin.',
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    });
                 });
             }
         })
