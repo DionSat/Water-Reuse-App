@@ -3,7 +3,7 @@
 @section('body')
     <div class="container">
     <div class="row my-3">
-            <a href="{{route("Submission2")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> User Submissions </a>
+            <a href="{{route("userSubmission2")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> User Submissions </a>
         </div>
         <h2 class="text-center"> City Submissions </h2>
         <table class="table w-75 mt-4 mx-auto">
