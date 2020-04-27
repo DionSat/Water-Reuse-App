@@ -210,7 +210,7 @@
                 .then(function (response) {
                     Swal.fire({
                         title: 'You Did It!',
-                        text: 'Your regulation request for ' + response.data + ' has been submitted. Please give our admin time to approve you submission.',
+                        text: 'Your regulation request for ' + response.data + ' has been submitted. Please give our admin time to approve your submission.',
                         icon: 'success',
                         confirmButtonText: 'Ok'
                     }).then((result) => {
