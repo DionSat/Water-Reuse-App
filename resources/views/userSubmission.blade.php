@@ -171,7 +171,7 @@
             if($state == "Choose...")
             {
                 Swal.fire({
-                        title: 'Error!',
+                        title: 'Error: No State Selected',
                         text: 'You did not pick a State. You need to at least pick a State to add a regulation. Please try again.',
                         icon: 'error',
                         confirmButtonText: 'Ok'
@@ -204,7 +204,7 @@
                     $regList.push($newReg);
                 }
 
-                axios.post('/regSubmit', {
+                axios.post("{{route('regSubmit')}}", {
                     newRegList: JSON.stringify($regList)
                 })
                 .then(function (response) {
@@ -220,7 +220,7 @@
                 })
                 .catch(function (error) {
                     Swal.fire({
-                        title: 'Error!',
+                        title: 'Error: Request Failed To Submit',
                         text: 'The regulation form you tried to turn in failed to submit. Please try again. If the problem continues, please contact an admin.',
                         icon: 'error',
                         confirmButtonText: 'Ok'
