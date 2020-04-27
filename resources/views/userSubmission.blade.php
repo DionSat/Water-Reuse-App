@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">Submit a New Water Reuse Regulation</div>
                 <div class="card-body">
-                    <form>
+                    <form type="POST">
                         <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="inputState">State</label>
@@ -40,7 +40,7 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                 <label for="waterSource0">Water Source</label>
-                                <select id="waterSource0" class="form-control">
+                                <select id="waterSource0" name="waterSource0" class="form-control">
                                     <option value="choose" disabled>Choose...</option>
                                 </select>
                                 </div>
@@ -52,9 +52,13 @@
                                 </div>
                             </div>
                             </br>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="isPermitted0">
-                                <label class="form-check-label" for="isPermitted0">Check if reuse from this source is permitted</label>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="allowed0">Is Water Reuse From This Source Allowed?</label>
+                                    <select id="allowed0" class="form-control">
+                                        <option value="choose" disabled>Choose...</option>
+                                    </select>
+                                </div>
                             </div>
                             <hr>
                             <div class="form-row">
@@ -87,7 +91,7 @@
                             <button type="button" class="btn btn-secondary" id="addSource">+</button>
                             <label for="addSource"> Add Another Regulation For This Area</label>
                         </div>
-                        <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+                        <button type="button" class="btn btn-primary" id="submit">Submit</button>
                     </form>
                 </div>
             </div>
@@ -98,7 +102,10 @@
 
 @push("js")
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
     <script>
+
         //holds the number of regulations a user wishes to submit, using 0 indexing
         numOfRegs = 0;
 
@@ -130,25 +137,46 @@
             });
         };
 
+        // get the water destinations
+        function getAllowed( idNum ) {
+            axios.get("{{route("allowed-api")}}")
+            .then(function (response) {
+                //get each county, and set them as options
+                $allowed = response.data.map(obj => ("<option class='allowedName' value=" + obj.allowed_id + " >" + obj.allowedText + "</option>"));
+                $("#allowed" + idNum).append($allowed);
+            })
+            .catch(function (error) {
+                //Handle errors here
+                console.log(error);
+            });
+        };
+
         //populate the initial water source and destination
         getWaterSources(numOfRegs);
         getWaterDestinations(numOfRegs);
+        getAllowed(numOfRegs);
 
 
         $('#addSource').click(function(){
             numOfRegs += 1;
-            $source = '<div class="form-row"><div class="form-group col-md-6"><label for="waterSource' + numOfRegs + '">Water Source</label><select id="waterSource' + numOfRegs + '" class="form-control"><option value="choose" disabled>Choose...</option></select></div><div class="form-group col-md-6"><label for="waterDestination' + numOfRegs + '">Water Destination</label><select id="waterDestination' + numOfRegs + '" class="form-control"><option value="choose" disabled>Choose...</option></select></div></div></br><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" id="isPermitted' + numOfRegs + '"><label class="form-check-label" for="isPermitted' + numOfRegs + '">Check if reuse from this source is permitted</label></div><hr><div class="form-row"><div class="form-group col-md-6"><label for="codes' + numOfRegs + '">Link to Codes (Optional)</label><input type="text" class="form-control" id="codes' + numOfRegs + '" placeholder=""></div><div class="form-group col-md-6"><label for="permits' + numOfRegs + '">Link to Permit (Optional)</label><input type="text" class="form-control" id="permits' + numOfRegs + '" placeholder=""></div></div><div class="form-row"><div class="form-group col-md-6"><label for="insentives' + numOfRegs + '">Link to Insentives (Optional)</label><input type="text" class="form-control" id="insentives' + numOfRegs + '" placeholder=""></div><div class="form-group col-md-6"><label for="moreInfo' + numOfRegs + '">Link to More Information (Optional)</label><input type="text" class="form-control" id="moreInfo' + numOfRegs + '" placeholder=""></div></div><div class="form-group"><label for="comments' + numOfRegs + '">Comments (Optional)</label><textarea class="form-control" id="comments' + numOfRegs + '" rows="3"></textarea><hr></div>';
+            $source = '<div class="form-row"><div class="form-group col-md-6"><label for="waterSource' + numOfRegs + '">Water Source</label><select id="waterSource' + numOfRegs + '" name="waterSource' + numOfRegs + '" class="form-control"><option value="choose" disabled>Choose...</option></select></div><div class="form-group col-md-6"><label for="waterDestination' + numOfRegs + '">Water Destination</label><select id="waterDestination' + numOfRegs + '" class="form-control"><option value="choose" disabled>Choose...</option></select></div></div></br><div class="form-row"><div class="form-group col-md-6"><label for="allowed' + numOfRegs + '">Is Water Reuse From This Source Allowed?</label><select id="allowed' + numOfRegs + '" class="form-control"><option value="choose" disabled>Choose...</option></select></div></div><hr><div class="form-row"><div class="form-group col-md-6"><label for="codes' + numOfRegs + '">Link to Codes (Optional)</label><input type="text" class="form-control" id="codes' + numOfRegs + '" placeholder=""></div><div class="form-group col-md-6"><label for="permits' + numOfRegs + '">Link to Permit (Optional)</label><input type="text" class="form-control" id="permits' + numOfRegs + '" placeholder=""></div></div><div class="form-row"><div class="form-group col-md-6"><label for="insentives' + numOfRegs + '">Link to Insentives (Optional)</label><input type="text" class="form-control" id="insentives' + numOfRegs + '" placeholder=""></div><div class="form-group col-md-6"><label for="moreInfo' + numOfRegs + '">Link to More Information (Optional)</label><input type="text" class="form-control" id="moreInfo' + numOfRegs + '" placeholder=""></div></div><div class="form-group"><label for="comments' + numOfRegs + '">Comments (Optional)</label><textarea class="form-control" id="comments' + numOfRegs + '" rows="3"></textarea><hr></div>';
             $("#waterSourceDiv").append($source);
             getWaterSources(numOfRegs);
             getWaterDestinations(numOfRegs);
-
+            getAllowed(numOfRegs);
         });
         $('#submit').click(function(){
             $state = $("#inputState").children("option:selected").text();
 
             if($state == "Choose...")
             {
-                alert("You have not chosen a state. Please select the state you wish to create a regulation for.");
+                Swal.fire({
+                        title: 'Error: No State Selected',
+                        text: 'You did not pick a State. You need to at least pick a State to add a regulation. Please try again.',
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    });
+                return;
             }
             else{
                 $county = $("#county").children("option:selected").text();
@@ -158,9 +186,15 @@
                 for(i = 0; i <= numOfRegs; i++)
                 {
                     $newReg = {
-                        $source: $('#waterSource' + i).children("option:selected").text(),
-                        $destination: $('#waterDestination' + i).children("option:selected").text(),
-                        $isPermitted: $("#isPermitted" + i).prop("checked"),
+                        $state: $('#inputState').children("option:selected").text(),
+                        $county: $('#county').children("option:selected").text(),
+                        $city: $('#city').children("option:selected").text(),
+                        $stateId: $('#inputState').children("option:selected").val(),
+                        $countyId: $('#county').children("option:selected").val(),
+                        $cityId: $('#city').children("option:selected").val(),
+                        $sourceId: $('#waterSource' + i).children("option:selected").val(),
+                        $destinationId: $('#waterDestination' + i).children("option:selected").val(),
+                        $isPermitted: $("#allowed" + i).children("option:selected").val(),
                         $codesLink: $("#codes" + i).val(),
                         $permitLink: $("#permits" + i).val(),
                         $insentivesLink: $("#insentives" + i).val(),
@@ -170,14 +204,27 @@
                     $regList.push($newReg);
                 }
 
-                axios.post('/regSubmit', {
-                    newRegList: $regList
+                axios.post("{{route('regSubmit')}}", {
+                    newRegList: JSON.stringify($regList)
                 })
                 .then(function (response) {
-                    console.log(response);
+                    Swal.fire({
+                        title: 'You Did It!',
+                        text: 'Your regulation request for ' + response.data + ' has been submitted. Please give our admin time to approve you submission.',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    }).then((result) => {
+                        location.reload();
+                    });
+
                 })
                 .catch(function (error) {
-                    console.log(error);
+                    Swal.fire({
+                        title: 'Error: Request Failed To Submit',
+                        text: 'The regulation form you tried to turn in failed to submit. Please try again. If the problem continues, please contact an admin.',
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    });
                 });
             }
         })
@@ -212,20 +259,12 @@
 
                 axios.get("{{route("counties-api")}}"+"/"+inputState.value)
                 .then(function (response) {
-
-
-                    // console.log("Response: " + response);
-                    // console.log("Data: " + response.data);
                     //get each county, and set them as options
                     $county = response.data.map(obj => ("<option class='countyName' value=" + obj.county_id + " >" + obj.countyName + "</option>"));
-                    // console.log($county);
                     $("#county").append($county);
                 })
                 .catch(function (error) {
                     //Handle errors here
-
-                    //Generally don't have to worry about errors too much,
-                    // but maybe want to do "alert('There was a error, please try re-loading the page.')"
                     console.log(error);
                 });
             }
@@ -260,10 +299,6 @@
 
                 axios.get("{{route("cities-api")}}"+"/"+county.value)
                 .then(function (response) {
-
-
-                    // console.log("Response: " + response);
-                    // console.log("Data: " + response.data);
                     //get each city, and set them as options
                     $city = response.data.map(obj => ("<option class='cityName' value=" + obj.city_id + " >" + obj.cityName + "</option>"));
                     // console.log($city);
@@ -271,9 +306,6 @@
                 })
                 .catch(function (error) {
                     //Handle errors here
-
-                    //Generally don't have to worry about errors too much,
-                    // but maybe want to do "alert('There was a error, please try re-loading the page.')"
                     console.log(error);
                 })
             }
