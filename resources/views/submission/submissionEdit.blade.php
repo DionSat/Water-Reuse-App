@@ -2,6 +2,7 @@
 
 @section('body')
 <div class="container">
+    <a href="{{route("submission")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> Submissions </a>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -116,7 +117,7 @@
                         {{ csrf_field() }}
                         <input type="text" name="type" style="display: none;" value="{{$type}}">
                         <input type="number" name="id" style="display: none;" value={{$submission->id}}>
-                        <button style="float:right;margin:25px 10px 10px 10px;" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" type="button">Delete</button>
+                        <button style="float:right;margin:-40px 10px 10px 10px;" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" type="button">Delete</button>
 
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">

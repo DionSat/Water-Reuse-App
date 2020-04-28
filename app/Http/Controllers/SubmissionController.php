@@ -38,21 +38,24 @@ class SubmissionController extends Controller
     {
         $user = Auth::user();
         $submissions = PendingStateMerge::where('id', $request->itemId)->get();
-        return view('submission.submissionItem', compact('user','submissions'));
+        $type = "State";
+        return view('submission.submissionItem', compact('user','submissions','type'));
     }
 
     public function pendingCity(Request $request)
     {
         $user = Auth::user();
         $submissions = PendingCityMerge::where('id', $request->itemId)->get();
-        return view('submission.submissionItem', compact('user','submissions'));
+        $type = 'City';
+        return view('submission.submissionItem', compact('user','submissions','type'));
     }
 
     public function pendingCounty(Request $request)
     {
         $user = Auth::user();
         $submissions = PendingCountyMerge::where('id', $request->itemId)->get();
-        return view('submission.submissionItem', compact('user','submissions'));
+        $type = 'County';
+        return view('submission.submissionItem', compact('user','submissions','type'));
     }
 
     //view of submission that have been aproved

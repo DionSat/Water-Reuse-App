@@ -13,21 +13,16 @@
                     <div class="card-body">
                     @foreach($submissions as $item)
                         @include('common/reuse-item',['item'=>$item])
+
+
+                        <td class="text-center">
+                            <a style="margin: 25px 10px 0px 10px" href="{{route('submissionEdit')."/".'State'."/".$item->first()->id}}" class="btn btn-primary"> Edit </a>
+                        </td>
                         <form action={{ route('deleteUnapproved') }} method="POST">
                             {{ csrf_field() }}
-                            <input type="text" name="type" style="display: none;" 
-                            @if(isset($item->first()->stateID))
-                                value="State">
-                                <input type="number" name="id" style="display: none;" value="{{$item->first()->id}}" 
-                            @elseif(isset($item->first()->countyID))
-                                value="County">
-                                <input type="number" name="id" style="display: none;" value="{{$item->first()->id}}" 
-                            @elseif(isset($item->first()->cityID))
-                                value="City">
-                                <input type="number" name="id" style="display: none;" value="{{$item->first()->id}}" 
-                            @endif
-                            >
-                            <button style="float:right;margin:25px 10px 10px 10px;" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" type="button">Delete</button>
+                            <input type="text" name="type" style="display: none;" value="{{$type}}">
+                            <input type="number" name="id" style="display: none;" value="{{$item->first()->id}}">
+                            <button style="float:right;margin:-40px 10px 10px 10px;" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" type="button">Delete</button>
 
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
