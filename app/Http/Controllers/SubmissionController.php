@@ -17,6 +17,7 @@ use App\PendingCountyMerge;
 use App\StateMerge;
 use App\CityMerge;
 use App\CountyMerge;
+use Route;
 
 class SubmissionController extends Controller
 {
@@ -192,5 +193,31 @@ class SubmissionController extends Controller
         $submission->save();
 
         return redirect()->route('submission')->with(['alert' => 'success', 'alertMessage' => 'The submission has been updated.']);
+    }
+
+    public function deleteUnapproved(Request $request) {
+        $route = Route::current();
+        if (empty($request))
+            return redirect()->route($route->getName())->with(['alert' => 'danger', 'alertMessage' => 'Error trying to delete the submission.']);
+
+        switch ($request->type) {
+            case 'State':
+                $submission = PendingStateMerge::where('id', $request->id)->get()->first();
+                break;
+            case 'County':
+                $submission = PendingCountyMerge::where('id', $request->id)->get()->first();
+                
+                break;
+            case 'City':
+                $submission = PendingCityMerge::where('id', $request->id)->get()->first();
+                
+                
+                break;
+            default:
+                return redirect()->route($route->getName())->with(['alert' => 'danger', 'alertMessage' => 'Error trying to delete the submission.']);
+                break;
+        }
+        //$submission->delete();
+        return redirect()->route($route->getName())->with(['alert' => 'success', 'alertMessage' => 'The submission has been deleted.']);
     }
 }
