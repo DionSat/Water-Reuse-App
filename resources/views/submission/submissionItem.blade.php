@@ -13,6 +13,38 @@
                     <div class="card-body">
                     @foreach($submissions as $item)
                         @include('common/reuse-item',['item'=>$item])
+
+
+                        <td class="text-center">
+                            <a style="margin: 25px 10px 0px 10px" href="{{route('submissionEdit')."/".'State'."/".$item->id}}" class="btn btn-primary"> Edit </a>
+                        </td>
+                        <form action={{ route('deleteUnapproved') }} method="POST">
+                            {{ csrf_field() }}
+                            <input type="text" name="type" style="display: none;" value="{{$type}}">
+                            <input type="number" name="id" style="display: none;" value="{{$item->id}}">
+                            <button style="float:right;margin:-40px 10px 10px 10px;" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" type="button">Delete</button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="modal-title">Delete Submission Confirmation</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    Are you sure you want to delete this submission?
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-danger" type="submit" onClick="javascript:this.form.submit();">Confirm Delete</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </form>
                     @endforeach
                     </div>
                 </div>

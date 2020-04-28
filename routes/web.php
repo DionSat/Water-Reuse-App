@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/submissions/countyApprovedItem/{itemId?}', 'SubmissionController@county')->middleware('auth')->name('countyApprove');
     Route::get('/submissions/submissionEdit/{type?}/{itemId?}', 'SubmissionController@submissionEdit')->middleware('auth')->name('submissionEdit');
     Route::post('/submissions/submissionEdit/{type?}/{itemId?}', 'SubmissionController@submissionEditSubmit')->name('submissionEditUpdate');
+    Route::post('/submissions', 'SubmissionController@deleteUnapproved')->name('deleteUnapproved');
 
     Route::get('/account', 'AccountController@view')->middleware('auth')->name('account');
     Route::get('/accountUpdate', 'AccountController@getUpdatePage')->middleware('auth')->name('updatePage');

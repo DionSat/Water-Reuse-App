@@ -2,6 +2,7 @@
 
 @section('body')
 <div class="container">
+    <a href="{{route("submission")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> Submissions </a>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -93,8 +94,8 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="insentives">Link to Insentives (Optional)</label>
-                                    <input type="text" class="form-control" id="insentives" placeholder="" value="{{$submission->incentivesObj->linkText}}" name="insentives">
+                                    <label for="incentives">Link to Insentives (Optional)</label>
+                                    <input type="text" class="form-control" id="incentives" placeholder="" value="{{$submission->incentivesObj->linkText}}" name="incentives">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="moreInfo">Link to More Information (Optional)</label>
@@ -110,7 +111,35 @@
                             <hr>
                         </div>
                         <button type="submit" class="btn btn-primary" id="submit">Re-Submit</button>
+                        
                     </form>
+                    <form action={{ route('deleteUnapproved') }} method="POST">
+                        {{ csrf_field() }}
+                        <input type="text" name="type" style="display: none;" value="{{$type}}">
+                        <input type="number" name="id" style="display: none;" value={{$submission->id}}>
+                        <button style="float:right;margin:-40px 10px 10px 10px;" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" type="button">Delete</button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="modal-title">Delete Submission Confirmation</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    Are you sure you want to delete this submission?
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-danger" type="submit" onClick="javascript:this.form.submit();">Confirm Delete</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </form>
                 </div>
             </div>
         </div>

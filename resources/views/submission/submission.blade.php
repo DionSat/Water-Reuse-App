@@ -9,8 +9,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Source</th>
                     <th scope="col">Destination</th>
-                    <th scope="col" class="text-center">View</th>
-                    <th scope="col" class="text-center">Edit</th>
+                    <th scope="col">View</th>
                     <th scope="col">Status</th>
                 </tr>
             </thead>
@@ -23,11 +22,8 @@
                         <th scope="row">{{$a++}}</th>
                         <td> {{$state->source->node_name}}</td>
                         <td>{{$state->destination->node_name}}</td>
-                        <td class="text-center">
+                        <td>
                             <a href="{{route('stateSubmission')."/".$state->id}}" class="btn btn-primary"> View </a>
-                        </td>
-                        <td class="text-center">
-                            <a href="{{route('submissionEdit')."/".'State'."/".$state->id}}" class="btn btn-primary"> Edit </a>
                         </td>
                         <td>@if($state->trashed())Rejected @else Pending @endif</td>
                     </tr>
@@ -37,13 +33,9 @@
                         <th scope="row">{{$a++}}</th>
                         <td> {{$city->source->node_name}}</td>
                         <td>{{$city->destination->node_name}}</td>
-                        <td class="text-center">
+                        <td>
                             <a href="{{route('citySubmission')."/".$city->id}}" class="btn btn-primary"> View </a>
-                        </td>
-                        <td class="text-center">
-                            <a href="{{route('submissionEdit')."/".'City'."/".$city->id}}" class="btn btn-primary"> Edit </a>
-                        </td>
-                        <td>@if($city->trashed())Rejected @else Pending @endif</td>
+                        </td>                        <td>@if($city->trashed())Rejected @else Pending @endif</td>
                     </tr>
                 @endforeach
                 @foreach($countySubmissions as $county)
@@ -51,11 +43,8 @@
                         <th scope="row">{{$a++}}</th>
                         <td> {{$county->source->node_name}}</td>
                         <td>{{$county->destination->node_name}}</td>
-                        <td class="text-center">
+                        <td>
                             <a href="{{route('countySubmission')."/".$county->id}}" class="btn btn-primary"> View </a>
-                        </td>
-                        <td class="text-center">
-                            <a href="{{route('submissionEdit')."/".'County'."/".$county->id}}" class="btn btn-primary"> Edit </a>
                         </td>
                         <td>@if($county->trashed())Rejected @else Pending @endif</td>
                     </tr>
@@ -65,11 +54,8 @@
                         <th scope="row">{{$a++}}</th>
                         <td> {{$stateAp->source->node_name}}</td>
                         <td>{{$stateAp->destination->node_name}}</td>
-                        <td class="text-center">
+                        <td >
                             <a href="{{route('stateApprove')."/".$stateAp->id}}" class="btn btn-primary"> View </a>
-                        </td>
-                        <td class="text-center">
-                            <i class="fas fa-lock mx-auto"></i>
                         </td>
                         <td>Approved</td>
                     </tr>
@@ -79,11 +65,8 @@
                         <th scope="row">{{$a++}}</th>
                         <td> {{$cityAp->source->node_name}}</td>
                         <td>{{$cityAp->destination->node_name}}</td>
-                        <td class="text-center">
+                        <td >
                             <a href="{{route('cityApprove')."/".$cityAp->id}}" class="btn btn-primary"> View </a>
-                        </td>
-                        <td class="text-center">
-                            <i class="fas fa-lock mx-auto"></i>
                         </td>
                         <td>Approved</td>
                     </tr>
@@ -93,11 +76,8 @@
                         <th scope="row">{{$a++}}</th>
                         <td> {{$countyAp->source->node_name}}</td>
                         <td>{{$countyAp->destination->node_name}}</td>
-                        <td class="text-center">
+                        <td >
                             <a href="{{route('countyApprove')."/".$countyAp->id}}" class="btn btn-primary"> View </a>
-                        </td>
-                        <td class="text-center">
-                            <i class="fas fa-lock mx-auto"></i>
                         </td>
                         <td>Approved</td>
                     </tr>

@@ -17,6 +17,7 @@ use App\PendingCountyMerge;
 use App\StateMerge;
 use App\CityMerge;
 use App\CountyMerge;
+use Route;
 
 class SubmissionController extends Controller
 {
@@ -37,21 +38,24 @@ class SubmissionController extends Controller
     {
         $user = Auth::user();
         $submissions = PendingStateMerge::where('id', $request->itemId)->get();
-        return view('submission.submissionItem', compact('user','submissions'));
+        $type = "State";
+        return view('submission.submissionItem', compact('user','submissions','type'));
     }
 
     public function pendingCity(Request $request)
     {
         $user = Auth::user();
         $submissions = PendingCityMerge::where('id', $request->itemId)->get();
-        return view('submission.submissionItem', compact('user','submissions'));
+        $type = 'City';
+        return view('submission.submissionItem', compact('user','submissions','type'));
     }
 
     public function pendingCounty(Request $request)
     {
         $user = Auth::user();
         $submissions = PendingCountyMerge::where('id', $request->itemId)->get();
-        return view('submission.submissionItem', compact('user','submissions'));
+        $type = 'County';
+        return view('submission.submissionItem', compact('user','submissions','type'));
     }
 
     //view of submission that have been aproved
@@ -129,11 +133,11 @@ class SubmissionController extends Controller
                 $submission = PendingStateMerge::where('id', $request->id)->get()->first();
                 $submissionInfo = $submission->toArray();
                 if($request->county > -1 && $request->city > -1){
-                    $submission->delete();
+                    $submission->forceDelete();
                     $submission = new PendingCityMerge($submissionInfo);
                     $submission->cityID = $request->city;
                 }else if($request->county > -1){
-                    $submission->delete();
+                    $submission->forceDelete();
                     $submission = new PendingCountyMerge($submissionInfo);
                     $submission->countyID = $request->county;
                 }else{
@@ -144,11 +148,11 @@ class SubmissionController extends Controller
                 $submission = PendingCountyMerge::where('id', $request->id)->get()->first();
                 $submissionInfo = $submission->toArray();
                 if($request->county == -1){
-                    $submission->delete();
+                    $submission->forceDelete();
                     $submission = new PendingStateMerge($submissionInfo);
                     $submission->StateID = $request->State;
                 }else if($request->city > -1){
-                    $submission->delete();
+                    $submission->forceDelete();
                     $submission = new PendingCityMerge($submissionInfo);
                     $submission->cityID = $request->city;
                 }else{    
@@ -159,11 +163,11 @@ class SubmissionController extends Controller
                 $submission = PendingCityMerge::where('id', $request->id)->get()->first();
                 $submissionInfo = $submission->toArray();
                 if($request->county == -1){
-                    $submission->delete();
+                    $submission->forceDelete();
                     $submission = new PendingStateMerge($submissionInfo);
                     $submission->StateID = $request->State;
                 }else if($request->city == -1){
-                    $submission->delete();
+                    $submission->forceDelete();
                     $submission = new PendingCountyMerge($submissionInfo);
                     $submission->countyID = $request->county;
                 }else{
@@ -180,17 +184,43 @@ class SubmissionController extends Controller
         $codes = $submission->codesObj()->first();
         $codes->linkText = $request->codes;
         $codes->save();
-        $permit = $submission->permitObj();
+        $permit = $submission->permitObj()->first();
         $permit->linkText = $request->permit;
         $permit->save();
-        $incentives = $submission->incentivesObj();
+        $incentives = $submission->incentivesObj()->first();
         $incentives->linkText = $request->incentives;
         $incentives->save();
-        $moreInfo = $submission->moreInfoObj();
+        $moreInfo = $submission->moreInfoObj()->first();
         $moreInfo->linkText = $request->moreInfo;
         $moreInfo->save();
         $submission->save();
 
         return redirect()->route('submission')->with(['alert' => 'success', 'alertMessage' => 'The submission has been updated.']);
+    }
+
+    public function deleteUnapproved(Request $request) {
+        $route = Route::current();
+        if (empty($request))
+            return redirect()->route($route->getName())->with(['alert' => 'danger', 'alertMessage' => 'Error trying to delete the submission.']);
+
+        switch ($request->type) {
+            case 'State':
+                $submission = PendingStateMerge::where('id', $request->id)->get()->first();
+                break;
+            case 'County':
+                $submission = PendingCountyMerge::where('id', $request->id)->get()->first();
+                
+                break;
+            case 'City':
+                $submission = PendingCityMerge::where('id', $request->id)->get()->first();
+                
+                
+                break;
+            default:
+                return redirect()->route($route->getName())->with(['alert' => 'danger', 'alertMessage' => 'Error trying to delete the submission.']);
+                break;
+        }
+        $submission->forceDelete();
+        return redirect()->route($route->getName())->with(['alert' => 'success', 'alertMessage' => 'The submission has been deleted.']);
     }
 }
