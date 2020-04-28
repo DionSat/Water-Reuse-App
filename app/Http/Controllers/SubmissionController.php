@@ -133,11 +133,11 @@ class SubmissionController extends Controller
                 $submission = PendingStateMerge::where('id', $request->id)->get()->first();
                 $submissionInfo = $submission->toArray();
                 if($request->county > -1 && $request->city > -1){
-                    $submission->delete();
+                    $submission->forceDelete();
                     $submission = new PendingCityMerge($submissionInfo);
                     $submission->cityID = $request->city;
                 }else if($request->county > -1){
-                    $submission->delete();
+                    $submission->forceDelete();
                     $submission = new PendingCountyMerge($submissionInfo);
                     $submission->countyID = $request->county;
                 }else{
@@ -148,11 +148,11 @@ class SubmissionController extends Controller
                 $submission = PendingCountyMerge::where('id', $request->id)->get()->first();
                 $submissionInfo = $submission->toArray();
                 if($request->county == -1){
-                    $submission->delete();
+                    $submission->forceDelete();
                     $submission = new PendingStateMerge($submissionInfo);
                     $submission->StateID = $request->State;
                 }else if($request->city > -1){
-                    $submission->delete();
+                    $submission->forceDelete();
                     $submission = new PendingCityMerge($submissionInfo);
                     $submission->cityID = $request->city;
                 }else{    
@@ -163,11 +163,11 @@ class SubmissionController extends Controller
                 $submission = PendingCityMerge::where('id', $request->id)->get()->first();
                 $submissionInfo = $submission->toArray();
                 if($request->county == -1){
-                    $submission->delete();
+                    $submission->forceDelete();
                     $submission = new PendingStateMerge($submissionInfo);
                     $submission->StateID = $request->State;
                 }else if($request->city == -1){
-                    $submission->delete();
+                    $submission->forceDelete();
                     $submission = new PendingCountyMerge($submissionInfo);
                     $submission->countyID = $request->county;
                 }else{
@@ -220,7 +220,7 @@ class SubmissionController extends Controller
                 return redirect()->route($route->getName())->with(['alert' => 'danger', 'alertMessage' => 'Error trying to delete the submission.']);
                 break;
         }
-        //$submission->delete();
+        $submission->forceDelete();
         return redirect()->route($route->getName())->with(['alert' => 'success', 'alertMessage' => 'The submission has been deleted.']);
     }
 }

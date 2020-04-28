@@ -54,11 +54,8 @@
                         <th scope="row">{{$a++}}</th>
                         <td> {{$stateAp->source->node_name}}</td>
                         <td>{{$stateAp->destination->node_name}}</td>
-                        <td class="text-center">
+                        <td >
                             <a href="{{route('stateApprove')."/".$stateAp->id}}" class="btn btn-primary"> View </a>
-                        </td>
-                        <td class="text-center">
-                            <i class="fas fa-lock mx-auto"></i>
                         </td>
                         <td>Approved</td>
                     </tr>
@@ -68,11 +65,8 @@
                         <th scope="row">{{$a++}}</th>
                         <td> {{$cityAp->source->node_name}}</td>
                         <td>{{$cityAp->destination->node_name}}</td>
-                        <td class="text-center">
+                        <td >
                             <a href="{{route('cityApprove')."/".$cityAp->id}}" class="btn btn-primary"> View </a>
-                        </td>
-                        <td class="text-center">
-                            <i class="fas fa-lock mx-auto"></i>
                         </td>
                         <td>Approved</td>
                     </tr>
@@ -82,11 +76,8 @@
                         <th scope="row">{{$a++}}</th>
                         <td> {{$countyAp->source->node_name}}</td>
                         <td>{{$countyAp->destination->node_name}}</td>
-                        <td class="text-center">
+                        <td >
                             <a href="{{route('countyApprove')."/".$countyAp->id}}" class="btn btn-primary"> View </a>
-                        </td>
-                        <td class="text-center">
-                            <i class="fas fa-lock mx-auto"></i>
                         </td>
                         <td>Approved</td>
                     </tr>
