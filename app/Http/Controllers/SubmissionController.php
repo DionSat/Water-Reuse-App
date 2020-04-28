@@ -184,13 +184,13 @@ class SubmissionController extends Controller
         $codes = $submission->codesObj()->first();
         $codes->linkText = $request->codes;
         $codes->save();
-        $permit = $submission->permitObj();
+        $permit = $submission->permitObj()->first();
         $permit->linkText = $request->permit;
         $permit->save();
-        $incentives = $submission->incentivesObj();
+        $incentives = $submission->incentivesObj()->first();
         $incentives->linkText = $request->incentives;
         $incentives->save();
-        $moreInfo = $submission->moreInfoObj();
+        $moreInfo = $submission->moreInfoObj()->first();
         $moreInfo->linkText = $request->moreInfo;
         $moreInfo->save();
         $submission->save();

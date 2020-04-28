@@ -94,8 +94,8 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="insentives">Link to Insentives (Optional)</label>
-                                    <input type="text" class="form-control" id="insentives" placeholder="" value="{{$submission->incentivesObj->linkText}}" name="insentives">
+                                    <label for="incentives">Link to Insentives (Optional)</label>
+                                    <input type="text" class="form-control" id="incentives" placeholder="" value="{{$submission->incentivesObj->linkText}}" name="incentives">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="moreInfo">Link to More Information (Optional)</label>
