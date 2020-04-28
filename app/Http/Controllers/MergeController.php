@@ -32,11 +32,11 @@ class MergeController extends Controller
         $city->permit = $pending->permit;
         $city->incentives = $pending->incentives;
         $city->moreInfo = $pending->moreInfo;
-        $city->user_id = $pending->userID;
+        $city->user_id = $pending->user_id;
         $city->save();
         
         $pending->delete();
-        return redirect()->route('userCityView')->with(['alert' => 'success', 'alertMessage' => ' Submission has been added.']);
+        return redirect()->route('userCityView')->with(['alert' => 'success', 'alertMessage' => 'The submission has been approved.']);
     }
 
     public function addStateMergeSubmit(Request $request) 
@@ -52,11 +52,11 @@ class MergeController extends Controller
         $state->permit = $pending->permit;
         $state->incentives = $pending->incentives;
         $state->moreInfo = $pending->moreInfo;
-        $state->user_id = $pending->userID;
+        $state->user_id = $pending->user_id;
         $state->save();
         
         $pending->delete();
-        return redirect()->route('userStateView')->with(['alert' => 'success', 'alertMessage' => ' submission has been added.']);
+        return redirect()->route('userStateView')->with(['alert' => 'success', 'alertMessage' => 'The submission has been approved.']);
     }
 
     public function addCountyMergeSubmit(Request $request) 
@@ -71,11 +71,11 @@ class MergeController extends Controller
         $county->permit = $pending->permit;
         $county->incentives = $pending->incentives;
         $county->moreInfo = $pending->moreInfo;
-        $county->user_id = $pending->userID;
+        $county->user_id = $pending->user_id;
         $county->save();
 
         $pending->delete();
-        return redirect()->route('userCountyView')->with(['alert' => 'success', 'alertMessage' => ' submission has been added.']);
+        return redirect()->route('userCountyView')->with(['alert' => 'success', 'alertMessage' => 'The submission has been approved.']);
     }
 
     public function deleteCityMerge(Request $request)
@@ -83,7 +83,7 @@ class MergeController extends Controller
         $city = PendingCityMerge::where("id", $request->id)->get()->first();
         $city->delete();
 
-        return redirect()->route('userCityView')->with(['alert' => 'success', 'alertMessage' => ' submission has been deleted.']);
+        return redirect()->route('userCityView')->with(['alert' => 'success', 'alertMessage' => 'The submission has been deleted.']);
     }
     
     public function deleteStateMerge(Request $request)
@@ -91,7 +91,7 @@ class MergeController extends Controller
         $state = PendingStateMerge::where("id", $request->id)->get()->first();
         $state->delete();
 
-        return redirect()->route('userStateView')->with(['alert' => 'success', 'alertMessage' =>' submission has been deleted.']);
+        return redirect()->route('userStateView')->with(['alert' => 'success', 'alertMessage' =>'The submission has been deleted.']);
     }
 
     public function deleteCountyMerge(Request $request)
@@ -99,6 +99,6 @@ class MergeController extends Controller
         $county = PendingCountyMerge::where("id", $request->id)->get()->first();
         $county->delete();
 
-        return redirect()->route('userCountyView')->with(['alert' => 'success', 'alertMessage' => ' submission has been deleted.']);
+        return redirect()->route('userCountyView')->with(['alert' => 'success', 'alertMessage' => 'The submission has been deleted.']);
     }
 }
