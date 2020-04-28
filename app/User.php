@@ -41,6 +41,9 @@ class User extends Authenticatable
 
     public function formatPhoneNumber()
     {
+        if(empty($this->phoneNumber))
+            return "";
+
         $new = strval($this->phoneNumber);
         $phone = ' ';
         $count = 0;

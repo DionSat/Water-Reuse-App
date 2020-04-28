@@ -37,7 +37,7 @@ class SubmissionController extends Controller
     public function pendingState(Request $request)
     {
         $user = Auth::user();
-        $submissions = PendingStateMerge::where('id', $request->itemId)->get();
+        $submissions = PendingStateMerge::where('id', $request->itemId)->withTrashed()->get();
         $type = "State";
         return view('submission.submissionItem', compact('user','submissions','type'));
     }
@@ -45,7 +45,7 @@ class SubmissionController extends Controller
     public function pendingCity(Request $request)
     {
         $user = Auth::user();
-        $submissions = PendingCityMerge::where('id', $request->itemId)->get();
+        $submissions = PendingCityMerge::where('id', $request->itemId)->withTrashed()->get();
         $type = 'City';
         return view('submission.submissionItem', compact('user','submissions','type'));
     }
@@ -53,7 +53,7 @@ class SubmissionController extends Controller
     public function pendingCounty(Request $request)
     {
         $user = Auth::user();
-        $submissions = PendingCountyMerge::where('id', $request->itemId)->get();
+        $submissions = PendingCountyMerge::where('id', $request->itemId)->withTrashed()->get();
         $type = 'County';
         return view('submission.submissionItem', compact('user','submissions','type'));
     }
@@ -63,21 +63,27 @@ class SubmissionController extends Controller
     {
         $user = Auth::user();
         $submissions = StateMerge::where('id', $request->itemId)->get();
-        return view('submission.submissionItem', compact('user','submissions'));
+        $type = "State";
+        $approved = true;
+        return view('submission.submissionItem', compact('user','submissions','type', 'approved'));
     }
 
     public function city(Request $request)
     {
         $user = Auth::user();
         $submissions = CityMerge::where('id', $request->itemId)->get();
-        return view('submission.submissionItem', compact('user','submissions'));
+        $type = 'City';
+        $approved = true;
+        return view('submission.submissionItem', compact('user','submissions','type', 'approved'));
     }
 
     public function county(Request $request)
     {
         $user = Auth::user();
         $submissions = CountyMerge::where('id', $request->itemId)->get();
-        return view('submission.submissionItem', compact('user','submissions'));
+        $type = 'County';
+        $approved = true;
+        return view('submission.submissionItem', compact('user','submissions','type', 'approved'));
     }
 
     public function submissionEdit(Request $request) 
