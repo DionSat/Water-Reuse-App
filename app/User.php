@@ -39,4 +39,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function formatPhoneNumber()
+    {
+        $new = strval($this->phoneNumber);
+        $phone = ' ';
+        $count = 0;
+        for($i = 0; $i < 10; $i++){
+            $phone .= $new[$i];
+            if(($i+1) % 3 == 0 && $count < 2){
+                $phone .= '-';
+                $count++;
+            }
+        }
+
+        return $phone;
+    }
+
 }
