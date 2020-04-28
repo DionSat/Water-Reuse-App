@@ -25,7 +25,20 @@
                         @if($user->countryCode)
                             <td>{{$user->countryCode}}-{{$user->phoneNumber}}</td>
                         @else
-                            <td>{{$user->phoneNumber}}</td>
+                            <!-- <td>{{$user->phoneNumber}}</td> -->
+                            @php
+                            $new = strval($user->phoneNumber);
+                            $phone = ' ';
+                            $count = 0;
+                            for($i = 0; $i < 10; $i++){
+                                $phone .= $new[$i];
+                                if(($i+1) % 3 == 0 && $count < 2){
+                                    $phone .= '-';
+                                    $count++;
+                                }
+                            }
+                            @endphp
+                            <td>{{$phone}}</td>
                         @endif
                     </tr>
                     <tr>
