@@ -67,7 +67,7 @@ Class RegulationController extends Controller{
 
             $codesLink = new Links();
             $permitLink = new Links();
-            $insentivesLink = new Links();
+            $incentivesLink = new Links();
             $moreInfoLink = new Links();
 
 
@@ -79,9 +79,9 @@ Class RegulationController extends Controller{
             $permitLink->save();
             $mergeTable->permit = $permitLink->link_id;
 
-            $insentivesLink->linkText = $regList['$insentivesLink'];
-            $insentivesLink->save();
-            $mergeTable->incentives = $insentivesLink->link_id;
+            $incentivesLink->linkText = $regList['$incentivesLink'];
+            $incentivesLink->save();
+            $mergeTable->incentives = $incentivesLink->link_id;
 
             $moreInfoLink->linkText = $regList['$moreInfoLink'];
             $moreInfoLink->save();
@@ -95,7 +95,7 @@ Class RegulationController extends Controller{
             {
                 $codesLink->delete();
                 $permitLink->delete();
-                $insentivesLink->delete();
+                $incentivesLink->delete();
                 $moreInfoLink->delete();
             }
         }

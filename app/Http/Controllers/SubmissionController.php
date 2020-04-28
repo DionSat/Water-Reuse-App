@@ -100,19 +100,19 @@ class SubmissionController extends Controller
 
         switch ($request->type) {
             case 'State':
-                $submission = PendingStateMerge::where('id', $request->itemId)->get()->first();
+                $submission = PendingStateMerge::where('id', $request->itemId)->withTrashed()->get()->first();
                 $counties = County::where('fk_state', $submission->stateID)->get();
                 $submissionState = $submission->stateID;
                 break;
             case 'County':
-                $submission = PendingCountyMerge::where('id', $request->itemId)->get()->first();
+                $submission = PendingCountyMerge::where('id', $request->itemId)->withTrashed()->get()->first();
                 $counties = County::where('fk_state', $submission->county->state->state_id)->get();
                 $cities = City::where('fk_county', $submission->countyID)->get();
                 $submissionCounty = $submission->countyID;
                 $submissionState = $submission->county->state->state_id;
                 break;
             case 'City':
-                $submission = PendingCityMerge::where('id', $request->itemId)->get()->first();
+                $submission = PendingCityMerge::where('id', $request->itemId)->withTrashed()->get()->first();
                 $submissionCity = $submission->cityID;
                 $submissionCounty = $submission->city->county->county_id;
                 $submissionState = $submission->city->county->state->state_id;
@@ -136,7 +136,7 @@ class SubmissionController extends Controller
 
         switch ($request->type) {
             case 'State':
-                $submission = PendingStateMerge::where('id', $request->id)->get()->first();
+                $submission = PendingStateMerge::where('id', $request->id)->withTrashed()->get()->first();
                 $submissionInfo = $submission->toArray();
                 if($request->county > -1 && $request->city > -1){
                     $submission->forceDelete();
@@ -151,7 +151,7 @@ class SubmissionController extends Controller
                 }
                 break;
             case 'County':
-                $submission = PendingCountyMerge::where('id', $request->id)->get()->first();
+                $submission = PendingCountyMerge::where('id', $request->id)->withTrashed()->get()->first();
                 $submissionInfo = $submission->toArray();
                 if($request->county == -1){
                     $submission->forceDelete();
@@ -166,7 +166,7 @@ class SubmissionController extends Controller
                 }
                 break;
             case 'City':
-                $submission = PendingCityMerge::where('id', $request->id)->get()->first();
+                $submission = PendingCityMerge::where('id', $request->id)->withTrashed()->get()->first();
                 $submissionInfo = $submission->toArray();
                 if($request->county == -1){
                     $submission->forceDelete();
