@@ -78,8 +78,8 @@ class ReuseNodeController extends Controller
         $node->save();
 
         if($oldValue === $node->node_name)
-            return redirect()->route('reuseNodeView')->with(['alert' => 'success', 'alertMessage' => 'values have been updated']);
+            return redirect()->route('reuseNodeView')->with(['alert' => 'success', 'alertMessage' => 'The node '.$node->node_name.' has been updated.']);
         else
-            return redirect()->route('reuseNodeView')->with(['alert' => 'success', 'alertMessage' => $oldValue . ' has been changed to ' . $node->node_name . ' & values have been updated']);
+            return redirect()->route('reuseNodeView')->with(['alert' => 'success', 'alertMessage' => $oldValue . ' has been changed to ' . $node->node_name . ' & values have been updated.']);
     }
 }

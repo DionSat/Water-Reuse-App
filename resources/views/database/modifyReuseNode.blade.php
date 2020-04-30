@@ -11,24 +11,23 @@
         {{ csrf_field() }}
         <div class="container">
             <div class="row mt-3 mb-5">
-                <div class="card h-100 shadow  mx-auto text-center">
-                    <div class="card-header">
-                        <h3>Current Node</h3>
-                        <h4>{{$node->node_name}}</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="d-flex">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-default">New Name</span>
-                                </div>
-                                <input type="text" name="newValue" class="form-control" aria-label="Default"
-                                       aria-describedby="inputGroup-sizing-default" value="{{$node->node_name}}">
-                                <input type="text" name="node_id" value="{{$node->node_id}}" hidden>
-                            </div>
+                <div class="col-md-6 mx-auto">
+                    <div class="card h-100 shadow  mx-auto text-center">
+                        <div class="card-header">
+                            <h3>{{$node->node_name}}</h3>
                         </div>
-                        <div class="d-flex">
-                            <div class="input-group mb-3">
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
+                                    </div>
+                                    <input type="text" name="newValue" class="form-control" aria-label="Default"
+                                           aria-describedby="inputGroup-sizing-default" value="{{$node->node_name}}">
+                                    <input type="text" name="node_id" value="{{$node->node_id}}" hidden>
+                                </div>
+                            </div>
+                            <div class="input-group d-flex justify-content-between my-3">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" id="is_source_checkbox" type="checkbox" name="is_source"@if($node->is_source === true) checked @endif>
                                     <label class="form-check-label" for="is_source_checkbox">Source</label>
@@ -45,11 +44,11 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <button type="submit" class="btn btn-success btn-large btn-block"><i class="fas fa-edit"></i> Edit </button>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-8 mx-auto">
+                                    <button type="submit" class="btn btn-success btn-large btn-block mx-auto"><i class="fas fa-edit"></i> Save </button>
+                                </div>
                             </div>
                         </div>
                     </div>
