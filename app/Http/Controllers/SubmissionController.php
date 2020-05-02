@@ -24,12 +24,12 @@ class SubmissionController extends Controller
     public function view()
     {
         $user = Auth::user();
-        $stateSubmissions = PendingStateMerge::withTrashed()->where('user_id', $user->id)->get();
-        $citySubmissions = PendingCityMerge::withTrashed()->where('user_id', $user->id)->get();
-        $countySubmissions = PendingCountyMerge::withTrashed()->where('user_id', $user->id)->get();
-        $stateApproved = StateMerge::where('user_id', $user->id)->get();
-        $cityApproved = CityMerge::where('user_id', $user->id)->get();
-        $countyApproved = CountyMerge::where('user_id', $user->id)->get();
+        $stateSubmissions = PendingStateMerge::withTrashed()->with(['user', 'source', 'destination'])->where('user_id', $user->id)->get();
+        $citySubmissions = PendingCityMerge::withTrashed()->with(['user', 'source', 'destination'])->where('user_id', $user->id)->get();
+        $countySubmissions = PendingCountyMerge::withTrashed()->with(['user', 'source', 'destination'])->where('user_id', $user->id)->get();
+        $stateApproved = StateMerge::where('user_id', $user->id)->with(['user', 'source', 'destination'])->get();
+        $cityApproved = CityMerge::where('user_id', $user->id)->with(['user', 'source', 'destination'])->get();
+        $countyApproved = CountyMerge::where('user_id', $user->id)->with(['user', 'source', 'destination'])->get();
         return view('submission.submission', compact('user', 'stateSubmissions', 'citySubmissions', 'countySubmissions', 'stateApproved', 'cityApproved', 'countyApproved'));
     }
 

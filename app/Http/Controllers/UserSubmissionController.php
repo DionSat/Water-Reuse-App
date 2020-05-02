@@ -35,7 +35,7 @@ class UserSubmissionController extends Controller
     public function userCity() 
     {
         $user = Auth::user();
-        $citySubmissions = PendingCityMerge::all();
+        $citySubmissions = PendingCityMerge::with(['user', 'source', 'destination'])->get();
         return view('userSubmission.userCitySubmission', compact('user', 'citySubmissions'));
 
     }
@@ -43,14 +43,14 @@ class UserSubmissionController extends Controller
     public function userState() 
     {
         $user = Auth::user();
-        $stateSubmissions = PendingStateMerge::all();
+        $stateSubmissions = PendingStateMerge::with(['user', 'source', 'destination'])->get();
         return view('userSubmission.userStateSubmission', compact('user', 'stateSubmissions'));
     }
 
     public function userCounty()
     {
         $user = Auth::user();
-        $countySubmissions = PendingCountyMerge::all();
+        $countySubmissions = PendingCountyMerge::with(['user', 'source', 'destination'])->get();
         return view('userSubmission.userCountySubmission', compact('user', 'countySubmissions'));
     }
 
