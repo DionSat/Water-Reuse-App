@@ -5,15 +5,10 @@
     <div class="container">
         <h2 class="text-center my-4"> Dashboard</h2>
         <hr>
-        <div class="row justify-content-md-center">
-            <div class="col col-lg-2">
-                <button onclick="loadStats()" class="btn btn-primary d-block"> Services & Stats </button>
-            </div>
-            <div class="col-md-auto"></div>
-            <div class="col col-lg-2">
-                <button onclick="loadDBStats()" class="btn btn-primary d-block"> Database </button>
-            </div>
-        </div>
+        <nav class="nav nav-pills" style="display: flex; justify-content: center;">
+            <a class="nav-link active" onclick="loadStats()" id="svcBtn" data-toggle="tab" style="cursor: pointer;"> Services & Stats </a>
+            <a class="nav-link" onclick="loadDBStats()" id="dbBtn" data-toggle="tab" style="cursor: pointer;"> Database </a>
+        </nav>
         </br>
 
         <div class="container" id="statsPage">
@@ -154,6 +149,8 @@
     function loadStats() {
         var stats = document.getElementById("statsPage");
         var DBstats = document.getElementById("dbStatsPage");
+        var svcBtn = document.getElementById("svcBtn");
+        var dbBtn = document.getElementById("dbBtn");
         stats.style.display = "block";
         DBstats.style.display = "none";
     }
@@ -161,6 +158,8 @@
     function loadDBStats() {
         var stats = document.getElementById("statsPage");
         var DBstats = document.getElementById("dbStatsPage");
+        var svcBtn = document.getElementById("svcBtn");
+        var dbBtn = document.getElementById("dbBtn");
         stats.style.display = "none";
         DBstats.style.display = "block";
     }
