@@ -38,11 +38,11 @@ class AdminController extends Controller
         $canEmailCount = User::where('can_contact', true)->count();
         $userAndEmail = [];
         $userAndEmail[] = ["title" => "All Users", "count" => $allUserCount, "view" => route("getUsers")];
-        $userAndEmail[] = ["title" => "Users Emails", "count" => $canEmailCount, "view" => route("viewEmail")];
+        $userAndCanEmail[] = ["title" => "Users Emails", "count" => $canEmailCount, "view" => route("viewEmail")];
         if ($user->is_admin === false)
             abort(404);
         else
-            return view("admin.dashboard", compact('userAndEmail', 'allUsers', 'locationCards', 'sourcesAndDestinations', 'linksAndOther'));
+            return view("admin.dashboard", compact('userAndEmail', 'userAndCanEmail', 'allUsers', 'locationCards', 'sourcesAndDestinations', 'linksAndOther'));
     }
 
     public function viewEmail()
