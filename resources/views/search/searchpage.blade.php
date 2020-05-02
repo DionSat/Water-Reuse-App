@@ -35,7 +35,7 @@
                                     <label for="stateSelect" class="col-md-4 col-form-label"> <strong> State </strong> </label>
                                     <div class="col-md-6 text-center">
                                         <select id="stateSelect" name="state_id" class="form-control">
-                                            <option value="" disabled selected>Select a state</option>
+                                            <option value="-1" disabled selected>Select a state</option>
                                             @foreach($states as $state)
                                                 <option value="{{$state->state_id}}">{{$state->stateName}}</option>
                                             @endforeach
@@ -47,7 +47,7 @@
                                     <div class="col-md-6 text-center">
                                         <i id="countySpinner" class="fas fa-spinner fa-pulse mt-2 d-none"></i>
                                         <select id="countySelect" name="county_id" class="form-control">
-                                            <option value="" disabled selected>Select a state first</option>
+                                            <option value="-1" disabled selected>Select a state first</option>
                                         </select>
                                     </div>
                                 </div>
@@ -56,12 +56,12 @@
                                     <div class="col-md-6 text-center">
                                         <i id="citySpinner" class="fas fa-spinner fa-pulse mt-2 d-none"></i>
                                         <select id="citySelect" name="city_id" class="form-control">
-                                            <option value="" disabled selected>Select a county first</option>
+                                            <option value="-1" disabled selected>Select a county first</option>
                                         </select>
                                     </div>
                                 </div>
                                 <input id="searchType" name="searchType" class="d-none" type="text" value="residential">
-                                <button id="searchButton" class="btn btn-primary mx-auto btn-block w-50 mt-4" type="submit"> <i class="fas fa-search"></i> Search </button>
+                                <button id="searchButton" class="btn btn-primary mx-auto btn-block w-50 mt-4" type="submit" disabled="true"> <i class="fas fa-search"></i> Search </button>
                              </form>
                         </div>
                     </div>
@@ -117,10 +117,6 @@
             }
         });
 
-        function disableSearch() {
-            $("#searchButton").attr("disabled", true);
-        }
-
         function enableSearch() {
             $("#searchButton").removeAttr("disabled");
         }
@@ -147,14 +143,13 @@
 
 
         $( "#stateSelect" ).change(function() {
+            enableSearch();
             showCountySpinner();
-            disableSearch();
             axios.get("{{route("counties-api")}}"+"/"+stateSelect.value)
                 .then(function (response) {
                     hideCountySpinner();
-                    enableSearch();
-                    $("#countySelect").html(response.data.map(obj => "<option value='"+obj.county_id+"'>"+obj.countyName+"</option>").join("\n"));
-                    $("#countySelect").change();
+                    $("#countySelect").html('<option id="chooseCounty" value="-1" disabled selected>Choose...</option>'+
+                        response.data.map(obj => "<option value='"+obj.county_id+"'>"+obj.countyName+"</option>").join("\n"));
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -163,15 +158,14 @@
         });
         $( "#countySelect" ).change(function() {
             showCitySpinner();
-            disableSearch();
             axios.get("{{route("cities-api")}}"+"/"+countySelect.value)
                 .then(function (response) {
                     hideCitySpinner();
-                    enableSearch();
                     console.log(response.data);
                     console.log(response.data.length);
                     if(response.data.length != 0){
-                        $("#citySelect").html(response.data.map(obj => "<option value='"+obj.city_id+"'>"+obj.cityName+"</option>").join("\n"));
+                        $("#citySelect").html('<option id="chooseCounty" value="-1" disabled selected>Choose...</option>'+
+                            response.data.map(obj => "<option value='"+obj.city_id+"'>"+obj.cityName+"</option>").join("\n"));
                     } else {
                         $("#citySelect").html("<option value='' disabled selected>No cities found in county</option>");
                     }
