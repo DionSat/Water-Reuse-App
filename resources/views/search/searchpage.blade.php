@@ -6,7 +6,7 @@
             <h3 class="text-center mt-5"> Select the property type: </h3>
             <div class="row justify-content-center mt-0 mt-md-5">
                 <div class="col-md-4">
-                    <div class="card text-center selection-card commercial">
+                    <div class="card text-center selection-card commercial border-dark">
                         <div class="card-body">
                             <i class="display-icon fas fa-industry"></i>
                             <h1> Commercial </h1>
@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card text-center selection-card residential">
+                    <div class="card text-center selection-card residential border-dark">
                         <div class="card-body">
                             <i class="display-icon fas fa-home"></i>
                             <h1> Residential </h1>
@@ -97,10 +97,12 @@
     <script>
 
         $(".selection-card").hover(function () {
+            $(this).removeClass("border-dark");
             $(this).addClass("shadow border border-info");
         },
         function () {
             $(this).removeClass("shadow border border-info");
+            $(this).addClass("border-dark");
         });
 
         $(".selection-card").click(function () {
