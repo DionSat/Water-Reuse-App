@@ -71,9 +71,6 @@
                             <li class="nav-item @if (Route::current()->getName() == "admin") active @endif">
                                 <a class="nav-link" href="{{ route('admin') }}"><i class="fas fa-tachometer-alt"></i> Dashboard </a>
                             </li>
-                            <li class="nav-item @if (Route::current()->getName() == "database") active @endif">
-                                <a class="nav-link" href="{{ route('database') }}"><i class="fas fa-database"></i> Database </a>
-                            </li> 
                             <li class="nav-item @if (Route::current()->getName() == "admin-userSubmission") active @endif">
                                 <a class="nav-link" href="{{ route('userSubmission2') }}"><i class="fas fa-bars"></i> Submissions </a>
                             </li>
