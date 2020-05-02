@@ -44,7 +44,7 @@
             </div>
         </div>
 
-        <div class="container" id="dbStatsPage">
+        <div class="container" id="dbStatsPage" style="display: none">
             <h3 class="mt-4"> Locations </h3>
             <hr>
             <div class="row">
