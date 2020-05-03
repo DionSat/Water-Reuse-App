@@ -10,14 +10,17 @@
 
 <style>
     @import url(https://fonts.googleapis.com/css?family=Arvo:700italic);
-    @import url(https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css)
+    @import url(https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
     .text-wrap {
-  white-space: normal;
-}
-    .codes:hover{
-        color: #0ff;
+        white-space: normal;
     }
-
+    .waterSource{
+        background-color: #000;
+    }
+    #source0{
+        background-color: #000;
+    }
+/*
     body {
         background: #222;
         color: #fff;
@@ -56,7 +59,7 @@
     .messageText {
         fill: #222;
         stroke: #fff;
-    }
+    } */
 </style>
 @endpush
 @push("js")
@@ -68,21 +71,44 @@
     $(document).ready(function(){
         $waterSources = new Array("Condensate", "Harvested Water", "Surface Water", "Stormwater Runoff", "Shallow Groundwater", "Aquifer");
         $count = 0;
+        $buffer = 0;
         $sourceCount = 0;
-        $index = "Condensate";
+        $fixtureCount = 0;
+        $wasSet = false;
+        $fixtures = new Array("Kitchen Sink", "Kitchen Sink + Disposal", "Dishwasher", "Lavatory", "Tub Shower", "Fire Suppression", "Mechanical Cooling + P-Trap Prime", "Clothes Washer", "Toilet", "Composting Toilet", "Urinel", "Water Reuse Urinal or Urine Diverter");
 
-        $source = '<div class="mermaid"> graph LR;';
+        // $source = '<div class="mermaid"> graph LR;';
         for(i = 0; i < $waterSources.length; ++i)
         {
+            $source = '<div class="mermaid"> graph LR;';
             for(j = 0; j < 12; ++j)
             {
                 $source += 'source' + $sourceCount + '('+ $waterSources[i] + '):::waterSource --> code' + $count + '["#128279;"]:::codes;';
+                $buffer = $count;
                 $count++;
+                $source += 'code' + $buffer + ' --> code' + $count + '["#128279;"]:::codes;';
+                $buffer = $count;
+                $count++;
+                $source += 'code' + $buffer + ' --> code' + $count + '["#128279;"]:::codes;';
+                $buffer = $count;
+                $count++;
+                $source += 'code' + $buffer + ' --> code' + $count + '["#128279;"]:::codes;';
+                if(!$wasSet)
+                {
+                    $source += 'code' + $count + ' --> fixuture' + $fixtureCount + '('+ $fixtures[$fixtureCount] + '):::fixture;';
+                }
+                else{
+                    $source += 'code' + $count + ' --> fixuture' + $fixtureCount + ';';
+                }
+                $count++;
+                $fixtureCount++;
             }
             $sourceCount++;
+            $fixtureCount = 0;
+            $source += 'class source0 cssClass;\n classDef waterSource:hover fill:#0ff;\nclassDef codes fill:#8A2BE2;';
+            $("#mer").append($source);
         }
-        $source += 'classDef waterSource fill:#0ff;\nclassDef codes fill:#8A2BE2;';
-        $("#mer").append($source);
+
     })
     var config = {
             startOnLoad: true,
