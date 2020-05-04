@@ -12,7 +12,7 @@
         </br>
 
         <div class="container" id="statsPage">
-            <h3 class="mt-4"> User Management</h3>
+            <h3 class="mt-4">User Management</h3>
             <hr>
 
             <div class="row">
@@ -22,7 +22,7 @@
                             <div class="card-body">
                                 <div class="d-flex">
                                     <div class="p-2 mr-3 w-75">
-                                        <h4 class="card-title"> Edit Users</h4>
+                                        <h4 class="card-title">Edit Users</h4>
                                     </div>
                                     <div>
                                         <h1 class="m-3 flex-grow-1 w-100 text-muted"> {{$card["count"]}}</h1>
@@ -39,13 +39,13 @@
                         </div>
                     </div>
                 @endforeach
-                    @foreach($userAndCanEmail as $card)
+                @foreach($userAndCanEmail as $card)
                         <div class="col-md-3">
                             <div class="card h-80 shadow">
                                 <div class="card-body">
                                     <div class="d-flex">
                                         <div class="p-2 mr-3 w-75">
-                                            <h4 class="card-title"> Contact Users</h4>
+                                            <h4 class="card-title">Contact Users</h4>
                                         </div>
                                         <div>
                                             <h1 class="m-3 flex-grow-1 w-100 text-muted"> {{$card["count"]}}</h1>
@@ -62,6 +62,29 @@
                             </div>
                         </div>
                     @endforeach
+            </div>
+            <h3 class="mt-4">Server Stastics</h3>
+            <hr>
+
+            <div class="row">
+                @foreach($userAndEmail as $card)
+                    <div class="col-md-4">
+                        <div class="card h-80 shadow">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <div class="p-2 mr-3 w-75">
+                                        <h4 class="card-title">CPU load</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="form-row mt-3 justify-content-center">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
 
