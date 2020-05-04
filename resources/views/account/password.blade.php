@@ -15,34 +15,67 @@
                 {{ session('danger') }}
             </div>
         @endif
-        <form action={{ route('changePassword') }} method="POST">
-            {{ csrf_field() }}
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label for="inputPasswordOld1">Old Password</label><input type="password" class="form-control"
-                                                                              name="inputPasswordOld1"
-                                                                              placeholder="Password">
+        <div id="myAlert" class="alert alert-danger" style="display:none" role="alert">Passwords don't match</div>
+        <form action="{{route('changePassword')}}" method="POST" >
+            {{csrf_field()}}
+            <div class="row mt-3 mb-5">
+                <div class="col-md-4 mx-auto">
+                    <div class="card h-100 shadow mx-auto text-center">
+                        <div class="card-header">
+                            <h3>Change password</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text">New password</label>
+                                    </div>
+                                    <input type="password" id="pw" name="newPW" class="form-control" aria-label="Default"
+                                           aria-describedby="inputGroup-sizing-default"  onkeyup="validate()" placeholder="New password">
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text">Verify password</label>
+                                    </div>
+                                    <input type="password" id="pw2" name="newPW2" class="form-control" aria-label="Default"
+                                           aria-describedby="inputGroup-sizing-default" placeholder="New password" onkeyup="validate()">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-6">
+                                        <button id="btnSubmit" type="submit" class="btn btn-success btn-large btn-block"><i
+                                                class="fas fa-edit"></i>
+                                            Save
+                                        </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="inputPasswordOld2">Verify Password</label>
-                    <input type="password" class="form-control" name="inputPasswordOld2"
-                           placeholder="Re-enter Password">
-                </div>
-
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label
-                        for="newPW">New Password</label>
-                    <input type="password" class="form-control" name="newPW" placeholder="New Password">
-                </div>
-                <div class="form-group col-md-4">
-                    <label
-                        for="newPW2">Verify new password</label>
-                    <input type="password" class="form-control" name="newPW2" placeholder="Verify new Password">
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Save</button>
         </form>
     </div>
 @endsection
+
+@push("js")
+  <script>
+      function validate() {
+          console.log("checking..");
+          var pw = document.getElementById("pw").value;
+          var pw2 = document.getElementById("pw2").value;
+          if(pw != pw2) {
+              $("#myAlert").show();
+              console.log(pw);
+              document.getElementById("btnSubmit").disabled = true;
+              return false;
+          }
+          $("#myAlert").hide();
+          console.log("condition2");
+          document.getElementById("btnSubmit").disabled = false;
+      }
+  </script>
+@endpush
