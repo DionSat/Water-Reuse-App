@@ -40,7 +40,7 @@ class AdminController extends Controller
         $userAndEmail[] = ["title" => "All Users", "count" => $allUserCount, "view" => route("getUsers")];
         $userAndCanEmail[] = ["title" => "Users Emails", "count" => $canEmailCount, "view" => route("viewEmail")];
 
-        /*
+        
         $free = shell_exec('free');
         $free = (string)trim($free);
         $free_arr = explode("\n", $free);
@@ -50,7 +50,6 @@ class AdminController extends Controller
         $memory_usage = $mem[2]/$mem[1]*100;
 
         $load = shell_exec(sys_getloadavg());
-        */
 
         if ($user->is_admin === false)
             abort(404);
