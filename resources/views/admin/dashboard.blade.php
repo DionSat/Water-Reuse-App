@@ -63,29 +63,7 @@
                         </div>
                     @endforeach
             </div>
-            <h3 class="mt-4">Server Stastics</h3>
-            <hr>
 
-            <div class="row">
-                @foreach($userAndEmail as $card)
-                    <div class="col-md-4">
-                        <div class="card h-80 shadow">
-                            <div class="card-body">
-                                <div class="d-flex">
-                                    <div class="p-2 mr-3 w-75">
-                                        <h4 class="card-title">CPU load</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                <div class="form-row mt-3 justify-content-center">
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
         </div>
 
         <div class="container" id="dbStatsPage" style="display: none">
