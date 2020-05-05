@@ -22,7 +22,7 @@ class AdminController extends Controller
         $locationCards[] = ["title" => "Counties", "subheading" => "Counties in States", "count" => $countyNumber, "manageData" => route("countyView"), "addData" => route("countyAdd")];
         $locationCards[] = ["title" => "States", "subheading" => "States in the US", "count" => $stateNumber, "manageData" => route("stateView"), "addData" => route("stateAdd")];
 
-        $sources = DB::table('reusenodes')->where("is_source", true)->count();
+        $sources = DB::table('reusenodes')->count();
 
         $sourcesAndDestinations = [];
         $sourcesAndDestinations[] = ["title" => "Reuse Nodes", "subheading" => "Water Sources, Destinations, and Fixtures ", "count" => $sources, "manageData" => route("reuseNodeView"), "addData" => route("reuseNodeAdd")];
