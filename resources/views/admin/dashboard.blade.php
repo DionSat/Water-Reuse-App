@@ -173,27 +173,12 @@
 @push("js")
 <script>
     function loadStats() {
-        var stats = document.getElementById("statsPage");
-        var DBstats = document.getElementById("dbStatsPage");
-        var svcBtn = document.getElementById("svcBtn");
-        var dbBtn = document.getElementById("dbBtn");
-        stats.style.display = "block";
-        DBstats.style.display = "none";
+        document.getElementById("statsPage").style.display = "block";
+        document.getElementById("dbStatsPage").style.display = "none";
     }
 
     function loadDBStats() {
-        var stats = document.getElementById("statsPage");
-        var DBstats = document.getElementById("dbStatsPage");
-        var svcBtn = document.getElementById("svcBtn");
-        var dbBtn = document.getElementById("dbBtn");
-        stats.style.display = "none";
-        DBstats.style.display = "block";
-    }
-
-    function onLoad() {
-        var stats = document.getElementById("statsPage");
-        var DBstats = document.getElementById("dbStatsPage");
-        stats.style.display = "block";
-        DBstats.style.display = "none";
+        document.getElementById("statsPage").style.display = "none";
+        document.getElementById("dbStatsPage").style.display = "block";
     }
 </script>
