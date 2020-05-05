@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('body')
-    <body onload="onLoad()">
     <div class="container">
         <h2 class="text-center my-4"> Dashboard</h2>
         <hr>
