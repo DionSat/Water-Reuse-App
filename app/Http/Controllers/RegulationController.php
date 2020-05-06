@@ -70,21 +70,42 @@ Class RegulationController extends Controller{
             $incentivesLink = new Links();
             $moreInfoLink = new Links();
 
-
-            $codesLink->linkText = $regList['$codesLink'];
-            $codesLink->save();
+            $holdingVar = Links::where('linkText', $regList['$codesLink'])->get();
+            if(count($holdingVar) > 0){
+                $codesLink = Links::where('linkText', $regList['$codesLink'])->get()->first();
+            }else{
+                $codesLink->linkText = $regList['$codesLink'];
+                $codesLink->save();
+            }
             $mergeTable->codes = $codesLink->link_id;
 
-            $permitLink->linkText = $regList['$permitLink'];
-            $permitLink->save();
+            $holdingVar = Links::where('linkText', $regList['$permitLink'])->get();
+            if(count($holdingVar) > 0){
+                $permitLink = Links::where('linkText', $regList['$permitLink'])->get()->first();
+                
+            }else{
+                $permitLink->linkText = $regList['$permitLink'];
+                $permitLink->save();
+            }
             $mergeTable->permit = $permitLink->link_id;
 
-            $incentivesLink->linkText = $regList['$incentivesLink'];
-            $incentivesLink->save();
+            $holdingVar = Links::where('linkText', $regList['$incentivesLink'])->get();
+            if(count($holdingVar) > 0){
+                $incentivesLink = Links::where('linkText', $regList['$incentivesLink'])->get()->first();
+            }else{
+                $incentivesLink->linkText = $regList['$incentivesLink'];
+                $incentivesLink->save();
+            }
             $mergeTable->incentives = $incentivesLink->link_id;
 
-            $moreInfoLink->linkText = $regList['$moreInfoLink'];
-            $moreInfoLink->save();
+            $holdingVar = Links::where('linkText', $regList['$moreInfoLink'])->get();
+            if(count($holdingVar) > 0) {
+                $moreInfoLink = Links::where('linkText', $regList['$moreInfoLink'])->get()->first();
+                
+            }else{
+                $moreInfoLink->linkText = $regList['$moreInfoLink'];
+                $moreInfoLink->save();
+            }
             $mergeTable->moreInfo = $moreInfoLink->link_id;
 
             $mergeTable->sourceID = $regList['$sourceId'];

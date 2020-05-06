@@ -8,6 +8,7 @@ use App\State;
 use App\County;
 use App\City;
 use App\Allowed;
+use App\Links;
 use Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -187,18 +188,47 @@ class SubmissionController extends Controller
         $submission->allowedID = $request->allowed;
         $submission->sourceID = $request->source;
         $submission->destinationID = $request->destination;
-        $codes = $submission->codesObj()->first();
-        $codes->linkText = $request->codes;
-        $codes->save();
-        $permit = $submission->permitObj()->first();
-        $permit->linkText = $request->permit;
-        $permit->save();
-        $incentives = $submission->incentivesObj()->first();
-        $incentives->linkText = $request->incentives;
-        $incentives->save();
-        $moreInfo = $submission->moreInfoObj()->first();
-        $moreInfo->linkText = $request->moreInfo;
-        $moreInfo->save();
+
+        $holdingVar = Links::where('linkText', $request->codes)->get();
+        if(count($holdingVar) > 0){
+            $submission->codes = Links::where('linkText', $request->codes)->get()->first()->link_id;
+        }else{
+            $codes = new Links();
+            $codes->linkText = $request->codes;
+            $codes->save();
+            $submission->codes = $codes->link_id;
+        }
+                   
+        $holdingVar = Links::where('linkText', $request->permit)->get();
+        if(count($holdingVar) > 0){
+            $submission->permit = Links::where('linkText', $request->permit)->get()->first()->link_id;
+        }else{
+            $permit = new Links();
+            $permit->linkText = $request->permit;
+            $permit->save();
+            $submission->permit = $permit->link_id;
+        }
+           
+        $holdingVar = Links::where('linkText', $request->incentives)->get();
+        if(count($holdingVar) > 0){
+            $submission->incentives = Links::where('linkText', $request->incentives)->get()->first()->link_id;
+        }else{
+            $incentives = new Links();
+            $incentives->linkText = $request->incentives;
+            $incentives->save();
+            $submission->incentives = $incentives->link_id;
+        }
+        
+        $holdingVar = Links::where('linkText', $request->moreInfo)->get();
+        if(count($holdingVar) > 0){
+            $submission->moreInfo = Links::where('linkText', $request->moreInfo)->get()->first()->link_id;
+        }else{
+            $moreInfo = new Links();
+            $moreInfo->linkText = $request->moreInfo;
+            $moreInfo->save();
+            $submission->moreInfo = $moreInfo->link_id;
+        }
+
         $submission->save();
 
         return redirect()->route('submission')->with(['alert' => 'success', 'alertMessage' => 'The submission has been updated.']);
