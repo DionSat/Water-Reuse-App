@@ -28,6 +28,15 @@
                             <div class="d-flex">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
+                                        <label class="input-group-text">Old password</label>
+                                    </div>
+                                    <input type="password" id="Oldpw" name="oldPW" class="form-control" aria-label="Default"
+                                           aria-describedby="inputGroup-sizing-default"  placeholder="Old password">
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
                                         <label class="input-group-text">New password</label>
                                     </div>
                                     <input type="password" id="pw" name="newPW" class="form-control" aria-label="Default"
@@ -64,17 +73,14 @@
 @push("js")
   <script>
       function validate() {
-          console.log("checking..");
           var pw = document.getElementById("pw").value;
           var pw2 = document.getElementById("pw2").value;
           if(pw != pw2) {
               $("#myAlert").show();
-              console.log(pw);
               document.getElementById("btnSubmit").disabled = true;
               return false;
           }
           $("#myAlert").hide();
-          console.log("condition2");
           document.getElementById("btnSubmit").disabled = false;
       }
   </script>
