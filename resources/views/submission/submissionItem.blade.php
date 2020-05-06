@@ -20,7 +20,7 @@
                                 </div>
                             @else
                                 <span class="text-center">
-                                        <a style="margin: 25px 10px 0px 10px" href="{{route('submissionEdit')."/".'State'."/".$item->id}}" class="btn btn-primary"> Edit </a>
+                                        <a style="margin: 25px 10px 0px 10px" href="{{route('submissionEdit')."/".$type."/".$item->id}}" class="btn btn-primary"> Edit </a>
                                 </span>
                                 <form action={{ route('deleteUnapproved') }} method="POST">
                                     {{ csrf_field() }}
