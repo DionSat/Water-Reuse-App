@@ -12,7 +12,6 @@
         <div class="container">
             <div class="row mt-3 mb-5">
                 <div class="col-md-4 mx-auto">
-
                     <div class="card h-100 shadow  mx-auto text-center">
                         <div class="card-header">
                             <h3>Current Link URL</h3>
