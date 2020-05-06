@@ -14,7 +14,7 @@
                         <i id="cityGroupIcon" class="fas fa-chevron-right fa-rotate-90 p-1"></i> {{$city->cityName}}
                     </span>
 
-                        <h3><span class="badge badge-primary">{{$cityRules->count()}} Reuse Rules</span> </h3>
+                        <h3><span class="badge badge-primary">{{$cityRules->count()}} {{$cityRules->count() == 1 ? "Reuse Rule" : "Reuse Rules"}}</span> </h3>
                     </div>
                     <div id="cityCollapse" class="collapsible collapse p-4 overflow-auto show" data-level="city">
                         @if($cityRules->count() == 0)
@@ -33,7 +33,7 @@
                         <i id="countyGroupIcon" class="fas fa-chevron-right {{$lowestLevel == "county" ? "fa-rotate-90" : ""}} p-1"></i> {{$county->countyName}}
                     </span>
 
-                        <h3><span class="badge badge-primary">{{$countyRules->count()}} Reuse Rules</span> </h3>
+                        <h3><span class="badge badge-primary">{{$countyRules->count()}} {{$countyRules->count() == 1 ? "Reuse Rule" : "Reuse Rules"}}</span> </h3>
                     </div>
                     <div id="countyCollapse" class="collapsible collapse p-4 overflow-auto {{$lowestLevel == "county" ? "show" : ""}}" data-level="county">
                         @if($countyRules->count() == 0)
@@ -50,7 +50,7 @@
                         <i id="stateGroupIcon" class="fas fa-chevron-right {{$lowestLevel == "state" ? "fa-rotate-90" : ""}} p-1"></i> {{$state->stateName}}
                     </span>
 
-                        <h3><span class="badge badge-primary">{{$stateRules->count()}} Reuse Rules</span> </h3>
+                        <h3><span class="badge badge-primary">{{$stateRules->count()}} {{$stateRules->count() == 1 ? "Reuse Rule" : "Reuse Rules"}}</span> </h3>
                     </div>
                     <div id="stateCollapse" class="collapsible collapse p-4 overflow-auto {{$lowestLevel == "state" ? "show" : ""}}" data-level="state">
                         @if($stateRules->count() == 0)
