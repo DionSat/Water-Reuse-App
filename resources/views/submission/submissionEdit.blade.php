@@ -88,8 +88,8 @@
                                     <input type="text" class="form-control" id="codes" placeholder="" value="{{$submission->codesObj->linkText}}" name="codes">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="permits">Link to Permit (Optional)</label>
-                                    <input type="text" class="form-control" id="permits" placeholder="" value="{{$submission->permitObj->linkText}}" name="permit">
+                                    <label for="permit">Link to Permit (Optional)</label>
+                                    <input type="text" class="form-control" id="permit" placeholder="" value="{{$submission->permitObj->linkText}}" name="permit">
                                 </div>
                             </div>
                             <div class="form-row">

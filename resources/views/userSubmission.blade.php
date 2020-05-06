@@ -164,6 +164,10 @@
             getWaterSources(numOfRegs);
             getWaterDestinations(numOfRegs);
             getAllowed(numOfRegs);
+            $("#codes" + numOfRegs).val($("#codes" + (numOfRegs - 1)).val());
+            $("#permits" + numOfRegs).val($("#permits" + (numOfRegs - 1)).val());
+            $("#incentives" + numOfRegs).val($("#incentives" + (numOfRegs - 1)).val());
+            $("#moreInfo" + numOfRegs).val($("#moreInfo" + (numOfRegs - 1)).val());
         });
         $('#submit').click(function(){
             $state = $("#inputState").children("option:selected").text();
