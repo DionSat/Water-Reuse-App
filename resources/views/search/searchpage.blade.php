@@ -6,15 +6,15 @@
             <h3 class="text-center mt-5"> Select the property type: </h3>
             <div class="row justify-content-center mt-0 mt-md-5">
                 <div class="col-md-4">
-                    <div class="card text-center selection-card commercial border-dark">
+                    <div class="card text-center selection-card commercial border-dark initial-selection">
                         <div class="card-body">
                             <i class="display-icon fas fa-industry"></i>
                             <h1> Commercial </h1>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card text-center selection-card residential border-dark">
+                <div class="col-md-4 mt-3 mt-md-0">
+                    <div class="card text-center selection-card residential border-dark initial-selection">
                         <div class="card-body">
                             <i class="display-icon fas fa-home"></i>
                             <h1> Residential </h1>
@@ -26,44 +26,62 @@
         <div id="search-page" class="mt-0 mt-md-5">
             <div class="row d-flex justify-content-center">
                 <div class="search-col col-md-8">
-                    <div class="card">
-                        <div class="card-header text-center"><h3 id="search-title">Search for Location </h3></div>
-                        <div class="card-body">
-                            <form method="POST" action="{{route("search-submit")}}" class="w-75 mx-auto text-right">
-                                {{ csrf_field() }}
-                                <div class="form-group row">
-                                    <label for="stateSelect" class="col-md-4 col-form-label"> <strong> State </strong> </label>
-                                    <div class="col-md-6 text-center">
-                                        <select id="stateSelect" name="state_id" class="form-control">
-                                            <option value="-1" disabled selected>Select a state</option>
-                                            @foreach($states as $state)
-                                                <option value="{{$state->state_id}}">{{$state->stateName}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                    <div class="d-flex justify-content-center">
+                        <div class="mr-2">
+                            <div class="card text-center selection-card commercial">
+                                <div class="card-body py-0 px-3">
+                                    <i class="display-icon-small fas fa-industry mt-2"></i>
+                                    <h5> Commercial </h5>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="countySelect" class="col-md-4 col-form-label"> <strong> County </strong> </label>
-                                    <div class="col-md-6 text-center">
-                                        <i id="countySpinner" class="fas fa-spinner fa-pulse mt-2 d-none"></i>
-                                        <select id="countySelect" name="county_id" class="form-control">
-                                            <option value="-1" disabled selected>Select a state first</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="citySelect" class="col-md-4 col-form-label"> <strong> City </strong> </label>
-                                    <div class="col-md-6 text-center">
-                                        <i id="citySpinner" class="fas fa-spinner fa-pulse mt-2 d-none"></i>
-                                        <select id="citySelect" name="city_id" class="form-control">
-                                            <option value="-1" disabled selected>Select a county first</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <input id="searchType" name="searchType" class="d-none" type="text" value="residential">
-                                <button id="searchButton" class="btn btn-primary mx-auto btn-block w-50 mt-4" type="submit" disabled="true"> <i class="fas fa-search"></i> Search </button>
-                             </form>
+                            </div>
                         </div>
+                        <div class="">
+                            <div class="card text-center selection-card residential">
+                                <div class="card-body py-0 px-3">
+                                    <i class="display-icon-small fas fa-home mt-2"></i>
+                                    <h5> Residential </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="search mt-3">
+                        <h3 id="search-title" class="text-center">Search for Location </h3>
+                        <hr>
+                        <form method="POST" action="{{route("search-submit")}}" class="w-75 mx-auto text-center">
+                            {{ csrf_field() }}
+
+                            <div class="form-group row">
+                                <label for="stateSelect" class="col-sm-2 col-form-label col-form-label-lg"> <strong> State </strong> </label>
+                                <div class="col-sm-10">
+                                    <select id="stateSelect" name="state_id" class="form-control form-control-lg">
+                                        <option value="-1" disabled selected>Select a state</option>
+                                        @foreach($states as $state)
+                                            <option value="{{$state->state_id}}">{{$state->stateName}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="countySelect" class="col-sm-2 col-form-label col-form-label-lg"> <strong> County </strong> </label>
+                                <div class="col-sm-10">
+                                    <i id="countySpinner" class="fas fa-spinner fa-pulse mt-2 d-none"></i>
+                                    <select id="countySelect" name="county_id" class="form-control form-control-lg">
+                                        <option value="-1" disabled selected>Select a state first</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="citySelect" class="col-sm-2 col-form-label col-form-label-lg"> <strong> City </strong> </label>
+                                <div class="col-sm-10">
+                                    <i id="citySpinner" class="fas fa-spinner fa-pulse mt-2 d-none"></i>
+                                    <select id="citySelect" name="city_id" class="form-control form-control-lg">
+                                        <option value="-1" disabled selected>Select a county first</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <input id="searchType" name="searchType" class="d-none" type="text" value="residential">
+                            <button id="searchButton" class="btn btn-primary btn-lg btn-block mt-5" type="submit" disabled="true"> <i class="fas fa-search"></i> Search </button>
+                         </form>
                     </div>
                 </div>
             </div>
@@ -77,6 +95,9 @@
     <style>
         .display-icon {
             font-size: 100px;
+        }
+        .display-icon-small{
+            font-size: 25px;
         }
         .fa-pulse {
             font-size: 25px;
@@ -96,12 +117,12 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
 
-        $(".selection-card").hover(function () {
+        $(".initial-selection").hover(function () {
             $(this).removeClass("border-dark");
-            $(this).addClass("shadow border border-info");
+            $(this).addClass("shadow bg-primary text-light border-none");
         },
         function () {
-            $(this).removeClass("shadow border border-info");
+            $(this).removeClass("shadow bg-primary text-light border-none");
             $(this).addClass("border-dark");
         });
 
@@ -109,11 +130,19 @@
             $(".type-selector").hide();
             $("#search-page").show();
             if($(this).hasClass("commercial")) {
-                $("#searchType").val("commercial");
-                $("#search-title").text("Search for Commercial Locations");
+                $(".commercial").removeClass("border-dark");
+                $(".commercial").addClass("bg-primary text-light border-none");
+                $(".residential").removeClass("bg-primary text-light");
+                $(".residential").addClass("border-dark");
+                $("#searchType").attr("value","commercial");
+                $("#search-title").text("Searching for Commercial Locations");
             } else {
-                $("#searchType").val("residential");
-                $("#search-title").text("Search for Residential Locations");
+                $(".residential").removeClass("border-dark");
+                $(".residential").addClass("bg-primary text-light border-none");
+                $(".commercial").removeClass("bg-primary text-light");
+                $(".commercial").addClass("border-dark");
+                $("#searchType").attr("value","residential");
+                $("#search-title").text("Searching for Residential Locations");
             }
         });
 
@@ -175,6 +204,11 @@
                     alert("A error occurred! Please try refreshing the page.")
                 })
         });
+
+        $("#searchButton").click(function () {
+            $(this).html("<i class=\"fas fa-spinner fa-pulse \"></i>");
+        });
+
   </script>
 @endpush
 

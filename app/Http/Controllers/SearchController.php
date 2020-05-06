@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\City;
+use App\County;
 use App\State;
 use App\StateMerge;
 use App\CountyMerge;
@@ -19,23 +21,34 @@ class SearchController extends Controller
 
 
     public function handleSubmit(Request $request){
-        $countySubmissions = new Collection();
-        $citySubmissions = new Collection();
+        $countyRules = new Collection();
+        $cityRules = new Collection();
+        $state = State::find($request->state_id);
+        $county = null;
+        $city = null;
+        $lowestLevel = "state";
 
-        $statesSubmissions = StateMerge::with(['state', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])
+
+//        var_dump($request->toArray());
+
+        $stateRules = StateMerge::with(['state', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])
                                         ->where("stateID", $request->state_id)->get();
-        if($request->county_id != -1){
-            $countySubmissions = CountyMerge::with(['county', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])
+        if(isset($request->county_id)){
+            $countyRules = CountyMerge::with(['county', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])
                 ->where("countyID", $request->county_id)->get();
+            $lowestLevel = "county";
+            $county = County::find($request->county_id);
         }
 
-        if($request->city_id != -1) {
-            $citySubmissions = CityMerge::with(['city', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])
+        if(isset($request->city_id)) {
+            $cityRules = CityMerge::with(['city', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])
                 ->where("cityID", $request->city_id)->get();
+            $lowestLevel = "city";
+            $city = City::find($request->city_id);
+
         }
 
-        $allSubmissions = $statesSubmissions->merge($countySubmissions)->merge($citySubmissions);
 
-        return view("search.searchresults", compact('allSubmissions'));
+        return view("search.searchresults", compact('stateRules', 'countyRules', 'cityRules', 'lowestLevel', 'city', 'county', 'state'));
     }
 }
