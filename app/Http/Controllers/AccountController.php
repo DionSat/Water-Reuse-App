@@ -29,33 +29,23 @@ class AccountController extends Controller
 
     public function changePassword(Request $request)
     {
-        $validatedData = $request->validate([
-            'inputoldPassword1' => 'bail|min:8|max:255',
-            'inputoldPassword2' => 'bail|min:8|max:255',
-            'inputPassword' => 'bail|min:8|max:255',
-            'inputPassword2' => 'bail|min:8|max:255',
-        ]);
         $updated = False;
 
         $user = User::find(Auth::user()->id);
 
         #update password through user model.
-        if (empty($request->inputPasswordOld1) === False) {
-            if ($request->inputPasswordOld1 != $request->inputPasswordOld2)
-                return redirect()->back()->with('danger', 'Old passwords do not match. Try again');
-            elseif (Hash::check($request->inputPasswordOld1, Auth::user()->password) === false)
-                return redirect()->back()->with('danger', 'Incorrect password! Try Again.');
-            elseif ($request->newPW != $request->newPW2)
-                return redirect()->back()->with('danger', 'New passwords do not match. Try again');
-            else {
-                $updated = True;
-                $user->password = Hash::make($request->newPW);
-                $user->save();
-            }
+        if ($request->newPW != $request->newPW2)
+            return redirect()->back()->with('danger', 'New passwords do not match. Try again');
+        elseif (Hash::check($request->oldPW, Auth::user()->password) === false)
+            return redirect()->back()->with('danger', 'Incorrect password, try again.');
+        else {
+            $updated = True;
+            $user->password = Hash::make($request->newPW);
+            $user->save();
         }
 
         if ($updated === True)
-            return redirect()->back()->with('status', 'Password change successful.');
+            return redirect('/account')->with('status', 'Password change successful.');
         else
             return redirect()->back()->with('nothing', 'Nothing was updated');
 
@@ -98,7 +88,7 @@ class AccountController extends Controller
             }
         }
 
-        if($request->contact === 'true')
+        if ($request->contact === 'true')
             $user->can_contact = true;
         else
             $user->can_contact = false;

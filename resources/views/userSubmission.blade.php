@@ -105,7 +105,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
     <script>
-
         //holds the number of regulations a user wishes to submit, using 0 indexing
         numOfRegs = 0;
 
