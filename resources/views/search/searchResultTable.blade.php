@@ -1,6 +1,6 @@
 <table class="table text-center">
     <thead>
-    <tr>
+    <tr class="table-head">
         <th scope="col">Source</th>
         <th scope="col">Destination</th>
         <th scope="col">Allowed</th>
@@ -12,7 +12,7 @@
     </thead>
     <tbody>
         @foreach($rules as $rule)
-            <tr>
+            <tr data-source="{{$rule->source->node_id}}" data-destination="{{$rule->destination->node_id}}" class="reuse-row">
                 <td class="align-middle">{{$rule->source->node_name}}</td>
                 <td class="align-middle">{{$rule->destination->node_name}}</td>
                 <td class="align-middle">

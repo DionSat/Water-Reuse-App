@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\City;
 use App\County;
+use App\ReuseNode;
 use App\State;
 use App\StateMerge;
 use App\CountyMerge;
@@ -15,7 +16,7 @@ class SearchController extends Controller
 {
     public function mainPage(){
         
-        $states = State::all();
+        $states = State::all()->sortBy("stateName");
         return view("search.searchpage", compact('states'));
     }
 
@@ -27,9 +28,6 @@ class SearchController extends Controller
         $county = null;
         $city = null;
         $lowestLevel = "state";
-
-
-//        var_dump($request->toArray());
 
         $stateRules = StateMerge::with(['state', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])
                                         ->where("stateID", $request->state_id)->get();
@@ -45,10 +43,12 @@ class SearchController extends Controller
                 ->where("cityID", $request->city_id)->get();
             $lowestLevel = "city";
             $city = City::find($request->city_id);
-
         }
 
+        // Get all the sources and destinations
+        $sources = ReuseNode::sources()->sortBy("node_name");
+        $destinations = ReuseNode::destinations()->sortBy("node_name");
 
-        return view("search.searchresults", compact('stateRules', 'countyRules', 'cityRules', 'lowestLevel', 'city', 'county', 'state'));
+        return view("search.searchresults", compact('stateRules', 'countyRules', 'cityRules', 'lowestLevel', 'city', 'county', 'state', 'sources', 'destinations'));
     }
 }

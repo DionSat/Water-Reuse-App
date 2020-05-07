@@ -178,7 +178,11 @@
                 .then(function (response) {
                     hideCountySpinner();
                     $("#countySelect").html('<option id="chooseCounty" value="-1" disabled selected>Choose...</option>'+
-                        response.data.map(obj => "<option value='"+obj.county_id+"'>"+obj.countyName+"</option>").join("\n"));
+                        response.data.sort(function (a,b) {
+                            if(a.countyName < b.countyName) { return -1; }
+                            if(a.countyName > b.countyName) { return 1; }
+                            else {return 0;}
+                        }).map(obj => "<option value='"+obj.county_id+"'>"+obj.countyName+"</option>").join("\n"));
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -194,7 +198,11 @@
                     console.log(response.data.length);
                     if(response.data.length != 0){
                         $("#citySelect").html('<option id="chooseCounty" value="-1" disabled selected>Choose...</option>'+
-                            response.data.map(obj => "<option value='"+obj.city_id+"'>"+obj.cityName+"</option>").join("\n"));
+                            response.data.sort(function (a,b) {
+                                if(a.cityName < b.cityName) { return -1; }
+                                if(a.cityName > b.cityName) { return 1; }
+                                else {return 0;}
+                            }).map(obj => "<option value='"+obj.city_id+"'>"+obj.cityName+"</option>").join("\n"));
                     } else {
                         $("#citySelect").html("<option value='' disabled selected>No cities found in county</option>");
                     }
