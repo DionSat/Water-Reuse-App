@@ -90,7 +90,7 @@
 
             for(j = 0; j < 12; ++j)
             {
-                graphDefinition += 'source0(Condensate):::waterSource --> code' + $count + '["#128279;"]:::codes0;';
+                graphDefinition += 'source0(Condensate):::waterSource --> code' + $count + '(+):::codes0;';
                 clickToAppend += 'click code' + $count + ' "http://www.github.com" "This is a link";';
                 $buffer = $count;
                 $count++;
