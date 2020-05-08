@@ -7,11 +7,11 @@
         </div>
         <h2 class="text-center"> County Submissions </h2>
         @foreach($countySubmissions as $countyName => $countyArray)
-            <div class="w-75 mx-auto">
+            <div class="mx-auto">
                 <h3>{{$countyName}}</h3>
             </div>
 
-            <table class="table w-75 mt-4 mx-auto">
+            <table class="table mt-4 mx-auto">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -19,6 +19,7 @@
                         <th scope="col">Source</th>
                         <th scope="col">Destination</th>
                         <th scope="col">Allowed</th>
+                        <th scope="col">Time Submitted</th>
                         <th scope="col">View</th>
                         <th scope="col">Action</th>
                         <th scope="col">Action</th>
@@ -32,6 +33,7 @@
                             <td> {{$county->source->node_name}}</td>
                             <td>{{$county->destination->node_name}}</td>
                             <td> <h5>{!! $county->allowed->getAllowedTextBadge() !!}</h5></td>
+                            <td> {{$county->getTimeSubmittedAsString()}}</td>
                             <td>
                                 <a href="{{route('userCountySubmissionItem')."/".$county->id}}" class="btn btn-primary"> View </a>
                             </td>
