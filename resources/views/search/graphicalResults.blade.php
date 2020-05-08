@@ -90,19 +90,19 @@
 
             for(j = 0; j < 12; ++j)
             {
-                graphDefinition += 'source0(Condensate):::waterSource --> code' + $count + '(Link):::codes;';
+                graphDefinition += 'source0(Condensate):::waterSource --> code' + $count + '["#128279;"]:::codes0;';
                 clickToAppend += 'click code' + $count + ' "http://www.github.com" "This is a link";';
                 $buffer = $count;
                 $count++;
-                graphDefinition += 'code' + $buffer + ' --> code' + $count + '(Link):::codes;';
+                graphDefinition += 'code' + $buffer + ' --> code' + $count + '["#128279;"]:::codes1;';
                 clickToAppend += 'click code' + $count + ' "http://www.github.com" "This is a link";';
                 $buffer = $count;
                 $count++;
-                graphDefinition += 'code' + $buffer + ' --> code' + $count + '(Link):::codes;';
+                graphDefinition += 'code' + $buffer + ' --> code' + $count + '["#128279;"]:::codes2;';
                 clickToAppend += 'click code' + $count + ' "http://www.github.com" "This is a link";';
                 $buffer = $count;
                 $count++;
-                graphDefinition += 'code' + $buffer + ' --> code' + $count + '(Link):::codes;';
+                graphDefinition += 'code' + $buffer + ' --> code' + $count + '["#128279;"]:::codes3;';
                 clickToAppend += 'click code' + $count + ' "http://www.github.com" "This is a link";';
                 if(!$wasSet)
                 {
@@ -117,7 +117,7 @@
             $fixtureCount = 0;
             //graphDefinition += 'linkStyle default visibility:hidden;\nclass source0 cssClass;\n classDef waterSource:hover fill:#0ff;\nclassDef codes fill:#8A2BE2;';
             graphDefinition += clickToAppend;
-            graphDefinition += '\nclass source0 cssClass;\n classDef waterSource:hover fill:#0ff;\nclassDef codes fill:#8A2BE2;';
+            graphDefinition += '\nclass source0 cssClass;\n classDef waterSource:hover fill:#0ff;\nclassDef codes0 fill:#8A2BE2;\nclassDef codes1 fill:#8A2BFF;\nclassDef codes2 fill:#8A2BAF;\nclassDef codes3 fill:#8A2B00;';
 
             //-----------------renders the graph
             $(function() {
