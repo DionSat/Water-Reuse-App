@@ -177,12 +177,16 @@
             axios.get("{{route("counties-api")}}"+"/"+stateSelect.value)
                 .then(function (response) {
                     hideCountySpinner();
-                    $("#countySelect").html('<option id="chooseCounty" value="-1" disabled selected>Choose...</option>'+
-                        response.data.sort(function (a,b) {
-                            if(a.countyName < b.countyName) { return -1; }
-                            if(a.countyName > b.countyName) { return 1; }
-                            else {return 0;}
-                        }).map(obj => "<option value='"+obj.county_id+"'>"+obj.countyName+"</option>").join("\n"));
+                    if(response.data.length != 0){
+                        $("#countySelect").html('<option id="chooseCounty" value="-1" disabled selected>Choose...</option>'+
+                            response.data.sort(function (a,b) {
+                                if(a.countyName < b.countyName) { return -1; }
+                                if(a.countyName > b.countyName) { return 1; }
+                                else {return 0;}
+                            }).map(obj => "<option value='"+obj.county_id+"'>"+obj.countyName+"</option>").join("\n"));
+                    } else {
+                        $("#countySelect").html("<option value='' disabled selected>No counties found in state</option>");
+                    }
                 })
                 .catch(function (error) {
                     console.log(error);
