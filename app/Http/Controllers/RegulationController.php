@@ -112,12 +112,16 @@ Class RegulationController extends Controller{
             $mergeTable->destinationID = $regList['$destinationId'];
             $mergeTable->allowedID = $regList['$isPermitted'];
             $mergeTable->user_id = Auth::user()->id;
-            if($mergeTable->save() == false)
-            {
-                $codesLink->delete();
-                $permitLink->delete();
-                $incentivesLink->delete();
-                $moreInfoLink->delete();
+            try {
+                if($mergeTable->save() == false)
+                {
+                    $codesLink->delete();
+                    $permitLink->delete();
+                    $incentivesLink->delete();
+                    $moreInfoLink->delete();
+                }
+            } catch (Exception $exception){
+                return "A API error occurred.";
             }
         }
 
