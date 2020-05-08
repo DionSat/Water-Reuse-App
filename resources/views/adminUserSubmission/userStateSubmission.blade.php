@@ -3,9 +3,9 @@
 @section('body')
     <div class="container">
     <div class="row my-3">
-            <a href="{{route("userSubmission2")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> User Submissions </a>
+            <a href="{{route("adminUserSubmissionView")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> User Submissions </a>
         </div>
-        <h2 class="text-center"> County Submissions </h2>
+        <h2 class="text-center"> State Submissions </h2>
         <table class="table w-75 mt-4 mx-auto">
             <thead>
                 <tr>
@@ -19,27 +19,27 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($countySubmissions as $county)
+                @foreach($stateSubmissions as $state)
                     <tr>
                         <th scope="row">{{$loop->index+1}}</th>
-                        <td>{{$county->user->name}}</td>
-                        <td> {{$county->source->node_name}}</td>
-                        <td>{{$county->destination->node_name}}</td>
+                        <td>{{$state->user->name}}</td>
+                        <td> {{$state->source->node_name}}</td>
+                        <td>{{$state->destination->node_name}}</td>
                         <td>
-                            <a href="{{route('userCountySubmissionItem')."/".$county->id}}" class="btn btn-primary"> View </a>
+                            <a href="{{route('userStateSubmissionItem')."/".$state->id}}" class="btn btn-primary"> View </a>
                         </td>
                         <td>
-                            <form method="POST" action="{{ route('countyDelete') }}">
+                            <form method="POST" action="{{ route('stateDelete') }}">
                                 {{ csrf_field() }}
                                 <input id="delete" name="delete" value="delete" hidden>
-                                <input id="countyId-{{$county->id}}" name="id" value="{{$county->id}}" hidden>
+                                <input id="stateId-{{$state->id}}" name="id" value="{{$state->id}}" hidden>
                                 <button type="submit" class="btn btn-danger">Decline</button>
                             </form>
                         </td>
                         <td>
-                            <form method="POST" action="{{ route('addCountyMergeSubmit') }}">
+                            <form method="POST" action="{{ route('addStateMergeSubmit') }}">
                                 {{ csrf_field() }}
-                                <input id="countyId-{{$county->id}}" name="id" value="{{$county->id}}" hidden>
+                                <input id="stateId-{{$state->id}}" name="id" value="{{$state->id}}" hidden>
                                 <button type="submit" class="btn btn-success">Approve</button>
                             </form>
                         </td>
