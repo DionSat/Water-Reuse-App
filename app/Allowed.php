@@ -42,4 +42,18 @@ class Allowed extends Model
     {
         return $this->hasMany('CityMerge');
     }
+
+    public function getAllowedTextBadge(){
+        $badgeColor = "secondary";
+        if($this->allowedText === "Yes"){
+            $badgeColor = "success";
+        }
+        elseif ($this->allowedText === "No"){
+            $badgeColor = "danger";
+        }
+        elseif ($this->allowedText === "Maybe"){
+            $badgeColor = "warning";
+        }
+        return "<span class=\"badge badge-".$badgeColor."\"> ".$this->allowedText."</span>";
+    }
 }

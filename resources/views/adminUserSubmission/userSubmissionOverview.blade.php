@@ -2,7 +2,7 @@
 
 @section('body')
     <h2 class="text-center my-3"> Pending User Submissions by Location </h2>
-    <div class="text-center text-muted">These submissions are awaiting administrator approval and are not shown to users in search results.</div>
+    <div class="text-center text-muted">These re-use submissions are awaiting administrator approval and are not shown to users in search results.</div>
     <div class="container mt-5">
         <div class="row justify-content-center">
             @foreach($locationCards as $card)

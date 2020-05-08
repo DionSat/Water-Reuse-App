@@ -15,20 +15,7 @@
             <tr data-source="{{$rule->source->node_id}}" data-destination="{{$rule->destination->node_id}}" class="reuse-row">
                 <td class="align-middle">{{$rule->source->node_name}}</td>
                 <td class="align-middle">{{$rule->destination->node_name}}</td>
-                <td class="align-middle">
-                    <h4>
-                        <span class="badge
-                                @if($rule->allowed->allowedText == "Yes")
-                                badge-success
-                                @elseif($rule->allowed->allowedText == "No")
-                                badge-danger
-                                @else
-                                badge-warning
-                                @endif">
-                            {{$rule->allowed->allowedText}}
-                        </span>
-                    </h4>
-                </td>
+                <td class="align-middle"> <h4>{!! $rule->allowed->getAllowedTextBadge() !!}</h4> </td>
                 <td class="align-middle">
                     <a class="btn btn-outline-primary" href="{{$rule->codesObj->linkText}}" role="button">{{!empty($rule->codesObj->name) ? $rule->codesObj->name : "Unknown"}}</a>
                 </td>

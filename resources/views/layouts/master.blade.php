@@ -52,7 +52,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('info') }}">{{ __('Info') }}</a>
+                            <a class="nav-link @if (Route::current()->getName() == "search") info @endif" href="{{ route('info') }}">{{ __('Info') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link  @if (Route::current()->getName() == "search") active @endif" href="{{ route('search') }}"> Search</a>
@@ -71,7 +71,7 @@
                             <li class="nav-item @if (Route::current()->getName() == "admin") active @endif">
                                 <a class="nav-link" href="{{ route('admin') }}"><i class="fas fa-tachometer-alt"></i> Dashboard </a>
                             </li>
-                            <li class="nav-item @if (Route::current()->getName() == "admin-userSubmission") active @endif">
+                            <li class="nav-item @if (Route::current()->getName() == "adminUserSubmissionView") active @endif">
                                 <a class="nav-link" href="{{ route('adminUserSubmissionView') }}"><i class="fas fa-bars"></i> Submissions </a>
                             </li>
 
