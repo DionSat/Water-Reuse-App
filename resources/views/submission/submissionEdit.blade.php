@@ -1,199 +1,236 @@
 @extends('layouts.master')
 
 @section('body')
-<div class="container">
-    <a href="{{route("submission")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> Submissions </a>
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Edit Submission</div>
-                <div class="card-body">
-                    <form action={{ route('submissionEditUpdate') }} method="POST">
-                        {{ csrf_field() }}
-                        <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label for="inputState">State</label>
-                            <select id="inputState" class="form-control" name="state">
-                                <option value="-1" >Choose...</option>
-                                @foreach($states as $state)
-                                    <option value="{{$state->state_id}}"
-                                        @if($state->state_id == $submissionState)
-                                            selected
-                                        @endif
-                                    >{{$state->stateName}}</option>
-                                @endforeach
-                            </select>
-                            </div>
-                            <div class="form-group col-md-4">
-                            <label for="county">County (Optional)</label>
-                            <select class="form-control" id="county" name="county">
-                                <option id="chooseCounty" value="-1" >Choose...</option>
-                                @foreach($counties as $county)
-                                    <option class="countyName" value="{{$county->county_id}}"
-                                        @if($county->county_id == $submissionCounty)
-                                            selected
-                                        @endif
-                                    >{{$county->countyName}}</option>
-                                @endforeach
-                            </select>
-                            </div>
-                            <div class="form-group col-md-4">
-                            <label for="city">City (Optional)</label>
-                            <select class="form-control " id="city" name="city">
-                                <option id="chooseCity" value="-1" >Choose...</option>
-                                @foreach($cities as $city)
-                                    <option class="cityName" value="{{$city->city_id}}"
-                                        @if($city->city_id == $submissionCity)
-                                            selected
-                                        @endif
-                                    >{{$city->cityName}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        </div>
-                        
-                        <hr>
-                        <div id="waterSourceDiv">
+    <div class="container">
+        <a href="{{route("submission")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i>
+            Submissions </a>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Edit Submission</div>
+                    <div class="card-body">
+                        <form action={{ route('submissionEditUpdate') }} method="POST">
+                            {{ csrf_field() }}
                             <div class="form-row">
-                                <div class="form-group col-md-6">
-                                <label for="waterSource">Water Source</label>
-                                <select id="waterSource" class="form-control" name="source">
-                                    <option value="-1" disabled>Choose...</option>
-                                </select>
+                                <div class="form-group col-md-4">
+                                    <label for="inputState">State</label>
+                                    <select id="inputState" class="form-control" name="state">
+                                        <option value="-1">Choose...</option>
+                                        @foreach($states as $state)
+                                            <option value="{{$state->state_id}}"
+                                                    @if($state->state_id == $submissionState)
+                                                    selected
+                                                @endif
+                                            >{{$state->stateName}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                                <div class="form-group col-md-6">
-                                <label for="waterDestination">Water Destination</label>
-                                <select id="waterDestination" class="form-control" name="destination">
-                                    <option value="-1" disabled>Choose...</option>
-                                </select>
+                                <div class="form-group col-md-4">
+                                    <label for="county">County (Optional)</label>
+                                    <div class="text-center">
+                                        <i id="countySpinner" class="fas fa-spinner fa-pulse mt-2 d-none"></i>
+                                    </div>
+                                    <select class="form-control" id="county" name="county">
+                                        <option id="chooseCounty" value="-1">Choose...</option>
+                                        @foreach($counties as $county)
+                                            <option class="countyName" value="{{$county->county_id}}"
+                                                    @if($county->county_id == $submissionCounty)
+                                                    selected
+                                                @endif
+                                            >{{$county->countyName}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="city">City (Optional)</label>
+                                    <div class="text-center">
+                                        <i id="citySpinner"
+                                           class="justify-content-center fas fa-spinner fa-pulse mt-2 d-none"></i>
+                                    </div>
+                                    <select class="form-control " id="city" name="city">
+                                        <option id="chooseCity" value="-1">Choose...</option>
+                                        @foreach($cities as $city)
+                                            <option class="cityName" value="{{$city->city_id}}"
+                                                    @if($city->city_id == $submissionCity)
+                                                    selected
+                                                @endif
+                                            >{{$city->cityName}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
-                            </br>
-                            <div class="form-group col-md-4">
-                                <label for="isPermitted">Is this permitted: </label>
-                                <select class="form-control " type="checkbox" id="isPermitted" name="allowed">
-                                    @foreach($allowed as $option)
-                                        <option id="chooseAllowed" value="{{$option->allowed_id}}" 
-                                            @if($option->allowed_id == $submission->allowedID)
-                                            selected
-                                            @endif
-                                        >{{$option->allowedText}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+
                             <hr>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="codes">Link to Codes (Optional)</label>
-                                    <input type="text" class="form-control" id="codes" placeholder="" value="{{$submission->codesObj->linkText}}" name="codes">
+                            <div id="waterSourceDiv">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="waterSource">Water Source</label>
+                                        <select id="waterSource" class="form-control" name="source">
+                                            <option value="-1" disabled>Choose...</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="waterDestination">Water Destination</label>
+                                        <select id="waterDestination" class="form-control" name="destination">
+                                            <option value="-1" disabled>Choose...</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label for="permit">Link to Permit (Optional)</label>
-                                    <input type="text" class="form-control" id="permit" placeholder="" value="{{$submission->permitObj->linkText}}" name="permit">
+                                </br>
+                                <div class="form-group col-md-4">
+                                    <label for="isPermitted">Is this permitted: </label>
+                                    <select class="form-control " type="checkbox" id="isPermitted" name="allowed">
+                                        @foreach($allowed as $option)
+                                            <option id="chooseAllowed" value="{{$option->allowed_id}}"
+                                                    @if($option->allowed_id == $submission->allowedID)
+                                                    selected
+                                                @endif
+                                            >{{$option->allowedText}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
+                                <hr>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="codes">Link to Codes (Optional)</label>
+                                        <input type="text" class="form-control" id="codes" placeholder=""
+                                               value="{{$submission->codesObj->linkText}}" name="codes">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="permit">Link to Permit (Optional)</label>
+                                        <input type="text" class="form-control" id="permit" placeholder=""
+                                               value="{{$submission->permitObj->linkText}}" name="permit">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="incentives">Link to Incentives (Optional)</label>
+                                        <input type="text" class="form-control" id="incentives" placeholder=""
+                                               value="{{$submission->incentivesObj->linkText}}" name="incentives">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="moreInfo">Link to More Information (Optional)</label>
+                                        <input type="text" class="form-control" id="moreInfo" placeholder=""
+                                               value="{{$submission->moreInfoObj->linkText}}" name="moreInfo">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="comments">Comments (Optional)</label>
+                                    <textarea class="form-control" id="comments" rows="3" name="comments"></textarea>
+                                </div>
+                                <input type="text" name="type" style="display: none;" value="{{$type}}">
+                                <input type="number" name="id" style="display: none;" value={{$submission->id}}>
+                                <hr>
                             </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="incentives">Link to Incentives (Optional)</label>
-                                    <input type="text" class="form-control" id="incentives" placeholder="" value="{{$submission->incentivesObj->linkText}}" name="incentives">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="moreInfo">Link to More Information (Optional)</label>
-                                    <input type="text" class="form-control" id="moreInfo" placeholder="" value="{{$submission->moreInfoObj->linkText}}" name="moreInfo">
-                                </div>
-                            </div>
-                            <div class="form-group" >
-                                <label for="comments">Comments (Optional)</label>
-                                <textarea class="form-control" id="comments" rows="3" name="comments"></textarea>
-                            </div>
+                            <button type="submit" class="btn btn-primary" id="submit">Re-Submit</button>
+
+                        </form>
+                        <form action={{ route('deleteUnapproved') }} method="POST">
+                            {{ csrf_field() }}
                             <input type="text" name="type" style="display: none;" value="{{$type}}">
                             <input type="number" name="id" style="display: none;" value={{$submission->id}}>
-                            <hr>
-                        </div>
-                        <button type="submit" class="btn btn-primary" id="submit">Re-Submit</button>
-                        
-                    </form>
-                    <form action={{ route('deleteUnapproved') }} method="POST">
-                        {{ csrf_field() }}
-                        <input type="text" name="type" style="display: none;" value="{{$type}}">
-                        <input type="number" name="id" style="display: none;" value={{$submission->id}}>
-                        <button style="float:right;margin:-40px 10px 10px 10px;" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" type="button">Delete</button>
+                            <button style="float:right;margin:-40px 10px 10px 10px;" class="btn btn-danger"
+                                    data-toggle="modal" data-target="#exampleModal" type="button">Delete
+                            </button>
 
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
-                              <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title" id="modal-title">Delete Submission Confirmation</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
-                                  </div>
-                                  <div class="modal-body">
-                                    Are you sure you want to delete this submission?
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-danger" type="submit" onClick="javascript:this.form.submit();">Confirm Delete</button>
-                                  </div>
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modal-title">Delete Submission Confirmation</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to delete this submission?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                            </button>
+                                            <button type="button" class="btn btn-danger" type="submit"
+                                                    onClick="javascript:this.form.submit();">Confirm Delete
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                              </div>
                             </div>
                         </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
 
 @push("js")
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
 
+        function showCountySpinner() {
+            $("#countySpinner").removeClass("d-none");
+            $("#county").addClass("d-none");
+        }
+
+        function hideCountySpinner() {
+            $("#countySpinner").addClass("d-none");
+            $("#county").removeClass("d-none");
+        }
+
+        function showCitySpinner() {
+            $("#citySpinner").removeClass("d-none");
+            $("#city").addClass("d-none");
+        }
+
+        function hideCitySpinner() {
+            $("#citySpinner").addClass("d-none");
+            $("#city").removeClass("d-none");
+        }
+
         // get the water sources
         function getWaterSources() {
             var current = {{$submission->sourceID}};
             axios.get("{{route("my-sources-api")}}")
-            .then(function (response) {
-                //get each county, and set them as options
-                $source = response.data.map(obj => (
-                    "<option "
-                    + ( obj.node_id == current ? ' selected ' : "") 
-                    + " class='sourceName' value=" 
-                    + obj.node_id 
-                    + " >" 
-                    + obj.node_name 
-                    + "</option>"));
-                
-                $("#waterSource").append($source);
-            })
-            .catch(function (error) {
-                //Handle errors here
-                console.log(error);
-            });
+                .then(function (response) {
+                    //get each county, and set them as options
+                    $source = response.data.map(obj => (
+                        "<option "
+                        + (obj.node_id == current ? ' selected ' : "")
+                        + " class='sourceName' value="
+                        + obj.node_id
+                        + " >"
+                        + obj.node_name
+                        + "</option>"));
+
+                    $("#waterSource").append($source);
+                })
+                .catch(function (error) {
+                    //Handle errors here
+                    console.log(error);
+                });
         };
 
         // get the water destinations
         function getWaterDestinations() {
             var current = {{$submission->destinationID}};
             axios.get("{{route("my-destination-api")}}")
-            .then(function (response) {
-                //get each county, and set them as options
-                $destination = response.data.map(obj => (
-                    "<option "
-                    + ( obj.node_id == current ? 'selected' : "") 
-                    + " class='destinationName' value=" 
-                    + obj.node_id 
-                    + " >" 
-                    + obj.node_name 
-                    + "</option>"));
-                $("#waterDestination").append($destination);
-            })
-            .catch(function (error) {
-                //Handle errors here
-                console.log(error);
-            });
+                .then(function (response) {
+                    //get each county, and set them as options
+                    $destination = response.data.map(obj => (
+                        "<option "
+                        + (obj.node_id == current ? 'selected' : "")
+                        + " class='destinationName' value="
+                        + obj.node_id
+                        + " >"
+                        + obj.node_name
+                        + "</option>"));
+                    $("#waterDestination").append($destination);
+                })
+                .catch(function (error) {
+                    //Handle errors here
+                    console.log(error);
+                });
         };
 
         //populate the initial water source and destination
@@ -201,8 +238,8 @@
         getWaterDestinations();
 
         //for when the state changes
-        $( "#inputState" ).change(function() {
-
+        $("#inputState").change(function () {
+            showCountySpinner();
             // Here we can see the currently selected state (the state_id is the value)
             console.log(inputState.value);
 
@@ -217,34 +254,32 @@
             });
 
             //This is the Axios call to the API
-            if(inputState.value != -1)
-            {
+            if (inputState.value != -1) {
                 //enable the basic 'choose' option
                 $("#chooseCounty").prop("disabled", false);
                 //disable cities
                 $("#chooseCity").prop("disabled", true);
                 $("#chooseCity").prop("selected", false);
 
-                axios.get("{{route("counties-api")}}"+"/"+inputState.value)
-                .then(function (response) {
+                axios.get("{{route("counties-api")}}" + "/" + inputState.value)
+                    .then(function (response) {
 
+                        hideCountySpinner();
+                        // console.log("Response: " + response);
+                        // console.log("Data: " + response.data);
+                        //get each county, and set them as options
+                        $county = response.data.map(obj => ("<option class='countyName' value=" + obj.county_id + " >" + obj.countyName + "</option>"));
+                        // console.log($county);
+                        $("#county").append($county);
+                    })
+                    .catch(function (error) {
+                        //Handle errors here
 
-                    // console.log("Response: " + response);
-                    // console.log("Data: " + response.data);
-                    //get each county, and set them as options
-                    $county = response.data.map(obj => ("<option class='countyName' value=" + obj.county_id + " >" + obj.countyName + "</option>"));
-                    // console.log($county);
-                    $("#county").append($county);
-                })
-                .catch(function (error) {
-                    //Handle errors here
-
-                    //Generally don't have to worry about errors too much,
-                    // but maybe want to do "alert('There was a error, please try re-loading the page.')"
-                    console.log(error);
-                });
-            }
-            else {
+                        //Generally don't have to worry about errors too much,
+                        // but maybe want to do "alert('There was a error, please try re-loading the page.')"
+                        console.log(error);
+                    });
+            } else {
                 $("#chooseCounty").prop("disabled", true);
                 $("#chooseCounty").prop("selected", false);
                 $("#chooseCity").prop("disabled", true);
@@ -254,12 +289,10 @@
         });
 
 
-
-
         //Populate the cities
         //for when the state changes
-        $( "#county" ).change(function() {
-
+        $("#county").change(function () {
+            showCitySpinner();
             // Here we can see the currently selected state (the state_id is the value)
             console.log(county.value);
 
@@ -269,36 +302,33 @@
             });
 
             //This is the Axios call to the API
-            if(county.value != -1)
-            {
+            if (county.value != -1) {
                 $("#chooseCity").prop("disabled", false);
 
-                axios.get("{{route("cities-api")}}"+"/"+county.value)
-                .then(function (response) {
+                axios.get("{{route("cities-api")}}" + "/" + county.value)
+                    .then(function (response) {
 
+                        hideCitySpinner();
+                        // console.log("Response: " + response);
+                        // console.log("Data: " + response.data);
+                        //get each city, and set them as options
+                        $city = response.data.map(obj => ("<option class='cityName' value=" + obj.city_id + " >" + obj.cityName + "</option>"));
+                        // console.log($city);
+                        $("#city").append($city);
+                    })
+                    .catch(function (error) {
+                        //Handle errors here
 
-                    // console.log("Response: " + response);
-                    // console.log("Data: " + response.data);
-                    //get each city, and set them as options
-                    $city = response.data.map(obj => ("<option class='cityName' value=" + obj.city_id + " >" + obj.cityName + "</option>"));
-                    // console.log($city);
-                    $("#city").append($city);
-                })
-                .catch(function (error) {
-                    //Handle errors here
-
-                    //Generally don't have to worry about errors too much,
-                    // but maybe want to do "alert('There was a error, please try re-loading the page.')"
-                    console.log(error);
-                })
-            }
-            else{
+                        //Generally don't have to worry about errors too much,
+                        // but maybe want to do "alert('There was a error, please try re-loading the page.')"
+                        console.log(error);
+                    })
+            } else {
                 $("#chooseCity").prop("disabled", true);
                 $("#chooseCity").prop("selected", false);
             }
 
         });
-
 
 
     </script>
