@@ -28,24 +28,24 @@ Route::post('/search', 'SearchController@handleSubmit')->name('search-submit');
 //Registered User Routes
 Route::middleware('auth')->group(function () {
     //submission routes for each indiviual user
-    Route::get('/submissions', 'UserSubmissionController@view')->middleware('auth')->name('submission');
-    Route::get('/submissions/citySubmissionItem/{itemId?}', 'UserSubmissionController@pendingCity')->middleware('auth')->name('citySubmission');
-    Route::get('/submissions/stateSubmissionItem/{itemId?}', 'UserSubmissionController@pendingState')->middleware('auth')->name('stateSubmission');
-    Route::get('/submissions/countySubmissionItem/{itemId?}', 'UserSubmissionController@pendingCounty')->middleware('auth')->name('countySubmission');
+    Route::get('/submissions', 'UserSubmissionController@view')->name('submission');
+    Route::get('/submissions/citySubmissionItem/{itemId?}', 'UserSubmissionController@pendingCity')->name('citySubmission');
+    Route::get('/submissions/stateSubmissionItem/{itemId?}', 'UserSubmissionController@pendingState')->name('stateSubmission');
+    Route::get('/submissions/countySubmissionItem/{itemId?}', 'UserSubmissionController@pendingCounty')->name('countySubmission');
 
     //Approved submissions
-    Route::get('/submissions/cityApprovedItem/{itemId?}', 'UserSubmissionController@city')->middleware('auth')->name('cityApprove');
-    Route::get('/submissions/stateApprovedItem/{itemId?}', 'UserSubmissionController@state')->middleware('auth')->name('stateApprove');
-    Route::get('/submissions/countyApprovedItem/{itemId?}', 'UserSubmissionController@county')->middleware('auth')->name('countyApprove');
-    Route::get('/submissions/submissionEdit/{type?}/{itemId?}', 'UserSubmissionController@submissionEdit')->middleware('auth')->name('submissionEdit');
+    Route::get('/submissions/cityApprovedItem/{itemId?}', 'UserSubmissionController@city')->name('cityApprove');
+    Route::get('/submissions/stateApprovedItem/{itemId?}', 'UserSubmissionController@state')->name('stateApprove');
+    Route::get('/submissions/countyApprovedItem/{itemId?}', 'UserSubmissionController@county')->name('countyApprove');
+    Route::get('/submissions/submissionEdit/{type?}/{itemId?}', 'UserSubmissionController@submissionEdit')->name('submissionEdit');
     Route::post('/submissions/submissionEdit/{type?}/{itemId?}', 'UserSubmissionController@submissionEditSubmit')->name('submissionEditUpdate');
     Route::post('/submissions', 'UserSubmissionController@deleteUnapproved')->name('deleteUnapproved');
 
-    Route::get('/account', 'AccountController@view')->middleware('auth')->name('account');
-    Route::get('/accountUpdate', 'AccountController@getUpdatePage')->middleware('auth')->name('updatePage');
-    Route::post('/accountUpdate', 'AccountController@updateAccount')->middleware('auth')->name('updateAccount');
-    Route::get('/changePassword', 'AccountController@getPasswordPage')->middleware('auth')->name('password');
-    Route::post('/changePassword', 'AccountController@changePassword')->middleware('auth')->name('changePassword');
+    Route::get('/account', 'AccountController@view')->name('account');
+    Route::get('/accountUpdate', 'AccountController@getUpdatePage')->name('updatePage');
+    Route::post('/accountUpdate', 'AccountController@updateAccount')->name('updateAccount');
+    Route::get('/changePassword', 'AccountController@getPasswordPage')->name('password');
+    Route::post('/changePassword', 'AccountController@changePassword')->name('changePassword');
 
     Route::get('/userSubmission', 'RegulationController@userRegulationSubmissionPage')->name('userSubmission');
     Route::post('/regSubmit', 'RegulationController@addRegulationSubmit')->name('regSubmit');
