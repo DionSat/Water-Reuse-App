@@ -1,10 +1,9 @@
 @extends('layouts.master')
 
 @section('body')
-    <h2 class="text-center my-3"> User Submissions</h2>
-    <div class="container">
-        <h3 class="text-center my-3"> Locations </h3>
-        <hr>
+    <h2 class="text-center my-3"> Pending User Submissions by Location </h2>
+    <div class="text-center text-muted">These submissions are awaiting administrator approval and are not shown to users in search results.</div>
+    <div class="container mt-5">
         <div class="row justify-content-center">
             @foreach($locationCards as $card)
                 <div class="col-md-3">
@@ -19,13 +18,8 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="card-footer">
-                            <div class="form-row mt-3 justify-content-center">  
-                                <div class="col-md-6">
-                                    <a href="{{$card["view"]}}" class="btn btn-primary d-block"> <i class="fas fa-edit"></i> View </a>
-                                </div>
-                            </div>
+                            <a href="{{$card["view"]}}" class="btn btn-primary d-block"> <i class="fas fa-edit"></i> View </a>
                         </div>
                     </div>
                 </div>

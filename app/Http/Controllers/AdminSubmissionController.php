@@ -21,15 +21,15 @@ class AdminSubmissionController extends Controller
         $countyNumber = PendingCountyMerge::all()->count();
 
         $locationCards = [];
-        $locationCards[] = ["title" => "States", "count" => $stateNumber, "view" => route("userStateView")];
-        $locationCards[] = ["title" => "Cities", "count" => $cityNumber, "view" => route("userCityView")];
-        $locationCards[] = ["title" => "Counties", "count" => $countyNumber, "view" => route("userCountyView")];
+        $locationCards[] = ["title" => "State Submissions", "count" => $stateNumber, "view" => route("userStateView")];
+        $locationCards[] = ["title" => "County Submissions", "count" => $countyNumber, "view" => route("userCountyView")];
+        $locationCards[] = ["title" => "City Submissions", "count" => $cityNumber, "view" => route("userCityView")];
 
         $user = Auth::user();
         $stateSubmissions = PendingStateMerge::all();
         $citySubmissions = PendingCityMerge::all();
         $countySubmissions = PendingCountyMerge::all();
-        return view('adminUserSubmission.userSubmission', compact('user', 'locationCards', 'stateSubmissions', 'citySubmissions', 'countySubmissions'));
+        return view('adminUserSubmission.userSubmissionOverview', compact('user', 'locationCards', 'stateSubmissions', 'citySubmissions', 'countySubmissions'));
     }
 
     public function userCity() 
