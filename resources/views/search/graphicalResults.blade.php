@@ -66,8 +66,20 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
     <script>
-        var wasClicked = false;
-        $sourceCount = 0;
+        //------------Initialize mermaid
+        var config = {
+            startOnLoad: true,
+            flowchart:{
+                useMaxWidth:true,
+                htmlLabels:true,
+                curve:'cardinal',
+            },
+            securityLevel:'loose',
+        };
+
+        mermaid.initialize(config);
+
+        //-----------Mock up function to show mermaid capabilites and possible graph layout.
         function createCondensateGraph() {
             $count = 0;
             $fixtureCount = 0;
@@ -78,7 +90,7 @@
 
             for(j = 0; j < 12; ++j)
             {
-                graphDefinition += 'source' + $sourceCount + '(Condensate):::waterSource --> code' + $count + '(Link):::codes;';
+                graphDefinition += 'source0(Condensate):::waterSource --> code' + $count + '(Link):::codes;';
                 clickToAppend += 'click code' + $count + ' "http://www.github.com" "This is a link";';
                 $buffer = $count;
                 $count++;
@@ -106,7 +118,8 @@
             //graphDefinition += 'linkStyle default visibility:hidden;\nclass source0 cssClass;\n classDef waterSource:hover fill:#0ff;\nclassDef codes fill:#8A2BE2;';
             graphDefinition += clickToAppend;
             graphDefinition += '\nclass source0 cssClass;\n classDef waterSource:hover fill:#0ff;\nclassDef codes fill:#8A2BE2;';
-            // $source += "</div>"
+
+            //-----------------renders the graph
             $(function() {
                 var cb = function(svgGraph) {
                     console.log(svgGraph)
@@ -116,62 +129,8 @@
                 });
             });
         };
-    function showGraph(){
-        document.getElementById("graph").style.visibility = "hidden";
-    };
-    // $(document).ready(function(){
-    //     $waterSources = new Array("Condensate", "Harvested Water", "Surface Water", "Stormwater Runoff", "Shallow Groundwater", "Aquifer");
-    //     $count = 0;
-    //     $buffer = 0;
-    //     $sourceCount = 0;
-    //     $fixtureCount = 0;
-    //     $wasSet = false;
-    //     $fixtures = new Array("Kitchen Sink", "Kitchen Sink + Disposal", "Dishwasher", "Lavatory", "Tub Shower", "Fire Suppression", "Mechanical Cooling + P-Trap Prime", "Clothes Washer", "Toilet", "Composting Toilet", "Urinel", "Water Reuse Urinal or Urine Diverter");
 
-    //     // $source = '<div class="mermaid"> graph LR;';
-    //     for(i = 0; i < $waterSources.length; ++i)
-    //     {
-    //         $source = '<div class="mermaid"> graph LR;';
-    //         for(j = 0; j < 12; ++j)
-    //         {
-    //             $source += 'source' + $sourceCount + '('+ $waterSources[i] + '):::waterSource --> code' + $count + '["#128279;"]:::codes;';
-    //             $buffer = $count;
-    //             $count++;
-    //             $source += 'code' + $buffer + ' --> code' + $count + '["#128279;"]:::codes;';
-    //             $buffer = $count;
-    //             $count++;
-    //             $source += 'code' + $buffer + ' --> code' + $count + '["#128279;"]:::codes;';
-    //             $buffer = $count;
-    //             $count++;
-    //             $source += 'code' + $buffer + ' --> code' + $count + '["#128279;"]:::codes;';
-    //             if(!$wasSet)
-    //             {
-    //                 $source += 'code' + $count + ' --> fixuture' + $fixtureCount + '('+ $fixtures[$fixtureCount] + '):::fixture;';
-    //             }
-    //             else{
-    //                 $source += 'code' + $count + ' --> fixuture' + $fixtureCount + ';';
-    //             }
-    //             $count++;
-    //             $fixtureCount++;
-    //         }
-    //         $sourceCount++;
-    //         $fixtureCount = 0;
-    //         $source += 'linkStyle default visibility:hidden;\nclass source0 cssClass;\n classDef waterSource:hover fill:#0ff;\nclassDef codes fill:#8A2BE2;';
-    //         $("#mer").append($source);
-    //     }
 
-    // });
-        var config = {
-            startOnLoad: true,
-            flowchart:{
-                useMaxWidth:true,
-                htmlLabels:true,
-                curve:'cardinal',
-            },
-            securityLevel:'loose',
-        };
-
-        mermaid.initialize(config);
 
 
     </script>
