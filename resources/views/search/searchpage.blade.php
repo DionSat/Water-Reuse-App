@@ -25,7 +25,7 @@
         </div>
         <div id="search-page" class="mt-0 mt-md-5">
             <div class="row d-flex justify-content-center">
-                <div class="search-col col-md-8">
+                <div class="search-col col-md-8 card p-5 shadow shadow-lg">
                     <div class="d-flex justify-content-center">
                         <div class="mr-2">
                             <div class="card text-center selection-card commercial">
@@ -47,12 +47,12 @@
                     <div class="search mt-3">
                         <h3 id="search-title" class="text-center">Search for Location </h3>
                         <hr>
-                        <form method="POST" action="{{route("search-submit")}}" class="w-75 mx-auto text-center">
+                        <form method="POST" action="{{route("search-submit")}}" class="text-center">
                             {{ csrf_field() }}
 
                             <div class="form-group row">
-                                <label for="stateSelect" class="col-sm-2 col-form-label col-form-label-lg"> <strong> State </strong> </label>
-                                <div class="col-sm-10">
+                                <label for="stateSelect" class="col-md-3 col-form-label col-form-label-lg"> <strong> State </strong> </label>
+                                <div class="col-md-9">
                                     <select id="stateSelect" name="state_id" class="form-control form-control-lg">
                                         <option value="-1" disabled selected>Select a state</option>
                                         @foreach($states as $state)
@@ -62,8 +62,8 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="countySelect" class="col-sm-2 col-form-label col-form-label-lg"> <strong> County </strong> </label>
-                                <div class="col-sm-10">
+                                <label for="countySelect" class="col-md-3 col-form-label col-form-label-lg"> <strong> County </strong> </label>
+                                <div class="col-md-9">
                                     <i id="countySpinner" class="fas fa-spinner fa-pulse mt-2 d-none"></i>
                                     <select id="countySelect" name="county_id" class="form-control form-control-lg">
                                         <option value="-1" disabled selected>Select a state first</option>
@@ -71,8 +71,8 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="citySelect" class="col-sm-2 col-form-label col-form-label-lg"> <strong> City </strong> </label>
-                                <div class="col-sm-10">
+                                <label for="citySelect" class="col-md-3 col-form-label col-form-label-lg"> <strong> City </strong> </label>
+                                <div class="col-md-9">
                                     <i id="citySpinner" class="fas fa-spinner fa-pulse mt-2 d-none"></i>
                                     <select id="citySelect" name="city_id" class="form-control form-control-lg">
                                         <option value="-1" disabled selected>Select a county first</option>
@@ -177,12 +177,16 @@
             axios.get("{{route("counties-api")}}"+"/"+stateSelect.value)
                 .then(function (response) {
                     hideCountySpinner();
-                    $("#countySelect").html('<option id="chooseCounty" value="-1" disabled selected>Choose...</option>'+
-                        response.data.sort(function (a,b) {
-                            if(a.countyName < b.countyName) { return -1; }
-                            if(a.countyName > b.countyName) { return 1; }
-                            else {return 0;}
-                        }).map(obj => "<option value='"+obj.county_id+"'>"+obj.countyName+"</option>").join("\n"));
+                    if(response.data.length != 0){
+                        $("#countySelect").html('<option id="chooseCounty" value="-1" disabled selected>Choose...</option>'+
+                            response.data.sort(function (a,b) {
+                                if(a.countyName < b.countyName) { return -1; }
+                                if(a.countyName > b.countyName) { return 1; }
+                                else {return 0;}
+                            }).map(obj => "<option value='"+obj.county_id+"'>"+obj.countyName+"</option>").join("\n"));
+                    } else {
+                        $("#countySelect").html("<option value='' disabled selected>No counties found in state</option>");
+                    }
                 })
                 .catch(function (error) {
                     console.log(error);

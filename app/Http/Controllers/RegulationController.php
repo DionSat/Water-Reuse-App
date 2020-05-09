@@ -18,7 +18,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 Class RegulationController extends Controller{
-    public function allStates(){
+
+    public function userRegulationSubmissionPage(){
         $states = State::all();
         return view("userSubmission", compact('states'));
     }
@@ -40,7 +41,7 @@ Class RegulationController extends Controller{
 
         $regLists = json_decode($request->newRegList, true);
         $regArea = "";
-        $mergeTable;
+        $mergeTable = null;
         foreach($regLists as $regList)
         {
             //There is only a State
