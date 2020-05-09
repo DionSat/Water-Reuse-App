@@ -20,7 +20,7 @@ class StateMerge extends Model
      * The attributes that are mass assignable.
      */
     protected $fillable = [
-        'stateID', 'sourceID', 'destinationID', 'allowedID', 'codes', 'permit', 'incentives', 'moreInfo', 'user_id'
+        'stateID', 'sourceID', 'destinationID', 'allowedID', 'codes', 'permit', 'incentives', 'moreInfo', 'user_id', 'comments'
     ];
 
     public function user()
