@@ -14,6 +14,29 @@ class Addcolumns extends Migration
     public function up()
     {
         //
+        Schema::table('statemerge', function (Blueprint $table) {
+            $table->string('comments')->nullable();
+        });
+
+        Schema::table('pendingstatemerge', function (Blueprint $table) {
+            $table->string('comments')->nullable();
+        });
+
+        Schema::table('countymerge', function (Blueprint $table) {
+            $table->string('comments')->nullable();
+        });
+
+        Schema::table('pendingcountymerge', function (Blueprint $table) {
+            $table->string('comments')->nullable();
+        });
+
+        Schema::table('citymerge', function (Blueprint $table) {
+            $table->string('comments')->nullable();
+        });
+
+        Schema::table('pendingcitymerge', function (Blueprint $table) {
+            $table->string('comments')->nullable();
+        });
     }
 
     /**
@@ -24,5 +47,28 @@ class Addcolumns extends Migration
     public function down()
     {
         //
+        Schema::table('statemerge', function (Blueprint $table) {
+            $table->dropColumn('comments');
+        });
+
+        Schema::table('pendingstatemerge', function (Blueprint $table) {
+            $table->dropColumn('comments');
+        });
+
+        Schema::table('countymerge', function (Blueprint $table) {
+            $table->dropColumn('comments');
+        });
+
+        Schema::table('pendingcountymerge', function (Blueprint $table) {
+            $table->dropColumn('comments');
+        });
+
+        Schema::table('citymerge', function (Blueprint $table) {
+            $table->dropColumn('comments');
+        });
+
+        Schema::table('pendingcitymerge', function (Blueprint $table) {
+            $table->dropColumn('comments');
+        });
     }
 }
