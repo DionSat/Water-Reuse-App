@@ -6,16 +6,12 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             @foreach($locationCards as $card)
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="card h-100 shadow">
                         <div class="card-body">
-                            <div class="d-flex">
-                                <div class="p-2 mr-3 w-75">
+                            <div class="text-center">
                                     <h4 class="card-title">{{$card["title"]}}</h4>
-                                </div>
-                                <div>
-                                    <h1 class="m-3 flex-grow-1 w-100 text-muted"> {{$card["count"]}}</h1>
-                                </div>
+                                    <h2 class=" text-muted lead"> {{$card["count"]}} Pending </h2>
                             </div>
                         </div>
                         <div class="card-footer">

@@ -43,13 +43,34 @@ class AdminSubmissionController extends Controller
 
     public function userCounty()
     {
-        $countySubmissions = PendingCountyMerge::with(['user', 'source', 'destination', 'county'])->get()->sortByDesc("created_at")->groupBy('county.countyName');;
+        $countySubmissions = PendingCountyMerge::with(['user', 'source', 'destination', 'county', 'county.state'])->get()->sortByDesc("created_at")->groupBy('county.countyName');;
+        $countySubmissions = $countySubmissions->mapWithKeys(function ($item, $key) {
+            if(!empty($item)){
+                $stateName = ", ".$item[0]->county->state->stateName;
+            } else {
+                $stateName = "";
+            }
+            return [$key.$stateName => $item];
+        });
+
         return view('adminUserSubmission.countySubmissions', compact('countySubmissions'));
     }
 
     public function userCity()
     {
-        $citySubmissions = PendingCityMerge::with(['user', 'source', 'destination', 'city'])->get()->sortByDesc("created_at")->groupBy('city.cityName');;
+        $citySubmissions = PendingCityMerge::with(['user', 'source', 'destination', 'city', 'city.county', 'city.county.state'])->get()->sortByDesc("created_at")->groupBy('city.cityName');;
+
+        $citySubmissions = $citySubmissions->mapWithKeys(function ($item, $key) {
+            if(!empty($item)){
+                $stateName = ", ".$item[0]->city->county->state->stateName;
+                $countyName = ", ".$item[0]->city->county->countyName." County";
+            } else {
+                $stateName = "";
+                $countyName = "";
+            }
+            return [$key.$countyName.$stateName => $item];
+        });
+
         return view('adminUserSubmission.citySubmissions', compact('citySubmissions'));
     }
 

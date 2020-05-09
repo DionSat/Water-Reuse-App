@@ -29,7 +29,7 @@
                         @foreach($stateArray as $submission)
                             <tr>
                                 <th scope="row">{{$loop->index+1}}</th>
-                                <td>{{$submission->user->name}}</td>
+                                <td><a href="{{route('viewUser',['user_id' => $submission->user->id])}}">{{$submission->user->name}}</a>
                                 <td> {{$submission->source->node_name}}</td>
                                 <td>{{$submission->destination->node_name}}</td>
                                 <td> <h5>{!! $submission->allowed->getAllowedTextBadge() !!}</h5></td>

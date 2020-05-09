@@ -5,7 +5,7 @@
     <div class="row my-3">
             <a href="{{route("adminUserSubmissionView")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> All Submissions </a>
         </div>
-        <h2 class="text-center"> County Submissions </h2>
+        <h2 class="text-center mb-4"> County Submissions </h2>
         @foreach($countySubmissions as $countyName => $countyArray)
             <div class="mx-auto">
                 <h3>{{$countyName}}</h3>
@@ -29,7 +29,7 @@
                     @foreach($countyArray as $county)
                         <tr>
                             <th scope="row">{{$loop->index+1}}</th>
-                            <td>{{$county->user->name}}</td>
+                            <td><a href="{{route('viewUser',['user_id' => $county->user->id])}}">{{$county->user->name}}</a>
                             <td> {{$county->source->node_name}}</td>
                             <td>{{$county->destination->node_name}}</td>
                             <td> <h5>{!! $county->allowed->getAllowedTextBadge() !!}</h5></td>
