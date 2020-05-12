@@ -20,9 +20,9 @@
                     <tr>
                         <th scope="row">Phone Number</th>
                         @if($user->countryCode)
-                            <td>{{$user->countryCode}}-{{$user->phoneNumber}}</td>
+                            <td>{{$user->countryCode}}-{{$user->formatPhoneNumber()}}</td>
                         @else
-                            <td>{{$user->phoneNumber}}</td>
+                            <td>{{$user->formatPhoneNumber()}}</td>
                         @endif
                     </tr>
                     <tr>

@@ -5,6 +5,9 @@ namespace App\Http\Controllers\DataControllers;
 use App\CityMerge;
 use App\CountyMerge;
 use App\StateMerge;
+use App\PendingCityMerge;
+use App\PendingCountyMerge;
+use App\PendingStateMerge;
 use App\Links;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -51,6 +54,21 @@ class LinkController extends Controller
                                         ->orWhere("moreInfo", $request->link_id)->get()->count();
 
         $linksInMergeCount += StateMerge::where("codes", $request->link_id)
+                                        ->orWhere("permit", $request->link_id)
+                                        ->orWhere("incentives", $request->link_id)
+                                        ->orWhere("moreInfo", $request->link_id)->get()->count();
+
+        $linksInMergeCount += PendingCityMerge::where("codes", $request->link_id)
+                                        ->orWhere("permit", $request->link_id)
+                                        ->orWhere("incentives", $request->link_id)
+                                        ->orWhere("moreInfo", $request->link_id)->get()->count();
+
+        $linksInMergeCount += PendingCountyMerge::where("codes", $request->link_id)
+                                        ->orWhere("permit", $request->link_id)
+                                        ->orWhere("incentives", $request->link_id)
+                                        ->orWhere("moreInfo", $request->link_id)->get()->count();
+
+        $linksInMergeCount += PendingStateMerge::where("codes", $request->link_id)
                                         ->orWhere("permit", $request->link_id)
                                         ->orWhere("incentives", $request->link_id)
                                         ->orWhere("moreInfo", $request->link_id)->get()->count();

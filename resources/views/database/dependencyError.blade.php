@@ -9,7 +9,8 @@
         <h5 class="text-center mt-4 w-75 mx-auto">The database item ({{$item}}) is linked to
                                                     @if(count($dependantItems) > 0) by the following @else by one or more @endif
                                                     {{$dependantCategory}}.
-                                                    Please delete these items before deleting "{{$item}}". </h5>
+                                                    Please delete these items before deleting "{{$item}}".
+                                                    </h5>
         <ul class="list-group w-25 mx-auto mt-4">
             @foreach($dependantItems as $dependantItem)
                 <li class="list-group-item"> {{$dependantItem}} </li>
