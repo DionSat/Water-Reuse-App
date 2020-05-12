@@ -6,7 +6,7 @@
             <a href="{{route("adminUserSubmissionView")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> All Submissions </a>
         </div>
 
-        <h2 class="text-center"> State Submissions </h2>
+        <h2 class="text-center"> Pending State Submissions </h2>
         @foreach($stateSubmissions as $stateName => $stateArray)
             <div class="mx-auto">
                 <h3>{{$stateName}}</h3>
