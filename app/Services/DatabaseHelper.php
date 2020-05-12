@@ -172,4 +172,109 @@ class DatabaseHelper {
             throw new \Exception($e->getMessage());
         }
     }
+
+    public static function submissionEditSubmit(Request $request)
+    {
+        if (!$request->city)
+            $request->city = -1;
+
+        switch ($request->type) {
+            case 'State':
+                $submission = PendingStateMerge::where('id', $request->id)->withTrashed()->get()->first();
+                $submissionInfo = $submission->toArray();
+                if ($request->county > -1 && $request->city > -1) {
+                    $submission->forceDelete();
+                    $submission = new PendingCityMerge($submissionInfo);
+                    $submission->cityID = $request->city;
+                } else if ($request->county > -1) {
+                    $submission->forceDelete();
+                    $submission = new PendingCountyMerge($submissionInfo);
+                    $submission->countyID = $request->county;
+                } else {
+                    $submission->stateID = $request->state;
+                }
+                break;
+            case 'County':
+                $submission = PendingCountyMerge::where('id', $request->id)->withTrashed()->get()->first();
+                $submissionInfo = $submission->toArray();
+                if ($request->county == -1) {
+                    $submission->forceDelete();
+                    $submission = new PendingStateMerge($submissionInfo);
+                    $submission->StateID = $request->State;
+                } else if ($request->city > -1) {
+                    $submission->forceDelete();
+                    $submission = new PendingCityMerge($submissionInfo);
+                    $submission->cityID = $request->city;
+                } else {
+                    $submission->countyID = $request->county;
+                }
+                break;
+            case 'City':
+                $submission = PendingCityMerge::where('id', $request->id)->withTrashed()->get()->first();
+                $submissionInfo = $submission->toArray();
+                if ($request->county == -1) {
+                    $submission->forceDelete();
+                    $submission = new PendingStateMerge($submissionInfo);
+                    $submission->StateID = $request->State;
+                } else if ($request->city == -1) {
+                    $submission->forceDelete();
+                    $submission = new PendingCountyMerge($submissionInfo);
+                    $submission->countyID = $request->county;
+                } else {
+                    $submission->cityID = $request->city;
+                }
+                break;
+            default:
+                throw new Exception('Issue updating submission, please contact an administrator.');
+        }
+        $submission->allowedID = $request->allowed;
+        $submission->sourceID = $request->source;
+        $submission->destinationID = $request->destination;
+
+        $holdingVar = Links::where('linkText', $request->codes)->get();
+        if (count($holdingVar) > 0) {
+            $submission->codes = Links::where('linkText', $request->codes)->get()->first()->link_id;
+        } else {
+            $codes = new Links();
+            $codes->linkText = $request->codes;
+            $codes->save();
+            $submission->codes = $codes->link_id;
+        }
+
+        $holdingVar = Links::where('linkText', $request->permit)->get();
+        if (count($holdingVar) > 0) {
+            $submission->permit = Links::where('linkText', $request->permit)->get()->first()->link_id;
+        } else {
+            $permit = new Links();
+            $permit->linkText = $request->permit;
+            $permit->save();
+            $submission->permit = $permit->link_id;
+        }
+
+        $holdingVar = Links::where('linkText', $request->incentives)->get();
+        if (count($holdingVar) > 0) {
+            $submission->incentives = Links::where('linkText', $request->incentives)->get()->first()->link_id;
+        } else {
+            $incentives = new Links();
+            $incentives->linkText = $request->incentives;
+            $incentives->save();
+            $submission->incentives = $incentives->link_id;
+        }
+
+        $holdingVar = Links::where('linkText', $request->moreInfo)->get();
+        if (count($holdingVar) > 0) {
+            $submission->moreInfo = Links::where('linkText', $request->moreInfo)->get()->first()->link_id;
+        } else {
+            $moreInfo = new Links();
+            $moreInfo->linkText = $request->moreInfo;
+            $moreInfo->save();
+            $submission->moreInfo = $moreInfo->link_id;
+        }
+
+        try {
+            $submission->save();
+        } catch (Throwable $e) {
+            throw new Exception('Error saving updated submission to DB. Contact an administrator.');
+        }
+    }
 }
