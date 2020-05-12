@@ -3,25 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Services\DatabaseHelper;
-use Auth;
 use Illuminate\Http\Request;
-use Illuminate\Http\Requests;
 use App\PendingStateMerge;
 use App\PendingCityMerge;
 use App\PendingCountyMerge;
+use Exception;
 
 class MergeController extends Controller
 {
     public $timestamps = true;
+    const DB_ERROR_MSG = "A database error occurred, and the reuse item was not approved. The detailed error is: <br>";
 
     public function addCityMergeSubmit(Request $request)
     {
         try {
             DatabaseHelper::addCityMergeSubmit($request);
             return redirect()->route('userCityView')->with(['alert' => 'success', 'alertMessage' => 'The submission has been approved.']);
-        } catch (\Exception $e) {
-            $e->getMessage();
-        }
+        } catch (Exception $e) {
+            $errorMsg = MergeController::DB_ERROR_MSG.$e->getMessage();
+            return redirect()->route('userStateView')->with(['alert' => 'danger', 'alertMessage' => $errorMsg]);        }
     }
 
     public function addStateMergeSubmit(Request $request)
@@ -29,8 +29,9 @@ class MergeController extends Controller
         try {
             DatabaseHelper::addStateMergeSubmit($request);
             return redirect()->route('userStateView')->with(['alert' => 'success', 'alertMessage' => 'The submission has been approved.']);
-        } catch (\Exception $e) {
-            $e->getMessage();
+        } catch (Exception $e) {
+            $errorMsg = MergeController::DB_ERROR_MSG.$e->getMessage();
+            return redirect()->route('userStateView')->with(['alert' => 'danger', 'alertMessage' => $errorMsg]);
         }
     }
 
@@ -39,9 +40,9 @@ class MergeController extends Controller
         try {
             DatabaseHelper::addCountyMergeSubmit($request);
             return redirect()->route('userCountyView')->with(['alert' => 'success', 'alertMessage' => 'The submission has been approved.']);
-        } catch (\Exception $e) {
-            $e->getMessage();
-        }
+        } catch (Exception $e) {
+            $errorMsg = MergeController::DB_ERROR_MSG.$e->getMessage();
+            return redirect()->route('userStateView')->with(['alert' => 'danger', 'alertMessage' => $errorMsg]);        }
     }
 
     public function deleteCityMerge(Request $request)

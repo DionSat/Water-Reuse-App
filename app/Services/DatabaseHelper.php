@@ -5,20 +5,20 @@ namespace App\Services;
 use App\CityMerge;
 use App\CountyMerge;
 use App\StateMerge;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use App\PendingCityMerge;
 use App\PendingCountyMerge;
 use App\PendingStateMerge;
 use App\Links;
 use Exception;
 use Illuminate\Http\Request;
-use Symfony\Component\Debug\Exception\FatalThrowableError;
 use Throwable;
 
 class DatabaseHelper {
+
     public static function addRegulation(Request $request, $regLists) {
         $regArea = "";
-        $mergeTable;
+        $mergeTable = null;
         foreach($regLists as $regList)
         {
             //There is only a State
@@ -122,7 +122,7 @@ class DatabaseHelper {
             $pending->delete();
             return;
         } catch (Throwable $e) {
-            throw new \Exception($e->getMessage());
+            throw new Exception($e->getMessage());
         }
     }
 
@@ -131,7 +131,7 @@ class DatabaseHelper {
         $pending = PendingStateMerge::find($request->id);
 
         $state = new StateMerge();
-        $state->stateID = $pending->stateID;
+        $state->stateID = "hhh";
         $state->sourceID = $pending->sourceID;
         $state->destinationID = $pending->destinationID;
         $state->allowedID = $pending->allowedID;
@@ -146,7 +146,7 @@ class DatabaseHelper {
             $pending->delete();
             return;
         } catch (Throwable $e) {
-            throw new \Exception($e->getMessage());
+            throw new Exception($e->getMessage());
         }
     }
 
@@ -169,7 +169,7 @@ class DatabaseHelper {
             $pending->delete();
             return;
         } catch (Throwable $e) {
-            throw new \Exception($e->getMessage());
+            throw new Exception($e->getMessage());
         }
     }
 
