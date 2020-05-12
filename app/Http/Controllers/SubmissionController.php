@@ -16,7 +16,7 @@ use App\PendingCountyMerge;
 use App\StateMerge;
 use App\CityMerge;
 use App\CountyMerge;
-use mysql_xdevapi\Exception;
+use Exception;
 use Route;
 
 class SubmissionController extends Controller
@@ -135,7 +135,7 @@ class SubmissionController extends Controller
             DatabaseHelper::submissionEditSubmit($request);
             return redirect()->route('submission')->with(['alert' => 'success', 'alertMessage' => 'The submission has been updated.']);
         } catch (Exception $e) {
-            throw new Exception($e->getMessage());
+            return redirect()->route('submission')->with(['alert' => 'danger', 'alertMessage' => 'Error saving the submission. Detailed error message: <br>'.$e->getMessage()]);
         }
     }
 
