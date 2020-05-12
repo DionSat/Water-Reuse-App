@@ -192,7 +192,7 @@
         </table>
         <table class="table table-bordered">
             <h3 class="text-left">Comments</h3>
-            <tfoot>
+            <tbody>
                 <tr>
                     <td colspan="4">
                         @if($item->comments != "")
@@ -202,7 +202,7 @@
                         @endif
                     </td>
                 </tr>
-            </tfoot>
+            </tbody>
         </table>
     </div>
 </div>

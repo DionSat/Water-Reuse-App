@@ -33,6 +33,7 @@ class MergeController extends Controller
         $city->incentives = $pending->incentives;
         $city->moreInfo = $pending->moreInfo;
         $city->user_id = $pending->user_id;
+        $city->comments = $pending->comments;
         $city->save();
         
         $pending->delete();
@@ -53,6 +54,7 @@ class MergeController extends Controller
         $state->incentives = $pending->incentives;
         $state->moreInfo = $pending->moreInfo;
         $state->user_id = $pending->user_id;
+        $state->comments = $pending->comments;
         $state->save();
         
         $pending->delete();
@@ -72,6 +74,7 @@ class MergeController extends Controller
         $county->incentives = $pending->incentives;
         $county->moreInfo = $pending->moreInfo;
         $county->user_id = $pending->user_id;
+        $county->comments = $pending->comments;
         $county->save();
 
         $pending->delete();
