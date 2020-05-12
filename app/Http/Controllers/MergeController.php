@@ -4,14 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Services\DatabaseHelper;
 use Auth;
-use App\User;
-use App\CityMerge;
-use App\CountyMerge;
-use App\StateMerge;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Requests;
-use Illuminate\Support\Facades\DB;
 use App\PendingStateMerge;
 use App\PendingCityMerge;
 use App\PendingCountyMerge;
