@@ -137,7 +137,7 @@ class DatabaseHelper {
         $pending = PendingStateMerge::find($request->id);
 
         $state = new StateMerge();
-        $state->stateID = "hhh";
+        $state->stateID = $pending->stateID;
         $state->sourceID = $pending->sourceID;
         $state->destinationID = $pending->destinationID;
         $state->allowedID = $pending->allowedID;
