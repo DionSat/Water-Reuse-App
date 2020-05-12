@@ -3,21 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Services\DatabaseHelper;
-use Illuminate\Http\Request;
+use Illuminate\Http\Requests;
 use App\State;
 use App\County;
 use App\City;
 use App\Allowed;
-use Illuminate\Support\Facades\Auth;
+use Auth;
+use Illuminate\Http\Request;
 use App\PendingStateMerge;
 use App\PendingCityMerge;
 use App\PendingCountyMerge;
 use App\StateMerge;
 use App\CityMerge;
 use App\CountyMerge;
+use Exception;
 use Route;
 
-class UserSubmissionController extends Controller
+class SubmissionController extends Controller
 {
     public function view()
     {
@@ -133,7 +135,7 @@ class UserSubmissionController extends Controller
             DatabaseHelper::submissionEditSubmit($request);
             return redirect()->route('submission')->with(['alert' => 'success', 'alertMessage' => 'The submission has been updated.']);
         } catch (Exception $e) {
-            throw new Exception($e->getMessage());
+            return redirect()->route('submission')->with(['alert' => 'danger', 'alertMessage' => 'Error saving the submission. Detailed error message: <br>'.$e->getMessage()]);
         }
     }
 
