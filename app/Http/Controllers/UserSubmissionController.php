@@ -229,6 +229,8 @@ class UserSubmissionController extends Controller
             $submission->moreInfo = $moreInfo->link_id;
         }
 
+        $submission->comments = $request->comments;
+
         $submission->save();
 
         return redirect()->route('submission')->with(['alert' => 'success', 'alertMessage' => 'The submission has been updated.']);
