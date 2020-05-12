@@ -3,15 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Services\DatabaseHelper;
-use App\User;
 use Illuminate\Http\Requests;
 use App\State;
 use App\County;
 use App\City;
 use App\Allowed;
-use App\Links;
 use Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\PendingStateMerge;
 use App\PendingCityMerge;
