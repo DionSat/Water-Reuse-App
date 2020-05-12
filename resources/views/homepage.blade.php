@@ -14,7 +14,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-md-3">
-                <div class="card">
+                <div class="card h-100">
                     <div class="card-body">
                         <div class="card-title text-center">
                             <h5 class="card-title"> Accessible Reuse Rules </h5>

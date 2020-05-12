@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 use App\Services\DatabaseHelper;
-use Auth;
 use App\Allowed;
 use App\ReuseNode;
 use App\State;
@@ -10,7 +9,8 @@ use Illuminate\Http\Request;
 use Throwable;
 
 Class RegulationController extends Controller{
-    public function allStates(){
+
+    public function userRegulationSubmissionPage(){
         $states = State::all();
         return view("userSubmission", compact('states'));
     }

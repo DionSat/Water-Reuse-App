@@ -23,7 +23,7 @@
                         <label class="form-check-label" for="is_source_checkbox">Source</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" id="is_destination_checkbox_checkbox" type="checkbox" name="is_destination">
+                        <input class="form-check-input" id="is_destination_checkbox" type="checkbox" name="is_destination">
                         <label class="form-check-label" for="is_destination_checkbox">Destination</label>
                     </div>
                     <div class="form-check form-check-inline">

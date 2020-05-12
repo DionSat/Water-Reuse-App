@@ -90,12 +90,17 @@ class DatabaseHelper {
             $mergeTable->destinationID = $regList['$destinationId'];
             $mergeTable->allowedID = $regList['$isPermitted'];
             $mergeTable->user_id = Auth::user()->id;
-            if($mergeTable->save() == false)
-            {
-                $codesLink->delete();
-                $permitLink->delete();
-                $incentivesLink->delete();
-                $moreInfoLink->delete();
+            $mergeTable->comments = $regList['$comments'];
+            try {
+                if($mergeTable->save() == false)
+                {
+                    $codesLink->delete();
+                    $permitLink->delete();
+                    $incentivesLink->delete();
+                    $moreInfoLink->delete();
+                }
+            } catch (Exception $exception){
+                return "A API error occurred.";
             }
         }
 
@@ -116,6 +121,7 @@ class DatabaseHelper {
         $city->incentives = $pending->incentives;
         $city->moreInfo = $pending->moreInfo;
         $city->user_id = $pending->user_id;
+        $city->comments = $pending->comments;
 
         try {
             $city->save();
@@ -140,6 +146,7 @@ class DatabaseHelper {
         $state->incentives = $pending->incentives;
         $state->moreInfo = $pending->moreInfo;
         $state->user_id = $pending->user_id;
+        $state->comments = $pending->comments;
 
         try {
             $state->save();
@@ -163,6 +170,7 @@ class DatabaseHelper {
         $county->incentives = $pending->incentives;
         $county->moreInfo = $pending->moreInfo;
         $county->user_id = $pending->user_id;
+        $county->comments = $pending->comments;
 
         try {
             $county->save();

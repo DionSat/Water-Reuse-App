@@ -64,6 +64,35 @@ class UpdateMergeForeignKeys extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('statemerge', function (Blueprint $table) {
+            $table->dropForeign("statemerge_sourceid_foreign");
+            $table->dropForeign("statemerge_destinationid_foreign");
+        });
+
+        Schema::table('pendingstatemerge', function (Blueprint $table) {
+            $table->dropForeign("pendingstatemerge_sourceid_foreign");
+            $table->dropForeign("pendingstatemerge_destinationid_foreign");
+        });
+
+        Schema::table('countymerge', function (Blueprint $table) {
+            $table->dropForeign("countymerge_sourceid_foreign");
+            $table->dropForeign("countymerge_destinationid_foreign");
+        });
+
+        Schema::table('pendingcountymerge', function (Blueprint $table) {
+            $table->dropForeign("pendingcountymerge_sourceid_foreign");
+            $table->dropForeign("pendingcountymerge_destinationid_foreign");
+        });
+
+        Schema::table('citymerge', function (Blueprint $table) {
+            $table->dropForeign("citymerge_sourceid_foreign");
+            $table->dropForeign("citymerge_destinationid_foreign");
+        });
+
+        Schema::table('pendingcitymerge', function (Blueprint $table) {
+            $table->dropForeign("pendingcitymerge_sourceid_foreign");
+            $table->dropForeign("pendingcitymerge_destinationid_foreign");
+        });
+
     }
 }
