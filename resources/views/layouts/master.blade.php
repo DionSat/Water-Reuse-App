@@ -4,10 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSRF Token -->
-    <!-- <meta name="csrf-token" content="{{ csrf_token() }}"> -->
     <link rel="icon" href="{{ URL::asset('/img/drop-water.jpg') }}" type="image/x-icon"/>
-    <title>{{ config('app.name', 'Water Reuse App') }}</title>
+    <title>{{ config('app.name', 'Water Reuse Directory') }}</title>
 
     <!-- Scripts -->
     {{--    <script src="{{ asset('js/app.js') }}" defer></script>--}}
@@ -30,6 +28,17 @@
 
     <!-- Styles -->
     {{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
+    <style>
+        a.active {
+            border-bottom: 2px solid #272525;
+        }
+        a.nav-link:hover:not(.active):not(.dropdown-toggle){
+            border-bottom: 2px solid #a9a3a3;
+        }
+        a.nav-link:not(.active){
+            border-bottom: 2px solid white;
+        }
+    </style>
 
     @stack("css")
 
@@ -40,9 +49,9 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Water Reuse App
+            <div class="container-fluid mx-0 mx-md-2 mx-lg-4 py-1">
+                <a class="navbar-brand px-md-0 pb-md-0" href="{{ url('/') }}">
+                    {{ config('app.name', 'Water Reuse Directory') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -52,27 +61,27 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link @if (Route::current()->getName() == "search") info @endif" href="{{ route('info') }}">{{ __('Info') }}</a>
+                            <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "info") active @endif" href="{{ route('info') }}">{{ __('Info') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  @if (Route::current()->getName() == "search") active @endif" href="{{ route('search') }}"> Search</a>
+                            <a class="nav-link mx-md-2 px-md-0 pb-md-0  @if (Route::current()->getName() == "search") active @endif" href="{{ route('search') }}"> Search</a>
                         </li>
-                        @guest
-                        @else
+
+                        @auth
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('userSubmission') }}">{{ __('Submit a New Regulation') }}</a>
+                            <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "userSubmission") active @endif" href="{{ route('userSubmission') }}">{{ __('Submit a New Regulation') }}</a>
                         </li>
-                        @endguest
-                        {{--We'll want to do an actual check for "admin" here later --}}
+                        @endauth
+
                         @if (Auth::check() && Auth::user()->is_admin)
                             <li class="nav-item pl-3">
-                                <span class="nav-link">Admin:</span>
+                                <span class="nav-link mx-md-2 px-md-0 pb-md-0">Admin:</span>
                             </li>
-                            <li class="nav-item @if (Route::current()->getName() == "admin") active @endif">
-                                <a class="nav-link" href="{{ route('admin') }}"><i class="fas fa-tachometer-alt"></i> Dashboard </a>
+                            <li class="nav-item">
+                                <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "admin") active @endif" href="{{ route('admin') }}"><i class="fas fa-tachometer-alt"></i> Dashboard </a>
                             </li>
-                            <li class="nav-item @if (Route::current()->getName() == "adminUserSubmissionView") active @endif">
-                                <a class="nav-link" href="{{ route('adminUserSubmissionView') }}"><i class="fas fa-bars"></i> Submissions </a>
+                            <li class="nav-item">
+                                <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "adminUserSubmissionView") active @endif" href="{{ route('adminUserSubmissionView') }}"><i class="fas fa-bars"></i> Submissions </a>
                             </li>
 
                         @endif
@@ -82,16 +91,16 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "login") active @endif" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "register") active @endif" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link pb-md-0 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
