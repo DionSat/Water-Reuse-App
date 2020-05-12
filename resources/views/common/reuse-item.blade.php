@@ -70,5 +70,19 @@
             </tr>
             </tbody>
         </table>
+        @if($item->comments != "")
+            <table class="table table-bordered">
+                <tfoot>
+                    <tr>
+                        <th scope="col" colspan="4">Comments</th>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            {{$item->comments}}
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        @endif
     </div>
 </div>

@@ -113,6 +113,7 @@ Class RegulationController extends Controller{
             $mergeTable->destinationID = $regList['$destinationId'];
             $mergeTable->allowedID = $regList['$isPermitted'];
             $mergeTable->user_id = Auth::user()->id;
+            $mergeTable->comments = $regList['$comments'];
             try {
                 if($mergeTable->save() == false)
                 {
