@@ -190,45 +190,45 @@ class DatabaseHelper {
             case 'State':
                 $submission = PendingStateMerge::where('id', $request->id)->withTrashed()->get()->first();
                 $submissionInfo = $submission->toArray();
-                if ($request->county > -1 && $request->city > -1) {
-                    $submission->forceDelete();
+                $submission->forceDelete();
+                if($request->county > -1 && $request->city > -1){
                     $submission = new PendingCityMerge($submissionInfo);
                     $submission->cityID = $request->city;
-                } else if ($request->county > -1) {
-                    $submission->forceDelete();
+                }else if($request->county > -1){
                     $submission = new PendingCountyMerge($submissionInfo);
                     $submission->countyID = $request->county;
-                } else {
+                }else{
+                    $submission = new PendingStateMerge($submissionInfo);
                     $submission->stateID = $request->state;
                 }
                 break;
             case 'County':
                 $submission = PendingCountyMerge::where('id', $request->id)->withTrashed()->get()->first();
                 $submissionInfo = $submission->toArray();
-                if ($request->county == -1) {
-                    $submission->forceDelete();
+                $submission->forceDelete();
+                if($request->county == -1){
                     $submission = new PendingStateMerge($submissionInfo);
                     $submission->StateID = $request->State;
-                } else if ($request->city > -1) {
-                    $submission->forceDelete();
+                }else if($request->city > -1){
                     $submission = new PendingCityMerge($submissionInfo);
                     $submission->cityID = $request->city;
-                } else {
+                }else{    
+                    $submission = new PendingCountyMerge($submissionInfo);
                     $submission->countyID = $request->county;
                 }
                 break;
             case 'City':
                 $submission = PendingCityMerge::where('id', $request->id)->withTrashed()->get()->first();
                 $submissionInfo = $submission->toArray();
-                if ($request->county == -1) {
-                    $submission->forceDelete();
+                $submission->forceDelete();
+                if($request->county == -1){
                     $submission = new PendingStateMerge($submissionInfo);
                     $submission->StateID = $request->State;
-                } else if ($request->city == -1) {
-                    $submission->forceDelete();
+                }else if($request->city == -1){
                     $submission = new PendingCountyMerge($submissionInfo);
                     $submission->countyID = $request->county;
-                } else {
+                }else{
+                    $submission = new PendingCityMerge($submissionInfo);
                     $submission->cityID = $request->city;
                 }
                 break;

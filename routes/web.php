@@ -18,7 +18,6 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/info', 'HomeController@getInfo')->name('info');
 Route::get('/search', 'SearchController@mainPage')->name('search');
-
 Route::post('/search', 'SearchController@handleSubmit')->name('search-submit');
 
 
@@ -27,6 +26,10 @@ Route::post('/search', 'SearchController@handleSubmit')->name('search-submit');
 
 //Registered User Routes
 Route::middleware('auth')->group(function () {
+
+    // User account welcome/overview page
+    Route::get('/overview', 'HomeController@overview')->name('overview');
+
     //submission routes for each indiviual user
     Route::get('/submissions', 'UserSubmissionController@view')->name('submission');
     Route::get('/submissions/citySubmissionItem/{itemId?}', 'UserSubmissionController@pendingCity')->name('citySubmission');
@@ -126,6 +129,7 @@ Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function 
         Route::post('/links/delete', 'LinkController@deleteLink')->name('deleteLink');
         Route::get('/links/modify', 'LinkController@modify')->name('modifyLink');
         Route::post('/links/modify', 'LinkController@modifyLinkSubmit')->name('modifyLinkSubmit');
+        Route::post('/links/status', 'LinkController@checkLinkStatus')->name('checkLinkStatus');
 
     });
 });

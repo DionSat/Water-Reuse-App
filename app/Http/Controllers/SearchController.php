@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\City;
 use App\County;
+use App\Links;
 use App\ReuseNode;
 use App\State;
 use App\StateMerge;
@@ -11,6 +12,7 @@ use App\CountyMerge;
 use App\CityMerge;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use App\Services\LinkCheckerService;
 
 class SearchController extends Controller
 {

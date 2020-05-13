@@ -118,7 +118,23 @@
 
 
 @push("js")
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 <script>
+    // Fire off a event as the user navigates away to check the link
+    // The link is only checked if it hasn't been updated in last 14 days
+    $(".link-button").click(function (event) {
+        axios.post("{{route("check-link-api")}}", {
+            link_id: $(this).attr("data-linkid")
+        })
+        .then(function (response) {
+            console.log(response.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    });
+
 
     $('.collapsible').on('hide.bs.collapse', function () {
         $("#"+$(this).attr("data-level")+"Header").find("i").removeClass("fa-rotate-90");
