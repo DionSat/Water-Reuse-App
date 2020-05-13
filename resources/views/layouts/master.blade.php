@@ -57,11 +57,15 @@
                         <li class="nav-item">
                             <a class="nav-link  @if (Route::current()->getName() == "search") active @endif" href="{{ route('search') }}"> Search</a>
                         </li>
+
                         @guest
                         @else
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('userSubmission') }}">{{ __('Submit a New Regulation') }}</a>
                         </li>
+
+     
+
                         @endguest
                         {{--We'll want to do an actual check for "admin" here later --}}
                         @if (Auth::check() && Auth::user()->is_admin)
@@ -84,6 +88,11 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
+
+                        <li class="nav-item">
+                            <button type="button" class="btn btn-primary padding-sm" href="https://www.recodenow.org/donate-test-page" > <i class="fas fa-hands-helping"></i> Donate</button>
+                        </li>   
+
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
@@ -93,6 +102,12 @@
                                 </li>
                             @endif
                         @else
+
+
+                        <li class="nav-item">
+                            <button type="button" class="btn btn-primary padding-sm" href="https://www.recodenow.org/donate-test-page" > <i class="fas fa-hands-helping"></i> Donate</button>
+                        </li>  
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

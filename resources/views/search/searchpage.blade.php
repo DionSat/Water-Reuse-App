@@ -8,9 +8,6 @@
                     <div class="card-header"><h3>Search for Location </h3></div>
                     <div class="card-body">
 
-    
-                
-                
                         <form method="POST" action="{{route("search-submit")}}">
                             {{ csrf_field() }}
 
@@ -28,8 +25,6 @@
                                 </div>
                             </div>
 
-
-
                             <div class="form-group row">
                                 <label for="countySelect" class="col-md-4 col-form-label"> County </label>
                                 <div class="col-md-6">
@@ -40,8 +35,6 @@
                                 </div>
                             </div>
 
-
-
                             <div class="form-group row">
                                 <label for="citySelect" class="col-md-4 col-form-label"> City </label>
                                 <div class="col-md-6">
@@ -51,25 +44,9 @@
                                     </select>
                                 </div>
                             </div>
-
-
-
-
-
-
-
-
-
                         
                             <button class="btn btn-primary" type="submit"> Submit </button>
                          </form>
-
-
-
-
-
-                         
-
                     </div>
                 </div>
             </div>
