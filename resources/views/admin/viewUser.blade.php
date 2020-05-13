@@ -2,6 +2,9 @@
 
 @section('body')
     <div class="container">
+        <div class="row my-3">
+            <a href="{{url()->previous()}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> Back </a>
+        </div>
         <div class="card col-8 mx-auto">
             <div class="card-body">
                 <table class="table table-striped">

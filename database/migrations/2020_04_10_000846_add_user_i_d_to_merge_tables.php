@@ -29,16 +29,19 @@ class AddUserIDToMergeTables extends Migration
         });
 
         Schema::table('pendingstatemerge', function (Blueprint $table) {
+            $table->dropColumn('userID');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
         });
 
         Schema::table('pendingcountymerge', function (Blueprint $table) {
+            $table->dropColumn('userID');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
         });
 
         Schema::table('pendingcitymerge', function (Blueprint $table) {
+            $table->dropColumn('userID');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
         });

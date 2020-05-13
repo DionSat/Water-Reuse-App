@@ -38,7 +38,7 @@
         <div class="list-group">
             @if($lowestLevel == "city")
                 <div class="list-group-item">
-                    <div id="cityHeader" class="d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#cityCollapse">
+                    <div id="cityHeader" class="d-flex justify-content-between align-items-center pointer" data-toggle="collapse" data-target="#cityCollapse">
                     <span class="font-25">
                         <i id="cityGroupIcon" class="fas fa-chevron-right fa-rotate-90 p-1"></i> {{$city->cityName}}
                     </span>
@@ -56,7 +56,7 @@
             @endif
             @if($lowestLevel == "county" || $lowestLevel == "city")
                 <div class="list-group-item">
-                    <div id="countyHeader" class="d-flex justify-content-between align-items-center {{$lowestLevel == "county" ? "" : "collapsed"}}" data-toggle="collapse" data-target="#countyCollapse">
+                    <div id="countyHeader" class="d-flex justify-content-between align-items-center pointer {{$lowestLevel == "county" ? "" : "collapsed"}}" data-toggle="collapse" data-target="#countyCollapse">
                     <span class="font-25">
                         <i id="countyGroupIcon" class="fas fa-chevron-right {{$lowestLevel == "county" ? "fa-rotate-90" : ""}} p-1"></i> {{$county->countyName}}
                     </span>
@@ -73,7 +73,7 @@
                 </div>
             @endif
                 <div class="list-group-item">
-                    <div id="stateHeader" class="d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#stateCollapse">
+                    <div id="stateHeader" class="d-flex justify-content-between align-items-center pointer" data-toggle="collapse" data-target="#stateCollapse">
                     <span class="font-25">
                         <i id="stateGroupIcon" class="fas fa-chevron-right {{$lowestLevel == "state" ? "fa-rotate-90" : ""}} p-1"></i> {{$state->stateName}}
                     </span>
@@ -107,6 +107,10 @@
 
         .fa-chevron-right {
             transition: 0.3s;
+        }
+
+        .pointer{
+            cursor: pointer;
         }
 
     </style>

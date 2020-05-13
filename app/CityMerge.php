@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class CityMerge extends Model
@@ -20,7 +21,7 @@ class CityMerge extends Model
      * The attributes that are mass assignable.
      */
     protected $fillable = [
-        'cityID', 'sourceID', 'destinationID', 'allowedID', 'codes', 'permit', 'incentives', 'moreInfo', 'user_id'
+        'cityID', 'sourceID', 'destinationID', 'allowedID', 'codes', 'permit', 'incentives', 'moreInfo', 'user_id', 'comments'
     ];
 
     public function user()
@@ -66,6 +67,11 @@ class CityMerge extends Model
     public function moreInfoObj()
     {
         return $this->hasOne('App\Links', 'link_id','moreInfo');
+    }
+
+    public function getTimeSubmittedAsString(){
+        $time = new Carbon($this->updated_at);
+        return $time->toDayDateTimeString();
     }
 
 }

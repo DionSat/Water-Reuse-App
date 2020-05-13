@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddIsAdminField extends Migration
+class ChangeCitiesUnique extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class AddIsAdminField extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-                    $table->boolean('isAdmin')->default(false);
-                });
+        Schema::table('cities', function (Blueprint $table) {
+            $table->unique(['fk_county', 'cityName']);
+        });
     }
 
     /**
@@ -25,8 +25,8 @@ class AddIsAdminField extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropIfExists(['isAdmin']);
+        Schema::table('cities', function (Blueprint $table) {
+            $table->dropUnique(['fk_county', 'cityName']);
         });
     }
 }

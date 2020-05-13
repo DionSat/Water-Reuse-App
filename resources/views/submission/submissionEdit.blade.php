@@ -116,7 +116,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="comments">Comments (Optional)</label>
-                                    <textarea class="form-control" id="comments" rows="3" name="comments"></textarea>
+                                    <textarea class="form-control" id="comments" rows="3" name="comments">{{$submission->comments}}</textarea>
                                 </div>
                                 <input type="text" name="type" style="display: none;" value="{{$type}}">
                                 <input type="number" name="id" style="display: none;" value={{$submission->id}}>
@@ -217,8 +217,7 @@
             axios.get("{{route("my-destination-api")}}")
                 .then(function (response) {
                     //get each county, and set them as options
-                    $destination = response.data.map(obj => (
-                        "<option "
+                    $destination = response.data.map(obj => ("<option "
                         + (obj.node_id == current ? 'selected' : "")
                         + " class='destinationName' value="
                         + obj.node_id

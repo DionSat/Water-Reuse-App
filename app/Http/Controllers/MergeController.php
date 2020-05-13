@@ -2,80 +2,47 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
-use App\User;
-use App\CityMerge;
-use App\CountyMerge;
-use App\StateMerge;
+use App\Services\DatabaseHelper;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Requests;
-use Illuminate\Support\Facades\DB;
 use App\PendingStateMerge;
 use App\PendingCityMerge;
 use App\PendingCountyMerge;
+use Exception;
 
 class MergeController extends Controller
 {
     public $timestamps = true;
-    
-    public function addCityMergeSubmit(Request $request) 
-    {
-        $pending = PendingCityMerge::find($request->id);
+    const DB_ERROR_MSG = "A database error occurred, and the reuse item was not approved. The detailed error is: <br>";
 
-        $city = new CityMerge();
-        $city->cityID = $pending->cityID;
-        $city->sourceID = $pending->sourceID;
-        $city->destinationID = $pending->destinationID;
-        $city->allowedID = $pending->allowedID;
-        $city->codes = $pending->codes;
-        $city->permit = $pending->permit;
-        $city->incentives = $pending->incentives;
-        $city->moreInfo = $pending->moreInfo;
-        $city->user_id = $pending->user_id;
-        $city->save();
-        
-        $pending->delete();
-        return redirect()->route('userCityView')->with(['alert' => 'success', 'alertMessage' => 'The submission has been approved.']);
+    public function addCityMergeSubmit(Request $request)
+    {
+        try {
+            DatabaseHelper::addCityMergeSubmit($request);
+            return redirect()->route('userCityView')->with(['alert' => 'success', 'alertMessage' => 'The submission has been approved.']);
+        } catch (Exception $e) {
+            $errorMsg = MergeController::DB_ERROR_MSG.$e->getMessage();
+            return redirect()->route('userStateView')->with(['alert' => 'danger', 'alertMessage' => $errorMsg]);        }
     }
 
-    public function addStateMergeSubmit(Request $request) 
+    public function addStateMergeSubmit(Request $request)
     {
-        $pending = PendingStateMerge::find($request->id);
-
-        $state = new StateMerge();
-        $state->stateID = $pending->stateID;
-        $state->sourceID = $pending->sourceID;
-        $state->destinationID = $pending->destinationID;
-        $state->allowedID = $pending->allowedID;
-        $state->codes = $pending->codes;
-        $state->permit = $pending->permit;
-        $state->incentives = $pending->incentives;
-        $state->moreInfo = $pending->moreInfo;
-        $state->user_id = $pending->user_id;
-        $state->save();
-        
-        $pending->delete();
-        return redirect()->route('userStateView')->with(['alert' => 'success', 'alertMessage' => 'The submission has been approved.']);
+        try {
+            DatabaseHelper::addStateMergeSubmit($request);
+            return redirect()->route('userStateView')->with(['alert' => 'success', 'alertMessage' => 'The submission has been approved.']);
+        } catch (Exception $e) {
+            $errorMsg = MergeController::DB_ERROR_MSG.$e->getMessage();
+            return redirect()->route('userStateView')->with(['alert' => 'danger', 'alertMessage' => $errorMsg]);
+        }
     }
 
-    public function addCountyMergeSubmit(Request $request) 
+    public function addCountyMergeSubmit(Request $request)
     {
-        $pending = PendingCountyMerge::find($request->id);
-        $county = new CountyMerge();
-        $county->countyID = $pending->countyID;
-        $county->sourceID = $pending->sourceID;
-        $county->destinationID = $pending->destinationID;
-        $county->allowedID = $pending->allowedID;
-        $county->codes = $pending->codes;
-        $county->permit = $pending->permit;
-        $county->incentives = $pending->incentives;
-        $county->moreInfo = $pending->moreInfo;
-        $county->user_id = $pending->user_id;
-        $county->save();
-
-        $pending->delete();
-        return redirect()->route('userCountyView')->with(['alert' => 'success', 'alertMessage' => 'The submission has been approved.']);
+        try {
+            DatabaseHelper::addCountyMergeSubmit($request);
+            return redirect()->route('userCountyView')->with(['alert' => 'success', 'alertMessage' => 'The submission has been approved.']);
+        } catch (Exception $e) {
+            $errorMsg = MergeController::DB_ERROR_MSG.$e->getMessage();
+            return redirect()->route('userStateView')->with(['alert' => 'danger', 'alertMessage' => $errorMsg]);        }
     }
 
     public function deleteCityMerge(Request $request)
@@ -85,7 +52,7 @@ class MergeController extends Controller
 
         return redirect()->route('userCityView')->with(['alert' => 'success', 'alertMessage' => 'The submission has been deleted.']);
     }
-    
+
     public function deleteStateMerge(Request $request)
     {
         $state = PendingStateMerge::where("id", $request->id)->get()->first();
