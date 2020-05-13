@@ -25,3 +25,5 @@ Route::get("/cities/{county_id?}", "DataControllers\CityController@getCitiesInCo
 Route::get('/mySources', 'RegulationController@getAllSources')->name('my-sources-api');
 Route::get('/myDestination', 'RegulationController@getAllDestinations')->name('my-destination-api');
 Route::get('/allowed', 'RegulationController@getAllAllowed')->name('allowed-api');
+
+Route::post('/check-link', 'DataControllers\LinkController@checkLinkStatusAPI')->name('check-link-api');
