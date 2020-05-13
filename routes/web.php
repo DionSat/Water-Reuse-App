@@ -18,7 +18,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/info', 'HomeController@getInfo')->name('info');
 Route::get('/search', 'SearchController@mainPage')->name('search');
-
+Route::get('/welcome', 'HomeController@welcome')->name('welcome');
 Route::post('/search', 'SearchController@handleSubmit')->name('search-submit');
 
 

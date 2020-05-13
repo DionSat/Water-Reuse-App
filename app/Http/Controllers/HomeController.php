@@ -19,4 +19,8 @@ class HomeController extends Controller
     public function getUserSubmission() {
         return view('userSubmission');
     }
+
+    public function welcome() {
+        return view('welcome');
+    }
 }
