@@ -125,7 +125,7 @@ class DatabaseHelper {
 
         try {
             $city->save();
-            $pending->delete();
+            $pending->forceDelete();
             return;
         } catch (Throwable $e) {
             throw new Exception($e->getMessage());
@@ -150,7 +150,7 @@ class DatabaseHelper {
 
         try {
             $state->save();
-            $pending->delete();
+            $pending->forceDelete();
             return;
         } catch (Throwable $e) {
             throw new Exception($e->getMessage());
@@ -174,7 +174,7 @@ class DatabaseHelper {
 
         try {
             $county->save();
-            $pending->delete();
+            $pending->forceDelete();
             return;
         } catch (Throwable $e) {
             throw new Exception($e->getMessage());
