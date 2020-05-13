@@ -129,6 +129,7 @@ Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function 
         Route::post('/links/delete', 'LinkController@deleteLink')->name('deleteLink');
         Route::get('/links/modify', 'LinkController@modify')->name('modifyLink');
         Route::post('/links/modify', 'LinkController@modifyLinkSubmit')->name('modifyLinkSubmit');
+        Route::post('/links/status', 'LinkController@checkLinkStatus')->name('checkLinkStatus');
 
     });
 });

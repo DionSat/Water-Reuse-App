@@ -4,18 +4,38 @@ namespace App\Http\Controllers\DataControllers;
 
 use App\CityMerge;
 use App\CountyMerge;
+use App\Services\LinkCheckerService;
 use App\StateMerge;
 use App\Links;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Contracts\Pagination\Paginator;
 
 
 class LinkController extends Controller
 {
-    public function allLinks() {
-        $links = Links::orderBy('link_id')->paginate(10);
-        return view("database.links", compact('links'));
+    public function allLinks(Request $request) {
+        $links = null;
+        $brokenLinkCount = Links::where("status", "broken")->count();
+        $page = ($request->type === "broken") ? "broken" : "regular";
+
+        if($page === "broken"){
+            $links = Links::where("status", "broken")->paginate(10);
+        } else {
+            $links = Links::orderBy('link_id')->paginate(10);
+        }
+
+        return view("database.links", compact('links', 'brokenLinkCount', 'page'));
+    }
+
+    public function checkLinkStatus(Request $request){
+        $newLinkStatus = LinkCheckerService::checkAndUpdateLinkStatusById($request->link_id, true);
+        return redirect()->back()->with(['alert' => 'success', 'alertMessage' =>  ' The link status is: '.$newLinkStatus]);
+    }
+
+    //API method that is called every time a user clicks on a link
+    public function checkLinkStatusAPI(Request $request){
+        LinkCheckerService::checkAndUpdateLinkStatusById($request->link_id, false);
+        return "True";
     }
 
     public function addLink() {
@@ -86,10 +106,6 @@ class LinkController extends Controller
         if(!(in_array($request->newLinkStatus, $statusArray)))
             return redirect()->route('modifyLink', ['link_id' => $link->link_id])->with(['alert' => 'danger', 'alertMessage' => 'Please enter a link status']);
 
-
-        $oldLinkName = $link->name;
-        $oldLinkText = $link->linkText;
-        $oldLinkStatus = $link->status;
 
         $link->name = $request->newLinkName;
         $link->linkText = $request->newLinkText;
