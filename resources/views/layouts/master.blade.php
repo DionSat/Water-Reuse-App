@@ -69,7 +69,11 @@
 
                         @auth
                         <li class="nav-item">
-                            <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "userSubmission") active @endif" href="{{ route('userSubmission') }}">{{ __('Submit a New Regulation') }}</a>
+                            <a class="nav-link"
+                               href="{{ route('userSubmission') }}">{{ __('Submit a New Regulation') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-md-2 px-md-0 pb-md-0  @if (Route::current()->getName() == "search") overview @endif" href="{{route('overview')}}">{{__('Overview')}}</a>
                         </li>
                         @endauth
 
@@ -93,7 +97,7 @@
 
                         <li class="nav-item">
                             <button type="button" class="btn btn-primary padding-sm" href="https://www.recodenow.org/donate-test-page" > <i class="fas fa-hands-helping"></i> Donate</button>
-                        </li>   
+                        </li>
 
                             <li class="nav-item">
                                 <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "login") active @endif" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -108,7 +112,7 @@
 
                         <li class="nav-item">
                             <button type="button" class="btn btn-primary padding-sm" href="https://www.recodenow.org/donate-test-page" > <i class="fas fa-hands-helping"></i> Donate</button>
-                        </li>  
+                        </li>
 
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link pb-md-0 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
