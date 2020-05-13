@@ -60,9 +60,11 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link mx-md-2 px-md-0 pb-md-0  @if (Route::current()->getName() == "overview") active @endif" href="{{route('overview')}}"> Overview </a>
-                        </li>
+                        @auth
+                            <li class="nav-item">
+                                <a class="nav-link mx-md-2 px-md-0 pb-md-0  @if (Route::current()->getName() == "overview") active @endif" href="{{route('overview')}}"> Overview </a>
+                            </li>
+                        @endauth
                         <li class="nav-item">
                             <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "info") active @endif" href="{{ route('info') }}"> Information </a>
                         </li>
