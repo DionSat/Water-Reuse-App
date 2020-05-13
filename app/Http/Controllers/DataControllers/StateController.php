@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\DataControllers;
 
 use App\County;
+use App\Services\DatabaseHelper;
 use App\State;
+use http\Exception;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Throwable;
 
 
 class StateController extends Controller
@@ -25,9 +28,13 @@ class StateController extends Controller
 
         $state = new State();
         $state->stateName = $request->state;
-        $state->save();
 
-        return redirect()->route('stateView')->with(['alert' => 'success', 'alertMessage' => $state->stateName . ' has been added.']);
+        try {
+            $state->save();
+            return redirect()->route('stateView')->with(['alert' => 'success', 'alertMessage' => $request->stateName . ' has been added.']);
+        } catch(Throwable $e) {
+            return redirect()->route('stateAdd')->with(['alert' => 'danger', 'alertMessage' => $e->getMessage()]);
+        }
     }
 
     public function deleteState(Request $request)

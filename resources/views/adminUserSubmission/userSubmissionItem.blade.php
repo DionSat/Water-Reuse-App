@@ -12,7 +12,7 @@
                     <div class="card-header"></div>
                     <div class="card-body">
                     @foreach($submissions as $item)
-                        @include('common/reuse-item',['item'=>$item])
+                        @include('common/reuse-item-detail',['item'=>$item])
                     @endforeach
                     </div>
                 </div>

@@ -3,7 +3,7 @@
 @section('body')
     <div class="container">
         <div class="row my-3">
-            <a href="{{route("database")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> Dashboard </a>
+            <a href="{{route("admin")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> Dashboard </a>
         </div>
         <h2 class="text-center"> Add Source, Destination, & Fixture </h2>
         <form method="POST" action="{{ route('reuseNodeAddSubmit') }}">
@@ -23,7 +23,7 @@
                         <label class="form-check-label" for="is_source_checkbox">Source</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" id="is_destination_checkbox_checkbox" type="checkbox" name="is_destination">
+                        <input class="form-check-input" id="is_destination_checkbox" type="checkbox" name="is_destination">
                         <label class="form-check-label" for="is_destination_checkbox">Destination</label>
                     </div>
                     <div class="form-check form-check-inline">

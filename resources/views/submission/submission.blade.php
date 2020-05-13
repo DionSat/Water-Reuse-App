@@ -25,7 +25,7 @@
                         <td>
                             <a href="{{route('stateSubmission')."/".$state->id}}" class="btn btn-primary"> View </a>
                         </td>
-                        <td>Pending</td>
+                        <td>@if($state->trashed())Rejected @else Pending @endif</td>
                     </tr>
                 @endforeach
                 @foreach($citySubmissions as $city)
@@ -35,8 +35,7 @@
                         <td>{{$city->destination->node_name}}</td>
                         <td>
                             <a href="{{route('citySubmission')."/".$city->id}}" class="btn btn-primary"> View </a>
-                        </td>
-                        <td>Pending</td>
+                        </td>                        <td>@if($city->trashed())Rejected @else Pending @endif</td>
                     </tr>
                 @endforeach
                 @foreach($countySubmissions as $county)
@@ -47,7 +46,7 @@
                         <td>
                             <a href="{{route('countySubmission')."/".$county->id}}" class="btn btn-primary"> View </a>
                         </td>
-                        <td>Pending</td>
+                        <td>@if($county->trashed())Rejected @else Pending @endif</td>
                     </tr>
                 @endforeach
                 @foreach($stateApproved as $stateAp)
@@ -55,7 +54,7 @@
                         <th scope="row">{{$a++}}</th>
                         <td> {{$stateAp->source->node_name}}</td>
                         <td>{{$stateAp->destination->node_name}}</td>
-                        <td>
+                        <td >
                             <a href="{{route('stateApprove')."/".$stateAp->id}}" class="btn btn-primary"> View </a>
                         </td>
                         <td>Approved</td>
@@ -66,7 +65,7 @@
                         <th scope="row">{{$a++}}</th>
                         <td> {{$cityAp->source->node_name}}</td>
                         <td>{{$cityAp->destination->node_name}}</td>
-                        <td>
+                        <td >
                             <a href="{{route('cityApprove')."/".$cityAp->id}}" class="btn btn-primary"> View </a>
                         </td>
                         <td>Approved</td>
@@ -77,7 +76,7 @@
                         <th scope="row">{{$a++}}</th>
                         <td> {{$countyAp->source->node_name}}</td>
                         <td>{{$countyAp->destination->node_name}}</td>
-                        <td>
+                        <td >
                             <a href="{{route('countyApprove')."/".$countyAp->id}}" class="btn btn-primary"> View </a>
                         </td>
                         <td>Approved</td>

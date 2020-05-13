@@ -6,22 +6,44 @@ use App\User;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
     public function getBasicAdminPage()
     {
+        $cityNumber = DB::table('cities')->count();
+        $countyNumber = DB::table('counties')->count();
+        $stateNumber = DB::table('states')->count();
+
+        //route() to show routes
+        $locationCards = [];
+        $locationCards[] = ["title" => "Cities", "subheading" => "Cities in Counties", "count" => $cityNumber, "manageData" => route("cityView"), "addData" => route("cityAdd")];
+        $locationCards[] = ["title" => "Counties", "subheading" => "Counties in States", "count" => $countyNumber, "manageData" => route("countyView"), "addData" => route("countyAdd")];
+        $locationCards[] = ["title" => "States", "subheading" => "States in the US", "count" => $stateNumber, "manageData" => route("stateView"), "addData" => route("stateAdd")];
+
+        $sources = DB::table('reusenodes')->count();
+
+        $sourcesAndDestinations = [];
+        $sourcesAndDestinations[] = ["title" => "Reuse Nodes", "subheading" => "Water Sources, Destinations, and Fixtures ", "count" => $sources, "manageData" => route("reuseNodeView"), "addData" => route("reuseNodeAdd")];
+
+        $linksNumber = DB::table('links')->count();
+
+        $linksAndOther = [];
+        $linksAndOther[] = ["title" => "Links", "subheading" => "Water Regulation Links", "count" => $linksNumber, "manageData" => route("linkView"), "addData" => route("linkAdd")];
+
         $allUsers = User::all();
         $allUserCount = User::all()->count();
         $user = Auth::user();
         $canEmailCount = User::where('can_contact', true)->count();
         $userAndEmail = [];
         $userAndEmail[] = ["title" => "All Users", "count" => $allUserCount, "view" => route("getUsers")];
-        $userAndEmail[] = ["title" => "Users Emails", "count" => $canEmailCount, "view" => route("viewEmail")];
+        $userAndCanEmail[] = ["title" => "Users Emails", "count" => $canEmailCount, "view" => route("viewEmail")];
+
         if ($user->is_admin === false)
             abort(404);
         else
-            return view("admin.dashboard", compact('userAndEmail', 'allUsers'));
+            return view("admin.dashboard", compact('userAndEmail', 'userAndCanEmail', 'allUsers', 'locationCards', 'sourcesAndDestinations', 'linksAndOther'));
     }
 
     public function viewEmail()

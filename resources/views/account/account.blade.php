@@ -25,7 +25,7 @@
                         @if($user->countryCode)
                             <td>{{$user->countryCode}}-{{$user->phoneNumber}}</td>
                         @else
-                            <td>{{$user->phoneNumber}}</td>
+                            <td>{{$user->formatPhoneNumber()}}</td>
                         @endif
                     </tr>
                     <tr>

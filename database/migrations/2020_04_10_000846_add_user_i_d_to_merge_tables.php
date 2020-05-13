@@ -27,6 +27,24 @@ class AddUserIDToMergeTables extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
         });
+
+        Schema::table('pendingstatemerge', function (Blueprint $table) {
+            $table->dropColumn('userID');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+        });
+
+        Schema::table('pendingcountymerge', function (Blueprint $table) {
+            $table->dropColumn('userID');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+        });
+
+        Schema::table('pendingcitymerge', function (Blueprint $table) {
+            $table->dropColumn('userID');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+        });
     }
 
     /**
@@ -45,6 +63,18 @@ class AddUserIDToMergeTables extends Migration
         });
 
         Schema::table('citymerge', function (Blueprint $table) {
+            $table->dropColumn('user_id');
+        });
+
+        Schema::table('pendingstatemerge', function (Blueprint $table) {
+            $table->dropColumn('user_id');
+        });
+
+        Schema::table('pendingcountymerge', function (Blueprint $table) {
+            $table->dropColumn('user_id');
+        });
+
+        Schema::table('pendingcitymerge', function (Blueprint $table) {
             $table->dropColumn('user_id');
         });
     }

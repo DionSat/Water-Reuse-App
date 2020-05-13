@@ -19,7 +19,7 @@
             </div>
             <div class="p-2 d-block">
                 <h3>Destination</h3>
-                <h5 class="text-muted">{{$item->destination->destinationName ?? "N/A"}}</h5>
+                <h5 class="text-muted">{{$item->destination->node_name ?? "N/A"}}</h5>
             </div>
             <div class="p-2 d-block">
                 <h3>Allowed</h3>
@@ -39,12 +39,52 @@
             </thead>
             <tbody>
             <tr>
-                <td><a href="{{$item->codesObj->linkText ?? "#"}}" class="btn btn-primary">Link Name</a></td>
-                <td><a href="{{$item->permitObj->linkText ?? "#"}}" class="btn btn-primary">Link Name</a></td>
-                <td><a href="{{$item->incentivesObj->linkText ?? "#"}}" class="btn btn-primary">Link Name</a></td>
-                <td><a href="{{$item->moreInfoObj->linkText ?? "#"}}" class="btn btn-primary">Link Name</a></td>
+                <td>
+                    @if(empty($item->codesObj->linkText))
+                        N/A
+                    @else
+                        <a href="{{$item->codesObj->linkText ?? "#"}}" class="btn btn-primary">{{$item->codesObj->name ?? "Code Link"}}</a>
+                    @endif
+                </td>
+                <td>
+                    @if(empty($item->permitObj->linkText))
+                        N/A
+                    @else
+                        <a href="{{$item->permitObj->linkText ?? "#"}}" class="btn btn-primary">{{$item->permitObj->name ?? "Permit Link"}}</a>
+                    @endif
+                </td>
+                <td>
+                    @if(empty($item->incentivesObj->linkText))
+                        N/A
+                    @else
+                        <a href="{{$item->incentivesObj->linkText ?? "#"}}" class="btn btn-primary">{{$item->incentivesObj->name ?? "Incentives Link"}}</a>
+                    @endif
+                </td>
+                <td>
+                    @if(empty($item->codesObj->linkText))
+                        N/A
+                    @else
+                        <a href="{{$item->moreInfoObj->linkText ?? "#"}}" class="btn btn-primary">{{$item->moreInfoObj->name ?? "More Info"}}</a>
+                     @endif
+                </td>
             </tr>
             </tbody>
         </table>
+        @if($item->comments != "")
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col" colspan="4">Comments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="4">
+                            {{$item->comments}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        @endif
     </div>
 </div>
