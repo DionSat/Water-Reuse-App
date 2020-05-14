@@ -8,6 +8,7 @@
                     <div class="card-header">Submit a New Water Reuse Regulation</div>
                     <div class="card-body">
                         <form type="POST">
+                        <div id="selectRegion">
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label for="inputState">State</label>
@@ -41,6 +42,36 @@
                             <div class="text-center">
                                 <i id="citySpinner" class="justify-content-center fas fa-spinner fa-pulse mt-2 d-none"></i>
                             </div>
+                        </div>
+                        <div id="addRegionDiv" style="display: none">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="inputStateEdit">State</label>
+                                    <input type="text" id="inputStateEdit" class="form-control">
+                                    </input>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="countyEdit">County (Optional)</label>
+                                    <input class="form-control" type="text" id="countyEdit">
+                                    </input>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="inputZipEdit">Zip (Optional)</label>
+                                    <input type="text" class="form-control" id="inputZipEdit">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                    <label for="cityEdit">City (Optional)</label>
+                                    <input type="text" class="form-control" id="cityEdit">
+                                    </input>
+                            </div>
+                        </div>
+
+                            <div class="form-group">
+                                <button type="button" class="btn btn-secondary" id="addRegion">+</button>
+                                <label for="addRegion"> Add A New State, County or City</label>
+                            </div>
+
                             <hr>
                             <div id="waterSourceDiv">
                                 <div class="form-row">
@@ -255,6 +286,15 @@
             }
         })
 
+        //If they want to add a new area, the other area fields are disabled
+        //and the edit fields are shown
+        $("#addRegion").click(function() {
+            $("#addRegionDiv").css("display", "block");
+            $("#inputState").prop("disabled", true);
+            $("#county").prop("disabled", true);
+            $("#inputZip").prop("disabled", true);
+            $("#city").prop("disabled", true);
+        });
 
         //for when the state changes
         $("#inputState").change(function () {
