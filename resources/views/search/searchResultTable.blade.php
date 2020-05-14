@@ -5,6 +5,7 @@
         <th scope="col">Destination</th>
         <th scope="col">Allowed</th>
         <th scope="col" colspan="4">Links</th>
+        <th scope="col">Action</th>
     </tr>
     </thead>
     <tbody>
@@ -24,6 +25,9 @@
                 </td>
                 <td class="align-middle">
                     <a class="btn btn-outline-primary link-button" data-linkid="{{$rule->moreInfoObj->link_id}}" href="{{$rule->moreInfoObj->linkText}}">More Info</a>
+                </td>
+                <td class="align-middle">
+                    <a href="{{route('viewSubmission', ["type" => $rule->getLocationType(), "state" => $rule->getStatus(), "itemId" => $rule->id])}}" class="btn btn-primary"> View </a>
                 </td>
             </tr>
         @endforeach

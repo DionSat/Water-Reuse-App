@@ -2,8 +2,11 @@
 
 @section('body')
     <div class="container">
-        <a href="{{route("submission")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i>
-            Submissions </a>
+        <div class="my-3">
+            <a href="{{route('viewSubmission', ["type" => $submission->getLocationType(), "state" => $submission->getStatus(), "itemId" => $submission->id])}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i>
+                Back
+            </a>
+        </div>
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -122,12 +125,15 @@
                                 <input type="number" name="id" style="display: none;" value={{$submission->id}}>
                                 <hr>
                             </div>
+                            <input name="submissionState" style="display: none;" value={{$submission->getStatus()}}>
+                            <input name="submissionType" style="display: none;" value="{{$type}}">
                             <button type="submit" class="btn btn-primary" id="submit">Re-Submit</button>
 
                         </form>
                         <form action={{ route('deleteUnapproved') }} method="POST">
                             {{ csrf_field() }}
-                            <input type="text" name="type" style="display: none;" value="{{$type}}">
+                            <input name="submissionState" style="display: none;" value={{$submission->getStatus()}}>
+                            <input name="submissionType" style="display: none;" value="{{$type}}">
                             <input type="number" name="id" style="display: none;" value={{$submission->id}}>
                             <button style="float:right;margin:-40px 10px 10px 10px;" class="btn btn-danger"
                                     data-toggle="modal" data-target="#exampleModal" type="button">Delete

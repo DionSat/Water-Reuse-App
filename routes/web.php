@@ -30,18 +30,13 @@ Route::middleware('auth')->group(function () {
     // User account welcome/overview page
     Route::get('/overview', 'HomeController@overview')->name('overview');
 
-    //submission routes for each indiviual user
-    Route::get('/submissions', 'UserSubmissionController@view')->name('submission');
-    Route::get('/submissions/citySubmissionItem/{itemId?}', 'UserSubmissionController@pendingCity')->name('citySubmission');
-    Route::get('/submissions/stateSubmissionItem/{itemId?}', 'UserSubmissionController@pendingState')->name('stateSubmission');
-    Route::get('/submissions/countySubmissionItem/{itemId?}', 'UserSubmissionController@pendingCounty')->name('countySubmission');
+    //submission routes for each individual user
+    Route::get('/submissions', 'UserSubmissionController@userSubmissionListPage')->name('submission');
+    Route::get('/submission/view/{type?}/{state?}/{itemId?}', 'UserSubmissionController@viewSubmission')->name("viewSubmission");
 
-    //Approved submissions
-    Route::get('/submissions/cityApprovedItem/{itemId?}', 'UserSubmissionController@city')->name('cityApprove');
-    Route::get('/submissions/stateApprovedItem/{itemId?}', 'UserSubmissionController@state')->name('stateApprove');
-    Route::get('/submissions/countyApprovedItem/{itemId?}', 'UserSubmissionController@county')->name('countyApprove');
-    Route::get('/submissions/submissionEdit/{type?}/{itemId?}', 'UserSubmissionController@submissionEdit')->name('submissionEdit');
-    Route::post('/submissions/submissionEdit/{type?}/{itemId?}', 'UserSubmissionController@submissionEditSubmit')->name('submissionEditUpdate');
+    Route::get('/submission/edit/{type?}/{state?}/{itemId?}', 'UserSubmissionController@submissionEdit')->name('submissionEdit');
+    Route::post('/submission/edit/{type?}/{state?}/{itemId?}', 'UserSubmissionController@submissionEditSubmit')->name('submissionEditUpdate');
+
     Route::post('/submissions', 'UserSubmissionController@deleteUnapproved')->name('deleteUnapproved');
 
     Route::get('/account', 'AccountController@view')->name('account');

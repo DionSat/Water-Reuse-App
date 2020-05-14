@@ -5,6 +5,7 @@ namespace App\Services;
 use App\CityMerge;
 use App\CountyMerge;
 use App\StateMerge;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use App\PendingCityMerge;
 use App\PendingCountyMerge;
@@ -15,6 +16,57 @@ use Illuminate\Http\Request;
 use Throwable;
 
 class DatabaseHelper {
+
+
+    public static function getAllSubmissionsForCurrentUser(){
+        $userId = Auth::user()->id;
+
+        $mergedSubmissions = PendingStateMerge::withTrashed()->where('user_id', $userId)->get();
+        $mergedSubmissions = $mergedSubmissions->merge(PendingCityMerge::withTrashed()->where('user_id', $userId)->get());
+        $mergedSubmissions = $mergedSubmissions->merge(PendingCountyMerge::withTrashed()->where('user_id', $userId)->get());
+        $mergedSubmissions = $mergedSubmissions->merge(StateMerge::where('user_id', $userId)->get());
+        $mergedSubmissions = $mergedSubmissions->merge(CityMerge::where('user_id', $userId)->get());
+        $mergedSubmissions = $mergedSubmissions->merge(CountyMerge::where('user_id', $userId)->get());
+
+        return $mergedSubmissions->sortByDesc("created_at");
+    }
+
+
+    public static function getReuseItemByIdStateAndType($type, $state, $itemId) {
+        $item = null;
+        if($state === "pending"){
+            switch ($type){
+                case "city":
+                    $item = PendingCityMerge::find($itemId);
+                    break;
+                case "county":
+                    $item = PendingCountyMerge::find($itemId);
+                    break;
+                case "state":
+                    $item = PendingStateMerge::find($itemId);
+                    break;
+                default:
+                    $item = null;
+            }
+        } else {
+            switch ($type){
+                case "city":
+                    $item = CityMerge::find($itemId);
+                    break;
+                case "county":
+                    $item = CountyMerge::find($itemId);
+                    break;
+                case "state":
+                    $item = StateMerge::find($itemId);
+                    break;
+                default:
+                    $item = null;
+            }
+        }
+
+        return $item;
+    }
+
 
     public static function addRegulation(Request $request, $regLists) {
         $regArea = "";
@@ -186,55 +238,70 @@ class DatabaseHelper {
         if (!$request->city)
             $request->city = -1;
 
-        switch ($request->type) {
-            case 'State':
-                $submission = PendingStateMerge::where('id', $request->id)->withTrashed()->get()->first();
-                $submissionInfo = $submission->toArray();
-                $submission->forceDelete();
-                if($request->county > -1 && $request->city > -1){
-                    $submission = new PendingCityMerge($submissionInfo);
-                    $submission->cityID = $request->city;
-                }else if($request->county > -1){
-                    $submission = new PendingCountyMerge($submissionInfo);
-                    $submission->countyID = $request->county;
-                }else{
-                    $submission = new PendingStateMerge($submissionInfo);
-                    $submission->stateID = $request->state;
-                }
-                break;
-            case 'County':
-                $submission = PendingCountyMerge::where('id', $request->id)->withTrashed()->get()->first();
-                $submissionInfo = $submission->toArray();
-                $submission->forceDelete();
-                if($request->county == -1){
-                    $submission = new PendingStateMerge($submissionInfo);
-                    $submission->StateID = $request->State;
-                }else if($request->city > -1){
-                    $submission = new PendingCityMerge($submissionInfo);
-                    $submission->cityID = $request->city;
-                }else{    
-                    $submission = new PendingCountyMerge($submissionInfo);
-                    $submission->countyID = $request->county;
-                }
-                break;
-            case 'City':
-                $submission = PendingCityMerge::where('id', $request->id)->withTrashed()->get()->first();
-                $submissionInfo = $submission->toArray();
-                $submission->forceDelete();
-                if($request->county == -1){
-                    $submission = new PendingStateMerge($submissionInfo);
-                    $submission->StateID = $request->State;
-                }else if($request->city == -1){
-                    $submission = new PendingCountyMerge($submissionInfo);
-                    $submission->countyID = $request->county;
-                }else{
-                    $submission = new PendingCityMerge($submissionInfo);
-                    $submission->cityID = $request->city;
-                }
-                break;
-            default:
-                throw new Exception('Issue updating submission, please contact an administrator.');
+        $submissionType = $request->submissionType;
+        $submissionState = $request->submissionState;
+        $itemId = $request->id;
+
+        $submission = DatabaseHelper::getReuseItemByIdStateAndType($submissionType, $submissionState, $itemId);
+
+        //        var_dump($submission);
+        //        var_dump($submissionState);
+        //        var_dump($submissionType);
+        //        return;
+
+        //If we need to re-create the submission
+        if($submissionState !== "approved") {
+            switch ($submissionType) {
+                case 'state':
+                    $submission = PendingStateMerge::where('id', $request->id)->withTrashed()->get()->first();
+                    $submissionInfo = $submission->toArray();
+                    $submission->forceDelete();
+                    if($request->county > -1 && $request->city > -1){
+                        $submission = new PendingCityMerge($submissionInfo);
+                        $submission->cityID = $request->city;
+                    }else if($request->county > -1){
+                        $submission = new PendingCountyMerge($submissionInfo);
+                        $submission->countyID = $request->county;
+                    }else{
+                        $submission = new PendingStateMerge($submissionInfo);
+                        $submission->stateID = $request->state;
+                    }
+                    break;
+                case 'county':
+                    $submission = PendingCountyMerge::where('id', $request->id)->withTrashed()->get()->first();
+                    $submissionInfo = $submission->toArray();
+                    $submission->forceDelete();
+                    if($request->county == -1){
+                        $submission = new PendingStateMerge($submissionInfo);
+                        $submission->StateID = $request->State;
+                    }else if($request->city > -1){
+                        $submission = new PendingCityMerge($submissionInfo);
+                        $submission->cityID = $request->city;
+                    }else{
+                        $submission = new PendingCountyMerge($submissionInfo);
+                        $submission->countyID = $request->county;
+                    }
+                    break;
+                case 'city':
+                    $submission = PendingCityMerge::where('id', $request->id)->withTrashed()->get()->first();
+                    $submissionInfo = $submission->toArray();
+                    $submission->forceDelete();
+                    if($request->county == -1){
+                        $submission = new PendingStateMerge($submissionInfo);
+                        $submission->StateID = $request->State;
+                    }else if($request->city == -1){
+                        $submission = new PendingCountyMerge($submissionInfo);
+                        $submission->countyID = $request->county;
+                    }else{
+                        $submission = new PendingCityMerge($submissionInfo);
+                        $submission->cityID = $request->city;
+                    }
+                    break;
+                default:
+                    throw new Exception('Location type not defined properly. Please try again.');
+            }
         }
+
         $submission->allowedID = $request->allowed;
         $submission->sourceID = $request->source;
         $submission->destinationID = $request->destination;
