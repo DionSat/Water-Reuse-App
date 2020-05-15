@@ -25,7 +25,7 @@ Route::post('/search', 'SearchController@handleSubmit')->name('search-submit');
 
 
 //Registered User Routes
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->middleware('banned')->group(function () {
 
     // User account welcome/overview page
     Route::get('/overview', 'HomeController@overview')->name('overview');
@@ -57,7 +57,7 @@ Route::middleware('auth')->group(function () {
 });
 
 //Admin Routes
-Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function () {
+Route::prefix('admin')->middleware('auth')->middleware('admin')->middleware('banned')->group(function () {
     Route::get('/', 'AdminController@getBasicAdminPage')->name('admin');
     Route::get('update', 'AdminController@getUsers')->name('getUsers');
     Route::get('update/search', 'AdminController@searchUsers')->name('searchUsers');
