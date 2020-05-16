@@ -97,24 +97,24 @@
                                     <div class="form-group col-md-6">
                                         <label for="codes">Link to Codes (Optional)</label>
                                         <input type="text" class="form-control" id="codes" placeholder=""
-                                               value="{{$submission->codesObj->linkText}}" name="codes">
+                                               value="{{empty($submission->codesObj) ? "" : $submission->codesObj->linkText}}" name="codes">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="permit">Link to Permit (Optional)</label>
                                         <input type="text" class="form-control" id="permit" placeholder=""
-                                               value="{{$submission->permitObj->linkText}}" name="permit">
+                                               value="{{empty($submission->permitObj) ? "" : $submission->permitObj->linkText}}" name="permit">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="incentives">Link to Incentives (Optional)</label>
                                         <input type="text" class="form-control" id="incentives" placeholder=""
-                                               value="{{$submission->incentivesObj->linkText}}" name="incentives">
+                                               value="{{empty($submission->incentivesObj) ? "" : $submission->incentivesObj->linkText}}" name="incentives">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="moreInfo">Link to More Information (Optional)</label>
                                         <input type="text" class="form-control" id="moreInfo" placeholder=""
-                                               value="{{$submission->moreInfoObj->linkText}}" name="moreInfo">
+                                               value="{{empty($submission->moreInfoObj) ? "" : $submission->moreInfoObj->linkText}}" name="moreInfo">
                                     </div>
                                 </div>
                                 <div class="form-group">
