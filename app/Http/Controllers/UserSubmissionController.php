@@ -36,7 +36,9 @@ class UserSubmissionController extends Controller
         //Otherwise, get the item from the database
         $item = DatabaseHelper::getReuseItemByIdStateAndType($type, $state, $itemId);
 
-        return view('common.generic-reuse-item', compact('user','item', 'type', 'state'));
+        $backUrl = $request->back;
+
+        return view('common.generic-reuse-item', compact('user','item', 'type', 'state', 'backUrl'));
     }
 
 
@@ -53,7 +55,8 @@ class UserSubmissionController extends Controller
         $submissionCounty = -1;
         $submissionCity = -1;
         $allowed = Allowed::all();
-
+        $backUrl = $request->back;
+        $previousBackUrl = $request->previousBack;
 
         $submission = DatabaseHelper::getReuseItemByIdStateAndType($type, $state, $itemId);
 
@@ -76,7 +79,7 @@ class UserSubmissionController extends Controller
                 $counties = County::where('fk_state', $submission->city->county->state->state_id)->get();
                 break;
             default:
-                return redirect()->route('submission')->with(['alert' => 'danger', 'alertMessage' => 'Error trying to update the submission.']);
+                return redirect()->back()->with(['alert' => 'danger', 'alertMessage' => 'Error trying to find the submission.']);
                 break;
         }
 
@@ -84,7 +87,7 @@ class UserSubmissionController extends Controller
             return redirect()->back()->with(['alert' => 'danger', 'alertMessage' => "Please don't try to edit other people's submissions!"]);
         }
 
-        return view('submission.submissionEdit', compact('user', 'submission', 'states', 'counties', 'cities', 'type', 'submissionState', 'submissionCounty', 'submissionCity', 'allowed'));
+        return view('submission.submissionEdit', compact('user', 'submission', 'states', 'counties', 'cities', 'type', 'submissionState', 'submissionCounty', 'submissionCity', 'allowed', 'backUrl', 'previousBackUrl'));
     }
 
     public function submissionEditSubmit(Request $request) {
@@ -92,8 +95,9 @@ class UserSubmissionController extends Controller
             return redirect()->route('submissionEdit', ['type' => $request->type, 'itemId' => $request->id])->with(['alert' => 'danger', 'alertMessage' => 'Error trying to update the submission.']);
 
         try {
-            DatabaseHelper::submissionEditSubmit($request);
-            return redirect()->route('submission')->with(['alert' => 'success', 'alertMessage' => 'The submission has been updated.']);
+            $submission = DatabaseHelper::submissionEditSubmit($request);
+            return redirect()->route('viewSubmission', ["type" => $submission->getLocationType(), "state" => $submission->getStatus(), "itemId" => $submission->id, "back" => $request->back])
+                                ->with(['alert' => 'success', 'alertMessage' => 'The submission has been updated.']);
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }

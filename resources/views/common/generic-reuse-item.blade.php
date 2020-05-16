@@ -3,7 +3,7 @@
 @section('body')
     <div class="container">
         <div class="row my-3">
-            <a href="{{url()->previous()}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> Back </a>
+            <a href="{{$backUrl}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> Back </a>
         </div>
         <h2 class="text-center my-3"> Reuse Item Detail View </h2>
         <div class="row justify-content-center">
@@ -11,7 +11,7 @@
                 @if(($item->getStatus() != "approved" && $item->user_id === Auth::user()->id) || Auth::user()->is_admin)
                     <div class="my-3 row d-flex justify-content-between">
                         <span class="text-center col-md-4">
-                            <a href="{{route('submissionEdit')."/".$type."/".$state."/".$item->id}}" class="btn btn-primary btn-block"> Edit </a>
+                            <a href="{{route('submissionEdit', ["type" => $item->getLocationType(), "state" => $item->getStatus(), "itemId" => $item->id, "back" => url()->full(), "previousBack" => $backUrl])}}" class="btn btn-primary btn-block"> Edit </a>
                         </span>
                         <span class="text-center col-md-4">
                         <button class="btn btn-danger btn-block" data-toggle="modal" data-target="#exampleModal" type="button">Delete</button>

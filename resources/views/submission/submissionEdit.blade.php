@@ -3,7 +3,7 @@
 @section('body')
     <div class="container">
         <div class="my-3">
-            <a href="{{route('viewSubmission', ["type" => $submission->getLocationType(), "state" => $submission->getStatus(), "itemId" => $submission->id])}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i>
+            <a href="{{$backUrl}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i>
                 Back
             </a>
         </div>
@@ -12,7 +12,7 @@
                 <div class="card">
                     <div class="card-header">Edit Submission</div>
                     <div class="card-body">
-                        <form action={{ route('submissionEditUpdate') }} method="POST">
+                        <form action="{{ route('submissionEditUpdate') }}" method="POST">
                             {{ csrf_field() }}
                             <div class="form-row">
                                 <div class="form-group col-md-4">
@@ -127,10 +127,11 @@
                             </div>
                             <input name="submissionState" style="display: none;" value={{$submission->getStatus()}}>
                             <input name="submissionType" style="display: none;" value="{{$type}}">
-                            <button type="submit" class="btn btn-primary" id="submit">Re-Submit</button>
+                            <input name="back" style="display: none;" value="{{$previousBackUrl}}">
+                            <button type="submit" class="btn btn-primary" id="submit"> Save </button>
 
                         </form>
-                        <form action={{ route('deleteUnapproved') }} method="POST">
+                        <form action="{{ route('deleteUnapproved') }}" method="POST">
                             {{ csrf_field() }}
                             <input name="submissionState" style="display: none;" value={{$submission->getStatus()}}>
                             <input name="submissionType" style="display: none;" value="{{$type}}">

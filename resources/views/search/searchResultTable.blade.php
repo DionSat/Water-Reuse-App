@@ -27,7 +27,7 @@
                     <a class="btn btn-outline-primary link-button" data-linkid="{{$rule->moreInfoObj->link_id}}" href="{{$rule->moreInfoObj->linkText}}">More Info</a>
                 </td>
                 <td class="align-middle">
-                    <a href="{{route('viewSubmission', ["type" => $rule->getLocationType(), "state" => $rule->getStatus(), "itemId" => $rule->id])}}" class="btn btn-primary"> View </a>
+                    <a href="{{route('viewSubmission', ["type" => $rule->getLocationType(), "state" => $rule->getStatus(), "itemId" => $rule->id, "back" => url()->full()])}}" class="btn btn-primary"> View </a>
                 </td>
             </tr>
         @endforeach

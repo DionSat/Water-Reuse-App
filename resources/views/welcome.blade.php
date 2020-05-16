@@ -2,7 +2,7 @@
 
 @section('body')
     <div class="container-fluid">
-        <div class="row">
+        <div class="row mb-5">
             <div class="col-md-9 mx-auto">
                 <div class="card">
                     <div class="card-title jumbotron bg-white text-center">
@@ -14,7 +14,6 @@
                 </div>
             </div>
         </div>
-        <hr>
         <div class="row justify-content-center">
             <div class="col-md-3">
                 <div class="card h-100 text-center">

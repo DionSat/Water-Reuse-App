@@ -24,7 +24,7 @@
                         <td>{{$submission->destination->node_name}}</td>
                         <td>{{$submission->getTimeSubmittedAsString()}}</td>
                         <td>
-                            <a href="{{route('viewSubmission', ["type" => $submission->getLocationType(), "state" => $submission->getStatus(), "itemId" => $submission->id])}}" class="btn btn-primary"> View </a>
+                            <a href="{{route('viewSubmission', ["type" => $submission->getLocationType(), "state" => $submission->getStatus(), "itemId" => $submission->id, "back" => url()->current()])}}" class="btn btn-primary"> View </a>
                         </td>
                         <td>{!! $submission->getStatusAsBadge() !!}</td>
                     </tr>
