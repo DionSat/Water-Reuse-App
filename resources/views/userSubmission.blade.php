@@ -10,7 +10,7 @@
                         <form type="POST">
                         <div id="selectRegion">
                             <div class="form-row">
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-6">
                                     <label for="inputState">State</label>
                                     <select id="inputState" class="form-control">
                                         <option value="choose" selected>Choose...</option>
@@ -19,7 +19,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-6">
                                     <label for="county">County (Optional)</label>
                                     <div class="text-center">
                                         <i id="countySpinner" class="fas fa-spinner fa-pulse mt-2 d-none"></i>
@@ -27,10 +27,6 @@
                                     <select class="form-control" id="county">
                                         <option id="chooseCounty" value="choose" disabled>Choose...</option>
                                     </select>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="inputZip">Zip (Optional)</label>
-                                    <input type="text" class="form-control" id="inputZip">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -45,19 +41,15 @@
                         </div>
                         <div id="addRegionDiv" style="display: none">
                             <div class="form-row">
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-6">
                                     <label for="inputStateEdit">State</label>
                                     <input type="text" id="inputStateEdit" class="form-control">
                                     </input>
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-6">
                                     <label for="countyEdit">County (Optional)</label>
                                     <input class="form-control" type="text" id="countyEdit">
                                     </input>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="inputZipEdit">Zip (Optional)</label>
-                                    <input type="text" class="form-control" id="inputZipEdit">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -69,7 +61,7 @@
 
                             <div class="form-group">
                                 <button type="button" class="btn btn-secondary" id="addRegion">+</button>
-                                <label for="addRegion"> Add A New State, County or City</label>
+                                <label id="addRegionLabel" for="addRegion"> Add A New State, County or City</label>
                             </div>
 
                             <hr>
@@ -144,6 +136,8 @@
     <script>
         //holds the number of regulations a user wishes to submit, using 0 indexing
         numOfRegs = 0;
+        //Changes from false to true when the addRegion button is clicked
+        addRegionClicked = false;
 
         function showCountySpinner() {
             $("#countySpinner").removeClass("d-none");
@@ -226,74 +220,116 @@
             $("#moreInfo" + numOfRegs).val($("#moreInfo" + (numOfRegs - 1)).val());
         });
         $('#submit').click(function () {
-            $state = $("#inputState").children("option:selected").text();
 
-            if ($state == "Choose...") {
-                Swal.fire({
-                    title: 'Error: No State Selected',
-                    text: 'You did not pick a State. You need to at least pick a State to add a regulation. Please try again.',
-                    icon: 'error',
-                    confirmButtonText: 'Ok'
-                });
-                return;
-            } else {
-                $county = $("#county").children("option:selected").text();
-                $city = $("#city").children("option:selected").text();
-                $regList = [];
-
-                for (i = 0; i <= numOfRegs; i++) {
-                    $newReg = {
-                        $state: $('#inputState').children("option:selected").text(),
-                        $county: $('#county').children("option:selected").text(),
-                        $city: $('#city').children("option:selected").text(),
-                        $stateId: $('#inputState').children("option:selected").val(),
-                        $countyId: $('#county').children("option:selected").val(),
-                        $cityId: $('#city').children("option:selected").val(),
-                        $sourceId: $('#waterSource' + i).children("option:selected").val(),
-                        $destinationId: $('#waterDestination' + i).children("option:selected").val(),
-                        $isPermitted: $("#allowed" + i).children("option:selected").val(),
-                        $codesLink: $("#codes" + i).val(),
-                        $permitLink: $("#permits" + i).val(),
-                        $incentivesLink: $("#incentives" + i).val(),
-                        $moreInfoLink: $("#moreInfo" + i).val(),
-                        $comments: $("#comments" + i).val()
-                    };
-                    $regList.push($newReg);
-                }
-
-                axios.post("{{route('regSubmit')}}", {
-                    newRegList: JSON.stringify($regList)
-                })
-                    .then(function (response) {
-                        Swal.fire({
-                            title: 'You Did It!',
-                            text: 'Your regulation request for ' + response.data + ' has been submitted. Please give our admin time to approve your submission.',
-                            icon: 'success',
-                            confirmButtonText: 'Ok'
-                        }).then((result) => {
-                            location.reload();
-                        });
-
-                    })
-                    .catch(function (error) {
-                        Swal.fire({
-                            title: 'Error: Request Failed To Submit',
-                            text: 'The regulation form you tried to turn in failed to submit. Please try again. If the problem continues, please contact an admin.',
-                            icon: 'error',
-                            confirmButtonText: 'Ok'
-                        });
+            if(addRegionClicked){
+                $stateSelected = $("#inputStateEdit").text();
+                if (!$("#inputStateEdit").val()) {
+                    Swal.fire({
+                        title: 'Error: No State Selected',
+                        text: 'You did not pick a State. You need to at least pick a State to add a regulation. Please try again.',
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
                     });
+                    return;
+                }
+                else{
+                    $countySelected = $('#countyEdit').children("option:selected").text();
+                    $citySelected =  $('#cityEdit').children("option:selected").text();
+                    $stateIdSelected = -1;
+                    $countyIdSelected = -1;
+                    $cityIdSelected = -1;
+                }
             }
-        })
+            else{
+                $stateSelected = $("#inputState").children("option:selected").text();
+                if ($stateSelected == "Choose...") {
+                    Swal.fire({
+                        title: 'Error: No State Selected',
+                        text: 'You did not pick a State. You need to at least pick a State to add a regulation. Please try again.',
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    });
+                    return;
+                }
+                else{
+                    $countySelected = $('#county').children("option:selected").text();
+                    $citySelected =  $('#city').children("option:selected").text();
+                    $stateIdSelected = $('#inputState').children("option:selected").val();
+                    $countyIdSelected = $('#county').children("option:selected").val();
+                    $cityIdSelected = $('#city').children("option:selected").val();
+                }
+            }
+            $county = $("#county").children("option:selected").text();
+            $city = $("#city").children("option:selected").text();
+            $regList = [];
+
+            for (i = 0; i <= numOfRegs; i++) {
+                $newReg = {
+                    $state: $stateSelected,
+                    $county: $countySelected,
+                    $city: $citySelected,
+                    $stateId: $stateIdSelected,
+                    $countyId: $countyIdSelected,
+                    $cityId: $cityIdSelected,
+                    $sourceId: $('#waterSource' + i).children("option:selected").val(),
+                    $destinationId: $('#waterDestination' + i).children("option:selected").val(),
+                    $isPermitted: $("#allowed" + i).children("option:selected").val(),
+                    $codesLink: $("#codes" + i).val(),
+                    $permitLink: $("#permits" + i).val(),
+                    $incentivesLink: $("#incentives" + i).val(),
+                    $moreInfoLink: $("#moreInfo" + i).val(),
+                    $comments: $("#comments" + i).val()
+                };
+                $regList.push($newReg);
+            }
+
+            axios.post("{{route('regSubmit')}}", {
+                newRegList: JSON.stringify($regList)
+            })
+                .then(function (response) {
+                    Swal.fire({
+                        title: 'You Did It!',
+                        text: 'Your regulation request for ' + response.data + ' has been submitted. Please give our admin time to approve your submission.',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    }).then((result) => {
+                        location.reload();
+                    });
+
+                })
+                .catch(function (error) {
+                    Swal.fire({
+                        title: 'Error: Request Failed To Submit',
+                        text: 'The regulation form you tried to turn in failed to submit. Please try again. If the problem continues, please contact an admin.',
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    });
+                });
+        });
 
         //If they want to add a new area, the other area fields are disabled
         //and the edit fields are shown
         $("#addRegion").click(function() {
-            $("#addRegionDiv").css("display", "block");
-            $("#inputState").prop("disabled", true);
-            $("#county").prop("disabled", true);
-            $("#inputZip").prop("disabled", true);
-            $("#city").prop("disabled", true);
+            if(!addRegionClicked)
+            {
+                $("#addRegion").html("-");
+                $("#addRegionLabel").html(" Choose From Existing States / Counties / Cities");
+                $("#addRegionDiv").css("display", "block");
+                $("#inputState").prop("disabled", true);
+                $("#county").prop("disabled", true);
+                $("#city").prop("disabled", true);
+                addRegionClicked = true;
+            }
+            else{
+                $("#addRegion").html("+");
+                $("#addRegionLabel").html(" Add A New State, County or City");
+                $("#addRegionDiv").css("display", "none");
+                $("#inputState").prop("disabled", false);
+                $("#county").prop("disabled", false);
+                $("#city").prop("disabled", false);
+                addRegionClicked = false;
+            }
+
         });
 
         //for when the state changes
