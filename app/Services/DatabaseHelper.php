@@ -272,7 +272,7 @@ class DatabaseHelper {
         try {
             $submission->save();
         } catch (Throwable $e) {
-            throw new Exception('Error saving updated submission to DB. Contact an administrator.');
+            throw $e;
         }
 
         return $submission;
@@ -359,7 +359,7 @@ class DatabaseHelper {
         $holdingVar = Links::where('linkText', $request->codes)->get();
         if (count($holdingVar) > 0) {
             $submission->codes = $holdingVar->first()->link_id;
-        } else if ($request->codes !== "") {
+        } else if ($request->codes !== null) {
             $codes = new Links();
             $codes->linkText = $request->codes;
             $codes->save();
@@ -371,7 +371,7 @@ class DatabaseHelper {
         $holdingVar = Links::where('linkText', $request->permit)->get();
         if (count($holdingVar) > 0) {
             $submission->permit = $holdingVar->first()->link_id;
-        } else if ($request->permit !== "") {
+        } else if ($request->permit !== null) {
             $codes = new Links();
             $codes->linkText = $request->permit;
             $codes->save();
@@ -383,7 +383,7 @@ class DatabaseHelper {
         $holdingVar = Links::where('linkText', $request->incentives)->get();
         if (count($holdingVar) > 0) {
             $submission->incentives = $holdingVar->first()->link_id;
-        } else if ($request->incentives !== "") {
+        } else if ($request->incentives !== null) {
             $codes = new Links();
             $codes->linkText = $request->incentives;
             $codes->save();
@@ -395,7 +395,7 @@ class DatabaseHelper {
         $holdingVar = Links::where('linkText', $request->moreInfo)->get();
         if (count($holdingVar) > 0) {
             $submission->moreInfo = $holdingVar->first()->link_id;
-        } else if ($request->moreInfo !== "") {
+        } else if ($request->moreInfo !== null) {
             $codes = new Links();
             $codes->linkText = $request->moreInfo;
             $codes->save();
