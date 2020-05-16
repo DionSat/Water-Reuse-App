@@ -34,16 +34,16 @@ class DatabaseHelper {
 
     public static function getReuseItemByIdStateAndType($type, $state, $itemId) {
         $item = null;
-        if($state === "pending"){
+        if($state === "pending" || $state === "rejected"){
             switch ($type){
                 case "city":
-                    $item = PendingCityMerge::find($itemId);
+                    $item = PendingCityMerge::withTrashed()->find($itemId);
                     break;
                 case "county":
-                    $item = PendingCountyMerge::find($itemId);
+                    $item = PendingCountyMerge::withTrashed()->find($itemId);
                     break;
                 case "state":
-                    $item = PendingStateMerge::find($itemId);
+                    $item = PendingStateMerge::withTrashed()->find($itemId);
                     break;
                 default:
                     $item = null;
@@ -344,11 +344,8 @@ class DatabaseHelper {
         //Make a new item in the right table
         $item = DatabaseHelper::createNewReuseItemFromOtherItem($state, $locationToMoveItemTo, $newLocationId, $oldItem);
 
-        //Delete the old item
-        if ($state === "pending")
-            $oldItem->forceDelete();
-        else
-            $oldItem->delete();
+        self::deleteItem($state, $oldItem);
+
 
         return $item;
     }
@@ -406,5 +403,18 @@ class DatabaseHelper {
         } else {
             $submission->moreInfo = null;
         }
+    }
+
+    /**
+     * @param $state
+     * @param $item
+     */
+    public static function deleteItem($state, $item): void
+    {
+        //Delete the old item
+        if ($state === "pending" || $state === "rejected")
+            $item->forceDelete();
+        else
+            $item->delete();
     }
 }

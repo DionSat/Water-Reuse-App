@@ -37,7 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/submission/edit/{type?}/{state?}/{itemId?}', 'UserSubmissionController@submissionEdit')->name('submissionEdit');
     Route::post('/submission/edit/{type?}/{state?}/{itemId?}', 'UserSubmissionController@submissionEditSubmit')->name('submissionEditUpdate');
 
-    Route::post('/submissions', 'UserSubmissionController@deleteUnapproved')->name('deleteUnapproved');
+    Route::post('/submissions/delete', 'UserSubmissionController@deleteItem')->name('deleteItem');
 
     Route::get('/account', 'AccountController@view')->name('account');
     Route::get('/accountUpdate', 'AccountController@getUpdatePage')->name('updatePage');

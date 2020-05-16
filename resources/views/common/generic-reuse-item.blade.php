@@ -42,9 +42,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <form action="{{ route('deleteUnapproved') }}" method="POST">
+                    <form action="{{ route('deleteItem') }}" method="POST">
                         {{ csrf_field() }}
+                        <input type="text" name="back" style="display: none;" value="{{$backUrl}}">
                         <input type="text" name="type" style="display: none;" value="{{$type}}">
+                        <input type="text" name="state" style="display: none;" value="{{$item->getStatus()}}">
                         <input type="number" name="id" style="display: none;" value="{{$item->id}}">
                         <button type="submit" class="btn btn-danger">Confirm Delete</button>
                     </form>
