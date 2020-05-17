@@ -202,9 +202,9 @@
                         $("#citySelect").html('<option id="chooseCounty" value="-1" disabled selected>Choose...</option>'+
                             response.data.sort(function (a,b) {
                                 if(a.cityName < b.cityName) { return -1; }
-                                if(a.cityName > b.cityName) { return 1; }
+                                if(a.cityName > b.cityName) { return 1;}
                                 else {return 0;}
-                            }).map(obj => "<option value='"+obj.city_id+"'>"+obj.cityName+"</option>").join("\n"));
+                            }).map(obj => obj.is_approved && "<option value='"+obj.city_id+"'>"+obj.cityName+"</option>").join("\n")); //TODO: Check if this is correct after approving a city
                     } else {
                         $("#citySelect").html("<option value='' disabled selected>No cities found in county</option>");
                     }
