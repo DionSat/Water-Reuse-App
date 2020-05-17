@@ -42,8 +42,8 @@ class CreatePendingCityMergeTable extends Migration
             $table->unsignedBigInteger('moreInfo')->nullable();
             $table->foreign('moreInfo')->references('link_id')->on('links');
 
-            $table->unsignedBigInteger('userID');
-            $table->foreign('userID')->references('id')->on('users');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->string('comments')->nullable();
         });
