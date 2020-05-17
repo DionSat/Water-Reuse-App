@@ -138,6 +138,8 @@
         numOfRegs = 0;
         //Changes from false to true when the addRegion button is clicked
         addRegionClicked = false;
+        //The error message returned from the back end
+        $errorMessage = "A API error occurred."
 
         function showCountySpinner() {
             $("#countySpinner").removeClass("d-none");
@@ -222,7 +224,7 @@
         $('#submit').click(function () {
 
             if(addRegionClicked){
-                $stateSelected = $("#inputStateEdit").text();
+                $stateSelected = $("#inputStateEdit").val();
                 if (!$("#inputStateEdit").val()) {
                     Swal.fire({
                         title: 'Error: No State Selected',
@@ -233,8 +235,9 @@
                     return;
                 }
                 else{
-                    $countySelected = $('#countyEdit').children("option:selected").text();
-                    $citySelected =  $('#cityEdit').children("option:selected").text();
+                    $countySelected = $('#countyEdit').val();
+                    $citySelected =  $('#cityEdit').val();
+                    console.log("City: " + $citySelected)
                     $stateIdSelected = -1;
                     $countyIdSelected = -1;
                     $cityIdSelected = -1;
@@ -287,20 +290,32 @@
                 newRegList: JSON.stringify($regList)
             })
                 .then(function (response) {
-                    Swal.fire({
-                        title: 'You Did It!',
-                        text: 'Your regulation request for ' + response.data + ' has been submitted. Please give our admin time to approve your submission.',
-                        icon: 'success',
-                        confirmButtonText: 'Ok'
-                    }).then((result) => {
-                        location.reload();
-                    });
+                    if(response.data != $errorMessage && response.data != "County Already Exists, or There Was an Error on Loading New Area" || "State Already Exists, or There Was an Error on Loading New Area" || "City Already Exists, or There Was an Error on Loading New Area")
+                    {
+                        console.log("'" + response.data + "'");
+                        Swal.fire({
+                            title: 'You Did It!',
+                            text: 'Your regulation request for ' + response.data + ' has been submitted. Please give our admin time to approve your submission.',
+                            icon: 'success',
+                            confirmButtonText: 'Ok'
+                        }).then((result) => {
+                            location.reload();
+                        });
+                    }
+                    else{
+                        Swal.fire({
+                            title: 'Error: Request Failed To Submit',
+                            text: 'The regulation form you tried to turn in failed to submit with error ' + response.data + '. Please try again. If the problem continues, please contact an admin.',
+                            icon: 'error',
+                            confirmButtonText: 'Ok'
+                        });
+                    }
 
                 })
                 .catch(function (error) {
                     Swal.fire({
                         title: 'Error: Request Failed To Submit',
-                        text: 'The regulation form you tried to turn in failed to submit. Please try again. If the problem continues, please contact an admin.',
+                        text: 'The regulation form you tried to turn in failed to submit  with the error ' + error + '. Please try again. If the problem continues, please contact an admin.',
                         icon: 'error',
                         confirmButtonText: 'Ok'
                     });

@@ -7,6 +7,8 @@ use App\ReuseNode;
 use App\State;
 use Illuminate\Http\Request;
 use Throwable;
+use App\City;
+use App\County;
 
 Class RegulationController extends Controller{
 
