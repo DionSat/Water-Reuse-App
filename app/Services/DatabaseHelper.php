@@ -42,80 +42,25 @@ class DatabaseHelper {
                     $stateCheck =  State::where("stateName", $regLists[0]['$state'])->get()->first();
                     $countyCheck = County::where("countyName", $regLists[0]['$county'])->get()->first();
                     $cityCheck = City::where("cityName", $regLists[0]['$city'])->get()->first();
-                    $state;
 
                     if(!$stateCheck && $regLists[0]['$state'] != "")
                     {
                         $state = new State();
-                        $county;
                         $state->stateName = $regLists[0]['$state'];
                         try {
                             $state->save();
                         } catch(Throwable $e) {
                             return "State Already Exists, or There Was an Error on Loading New Area";
                         }
-
-                        if($regLists[0]['$county'] != "" && $regLists[0]['$city'] == "" && !$countyCheck)
-                        {
-                            $county = new County();
-                            $county->countyName = $regLists[0]['$county'];
-                            if($stateCheck)
-                            {
-                                $county->fk_state = $stateCheck->state_id;
-                            }
-                            else{
-                                $county->fk_state = $state->state_id;
-                            }
-                            try {
-                                $county->save();
-                            }
-                            catch(Throwable $e1){
-                                return "County Already Exists, or There Was an Error on Loading New Area";
-                            }
-                            $mergeTable = new PendingCountyMerge();
-                            $mergeTable->cityID= $city->city_id;
-                            $regArea = $regLists[0]['$county'];
-                            $regLists[0]['$countyId'] = $county->county_id;
-                            $isNewCounty = true;
-                            $isNew = false;
-                        }
-                        //TODO: add a case to create a new city and county at the same time... and fix deletion problem in MergeController
-                        else if(!$cityCheck && $regLists[0]['$city'] != "")
-                        {
-                            $city = new City();
-                            $city->cityName = $regLists[0]['$city'];
-                            if($countyCheck)
-                            {
-                                $city->fk_county = $countyCheck->county_id;
-                            }
-                            else
-                            {
-                                $city->fk_county = $county->county_id;
-                            }
-                            try{
-                                $city->save();
-                            }
-                            catch(Throwable $e2)
-                            {
-                                return "City Already Exists, or There Was an Error on Loading New Area";
-                            }
-                            $mergeTable = new PendingCityMerge();
-                            $mergeTable->cityID= $city->city_id;
-                            $regArea = $regLists[0]['$city'];
-                            $regLists[0]['$cityId'] = $city->city_id;
-                            $isNewCity = true;
-                            $isNew = false;
-                        }
-                        else{
                             $mergeTable = new PendingStateMerge();
                             $mergeTable->stateID= $state->state_id;
                             $regArea = $regLists[0]['$state'];
                             $regLists[0]['$stateId'] = $state->state_id;
                             $isNewState = true;
                             $isNew = false;
-                        }
+                            $stateCheck = $state;
                     }
-                    else if(!$countyCheck && $regLists[0]['$county'] != ""){
+                    if(!$countyCheck && $regLists[0]['$county'] != ""){
                         $county = new County();
                         $county->countyName = $regLists[0]['$county'];
                         $county->fk_state = $stateCheck->state_id;
@@ -125,35 +70,17 @@ class DatabaseHelper {
                         catch(Throwable $e1){
                             return "County Already Exists, or There Was an Error on Loading New Area";
                         }
-                        if(!$cityCheck && $regLists[0]['$city'] != "")
-                        {
-                            $city = new City();
-                            $city->cityName = $regLists[0]['$city'];
-                            $city->fk_county = $county->county_id;
-                            try{
-                                $city->save();
-                            }
-                            catch(Throwable $e2)
-                            {
-                                return "City Already Exists, or There Was an Error on Loading New Area";
-                            }
-                            $mergeTable = new PendingCityMerge();
-                            $mergeTable->cityID= $city->city_id;
-                            $regArea = $regLists[0]['$city'];
-                            $regLists[0]['$cityId'] = $city->city_id;
-                            $isNewCity = true;
-                            $isNew = false;
-                        }
-                        else{
+
                             $mergeTable = new PendingCountyMerge();
                             $mergeTable->countyID = $county->county_id;
                             $regArea = $regLists[0]['$county'];
                             $regLists[0]['$countyId'] = $county->county_id;
                             $isNewCounty = true;
+                            $isNewState = false;
                             $isNew = false;
-                        }
+                            $countyCheck = $county;
                     }
-                    else if(!$cityCheck && $regLists[0]['$city'] != "")
+                    if(!$cityCheck && $regLists[0]['$city'] != "")
                     {
                         $city = new City();
                         $city->cityName = $regLists[0]['$city'];
@@ -170,6 +97,8 @@ class DatabaseHelper {
                         $regArea = $regLists[0]['$city'];
                         $regLists[0]['$cityId'] = $city->city_id;
                         $isNewCity = true;
+                        $isNewState = false;
+                        $isNewCounty = false;
                         $isNew = false;
                     }
                 }
