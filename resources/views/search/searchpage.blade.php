@@ -47,7 +47,7 @@
                     <div class="search mt-3">
                         <h3 id="search-title" class="text-center">Search for Location </h3>
                         <hr>
-                        <form method="POST" action="{{route("search-submit")}}" class="text-center">
+                        <form method="GET" action="{{route("search-submit")}}" class="text-center">
                             {{ csrf_field() }}
 
                             <div class="form-group row">

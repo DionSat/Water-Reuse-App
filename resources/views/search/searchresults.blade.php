@@ -2,7 +2,7 @@
 
 @section('body')
     <div class="container">
-        <a href="{{url()->previous()}}" class="btn btn-primary col-md-2 mb-4"> <i class="fas fa-arrow-circle-left"></i>
+        <a href="{{route("search")}}" class="btn btn-primary col-md-2 mb-4"> <i class="fas fa-arrow-circle-left"></i>
             Search Again
         </a>
         <div class="card mb-3">
