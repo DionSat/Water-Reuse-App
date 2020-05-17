@@ -14,8 +14,11 @@ class CreateLinksTable extends Migration
     public function up()
     {
         Schema::create('links', function (Blueprint $table) {
+            $table->timestamps();
             $table->bigIncrements('link_id');
             $table->string('linkText');
+            $table->string('name')->nullable();
+            $table->enum('status', ['valid', 'broken', 'unknown'])->nullable();
         });
     }
 

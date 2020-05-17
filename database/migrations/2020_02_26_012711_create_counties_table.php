@@ -20,6 +20,7 @@ class CreateCountiesTable extends Migration
             $table->unsignedBigInteger('fk_state');
 
             $table->foreign('fk_state')->references('state_id')->on('states');
+            $table->unique(['fk_state', 'countyName']);
 
             // Set the foreign key to cascade deletions
             /*
