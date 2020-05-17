@@ -79,7 +79,7 @@ class DatabaseHelper {
                             $isNewCounty = true;
                             $isNew = false;
                         }
-                        //TODO: add a case to create a new city and county at the same time...
+                        //TODO: add a case to create a new city and county at the same time... and fix deletion problem in MergeController
                         else if(!$cityCheck && $regLists[0]['$city'] != "")
                         {
                             $city = new City();
