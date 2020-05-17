@@ -56,7 +56,7 @@
                                     <select id="stateSelect" name="state_id" class="form-control form-control-lg">
                                         <option value="-1" disabled selected>Select a state</option>
                                         @foreach($states as $state)
-                                            @if($states.is_approved)
+                                            @if($state->is_approved)
                                                 <option value="{{$state->state_id}}">{{$state->stateName}}</option>
                                             @endif
                                         @endforeach
