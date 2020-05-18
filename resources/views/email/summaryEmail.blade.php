@@ -107,7 +107,7 @@
                                                                             <tbody>
                                                                             <tr>
                                                                                 <td style="border-spacing: 0px; border-collapse: collapse; line-height: 24px; font-size: 16px; border-radius: 4px; margin: 0;" align="center" bgcolor="#007bff">
-                                                                                    <a href="https://bootstrapemail.com" style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 4px; line-height: 20px; display: inline-block; font-weight: normal; white-space: nowrap; background-color: #007bff; color: #ffffff; padding: 8px 12px; border: 1px solid #007bff;">View</a>
+                                                                                    <a href="{{route("adminUserSubmissionView")}}" style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 4px; line-height: 20px; display: inline-block; font-weight: normal; white-space: nowrap; background-color: #007bff; color: #ffffff; padding: 8px 12px; border: 1px solid #007bff;">View</a>
                                                                                 </td>
                                                                             </tr>
                                                                             </tbody>
@@ -161,7 +161,7 @@
                                                                             <tbody>
                                                                             <tr>
                                                                                 <td style="border-spacing: 0px; border-collapse: collapse; line-height: 24px; font-size: 16px; border-radius: 4px; margin: 0;" align="center" bgcolor="#007bff">
-                                                                                    <a href="https://bootstrapemail.com" style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 4px; line-height: 20px; display: inline-block; font-weight: normal; white-space: nowrap; background-color: #007bff; color: #ffffff; padding: 8px 12px; border: 1px solid #007bff;">View</a>
+                                                                                    <a href="{{route("linkView", ["type" => "broken"])}}" style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 4px; line-height: 20px; display: inline-block; font-weight: normal; white-space: nowrap; background-color: #007bff; color: #ffffff; padding: 8px 12px; border: 1px solid #007bff;">View</a>
                                                                                 </td>
                                                                             </tr>
                                                                             </tbody>
@@ -215,7 +215,7 @@
                                                                             <tbody>
                                                                             <tr>
                                                                                 <td style="border-spacing: 0px; border-collapse: collapse; line-height: 24px; font-size: 16px; border-radius: 4px; margin: 0;" align="center" bgcolor="#007bff">
-                                                                                    <a href="https://bootstrapemail.com" style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 4px; line-height: 20px; display: inline-block; font-weight: normal; white-space: nowrap; background-color: #007bff; color: #ffffff; padding: 8px 12px; border: 1px solid #007bff;">View</a>
+                                                                                    <a href="{{route("search")}}" style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 4px; line-height: 20px; display: inline-block; font-weight: normal; white-space: nowrap; background-color: #007bff; color: #ffffff; padding: 8px 12px; border: 1px solid #007bff;">View</a>
                                                                                 </td>
                                                                             </tr>
                                                                             </tbody>
