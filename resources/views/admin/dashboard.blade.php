@@ -21,7 +21,7 @@
                             <div class="card-body">
                                 <div class="d-flex">
                                     <div class="p-2 mr-3 w-75">
-                                        <h4 class="card-title">Edit Users</h4>
+                                        <h4 class="card-title">{{$card["title"]}}</h4>
                                     </div>
                                     <div>
                                         <h1 class="m-3 flex-grow-1 w-100 text-muted"> {{$card["count"]}}</h1>
@@ -44,7 +44,7 @@
                                 <div class="card-body">
                                     <div class="d-flex">
                                         <div class="p-2 mr-3 w-75">
-                                            <h4 class="card-title">Contact Users</h4>
+                                            <h4 class="card-title">{{$card["title"]}}</h4>
                                         </div>
                                         <div>
                                             <h1 class="m-3 flex-grow-1 w-100 text-muted"> {{$card["count"]}}</h1>

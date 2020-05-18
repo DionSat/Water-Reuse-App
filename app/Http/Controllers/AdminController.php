@@ -2,14 +2,49 @@
 
 namespace App\Http\Controllers;
 
+use App\ScheduledEmails;
 use App\User;
 use Auth;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
+
+    public function scheduledEmailView(){
+
+        // Get all admins and scheduled emails
+        $adminUsers = User::where('is_admin', true)->orderBy('id')->get();
+        $currentScheduledEmails = ScheduledEmails::all();
+
+        return view("admin.viewScheduledEmail", compact('adminUsers', 'currentScheduledEmails'));
+    }
+
+    // Add a new scheduled email
+    public function scheduledEmailSubmit(Request $request){
+
+        if($request->req_type === "add"){
+            //Check if user is already in the table
+            if(ScheduledEmails::where("user_id", $request->user_id)->get()->count() > 0)
+                return redirect()->back()->with(['alert' => 'danger', 'alertMessage' => 'This user already has a scheduled email. Please delete the already scheduled email first.']);
+
+            $newScheduledEmail = new ScheduledEmails();
+            $newScheduledEmail->user_id = $request->user_id;
+            $newScheduledEmail->send_interval = $request->email_frequency;
+            $newScheduledEmail->last_sent = Carbon::now()->subDay(); //Set to now minus one day
+            $newScheduledEmail->save();
+            return redirect()->back()->with(['alert' => 'success', 'alertMessage' => 'Scheduled email added.']);
+        } else {
+            //Removing a scheduled email
+            $userEmail = ScheduledEmails::find($request->item_id);
+            $userEmail->delete();
+            return redirect()->back()->with(['alert' => 'success', 'alertMessage' => 'Scheduled email was deleted.']);
+        }
+
+    }
+
+
     public function getBasicAdminPage()
     {
         $cityNumber = DB::table('cities')->count();
@@ -36,9 +71,11 @@ class AdminController extends Controller
         $allUserCount = User::all()->count();
         $user = Auth::user();
         $canEmailCount = User::where('can_contact', true)->count();
+        $usersToEmail = ScheduledEmails::all()->count();
         $userAndEmail = [];
         $userAndEmail[] = ["title" => "All Users", "count" => $allUserCount, "view" => route("getUsers")];
-        $userAndCanEmail[] = ["title" => "Users Emails", "count" => $canEmailCount, "view" => route("viewEmail")];
+        $userAndCanEmail[] = ["title" => "All User Emails", "count" => $canEmailCount, "view" => route("viewEmail")];
+        $userAndCanEmail[] = ["title" => "Scheduled Emails", "count" => $usersToEmail, "view" => route("scheduledEmails")];
 
         if ($user->is_admin === false)
             abort(404);
