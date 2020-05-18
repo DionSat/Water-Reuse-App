@@ -28,6 +28,7 @@ class StateController extends Controller
 
         $state = new State();
         $state->stateName = $request->state;
+        $state->is_approved = true;
 
         try {
             $state->save();
