@@ -127,12 +127,12 @@ Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function 
         Route::post('/links/status', 'LinkController@checkLinkStatus')->name('checkLinkStatus');
 
         // Allowed Routes
-        Route::get('/allowedTypes', 'ReuseNodeController@allReuseNodes')->name('allowedView');
-        Route::get('/allowedTypes/add', 'ReuseNodeController@addReuseNode')->name('allowedAdd');
-        //Route::post('/allowedTypes/add', 'ReuseNodeController@addReuseNodeSubmit')->name('allowedAddSubmit');
-        //Route::post('/allowedTypes/delete', 'ReuseNodeController@deleteReuseNode')->name('deleteAllowed');
-        //Route::get('/allowedTypes/modify', 'ReuseNodeController@modify')->name('modifyAllowed');
-        //Route::post('/allowedTypes/modify', 'ReuseNodeController@modifyReuseNodeSubmit')->name('modifyAllowedSubmit');
+        Route::get('/allowedTypes', 'AllowedTypesController@allAllowedTypes')->name('allowedView');
+        Route::get('/allowedTypes/add', 'AllowedTypesController@addAllowedType')->name('allowedAdd');
+        Route::post('/allowedTypes/add', 'AllowedTypesController@addAllowedTypeSubmit')->name('allowedAddSubmit');
+        Route::post('/allowedTypes/delete', 'AllowedTypesController@deleteReuseNode')->name('deleteAllowed');
+        Route::get('/allowedTypes/modify', 'AllowedTypesController@modify')->name('modifyAllowed');
+        Route::post('/allowedTypes/modify', 'AllowedTypesController@modifyReuseNodeSubmit')->name('modifyAllowedSubmit');
     });
 });
 

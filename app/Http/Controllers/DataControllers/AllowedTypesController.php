@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\DataControllers;
 
+use App\Allowed;
 use App\CityMerge;
 use App\CountyMerge;
 use App\ReuseNode;
@@ -13,13 +14,15 @@ use App\Http\Controllers\Controller;
 class AllowedTypesController extends Controller
 {
     public function allAllowedTypes() {
-        $nodes = ReuseNode::all();
-        return view("database.reuseNodes", compact('nodes'));
+        $types = Allowed::all();
+        return view("database.allowed", compact('types'));
     }
 
     public function addAllowedType() {
-        return view("database.addReuseNode");
+        return view("database.addAllowed");
     }
+
+
 
     public function addAllowedTypeSubmit(Request $request) {
         if (empty($request->source))
