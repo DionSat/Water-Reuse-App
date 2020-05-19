@@ -35,16 +35,16 @@ class AllowedTypesController extends Controller
 
     public function deleteAllowedType(Request $request)
     {
-        $node = ReuseNode::where("node_id", $request->node_id)->get()->first();
+        $allowed = Allowed::where("allowed_id", $request->allowed_id)->get()->first();
 
-        $sourcesInMergeCount = CityMerge::where("sourceID", $request->node_id)->get()->count();
-        $sourcesInMergeCount += CountyMerge::where("sourceID", $request->node_id)->get()->count();
-        $sourcesInMergeCount += StateMerge::where("sourceID", $request->node_id)->get()->count();
+        $allowedInMergeCount = CityMerge::where("allowedID", $request->allowed_id)->get()->count();
+        $allowedInMergeCount += CountyMerge::where("allowedID", $request->allowed_id)->get()->count();
+        $allowedInMergeCount += StateMerge::where("allowedID", $request->allowed_id)->get()->count();
 
-        if($sourcesInMergeCount != 0) {
-            $backRoute = route("sourceView");
-            $backName  = "Sources";
-            $item = $node->node_name;
+        if($allowedInMergeCount != 0) {
+            $backRoute = route("allowedView");
+            $backName  = "Allowed Types";
+            $item = $allowed->allowedText;
             $dependantCategory = "water reuse rules";
             $dependantItems = [];
 
@@ -52,9 +52,9 @@ class AllowedTypesController extends Controller
         }
 
         //If no dependencies, then delete
-        $node->delete();
+        $allowed->delete();
 
-        return redirect()->route('reuseNodeView')->with(['alert' => 'success', 'alertMessage' => $node->node_name . ' has been deleted.']);
+        return redirect()->route('allowedView')->with(['alert' => 'success', 'alertMessage' => $allowed->allowedText . ' has been deleted.']);
     }
 
     public function modify(Request $request) {
@@ -62,7 +62,7 @@ class AllowedTypesController extends Controller
         return view('database.modifyReuseNode', compact('node'));
     }
 
-    public function modifyAllowedTypesSubmit(Request $request) {
+    public function modifyAllowedSubmit(Request $request) {
         $node = ReuseNode::where("node_id", $request->node_id)->get()->first();
         if(empty($request->newValue))
             return redirect()->route('modifyReuseNode')->with(['alert' => 'danger', 'alertMessage' => 'Please enter a source/destination/fixture name!']);

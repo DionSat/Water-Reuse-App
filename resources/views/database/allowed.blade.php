@@ -22,7 +22,7 @@
                         <form method="POST" action="{{ route('deleteAllowed') }}">
                             {{ csrf_field() }}
                             <input id="delete" name="delete" value="delete" hidden>
-                            <input id="sourceId-{{$type->allowedText}}" name="node_id" value="{{$type->allowedText}}" hidden>
+                            <input id="allowedId-{{$type->allowed_id}}" name="allowed_id" value="{{$type->allowed_id}}" hidden>
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </td>
