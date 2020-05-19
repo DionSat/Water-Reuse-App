@@ -22,20 +22,15 @@ class AllowedTypesController extends Controller
         return view("database.addAllowed");
     }
 
-
-
     public function addAllowedTypeSubmit(Request $request) {
-        if (empty($request->source))
-            return redirect()->route('reuseNodeAdd')->with(['alert' => 'danger', 'alertMessage' => 'Please enter a source/destination/fixture name!']);
+        if (empty($request->allowedText))
+            return redirect()->route('allowedAdd')->with(['alert' => 'danger', 'alertMessage' => 'Please enter a name!']);
 
-        $source = new ReuseNode();
-        $source->node_name = $request->source;
-        $source->is_source = $request->boolean('is_source');
-        $source->is_destination = $request->boolean('is_destination');
-        $source->is_fixture = $request->boolean('is_fixture');
-        $source->save();
+        $allowed = new Allowed();
+        $allowed->allowedText = $request->allowedText;
+        $allowed->save();
 
-        return redirect()->route('reuseNodeView')->with(['alert' => 'success', 'alertMessage' => $source->node_name . ' has been added.']);
+        return redirect()->route('allowedView')->with(['alert' => 'success', 'alertMessage' => $allowed->allowedText . ' has been added.']);
     }
 
     public function deleteAllowedType(Request $request)
