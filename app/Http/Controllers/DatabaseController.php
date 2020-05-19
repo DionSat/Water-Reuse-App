@@ -29,7 +29,11 @@ class DatabaseController extends Controller
         $linksAndOther = [];
         $linksAndOther[] = ["title" => "Links", "subheading" => "Water Regulation Links", "count" => $linksNumber, "manageData" => route("linkView"), "addData" => route("linkAdd")];
 
-        return view("admin.database", compact('locationCards', 'sourcesAndDestinations', 'linksAndOther')
+        $allowedNumber = DB::table('allowed')->count();
+        $allowedTypes = [];
+        $allowedTypes[] = ["title" => "Allowed?", "subheading" => "Allowed Levels (yes/no/...)", "count" => $allowedNumber, "manageData" => route("allowedView"), "addData" => route("allowedAdd")];
+
+        return view("admin.database", compact('locationCards', 'sourcesAndDestinations', 'linksAndOther', 'allowedTypes')
         );
     }
 }

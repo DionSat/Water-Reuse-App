@@ -77,10 +77,14 @@ class AdminController extends Controller
         $userAndCanEmail[] = ["title" => "All User Emails", "count" => $canEmailCount, "view" => route("viewEmail")];
         $userAndCanEmail[] = ["title" => "Scheduled Emails", "count" => $usersToEmail, "view" => route("scheduledEmails")];
 
+        $allowedNumber = DB::table('allowed')->count();
+        $allowedTypes = [];
+        $allowedTypes[] = ["title" => "Allowed?", "subheading" => "Allowed Levels (yes/no/...)", "count" => $allowedNumber, "manageData" => route("allowedView"), "addData" => route("allowedAdd")];
+
         if ($user->is_admin === false)
             abort(404);
         else
-            return view("admin.dashboard", compact('userAndEmail', 'userAndCanEmail', 'allUsers', 'locationCards', 'sourcesAndDestinations', 'linksAndOther'));
+            return view("admin.dashboard", compact('userAndEmail', 'userAndCanEmail', 'allUsers', 'locationCards', 'sourcesAndDestinations', 'linksAndOther', 'allowedTypes'));
     }
 
     public function viewEmail()

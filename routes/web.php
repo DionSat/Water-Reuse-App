@@ -126,6 +126,13 @@ Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function 
         Route::post('/links/modify', 'LinkController@modifyLinkSubmit')->name('modifyLinkSubmit');
         Route::post('/links/status', 'LinkController@checkLinkStatus')->name('checkLinkStatus');
 
+        // Allowed Routes
+        Route::get('/allowedTypes', 'AllowedTypesController@allAllowedTypes')->name('allowedView');
+        Route::get('/allowedTypes/add', 'AllowedTypesController@addAllowedType')->name('allowedAdd');
+        Route::post('/allowedTypes/add', 'AllowedTypesController@addAllowedTypeSubmit')->name('allowedAddSubmit');
+        Route::post('/allowedTypes/delete', 'AllowedTypesController@deleteAllowedType')->name('deleteAllowed');
+        Route::get('/allowedTypes/modify', 'AllowedTypesController@modify')->name('modifyAllowed');
+        Route::post('/allowedTypes/modify', 'AllowedTypesController@modifyAllowedSubmit')->name('modifyAllowedSubmit');
     });
 });
 
