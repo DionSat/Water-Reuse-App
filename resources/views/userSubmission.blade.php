@@ -1,16 +1,17 @@
 @extends('layouts.master')
 
 @section('body')
-    <div class="container">
+    <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                <h3 style="text-align: center">Submit a New Water Reuse Regulation</h3>
                 <div class="card">
-                    <div class="card-header">Submit a New Water Reuse Regulation</div>
+                    <div class="card-header">Location</div>
                     <div class="card-body">
                         <form type="POST">
                         <div id="selectRegion">
                             <div class="form-row">
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                     <label for="inputState">State</label>
                                     <select id="inputState" class="form-control">
                                         <option value="choose" selected>Choose...</option>
@@ -19,7 +20,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                     <label for="county">County (Optional)</label>
                                     <div class="text-center">
                                         <i id="countySpinner" class="fas fa-spinner fa-pulse mt-2 d-none"></i>
@@ -28,12 +29,12 @@
                                         <option id="chooseCounty" value="choose" disabled>Choose...</option>
                                     </select>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                    <label for="city">City (Optional)</label>
-                                    <select class="form-control" id="city">
-                                        <option id="chooseCity" value="choose" disabled>Choose...</option>
-                                    </select>
+                                <div class="form-group col-md-4">
+                                        <label for="city">City (Optional)</label>
+                                        <select class="form-control" id="city">
+                                            <option id="chooseCity" value="choose" disabled>Choose...</option>
+                                        </select>
+                                </div>
                             </div>
                             <div class="text-center">
                                 <i id="citySpinner" class="justify-content-center fas fa-spinner fa-pulse mt-2 d-none"></i>
@@ -41,48 +42,50 @@
                         </div>
                         <div id="addRegionDiv" style="display: none">
                             <div class="form-row">
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                     <label for="inputStateEdit">State</label>
                                     <input type="text" id="inputStateEdit" class="form-control">
                                     </input>
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                     <label for="countyEdit">County (Optional)</label>
                                     <input class="form-control" type="text" id="countyEdit">
                                     </input>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                    <label for="cityEdit">City (Optional)</label>
-                                    <input type="text" class="form-control" id="cityEdit">
-                                    </input>
+                                <div class="form-group col-md-4">
+                                        <label for="cityEdit">City (Optional)</label>
+                                        <input type="text" class="form-control" id="cityEdit">
+                                        </input>
+                                </div>
                             </div>
                         </div>
-
                             <div class="form-group">
                                 <button type="button" class="btn btn-secondary" id="addRegion">+</button>
                                 <label id="addRegionLabel" for="addRegion"> Add A New State, County or City</label>
                             </div>
-
-                            <hr>
+                        </form>
+                    </div>
+                </div>
+                <br/>
+                <div class="card">
+                    <div class="card-header">Regulations</div>
+                    <div class="card-body">
+                        <form type="POST">
                             <div id="waterSourceDiv">
                                 <div class="form-row">
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-4">
                                         <label for="waterSource0">Water Source</label>
                                         <select id="waterSource0" name="waterSource0" class="form-control">
                                             <option value="choose" disabled>Choose...</option>
                                         </select>
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-4">
                                         <label for="waterDestination0">Water Destination</label>
                                         <select id="waterDestination0" class="form-control">
                                             <option value="choose" disabled>Choose...</option>
                                         </select>
                                     </div>
-                                </div>
-                                </br>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-4">
                                         <label for="allowed0">Is Water Reuse From This Source Allowed?</label>
                                         <select id="allowed0" class="form-control">
                                             <option value="choose" disabled>Choose...</option>
@@ -91,21 +94,19 @@
                                 </div>
                                 <hr>
                                 <div class="form-row">
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-3">
                                         <label for="codes0">Link to Codes (Optional)</label>
                                         <input type="text" class="form-control" id="codes0" placeholder="">
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-3">
                                         <label for="permits0">Link to Permit (Optional)</label>
                                         <input type="text" class="form-control" id="permits0" placeholder="">
                                     </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-3">
                                         <label for="incentives0">Link to Incentives (Optional)</label>
                                         <input type="text" class="form-control" id="incentives0" placeholder="">
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-3">
                                         <label for="moreInfo0">Link to More Information (Optional)</label>
                                         <input type="text" class="form-control" id="moreInfo0" placeholder="">
                                     </div>
@@ -114,13 +115,13 @@
                                     <label for="comments0">Comments (Optional)</label>
                                     <textarea class="form-control" id="comments0" rows="3"></textarea>
                                 </div>
-                                <hr>
+                                <hr style="height:2px;border:none;color:#333;background-color:#333;"/>
                             </div>
-                            <div class="form-group" style="float: right;">
+                            <div class="form-group" style="float: left;">
                                 <button type="button" class="btn btn-secondary" id="addSource">+</button>
                                 <label for="addSource"> Add Another Regulation For This Area</label>
                             </div>
-                            <button type="button" class="btn btn-primary" id="submit">Submit</button>
+                            <button type="button" class="btn btn-primary" id="submit" style="float: right;">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -211,7 +212,7 @@
 
         $('#addSource').click(function () {
             numOfRegs += 1;
-            $source = '<div class="form-row"><div class="form-group col-md-6"><label for="waterSource' + numOfRegs + '">Water Source</label><select id="waterSource' + numOfRegs + '" name="waterSource' + numOfRegs + '" class="form-control"><option value="choose" disabled>Choose...</option></select></div><div class="form-group col-md-6"><label for="waterDestination' + numOfRegs + '">Water Destination</label><select id="waterDestination' + numOfRegs + '" class="form-control"><option value="choose" disabled>Choose...</option></select></div></div></br><div class="form-row"><div class="form-group col-md-6"><label for="allowed' + numOfRegs + '">Is Water Reuse From This Source Allowed?</label><select id="allowed' + numOfRegs + '" class="form-control"><option value="choose" disabled>Choose...</option></select></div></div><hr><div class="form-row"><div class="form-group col-md-6"><label for="codes' + numOfRegs + '">Link to Codes (Optional)</label><input type="text" class="form-control" id="codes' + numOfRegs + '" placeholder=""></div><div class="form-group col-md-6"><label for="permits' + numOfRegs + '">Link to Permit (Optional)</label><input type="text" class="form-control" id="permits' + numOfRegs + '" placeholder=""></div></div><div class="form-row"><div class="form-group col-md-6"><label for="incentives' + numOfRegs + '">Link to Incentives (Optional)</label><input type="text" class="form-control" id="incentives' + numOfRegs + '" placeholder=""></div><div class="form-group col-md-6"><label for="moreInfo' + numOfRegs + '">Link to More Information (Optional)</label><input type="text" class="form-control" id="moreInfo' + numOfRegs + '" placeholder=""></div></div><div class="form-group"><label for="comments' + numOfRegs + '">Comments (Optional)</label><textarea class="form-control" id="comments' + numOfRegs + '" rows="3"></textarea><hr></div>';
+            $source = '<div class="form-row"><div class="form-group col-md-4"><label for="waterSource' + numOfRegs + '">Water Source</label><select id="waterSource' + numOfRegs + '" name="waterSource' + numOfRegs + '" class="form-control"><option value="choose" disabled>Choose...</option></select></div><div class="form-group col-md-4"><label for="waterDestination' + numOfRegs + '">Water Destination</label><select id="waterDestination' + numOfRegs + '" class="form-control"><option value="choose" disabled>Choose...</option></select></div><div class="form-group col-md-4"><label for="allowed' + numOfRegs + '">Is Water Reuse From This Source Allowed?</label><select id="allowed' + numOfRegs + '" class="form-control"><option value="choose" disabled>Choose...</option></select></div></div><hr><div class="form-row"><div class="form-group col-md-3"><label for="codes' + numOfRegs + '">Link to Codes (Optional)</label><input type="text" class="form-control" id="codes' + numOfRegs + '" placeholder=""></div><div class="form-group col-md-3"><label for="permits' + numOfRegs + '">Link to Permit (Optional)</label><input type="text" class="form-control" id="permits' + numOfRegs + '" placeholder=""></div><div class="form-group col-md-3"><label for="incentives' + numOfRegs + '">Link to Incentives (Optional)</label><input type="text" class="form-control" id="incentives' + numOfRegs + '" placeholder=""></div><div class="form-group col-md-3"><label for="moreInfo' + numOfRegs + '">Link to More Information (Optional)</label><input type="text" class="form-control" id="moreInfo' + numOfRegs + '" placeholder=""></div></div><div class="form-group"><label for="comments' + numOfRegs + '">Comments (Optional)</label><textarea class="form-control" id="comments' + numOfRegs + '" rows="3"></textarea><hr style="height:2px;border:none;color:#333;background-color:#333;"/></div>';
             $("#waterSourceDiv").append($source);
             getWaterSources(numOfRegs);
             getWaterDestinations(numOfRegs);
