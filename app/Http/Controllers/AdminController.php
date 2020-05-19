@@ -66,7 +66,7 @@ class AdminController extends Controller
 
     public function getUsers()
     {
-        $allUsers = User::orderBy('id')->paginate(10);//->sortBy("id");
+        $allUsers = User::where("is_banned", false)->orderBy('id')->paginate(10);
         $user = Auth::user();
         $userListHome = true;
 
@@ -118,6 +118,22 @@ class AdminController extends Controller
 
         if ($updated === true)
             return redirect()->back()->with('status', 'Admins updated.');
+        else
+            return redirect()->back()->with('nothing', 'No update');
+    }
+
+    public function toggleBanUser(Request $request)
+    {
+        $userToModify = User::find($request->userId);
+        if ($userToModify->is_banned === false) {
+            $userToModify->is_banned = true;
+        } else {
+            $userToModify->is_banned = false;
+        }
+        $userToModify->save();
+
+        if ($updated === true)
+            return redirect()->back()->with('status', 'User has been banned.');
         else
             return redirect()->back()->with('nothing', 'No update');
     }

@@ -63,6 +63,7 @@ Route::prefix('admin')->middleware('auth')->middleware('admin')->middleware('ban
     Route::get('update/search', 'AdminController@searchUsers')->name('searchUsers');
     //Route::get('/database', 'DatabaseController@getDatabasePage')->name('database');
     Route::post('/update', 'AdminController@updateUserAccess')->name('updateUser');
+    Route::post('/update', 'AdminController@toggleBanUser')->name('toggleBanUser');
     Route::get('viewUser', 'AdminController@viewUser')->name('viewUser');
     Route::get('/viewEmail', 'AdminController@viewEmail')->name('viewEmail');
 

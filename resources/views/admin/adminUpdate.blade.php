@@ -42,6 +42,7 @@
                                         <th scope="col">Contact</th>
                                         <th scope="col">Admin</th>
                                         <th scope="col">Toggle Admin</th>
+                                        <th scope="col">Ban User</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -74,6 +75,15 @@
                                                     <input type="number" name="userId" style="display: none;" value={{$user->id}}>
                                                     <button type="submit" class="btn btn-primary">
                                                         {{ __('Toggle Admin') }}
+                                                    </button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form action={{ route('toggleBanUser') }} method="POST">
+                                                    {{ csrf_field() }}
+                                                    <input type="number" name="userId" style="display: none;" value={{$user->id}}>
+                                                    <button type="submit" class="btn btn-primary">
+                                                        Ban User
                                                     </button>
                                                 </form>
                                             </td>
