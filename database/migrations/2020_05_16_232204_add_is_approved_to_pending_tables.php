@@ -36,15 +36,15 @@ class AddIsApprovedToPendingTables extends Migration
     {
 
         Schema::table('states', function (Blueprint $table) {
-            $table->boolean('is_approved');
+            $table->dropColumn('is_approved');
         });
 
         Schema::table('counties', function (Blueprint $table) {
-            $table->boolean('is_approved');
+            $table->dropColumn('is_approved');
         });
 
         Schema::table('cities', function (Blueprint $table) {
-            $table->boolean('is_approved');
+            $table->dropColumn('is_approved');
         });
     }
 }
