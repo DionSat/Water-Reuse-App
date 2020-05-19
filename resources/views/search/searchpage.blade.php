@@ -56,7 +56,9 @@
                                     <select id="stateSelect" name="state_id" class="form-control form-control-lg">
                                         <option value="-1" disabled selected>Select a state</option>
                                         @foreach($states as $state)
-                                            <option value="{{$state->state_id}}">{{$state->stateName}}</option>
+                                            @if($state->is_approved)
+                                                <option value="{{$state->state_id}}">{{$state->stateName}}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
@@ -181,7 +183,7 @@
                                 if(a.countyName < b.countyName) { return -1; }
                                 if(a.countyName > b.countyName) { return 1; }
                                 else {return 0;}
-                            }).map(obj => "<option value='"+obj.county_id+"'>"+obj.countyName+"</option>").join("\n"));
+                            }).map(obj => obj.is_approved && "<option value='"+obj.county_id+"'>"+obj.countyName+"</option>").join("\n"));
                     } else {
                         $("#countySelect").html("<option value='' disabled selected>No counties found in state</option>");
                     }
@@ -202,9 +204,9 @@
                         $("#citySelect").html('<option id="chooseCounty" value="-1" disabled selected>Choose...</option>'+
                             response.data.sort(function (a,b) {
                                 if(a.cityName < b.cityName) { return -1; }
-                                if(a.cityName > b.cityName) { return 1; }
+                                if(a.cityName > b.cityName) { return 1;}
                                 else {return 0;}
-                            }).map(obj => "<option value='"+obj.city_id+"'>"+obj.cityName+"</option>").join("\n"));
+                            }).map(obj => obj.is_approved && "<option value='"+obj.city_id+"'>"+obj.cityName+"</option>").join("\n")); //TODO: Check if this is correct after approving a city
                     } else {
                         $("#citySelect").html("<option value='' disabled selected>No cities found in county</option>");
                     }

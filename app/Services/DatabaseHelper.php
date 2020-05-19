@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Services;
-
+use App\City;
+use App\County;
+use App\State;
 use App\CityMerge;
 use App\CountyMerge;
 use App\StateMerge;
@@ -106,27 +108,107 @@ class DatabaseHelper {
     public static function addRegulation(Request $request, $regLists) {
         $regArea = "";
         $mergeTable = null;
+        $isNew = false;
+        $isNewCounty = false;
+        $isNewCity = false;
+        $isNewState = false;
+
+        //check to see if it's a new area
+        if($regLists[0]['$stateId'] == -1)
+        {
+            $isNew = true;
+        }
+
         foreach($regLists as $regList)
         {
+            //need to add a new area
+            if($isNew)
+            {
+                if($regLists[0]['$stateId'] == -1)
+                {
+                    $stateCheck =  State::where("stateName", $regLists[0]['$state'])->get()->first();
+                    $countyCheck = County::where("countyName", $regLists[0]['$county'])->get()->first();
+                    $cityCheck = City::where("cityName", $regLists[0]['$city'])->get()->first();
+
+                    if(!$stateCheck && $regLists[0]['$state'] != "")
+                    {
+                        $state = new State();
+                        $state->stateName = $regLists[0]['$state'];
+                        try {
+                            $state->save();
+                        } catch(Throwable $e) {
+                            return "State Already Exists, or There Was an Error on Loading New Area";
+                        }
+                            $mergeTable = new PendingStateMerge();
+                            $mergeTable->stateID= $state->state_id;
+                            $regArea = $regLists[0]['$state'];
+                            $regLists[0]['$stateId'] = $state->state_id;
+                            $isNewState = true;
+                            $isNew = false;
+                            $stateCheck = $state;
+                    }
+                    if(!$countyCheck && $regLists[0]['$county'] != ""){
+                        $county = new County();
+                        $county->countyName = $regLists[0]['$county'];
+                        $county->fk_state = $stateCheck->state_id;
+                        try {
+                            $county->save();
+                        }
+                        catch(Throwable $e1){
+                            return "County Already Exists, or There Was an Error on Loading New Area";
+                        }
+
+                            $mergeTable = new PendingCountyMerge();
+                            $mergeTable->countyID = $county->county_id;
+                            $regArea = $regLists[0]['$county'];
+                            $regLists[0]['$countyId'] = $county->county_id;
+                            $isNewCounty = true;
+                            $isNewState = false;
+                            $isNew = false;
+                            $countyCheck = $county;
+                    }
+                    if(!$cityCheck && $regLists[0]['$city'] != "")
+                    {
+                        $city = new City();
+                        $city->cityName = $regLists[0]['$city'];
+                        $city->fk_county = $countyCheck->county_id;
+                        try{
+                            $city->save();
+                        }
+                        catch(Throwable $e2)
+                        {
+                            return "City Already Exists, or There Was an Error on Loading New Area";
+                        }
+                        $mergeTable = new PendingCityMerge();
+                        $mergeTable->cityID= $city->city_id;
+                        $regArea = $regLists[0]['$city'];
+                        $regLists[0]['$cityId'] = $city->city_id;
+                        $isNewCity = true;
+                        $isNewState = false;
+                        $isNewCounty = false;
+                        $isNew = false;
+                    }
+                }
+            }
             //There is only a State
-            if($regLists[0]['$county'] == '' || $regLists[0]['$county'] == 'Choose...')
+            else if($regLists[0]['$county'] == 'Choose...' || $isNewState || $regLists[0]['$county'] == '')
             {
                 $mergeTable = new PendingStateMerge();
-                $mergeTable->stateID = $regList['$stateId'];
                 $regArea = $regLists[0]['$state'];
+                $mergeTable->stateID = $regLists[0]['$stateId'];
             }
             //There is a State and a County
-            else if($regLists[0]['$city'] == '' || $regLists[0]['$city'] == 'Choose...')
+            else if($regLists[0]['$city'] == 'Choose...' || $isNewCounty || $regLists[0]['$city'] == '')
             {
                 $mergeTable = new PendingCountyMerge();
-                $mergeTable->countyID = $regList['$countyId'];
+                $mergeTable->countyID = $regLists[0]['$countyId'];
                 $regArea = $regLists[0]['$county'];
             }
             //There is a city. The code will not call the post unless there is at
             //least a State selected, so this assumes there will always be a state.
-            else{
+            else if($regLists[0]['$city'] != 'Choose...' || $isNewCity || $regLists[0]['$city'] != ''){
                 $mergeTable = new PendingCityMerge();
-                $mergeTable->cityID = $regList['$cityId'];
+                $mergeTable->cityID = $regLists[0]['$cityId'];
                 $regArea = $regLists[0]['$city'];
             }
 
@@ -187,7 +269,7 @@ class DatabaseHelper {
                     $moreInfoLink->delete();
                 }
             } catch (Exception $exception){
-                return "A API error occurred.";
+                return $exception->getMessage();// return "A API error occurred.";
             }
         }
 
@@ -198,7 +280,17 @@ class DatabaseHelper {
     {
         $pending = PendingCityMerge::find($request->id);
 
+
         $city = new CityMerge();
+        $cityToApprove = City::where("city_id", $pending->cityID)->get()->first();
+        if($cityToApprove)
+        {
+            if(!$cityToApprove->is_approved)
+            {
+                $cityToApprove->is_approved = true;
+                $cityToApprove->save();
+            }
+        }
         $city->cityID = $pending->cityID;
         $city->sourceID = $pending->sourceID;
         $city->destinationID = $pending->destinationID;
@@ -209,6 +301,7 @@ class DatabaseHelper {
         $city->moreInfo = $pending->moreInfo;
         $city->user_id = $pending->user_id;
         $city->comments = $pending->comments;
+
 
         try {
             $city->save();
@@ -224,6 +317,16 @@ class DatabaseHelper {
         $pending = PendingStateMerge::find($request->id);
 
         $state = new StateMerge();
+        $stateToApprove = State::where("state_id", $pending->stateID)->get()->first();
+        if($stateToApprove)
+        {
+            if(!$stateToApprove->is_approved)
+            {
+                $stateToApprove->is_approved = true;
+                $stateToApprove->save();
+            }
+        }
+
         $state->stateID = $pending->stateID;
         $state->sourceID = $pending->sourceID;
         $state->destinationID = $pending->destinationID;
@@ -248,6 +351,15 @@ class DatabaseHelper {
     {
         $pending = PendingCountyMerge::find($request->id);
         $county = new CountyMerge();
+        $countyToApprove = County::where("county_id", $pending->countyID)->get()->first();
+        if($countyToApprove)
+        {
+            if(!$countyToApprove->is_approved)
+            {
+                $countyToApprove->is_approved = true;
+                $countyToApprove->save();
+            }
+        }
         $county->countyID = $pending->countyID;
         $county->sourceID = $pending->sourceID;
         $county->destinationID = $pending->destinationID;
