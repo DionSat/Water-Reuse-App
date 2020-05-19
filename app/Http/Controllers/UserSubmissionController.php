@@ -19,70 +19,28 @@ use Route;
 
 class UserSubmissionController extends Controller
 {
-    public function view()
-    {
-        $user = Auth::user();
-        $stateSubmissions = PendingStateMerge::withTrashed()->where('user_id', $user->id)->get();
-        $citySubmissions = PendingCityMerge::withTrashed()->where('user_id', $user->id)->get();
-        $countySubmissions = PendingCountyMerge::withTrashed()->where('user_id', $user->id)->get();
-        $stateApproved = StateMerge::where('user_id', $user->id)->get();
-        $cityApproved = CityMerge::where('user_id', $user->id)->get();
-        $countyApproved = CountyMerge::where('user_id', $user->id)->get();
-        return view('submission.submission', compact('user', 'stateSubmissions', 'citySubmissions', 'countySubmissions', 'stateApproved', 'cityApproved', 'countyApproved'));
+    public function userSubmissionListPage(){
+        $submissions = DatabaseHelper::getAllSubmissionsForCurrentUser();
+
+        return view('submission.userSubmissionOverview', compact('user', 'submissions'));
     }
 
-    //views of submission that are still pending
-    public function pendingState(Request $request)
-    {
-        $user = Auth::user();
-        $submissions = PendingStateMerge::where('id', $request->itemId)->withTrashed()->get();
-        $type = "State";
-        return view('submission.submissionItem', compact('user','submissions','type'));
+    public function viewSubmission(Request $request){
+        $type = $request->type;
+        $state = $request->state;
+        $itemId = $request->itemId;
+
+        if(empty($type) || empty($state) || empty($itemId))
+            return back()->with(['alert' => 'danger', 'alertMessage' => 'Error loading the submission.']);
+
+        //Otherwise, get the item from the database
+        $item = DatabaseHelper::getReuseItemByIdStateAndType($type, $state, $itemId);
+
+        $backUrl = $request->back;
+
+        return view('common.generic-reuse-item', compact('user','item', 'type', 'state', 'backUrl'));
     }
 
-    public function pendingCity(Request $request)
-    {
-        $user = Auth::user();
-        $submissions = PendingCityMerge::where('id', $request->itemId)->withTrashed()->get();
-        $type = 'City';
-        return view('submission.submissionItem', compact('user','submissions','type'));
-    }
-
-    public function pendingCounty(Request $request)
-    {
-        $user = Auth::user();
-        $submissions = PendingCountyMerge::where('id', $request->itemId)->withTrashed()->get();
-        $type = 'County';
-        return view('submission.submissionItem', compact('user','submissions','type'));
-    }
-
-    //view of submission that have been aproved
-    public function state(Request $request)
-    {
-        $user = Auth::user();
-        $submissions = StateMerge::where('id', $request->itemId)->get();
-        $type = "State";
-        $approved = true;
-        return view('submission.submissionItem', compact('user','submissions','type', 'approved'));
-    }
-
-    public function city(Request $request)
-    {
-        $user = Auth::user();
-        $submissions = CityMerge::where('id', $request->itemId)->get();
-        $type = 'City';
-        $approved = true;
-        return view('submission.submissionItem', compact('user','submissions','type', 'approved'));
-    }
-
-    public function county(Request $request)
-    {
-        $user = Auth::user();
-        $submissions = CountyMerge::where('id', $request->itemId)->get();
-        $type = 'County';
-        $approved = true;
-        return view('submission.submissionItem', compact('user','submissions','type', 'approved'));
-    }
 
     public function submissionEdit(Request $request)
     {
@@ -91,26 +49,29 @@ class UserSubmissionController extends Controller
         $counties = [];
         $cities = [];
         $type = $request->type;
+        $state = $request->state;
+        $itemId = $request->itemId;
         $submissionState = -1;
         $submissionCounty = -1;
         $submissionCity = -1;
         $allowed = Allowed::all();
+        $backUrl = $request->back;
+        $previousBackUrl = $request->previousBack;
 
-        switch ($request->type) {
-            case 'State':
-                $submission = PendingStateMerge::where('id', $request->itemId)->withTrashed()->get()->first();
+        $submission = DatabaseHelper::getReuseItemByIdStateAndType($type, $state, $itemId);
+
+        switch ($type) {
+            case 'state':
                 $counties = County::where('fk_state', $submission->stateID)->get();
                 $submissionState = $submission->stateID;
                 break;
-            case 'County':
-                $submission = PendingCountyMerge::where('id', $request->itemId)->withTrashed()->get()->first();
+            case 'county':
                 $counties = County::where('fk_state', $submission->county->state->state_id)->get();
                 $cities = City::where('fk_county', $submission->countyID)->get();
                 $submissionCounty = $submission->countyID;
                 $submissionState = $submission->county->state->state_id;
                 break;
-            case 'City':
-                $submission = PendingCityMerge::where('id', $request->itemId)->withTrashed()->get()->first();
+            case 'city':
                 $submissionCity = $submission->cityID;
                 $submissionCounty = $submission->city->county->county_id;
                 $submissionState = $submission->city->county->state->state_id;
@@ -118,11 +79,15 @@ class UserSubmissionController extends Controller
                 $counties = County::where('fk_state', $submission->city->county->state->state_id)->get();
                 break;
             default:
-                return redirect()->route('submission')->with(['alert' => 'danger', 'alertMessage' => 'Error trying to update the submission.']);
+                return redirect()->back()->with(['alert' => 'danger', 'alertMessage' => 'Error trying to find the submission.']);
                 break;
         }
 
-        return view('submission.submissionEdit', compact('user', 'submission', 'states', 'counties', 'cities', 'type', 'submissionState', 'submissionCounty', 'submissionCity', 'allowed'));
+        if(($submission->user_id !== Auth::user()->id) && Auth::user()->is_admin === false){
+            return redirect()->back()->with(['alert' => 'danger', 'alertMessage' => "Please don't try to edit other people's submissions!"]);
+        }
+
+        return view('submission.submissionEdit', compact('user', 'submission', 'states', 'counties', 'cities', 'type', 'submissionState', 'submissionCounty', 'submissionCity', 'allowed', 'backUrl', 'previousBackUrl'));
     }
 
     public function submissionEditSubmit(Request $request) {
@@ -130,36 +95,23 @@ class UserSubmissionController extends Controller
             return redirect()->route('submissionEdit', ['type' => $request->type, 'itemId' => $request->id])->with(['alert' => 'danger', 'alertMessage' => 'Error trying to update the submission.']);
 
         try {
-            DatabaseHelper::submissionEditSubmit($request);
-            return redirect()->route('submission')->with(['alert' => 'success', 'alertMessage' => 'The submission has been updated.']);
+            $submission = DatabaseHelper::submissionEditSubmit($request);
+            return redirect()->route('viewSubmission', ["type" => $submission->getLocationType(), "state" => $submission->getStatus(), "itemId" => $submission->id, "back" => $request->back])
+                                ->with(['alert' => 'success', 'alertMessage' => 'The submission has been updated.']);
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
     }
 
-    public function deleteUnapproved(Request $request) {
+    public function deleteItem(Request $request) {
         $route = Route::current();
         if (empty($request))
-            return redirect()->route($route->getName())->with(['alert' => 'danger', 'alertMessage' => 'Error trying to delete the submission.']);
+            return redirect()->back()->with(['alert' => 'danger', 'alertMessage' => 'Error trying to delete the submission.']);
 
-        switch ($request->type) {
-            case 'State':
-                $submission = PendingStateMerge::where('id', $request->id)->get()->first();
-                break;
-            case 'County':
-                $submission = PendingCountyMerge::where('id', $request->id)->get()->first();
+        $submission = DatabaseHelper::getReuseItemByIdStateAndType($request->type, $request->state, $request->id);
 
-                break;
-            case 'City':
-                $submission = PendingCityMerge::where('id', $request->id)->get()->first();
+        DatabaseHelper::deleteItem($request->state, $submission);
 
-
-                break;
-            default:
-                return redirect()->route($route->getName())->with(['alert' => 'danger', 'alertMessage' => 'Error trying to delete the submission.']);
-                break;
-        }
-        $submission->forceDelete();
-        return redirect()->route($route->getName())->with(['alert' => 'success', 'alertMessage' => 'The submission has been deleted.']);
+        return redirect($request->back)->with(['alert' => 'success', 'alertMessage' => 'The submission has been deleted.']);
     }
 }

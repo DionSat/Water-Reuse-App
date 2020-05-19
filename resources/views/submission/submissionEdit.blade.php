@@ -2,14 +2,17 @@
 
 @section('body')
     <div class="container">
-        <a href="{{route("submission")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i>
-            Submissions </a>
+        <div class="my-3">
+            <a href="{{$backUrl}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i>
+                Back
+            </a>
+        </div>
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Edit Submission</div>
                     <div class="card-body">
-                        <form action={{ route('submissionEditUpdate') }} method="POST">
+                        <form action="{{ route('submissionEditUpdate') }}" method="POST">
                             {{ csrf_field() }}
                             <div class="form-row">
                                 <div class="form-group col-md-4">
@@ -94,24 +97,24 @@
                                     <div class="form-group col-md-6">
                                         <label for="codes">Link to Codes (Optional)</label>
                                         <input type="text" class="form-control" id="codes" placeholder=""
-                                               value="{{$submission->codesObj->linkText}}" name="codes">
+                                               value="{{empty($submission->codesObj) ? "" : $submission->codesObj->linkText}}" name="codes">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="permit">Link to Permit (Optional)</label>
                                         <input type="text" class="form-control" id="permit" placeholder=""
-                                               value="{{$submission->permitObj->linkText}}" name="permit">
+                                               value="{{empty($submission->permitObj) ? "" : $submission->permitObj->linkText}}" name="permit">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="incentives">Link to Incentives (Optional)</label>
                                         <input type="text" class="form-control" id="incentives" placeholder=""
-                                               value="{{$submission->incentivesObj->linkText}}" name="incentives">
+                                               value="{{empty($submission->incentivesObj) ? "" : $submission->incentivesObj->linkText}}" name="incentives">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="moreInfo">Link to More Information (Optional)</label>
                                         <input type="text" class="form-control" id="moreInfo" placeholder=""
-                                               value="{{$submission->moreInfoObj->linkText}}" name="moreInfo">
+                                               value="{{empty($submission->moreInfoObj) ? "" : $submission->moreInfoObj->linkText}}" name="moreInfo">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -122,40 +125,11 @@
                                 <input type="number" name="id" style="display: none;" value={{$submission->id}}>
                                 <hr>
                             </div>
-                            <button type="submit" class="btn btn-primary" id="submit">Re-Submit</button>
+                            <input name="submissionState" style="display: none;" value={{$submission->getStatus()}}>
+                            <input name="submissionType" style="display: none;" value="{{$type}}">
+                            <input name="back" style="display: none;" value="{{$previousBackUrl}}">
+                            <button type="submit" class="btn btn-primary" id="submit"> Save </button>
 
-                        </form>
-                        <form action={{ route('deleteUnapproved') }} method="POST">
-                            {{ csrf_field() }}
-                            <input type="text" name="type" style="display: none;" value="{{$type}}">
-                            <input type="number" name="id" style="display: none;" value={{$submission->id}}>
-                            <button style="float:right;margin:-40px 10px 10px 10px;" class="btn btn-danger"
-                                    data-toggle="modal" data-target="#exampleModal" type="button">Delete
-                            </button>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="modal-title">Delete Submission Confirmation</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Are you sure you want to delete this submission?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                                            </button>
-                                            <button type="button" class="btn btn-danger" type="submit"
-                                                    onClick="javascript:this.form.submit();">Confirm Delete
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </form>
                     </div>
                 </div>

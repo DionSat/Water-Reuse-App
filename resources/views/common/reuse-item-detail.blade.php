@@ -19,11 +19,9 @@
                 <h3>County</h3>
                 <h5 class="text-muted">
                     @if(!empty($item))
-                        @if(isset($item->countyID))
-                            {{$item->county->countyName ?? "N/A"}} 
-                        @else
-                            {{$item->city->county->countyName ?? "N/A"}}
-                        @endif
+                        @if(isset($item->stateID)){{"N/A"}}@endif
+                        @if(isset($item->countyID)){{$item->county->countyName ?? "N/A"}}@endif
+                        @if(isset($item->cityID)){{$item->city->county->countyName ?? "N/A"}}@endif
                     @else
                         N/A
                     @endif
@@ -33,11 +31,9 @@
                 <h3>State</h3>
                 <h5 class="text-muted">
                     @if(!empty($item))
-                        @if(isset($item->stateID)) 
-                            {{$item->state->stateName ?? "N/A"}} 
-                        @else
-                            {{$item->city->county->state->stateName ?? "N/A"}}
-                        @endif
+                        @if(isset($item->stateID)){{$item->state->stateName ?? "N/A"}}@endif 
+                        @if(isset($item->countyID)){{$item->county->state->stateName ?? "N/A"}}@endif
+                        @if(isset($item->cityID)){{$item->city->county->state->stateName ?? "N/A"}}@endif
                     @else
                         N/A
                     @endif

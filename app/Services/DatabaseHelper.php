@@ -7,6 +7,7 @@ use App\State;
 use App\CityMerge;
 use App\CountyMerge;
 use App\StateMerge;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use App\PendingCityMerge;
 use App\PendingCountyMerge;
@@ -17,6 +18,57 @@ use Illuminate\Http\Request;
 use Throwable;
 
 class DatabaseHelper {
+
+
+    public static function getAllSubmissionsForCurrentUser(){
+        $userId = Auth::user()->id;
+
+        $mergedSubmissions = PendingStateMerge::withTrashed()->where('user_id', $userId)->get();
+        $mergedSubmissions = $mergedSubmissions->merge(PendingCityMerge::withTrashed()->where('user_id', $userId)->get());
+        $mergedSubmissions = $mergedSubmissions->merge(PendingCountyMerge::withTrashed()->where('user_id', $userId)->get());
+        $mergedSubmissions = $mergedSubmissions->merge(StateMerge::where('user_id', $userId)->get());
+        $mergedSubmissions = $mergedSubmissions->merge(CityMerge::where('user_id', $userId)->get());
+        $mergedSubmissions = $mergedSubmissions->merge(CountyMerge::where('user_id', $userId)->get());
+
+        return $mergedSubmissions->sortByDesc("created_at");
+    }
+
+
+    public static function getReuseItemByIdStateAndType($type, $state, $itemId) {
+        $item = null;
+        if($state === "pending" || $state === "rejected"){
+            switch ($type){
+                case "city":
+                    $item = PendingCityMerge::withTrashed()->find($itemId);
+                    break;
+                case "county":
+                    $item = PendingCountyMerge::withTrashed()->find($itemId);
+                    break;
+                case "state":
+                    $item = PendingStateMerge::withTrashed()->find($itemId);
+                    break;
+                default:
+                    $item = null;
+            }
+        } else {
+            switch ($type){
+                case "city":
+                    $item = CityMerge::find($itemId);
+                    break;
+                case "county":
+                    $item = CountyMerge::find($itemId);
+                    break;
+                case "state":
+                    $item = StateMerge::find($itemId);
+                    break;
+                default:
+                    $item = null;
+            }
+        }
+
+        return $item;
+    }
+
 
     public static function addRegulation(Request $request, $regLists) {
         $regArea = "";
@@ -298,103 +350,183 @@ class DatabaseHelper {
         if (!$request->city)
             $request->city = -1;
 
-        switch ($request->type) {
-            case 'State':
-                $submission = PendingStateMerge::where('id', $request->id)->withTrashed()->get()->first();
-                $submissionInfo = $submission->toArray();
-                $submission->forceDelete();
-                if($request->county > -1 && $request->city > -1){
-                    $submission = new PendingCityMerge($submissionInfo);
-                    $submission->cityID = $request->city;
-                }else if($request->county > -1){
-                    $submission = new PendingCountyMerge($submissionInfo);
-                    $submission->countyID = $request->county;
-                }else{
-                    $submission = new PendingStateMerge($submissionInfo);
-                    $submission->stateID = $request->state;
-                }
-                break;
-            case 'County':
-                $submission = PendingCountyMerge::where('id', $request->id)->withTrashed()->get()->first();
-                $submissionInfo = $submission->toArray();
-                $submission->forceDelete();
-                if($request->county == -1){
-                    $submission = new PendingStateMerge($submissionInfo);
-                    $submission->StateID = $request->State;
-                }else if($request->city > -1){
-                    $submission = new PendingCityMerge($submissionInfo);
-                    $submission->cityID = $request->city;
-                }else{
-                    $submission = new PendingCountyMerge($submissionInfo);
-                    $submission->countyID = $request->county;
-                }
-                break;
-            case 'City':
-                $submission = PendingCityMerge::where('id', $request->id)->withTrashed()->get()->first();
-                $submissionInfo = $submission->toArray();
-                $submission->forceDelete();
-                if($request->county == -1){
-                    $submission = new PendingStateMerge($submissionInfo);
-                    $submission->StateID = $request->State;
-                }else if($request->city == -1){
-                    $submission = new PendingCountyMerge($submissionInfo);
-                    $submission->countyID = $request->county;
-                }else{
-                    $submission = new PendingCityMerge($submissionInfo);
-                    $submission->cityID = $request->city;
-                }
-                break;
-            default:
-                throw new Exception('Issue updating submission, please contact an administrator.');
+        $submissionType = $request->submissionType;
+        $submissionState = $request->submissionState;
+        $itemId = $request->id;
+
+        $newLocationId = -1;
+        $newLocation = "";
+
+        if($request->city > -1){
+            $newLocationId = $request->city;
+            $newLocation = "city";
         }
+        elseif ($request->county > -1){
+            $newLocationId = $request->county;
+            $newLocation = "county";
+        }
+        else {
+            $newLocationId = $request->state;
+            $newLocation = "state";
+        }
+
+        $submission = self::moveReuseItemBetweenMergeTables($submissionType, $submissionState, $itemId, $newLocation, $newLocationId);
+
         $submission->allowedID = $request->allowed;
         $submission->sourceID = $request->source;
         $submission->destinationID = $request->destination;
 
-        $holdingVar = Links::where('linkText', $request->codes)->get();
-        if (count($holdingVar) > 0) {
-            $submission->codes = Links::where('linkText', $request->codes)->get()->first()->link_id;
-        } else {
-            $codes = new Links();
-            $codes->linkText = $request->codes;
-            $codes->save();
-            $submission->codes = $codes->link_id;
-        }
+        // Update all the links
+        self::updateReuseItemLinks($request, $submission);
 
-        $holdingVar = Links::where('linkText', $request->permit)->get();
-        if (count($holdingVar) > 0) {
-            $submission->permit = Links::where('linkText', $request->permit)->get()->first()->link_id;
-        } else {
-            $permit = new Links();
-            $permit->linkText = $request->permit;
-            $permit->save();
-            $submission->permit = $permit->link_id;
-        }
-
-        $holdingVar = Links::where('linkText', $request->incentives)->get();
-        if (count($holdingVar) > 0) {
-            $submission->incentives = Links::where('linkText', $request->incentives)->get()->first()->link_id;
-        } else {
-            $incentives = new Links();
-            $incentives->linkText = $request->incentives;
-            $incentives->save();
-            $submission->incentives = $incentives->link_id;
-        }
-
-        $holdingVar = Links::where('linkText', $request->moreInfo)->get();
-        if (count($holdingVar) > 0) {
-            $submission->moreInfo = Links::where('linkText', $request->moreInfo)->get()->first()->link_id;
-        } else {
-            $moreInfo = new Links();
-            $moreInfo->linkText = $request->moreInfo;
-            $moreInfo->save();
-            $submission->moreInfo = $moreInfo->link_id;
-        }
+        $submission->comments = $request->comments;
 
         try {
             $submission->save();
         } catch (Throwable $e) {
-            throw new Exception('Error saving updated submission to DB. Contact an administrator.');
+            throw $e;
         }
+
+        return $submission;
+    }
+
+
+    // We trust that the new location Id matches the $type (city / county / state)
+    public static function createNewReuseItemFromOtherItem($state, $type, $newItemLocationId, $oldItem) {
+
+        //Make the new item
+        if($state === "pending"){
+            switch ($type){
+                case "city":
+                    $item = new PendingCityMerge();
+                    $item->cityID = $newItemLocationId;
+                    break;
+                case "county":
+                    $item = new PendingCountyMerge();
+                    $item->countyID = $newItemLocationId;
+                    break;
+                case "state":
+                    $item = new PendingStateMerge();
+                    $item->stateID = $newItemLocationId;
+                    break;
+                default:
+                    $item = null;
+            }
+        } else {
+            switch ($type){
+                case "city":
+                    $item = new CityMerge();
+                    $item->cityID = $newItemLocationId;
+                    break;
+                case "county":
+                    $item = new CountyMerge();
+                    $item->countyID = $newItemLocationId;
+                    break;
+                case "state":
+                    $item = new StateMerge();
+                    $item->stateID = $newItemLocationId;
+                    break;
+                default:
+                    $item = null;
+            }
+        }
+
+        //Copy over all the old information
+        $item->sourceID = $oldItem->sourceID;
+        $item->destinationID = $oldItem->destinationID;
+        $item->allowedID = $oldItem->allowedID;
+        $item->codes = $oldItem->codes;
+        $item->permit = $oldItem->permit;
+        $item->incentives = $oldItem->incentives;
+        $item->moreInfo = $oldItem->moreInfo;
+        $item->user_id = $oldItem->user_id;
+        $item->comments = $oldItem->comments;
+
+        return $item;
+    }
+
+
+
+    //Returns the new item as a object
+    public static function moveReuseItemBetweenMergeTables($type, $state, $itemId, $locationToMoveItemTo, $newLocationId)
+    {
+        //Find the item
+        $oldItem = DatabaseHelper::getReuseItemByIdStateAndType($type, $state, $itemId);
+
+        //Make a new item in the right table
+        $item = DatabaseHelper::createNewReuseItemFromOtherItem($state, $locationToMoveItemTo, $newLocationId, $oldItem);
+
+        self::deleteItem($state, $oldItem);
+
+
+        return $item;
+    }
+
+    /**
+     * @param Request $request
+     * @param $submission
+     */
+    private static function updateReuseItemLinks(Request $request, $submission): void
+    {
+        $holdingVar = Links::where('linkText', $request->codes)->get();
+        if (count($holdingVar) > 0) {
+            $submission->codes = $holdingVar->first()->link_id;
+        } else if ($request->codes !== null) {
+            $codes = new Links();
+            $codes->linkText = $request->codes;
+            $codes->save();
+            $submission->codes = $codes->link_id;
+        } else {
+            $submission->codes = null;
+        }
+
+        $holdingVar = Links::where('linkText', $request->permit)->get();
+        if (count($holdingVar) > 0) {
+            $submission->permit = $holdingVar->first()->link_id;
+        } else if ($request->permit !== null) {
+            $codes = new Links();
+            $codes->linkText = $request->permit;
+            $codes->save();
+            $submission->permit = $codes->link_id;
+        } else {
+            $submission->permit = null;
+        }
+
+        $holdingVar = Links::where('linkText', $request->incentives)->get();
+        if (count($holdingVar) > 0) {
+            $submission->incentives = $holdingVar->first()->link_id;
+        } else if ($request->incentives !== null) {
+            $codes = new Links();
+            $codes->linkText = $request->incentives;
+            $codes->save();
+            $submission->incentives = $codes->link_id;
+        } else {
+            $submission->incentives = null;
+        }
+
+        $holdingVar = Links::where('linkText', $request->moreInfo)->get();
+        if (count($holdingVar) > 0) {
+            $submission->moreInfo = $holdingVar->first()->link_id;
+        } else if ($request->moreInfo !== null) {
+            $codes = new Links();
+            $codes->linkText = $request->moreInfo;
+            $codes->save();
+            $submission->moreInfo = $codes->link_id;
+        } else {
+            $submission->moreInfo = null;
+        }
+    }
+
+    /**
+     * @param $state
+     * @param $item
+     */
+    public static function deleteItem($state, $item): void
+    {
+        //Delete the old item
+        if ($state === "pending" || $state === "rejected")
+            $item->forceDelete();
+        else
+            $item->delete();
     }
 }

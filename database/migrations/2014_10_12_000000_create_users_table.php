@@ -32,6 +32,7 @@ class CreateUsersTable extends Migration
             $table->boolean('can_contact')->nullable();
             $table->biginteger('phoneNumber')->nullable();
             $table->string('countryCode')->nullable();
+            $table->boolean('is_admin')->default(false);
         });
     }
 
