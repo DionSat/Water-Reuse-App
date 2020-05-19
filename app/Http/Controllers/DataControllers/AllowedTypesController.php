@@ -58,8 +58,8 @@ class AllowedTypesController extends Controller
     }
 
     public function modify(Request $request) {
-        $node = ReuseNode::where("node_id", $request->node_id)->get()->first();
-        return view('database.modifyReuseNode', compact('node'));
+        $allowed = Allowed::where("allowed_id", $request->allowed_id)->get()->first();
+        return view('database.modifyAllowed', compact('allowed'));
     }
 
     public function modifyAllowedSubmit(Request $request) {

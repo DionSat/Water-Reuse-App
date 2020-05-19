@@ -6,7 +6,7 @@
             <a href="{{route("admin")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> Dashboard </a>
         </div>
         <h2 class="text-center"> Allowed Types </h2>
-        <table class="table w-75 mx-auto mt-4">
+        <table class="table w-50 mx-auto mt-4">
             <thead>
             <tr>
                 <th scope="col">Allowed Text</th>
