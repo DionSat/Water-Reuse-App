@@ -28,6 +28,7 @@ class CountyController extends Controller
         $county = new County();
         $county->countyName = $request->county;
         $county->fk_state = $request->state;
+        $county->is_approved = true;
         $county->save();
 
         return redirect()->route('countyView')->with(['alert' => 'success', 'alertMessage' => $county->countyName . ' has been added.']);

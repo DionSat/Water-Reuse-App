@@ -73,4 +73,39 @@ class StateMerge extends Model
         $time = new Carbon($this->updated_at);
         return $time->toDayDateTimeString();
     }
+
+    public function getLocationAsString() {
+        return $this->state->stateName;
+    }
+
+    public function getLocationType() {
+        return "state";
+    }
+
+    public function getStatus(){
+        if($this->table === "statemerge")
+            return "approved";
+        else
+            return $this->trashed() ? "rejected" : "pending";
+    }
+
+    public function getStatusAsString(){
+        return ucfirst($this->getStatus());
+    }
+
+    public function getStatusAsBadge(){
+        $status = $this->getStatus();
+        $badgeColor = "warning";
+
+        if($status === "rejected"){
+            $badgeColor = "danger";
+        }
+        elseif ($status === "approved"){
+            $badgeColor = "success";
+        }
+
+        return "<span class=\"badge badge-".$badgeColor."\"> ".$this->getStatusAsString()."</span>";
+    }
+
+
 }

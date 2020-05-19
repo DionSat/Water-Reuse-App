@@ -28,6 +28,7 @@ class CityController extends Controller
         $city = new City();
         $city->cityName = $request->city;
         $city->fk_county = $request->county;
+        $city->is_approved = true;
         $city->save();
 
         return redirect()->route('cityView')->with(['alert' => 'success', 'alertMessage' => $city->cityName . ' has been added.']);

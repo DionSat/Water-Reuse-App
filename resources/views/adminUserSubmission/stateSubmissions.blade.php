@@ -35,7 +35,7 @@
                                 <td> <h5>{!! $submission->allowed->getAllowedTextBadge() !!}</h5></td>
                                 <td> {{$submission->getTimeSubmittedAsString()}}</td>
                                 <td>
-                                    <a href="{{route('userStateSubmissionItem')."/".$submission->id}}" class="btn btn-primary"> View </a>
+                                    <a href="{{route('viewSubmission', ["type" => $submission->getLocationType(), "state" => $submission->getStatus(), "itemId" => $submission->id, "back" => url()->full()])}}" class="btn btn-primary"> View </a>
                                 </td>
                                 <td>
                                     <form method="POST" action="{{ route('stateDelete') }}">
