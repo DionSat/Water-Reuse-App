@@ -22,7 +22,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroup-sizing-default">New Text</span>
                                     </div>
-                                    <input type="text" name="newAllowedValue" class="form-control" aria-label="Default"
+                                    <input type="text" name="newValue" class="form-control" aria-label="Default"
                                            aria-describedby="inputGroup-sizing-default" value="{{$allowed->allowedText}}">
                                 </div>
                                 <input type="text" name="allowed_id" value="{{$allowed->allowed_id}}" hidden>

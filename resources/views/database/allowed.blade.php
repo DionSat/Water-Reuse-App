@@ -9,6 +9,7 @@
         <table class="table w-50 mx-auto mt-4">
             <thead>
             <tr>
+                <th scope="col">#</th>
                 <th scope="col">Allowed Text</th>
                 <th scope="col" class="text-center" colspan="2">Actions</th>
             </tr>
@@ -16,8 +17,8 @@
             <tbody>
             @foreach($types as $type)
                 <tr>
-                    <td>
-                        {{$type->allowedText}}
+                    <th scope="row">{{$loop->index+1}}</th>
+                    <td>{{$type->allowedText}}</td>
                     <td>
                         <form method="POST" action="{{ route('deleteAllowed') }}">
                             {{ csrf_field() }}
@@ -27,7 +28,7 @@
                         </form>
                     </td>
                     <td>
-                        <a href="{{route('modifyAllowed', ['allowedText' => $type->allowedText])}}" class="btn btn-primary"><i class="fas fa-edit" aria-hidden="true"></i> Modify </a>
+                        <a href="{{route('modifyAllowed', ['allowedText' => $type->allowedText, 'allowed_id' => $type->allowed_id])}}" class="btn btn-primary"><i class="fas fa-edit" aria-hidden="true"></i> Modify </a>
                     </td>
                 </tr>
             @endforeach

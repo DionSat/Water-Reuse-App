@@ -63,21 +63,18 @@ class AllowedTypesController extends Controller
     }
 
     public function modifyAllowedSubmit(Request $request) {
-        $node = ReuseNode::where("node_id", $request->node_id)->get()->first();
+        $allowed = Allowed::where("allowed_id", $request->allowed_id)->get()->first();
         if(empty($request->newValue))
-            return redirect()->route('modifyReuseNode')->with(['alert' => 'danger', 'alertMessage' => 'Please enter a source/destination/fixture name!']);
+            return redirect()->route('modifyAllowed')->with(['alert' => 'danger', 'alertMessage' => 'Please enter new allowed text!']);
 
-        $oldValue = $node->node_name;
+        $oldValue = $allowed->allowedText;
 
-        $node->node_name = $request->newValue;
-        $node->is_source = $request->boolean('is_source');
-        $node->is_destination = $request->boolean('is_destination');
-        $node->is_fixture = $request->boolean('is_fixture');
-        $node->save();
+        $allowed->allowedText = $request->newValue;
+        $allowed->save();
 
-        if($oldValue === $node->node_name)
-            return redirect()->route('reuseNodeView')->with(['alert' => 'success', 'alertMessage' => 'The node '.$node->node_name.' has been updated.']);
+        if($oldValue === $allowed->allowedText)
+            return redirect()->route('allowedView')->with(['alert' => 'success', 'alertMessage' => 'The node '.$allowed->allowedText.' has been updated.']);
         else
-            return redirect()->route('reuseNodeView')->with(['alert' => 'success', 'alertMessage' => $oldValue . ' has been changed to ' . $node->node_name . ' & values have been updated.']);
+            return redirect()->route('allowedView')->with(['alert' => 'success', 'alertMessage' => $oldValue . ' has been changed to ' . $allowed->allowedText . ' & values have been updated.']);
     }
 }
