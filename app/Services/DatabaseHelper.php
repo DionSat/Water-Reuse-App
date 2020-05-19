@@ -52,6 +52,7 @@ class DatabaseHelper {
             if(count($holdingVar) > 0){
                 $codesLink = Links::where('linkText', $regList['$codesLink'])->get()->first();
             }else{
+                $codesLink->name = $regList['$codesTitle'];
                 $codesLink->linkText = $regList['$codesLink'];
                 $codesLink->save();
             }
@@ -62,6 +63,7 @@ class DatabaseHelper {
                 $permitLink = Links::where('linkText', $regList['$permitLink'])->get()->first();
 
             }else{
+                $permitLink->name = $regList['$permitsTitle'];
                 $permitLink->linkText = $regList['$permitLink'];
                 $permitLink->save();
             }
@@ -71,6 +73,7 @@ class DatabaseHelper {
             if(count($holdingVar) > 0){
                 $incentivesLink = Links::where('linkText', $regList['$incentivesLink'])->get()->first();
             }else{
+                $incentivesLink->name = $regList['$incentivesTitle'];
                 $incentivesLink->linkText = $regList['$incentivesLink'];
                 $incentivesLink->save();
             }
@@ -81,6 +84,7 @@ class DatabaseHelper {
                 $moreInfoLink = Links::where('linkText', $regList['$moreInfoLink'])->get()->first();
 
             }else{
+                $moreInfoLink->name = $regList['$moreInfoTitle'];
                 $moreInfoLink->linkText = $regList['$moreInfoLink'];
                 $moreInfoLink->save();
             }
@@ -212,7 +216,7 @@ class DatabaseHelper {
                 }else if($request->city > -1){
                     $submission = new PendingCityMerge($submissionInfo);
                     $submission->cityID = $request->city;
-                }else{    
+                }else{
                     $submission = new PendingCountyMerge($submissionInfo);
                     $submission->countyID = $request->county;
                 }
