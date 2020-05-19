@@ -22,8 +22,6 @@ Route::get('/search/query', 'SearchController@handleSubmit')->name('search-submi
 
 
 
-
-
 //Registered User Routes
 Route::middleware('auth')->group(function () {
 
@@ -60,6 +58,8 @@ Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function 
     Route::post('/update', 'AdminController@updateUserAccess')->name('updateUser');
     Route::get('viewUser', 'AdminController@viewUser')->name('viewUser');
     Route::get('/viewEmail', 'AdminController@viewEmail')->name('viewEmail');
+    Route::get('/email/scheduled', 'AdminController@scheduledEmailView')->name('scheduledEmails');
+    Route::post('/email/scheduled', 'AdminController@scheduledEmailSubmit')->name('scheduledEmailsSubmit');
 
     //User submission Routes
     Route::get('/adminUserSubmissionView', 'AdminSubmissionController@all')->name('adminUserSubmissionView');

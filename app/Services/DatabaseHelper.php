@@ -14,12 +14,47 @@ use App\Links;
 use Exception;
 use Illuminate\Http\Request;
 use Throwable;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseHelper {
 
+    public static function getAllPendingSubmissions(){
+        $mergedSubmissions = PendingStateMerge::all();
+        $mergedSubmissions = $mergedSubmissions->merge(PendingCityMerge::all());
+        $mergedSubmissions = $mergedSubmissions->merge(PendingCountyMerge::all());
+
+        return $mergedSubmissions;
+    }
+
+    public static function getCountOfAllPendingSubmissions(){
+        $mergedSubmissionCount = DB::table('pendingcitymerge')->where('deleted_at', null)->count();
+        $mergedSubmissionCount += DB::table('pendingcountymerge')->where('deleted_at', null)->count();
+        $mergedSubmissionCount += DB::table('pendingstatemerge')->where('deleted_at', null)->count();
+
+        return $mergedSubmissionCount;
+    }
+
+    public static function getAllApprovedSubmissions(){
+        $mergedSubmissions = StateMerge::all();
+        $mergedSubmissions = $mergedSubmissions->merge(CityMerge::all());
+        $mergedSubmissions = $mergedSubmissions->merge(CountyMerge::all());
+
+        return $mergedSubmissions;
+    }
+
+    public static function getCountOfAllApprovedSubmissions(){
+        $mergedSubmissionCount = DB::table('citymerge')->count();
+        $mergedSubmissionCount += DB::table('countymerge')->count();
+        $mergedSubmissionCount += DB::table('statemerge')->count();
+
+        return $mergedSubmissionCount;
+    }
 
     public static function getAllSubmissionsForCurrentUser(){
         $userId = Auth::user()->id;
+
+
+        // NEED TO ADD THE with() CALLS FOR THE VARIOUS ATTRIBUTES TO REDUCE LOAD TIME
 
         $mergedSubmissions = PendingStateMerge::withTrashed()->where('user_id', $userId)->get();
         $mergedSubmissions = $mergedSubmissions->merge(PendingCityMerge::withTrashed()->where('user_id', $userId)->get());

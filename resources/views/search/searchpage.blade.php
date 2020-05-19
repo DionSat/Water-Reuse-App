@@ -8,7 +8,7 @@
                 <div class="col-md-4">
                     <div class="card text-center selection-card commercial border-dark initial-selection">
                         <div class="card-body">
-                            <i class="display-icon fas fa-industry"></i>
+                            <i class="display-icon fas fa-store"></i>
                             <h1> Commercial </h1>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                         <div class="mr-2">
                             <div class="card text-center selection-card commercial">
                                 <div class="card-body py-0 px-3">
-                                    <i class="display-icon-small fas fa-industry mt-2"></i>
+                                    <i class="display-icon-small fas fa-store mt-2"></i>
                                     <h5> Commercial </h5>
                                 </div>
                             </div>
