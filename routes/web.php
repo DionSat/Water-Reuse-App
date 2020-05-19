@@ -126,6 +126,13 @@ Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function 
         Route::post('/links/modify', 'LinkController@modifyLinkSubmit')->name('modifyLinkSubmit');
         Route::post('/links/status', 'LinkController@checkLinkStatus')->name('checkLinkStatus');
 
+        // Allowed Routes
+        Route::get('/allowedTypes', 'ReuseNodeController@allReuseNodes')->name('allowedView');
+        Route::get('/allowedTypes/add', 'ReuseNodeController@addReuseNode')->name('allowedAdd');
+        //Route::post('/allowedTypes/add', 'ReuseNodeController@addReuseNodeSubmit')->name('allowedAddSubmit');
+        //Route::post('/allowedTypes/delete', 'ReuseNodeController@deleteReuseNode')->name('deleteAllowed');
+        //Route::get('/allowedTypes/modify', 'ReuseNodeController@modify')->name('modifyAllowed');
+        //Route::post('/allowedTypes/modify', 'ReuseNodeController@modifyReuseNodeSubmit')->name('modifyAllowedSubmit');
     });
 });
 
