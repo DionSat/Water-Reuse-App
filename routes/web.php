@@ -53,6 +53,7 @@ Route::middleware('auth')->middleware('banned')->group(function () {
 Route::prefix('admin')->middleware('auth')->middleware('admin')->middleware('banned')->group(function () {
     Route::get('/', 'AdminController@getBasicAdminPage')->name('admin');
     Route::get('update', 'AdminController@getUsers')->name('getUsers');
+    Route::get('banList', 'AdminController@getBannedUsers')->name('banList');
     Route::get('update/search', 'AdminController@searchUsers')->name('searchUsers');
     //Route::get('/database', 'DatabaseController@getDatabasePage')->name('database');
     Route::post('/update', 'AdminController@updateUserAccess')->name('updateUser');

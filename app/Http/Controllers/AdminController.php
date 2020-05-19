@@ -118,6 +118,18 @@ class AdminController extends Controller
             return view("admin.adminUpdate", compact('allUsers', 'userListHome'));
     }
 
+    public function getBannedUsers()
+    {
+        $users = User::where("is_banned", true)->orderBy('id')->paginate(10);
+        $user = Auth::user();
+        $userListHome = true;
+
+        if ($user->is_admin === false)
+            abort(404);
+        else
+            return view("admin.banList", compact('users', 'userListHome'));
+    }
+
     public function searchUsers(Request $request)
     {
         $searchInput = $request->search;
@@ -168,15 +180,16 @@ class AdminController extends Controller
         $userToModify = User::find($request->userId);
         if ($userToModify->is_banned === false) {
             $userToModify->is_banned = true;
+            $userToModify->is_admin = false;
         } else {
             $userToModify->is_banned = false;
         }
         $userToModify->save();
 
-        if ($updated === true)
+        if ($userToModify->is_banned)
             return redirect()->back()->with('status', 'User has been banned.');
         else
-            return redirect()->back()->with('nothing', 'No update');
+            return redirect()->back()->with('status', 'User has been updated.');
     }
 
     public function viewUser(Request $req){

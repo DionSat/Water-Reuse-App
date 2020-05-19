@@ -30,7 +30,7 @@
                                         <button type="submit" class="btn btn-primary" style="width: 50px;height: 38px;font-size:1.3em;margin-bottom: 2px;text-align: center;padding: 2px 4px 6px 4px;">Go</button>
                                     </form>
                                     @if (!$userListHome)
-                                        <button class="btn btn-primary" style="width: 50px;height: 38px;font-size:1.0em;margin-top:2px;margin-bottom: 4px;margin-left:2px;text-align: center;padding: 2px 4px 6px 4px;" onclick="window.location='{{ route('getUsers') }}'">Clear</button>
+                                        <button class="btn btn-primary" style="width: 50px;height: 38px;font-size:1.0em;margin-top:2px;margin-bottom: 4px;margin-left:2px;text-align: center;padding: 2px 4px 6px 4px;" onclick="window.location='{{ route('banlist') }}'">Clear</button>
                                     @endif
                                 </div>
                             </center>
@@ -41,13 +41,11 @@
                                         <th scope="col">Name</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Contact</th>
-                                        <th scope="col">Admin</th>
-                                        <th scope="col">Toggle Admin</th>
                                         <th scope="col">Ban User</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($allUsers as $user)
+                                    @foreach($users as $user)
                                             <!--13 is tha ascii value for return and in php its "\r"-->
                                             <tr data-toggle="tooltip" data-placement="bottom" title="Company: {{$user->company}} &#13Job Title: {{$user->jobTitle}} &#13City: {{$user->city}} &#13State: {{$user->state}}">
                                             <th scope="row">{{$user->id}}</th>
@@ -63,23 +61,6 @@
                                                 </span>
                                             </td>
                                             <td>
-                                                <span style="font-size: 1em; color: red;">
-                                                @if($user->is_admin === false)<i class="fas fa-times" ></i>@endif
-                                                </span>
-                                                <span style="font-size: 1em; color: green;">
-                                                @if($user->is_admin === true) <i class="fas fa-check"></i> @endif
-                                                </span>
-                                            </td>
-                                            <td>
-                                                <form action={{ route('updateUser') }} method="POST">
-                                                    {{ csrf_field() }}
-                                                    <input type="number" name="userId" style="display: none;" value={{$user->id}}>
-                                                    <button type="submit" class="btn btn-primary">
-                                                        {{ __('Toggle Admin') }}
-                                                    </button>
-                                                </form>
-                                            </td>
-                                            <td>
                                                 <form action={{ route('toggleBanUser') }} method="POST">
                                                     {{ csrf_field() }}
                                                     <input type="number" name="userId" style="display: none;" value={{$user->id}}>
@@ -93,7 +74,7 @@
                                     </tbody>
                                 </table>
                                 <div class="text-center">
-                                    {{ $allUsers->links() }}
+                                    {{ $users->links() }}
                                     
                                 </div>
                         </div>
@@ -127,7 +108,7 @@
                 }else{
                     var resNum = 0;
                     $('.userListItem').attr('hidden', true);
-                    <?php foreach ($allUsers as $user):?>
+                    <?php foreach ($users as $user):?>
                     if("{{$user->name}}".toLowerCase().search($('#searchBox').val()) > -1 || "{{$user->email}}".toLowerCase().search($('#searchBox').val()) > -1){
                         $('#{{$user->id}}').removeAttr('hidden');
                         resNum +=1;
