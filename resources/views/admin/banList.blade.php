@@ -23,14 +23,13 @@
                             @endif
                                 Search Current Page: <input type="text" id="search" style="max-width: 150px;height: 35px;margin-top: 3px;margin-right:30px;">
                                 <div style="float: right;">
-                                    <form action={{route('searchUsers')}} method="GET" style="display: inline-block;font-size: 1.0em;float: left;margin-top: 2px">
+                                    <form action={{route('searchUsers', ["type" => "banList"])}} method="GET" style="display: inline-block;font-size: 1.0em;float: left;margin-top: 2px">
                                         {{ csrf_field() }}
                                         Search Database: <input type="text" id="searchDB" name="search" style="max-width: 150px;height: 35px;" >
-                                        <input type="hidden" name="type" value="normal">
                                         <button type="submit" class="btn btn-primary" style="width: 50px;height: 38px;font-size:1.3em;margin-bottom: 2px;text-align: center;padding: 2px 4px 6px 4px;">Go</button>
                                     </form>
                                     @if (!$userListHome)
-                                        <button class="btn btn-primary" style="width: 50px;height: 38px;font-size:1.0em;margin-top:2px;margin-bottom: 4px;margin-left:2px;text-align: center;padding: 2px 4px 6px 4px;" onclick="window.location='{{ route('banlist') }}'">Clear</button>
+                                        <button class="btn btn-primary" style="width: 50px;height: 38px;font-size:1.0em;margin-top:2px;margin-bottom: 4px;margin-left:2px;text-align: center;padding: 2px 4px 6px 4px;" onclick="window.location='{{ route('banList') }}'">Clear</button>
                                     @endif
                                 </div>
                             </center>
@@ -40,8 +39,7 @@
                                         <th scope="col">#</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Email</th>
-                                        <th scope="col">Contact</th>
-                                        <th scope="col">Ban User</th>
+                                        <th scope="col">Unban User</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -53,19 +51,11 @@
                                             </td>
                                             <td>{{$user->email}}</td>
                                             <td>
-                                                <span style="font-size: 1em; color: red;">
-                                                @if($user->can_contact === false)<i class="fas fa-times"></i>@endif
-                                                </span>
-                                                <span style="font-size: 1em; color: green;">
-                                                @if($user->can_contact === true) <i class="fas fa-check"></i> @endif
-                                                </span>
-                                            </td>
-                                            <td>
                                                 <form action={{ route('toggleBanUser') }} method="POST">
                                                     {{ csrf_field() }}
                                                     <input type="number" name="userId" style="display: none;" value={{$user->id}}>
                                                     <button type="submit" class="btn btn-primary">
-                                                        Ban User
+                                                        Unban
                                                     </button>
                                                 </form>
                                             </td>
