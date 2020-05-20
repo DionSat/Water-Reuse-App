@@ -11,10 +11,12 @@ class CheckBanned
     //Handle the incoming request, check if the current user is banned
     public function handle($request, Closure $next) {
         //Check if a user is authenticated
-        $User = Auth::user();
-        if(Auth::check() == true && !$User->is_banned)
+        $user = Auth::user();
+        if($user && $user->is_banned === false)
             return $next($request);
-        else{
+        elseif(!$user){
+            abort(401, "Please log in to view this page.");
+        } else {
         	Auth::logout();
             abort(401, 'Unauthorized action. Your account has been disabled.');
         }
