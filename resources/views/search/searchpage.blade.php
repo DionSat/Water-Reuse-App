@@ -8,7 +8,7 @@
                 <div class="col-md-4">
                     <div class="card text-center selection-card commercial border-dark initial-selection">
                         <div class="card-body">
-                            <img class="display-icon" src="{{url('/img/commercial-icon.png')}}" alt="Commercial Image"/>
+                            <img class="display-icon" src="{{url('/img/commercial-icon.png')}}" alt="Commercial Icon"/>
                             <h1> Commercial </h1>
                         </div>
                     </div>
@@ -16,7 +16,7 @@
                 <div class="col-md-4 mt-3 mt-md-0">
                     <div class="card text-center selection-card residential border-dark initial-selection">
                         <div class="card-body">
-                            <img class="display-icon" src="{{url('/img/residential-icon.png')}}" alt="Commercial Image"/>
+                            <img class="display-icon" src="{{url('/img/residential-icon.png')}}" alt="Residential Icon"/>
                             <h1> Residential </h1>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                         <div class="mr-2">
                             <div class="card text-center selection-card commercial">
                                 <div class="card-body py-0 px-3">
-                                    <img class="display-icon-small mt-2" src="{{url('/img/commercial-icon.png')}}" alt="Commercial Image"/>
+                                    <img class="display-icon-small mt-2" src="{{url('/img/commercial-icon.png')}}" alt="Commercial Icon"/>
                                     <h5> Commercial </h5>
                                 </div>
                             </div>
@@ -38,7 +38,7 @@
                         <div class="">
                             <div class="card text-center selection-card residential">
                                 <div class="card-body py-0 px-3">
-                                    <img class="display-icon-small mt-2" src="{{url('/img/residential-icon.png')}}" alt="Commercial Image"/>
+                                    <img class="display-icon-small mt-2" src="{{url('/img/residential-icon.png')}}" alt="Residential Icon"/>
                                     <h5> Residential </h5>
                                 </div>
                             </div>
