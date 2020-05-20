@@ -11,7 +11,7 @@
                     <tbody>
                     <tr>
                         <th scope="row">Name</th>
-                        <td>{{$user->name}}</td>
+                        <td>{{$user->name}} @if ($user->is_banned)<span class="badge badge-danger">Banned</span>@endif</td>
                     </tr>
                     <tr>
                         <th scope="row">Email</th>

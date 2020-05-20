@@ -23,7 +23,7 @@ Route::get('/search/query', 'SearchController@handleSubmit')->name('search-submi
 
 
 //Registered User Routes
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->middleware('banned')->group(function () {
 
     // User account welcome/overview page
     Route::get('/overview', 'HomeController@overview')->name('overview');
@@ -50,12 +50,14 @@ Route::middleware('auth')->group(function () {
 });
 
 //Admin Routes
-Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function () {
+Route::prefix('admin')->middleware('auth')->middleware('admin')->middleware('banned')->group(function () {
     Route::get('/', 'AdminController@getBasicAdminPage')->name('admin');
     Route::get('update', 'AdminController@getUsers')->name('getUsers');
-    Route::get('update/search', 'AdminController@searchUsers')->name('searchUsers');
+    Route::get('banList', 'AdminController@getBannedUsers')->name('banList');
+    Route::get('{type?}/search', 'AdminController@searchUsers')->name('searchUsers');
     //Route::get('/database', 'DatabaseController@getDatabasePage')->name('database');
     Route::post('/update', 'AdminController@updateUserAccess')->name('updateUser');
+    Route::post('/banUser', 'AdminController@toggleBanUser')->name('toggleBanUser');
     Route::get('viewUser', 'AdminController@viewUser')->name('viewUser');
     Route::get('/viewEmail', 'AdminController@viewEmail')->name('viewEmail');
     Route::get('/email/scheduled', 'AdminController@scheduledEmailView')->name('scheduledEmails');
