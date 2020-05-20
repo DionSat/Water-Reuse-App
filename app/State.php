@@ -28,6 +28,10 @@ class State extends Model
         'stateName'
     ];
 
+    protected $casts = [
+        'is_approved' => 'boolean',
+    ];
+
     public function counties()
     {
         return $this->hasMany('county');

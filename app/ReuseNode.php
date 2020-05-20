@@ -28,6 +28,12 @@ class ReuseNode extends Model
         'node_name', 'is_source', 'is_destination', 'is_fixture'
     ];
 
+    protected $casts = [
+        'is_source' => 'boolean',
+        'is_destination' => 'boolean',
+        'is_fixture' => 'boolean',
+    ];
+
     public function stateMerge()
     {
         return $this->hasMany('StateMerge');

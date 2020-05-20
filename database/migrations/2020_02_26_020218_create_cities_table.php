@@ -20,6 +20,8 @@ class CreateCitiesTable extends Migration
             $table->unsignedBigInteger('fk_county');
 
             $table->foreign('fk_county')->references('county_id')->on('counties');
+
+            $table->unique(['fk_county', 'cityName']);
         });
     }
 

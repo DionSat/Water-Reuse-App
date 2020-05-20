@@ -34,7 +34,7 @@
                             <td> <h5>{!! $city->allowed->getAllowedTextBadge() !!}</h5></td>
                             <td> {{$city->getTimeSubmittedAsString()}}</td>
                             <td>
-                                <a href="{{route('userCitySubmissionItem')."/".$city->id}}" class="btn btn-primary"> View </a>
+                                <a href="{{route('viewSubmission', ["type" => $city->getLocationType(), "state" => $city->getStatus(), "itemId" => $city->id, "back" => url()->full()])}}" class="btn btn-primary"> View </a>
                             </td>
                             <td>
                                 <form method="POST" action="{{ route('cityDelete') }}">

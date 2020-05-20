@@ -18,31 +18,24 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/info', 'HomeController@getInfo')->name('info');
 Route::get('/search', 'SearchController@mainPage')->name('search');
-Route::post('/search', 'SearchController@handleSubmit')->name('search-submit');
-
-
+Route::get('/search/query', 'SearchController@handleSubmit')->name('search-submit');
 
 
 
 //Registered User Routes
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->middleware('banned')->group(function () {
 
     // User account welcome/overview page
     Route::get('/overview', 'HomeController@overview')->name('overview');
 
-    //submission routes for each indiviual user
-    Route::get('/submissions', 'UserSubmissionController@view')->name('submission');
-    Route::get('/submissions/citySubmissionItem/{itemId?}', 'UserSubmissionController@pendingCity')->name('citySubmission');
-    Route::get('/submissions/stateSubmissionItem/{itemId?}', 'UserSubmissionController@pendingState')->name('stateSubmission');
-    Route::get('/submissions/countySubmissionItem/{itemId?}', 'UserSubmissionController@pendingCounty')->name('countySubmission');
+    //submission routes for each individual user
+    Route::get('/submissions', 'UserSubmissionController@userSubmissionListPage')->name('submission');
+    Route::get('/submission/view/{type?}/{state?}/{itemId?}', 'UserSubmissionController@viewSubmission')->name("viewSubmission");
 
-    //Approved submissions
-    Route::get('/submissions/cityApprovedItem/{itemId?}', 'UserSubmissionController@city')->name('cityApprove');
-    Route::get('/submissions/stateApprovedItem/{itemId?}', 'UserSubmissionController@state')->name('stateApprove');
-    Route::get('/submissions/countyApprovedItem/{itemId?}', 'UserSubmissionController@county')->name('countyApprove');
-    Route::get('/submissions/submissionEdit/{type?}/{itemId?}', 'UserSubmissionController@submissionEdit')->name('submissionEdit');
-    Route::post('/submissions/submissionEdit/{type?}/{itemId?}', 'UserSubmissionController@submissionEditSubmit')->name('submissionEditUpdate');
-    Route::post('/submissions', 'UserSubmissionController@deleteUnapproved')->name('deleteUnapproved');
+    Route::get('/submission/edit/{type?}/{state?}/{itemId?}', 'UserSubmissionController@submissionEdit')->name('submissionEdit');
+    Route::post('/submission/edit/{type?}/{state?}/{itemId?}', 'UserSubmissionController@submissionEditSubmit')->name('submissionEditUpdate');
+
+    Route::post('/submissions/delete', 'UserSubmissionController@deleteItem')->name('deleteItem');
 
     Route::get('/account', 'AccountController@view')->name('account');
     Route::get('/accountUpdate', 'AccountController@getUpdatePage')->name('updatePage');
@@ -57,14 +50,18 @@ Route::middleware('auth')->group(function () {
 });
 
 //Admin Routes
-Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function () {
+Route::prefix('admin')->middleware('auth')->middleware('admin')->middleware('banned')->group(function () {
     Route::get('/', 'AdminController@getBasicAdminPage')->name('admin');
     Route::get('update', 'AdminController@getUsers')->name('getUsers');
-    Route::get('update/search', 'AdminController@searchUsers')->name('searchUsers');
+    Route::get('banList', 'AdminController@getBannedUsers')->name('banList');
+    Route::get('{type?}/search', 'AdminController@searchUsers')->name('searchUsers');
     //Route::get('/database', 'DatabaseController@getDatabasePage')->name('database');
     Route::post('/update', 'AdminController@updateUserAccess')->name('updateUser');
+    Route::post('/banUser', 'AdminController@toggleBanUser')->name('toggleBanUser');
     Route::get('viewUser', 'AdminController@viewUser')->name('viewUser');
     Route::get('/viewEmail', 'AdminController@viewEmail')->name('viewEmail');
+    Route::get('/email/scheduled', 'AdminController@scheduledEmailView')->name('scheduledEmails');
+    Route::post('/email/scheduled', 'AdminController@scheduledEmailSubmit')->name('scheduledEmailsSubmit');
 
     //User submission Routes
     Route::get('/adminUserSubmissionView', 'AdminSubmissionController@all')->name('adminUserSubmissionView');
@@ -131,6 +128,13 @@ Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function 
         Route::post('/links/modify', 'LinkController@modifyLinkSubmit')->name('modifyLinkSubmit');
         Route::post('/links/status', 'LinkController@checkLinkStatus')->name('checkLinkStatus');
 
+        // Allowed Routes
+        Route::get('/allowedTypes', 'AllowedTypesController@allAllowedTypes')->name('allowedView');
+        Route::get('/allowedTypes/add', 'AllowedTypesController@addAllowedType')->name('allowedAdd');
+        Route::post('/allowedTypes/add', 'AllowedTypesController@addAllowedTypeSubmit')->name('allowedAddSubmit');
+        Route::post('/allowedTypes/delete', 'AllowedTypesController@deleteAllowedType')->name('deleteAllowed');
+        Route::get('/allowedTypes/modify', 'AllowedTypesController@modify')->name('modifyAllowed');
+        Route::post('/allowedTypes/modify', 'AllowedTypesController@modifyAllowedSubmit')->name('modifyAllowedSubmit');
     });
 });
 

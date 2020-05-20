@@ -8,8 +8,9 @@
                     <div class="card-header">Submit a New Water Reuse Regulation</div>
                     <div class="card-body">
                         <form type="POST">
+                        <div id="selectRegion">
                             <div class="form-row">
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-6">
                                     <label for="inputState">State</label>
                                     <select id="inputState" class="form-control">
                                         <option value="choose" selected>Choose...</option>
@@ -18,7 +19,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-6">
                                     <label for="county">County (Optional)</label>
                                     <div class="text-center">
                                         <i id="countySpinner" class="fas fa-spinner fa-pulse mt-2 d-none"></i>
@@ -26,10 +27,6 @@
                                     <select class="form-control" id="county">
                                         <option id="chooseCounty" value="choose" disabled>Choose...</option>
                                     </select>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="inputZip">Zip (Optional)</label>
-                                    <input type="text" class="form-control" id="inputZip">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -42,6 +39,32 @@
                                 <i id="citySpinner"
                                    class="justify-content-center fas fa-spinner fa-pulse mt-2 d-none"></i>
                             </div>
+                        </div>
+                        <div id="addRegionDiv" style="display: none">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputStateEdit">State</label>
+                                    <input type="text" id="inputStateEdit" class="form-control">
+                                    </input>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="countyEdit">County (Optional)</label>
+                                    <input class="form-control" type="text" id="countyEdit">
+                                    </input>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                    <label for="cityEdit">City (Optional)</label>
+                                    <input type="text" class="form-control" id="cityEdit">
+                                    </input>
+                            </div>
+                        </div>
+
+                            <div class="form-group">
+                                <button type="button" class="btn btn-secondary" id="addRegion">+</button>
+                                <label id="addRegionLabel" for="addRegion"> Add A New State, County or City</label>
+                            </div>
+
                             <hr>
                             <div id="waterSourceDiv">
                                 <div class="form-row">
@@ -71,13 +94,11 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="codes0">Link to Codes (Optional)</label>
-                                        <input type="text" class="form-control" id="codes0" placeholder=""
-                                               >
+                                        <input type="text" class="form-control" id="codes0" placeholder="">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="permits0">Link to Permit (Optional)</label>
-                                        <input type="text" class="form-control" id="permits0" placeholder=""
-                                              >
+                                        <input type="text" class="form-control" id="permits0" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -117,6 +138,10 @@
 
         //holds the number of regulations a user wishes to submit, using 0 indexing
         numOfRegs = 0;
+        //Changes from false to true when the addRegion button is clicked
+        addRegionClicked = false;
+        //The error message returned from the back end
+        $errorMessage = "A API error occurred."
 
         function showCountySpinner() {
             $("#countySpinner").removeClass("d-none");
@@ -242,58 +267,90 @@
             $("#moreInfo" + numOfRegs).val($("#moreInfo" + (numOfRegs - 1)).val());
         });
         $('#submit').click(function () {
-            $state = $("#inputState").children("option:selected").text();
 
-            if ($state == "Choose...") {
-                Swal.fire({
-                    title: 'Error: No State Selected',
-                    text: 'You did not pick a State. You need to at least pick a State to add a regulation. Please try again.',
-                    icon: 'error',
-                    confirmButtonText: 'Ok'
-                });
-                return;
-            } else {
-                $county = $("#county").children("option:selected").text();
-                $city = $("#city").children("option:selected").text();
-                $regList = [];
-
-                for (i = 0; i <= numOfRegs; i++) {
-                    $codes = $("#codes" + i).val();
-                    $permits = $("#permits" + i).val();
-                    $incentives = $("#incentives" + i).val();
-                    $moreInfo = $("#moreInfo" + i).val();
-                    $codesTitleDomain = getDomain($codes);
-                    $permitsTitleDomain = getDomain($permits);
-                    $incentivesTitleDomain = getDomain($incentives);
-                    $moreInfoTitleDomain = getDomain($moreInfo);
-
-                    $newReg = {
-                        $state: $('#inputState').children("option:selected").text(),
-                        $county: $('#county').children("option:selected").text(),
-                        $city: $('#city').children("option:selected").text(),
-                        $stateId: $('#inputState').children("option:selected").val(),
-                        $countyId: $('#county').children("option:selected").val(),
-                        $cityId: $('#city').children("option:selected").val(),
-                        $sourceId: $('#waterSource' + i).children("option:selected").val(),
-                        $destinationId: $('#waterDestination' + i).children("option:selected").val(),
-                        $isPermitted: $("#allowed" + i).children("option:selected").val(),
-                        $codesLink: $codes,
-                        $codesTitle: $codesTitleDomain,
-                        $permitLink: $permits,
-                        $permitsTitle: $permitsTitleDomain,
-                        $incentivesLink: $incentives,
-                        $incentivesTitle: $incentivesTitleDomain,
-                        $moreInfoLink: $moreInfo,
-                        $moreInfoTitle: $moreInfoTitleDomain,
-                        $comments: $("#comments" + i).val()
-                    };
-                    $regList.push($newReg);
+            if(addRegionClicked){
+                $stateSelected = $("#inputStateEdit").val();
+                if (!$("#inputStateEdit").val()) {
+                    Swal.fire({
+                        title: 'Error: No State Selected',
+                        text: 'You did not pick a State. You need to at least pick a State to add a regulation. Please try again.',
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    });
+                    return;
                 }
+                else{
+                    $countySelected = $('#countyEdit').val();
+                    $citySelected =  $('#cityEdit').val();
+                    console.log("City: " + $citySelected)
+                    $stateIdSelected = -1;
+                    $countyIdSelected = -1;
+                    $cityIdSelected = -1;
+                }
+            }
+            else{
+                $stateSelected = $("#inputState").children("option:selected").text();
+                if ($stateSelected == "Choose...") {
+                    Swal.fire({
+                        title: 'Error: No State Selected',
+                        text: 'You did not pick a State. You need to at least pick a State to add a regulation. Please try again.',
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    });
+                    return;
+                }
+                else{
+                    $countySelected = $('#county').children("option:selected").text();
+                    $citySelected =  $('#city').children("option:selected").text();
+                    $stateIdSelected = $('#inputState').children("option:selected").val();
+                    $countyIdSelected = $('#county').children("option:selected").val();
+                    $cityIdSelected = $('#city').children("option:selected").val();
+                }
+            }
+            $county = $("#county").children("option:selected").text();
+            $city = $("#city").children("option:selected").text();
+            $regList = [];
 
-                axios.post("{{route('regSubmit')}}", {
-                    newRegList: JSON.stringify($regList)
-                })
-                    .then(function (response) {
+            for (i = 0; i <= numOfRegs; i++) {
+                $codes = $("#codes" + i).val();
+                $permits = $("#permits" + i).val();
+                $incentives = $("#incentives" + i).val();
+                $moreInfo = $("#moreInfo" + i).val();
+                $codesTitleDomain = getDomain($codes);
+                $permitsTitleDomain = getDomain($permits);
+                $incentivesTitleDomain = getDomain($incentives);
+                $moreInfoTitleDomain = getDomain($moreInfo);
+
+                $newReg = {
+                    $state: $stateSelected,
+                    $county: $countySelected,
+                    $city: $citySelected,
+                    $stateId: $stateIdSelected,
+                    $countyId: $countyIdSelected,
+                    $cityId: $cityIdSelected,
+                    $sourceId: $('#waterSource' + i).children("option:selected").val(),
+                    $destinationId: $('#waterDestination' + i).children("option:selected").val(),
+                    $isPermitted: $("#allowed" + i).children("option:selected").val(),
+                    $codesLink: $codes,
+                    $codesTitle: $codesTitleDomain,
+                    $permitLink: $permits,
+                    $permitsTitle: $permitsTitleDomain,
+                    $incentivesLink: $incentives,
+                    $incentivesTitle: $incentivesTitleDomain,
+                    $moreInfoLink: $moreInfo,
+                    $moreInfoTitle: $moreInfoTitleDomain,
+                    $comments: $("#comments" + i).val()
+                };
+                $regList.push($newReg);
+            }
+
+            axios.post("{{route('regSubmit')}}", {
+                newRegList: JSON.stringify($regList)
+            })
+                .then(function (response) {
+                    if(response.data != $errorMessage && response.data != "County Already Exists, or There Was an Error on Loading New Area" || "State Already Exists, or There Was an Error on Loading New Area" || "City Already Exists, or There Was an Error on Loading New Area")
+                    {
+                        console.log("'" + response.data + "'");
                         Swal.fire({
                             title: 'You Did It!',
                             text: 'Your regulation request for ' + response.data + ' has been submitted. Please give our admin time to approve your submission.',
@@ -302,19 +359,51 @@
                         }).then((result) => {
                             location.reload();
                         });
-
-                    })
-                    .catch(function (error) {
+                    }
+                    else{
                         Swal.fire({
                             title: 'Error: Request Failed To Submit',
-                            text: 'The regulation form you tried to turn in failed to submit. Please try again. If the problem continues, please contact an admin.',
+                            text: 'The regulation form you tried to turn in failed to submit with error ' + response.data + '. Please try again. If the problem continues, please contact an admin.',
                             icon: 'error',
                             confirmButtonText: 'Ok'
                         });
-                    });
-            }
-        })
+                    }
 
+                })
+                .catch(function (error) {
+                    Swal.fire({
+                        title: 'Error: Request Failed To Submit',
+                        text: 'The regulation form you tried to turn in failed to submit  with the error ' + error + '. Please try again. If the problem continues, please contact an admin.',
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    });
+                });
+        });
+
+        //If they want to add a new area, the other area fields are disabled
+        //and the edit fields are shown
+        $("#addRegion").click(function() {
+            if(!addRegionClicked)
+            {
+                $("#addRegion").html("-");
+                $("#addRegionLabel").html(" Choose From Existing States / Counties / Cities");
+                $("#addRegionDiv").css("display", "block");
+                $("#inputState").prop("disabled", true);
+                $("#county").prop("disabled", true);
+                $("#city").prop("disabled", true);
+                addRegionClicked = true;
+            }
+            else{
+                $("#addRegion").html("+");
+                $("#addRegionLabel").html(" Add A New State, County or City");
+                $("#addRegionDiv").css("display", "none");
+                $("#inputState").prop("disabled", false);
+                $("#county").prop("disabled", false);
+                $("#city").prop("disabled", false);
+                addRegionClicked = false;
+            }
+
+        });
 
         //for when the state changes
         $("#inputState").change(function () {

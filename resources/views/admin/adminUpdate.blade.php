@@ -23,7 +23,7 @@
                             @endif
                                 Search Current Page: <input type="text" id="search" style="max-width: 150px;height: 35px;margin-top: 3px;margin-right:30px;">
                                 <div style="float: right;">
-                                    <form action={{route('searchUsers')}} method="GET" style="display: inline-block;font-size: 1.0em;float: left;margin-top: 2px">
+                                    <form action={{route('searchUsers', ["type" => "update"])}} method="GET" style="display: inline-block;font-size: 1.0em;float: left;margin-top: 2px">
                                         {{ csrf_field() }}
                                         Search Database: <input type="text" id="searchDB" name="search" style="max-width: 150px;height: 35px;" >
                                         <button type="submit" class="btn btn-primary" style="width: 50px;height: 38px;font-size:1.3em;margin-bottom: 2px;text-align: center;padding: 2px 4px 6px 4px;">Go</button>
@@ -42,10 +42,11 @@
                                         <th scope="col">Contact</th>
                                         <th scope="col">Admin</th>
                                         <th scope="col">Toggle Admin</th>
+                                        <th scope="col">Ban User</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($allUsers as $user)
+                                    @foreach($users as $user)
                                             <!--13 is tha ascii value for return and in php its "\r"-->
                                             <tr data-toggle="tooltip" data-placement="bottom" title="Company: {{$user->company}} &#13Job Title: {{$user->jobTitle}} &#13City: {{$user->city}} &#13State: {{$user->state}}">
                                             <th scope="row">{{$user->id}}</th>
@@ -77,12 +78,21 @@
                                                     </button>
                                                 </form>
                                             </td>
+                                            <td>
+                                                <form action={{ route('toggleBanUser') }} method="POST">
+                                                    {{ csrf_field() }}
+                                                    <input type="number" name="userId" style="display: none;" value={{$user->id}}>
+                                                    <button type="submit" class="btn btn-primary">
+                                                        Ban User
+                                                    </button>
+                                                </form>
+                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
                                 </table>
                                 <div class="text-center">
-                                    {{ $allUsers->links() }}
+                                    {{ $users->links() }}
                                     
                                 </div>
                         </div>
@@ -116,7 +126,7 @@
                 }else{
                     var resNum = 0;
                     $('.userListItem').attr('hidden', true);
-                    <?php foreach ($allUsers as $user):?>
+                    <?php foreach ($users as $user):?>
                     if("{{$user->name}}".toLowerCase().search($('#searchBox').val()) > -1 || "{{$user->email}}".toLowerCase().search($('#searchBox').val()) > -1){
                         $('#{{$user->id}}').removeAttr('hidden');
                         resNum +=1;

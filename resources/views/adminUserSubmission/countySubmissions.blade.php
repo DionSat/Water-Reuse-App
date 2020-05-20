@@ -35,7 +35,7 @@
                             <td> <h5>{!! $county->allowed->getAllowedTextBadge() !!}</h5></td>
                             <td> {{$county->getTimeSubmittedAsString()}}</td>
                             <td>
-                                <a href="{{route('userCountySubmissionItem')."/".$county->id}}" class="btn btn-primary"> View </a>
+                                <a href="{{route('viewSubmission', ["type" => $county->getLocationType(), "state" => $county->getStatus(), "itemId" => $county->id, "back" => url()->full()])}}" class="btn btn-primary"> View </a>
                             </td>
                             <td>
                                 <form method="POST" action="{{ route('countyDelete') }}">

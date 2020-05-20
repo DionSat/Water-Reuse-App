@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ChangeStatesUnique extends Migration
+class AddIsBannedToUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class ChangeStatesUnique extends Migration
      */
     public function up()
     {
-        Schema::table('states', function (Blueprint $table) {
-            $table->unique('stateName');
+        Schema::table('users', function (Blueprint $table) {
+            $table->boolean('is_banned')->default(false);
         });
     }
 
@@ -25,8 +25,8 @@ class ChangeStatesUnique extends Migration
      */
     public function down()
     {
-        Schema::table('states', function (Blueprint $table) {
-            $table->dropUnique('stateName');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropIfExists(['is_banned']);
         });
     }
 }
