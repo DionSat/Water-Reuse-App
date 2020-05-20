@@ -27,6 +27,7 @@ class UserSubmissionController extends Controller
     }
 
     public function viewSubmission(Request $request){
+        $user = Auth::user();
         $type = $request->type;
         $state = $request->state;
         $itemId = $request->itemId;
