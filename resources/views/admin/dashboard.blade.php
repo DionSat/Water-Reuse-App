@@ -8,7 +8,7 @@
             <a class="nav-link active" onclick="loadStats()" id="svcBtn" data-toggle="tab" style="cursor: pointer;"> Services & Stats </a>
             <a class="nav-link" onclick="loadDBStats()" id="dbBtn" data-toggle="tab" style="cursor: pointer;"> Database </a>
         </nav>
-        </br>
+        <br>
 
         <div class="container" id="statsPage">
             <h3 class="mt-4">User Management</h3>
