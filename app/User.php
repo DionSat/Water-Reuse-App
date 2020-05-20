@@ -17,7 +17,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'email', 'password', 'streetAddress', 'address2', 'city',
-        'state', 'zipCode', 'jobTitle', 'company', 'reason', 'phoneNumber', 'can_contact', 'countryCode', 'is_admin',
+        'state', 'zipCode', 'jobTitle', 'company', 'reason', 'phoneNumber', 'countryCode',
 
     ];
 
@@ -37,6 +37,10 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'can_contact' => 'boolean',
+        'is_admin' => 'boolean',
+        'is_banned' => 'boolean',
+
     ];
 
     public function formatPhoneNumber()
