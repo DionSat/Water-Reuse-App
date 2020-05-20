@@ -3,7 +3,7 @@
 @section('body')
     <div class="container">
         <div class="row my-3">
-            <a href="{{route("admin")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> Dashboard </a>
+            <a href="{{url()->previous()}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> Back </a>
         </div>
         <h2 class="text-center"> Add Link </h2>
         <form method="POST" action="{{ route('linkAddSubmit') }}">

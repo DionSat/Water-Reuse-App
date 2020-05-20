@@ -3,14 +3,19 @@
 @section('body')
     <div class="container">
         <div class="row my-3 d-flex justify-content-between">
-            <a href="{{route("admin")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> Dashboard </a>
-
-            @if($page === "regular")
-                <a href="{{route("linkView", ["type" => "broken"])}}" class="btn btn-danger col-md-3"> <i class="fas fa-unlink"></i> View Broken Links <span class="badge badge-light">{{$brokenLinkCount}}</span></a>
-            @else
-                <a href="{{route("linkView")}}" class="btn btn-primary col-md-3"> <i class="fas fa-link"></i> View All Links </a>
-            @endif
-
+            <div class="col-md-2">
+                <a href="{{route("admin")}}" class="btn btn-primary d-block"> <i class="fas fa-arrow-circle-left"></i> Dashboard </a>
+            </div>
+            <div class="col-md-2">
+                <a href="{{route("linkAdd")}}" class="btn btn-success d-block"> <i class="fas fa-plus-square"></i> Add New </a>
+            </div>
+            <div class="col-md-4">
+                @if($page === "regular")
+                    <a href="{{route("linkView", ["type" => "broken"])}}" class="btn btn-danger btn-block"> <i class="fas fa-unlink"></i> View Broken Links <span class="badge badge-light">{{$brokenLinkCount}}</span></a>
+                @else
+                    <a href="{{route("linkView")}}" class="btn btn-primary btn-block"> <i class="fas fa-link"></i> View All Links </a>
+                @endif
+            </div>
         </div>
         <h2 class="text-center"> Links </h2>
         <div class="table-responsive text-align-center ">
