@@ -68,12 +68,14 @@ class AdminController extends Controller
         $linksAndOther[] = ["title" => "Links", "subheading" => "Water Regulation Links", "count" => $linksNumber, "manageData" => route("linkView"), "addData" => route("linkAdd")];
 
         $allUsers = User::all();
-        $allUserCount = User::all()->count();
+        $allUserCount = User::where("is_banned", false)->count();
+        $bannedUserCount = User::where("is_banned", true)->count();
         $user = Auth::user();
         $canEmailCount = User::where('can_contact', true)->count();
         $usersToEmail = ScheduledEmails::all()->count();
         $userAndEmail = [];
         $userAndEmail[] = ["title" => "All Users", "count" => $allUserCount, "view" => route("getUsers")];
+        $userAndEmail[] = ["title" => "Banned Users", "count" => $bannedUserCount, "view" => route("banList")];
         $userAndCanEmail[] = ["title" => "All User Emails", "count" => $canEmailCount, "view" => route("viewEmail")];
         $userAndCanEmail[] = ["title" => "Scheduled Emails", "count" => $usersToEmail, "view" => route("scheduledEmails")];
 
