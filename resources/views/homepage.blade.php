@@ -44,9 +44,16 @@
                             </a>
                             <hr class="mt-5">
                             <h5 class="lead mt-4">Contibute your knowledge by adding to our database.</h5>
-                            <a class="btn btn-primary btn-block mb-4" href="{{route("register")}}">
-                                Register To Contribute
-                            </a>
+                            @if(Auth::check())
+                                <a class="btn btn-primary btn-block mb-4" href="{{route("userSubmission")}}">
+                                    Submit a Regulation
+                                </a>
+                            @else
+                                <a class="btn btn-primary btn-block mb-4" href="{{route("register")}}">
+                                    Register To Contribute
+                                </a>
+                                @endif
+
                         </div>
                     </div>
                 </div>
