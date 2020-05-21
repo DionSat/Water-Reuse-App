@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card mt-3 mt-md-0">
+                <div class="card mt-3 mt-md-0 h-100">
                     <div class="card-body">
                         <div class="card-title text-center">
                             <h5 class="card-title"> Find Information + Contribute </h5>
@@ -105,9 +105,12 @@
         html, body {
             height: 100%;
         }
-        body {
-            background: url("img/bird-s-eye-view-of-ocean-during-daytime-2707756.jpg");
+
+        #app {
+            background: url("img/output1080.gif");
             background-size: cover;
+            height: 100%;
+            overflow: scroll;
         }
 
         .fa-ul>li {
