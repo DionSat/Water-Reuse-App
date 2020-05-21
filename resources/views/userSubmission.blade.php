@@ -289,7 +289,7 @@
                     $cityIdSelected = -1;
                 }
             }
-            else{
+            else {
                 $stateSelected = $("#inputState").children("option:selected").text();
                 if ($stateSelected == "Choose...") {
                     Swal.fire({
