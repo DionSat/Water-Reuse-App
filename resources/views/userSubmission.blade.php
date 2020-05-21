@@ -162,6 +162,16 @@
             $("#city").removeClass("d-none");
         }
 
+        function showStateSpinner() {
+            $("#inputState").removeClass("d-none");
+            $("#state").addClass("d-none");
+        }
+
+        function hideStateSpinner() {
+            $("#inputState").addClass("d-none");
+            $("#state").removeClass("d-none");
+        }
+
         // get the water sources
         function getWaterSources(idNum) {
             axios.get("{{route("my-sources-api")}}")
@@ -331,18 +341,14 @@
                 $("#addRegion").html("-");
                 $("#addRegionLabel").html(" Choose From Existing States / Counties / Cities");
                 $("#addRegionDiv").css("display", "block");
-                $("#inputState").prop("disabled", true);
-                $("#county").prop("disabled", true);
-                $("#city").prop("disabled", true);
+                $("#selectRegion").css("display", "none");
                 addRegionClicked = true;
             }
             else{
                 $("#addRegion").html("+");
                 $("#addRegionLabel").html(" Add A New State, County or City");
                 $("#addRegionDiv").css("display", "none");
-                $("#inputState").prop("disabled", false);
-                $("#county").prop("disabled", false);
-                $("#city").prop("disabled", false);
+                $("#selectRegion").css("display", "block");
                 addRegionClicked = false;
             }
 
