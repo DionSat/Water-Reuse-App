@@ -21,7 +21,7 @@ class CountyMerge extends Model
      * The attributes that are mass assignable.
      */
     protected $fillable = [
-        'countyID', 'sourceID', 'destinationID', 'allowedID', 'codes', 'permit', 'incentives', 'moreInfo', 'user_id', 'comments'
+        'countyID', 'sourceID', 'destinationID', 'allowedID', 'codes', 'permit', 'incentives', 'moreInfo', 'user_id', 'comments', 'location_type'
     ];
 
     public function user()
@@ -67,6 +67,16 @@ class CountyMerge extends Model
     public function moreInfoObj()
     {
         return $this->hasOne('App\Links', 'link_id','moreInfo');
+    }
+
+    public function setLocationAsResidential(){
+        $this->location_type = "residential";
+        return;
+    }
+
+    public function setLocationAsCommercial(){
+        $this->location_type = "commercial";
+        return;
     }
 
     public function getTimeSubmittedAsString(){

@@ -263,6 +263,7 @@ class DatabaseHelper {
             $mergeTable->destinationID = $regList['$destinationId'];
             $mergeTable->allowedID = $regList['$isPermitted'];
             $mergeTable->user_id = Auth::user()->id;
+            $mergeTable->location_type = $regList['$locationType'];
             $mergeTable->comments = $regList['$comments'];
             try {
                 if($mergeTable->save() == false)
@@ -305,6 +306,7 @@ class DatabaseHelper {
         $city->moreInfo = $pending->moreInfo;
         $city->user_id = $pending->user_id;
         $city->comments = $pending->comments;
+        $city->location_type = $pending->location_type;
 
 
         try {
@@ -341,6 +343,7 @@ class DatabaseHelper {
         $state->moreInfo = $pending->moreInfo;
         $state->user_id = $pending->user_id;
         $state->comments = $pending->comments;
+        $state->location_type = $pending->location_type;
 
         try {
             $state->save();
@@ -374,6 +377,7 @@ class DatabaseHelper {
         $county->moreInfo = $pending->moreInfo;
         $county->user_id = $pending->user_id;
         $county->comments = $pending->comments;
+        $county->location_type = $pending->location_type;
 
         try {
             $county->save();
