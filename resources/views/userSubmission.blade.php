@@ -278,7 +278,7 @@
                 }
             }
             else{
-                $stateSelected = $("#inputStateEdit").children("option:selected").text();
+                $stateSelected = $("#inputState").children("option:selected").text();
                 if ($stateSelected == "Choose...") {
                     Swal.fire({
                         title: 'Error: No State Selected',
@@ -291,7 +291,7 @@
                 else{
                     $countySelected = $('#county').children("option:selected").text();
                     $citySelected =  $('#city').children("option:selected").text();
-                    $stateIdSelected = $('#inputStateEdit').children("option:selected").val();
+                    $stateIdSelected = $('#inputState').children("option:selected").val();
                     $countyIdSelected = $('#county').children("option:selected").val();
                     $cityIdSelected = $('#city').children("option:selected").val();
                 }
