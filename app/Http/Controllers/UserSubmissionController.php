@@ -20,12 +20,14 @@ use Route;
 class UserSubmissionController extends Controller
 {
     public function userSubmissionListPage(){
+        $user = Auth::user();
         $submissions = DatabaseHelper::getAllSubmissionsForCurrentUser();
 
         return view('submission.userSubmissionOverview', compact('user', 'submissions'));
     }
 
     public function viewSubmission(Request $request){
+        $user = Auth::user();
         $type = $request->type;
         $state = $request->state;
         $itemId = $request->itemId;

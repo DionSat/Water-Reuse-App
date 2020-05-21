@@ -28,6 +28,9 @@ class City extends Model
         'cityName'
     ];
 
+    protected $casts = [
+        'is_approved' => 'boolean',
+    ];
     /**
      * One to one relationship for a county to a state. Each county has 1 state
      */

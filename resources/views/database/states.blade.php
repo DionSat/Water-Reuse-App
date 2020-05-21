@@ -2,8 +2,13 @@
 
 @section('body')
     <div class="container">
-        <div class="row my-3">
-            <a href="{{route("admin")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> Dashboard </a>
+        <div class="row my-3 d-flex justify-content-between">
+            <div class="col-md-2">
+                <a href="{{route("admin")}}" class="btn btn-primary d-block"> <i class="fas fa-arrow-circle-left"></i> Dashboard </a>
+            </div>
+            <div class="col-md-2">
+                <a href="{{route("stateAdd")}}" class="btn btn-success d-block"> <i class="fas fa-plus-square"></i> Add New </a>
+            </div>
         </div>
         <h2 class="text-center"> States </h2>
         <table class="table w-50 mx-auto mt-4">

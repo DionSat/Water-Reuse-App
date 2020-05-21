@@ -68,26 +68,29 @@ class AdminController extends Controller
         $linksAndOther[] = ["title" => "Links", "subheading" => "Water Regulation Links", "count" => $linksNumber, "manageData" => route("linkView"), "addData" => route("linkAdd")];
 
         $allUsers = User::all();
-        $allUserCount = User::all()->count();
+        $allUserCount = User::where("is_banned", false)->count();
+        $bannedUserCount = User::where("is_banned", true)->count();
         $user = Auth::user();
         $canEmailCount = User::where('can_contact', true)->count();
         $usersToEmail = ScheduledEmails::all()->count();
         $userAndEmail = [];
         $userAndEmail[] = ["title" => "All Users", "count" => $allUserCount, "view" => route("getUsers")];
+        $userAndEmail[] = ["title" => "Banned Users", "count" => $bannedUserCount, "view" => route("banList")];
         $userAndCanEmail[] = ["title" => "All User Emails", "count" => $canEmailCount, "view" => route("viewEmail")];
         $userAndCanEmail[] = ["title" => "Scheduled Emails", "count" => $usersToEmail, "view" => route("scheduledEmails")];
 
-        if ($user->is_admin === false)
-            abort(404);
-        else
-            return view("admin.dashboard", compact('userAndEmail', 'userAndCanEmail', 'allUsers', 'locationCards', 'sourcesAndDestinations', 'linksAndOther'));
+        $allowedNumber = DB::table('allowed')->count();
+        $allowedTypes = [];
+        $allowedTypes[] = ["title" => "Allowed?", "subheading" => "Allowed Levels (yes/no/...)", "count" => $allowedNumber, "manageData" => route("allowedView"), "addData" => route("allowedAdd")];
+
+
+        return view("admin.dashboard", compact('userAndEmail', 'userAndCanEmail', 'allUsers', 'locationCards', 'sourcesAndDestinations', 'linksAndOther', 'allowedTypes'));
     }
 
     public function viewEmail()
     {
         $allUsers = User::all();
         $all = User::orderBy('id')->paginate(6, ['*'], 'users');
-        $user = Auth::user();
         $canEmail = array();
         $canBeEmailed = User::where('can_contact', true)->orderBy('id')->paginate(6, ['*'], 'contactable');
 
@@ -95,23 +98,24 @@ class AdminController extends Controller
             if($users->can_contact === true)
                 array_push($canEmail, $users->email);
         }
-        if ($user->is_admin === false)
-            abort(404);
-        else
-            return view("admin.viewEmail", compact('canEmail', 'allUsers', 'all', 'canBeEmailed'));
+
+        return view("admin.viewEmail", compact('canEmail', 'allUsers', 'all', 'canBeEmailed'));
     }
 
     public function getUsers()
     {
-        $allUsers = User::orderBy('id')->paginate(10);//->sortBy("id");
-        $user = Auth::user();
+        $users = User::where("is_banned", false)->orderBy('id')->paginate(10);
         $userListHome = true;
 
+        return view("admin.adminUpdate", compact('users', 'userListHome'));
+    }
 
-        if ($user->is_admin === false)
-            abort(404);
-        else
-            return view("admin.adminUpdate", compact('allUsers', 'userListHome'));
+    public function getBannedUsers()
+    {
+        $users = User::where("is_banned", true)->orderBy('id')->paginate(10);
+        $userListHome = true;
+
+        return view("admin.banList", compact('users', 'userListHome'));
     }
 
     public function searchUsers(Request $request)
@@ -119,7 +123,7 @@ class AdminController extends Controller
         $searchInput = $request->search;
         $searchInput = '%'.$searchInput.'%';
 
-        $allUsers = User::where('name', 'ILIKE',$searchInput)
+        $users = User::where('name', 'ILIKE',$searchInput)
             ->orWhere('email','ILIKE',$searchInput)
             ->orWhere('streetAddress','ILIKE',$searchInput)
             ->orWhere('city','ILIKE',$searchInput)
@@ -129,15 +133,24 @@ class AdminController extends Controller
             ->orderBy('id')
             ->paginate(10);
 
-        //var_dump($users->toArray());
-        $user = Auth::user();
         $userListHome = false;
 
+        if($request->type == "banList"){
+            foreach ($users as $oneUser => $value) {
+                if (!$value->is_banned) {
+                    unset($users[$oneUser]);
+                }
+            }
+            return view("admin.banList", compact('users','userListHome'));
+        }else{
+            foreach ($users as $oneUser => $value) {
+                if ($value->is_banned) {
+                    unset($users[$oneUser]);
+                }
+            }
+        }
+        return view("admin.adminUpdate", compact('users','userListHome'));
 
-        if ($user->is_admin === false)
-            abort(404);
-        else
-            return view("admin.adminUpdate", compact('allUsers','userListHome'));
     }
 
     public function updateUserAccess(Request $request)
@@ -157,6 +170,23 @@ class AdminController extends Controller
             return redirect()->back()->with('status', 'Admins updated.');
         else
             return redirect()->back()->with('nothing', 'No update');
+    }
+
+    public function toggleBanUser(Request $request)
+    {
+        $userToModify = User::find($request->userId);
+        if ($userToModify->is_banned === false) {
+            $userToModify->is_banned = true;
+            $userToModify->is_admin = false;
+        } else {
+            $userToModify->is_banned = false;
+        }
+        $userToModify->save();
+
+        if ($userToModify->is_banned)
+            return redirect()->back()->with('status', $userToModify->name . ' has been banned.');
+        else
+            return redirect()->back()->with('status', $userToModify->name . ' has been updated.');
     }
 
     public function viewUser(Request $req){

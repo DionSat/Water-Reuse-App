@@ -37,7 +37,8 @@
                                 </div>
                             </div>
                             <div class="text-center">
-                                <i id="citySpinner" class="justify-content-center fas fa-spinner fa-pulse mt-2 d-none"></i>
+                                <i id="citySpinner"
+                                   class="justify-content-center fas fa-spinner fa-pulse mt-2 d-none"></i>
                             </div>
                         </div>
                         <div id="addRegionDiv" style="display: none">
@@ -144,6 +145,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
     <script>
+
         //holds the number of regulations a user wishes to submit, using 0 indexing
         numOfRegs = 0;
         //Changes from false to true when the addRegion button is clicked
@@ -234,11 +236,17 @@
         $('#addSource').click(function () {
             numOfRegs += 1;
             $source = '<div id=regNum' + numOfRegs + '><div class="form-row"><div class="form-group col-md-4"><label for="waterSource' + numOfRegs + '">Water Source</label><select id="waterSource' + numOfRegs + '" name="waterSource' + numOfRegs + '" class="form-control"><option value="choose" disabled>Choose...</option></select></div><div class="form-group col-md-4"><label for="waterDestination' + numOfRegs + '">Water Destination</label><select id="waterDestination' + numOfRegs + '" class="form-control"><option value="choose" disabled>Choose...</option></select></div><div class="form-group col-md-4"><label for="allowed' + numOfRegs + '">Is Water Reuse From This Source Allowed?</label><select id="allowed' + numOfRegs + '" class="form-control"><option value="choose" disabled>Choose...</option></select></div></div><hr><div class="form-row"><div class="form-group col-md-3"><label for="codes' + numOfRegs + '">Link to Codes (Optional)</label><input type="text" class="form-control" id="codes' + numOfRegs + '" placeholder=""></div><div class="form-group col-md-3"><label for="permits' + numOfRegs + '">Link to Permit (Optional)</label><input type="text" class="form-control" id="permits' + numOfRegs + '" placeholder=""></div><div class="form-group col-md-3"><label for="incentives' + numOfRegs + '">Link to Incentives (Optional)</label><input type="text" class="form-control" id="incentives' + numOfRegs + '" placeholder=""></div><div class="form-group col-md-3"><label for="moreInfo' + numOfRegs + '">Link to More Information (Optional)</label><input type="text" class="form-control" id="moreInfo' + numOfRegs + '" placeholder=""></div></div><div class="form-group"><label for="comments' + numOfRegs + '">Comments (Optional)</label><textarea class="form-control" id="comments' + numOfRegs + '" rows="3"></textarea><hr style="height:2px;border:none;color:#333;background-color:#333;"/></div></div>';
+
             $("#waterSourceDiv").append($source);
             getWaterSources(numOfRegs);
             getWaterDestinations(numOfRegs);
             getAllowed(numOfRegs);
             $("#codes" + numOfRegs).val($("#codes" + (numOfRegs - 1)).val());
+            var url = $("#codes" + numOfRegs).val();
+            domain = getDomain(url);
+            console.log(domain);
+            //$("#codeTitle" + numOfRegs).val($("#codeTitle" + (numOfRegs - 1)).val());
+            $("#permitTitle" + numOfRegs).val($("#permitTitle" + (numOfRegs - 1)).val());
             $("#permits" + numOfRegs).val($("#permits" + (numOfRegs - 1)).val());
             $("#incentives" + numOfRegs).val($("#incentives" + (numOfRegs - 1)).val());
             $("#moreInfo" + numOfRegs).val($("#moreInfo" + (numOfRegs - 1)).val());
@@ -300,6 +308,15 @@
             $regList = [];
 
             for (i = 0; i <= numOfRegs; i++) {
+                $codes = $("#codes" + i).val();
+                $permits = $("#permits" + i).val();
+                $incentives = $("#incentives" + i).val();
+                $moreInfo = $("#moreInfo" + i).val();
+                $codesTitleDomain = getDomain($codes);
+                $permitsTitleDomain = getDomain($permits);
+                $incentivesTitleDomain = getDomain($incentives);
+                $moreInfoTitleDomain = getDomain($moreInfo);
+
                 $newReg = {
                     $state: $stateSelected,
                     $county: $countySelected,
@@ -310,10 +327,14 @@
                     $sourceId: $('#waterSource' + i).children("option:selected").val(),
                     $destinationId: $('#waterDestination' + i).children("option:selected").val(),
                     $isPermitted: $("#allowed" + i).children("option:selected").val(),
-                    $codesLink: $("#codes" + i).val(),
-                    $permitLink: $("#permits" + i).val(),
-                    $incentivesLink: $("#incentives" + i).val(),
-                    $moreInfoLink: $("#moreInfo" + i).val(),
+                    $codesLink: $codes,
+                    $codesTitle: $codesTitleDomain,
+                    $permitLink: $permits,
+                    $permitsTitle: $permitsTitleDomain,
+                    $incentivesLink: $incentives,
+                    $incentivesTitle: $incentivesTitleDomain,
+                    $moreInfoLink: $moreInfo,
+                    $moreInfoTitle: $moreInfoTitleDomain,
                     $comments: $("#comments" + i).val()
                 };
                 $regList.push($newReg);
@@ -455,6 +476,15 @@
 
         });
 
+        function getDomain(url) {
+            var hostName = url;
+            var splitHost = hostName.split('.');
+            splitHost.pop();
+            if (splitHost.length > 1) {
+                splitHost.shift();
+            }
+            return splitHost.join();
+        }
 
     </script>
 @endpush
