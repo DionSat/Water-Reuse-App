@@ -114,7 +114,7 @@ class DatabaseHelper {
         $isNewState = false;
 
         //check to see if it's a new area
-        if($regLists[0]['$stateId'] == -1)
+        if($regLists[0]['$countyId'] == -1)
         {
             $isNew = true;
         }
@@ -124,29 +124,10 @@ class DatabaseHelper {
             //need to add a new area
             if($isNew)
             {
-                if($regLists[0]['$stateId'] == -1)
-                {
-                    $stateCheck =  State::where("stateName", $regLists[0]['$state'])->get()->first();
+                    $stateCheck =  State::where("state_id", $regLists[0]['$stateId'])->get()->first();
                     $countyCheck = County::where("countyName", $regLists[0]['$county'])->get()->first();
                     $cityCheck = City::where("cityName", $regLists[0]['$city'])->get()->first();
 
-                    if(!$stateCheck && $regLists[0]['$state'] != "")
-                    {
-                        $state = new State();
-                        $state->stateName = $regLists[0]['$state'];
-                        try {
-                            $state->save();
-                        } catch(Throwable $e) {
-                            return "State Already Exists, or There Was an Error on Loading New Area";
-                        }
-                            $mergeTable = new PendingStateMerge();
-                            $mergeTable->stateID= $state->state_id;
-                            $regArea = $regLists[0]['$state'];
-                            $regLists[0]['$stateId'] = $state->state_id;
-                            $isNewState = true;
-                            $isNew = false;
-                            $stateCheck = $state;
-                    }
                     if(!$countyCheck && $regLists[0]['$county'] != ""){
                         $county = new County();
                         $county->countyName = $regLists[0]['$county'];
@@ -164,7 +145,6 @@ class DatabaseHelper {
                             $regLists[0]['$countyId'] = $county->county_id;
                             $isNewCounty = true;
                             $isNewState = false;
-                            $isNew = false;
                             $countyCheck = $county;
                     }
                     if(!$cityCheck && $regLists[0]['$city'] != "")
@@ -186,9 +166,7 @@ class DatabaseHelper {
                         $isNewCity = true;
                         $isNewState = false;
                         $isNewCounty = false;
-                        $isNew = false;
                     }
-                }
             }
             //There is only a State
             else if($regLists[0]['$county'] == 'Choose...' || $isNewState || $regLists[0]['$county'] == '')
@@ -263,6 +241,7 @@ class DatabaseHelper {
             $mergeTable->destinationID = $regList['$destinationId'];
             $mergeTable->allowedID = $regList['$isPermitted'];
             $mergeTable->user_id = Auth::user()->id;
+            $mergeTable->location_type = $regList['$locationType'];
             $mergeTable->comments = $regList['$comments'];
             try {
                 if($mergeTable->save() == false)
@@ -305,6 +284,7 @@ class DatabaseHelper {
         $city->moreInfo = $pending->moreInfo;
         $city->user_id = $pending->user_id;
         $city->comments = $pending->comments;
+        $city->location_type = $pending->location_type;
 
 
         try {
@@ -341,6 +321,7 @@ class DatabaseHelper {
         $state->moreInfo = $pending->moreInfo;
         $state->user_id = $pending->user_id;
         $state->comments = $pending->comments;
+        $state->location_type = $pending->location_type;
 
         try {
             $state->save();
@@ -374,6 +355,7 @@ class DatabaseHelper {
         $county->moreInfo = $pending->moreInfo;
         $county->user_id = $pending->user_id;
         $county->comments = $pending->comments;
+        $county->location_type = $pending->location_type;
 
         try {
             $county->save();

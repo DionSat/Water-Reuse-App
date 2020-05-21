@@ -26,7 +26,7 @@ class AddIsBannedToUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropIfExists(['is_banned']);
+            $table->dropColumn('is_banned');
         });
     }
 }

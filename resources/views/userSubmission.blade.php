@@ -9,64 +9,69 @@
                     <div class="card-header">Location</div>
                     <div class="card-body">
                         <form type="POST">
-                        <div id="selectRegion">
-                            <div class="form-row">
-                                <div class="form-group col-md-4">
-                                    <label for="inputState">State</label>
-                                    <select id="inputState" class="form-control">
-                                        <option value="choose" selected>Choose...</option>
-                                        @foreach($states as $state)
-                                            <option value="{{$state->state_id}}">{{$state->stateName}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="county">County (Optional)</label>
-                                    <div class="text-center">
-                                        <i id="countySpinner" class="fas fa-spinner fa-pulse mt-2 d-none"></i>
-                                    </div>
-                                    <select class="form-control" id="county">
-                                        <option id="chooseCounty" value="choose" disabled>Choose...</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-4">
-                                        <label for="city">City (Optional)</label>
-                                        <select class="form-control" id="city">
-                                            <option id="chooseCity" value="choose" disabled>Choose...</option>
+                            <div id="selectRegion">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="inputState">State</label>
+                                        <select id="inputState" class="form-control">
+                                            <option value="choose" selected>Choose...</option>
+                                            @foreach($states as $state)
+                                                <option value="{{$state->state_id}}">{{$state->stateName}}</option>
+                                            @endforeach
                                         </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="county">County (Optional)</label>
+                                        <div class="text-center">
+                                            <i id="countySpinner" class="fas fa-spinner fa-pulse mt-2 d-none"></i>
+                                        </div>
+                                        <select class="form-control" id="county">
+                                            <option id="chooseCounty" value="choose" class="countyName" disabled selected>Select a state first...</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                            <label for="city">City (Optional)</label>
+                                            <select class="form-control" id="city">
+                                                <option id="chooseCity" value="choose" class="cityName" disabled selected>Select a county first...</option>
+                                            </select>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <i id="citySpinner" class="justify-content-center fas fa-spinner fa-pulse mt-2 d-none"></i>
                                 </div>
                             </div>
-                            <div class="text-center">
-                                <i id="citySpinner"
-                                   class="justify-content-center fas fa-spinner fa-pulse mt-2 d-none"></i>
-                            </div>
-                        </div>
-                        <div id="addRegionDiv" style="display: none">
-                            <div class="form-row">
-                                <div class="form-group col-md-4">
-                                    <label for="inputState">State</label>
-                                    <select id="inputStateEdit" class="form-control">
-                                        <option value="choose" selected>Choose...</option>
-                                        @foreach($states as $state)
-                                            <option value="{{$state->state_id}}">{{$state->stateName}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="countyEdit">County (Optional)</label>
-                                    <input class="form-control border border-danger" type="text" id="countyEdit">
-                                    </input>
-                                </div>
-                                <div class="form-group col-md-4">
-                                        <label for="cityEdit">City (Optional)</label>
-                                        <input type="text" class="form-control border border-danger" id="cityEdit">
-                                        </input>
+                            <div id="addRegionDiv" style="display: none">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="inputState">State</label>
+                                        <select id="inputStateEdit" class="form-control">
+                                            <option value="choose" selected>Choose...</option>
+                                            @foreach($states as $state)
+                                                <option value="{{$state->state_id}}">{{$state->stateName}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="countyEdit">County (Optional)</label>
+                                        <input class="form-control border border-danger" type="text" id="countyEdit">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                            <label for="cityEdit">City (Optional)</label>
+                                            <input type="text" class="form-control border border-danger" id="cityEdit">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                            <div class="form-group">
-                                <button type="button" class="btn btn-secondary" id="addRegion">+</button>
-                                <label id="addRegionLabel" for="addRegion"> Add A New State, County or City</label>
+                            <div class="form-group row">
+                                <div class="col-md-8 d-flex align-items-center">
+                                    <button type="button" class="btn btn-secondary" id="addRegion"> Add A New State, County or City </button>
+                                </div>
+                               <div class="col-md-4">
+                                   <label for="city">Location Type</label>
+                                   <select class="form-control" id="locationType" name="location_type">
+                                       <option value="residential">Residential</option>
+                                       <option value="commercial">Commercial</option>
+                                   </select>
+                               </div>
                             </div>
                         </form>
                     </div>
@@ -284,7 +289,7 @@
                     $cityIdSelected = -1;
                 }
             }
-            else{
+            else {
                 $stateSelected = $("#inputState").children("option:selected").text();
                 if ($stateSelected == "Choose...") {
                     Swal.fire({
@@ -306,6 +311,8 @@
             $county = $("#county").children("option:selected").text();
             $city = $("#city").children("option:selected").text();
             $regList = [];
+            $locationType = $('#locationType').children("option:selected").val();
+
 
             for (i = 0; i <= numOfRegs; i++) {
                 $codes = $("#codes" + i).val();
@@ -335,7 +342,8 @@
                     $incentivesTitle: $incentivesTitleDomain,
                     $moreInfoLink: $moreInfo,
                     $moreInfoTitle: $moreInfoTitleDomain,
-                    $comments: $("#comments" + i).val()
+                    $comments: $("#comments" + i).val(),
+                    $locationType: $locationType
                 };
                 $regList.push($newReg);
             }
@@ -381,15 +389,15 @@
         $("#addRegion").click(function() {
             if(!addRegionClicked)
             {
-                $("#addRegion").html("-");
-                $("#addRegionLabel").html(" Select an existing state, city, or county.");
+                $("#addRegion").html("Select an existing State, County or City");
+//                $("#addRegionLabel").html(" Select an existing state, city, or county.");
                 $("#addRegionDiv").show();
                 $("#selectRegion").hide();
                 addRegionClicked = true;
             }
             else{
-                $("#addRegion").html("+");
-                $("#addRegionLabel").html(" Add a new county or city not listed.");
+                $("#addRegion").html("Add A New State, County or City");
+//                $("#addRegionLabel").html(" Add a new county or city not listed.");
                 $("#addRegionDiv").hide();
                 $("#selectRegion").show();
                 addRegionClicked = false;
@@ -424,7 +432,7 @@
                     .then(function (response) {
                         hideCountySpinner();
                         //get each county, and set them as options
-                        $county = response.data.map(obj => ("<option class='countyName' value=" + obj.county_id + " >" + obj.countyName + "</option>"));
+                        $county = '<option id="chooseCounty" value="" disabled selected>Choose...</option>'+response.data.map(obj => ("<option class='countyName' value=" + obj.county_id + " >" + obj.countyName + "</option>"));
                         $("#county").append($county);
                     })
                     .catch(function (error) {
@@ -461,7 +469,7 @@
                     .then(function (response) {
                         hideCitySpinner();
                         //get each city, and set them as options
-                        $city = response.data.map(obj => ("<option class='cityName' value=" + obj.city_id + " >" + obj.cityName + "</option>"));
+                        $city = '<option id="chooseCounty" value="" disabled selected>Choose...</option>'+response.data.map(obj => ("<option class='cityName' value=" + obj.city_id + " >" + obj.cityName + "</option>"));
                         // console.log($city);
                         $("#city").append($city);
                     })

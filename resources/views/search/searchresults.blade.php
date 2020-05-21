@@ -7,7 +7,7 @@
         </a>
         <div class="card mb-3">
             <div class="card-body">
-                <h3 class="text-center"> Search Results </h3>
+                <h3 class="text-center"> {{$type}} Search Results </h3>
                 <div class="text-center">To narrow down results to just the reuse paths that you are intrested in, you can use the filter options below.</div>
                 <div class="mt-3 row d-flex justify-content-center">
                     <div class="form-group col-md-4 text-center">

@@ -32,7 +32,7 @@ class SearchController extends Controller
         $lowestLevel = "state";
 
         $stateRules = StateMerge::with(['state', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])
-                                        ->where("stateID", $request->state_id)->get();
+                                        ->where("stateID", $request->state_id)->where("location_type", $request->searchType)->get();
         if(isset($request->county_id)){
             $countyRules = CountyMerge::with(['county', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])
                 ->where("countyID", $request->county_id)->get();
@@ -50,7 +50,8 @@ class SearchController extends Controller
         // Get all the sources and destinations
         $sources = ReuseNode::sources()->sortBy("node_name");
         $destinations = ReuseNode::destinations()->sortBy("node_name");
+        $type = $request->searchType === "residential" ? "Residential" : "Commercial";
 
-        return view("search.searchresults", compact('stateRules', 'countyRules', 'cityRules', 'lowestLevel', 'city', 'county', 'state', 'sources', 'destinations'));
+        return view("search.searchresults", compact('stateRules', 'countyRules', 'cityRules', 'lowestLevel', 'city', 'county', 'state', 'sources', 'destinations', 'type'));
     }
 }
