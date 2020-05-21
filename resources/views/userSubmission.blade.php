@@ -121,9 +121,14 @@
                                 </div>
                                 <hr style="height:2px;border:none;color:#333;background-color:#333;"/>
                             </div>
-                            <div class="form-group" style="float: left;">
+                            <div class="form-row" style="float: left;">
                                 <button type="button" class="btn btn-secondary" id="addSource">+</button>
-                                <label for="addSource"> Add Another Regulation For This Area</label>
+                                <label for="addSource" style="margin: 8px">Add Another Regulation For This Area</label>
+
+                                <div id="removeSource">
+                                    <button type="button" class="btn btn-danger" id="removeSourceBtn">-</button>
+                                    <label for="removeSource" style="margin: 10px">Remove Last Regulation in List</label>
+                                </div>
                             </div>
                             <button type="button" class="btn btn-primary" id="submit" style="float: right;">Submit</button>
                         </form>
@@ -145,6 +150,8 @@
         addRegionClicked = false;
         //The error message returned from the back end
         $errorMessage = "A API error occurred."
+
+        $("#removeSource").hide();
 
         function showCountySpinner() {
             $("#countySpinner").removeClass("d-none");
@@ -226,7 +233,7 @@
 
         $('#addSource').click(function () {
             numOfRegs += 1;
-            $source = '<div class="form-row"><div class="form-group col-md-4"><label for="waterSource' + numOfRegs + '">Water Source</label><select id="waterSource' + numOfRegs + '" name="waterSource' + numOfRegs + '" class="form-control"><option value="choose" disabled>Choose...</option></select></div><div class="form-group col-md-4"><label for="waterDestination' + numOfRegs + '">Water Destination</label><select id="waterDestination' + numOfRegs + '" class="form-control"><option value="choose" disabled>Choose...</option></select></div><div class="form-group col-md-4"><label for="allowed' + numOfRegs + '">Is Water Reuse From This Source Allowed?</label><select id="allowed' + numOfRegs + '" class="form-control"><option value="choose" disabled>Choose...</option></select></div></div><hr><div class="form-row"><div class="form-group col-md-3"><label for="codes' + numOfRegs + '">Link to Codes (Optional)</label><input type="text" class="form-control" id="codes' + numOfRegs + '" placeholder=""></div><div class="form-group col-md-3"><label for="permits' + numOfRegs + '">Link to Permit (Optional)</label><input type="text" class="form-control" id="permits' + numOfRegs + '" placeholder=""></div><div class="form-group col-md-3"><label for="incentives' + numOfRegs + '">Link to Incentives (Optional)</label><input type="text" class="form-control" id="incentives' + numOfRegs + '" placeholder=""></div><div class="form-group col-md-3"><label for="moreInfo' + numOfRegs + '">Link to More Information (Optional)</label><input type="text" class="form-control" id="moreInfo' + numOfRegs + '" placeholder=""></div></div><div class="form-group"><label for="comments' + numOfRegs + '">Comments (Optional)</label><textarea class="form-control" id="comments' + numOfRegs + '" rows="3"></textarea><hr style="height:2px;border:none;color:#333;background-color:#333;"/></div>';
+            $source = '<div id=regNum' + numOfRegs + '><div class="form-row"><div class="form-group col-md-4"><label for="waterSource' + numOfRegs + '">Water Source</label><select id="waterSource' + numOfRegs + '" name="waterSource' + numOfRegs + '" class="form-control"><option value="choose" disabled>Choose...</option></select></div><div class="form-group col-md-4"><label for="waterDestination' + numOfRegs + '">Water Destination</label><select id="waterDestination' + numOfRegs + '" class="form-control"><option value="choose" disabled>Choose...</option></select></div><div class="form-group col-md-4"><label for="allowed' + numOfRegs + '">Is Water Reuse From This Source Allowed?</label><select id="allowed' + numOfRegs + '" class="form-control"><option value="choose" disabled>Choose...</option></select></div></div><hr><div class="form-row"><div class="form-group col-md-3"><label for="codes' + numOfRegs + '">Link to Codes (Optional)</label><input type="text" class="form-control" id="codes' + numOfRegs + '" placeholder=""></div><div class="form-group col-md-3"><label for="permits' + numOfRegs + '">Link to Permit (Optional)</label><input type="text" class="form-control" id="permits' + numOfRegs + '" placeholder=""></div><div class="form-group col-md-3"><label for="incentives' + numOfRegs + '">Link to Incentives (Optional)</label><input type="text" class="form-control" id="incentives' + numOfRegs + '" placeholder=""></div><div class="form-group col-md-3"><label for="moreInfo' + numOfRegs + '">Link to More Information (Optional)</label><input type="text" class="form-control" id="moreInfo' + numOfRegs + '" placeholder=""></div></div><div class="form-group"><label for="comments' + numOfRegs + '">Comments (Optional)</label><textarea class="form-control" id="comments' + numOfRegs + '" rows="3"></textarea><hr style="height:2px;border:none;color:#333;background-color:#333;"/></div></div>';
             $("#waterSourceDiv").append($source);
             getWaterSources(numOfRegs);
             getWaterDestinations(numOfRegs);
@@ -235,7 +242,19 @@
             $("#permits" + numOfRegs).val($("#permits" + (numOfRegs - 1)).val());
             $("#incentives" + numOfRegs).val($("#incentives" + (numOfRegs - 1)).val());
             $("#moreInfo" + numOfRegs).val($("#moreInfo" + (numOfRegs - 1)).val());
+
+            $("#removeSource").show();
         });
+
+        $('#removeSource').click(function () {
+            $("#regNum" + numOfRegs).remove();
+            numOfRegs -= 1;
+
+            if(numOfRegs < 1) {
+                $("#removeSource").hide();
+            }
+        });
+
         $('#submit').click(function () {
 
             if(addRegionClicked){
