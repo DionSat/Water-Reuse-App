@@ -258,8 +258,8 @@
         $('#submit').click(function () {
 
             if(addRegionClicked){
-                $stateSelected = $("#inputStateEdit").val();
-                if (!$("#inputStateEdit").val()) {
+                $stateSelected = $("#inputStateEdit").children("option:selected").text();
+                if ($stateSelected == "Choose...") {
                     Swal.fire({
                         title: 'Error: No State Selected',
                         text: 'You did not pick a State. You need to at least pick a State to add a regulation. Please try again.',
@@ -269,10 +269,9 @@
                     return;
                 }
                 else{
+                    $stateIdSelected = $('#inputStateEdit').children("option:selected").val();
                     $countySelected = $('#countyEdit').val();
                     $citySelected =  $('#cityEdit').val();
-                    console.log("City: " + $citySelected)
-                    $stateIdSelected = -1;
                     $countyIdSelected = -1;
                     $cityIdSelected = -1;
                 }
@@ -374,7 +373,6 @@
                 $("#selectRegion").show();
                 addRegionClicked = false;
             }
-
         });
 
         //for when the state changes
