@@ -339,16 +339,18 @@
             if(!addRegionClicked)
             {
                 $("#addRegion").html("-");
-                $("#addRegionLabel").html(" Choose From Existing States / Counties / Cities");
-                $("#addRegionDiv").css("display", "block");
-                $("#selectRegion").css("display", "none");
+                $("#addRegionLabel").html(" Enter a new county or city");
+                $("#addRegionDiv").show();
+                $("#selectRegion").hide();
+                $("#inputStateEdit").hide();
                 addRegionClicked = true;
             }
             else{
                 $("#addRegion").html("+");
                 $("#addRegionLabel").html(" Add A New State, County or City");
-                $("#addRegionDiv").css("display", "none");
-                $("#selectRegion").css("display", "block");
+                $("#addRegionDiv").hide();
+                $("#selectRegion").show();
+                $("#inputStateEdit").show();
                 addRegionClicked = false;
             }
 
