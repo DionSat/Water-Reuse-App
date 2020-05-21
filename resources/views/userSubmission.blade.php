@@ -43,18 +43,22 @@
                         <div id="addRegionDiv" style="display: none">
                             <div class="form-row">
                                 <div class="form-group col-md-4">
-                                    <label for="inputStateEdit">State</label>
-                                    <input type="text" id="inputStateEdit" class="form-control">
-                                    </input>
+                                    <label for="inputState">State</label>
+                                    <select id="inputStateEdit" class="form-control">
+                                        <option value="choose" selected>Choose...</option>
+                                        @foreach($states as $state)
+                                            <option value="{{$state->state_id}}">{{$state->stateName}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="countyEdit">County (Optional)</label>
-                                    <input class="form-control" type="text" id="countyEdit">
+                                    <input class="form-control border border-danger" type="text" id="countyEdit">
                                     </input>
                                 </div>
                                 <div class="form-group col-md-4">
                                         <label for="cityEdit">City (Optional)</label>
-                                        <input type="text" class="form-control" id="cityEdit">
+                                        <input type="text" class="form-control border border-danger" id="cityEdit">
                                         </input>
                                 </div>
                             </div>
@@ -255,7 +259,7 @@
                 }
             }
             else{
-                $stateSelected = $("#inputState").children("option:selected").text();
+                $stateSelected = $("#inputStateEdit").children("option:selected").text();
                 if ($stateSelected == "Choose...") {
                     Swal.fire({
                         title: 'Error: No State Selected',
@@ -268,7 +272,7 @@
                 else{
                     $countySelected = $('#county').children("option:selected").text();
                     $citySelected =  $('#city').children("option:selected").text();
-                    $stateIdSelected = $('#inputState').children("option:selected").val();
+                    $stateIdSelected = $('#inputStateEdit').children("option:selected").val();
                     $countyIdSelected = $('#county').children("option:selected").val();
                     $cityIdSelected = $('#city').children("option:selected").val();
                 }
@@ -339,18 +343,16 @@
             if(!addRegionClicked)
             {
                 $("#addRegion").html("-");
-                $("#addRegionLabel").html(" Enter a new county or city");
+                $("#addRegionLabel").html(" Select an existing state, city, or county.");
                 $("#addRegionDiv").show();
                 $("#selectRegion").hide();
-                $("#inputStateEdit").hide();
                 addRegionClicked = true;
             }
             else{
                 $("#addRegion").html("+");
-                $("#addRegionLabel").html(" Add A New State, County or City");
+                $("#addRegionLabel").html(" Add a new county or city not listed.");
                 $("#addRegionDiv").hide();
                 $("#selectRegion").show();
-                $("#inputStateEdit").show();
                 addRegionClicked = false;
             }
 
