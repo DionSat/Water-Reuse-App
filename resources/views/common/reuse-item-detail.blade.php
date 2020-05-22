@@ -1,5 +1,9 @@
 <div class="card mx-auto mt-3 shadow">
     <div class="card-body text-center">
+        <div class="mx-3 text-center">
+            <h3>Type: {{$item->location_type}}</h3>
+        </div>
+        <hr>
         <div class="d-flex flex-row justify-content-between mb-3 mx-3">
             <div class="p-2 d-block">
                 <h3>City</h3>

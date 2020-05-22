@@ -8,26 +8,29 @@
         <h2 class="text-center my-3"> Reuse Item Detail View </h2>
         <div class="row justify-content-center">
             <div class="col-md-8">
-                @if(($item->getStatus() != "approved" && $item->user_id === Auth::user()->id) || Auth::user()->is_admin)
-                    <div class="my-3 row d-flex justify-content-between">
-                        <span class="text-center col-md-4">
-                            <a href="{{route('submissionEdit', ["type" => $item->getLocationType(), "state" => $item->getStatus(), "itemId" => $item->id, "back" => url()->full(), "previousBack" => $backUrl])}}" class="btn btn-primary btn-block"> Edit </a>
-                        </span>
-                        <span class="text-center col-md-4">
-                        <button class="btn btn-danger btn-block" data-toggle="modal" data-target="#exampleModal" type="button">Delete</button>
-                        </span>
-                    </div>
-                @else
-                    <div class="text-center mt-5 text-center">
-                        <i class="fas fa-lock mx-auto"></i> Approved submissions cannot be edited or deleted.
-                    </div>
-                @endif
+                @auth
+                    @if(($item->getStatus() != "approved" && $item->user_id === Auth::user()->id) || Auth::user()->is_admin)
+                        <div class="my-3 row d-flex justify-content-between">
+                            <span class="text-center col-md-4">
+                                <a href="{{route('submissionEdit', ["type" => $item->getLocationType(), "state" => $item->getStatus(), "itemId" => $item->id, "back" => url()->full(), "previousBack" => $backUrl])}}" class="btn btn-primary btn-block"> Edit </a>
+                            </span>
+                            <span class="text-center col-md-4">
+                            <button class="btn btn-danger btn-block" data-toggle="modal" data-target="#exampleModal" type="button">Delete</button>
+                            </span>
+                        </div>
+                    @else
+                        <div class="text-center mt-5 text-center">
+                            <i class="fas fa-lock mx-auto"></i> Approved submissions cannot be edited or deleted.
+                        </div>
+                    @endif
+                @endauth
                 @include('common/reuse-item-detail',['item'=>$item])
             </div>
         </div>
     </div>
 
     <!-- Modal -->
+    @auth
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -54,4 +57,5 @@
             </div>
         </div>
     </div>
+    @endauth
 @endsection

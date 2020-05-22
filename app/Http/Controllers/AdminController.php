@@ -83,17 +83,14 @@ class AdminController extends Controller
         $allowedTypes = [];
         $allowedTypes[] = ["title" => "Allowed?", "subheading" => "Allowed Levels (yes/no/...)", "count" => $allowedNumber, "manageData" => route("allowedView"), "addData" => route("allowedAdd")];
 
-        if ($user->is_admin === false)
-            abort(404);
-        else
-            return view("admin.dashboard", compact('userAndEmail', 'userAndCanEmail', 'allUsers', 'locationCards', 'sourcesAndDestinations', 'linksAndOther', 'allowedTypes'));
+
+        return view("admin.dashboard", compact('userAndEmail', 'userAndCanEmail', 'allUsers', 'locationCards', 'sourcesAndDestinations', 'linksAndOther', 'allowedTypes'));
     }
 
     public function viewEmail()
     {
         $allUsers = User::all();
         $all = User::orderBy('id')->paginate(6, ['*'], 'users');
-        $user = Auth::user();
         $canEmail = array();
         $canBeEmailed = User::where('can_contact', true)->orderBy('id')->paginate(6, ['*'], 'contactable');
 
@@ -101,74 +98,59 @@ class AdminController extends Controller
             if($users->can_contact === true)
                 array_push($canEmail, $users->email);
         }
-        if ($user->is_admin === false)
-            abort(404);
-        else
-            return view("admin.viewEmail", compact('canEmail', 'allUsers', 'all', 'canBeEmailed'));
+
+        return view("admin.viewEmail", compact('canEmail', 'allUsers', 'all', 'canBeEmailed'));
     }
 
     public function getUsers()
     {
         $users = User::where("is_banned", false)->orderBy('id')->paginate(10);
-        $user = Auth::user();
         $userListHome = true;
 
-
-        if ($user->is_admin === false)
-            abort(404);
-        else
-            return view("admin.adminUpdate", compact('users', 'userListHome'));
+        return view("admin.adminUpdate", compact('users', 'userListHome'));
     }
 
     public function getBannedUsers()
     {
         $users = User::where("is_banned", true)->orderBy('id')->paginate(10);
-        $user = Auth::user();
         $userListHome = true;
 
-        if ($user->is_admin === false)
-            abort(404);
-        else
-            return view("admin.banList", compact('users', 'userListHome'));
+        return view("admin.banList", compact('users', 'userListHome'));
     }
 
     public function searchUsers(Request $request)
     {
-        $user = Auth::user();
-        if ($user->is_admin === false)
-            abort(404);
-        else{
-            $searchInput = $request->search;
-            $searchInput = '%'.$searchInput.'%';
+        $searchInput = $request->search;
+        $searchInput = '%'.$searchInput.'%';
 
-            $users = User::where('name', 'ILIKE',$searchInput)
-                ->orWhere('email','ILIKE',$searchInput)
-                ->orWhere('streetAddress','ILIKE',$searchInput)
-                ->orWhere('city','ILIKE',$searchInput)
-                ->orWhere('state','ILIKE',$searchInput)
-                ->orWhere('company','ILIKE',$searchInput)
-                ->orWhere('jobTitle','ILIKE',$searchInput)
-                ->orderBy('id')
-                ->paginate(10);
+        $users = User::where('name', 'ILIKE',$searchInput)
+            ->orWhere('email','ILIKE',$searchInput)
+            ->orWhere('streetAddress','ILIKE',$searchInput)
+            ->orWhere('city','ILIKE',$searchInput)
+            ->orWhere('state','ILIKE',$searchInput)
+            ->orWhere('company','ILIKE',$searchInput)
+            ->orWhere('jobTitle','ILIKE',$searchInput)
+            ->orderBy('id')
+            ->paginate(10);
 
-            $userListHome = false;
+        $userListHome = false;
 
-            if($request->type == "banList"){
-                foreach ($users as $oneUser => $value) {
-                    if (!$value->is_banned) {
-                        unset($users[$oneUser]);
-                    }
-                }
-                return view("admin.banList", compact('users','userListHome'));
-            }else{
-                foreach ($users as $oneUser => $value) {
-                    if ($value->is_banned) {
-                        unset($users[$oneUser]);
-                    }
+        if($request->type == "banList"){
+            foreach ($users as $oneUser => $value) {
+                if (!$value->is_banned) {
+                    unset($users[$oneUser]);
                 }
             }
-            return view("admin.adminUpdate", compact('users','userListHome'));
+            return view("admin.banList", compact('users','userListHome'));
+        }else{
+            foreach ($users as $oneUser => $value) {
+                if ($value->is_banned) {
+                    unset($users[$oneUser]);
+                }
+            }
         }
+        return view("admin.adminUpdate", compact('users','userListHome'));
+
     }
 
     public function updateUserAccess(Request $request)

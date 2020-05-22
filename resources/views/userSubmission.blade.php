@@ -1,89 +1,101 @@
 @extends('layouts.master')
 
 @section('body')
-    <div class="container">
+    <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                <h3 style="text-align: center">Submit a New Water Reuse Regulation</h3>
                 <div class="card">
-                    <div class="card-header">Submit a New Water Reuse Regulation</div>
+                    <div class="card-header">Location</div>
                     <div class="card-body">
                         <form type="POST">
-                        <div id="selectRegion">
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="inputState">State</label>
-                                    <select id="inputState" class="form-control">
-                                        <option value="choose" selected>Choose...</option>
-                                        @foreach($states as $state)
-                                            <option value="{{$state->state_id}}">{{$state->stateName}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="county">County (Optional)</label>
-                                    <div class="text-center">
-                                        <i id="countySpinner" class="fas fa-spinner fa-pulse mt-2 d-none"></i>
+                            <div id="selectRegion">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="inputState">State</label>
+                                        <select id="inputState" class="form-control">
+                                            <option value="choose" selected>Choose...</option>
+                                            @foreach($states as $state)
+                                                <option value="{{$state->state_id}}">{{$state->stateName}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
-                                    <select class="form-control" id="county">
-                                        <option id="chooseCounty" value="choose" disabled>Choose...</option>
-                                    </select>
+                                    <div class="form-group col-md-4">
+                                        <label for="county">County (Optional)</label>
+                                        <div class="text-center">
+                                            <i id="countySpinner" class="fas fa-spinner fa-pulse mt-2 d-none"></i>
+                                        </div>
+                                        <select class="form-control" id="county">
+                                            <option id="chooseCounty" value="choose" class="countyName" disabled selected>Select a state first...</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                            <label for="city">City (Optional)</label>
+                                            <select class="form-control" id="city">
+                                                <option id="chooseCity" value="choose" class="cityName" disabled selected>Select a county first...</option>
+                                            </select>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <i id="citySpinner" class="justify-content-center fas fa-spinner fa-pulse mt-2 d-none"></i>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="city">City (Optional)</label>
-                                <select class="form-control" id="city">
-                                    <option id="chooseCity" value="choose" disabled>Choose...</option>
-                                </select>
-                            </div>
-                            <div class="text-center">
-                                <i id="citySpinner"
-                                   class="justify-content-center fas fa-spinner fa-pulse mt-2 d-none"></i>
-                            </div>
-                        </div>
-                        <div id="addRegionDiv" style="display: none">
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="inputStateEdit">State</label>
-                                    <input type="text" id="inputStateEdit" class="form-control">
-                                    </input>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="countyEdit">County (Optional)</label>
-                                    <input class="form-control" type="text" id="countyEdit">
-                                    </input>
+                            <div id="addRegionDiv" style="display: none">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="inputState">State</label>
+                                        <select id="inputStateEdit" class="form-control">
+                                            <option value="choose" selected>Choose...</option>
+                                            @foreach($states as $state)
+                                                <option value="{{$state->state_id}}">{{$state->stateName}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="countyEdit">County (Optional)</label>
+                                        <input class="form-control border border-danger" type="text" id="countyEdit">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                            <label for="cityEdit">City (Optional)</label>
+                                            <input type="text" class="form-control border border-danger" id="cityEdit">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                    <label for="cityEdit">City (Optional)</label>
-                                    <input type="text" class="form-control" id="cityEdit">
-                                    </input>
+                            <div class="form-group row">
+                                <div class="col-md-8 d-flex align-items-center">
+                                    <button type="button" class="btn btn-secondary" id="addRegion"> Add A New State, County or City </button>
+                                </div>
+                               <div class="col-md-4">
+                                   <label for="city">Location Type</label>
+                                   <select class="form-control" id="locationType" name="location_type">
+                                       <option value="residential">Residential</option>
+                                       <option value="commercial">Commercial</option>
+                                   </select>
+                               </div>
                             </div>
-                        </div>
-
-                            <div class="form-group">
-                                <button type="button" class="btn btn-secondary" id="addRegion">+</button>
-                                <label id="addRegionLabel" for="addRegion"> Add A New State, County or City</label>
-                            </div>
-
-                            <hr>
+                        </form>
+                    </div>
+                </div>
+                <br/>
+                <div class="card">
+                    <div class="card-header">Regulations</div>
+                    <div class="card-body">
+                        <form type="POST">
                             <div id="waterSourceDiv">
                                 <div class="form-row">
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-4">
                                         <label for="waterSource0">Water Source</label>
                                         <select id="waterSource0" name="waterSource0" class="form-control">
                                             <option value="choose" disabled>Choose...</option>
                                         </select>
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-4">
                                         <label for="waterDestination0">Water Destination</label>
                                         <select id="waterDestination0" class="form-control">
                                             <option value="choose" disabled>Choose...</option>
                                         </select>
                                     </div>
-                                </div>
-                                </br>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-4">
                                         <label for="allowed0">Is Water Reuse From This Source Allowed?</label>
                                         <select id="allowed0" class="form-control">
                                             <option value="choose" disabled>Choose...</option>
@@ -92,21 +104,19 @@
                                 </div>
                                 <hr>
                                 <div class="form-row">
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-3">
                                         <label for="codes0">Link to Codes (Optional)</label>
                                         <input type="text" class="form-control" id="codes0" placeholder="">
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-3">
                                         <label for="permits0">Link to Permit (Optional)</label>
                                         <input type="text" class="form-control" id="permits0" placeholder="">
                                     </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-3">
                                         <label for="incentives0">Link to Incentives (Optional)</label>
                                         <input type="text" class="form-control" id="incentives0" placeholder="">
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-3">
                                         <label for="moreInfo0">Link to More Information (Optional)</label>
                                         <input type="text" class="form-control" id="moreInfo0" placeholder="">
                                     </div>
@@ -115,13 +125,18 @@
                                     <label for="comments0">Comments (Optional)</label>
                                     <textarea class="form-control" id="comments0" rows="3"></textarea>
                                 </div>
-                                <hr>
+                                <hr style="height:2px;border:none;color:#333;background-color:#333;"/>
                             </div>
-                            <div class="form-group" style="float: right;">
+                            <div class="form-row" style="float: left;">
                                 <button type="button" class="btn btn-secondary" id="addSource">+</button>
-                                <label for="addSource"> Add Another Regulation For This Area</label>
+                                <label for="addSource" style="margin: 8px">Add Another Regulation For This Area</label>
+
+                                <div id="removeSource">
+                                    <button type="button" class="btn btn-danger" id="removeSourceBtn">-</button>
+                                    <label for="removeSource" style="margin: 10px">Remove Last Regulation in List</label>
+                                </div>
                             </div>
-                            <button type="button" class="btn btn-primary" id="submit">Submit</button>
+                            <button type="button" class="btn btn-primary" id="submit" style="float: right;">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -143,6 +158,8 @@
         //The error message returned from the back end
         $errorMessage = "A API error occurred."
 
+        $("#removeSource").hide();
+
         function showCountySpinner() {
             $("#countySpinner").removeClass("d-none");
             $("#county").addClass("d-none");
@@ -161,6 +178,16 @@
         function hideCitySpinner() {
             $("#citySpinner").addClass("d-none");
             $("#city").removeClass("d-none");
+        }
+
+        function showStateSpinner() {
+            $("#inputState").removeClass("d-none");
+            $("#state").addClass("d-none");
+        }
+
+        function hideStateSpinner() {
+            $("#inputState").addClass("d-none");
+            $("#state").removeClass("d-none");
         }
 
         // get the water sources
@@ -213,45 +240,8 @@
 
         $('#addSource').click(function () {
             numOfRegs += 1;
-            $source = '<div class="form-row">' +
-                '<div class="form-group col-md-6">' +
-                '<label for="waterSource' + numOfRegs + '">Water Source</label>' +
-                '<select id="waterSource' + numOfRegs + '" name="waterSource' + numOfRegs + '" class="form-control">' +
-                '<option value="choose" disabled>Choose...</option>' +
-                '</select></div><div class="form-group col-md-6">' +
-                '<label for="waterDestination' + numOfRegs + '">Water Destination</label>' +
-                '<select id="waterDestination' + numOfRegs + '" class="form-control">' +
-                '<option value="choose" disabled>Choose...</option>' +
-                '</select>' +
-                '</div>' +
-                '</div>' +
-                '</br>' +
-                '<div class="form-row"><div class="form-group col-md-6">' +
-                '<label for="allowed' + numOfRegs + '">Is Water Reuse From This Source Allowed?</label>' +
-                '<select id="allowed' + numOfRegs + '" class="form-control">' +
-                '<option value="choose" disabled>Choose...</option>' +
-                '</select>' +
-                '</div>' +
-                '</div>' +
-                '<hr>' +
-                '<div class="form-row">' +
-                '<div class="form-group col-md-6"><label for="codes' + numOfRegs + '">Link to Codes (Optional)</label>' +
-                '<input type="text" class="form-control" id="codes' + numOfRegs + '" placeholder="">' +
-                '</div>' +
-                '<div class="form-group col-md-6">' +
-                '<label for="permits' + numOfRegs + '">Link to Permit (Optional)</label>' +
-                '<input type="text" class="form-control" id="permits' + numOfRegs + '" placeholder="">' +
-                '</div>' +
-                '</div>' +
-                '<div class="form-row">' +
-                '<div class="form-group col-md-6">' +
-                '<label for="incentives' + numOfRegs + '">Link to Incentives (Optional)</label>' +
-                '<input type="text" class="form-control" id="incentives' + numOfRegs + '" placeholder="">' +
-                '</div><div class="form-group col-md-6"><label for="moreInfo' + numOfRegs + '">Link to More Information (Optional)</label>' +
-                '<input type="text" class="form-control" id="moreInfo' + numOfRegs + '" placeholder=""></div>' +
-                '</div><div class="form-group"><label for="comments' + numOfRegs + '">Comments (Optional)</label>' +
-                '<textarea class="form-control" id="comments' + numOfRegs + '" rows="3"></textarea><hr>' +
-                '</div>';
+            $source = '<div id=regNum' + numOfRegs + '><div class="form-row"><div class="form-group col-md-4"><label for="waterSource' + numOfRegs + '">Water Source</label><select id="waterSource' + numOfRegs + '" name="waterSource' + numOfRegs + '" class="form-control"><option value="choose" disabled>Choose...</option></select></div><div class="form-group col-md-4"><label for="waterDestination' + numOfRegs + '">Water Destination</label><select id="waterDestination' + numOfRegs + '" class="form-control"><option value="choose" disabled>Choose...</option></select></div><div class="form-group col-md-4"><label for="allowed' + numOfRegs + '">Is Water Reuse From This Source Allowed?</label><select id="allowed' + numOfRegs + '" class="form-control"><option value="choose" disabled>Choose...</option></select></div></div><hr><div class="form-row"><div class="form-group col-md-3"><label for="codes' + numOfRegs + '">Link to Codes (Optional)</label><input type="text" class="form-control" id="codes' + numOfRegs + '" placeholder=""></div><div class="form-group col-md-3"><label for="permits' + numOfRegs + '">Link to Permit (Optional)</label><input type="text" class="form-control" id="permits' + numOfRegs + '" placeholder=""></div><div class="form-group col-md-3"><label for="incentives' + numOfRegs + '">Link to Incentives (Optional)</label><input type="text" class="form-control" id="incentives' + numOfRegs + '" placeholder=""></div><div class="form-group col-md-3"><label for="moreInfo' + numOfRegs + '">Link to More Information (Optional)</label><input type="text" class="form-control" id="moreInfo' + numOfRegs + '" placeholder=""></div></div><div class="form-group"><label for="comments' + numOfRegs + '">Comments (Optional)</label><textarea class="form-control" id="comments' + numOfRegs + '" rows="3"></textarea><hr style="height:2px;border:none;color:#333;background-color:#333;"/></div></div>';
+
             $("#waterSourceDiv").append($source);
             getWaterSources(numOfRegs);
             getWaterDestinations(numOfRegs);
@@ -265,12 +255,24 @@
             $("#permits" + numOfRegs).val($("#permits" + (numOfRegs - 1)).val());
             $("#incentives" + numOfRegs).val($("#incentives" + (numOfRegs - 1)).val());
             $("#moreInfo" + numOfRegs).val($("#moreInfo" + (numOfRegs - 1)).val());
+
+            $("#removeSource").show();
         });
+
+        $('#removeSource').click(function () {
+            $("#regNum" + numOfRegs).remove();
+            numOfRegs -= 1;
+
+            if(numOfRegs < 1) {
+                $("#removeSource").hide();
+            }
+        });
+
         $('#submit').click(function () {
 
             if(addRegionClicked){
-                $stateSelected = $("#inputStateEdit").val();
-                if (!$("#inputStateEdit").val()) {
+                $stateSelected = $("#inputStateEdit").children("option:selected").text();
+                if ($stateSelected == "Choose...") {
                     Swal.fire({
                         title: 'Error: No State Selected',
                         text: 'You did not pick a State. You need to at least pick a State to add a regulation. Please try again.',
@@ -280,15 +282,14 @@
                     return;
                 }
                 else{
+                    $stateIdSelected = $('#inputStateEdit').children("option:selected").val();
                     $countySelected = $('#countyEdit').val();
                     $citySelected =  $('#cityEdit').val();
-                    console.log("City: " + $citySelected)
-                    $stateIdSelected = -1;
                     $countyIdSelected = -1;
                     $cityIdSelected = -1;
                 }
             }
-            else{
+            else {
                 $stateSelected = $("#inputState").children("option:selected").text();
                 if ($stateSelected == "Choose...") {
                     Swal.fire({
@@ -310,6 +311,8 @@
             $county = $("#county").children("option:selected").text();
             $city = $("#city").children("option:selected").text();
             $regList = [];
+            $locationType = $('#locationType').children("option:selected").val();
+
 
             for (i = 0; i <= numOfRegs; i++) {
                 $codes = $("#codes" + i).val();
@@ -339,7 +342,8 @@
                     $incentivesTitle: $incentivesTitleDomain,
                     $moreInfoLink: $moreInfo,
                     $moreInfoTitle: $moreInfoTitleDomain,
-                    $comments: $("#comments" + i).val()
+                    $comments: $("#comments" + i).val(),
+                    $locationType: $locationType
                 };
                 $regList.push($newReg);
             }
@@ -385,24 +389,19 @@
         $("#addRegion").click(function() {
             if(!addRegionClicked)
             {
-                $("#addRegion").html("-");
-                $("#addRegionLabel").html(" Choose From Existing States / Counties / Cities");
-                $("#addRegionDiv").css("display", "block");
-                $("#inputState").prop("disabled", true);
-                $("#county").prop("disabled", true);
-                $("#city").prop("disabled", true);
+                $("#addRegion").html("Select an existing State, County or City");
+//                $("#addRegionLabel").html(" Select an existing state, city, or county.");
+                $("#addRegionDiv").show();
+                $("#selectRegion").hide();
                 addRegionClicked = true;
             }
             else{
-                $("#addRegion").html("+");
-                $("#addRegionLabel").html(" Add A New State, County or City");
-                $("#addRegionDiv").css("display", "none");
-                $("#inputState").prop("disabled", false);
-                $("#county").prop("disabled", false);
-                $("#city").prop("disabled", false);
+                $("#addRegion").html("Add A New State, County or City");
+//                $("#addRegionLabel").html(" Add a new county or city not listed.");
+                $("#addRegionDiv").hide();
+                $("#selectRegion").show();
                 addRegionClicked = false;
             }
-
         });
 
         //for when the state changes
@@ -433,7 +432,7 @@
                     .then(function (response) {
                         hideCountySpinner();
                         //get each county, and set them as options
-                        $county = response.data.map(obj => ("<option class='countyName' value=" + obj.county_id + " >" + obj.countyName + "</option>"));
+                        $county = '<option id="chooseCounty" value="" disabled selected>Choose...</option>'+response.data.map(obj => ("<option class='countyName' value=" + obj.county_id + " >" + obj.countyName + "</option>"));
                         $("#county").append($county);
                     })
                     .catch(function (error) {
@@ -470,7 +469,7 @@
                     .then(function (response) {
                         hideCitySpinner();
                         //get each city, and set them as options
-                        $city = response.data.map(obj => ("<option class='cityName' value=" + obj.city_id + " >" + obj.cityName + "</option>"));
+                        $city = '<option id="chooseCounty" value="" disabled selected>Choose...</option>'+response.data.map(obj => ("<option class='cityName' value=" + obj.city_id + " >" + obj.cityName + "</option>"));
                         // console.log($city);
                         $("#city").append($city);
                     })

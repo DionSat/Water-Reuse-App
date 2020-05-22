@@ -20,17 +20,16 @@ Route::get('/info', 'HomeController@getInfo')->name('info');
 Route::get('/search', 'SearchController@mainPage')->name('search');
 Route::get('/search/query', 'SearchController@handleSubmit')->name('search-submit');
 
-
+Route::get('/submission/view/{type?}/{state?}/{itemId?}', 'UserSubmissionController@viewSubmission')->name("viewSubmission");
 
 //Registered User Routes
-Route::middleware('auth')->middleware('banned')->group(function () {
+Route::middleware(['auth', 'banned'])->group(function () {
 
     // User account welcome/overview page
     Route::get('/overview', 'HomeController@overview')->name('overview');
 
     //submission routes for each individual user
     Route::get('/submissions', 'UserSubmissionController@userSubmissionListPage')->name('submission');
-    Route::get('/submission/view/{type?}/{state?}/{itemId?}', 'UserSubmissionController@viewSubmission')->name("viewSubmission");
 
     Route::get('/submission/edit/{type?}/{state?}/{itemId?}', 'UserSubmissionController@submissionEdit')->name('submissionEdit');
     Route::post('/submission/edit/{type?}/{state?}/{itemId?}', 'UserSubmissionController@submissionEditSubmit')->name('submissionEditUpdate');
@@ -50,7 +49,7 @@ Route::middleware('auth')->middleware('banned')->group(function () {
 });
 
 //Admin Routes
-Route::prefix('admin')->middleware('auth')->middleware('admin')->middleware('banned')->group(function () {
+Route::prefix('admin')->middleware(['auth','admin','banned'])->group(function () {
     Route::get('/', 'AdminController@getBasicAdminPage')->name('admin');
     Route::get('update', 'AdminController@getUsers')->name('getUsers');
     Route::get('banList', 'AdminController@getBannedUsers')->name('banList');
