@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\DB;
 class StateController extends Controller
 {
     public function allStates() {
-        $states = DB::table('states')->paginate(10);
+        $states = State::all();
+        //$states = DB::table('states')->paginate(10);
         return view("database.states", compact('states'));
     }
 

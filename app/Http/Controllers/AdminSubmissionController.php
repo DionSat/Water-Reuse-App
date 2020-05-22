@@ -43,7 +43,8 @@ class AdminSubmissionController extends Controller
 
     public function userCounty()
     {
-        $countySubmissions = PendingCountyMerge::with(['user', 'source', 'destination', 'county', 'county.state'])->get()->sortByDesc("created_at");;
+        $countySubmissions = PendingCountyMerge::with(['user', 'source', 'destination', 'county', 'county.state'])->get()->sortByDesc("created_at")->groupBy('county.countyName');
+        //$countySubmissions = PendingCountyMerge::with(['user', 'source', 'destination', 'county', 'county.state'])->get()->sortByDesc("created_at");;
         $countySubmissions = $countySubmissions->mapWithKeys(function ($item, $key) {
             if(!empty($item)){
                 $stateName = ", ".$item[0]->county->state->stateName;

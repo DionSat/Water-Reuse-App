@@ -13,7 +13,8 @@ use App\Http\Controllers\Controller;
 class ReuseNodeController extends Controller
 {
     public function allReuseNodes() {
-        $nodes = ReuseNode::paginate(10);
+        //$nodes = ReuseNode::paginate(10);
+        $nodes = ReuseNode::all();
         return view("database.reuseNodes", compact('nodes'));
     }
 

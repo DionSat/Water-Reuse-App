@@ -45,9 +45,6 @@
             </tbody>
 
         </table>
-        <div class="d-flex justify-content-center">
-            {{ $states->links() }}
-        </div>
     </div>
 
 
