@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 class CountyController extends Controller
 {
     public function allCounties() {
-        $counties = County::with('state')->get();
+        $counties = County::with('state')->paginate(10);
         return view("database.counties", compact('counties'));
     }
 

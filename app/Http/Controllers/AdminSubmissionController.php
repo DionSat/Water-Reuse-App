@@ -14,7 +14,7 @@ use App\PendingCountyMerge;
 
 class AdminSubmissionController extends Controller
 {
-    
+
     public function all()
     {
         $user = Auth::user();
@@ -37,13 +37,13 @@ class AdminSubmissionController extends Controller
     public function userState()
     {
         $stateSubmissions = PendingStateMerge::with(['user', 'source', 'destination', 'state'])->get()->sortByDesc("created_at")->groupBy('state.stateName');
-
+        //$stateSubmissions = PendingStateMerge::with(['user', 'source', 'destination', 'state'])->paginate(10)->sortByDesc("created_at")->groupBy('state.stateName');
         return view('adminUserSubmission.stateSubmissions', compact('stateSubmissions'));
     }
 
     public function userCounty()
     {
-        $countySubmissions = PendingCountyMerge::with(['user', 'source', 'destination', 'county', 'county.state'])->get()->sortByDesc("created_at")->groupBy('county.countyName');;
+        $countySubmissions = PendingCountyMerge::with(['user', 'source', 'destination', 'county', 'county.state'])->get()->sortByDesc("created_at");;
         $countySubmissions = $countySubmissions->mapWithKeys(function ($item, $key) {
             if(!empty($item)){
                 $stateName = ", ".$item[0]->county->state->stateName;
@@ -86,7 +86,7 @@ class AdminSubmissionController extends Controller
         return view('adminUserSubmission.userSubmissionItem', compact('submissions'));
     }
 
-    public function userCityView(Request $request) 
+    public function userCityView(Request $request)
     {
         $submissions = PendingCityMerge::where('id', $request->itemid)->get();
         return view('adminUserSubmission.userSubmissionItem', compact( 'submissions'));

@@ -7,11 +7,13 @@ use App\County;
 use App\State;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class CityController extends Controller
 {
     public function allCities() {
-        $cities = City::with(['county', 'county.state'])->get();
+        $cities = City::with(['county', 'county.state'])->paginate(10);
+        //$cities = DB::table('cities')->paginate(10);
         return view("database.cities", compact('cities'));
     }
 

@@ -4,10 +4,12 @@
     <div class="container">
         <div class="row my-3 d-flex justify-content-between">
             <div class="col-md-2">
-                <a href="{{route("admin")}}" class="btn btn-primary d-block"> <i class="fas fa-arrow-circle-left"></i> Dashboard </a>
+                <a href="{{route("admin")}}" class="btn btn-primary d-block"> <i class="fas fa-arrow-circle-left"></i>
+                    Dashboard </a>
             </div>
             <div class="col-md-2">
-                <a href="{{route("stateAdd")}}" class="btn btn-success d-block"> <i class="fas fa-plus-square"></i> Add New </a>
+                <a href="{{route("stateAdd")}}" class="btn btn-success d-block"> <i class="fas fa-plus-square"></i> Add
+                    New </a>
             </div>
         </div>
         <h2 class="text-center"> States </h2>
@@ -28,17 +30,26 @@
                         <form method="POST" action="{{ route('deleteState') }}">
                             {{ csrf_field() }}
                             <input id="delete" name="delete" value="delete" hidden>
-                            <input id="stateId-{{$state->state_id}}" name="state_id" value="{{$state->state_id}}" hidden>
+                            <input id="stateId-{{$state->state_id}}" name="state_id" value="{{$state->state_id}}"
+                                   hidden>
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </td>
                     <td>
-                        <a href="{{route('modifyState', ['state_id' => $state->state_id])}}" class="btn btn-primary"><i class="fas fa-edit" aria-hidden="true"></i> Modify </a>
+                        <a href="{{route('modifyState', ['state_id' => $state->state_id])}}" class="btn btn-primary"><i
+                                class="fas fa-edit" aria-hidden="true"></i> Modify </a>
                     </td>
                 </tr>
             @endforeach
+
             </tbody>
+
         </table>
+        <div class="d-flex justify-content-center">
+            {{ $states->links() }}
+        </div>
     </div>
+
+
 
 @endsection

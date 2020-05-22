@@ -57,5 +57,8 @@
                 </tbody>
             </table>
         @endforeach
+        <div class="d-flex justify-content-center">
+            {{ $stateSubmissions->links() }}
+        </div>
     </div>
 @endsection

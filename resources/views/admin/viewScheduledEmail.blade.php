@@ -72,6 +72,9 @@
                     </form>
                     </div>
                 </div>
+    <div class="d-flex justify-content-center">
+        {{$currentScheduledEmails->links()}}
+    </div>
             </div>
 @endsection
 

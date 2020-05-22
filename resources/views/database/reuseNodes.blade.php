@@ -77,6 +77,9 @@
             @endforeach
             </tbody>
         </table>
+        <div class="d-flex justify-content-center">
+            {{$nodes->links()}}
+        </div>
     </div>
 
 @endsection

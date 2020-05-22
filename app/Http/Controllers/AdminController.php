@@ -16,7 +16,7 @@ class AdminController extends Controller
 
         // Get all admins and scheduled emails
         $adminUsers = User::where('is_admin', true)->orderBy('id')->get();
-        $currentScheduledEmails = ScheduledEmails::all();
+        $currentScheduledEmails = ScheduledEmails::paginate(10);
 
         return view("admin.viewScheduledEmail", compact('adminUsers', 'currentScheduledEmails'));
     }
