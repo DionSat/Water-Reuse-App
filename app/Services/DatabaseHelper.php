@@ -190,52 +190,7 @@ class DatabaseHelper {
                 $regArea = $regLists[0]['$city'];
             }
 
-            $codesLink = new Links();
-            $permitLink = new Links();
-            $incentivesLink = new Links();
-            $moreInfoLink = new Links();
-
-            $holdingVar = Links::where('linkText', $regList['$codesLink'])->get();
-            if(count($holdingVar) > 0){
-                $codesLink = Links::where('linkText', $regList['$codesLink'])->get()->first();
-            }else{
-                $codesLink->name = $regList['$codesTitle'];
-                $codesLink->linkText = $regList['$codesLink'];
-                $codesLink->save();
-            }
-            $mergeTable->codes = $codesLink->link_id;
-
-            $holdingVar = Links::where('linkText', $regList['$permitLink'])->get();
-            if(count($holdingVar) > 0){
-                $permitLink = Links::where('linkText', $regList['$permitLink'])->get()->first();
-
-            }else{
-                $permitLink->name = $regList['$permitsTitle'];
-                $permitLink->linkText = $regList['$permitLink'];
-                $permitLink->save();
-            }
-            $mergeTable->permit = $permitLink->link_id;
-
-            $holdingVar = Links::where('linkText', $regList['$incentivesLink'])->get();
-            if(count($holdingVar) > 0){
-                $incentivesLink = Links::where('linkText', $regList['$incentivesLink'])->get()->first();
-            }else{
-                $incentivesLink->name = $regList['$incentivesTitle'];
-                $incentivesLink->linkText = $regList['$incentivesLink'];
-                $incentivesLink->save();
-            }
-            $mergeTable->incentives = $incentivesLink->link_id;
-
-            $holdingVar = Links::where('linkText', $regList['$moreInfoLink'])->get();
-            if(count($holdingVar) > 0) {
-                $moreInfoLink = Links::where('linkText', $regList['$moreInfoLink'])->get()->first();
-
-            }else{
-                $moreInfoLink->name = $regList['$moreInfoTitle'];
-                $moreInfoLink->linkText = $regList['$moreInfoLink'];
-                $moreInfoLink->save();
-            }
-            $mergeTable->moreInfo = $moreInfoLink->link_id;
+            list($codesLink, $permitLink, $incentivesLink, $moreInfoLink) = self::setLinksForNewRegulation($regList, $mergeTable);
 
             $mergeTable->sourceID = $regList['$sourceId'];
             $mergeTable->destinationID = $regList['$destinationId'];
@@ -243,6 +198,7 @@ class DatabaseHelper {
             $mergeTable->user_id = Auth::user()->id;
             $mergeTable->location_type = $regList['$locationType'];
             $mergeTable->comments = $regList['$comments'];
+
             try {
                 if($mergeTable->save() == false)
                 {
@@ -549,5 +505,78 @@ class DatabaseHelper {
             $item->forceDelete();
         else
             $item->delete();
+    }
+
+    /**
+     * @param $regList
+     * @param $mergeTable
+     * @return array
+     */
+    public static function setLinksForNewRegulation($regList, $mergeTable): array
+    {
+        $codesLink = new Links();
+        $permitLink = new Links();
+        $incentivesLink = new Links();
+        $moreInfoLink = new Links();
+
+        if (strlen(trim($regList['$codesLink'])) == 0){
+            $mergeTable->codes = null;
+        } else {
+            $holdingVar = Links::where('linkText', $regList['$codesLink'])->get();
+            if (count($holdingVar) > 0) {
+                $codesLink = Links::where('linkText', $regList['$codesLink'])->get()->first();
+            } else {
+                $codesLink->name = $regList['$codesTitle'];
+                $codesLink->linkText = $regList['$codesLink'];
+                $codesLink->save();
+            }
+            $mergeTable->codes = $codesLink->link_id;
+        }
+
+        if (strlen(trim($regList['$permitLink'])) == 0){
+            $mergeTable->permit = null;
+        } else {
+            $holdingVar = Links::where('linkText', $regList['$permitLink'])->get();
+            if (count($holdingVar) > 0) {
+                $permitLink = Links::where('linkText', $regList['$permitLink'])->get()->first();
+
+            } else {
+                $permitLink->name = $regList['$permitsTitle'];
+                $permitLink->linkText = $regList['$permitLink'];
+                $permitLink->save();
+            }
+            $mergeTable->permit = $permitLink->link_id;
+        }
+
+        if (strlen(trim($regList['$incentivesLink'])) == 0){
+            $mergeTable->incentives = null;
+        } else {
+            $holdingVar = Links::where('linkText', $regList['$incentivesLink'])->get();
+            if (count($holdingVar) > 0) {
+                $incentivesLink = Links::where('linkText', $regList['$incentivesLink'])->get()->first();
+            } else {
+                $incentivesLink->name = $regList['$incentivesTitle'];
+                $incentivesLink->linkText = $regList['$incentivesLink'];
+                $incentivesLink->save();
+            }
+            $mergeTable->incentives = $incentivesLink->link_id;
+        }
+
+        if (strlen(trim($regList['$moreInfoLink'])) == 0){
+            $mergeTable->moreInfo = null;
+        } else {
+            $holdingVar = Links::where('linkText', $regList['$moreInfoLink'])->get();
+            if (count($holdingVar) > 0) {
+                $moreInfoLink = Links::where('linkText', $regList['$moreInfoLink'])->get()->first();
+
+            } else {
+                $moreInfoLink->name = $regList['$moreInfoTitle'];
+                $moreInfoLink->linkText = $regList['$moreInfoLink'];
+                $moreInfoLink->save();
+            }
+            $mergeTable->moreInfo = $moreInfoLink->link_id;
+        }
+
+        return array($codesLink, $permitLink, $incentivesLink, $moreInfoLink);
     }
 }
