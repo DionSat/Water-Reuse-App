@@ -45,6 +45,11 @@
             </tbody>
 
         </table>
+        <div class="row mt-4">
+            <span class="mx-auto">
+                {{ $states->links() }}
+            </span>
+        </div>
     </div>
 
 

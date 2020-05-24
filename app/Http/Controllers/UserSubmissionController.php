@@ -21,8 +21,17 @@ class UserSubmissionController extends Controller
 {
     public function userSubmissionListPage(){
         $user = Auth::user();
-        $submissions = DatabaseHelper::getAllSubmissionsForCurrentUser();
+        $userId = $user->id;
 
+        $submissions = PendingStateMerge::withTrashed()->with(['state', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])->where('user_id', $userId)->get();
+        $submissions = $submissions->merge(PendingCityMerge::withTrashed()->with(['city', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])->where('user_id', $userId)->get());
+        $submissions = $submissions->merge(PendingCountyMerge::withTrashed()->with(['county', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])->where('user_id', $userId)->get());
+        $submissions = $submissions->merge(StateMerge::where('user_id', $userId)->with(['state', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])->get());
+        $submissions = $submissions->merge(CityMerge::where('user_id', $userId)->with(['city', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])->get());
+        $submissions = $submissions->merge(CountyMerge::where('user_id', $userId)->with(['county', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])->get());
+
+        $submissions = $submissions->sortByDesc('updated_at')->paginate(15);
+        
         return view('submission.userSubmissionOverview', compact('user', 'submissions'));
     }
 

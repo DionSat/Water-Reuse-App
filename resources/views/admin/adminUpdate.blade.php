@@ -32,7 +32,6 @@
                                         <button class="btn btn-primary" style="width: 50px;height: 38px;font-size:1.0em;margin-top:2px;margin-bottom: 4px;margin-left:2px;text-align: center;padding: 2px 4px 6px 4px;" onclick="window.location='{{ route('getUsers') }}'">Clear</button>
                                     @endif
                                 </div>
-                            </center>
                                 <table id="userTable" class="table">
                                     <thead>
                                     <tr>
@@ -92,7 +91,11 @@
                                     </tbody>
                                 </table>
                         </div>
-
+                        <div class="row mt-1">
+                            <span class="mx-auto">
+                                {{ $users->links() }}
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>

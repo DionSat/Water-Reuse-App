@@ -15,7 +15,6 @@ class AllowedTypesController extends Controller
 {
     public function allAllowedTypes() {
         $types = Allowed::all();
-        //$types = Allowed::paginate(10);
         return view("database.allowed", compact('types'));
     }
 

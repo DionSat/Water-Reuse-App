@@ -31,5 +31,10 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="row mt-4">
+            <span class="mx-auto">
+                {{ $submissions->links() }}
+            </span>
+        </div>
     </div>
 @endsection
