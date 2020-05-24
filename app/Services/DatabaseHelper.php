@@ -193,19 +193,22 @@ class DatabaseHelper {
             list($codesLink, $permitLink, $incentivesLink, $moreInfoLink) = self::setLinksForNewRegulation($regList, $mergeTable);
 
             $mergeTable->sourceID = $regList['$sourceId'];
-            $mergeTable->destinationID = $regList['$destinationId'];
             $mergeTable->allowedID = $regList['$isPermitted'];
             $mergeTable->user_id = Auth::user()->id;
             $mergeTable->location_type = $regList['$locationType'];
             $mergeTable->comments = $regList['$comments'];
 
             try {
-                if($mergeTable->save() == false)
-                {
-                    $codesLink->delete();
-                    $permitLink->delete();
-                    $incentivesLink->delete();
-                    $moreInfoLink->delete();
+                foreach ($regList['$destinationId'] as $destination){
+                    $mergeTableToSave = clone $mergeTable;
+                    $mergeTableToSave->destinationID = $destination;
+                    if($mergeTableToSave->save() == false)
+                    {
+                        $codesLink->delete();
+                        $permitLink->delete();
+                        $incentivesLink->delete();
+                        $moreInfoLink->delete();
+                    }
                 }
             } catch (Exception $exception){
                 return $exception->getMessage();// return "A API error occurred.";

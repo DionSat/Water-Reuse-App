@@ -91,7 +91,7 @@
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="waterDestination0">Water Destination</label>
-                                        <select id="waterDestination0" class="form-control">
+                                        <select id="waterDestination0" class="form-control" multiple>
                                             <option value="choose" disabled>Choose...</option>
                                         </select>
                                     </div>
@@ -332,7 +332,7 @@
                     $countyId: $countyIdSelected,
                     $cityId: $cityIdSelected,
                     $sourceId: $('#waterSource' + i).children("option:selected").val(),
-                    $destinationId: $('#waterDestination' + i).children("option:selected").val(),
+                    $destinationId: $('#waterDestination' + i).val(),
                     $isPermitted: $("#allowed" + i).children("option:selected").val(),
                     $codesLink: $codes,
                     $codesTitle: $codesTitleDomain,
