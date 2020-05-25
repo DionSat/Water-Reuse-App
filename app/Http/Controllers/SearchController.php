@@ -48,8 +48,8 @@ class SearchController extends Controller
         }
 
         // Get all the sources and destinations
-        $sources = ReuseNode::sources()->sortBy("node_name");
-        $destinations = ReuseNode::destinations()->sortBy("node_name");
+        $sources = ReuseNode::sources();
+        $destinations = ReuseNode::destinations();
         $type = $request->searchType === "residential" ? "Residential" : "Commercial";
 
         return view("search.searchresults", compact('stateRules', 'countyRules', 'cityRules', 'lowestLevel', 'city', 'county', 'state', 'sources', 'destinations', 'type'));

@@ -16,22 +16,22 @@
                 <td class="align-middle"> <h4>{!! $rule->allowed->getAllowedTextBadge() !!}</h4> </td>
                 <td class="align-middle">
                     @if($rule->codesObj !== null)
-                        <a class="btn btn-outline-primary link-button" data-linkid="{{$rule->codesObj->link_id}}" href="{{$rule->codesObj->linkText}}">Codes</a>
+                        <a target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary link-button" data-linkid="{{$rule->codesObj->link_id}}" href="{{$rule->codesObj->linkText}}">Code</a>
                     @endif
                 </td>
                 <td class="align-middle">
                     @if($rule->permitObj !== null)
-                        <a class="btn btn-outline-primary link-button" data-linkid="{{$rule->permitObj->link_id}}" href="{{$rule->permitObj->linkText}}">Permits</a>
+                        <a target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary link-button" data-linkid="{{$rule->permitObj->link_id}}" href="{{$rule->permitObj->linkText}}">Permit</a>
                     @endif
                 </td>
                 <td class="align-middle">
                     @if($rule->incentivesObj !== null)
-                        <a class="btn btn-outline-primary link-button" data-linkid="{{$rule->incentivesObj->link_id}}" href="{{$rule->incentivesObj->linkText}}">Incentives</a>
+                        <a target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary link-button" data-linkid="{{$rule->incentivesObj->link_id}}" href="{{$rule->incentivesObj->linkText}}">Incentive</a>
                     @endif
                 </td>
                 <td class="align-middle">
                     @if($rule->moreInfoObj !== null)
-                        <a class="btn btn-outline-primary link-button" data-linkid="{{$rule->moreInfoObj->link_id}}" href="{{$rule->moreInfoObj->linkText}}">More Info</a>
+                        <a target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary link-button" data-linkid="{{$rule->moreInfoObj->link_id}}" href="{{$rule->moreInfoObj->linkText}}">More Info</a>
                     @endif
                 </td>
                 <td class="align-middle">
