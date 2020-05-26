@@ -12,8 +12,7 @@ use Illuminate\Support\Facades\DB;
 class CityController extends Controller
 {
     public function allCities() {
-        $cities = City::with(['county', 'county.state'])->get();
-        //$cities = City::with(['county', 'county.state'])->paginate(10);
+        $cities = City::paginate(10);
         return view("database.cities", compact('cities'));
     }
 

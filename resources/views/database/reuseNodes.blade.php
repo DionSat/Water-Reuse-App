@@ -77,6 +77,11 @@
             @endforeach
             </tbody>
         </table>
+        <div class="row mt-4">
+            <span class="mx-auto">
+                {{ $nodes->links() }}
+            </span>
+        </div>
     </div>
 
 @endsection

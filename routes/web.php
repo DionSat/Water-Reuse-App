@@ -51,7 +51,7 @@ Route::middleware(['auth', 'banned'])->group(function () {
 //Admin Routes
 Route::prefix('admin')->middleware(['auth','admin','banned'])->group(function () {
     Route::get('/', 'AdminController@getBasicAdminPage')->name('admin');
-    Route::get('update', 'AdminController@getUsers')->name('getUsers');
+    Route::get('users', 'AdminController@getUsers')->name('getUsers');
     Route::get('banList', 'AdminController@getBannedUsers')->name('banList');
     Route::get('{type?}/search', 'AdminController@searchUsers')->name('searchUsers');
     //Route::get('/database', 'DatabaseController@getDatabasePage')->name('database');

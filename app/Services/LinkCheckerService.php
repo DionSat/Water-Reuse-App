@@ -37,7 +37,7 @@ class LinkCheckerService {
         }
 
         // Create the Guzzle client
-        $client = new Client([ 'timeout'  => 2.0 ]);
+        $client = new Client([ 'timeout'  => 15.0 ]);
 
         try{
             // If link is valid - we get a response

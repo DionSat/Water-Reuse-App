@@ -55,15 +55,12 @@ class DatabaseHelper {
     public static function getAllSubmissionsForCurrentUser(){
         $userId = Auth::user()->id;
 
-
-        // NEED TO ADD THE with() CALLS FOR THE VARIOUS ATTRIBUTES TO REDUCE LOAD TIME
-
-        $mergedSubmissions = PendingStateMerge::withTrashed()->where('user_id', $userId)->get();
-        $mergedSubmissions = $mergedSubmissions->merge(PendingCityMerge::withTrashed()->where('user_id', $userId)->get());
-        $mergedSubmissions = $mergedSubmissions->merge(PendingCountyMerge::withTrashed()->where('user_id', $userId)->get());
-        $mergedSubmissions = $mergedSubmissions->merge(StateMerge::where('user_id', $userId)->get());
-        $mergedSubmissions = $mergedSubmissions->merge(CityMerge::where('user_id', $userId)->get());
-        $mergedSubmissions = $mergedSubmissions->merge(CountyMerge::where('user_id', $userId)->get());
+        $mergedSubmissions = PendingStateMerge::withTrashed()->with(['state', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])->where('user_id', $userId)->get();
+        $mergedSubmissions = $mergedSubmissions->merge(PendingCityMerge::withTrashed()->with(['city', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])->where('user_id', $userId)->get());
+        $mergedSubmissions = $mergedSubmissions->merge(PendingCountyMerge::withTrashed()->with(['county', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])->where('user_id', $userId)->get());
+        $mergedSubmissions = $mergedSubmissions->merge(StateMerge::where('user_id', $userId)->with(['state', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])->get());
+        $mergedSubmissions = $mergedSubmissions->merge(CityMerge::where('user_id', $userId)->with(['city', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])->get());
+        $mergedSubmissions = $mergedSubmissions->merge(CountyMerge::where('user_id', $userId)->with(['county', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])->get());
 
         return $mergedSubmissions->sortByDesc("created_at");
     }
