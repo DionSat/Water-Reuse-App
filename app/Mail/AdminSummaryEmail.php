@@ -35,7 +35,7 @@ class AdminSummaryEmail extends Mailable
         $brokenLinkCount = DB::table('links')->where('status', "broken")->count();
         $approvedCount = DatabaseHelper::getCountOfAllApprovedSubmissions();
 
-        return $this->from('noreply@waterapptest.xyz')->subject("Water Reuse App Summary")
+        return $this->from('noreply@waterreuseapp.org')->subject("Water Reuse App Summary")
             ->view('email.summaryEmail')->with([
                 'pendingCount' => $pendingCount,
                 'brokenLinkCount' => $brokenLinkCount,

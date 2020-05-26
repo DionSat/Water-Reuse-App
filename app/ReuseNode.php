@@ -50,14 +50,14 @@ class ReuseNode extends Model
     }
 
     public static function sources() {
-        return self::where("is_source", true)->get();
+        return self::where("is_source", true)->orderBy('node_name', 'asc')->get();
     }
 
     public static function destinations() {
-        return self::where("is_destination", true)->get();
+        return self::where("is_destination", true)->orderBy('node_name', 'asc')->get();
     }
 
     public static function fixtures() {
-        return self::where("is_fixture", true)->get();
+        return self::where("is_fixture", true)->orderBy('node_name', 'asc')->get();
     }
 }
