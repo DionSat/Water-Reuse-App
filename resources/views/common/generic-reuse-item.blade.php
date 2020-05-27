@@ -16,8 +16,6 @@
                                    class="btn btn-primary btn-block"> Edit </a>
                             </span>
                             <span class="text-center col-md-4">
-{{--                                <form method="POST" action="@if($type==="state") {{'addStateMergeSubmit'}} @elseif($type==="county")--}}
-                                {{--                                    {{'addCountyMergeSubmit'}} @else {{'addCityMergeSubmit'}}" @endif>--}}
                                 <form method="POST" @if($type==="state") action="{{route('addStateMergeSubmit')}}"
                                       @elseif($type==="county") action="{{route('addCountyMergeSubmit')}}"
                                       @else action="{{route('addCityMergeSubmit')}}"@endif>
