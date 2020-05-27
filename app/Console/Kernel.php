@@ -24,7 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // CRON Job on DreamHost runs at one minute past each hour, hence the timing here 
+        // CRON Job on DreamHost runs at one minute past each hour, hence the timing here
         $schedule->command('emails:send')->dailyAt('10:01');
     }
 

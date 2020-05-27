@@ -55,19 +55,19 @@
             </div>
             <div class="p-2 d-block">
                 <h3>Allowed</h3>
-                <h3><span class="badge @if($item->allowed->allowedText === "Yes") badge-success @elseif($item->allowed->allowedText === "No") badge-danger @else badge-warning @endif">
-                        {{$item->allowed->allowedText ?? "?"}}
-                    </span></h3>
+                <h3>
+                    {!! $item->allowed->getAllowedTextBadge() !!}
+                </h3>
             </div>
         </div>
         <table class="table table-bordered">
             <h3 class="text-left">Links</h3>
             <thead>
             <tr>
-                <th scope="row">Types</th>
-                <th scope="col">Title</th>
-                <th scope="col">Url</th>
-                <th scope="col">Link State</th>
+                <th scope="row" colspan="1">Types</th>
+                <th scope="col" colspan="1">Title</th>
+                <th scope="col" colspan="3">Url</th>
+                <th scope="col" colspan="1">Link State</th>
             </tr>
             </thead>
             <tbody>
@@ -82,11 +82,11 @@
                         {{$item->codesObj->name ?? "Code Link"}}
                     @endif
                 </td>
-                <td>
+                <td colspan="3">
                     @if(empty($item->codesObj->linkText))
                         N/A
                     @else
-                        {{$item->codesObj->linkText}}
+                        <a target="_blank" rel="noopener noreferrer" href="{{$item->codesObj->linkText}}">{{$item->codesObj->linkText}}</a>
                     @endif
                 </td>
                 <td>
@@ -94,10 +94,9 @@
                         N/A
                     @else
                     <h4>
-                    <span class="badge @if($item->codesObj->status === 'valid') badge-success @elseif($item->codesObj->status === 'broken')
-                                badge-danger @else badge-warning @endif" style="font-size 2em">{{$item->codesObj->status}}</span>
-                    @endif
+                        {!! $item->codesObj->getStatusTextBadge() !!}
                     </h4>
+                    @endif
                 </td>
             </tr>
             <tr>
@@ -111,22 +110,21 @@
                         {{$item->permitObj->name ?? "Code Link"}}
                     @endif
                 </td>
-                <td>
+                <td colspan="3">
                     @if(empty($item->permitObj->linkText))
                         N/A
                     @else
-                        {{$item->permitObj->linkText}}
+                        <a target="_blank" rel="noopener noreferrer" href="{{$item->permitObj->linkText}}">{{$item->permitObj->linkText}}</a>
                     @endif
                 </td>
                 <td>
                     @if(empty($item->permitObj->linkText))
                         N/A
                     @else
-                    <h4>
-                    <span class="badge @if($item->permitObj->status === 'valid') badge-success @elseif($item->permitObj->status === 'broken')
-                                badge-danger @else badge-warning @endif" style="font-size 2em">{{$item->permitObj->status}}</span>
+                        <h4>
+                            {!! $item->permitObj->getStatusTextBadge() !!}
+                        </h4>
                     @endif
-                    </h4>
                 </td>
             </tr>
             <tr>
@@ -140,22 +138,21 @@
                         {{$item->incentivesObj->name ?? "Code Link"}}
                     @endif
                 </td>
-                <td>
+                <td colspan="3">
                     @if(empty($item->incentivesObj->linkText))
                         N/A
                     @else
-                        {{$item->incentivesObj->linkText}}
+                        <a target="_blank" rel="noopener noreferrer" href="{{$item->incentivesObj->linkText}}">{{$item->incentivesObj->linkText}}</a>
                     @endif
                 </td>
                 <td>
                     @if(empty($item->incentivesObj->linkText))
                         N/A
                     @else
-                    <h4>
-                    <span class="badge @if($item->incentivesObj->status === 'valid') badge-success @elseif($item->incentivesObj->status === 'broken')
-                                badge-danger @else badge-warning @endif" style="font-size 2em">{{$item->incentivesObj->status}}</span>
+                        <h4>
+                            {!! $item->incentivesObj->getStatusTextBadge() !!}
+                        </h4>
                     @endif
-                    </h4>
                 </td>
 
             </tr>
@@ -170,39 +167,36 @@
                         {{$item->moreInfoObj->name ?? "Code Link"}}
                     @endif
                 </td>
-                <td>
+                <td colspan="3">
                     @if(empty($item->moreInfoObj->linkText))
                         N/A
                     @else
-                        {{$item->moreInfoObj->linkText}}
+                        <a target="_blank" rel="noopener noreferrer" href="{{$item->moreInfoObj->linkText}}">{{$item->moreInfoObj->linkText}}</a>
                     @endif
                 </td>
                 <td>
                     @if(empty($item->moreInfoObj->linkText))
                         N/A
                     @else
-                    <h4>
-                    <span class="badge @if($item->moreInfoObj->status === 'valid') badge-success @elseif($item->moreInfoObj->status === 'broken')
-                                badge-danger @else badge-warning @endif" style="font-size 2em">{{$item->moreInfoObj->status}}</span>
+                        <h4>
+                            {!! $item->moreInfoObj->getStatusTextBadge() !!}
+                        </h4>
                     @endif
-                    </h4>
                 </td>
             </tr>
             </tbody>
         </table>
-        <table class="table table-bordered">
+        <div>
             <h3 class="text-left">Comments</h3>
-            <tbody>
-                <tr>
-                    <td colspan="4">
-                        @if($item->comments != "")
-                            {{$item->comments}}                            
-                        @else
-                            No Comments.                            
-                        @endif
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+            <div class="card text-left">
+                <div class="card-body">
+                    @if($item->comments != "")
+                        {{$item->comments}}
+                    @else
+                        No comments.
+                    @endif
+                </div>
+            </div>
+        </div>
     </div>
 </div>

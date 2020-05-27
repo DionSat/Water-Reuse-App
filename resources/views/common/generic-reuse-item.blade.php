@@ -7,7 +7,7 @@
         </div>
         <h2 class="text-center my-3"> Reuse Item Detail View </h2>
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 @auth
                     @if(($item->getStatus() != "approved" && $item->user_id === Auth::user()->id) || Auth::user()->is_admin)
                         <div class="my-3 row d-flex justify-content-between">
