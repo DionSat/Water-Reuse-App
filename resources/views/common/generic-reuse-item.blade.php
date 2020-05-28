@@ -16,14 +16,16 @@
                                    class="btn btn-primary btn-block"> Edit </a>
                             </span>
                             <span class="text-center col-md-4">
-                                <form method="POST" @if($type==="state") action="{{route('addStateMergeSubmit')}}"
-                                      @elseif($type==="county") action="{{route('addCountyMergeSubmit')}}"
-                                      @else action="{{route('addCityMergeSubmit')}}"@endif>
+                                @if($item->getStatus() != "approved")
+                                    <form method="POST" @if($type==="state") action="{{route('addStateMergeSubmit')}}"
+                                          @elseif($type==="county") action="{{route('addCountyMergeSubmit')}}"
+                                          @else action="{{route('addCityMergeSubmit')}}"@endif>
                                                                    {{ csrf_field() }}
                                                              <input name="id"
                                                                     value="{{$item->id}}" hidden>
                                 <button type="submit" class="btn btn-success btn-block">Approve</button>
                                 </form>
+                                @endif
                             </span>
                             <span class="text-center col-md-4">
                             <button class="btn btn-danger btn-block" data-toggle="modal" data-target="#exampleModal"
