@@ -95,19 +95,10 @@
 @push("css")
     <style>
         .py-4 {
-            background: rgb(2,0,36);
             text-align: center;
-        }
-        h1{
-            color: white;
-            font-family: 'Lobster';
         }
         p {
             margin-top: 3em;
-            font-family: 'Lato';
-        }
-        #back, #font {
-            color: white;
         }
     </style>
 @endpush
