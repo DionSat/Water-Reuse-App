@@ -44,7 +44,7 @@ class ReuseNodeController extends Controller
         $sourcesInMergeCount += StateMerge::where("sourceID", $request->node_id)->get()->count();
 
         if($sourcesInMergeCount != 0) {
-            $backRoute = route("sourceView");
+            $backRoute = route("reuseNodeView");
             $backName  = "Sources";
             $item = $node->node_name;
             $dependantCategory = "water reuse rules";
