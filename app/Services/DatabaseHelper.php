@@ -407,7 +407,6 @@ class DatabaseHelper {
                     $item = null;
             }
         }
-
         //Copy over all the old information
         $item->sourceID = $oldItem->sourceID;
         $item->destinationID = $oldItem->destinationID;
@@ -427,16 +426,18 @@ class DatabaseHelper {
     //Returns the new item as a object
     public static function moveReuseItemBetweenMergeTables($type, $state, $itemId, $locationToMoveItemTo, $newLocationId)
     {
-        //Find the item
-        $oldItem = DatabaseHelper::getReuseItemByIdStateAndType($type, $state, $itemId);
+        try {
+            //Find the item
+            $oldItem = DatabaseHelper::getReuseItemByIdStateAndType($type, $state, $itemId);
 
-        //Make a new item in the right table
-        $item = DatabaseHelper::createNewReuseItemFromOtherItem($state, $locationToMoveItemTo, $newLocationId, $oldItem);
+            //Make a new item in the right table
+            $item = DatabaseHelper::createNewReuseItemFromOtherItem($state, $locationToMoveItemTo, $newLocationId, $oldItem);
+            self::deleteItem($state, $oldItem);
+            return $item;
+        } catch(Exception $err) {
+            throw new Exception(err);
+        }
 
-        self::deleteItem($state, $oldItem);
-
-
-        return $item;
     }
 
     /**
