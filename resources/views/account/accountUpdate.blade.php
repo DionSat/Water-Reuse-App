@@ -13,12 +13,12 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="inputName">Name</label><input type="text" class="form-control" name="inputName"
-                                                                  value="{{ $user->name }}">
+                                                                  value="{{ $user->name }}" required>
                     </div>
                     <div class="form-group col-md-4">
                         <label
                             for="inputEmail">Email</label><input type="email" class="form-control" name="inputEmail"
-                                                                 value="{{ $user->email }}">
+                                                                 value="{{ $user->email }}" required>
                     </div>
                     <div class="form-group col-md-2">
                         <label for="countryCode">Country Code</label>

@@ -80,11 +80,8 @@ class AccountController extends Controller
             $tableField = $tableFields[$i];
             $formFieldElement = $formFields[$i];
 
-            if ($user != $request->$formFieldElement) {
-                $formField = $request->$formFieldElement ?? $user->$tableField;
-                # through 'db'
-                # DB::table('users')->update([$tableField => $formField]);
-                $user->$tableField = $formField;
+            if($user->$tableField != $request->$formFieldElement) {
+                $user->$tableField = $request->$formFieldElement;
             }
         }
 
