@@ -6,7 +6,7 @@
         <div class="row justify-content-center" style="margin: 3em">
             <div class="col-md-8">
                 <div class="container">
-                    <h2>How To Search For A Regulation</h2>
+                    <h2>How to Search for a Regulation</h2>
                     <p>1. Navigate to the <a href="{{ route('search') }}"> Search </a>page</p>
                     <p>2. Select either 'Commercial' or 'Residential'</p>
                     <img src="img/searchExample.png"></img>
@@ -24,14 +24,14 @@
         @else
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link active" id="nav-search-tab" data-toggle="tab" href="#nav-search" role="tab" aria-controls="nav-search" aria-selected="true">Search For A Regulation</a>
-                    <a class="nav-item nav-link" id="nav-addReg-tab" data-toggle="tab" href="#nav-addReg" role="tab" aria-controls="nav-addReg" aria-selected="false">Add A New Regulation</a>
+                    <a class="nav-item nav-link active" id="nav-search-tab" data-toggle="tab" href="#nav-search" role="tab" aria-controls="nav-search" aria-selected="true">Search for a Regulation</a>
+                    <a class="nav-item nav-link" id="nav-addReg-tab" data-toggle="tab" href="#nav-addReg" role="tab" aria-controls="nav-addReg" aria-selected="false">Add a New Regulation</a>
                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Administrator Information</a>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-search" role="tabpanel" aria-labelledby="nav-search-tab">
-                <h2>How To Search For A Regulation</h2>
+                <h2>How to Search for a Regulation</h2>
                 <p>1. Navigate to the <a href="{{ route('search') }}" target="_blank"> Search </a>page</p>
                 <p>2. Select either 'Commercial' or 'Residential'</p>
                 <img src="img/searchExample.png"></img>
@@ -63,18 +63,18 @@
                                     <a href="#userManip">User Manipulation</a>
                                 </li>
                                 <li>
-                                    <a href="#deleteReg">Delete A Regulation</a>
+                                    <a href="#deleteReg">Delete a Regulation</a>
                                 </li>
                                 <li>
-                                    <a href="#deleteArea">Delete A State, County or City</a>
+                                    <a href="#deleteArea">Delete a State, County or City</a>
                                 </li>
                             </ul>
                             <hr id="userManip">
                             <h2>User Manipulation</h2>
                             <hr id="deleteReg">
-                            <h2>Delete A Regulation</h2>
+                            <h2>Delete a Regulation</h2>
                             <hr id="deleteArea">
-                            <h2>Delete A State, County or City</h2>
+                            <h2>Delete a State, County or City</h2>
                         </div>
                     </div>
                 </div>
