@@ -61,6 +61,11 @@
                             <ul>
                                 <li>
                                     <a href="#userManip">User Manipulation</a>
+                                    <ul>
+                                        <li>
+                                            <a href="#addUser">Add a New User</a>
+                                        </li>
+                                    </ul>
                                 </li>
                                 <li>
                                     <a href="#deleteReg">Delete a Regulation</a>
@@ -71,6 +76,7 @@
                             </ul>
                             <hr id="userManip">
                             <h2>User Manipulation</h2>
+                            <h4 id="addUser" style="margin-top: 1em;">Add a New User</h4>
                             <hr id="deleteReg">
                             <h2>Delete a Regulation</h2>
                             <hr id="deleteArea">
