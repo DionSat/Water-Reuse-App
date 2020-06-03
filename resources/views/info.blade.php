@@ -2,7 +2,6 @@
 
 @section('body')
     <div class="container" id="container">
-        <h1 id="h">Information</h1>
         @guest
         <div class="row justify-content-center" style="margin: 3em">
             <div class="col-md-8">
@@ -33,7 +32,7 @@
             <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-search" role="tabpanel" aria-labelledby="nav-search-tab">
                 <h2>How To Search For A Regulation</h2>
-                <p>1. Navigate to the <a href="{{ route('search') }}"> Search </a>page</p>
+                <p>1. Navigate to the <a href="{{ route('search') }}" target="_blank"> Search </a>page</p>
                 <p>2. Select either 'Commercial' or 'Residential'</p>
                 <img src="img/searchExample.png"></img>
                 <p>3. First select a state in the dropdown menu, then you can either search only by state, or by county or city by selecting them in the dropdown menu.</p>
@@ -47,17 +46,36 @@
             </div>
             <div class="tab-pane fade" id="nav-addReg" role="tabpanel" aria-labelledby="nav-addReg-tab">
                 <h2>Add a New Regulation</h2>
-                <p>1. Navigate to the <a href="{{ route('userSubmission') }}">'Submit New Regulation' </a>page</p>
+                <p>1. Navigate to the <a href="{{ route('userSubmission') }}" target="_blank">'Submit New Regulation' </a>page</p>
                 <p>2. At the very least, enter the State you wish to submit a regulation for. You can also select a County and City, but that is not a requirement.</p>
                 <p>3. You may also enter a new county or city by clicking the 'Add A New State, County or City' button, and entering the new county and / or city name.</p>
                 <p>3. Select a source and a destination, and select the water reuse allowance (is allowed, not allowed, maybe allowed).</p>
-                <p>4. Add optional links to the water reuse regulation.
-                <p>5. Either click "Submit" if you only have one source and destination, or click the "Add another regulation" button, and repeat steps 3 - 4.</p></p>
+                <p>4. Add optional links to the water reuse regulation.</p>
+                <p>5. Either click "Submit" if you only have one source and destination, or click the "Add another regulation" button, and repeat steps 3 - 4.</p>
+
             </div>
 
                 <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                    <div class="row justify-content-center @if (Route::current()->getName() == "admin") active @endif"  style="margin: 3em">
-                    I see you.
+                   <div class="row justify-content-center @if (Route::current()->getName() == "admin") active @endif"  style="margin: 3em">
+                        <div class="container">
+                            <ul>
+                                <li>
+                                    <a href="#userManip">User Manipulation</a>
+                                </li>
+                                <li>
+                                    <a href="#deleteReg">Delete A Regulation</a>
+                                </li>
+                                <li>
+                                    <a href="#deleteArea">Delete A State, County or City</a>
+                                </li>
+                            </ul>
+                            <hr id="userManip">
+                            <h2>User Manipulation</h2>
+                            <hr id="deleteReg">
+                            <h2>Delete A Regulation</h2>
+                            <hr id="deleteArea">
+                            <h2>Delete A State, County or City</h2>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -73,6 +91,9 @@
         .py-4 {
             text-align: center;
         }
+        ul{
+            text-align: left;
+        }
         img{
             width: 485px;
             height: 300px;
@@ -85,7 +106,4 @@
             margin: 2em 0;
         }
     </style>
-@endpush
-@push('js')
-
 @endpush
