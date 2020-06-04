@@ -5,7 +5,7 @@
         @guest
         <div class="row justify-content-center" style="margin: 3em">
             <div class="col-md-8">
-                <div class="container">
+                <div class="container" id="guest">
                     <h2>How to Search for a Regulation</h2>
                     <p>1. Navigate to the <a href="{{ route('search') }}"> Search </a>page</p>
                     <p>2. Select either 'Commercial' or 'Residential'</p>
@@ -105,11 +105,11 @@
             height: 300px;
             border: 1px solid black !important;
         }
-        #nav-addReg, #nav-search, #nav-admin{
-            margin: 2em 0;
+        #nav-addReg, #nav-search, #nav-admin, #guest{
+            margin: 1.5em 0;
         }
-        #nav-addReg > *, #nav-search > *, #nav-admin > *{
-            margin: 2em 0;
+        #nav-addReg > *, #nav-search > *, #nav-admin > *, #guest > *{
+            margin: 1.5em 0;
         }
     </style>
 @endpush
