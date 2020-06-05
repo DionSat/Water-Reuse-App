@@ -75,13 +75,16 @@
             </div>
 
                 <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                        <div class="container">
+                        <div class="container" id="adminContainer">
                             <ul>
                                 <li>
                                     <a href="#userManip">User Manipulation</a>
                                     <ul>
                                         <li>
-                                            <a href="#deleteUser">Delete a User</a>
+                                            <a href="#addAdmin">Add / Remove Administrator Privileges</a>
+                                        </li>
+                                        <li>
+                                            <a href="#banUser">Ban a User</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -94,7 +97,30 @@
                             </ul>
                             <hr id="userManip">
                             <h2>User Manipulation</h2>
-                            <h4 id="deleteUser" style="margin-top: 1em;">Delete a User</h4>
+                                <h4 id="addAdmin">Add / Remove Administrator Privileges</h4>
+                                    <p>1. Navigate to the <a href="{{ route('admin') }}" target="_blank">'Administrator Dashboard' </a>page.</p>
+                                    <p>2. From here, click on the 'view' button under 'All Users'.</p>
+                                    <img src="img/banExample.png"></img>
+                                    <p>3. Now you can either scroll through the list / pages of users, you could search the current page of users with the 'Search Current Page' option or you can narrow down the search by searching the entire database of users with the 'Search Database' option</p>
+                                    <img class="smallRec" src="img/banExample1.png"></img>
+                                    <p>4. Once you have found the user you wish to ban, click the 'Toggle Admin' button.</p>
+                                    <img class="smallRec" src="img/toggleAdminExample.png"></img>
+                                    <p>5. You should now see either a green check mark or a red 'x', the former meaning the user has administrator privileges, and the later meaning they do not.</p>
+                                    <img class="smallRec" src="img/toggleAdminExample1.png"></img>
+                                <hr id="banUser">
+                                <h4 style="margin-top: 1em;">Ban a User</h4>
+                                    <p>1. Navigate to the <a href="{{ route('admin') }}" target="_blank">'Administrator Dashboard' </a>page.</p>
+                                    <p>2. From here, click on the 'view' button under 'All Users'.</p>
+                                    <img src="img/banExample.png"></img>
+                                    <p>3. Now you can either scroll through the list / pages of users, you could search the current page of users with the 'Search Current Page' option or you can narrow down the search by searching the entire database of users with the 'Search Database' option</p>
+                                    <img class="smallRec" src="img/banExample1.png"></img>
+                                    <p>4. Once you have found the user you wish to ban, click the 'ban user' button.</p>
+                                    <img class="smallRec" src="img/banExample2.png"></img>
+                                    <p>5. You should now recieve a message showing that the user was succesfully banned, and they will not appear in the list of users.</p>
+                                    <img class="smallRec" src="img/banExample3.png"></img>
+                                    <p>7. You can then 'unban' a user under the 'Banned Users' view of the Administrator Dashboard.</p>
+                                    <img src="img/banExample4.png"></img>
+                                    <img class="smallRec" src="img/banExample5.png"></img>
                             <hr id="deleteReg">
                             <h2>Delete a Regulation</h2>
                             <hr id="deleteArea">
@@ -139,6 +165,8 @@
                 <img class="smallRec" src="img/regSubmitExample4.png"></img>
                 <p>6. After submiting your new regulation, you should see a success message. If you receive an error, please contact the administrator to solve the issue.</p>
                 <img  src="img/regSubmitExample5.png"></img>
+
+
             </div>
             </div>
         @endguest
@@ -161,10 +189,10 @@
             height: 400px;
             border: 1px solid black !important;
         }
-        #nav-addReg, #nav-search, #nav-admin, #nav-searchGuest, #nav-register, #nav-addRegContrib, #nav-searchContrib{
+        #nav-addReg, #nav-search, #nav-admin, #nav-searchGuest, #nav-register, #nav-addRegContrib, #nav-searchContrib, #nav-contact, #adminContainer{
             margin: 1.5em 0;
         }
-        #nav-addReg > *, #nav-search > *, #nav-admin > *, #nav-searchGuest > *, #nav-register > *, #nav-addRegContrib > *, #nav-searchContrib > *{
+        #nav-addReg > *, #nav-search > *, #nav-admin > *, #nav-searchGuest > *, #nav-register > *, #nav-addRegContrib > *, #nav-searchContrib > *, #adminContainer > *{
             margin: 1.5em 0;
         }
         .smallRec{
@@ -172,6 +200,10 @@
         }
         #nav-contact{
             margin: 2em 0;
+        }
+        hr{
+            background-color: black;
+            border: none;
         }
     </style>
 @endpush
