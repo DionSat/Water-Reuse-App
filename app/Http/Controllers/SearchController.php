@@ -35,14 +35,14 @@ class SearchController extends Controller
                                         ->where("stateID", $request->state_id)->where("location_type", $request->searchType)->get();
         if(isset($request->county_id)){
             $countyRules = CountyMerge::with(['county', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])
-                ->where("countyID", $request->county_id)->get();
+                ->where("countyID", $request->county_id)->where("location_type", $request->searchType)->get();
             $lowestLevel = "county";
             $county = County::find($request->county_id);
         }
 
         if(isset($request->city_id)) {
             $cityRules = CityMerge::with(['city', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])
-                ->where("cityID", $request->city_id)->get();
+                ->where("cityID", $request->city_id)->where("location_type", $request->searchType)->get();
             $lowestLevel = "city";
             $city = City::find($request->city_id);
         }
