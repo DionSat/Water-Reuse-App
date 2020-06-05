@@ -84,6 +84,12 @@
                                             <a href="#addAdmin">Add / Remove Administrator Privileges</a>
                                         </li>
                                         <li>
+                                            <a href="#emailUsers">Send Emails to Users</a>
+                                        </li>
+                                        <li>
+                                            <a href="#emailAdmin">Schedule an Administrative Summary Email</a>
+                                        </li>
+                                        <li>
                                             <a href="#banUser">Ban a User</a>
                                         </li>
                                     </ul>
@@ -107,6 +113,23 @@
                                     <img class="smallRec" src="img/toggleAdminExample.png"></img>
                                     <p>5. You should now see either a green check mark or a red 'x', the former meaning the user has administrator privileges, and the later meaning they do not.</p>
                                     <img class="smallRec" src="img/toggleAdminExample1.png"></img>
+                                <hr id="emailUsers">
+                                <h4 style="margin-top: 1em;">Email Users</h4>
+                                    <p>1. Navigate to the <a href="{{ route('admin') }}" target="_blank">'Administrator Dashboard' </a>page.</p>
+                                    <p>2. From here, click on the 'view' button under 'All User Emails'.</p>
+                                    <img src="img/userEmailExample.png"></img>
+                                    <p>3. You will now see that there are two options. You can either email consenting users (preferred), or you can email all users. Generally, you only want to email non-consenting users if it is an absolute emergency.</p>
+                                    <img src="img/userEmailExample1.png"></img>
+                                    <p>4. Once you have chosen which user base to email, your default email software will open up on your computer prefilled with a list of user emails. If you do not have email capable software installed, we suggest to install one to use this functionality.</p>
+                                <hr id="emailAdmin">
+                                <h4 style="margin-top: 1em;">Schedule an Administrative Summary Email</h4>
+                                    <p>This will send an email with a summary of all pending administrator duties, such as approving a regulation.</p>
+                                    <p>1. Navigate to the <a href="{{ route('admin') }}" target="_blank">'Administrator Dashboard' </a>page.</p>
+                                    <p>2. From here, click on the 'view' button under 'Scheduled Emails'.</p>
+                                    <img src="img/emailAdminExample.png"></img>
+                                    <p>3. You may now select which administrator to email under the 'Admin User' dropdown. Your username will be selected by default. You can also select how often you would want your email sent in the 'How often (in days)' edit box.</p>
+                                    <img class="smallRec" src="img/emailAdminExample1.png"></img>
+                                    <p>4. Once you click the 'Schedule' button, an email containing administrative information will be sent at 10am every number of days specified by you.</p>
                                 <hr id="banUser">
                                 <h4 style="margin-top: 1em;">Ban a User</h4>
                                     <p>1. Navigate to the <a href="{{ route('admin') }}" target="_blank">'Administrator Dashboard' </a>page.</p>
