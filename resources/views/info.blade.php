@@ -181,7 +181,7 @@
             </div>
         @else
         <nav>
-                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <div class="nav nav-tabs" id="nav-tab-mid" role="tablist">
                     <a class="nav-item nav-link active" id="nav-searchContrib-tab" data-toggle="tab" href="#nav-searchContrib" role="tab" aria-controls="nav-searchContrib" aria-selected="true">Search for a Regulation</a>
                     <a class="nav-item nav-link" id="nav-addRegContrib-tab" data-toggle="tab" href="#nav-addRegContrib" role="tab" aria-controls="nav-addRegContrib" aria-selected="false">Add a New Regulation</a>
                 </div>
@@ -200,6 +200,7 @@
                 <img src="img/searchExample3.png"></img>
                 <h4>Disclaimer</h4>
                 <p>If the state, county or city does not have any water reuse information, or if the state, county or city is not present in the search dropdown menus, this does not mean there are no regulations. It just means they have not been added to this site. Please search your local government web pages to find the water reuse information you need.</p>
+                <a href="#nav-tab-mid">Back to Top</a>
             </div>
             <div class="tab-pane fade" id="nav-addRegContrib" role="tabpanel" aria-labelledby="nav-addRegContrib-tab">
                 <h2>Add a New Regulation</h2>
@@ -216,6 +217,7 @@
                 <img class="smallRec" src="img/regSubmitExample4.png"></img>
                 <p>6. After submiting your new regulation, you should see a success message. If you receive an error, please contact the administrator to solve the issue.</p>
                 <img  src="img/regSubmitExample5.png"></img>
+                <a href="#nav-tab-mid">Back to Top</a>
             </div>
             </div>
         @endguest
