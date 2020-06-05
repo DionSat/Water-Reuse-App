@@ -228,5 +228,16 @@
             background-color: black;
             border: none;
         }
+        @media only screen and (max-width: 774px)
+        {
+            img{
+                width: 323.5px;
+                height: 200px;
+                border: 1px solid black !important;
+            }
+            .smallRec{
+                height: 100px;
+            }
+        }
     </style>
 @endpush
