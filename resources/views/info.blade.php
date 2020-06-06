@@ -22,7 +22,7 @@
                 <p>5. At this point, you can either scroll through the search results, or narrow them down by selecting a source and destination in the dropdown menues.</p>
                 <img src="img/searchExample3.png"></img>
                 <h4>Disclaimer</h4>
-                <p>If the state, county or city does not have any water reuse information, or if the state, county or city is not present in the search dropdown menus, this does not mean there are no regulations. It just means they have not been added to this site. Please search your local government web pages to find the water reuse information you need.</p>
+                <p>If the state, county or city does not have any water reuse information, or if the state, county or city is not present in the search dropdown menus, this does not mean there are no regulations. It just means they have not been added to this site. Please search your local government web pages to find the water reuse information you need. After finding that information, it would be helpful to us if you <a href="{{ route('register') }}">resgister</a> to become a contributor, and add this regulation to our site.</p>
                 <a href="#nav-tab-base">Back to Top</a>
             </div>
             <div class="tab-pane fade" id="nav-register" role="tabpanel" aria-labelledby="nav-register-tab">
@@ -57,7 +57,7 @@
                 <p>5. At this point, you can either scroll through the search results, or narrow them down by selecting a source and destination in the dropdown menues.</p>
                 <img src="img/searchExample3.png"></img>
                 <h4>Disclaimer</h4>
-                <p>If the state, county or city does not have any water reuse information, or if the state, county or city is not present in the search dropdown menus, this does not mean there are no regulations. It just means they have not been added to this site. Please search your local government web pages to find the water reuse information you need.</p>
+                <p>If the state, county or city does not have any water reuse information, or if the state, county or city is not present in the search dropdown menus, this does not mean there are no regulations. It just means they have not been added to this site. Please search your local government web pages to find the water reuse information you need. After finding that information, it would be helpful to us if you <a href="{{ route('userSubmission') }}">add</a> it to the site.</p>
                 <a href="#nav-tab-admin">Back to Top</a>
             </div>
             <div class="tab-pane fade" id="nav-addReg" role="tabpanel" aria-labelledby="nav-addReg-tab">
@@ -102,10 +102,10 @@
                                     <a href="#regulation">Approve or Deny a New Regulation</a>
                                 </li>
                                 <li>
-                                    <a href="#deleteReg">Delete a Regulation</a>
+                                    <a href="#deleteReg">Delete / Edit a Regulation</a>
                                 </li>
                                 <li>
-                                    <a href="#deleteArea">Delete a State, County or City</a>
+                                    <a href="#deleteArea">Delete / Edit a State, County or City</a>
                                 </li>
                             </ul>
                             <hr id="userManip">
@@ -160,13 +160,31 @@
                                     </br>
                                     <a href="#nav-tab-admin">Back to Top</a>
                             <hr id="regulation">
-                            <h2>Approve or Deny a New Regulation<h2>
-                            <a href="#nav-tab-admin">Back to Top</a>
+                            <h2>Approve or Deny a New Regulation</h2>
+                                <p>1. Navigate to the <a href="{{ route('adminUserSubmissionView') }}" target="_blank">'Submissions' </a>page.</p>
+                                <p>2. From here you should see three options showing the count of pending State, County and City regulation submissions. Choose the area level you wish to approve for. For this example, we will be approving a State level submission, but these steps apply to County and City as well.</p>
+                                <img src="img/regulationExample.png"></img>
+                                <p>3. You should now see a list of regulations awaiting approval. To review the submission, click the 'view' button, to decline the submission click the 'Decline' button and to approve the submission, click the 'Approve' button.</p>
+                                <img class="smallRec" src="img/regulationExample1.png"></img>
+                                <h4>Disclamer</h4>
+                                <p>The system is set up in a way that if you approve a new or non-existing area, this area will be created.</h4>
+                                </br>
+                                </br>
+                                <a href="#nav-tab-admin">Back to Top</a>
                             <hr id="deleteReg">
-                            <h2>Delete a Regulation</h2>
-                                <p>1. Navigate to the <a href="{{ route('admin') }}" target="_blank">'Administrator Dashboard' </a>page.</p>
-                                <p>2. Click on the 'Database' button to switch to the database view.</p>
-                                <img src="img/deleteExample.png"></img>
+                            <h2>Delete / Edit a Regulation</h2>
+                                <p>1. Navigate to the <a href="{{ route('search') }}" target="_blank"> Search </a>page</p>
+                                <p>2. Select either 'Commercial' or 'Residential'</p>
+                                <img src="img/searchExample.png"></img>
+                                <p>3. First select a state in the dropdown menu, then you can either search only by state, or by county or city by selecting them in the dropdown menu.</p>
+                                <img src="img/searchExample1.png"></img>
+                                <p>4. After selecting the region you wish to search for, click on the 'Search' button.</p>
+                                <img src="img/searchExample2.png"></img>
+                                <p>5. At this point, you can either scroll through the search results, or narrow them down by selecting a source and destination in the dropdown menues.</p>
+                                <img src="img/searchExample3.png"></img>
+                                <p>6. Once you have found the regulation you wish to delete, click the 'view' button</p>
+                                <p>7. From this page, you can either delete or edit a regulation by clicking the associated buttons.</p>
+                                <img src="img/deleteRegExample.png"></img>
                                 </br>
                                 <a href="#nav-tab-admin">Back to Top</a>
                             <hr id="deleteArea">
@@ -174,6 +192,10 @@
                                 <p>1. Navigate to the <a href="{{ route('admin') }}" target="_blank">'Administrator Dashboard' </a>page.</p>
                                 <p>2. Click on the 'Database' button to switch to the database view.</p>
                                 <img src="img/deleteExample.png"></img>
+                                <p>3. You should now see display boxes for Cities, Counties and States. If you wish to add a new area, click '+Add', but if you wish to edit or delete an area, click 'Manage'</p>
+                                <img src="img/deleteAreaExample.png"></img>
+                                <p>4. From the 'Manage' screen, you will see button options to either 'Delete', if you wish to remove an area, or 'Modify', if you just need to edit the area.</p>
+                                <img src="img/deleteAreaExample1.png"></img>
                                 </br>
                                 <a href="#nav-tab-admin">Back to Top</a>
                         </div>
@@ -199,7 +221,7 @@
                 <p>5. At this point, you can either scroll through the search results, or narrow them down by selecting a source and destination in the dropdown menues.</p>
                 <img src="img/searchExample3.png"></img>
                 <h4>Disclaimer</h4>
-                <p>If the state, county or city does not have any water reuse information, or if the state, county or city is not present in the search dropdown menus, this does not mean there are no regulations. It just means they have not been added to this site. Please search your local government web pages to find the water reuse information you need.</p>
+                <p>If the state, county or city does not have any water reuse information, or if the state, county or city is not present in the search dropdown menus, this does not mean there are no regulations. It just means they have not been added to this site. Please search your local government web pages to find the water reuse information you need. After you find the information, if would be helpful if you <a href="{{ route('userSubmission') }}">add</a> it to the site.</p>
                 <a href="#nav-tab-mid">Back to Top</a>
             </div>
             <div class="tab-pane fade" id="nav-addRegContrib" role="tabpanel" aria-labelledby="nav-addRegContrib-tab">
