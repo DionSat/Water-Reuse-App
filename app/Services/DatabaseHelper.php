@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Services;
+
 use App\City;
 use App\County;
 use App\State;
@@ -13,14 +14,17 @@ use App\PendingCityMerge;
 use App\PendingCountyMerge;
 use App\PendingStateMerge;
 use App\Links;
+use App\ReuseNode;
 use Exception;
 use Illuminate\Http\Request;
 use Throwable;
 use Illuminate\Support\Facades\DB;
 
-class DatabaseHelper {
+class DatabaseHelper
+{
 
-    public static function getAllPendingSubmissions(){
+    public static function getAllPendingSubmissions()
+    {
         $mergedSubmissions = PendingStateMerge::all();
         $mergedSubmissions = $mergedSubmissions->merge(PendingCityMerge::all());
         $mergedSubmissions = $mergedSubmissions->merge(PendingCountyMerge::all());
@@ -28,7 +32,8 @@ class DatabaseHelper {
         return $mergedSubmissions;
     }
 
-    public static function getCountOfAllPendingSubmissions(){
+    public static function getCountOfAllPendingSubmissions()
+    {
         $mergedSubmissionCount = DB::table('pendingcitymerge')->where('deleted_at', null)->count();
         $mergedSubmissionCount += DB::table('pendingcountymerge')->where('deleted_at', null)->count();
         $mergedSubmissionCount += DB::table('pendingstatemerge')->where('deleted_at', null)->count();
@@ -36,7 +41,8 @@ class DatabaseHelper {
         return $mergedSubmissionCount;
     }
 
-    public static function getAllApprovedSubmissions(){
+    public static function getAllApprovedSubmissions()
+    {
         $mergedSubmissions = StateMerge::all();
         $mergedSubmissions = $mergedSubmissions->merge(CityMerge::all());
         $mergedSubmissions = $mergedSubmissions->merge(CountyMerge::all());
@@ -44,7 +50,8 @@ class DatabaseHelper {
         return $mergedSubmissions;
     }
 
-    public static function getCountOfAllApprovedSubmissions(){
+    public static function getCountOfAllApprovedSubmissions()
+    {
         $mergedSubmissionCount = DB::table('citymerge')->count();
         $mergedSubmissionCount += DB::table('countymerge')->count();
         $mergedSubmissionCount += DB::table('statemerge')->count();
@@ -52,7 +59,8 @@ class DatabaseHelper {
         return $mergedSubmissionCount;
     }
 
-    public static function getAllSubmissionsForCurrentUser(){
+    public static function getAllSubmissionsForCurrentUser()
+    {
         $userId = Auth::user()->id;
 
         $mergedSubmissions = PendingStateMerge::withTrashed()->with(['state', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])->where('user_id', $userId)->get();
@@ -66,10 +74,11 @@ class DatabaseHelper {
     }
 
 
-    public static function getReuseItemByIdStateAndType($type, $state, $itemId) {
+    public static function getReuseItemByIdStateAndType($type, $state, $itemId)
+    {
         $item = null;
-        if($state === "pending" || $state === "rejected"){
-            switch ($type){
+        if ($state === "pending" || $state === "rejected") {
+            switch ($type) {
                 case "city":
                     $item = PendingCityMerge::withTrashed()->find($itemId);
                     break;
@@ -83,7 +92,7 @@ class DatabaseHelper {
                     $item = null;
             }
         } else {
-            switch ($type){
+            switch ($type) {
                 case "city":
                     $item = CityMerge::find($itemId);
                     break;
@@ -102,7 +111,8 @@ class DatabaseHelper {
     }
 
 
-    public static function addRegulation(Request $request, $regLists) {
+    public static function addRegulation(Request $request, $regLists)
+    {
         $regArea = "";
         $mergeTable = null;
         $isNew = false;
@@ -111,77 +121,66 @@ class DatabaseHelper {
         $isNewState = false;
 
         //check to see if it's a new area
-        if($regLists[0]['$countyId'] == -1)
-        {
+        if ($regLists[0]['$countyId'] == -1) {
             $isNew = true;
         }
 
-        foreach($regLists as $regList)
-        {
+        foreach ($regLists as $regList) {
             //need to add a new area
-            if($isNew)
-            {
-                    $stateCheck =  State::where("state_id", $regLists[0]['$stateId'])->get()->first();
-                    $countyCheck = County::where("countyName", $regLists[0]['$county'])->get()->first();
-                    $cityCheck = City::where("cityName", $regLists[0]['$city'])->get()->first();
+            if ($isNew) {
+                $stateCheck = State::where("state_id", $regLists[0]['$stateId'])->get()->first();
+                $countyCheck = County::where("countyName", $regLists[0]['$county'])->get()->first();
+                $cityCheck = City::where("cityName", $regLists[0]['$city'])->get()->first();
 
-                    if(!$countyCheck && $regLists[0]['$county'] != ""){
-                        $county = new County();
-                        $county->countyName = $regLists[0]['$county'];
-                        $county->fk_state = $stateCheck->state_id;
-                        try {
-                            $county->save();
-                        }
-                        catch(Throwable $e1){
-                            return "County Already Exists, or There Was an Error on Loading New Area";
-                        }
+                if (!$countyCheck && $regLists[0]['$county'] != "") {
+                    $county = new County();
+                    $county->countyName = $regLists[0]['$county'];
+                    $county->fk_state = $stateCheck->state_id;
+                    try {
+                        $county->save();
+                    } catch (Throwable $e1) {
+                        return "County Already Exists, or There Was an Error on Loading New Area";
+                    }
 
-                            $mergeTable = new PendingCountyMerge();
-                            $mergeTable->countyID = $county->county_id;
-                            $regArea = $regLists[0]['$county'];
-                            $regLists[0]['$countyId'] = $county->county_id;
-                            $isNewCounty = true;
-                            $isNewState = false;
-                            $countyCheck = $county;
+                    $mergeTable = new PendingCountyMerge();
+                    $mergeTable->countyID = $county->county_id;
+                    $regArea = $regLists[0]['$county'];
+                    $regLists[0]['$countyId'] = $county->county_id;
+                    $isNewCounty = true;
+                    $isNewState = false;
+                    $countyCheck = $county;
+                }
+                if (!$cityCheck && $regLists[0]['$city'] != "") {
+                    $city = new City();
+                    $city->cityName = $regLists[0]['$city'];
+                    $city->fk_county = $countyCheck->county_id;
+                    try {
+                        $city->save();
+                    } catch (Throwable $e2) {
+                        return "City Already Exists, or There Was an Error on Loading New Area";
                     }
-                    if(!$cityCheck && $regLists[0]['$city'] != "")
-                    {
-                        $city = new City();
-                        $city->cityName = $regLists[0]['$city'];
-                        $city->fk_county = $countyCheck->county_id;
-                        try{
-                            $city->save();
-                        }
-                        catch(Throwable $e2)
-                        {
-                            return "City Already Exists, or There Was an Error on Loading New Area";
-                        }
-                        $mergeTable = new PendingCityMerge();
-                        $mergeTable->cityID= $city->city_id;
-                        $regArea = $regLists[0]['$city'];
-                        $regLists[0]['$cityId'] = $city->city_id;
-                        $isNewCity = true;
-                        $isNewState = false;
-                        $isNewCounty = false;
-                    }
-            }
-            //There is only a State
-            else if($regLists[0]['$county'] == 'Choose...' || $isNewState || $regLists[0]['$county'] == '')
-            {
+                    $mergeTable = new PendingCityMerge();
+                    $mergeTable->cityID = $city->city_id;
+                    $regArea = $regLists[0]['$city'];
+                    $regLists[0]['$cityId'] = $city->city_id;
+                    $isNewCity = true;
+                    $isNewState = false;
+                    $isNewCounty = false;
+                }
+            } //There is only a State
+            else if ($regLists[0]['$county'] == 'Choose...' || $isNewState || $regLists[0]['$county'] == '') {
                 $mergeTable = new PendingStateMerge();
                 $regArea = $regLists[0]['$state'];
                 $mergeTable->stateID = $regLists[0]['$stateId'];
-            }
-            //There is a State and a County
-            else if($regLists[0]['$city'] == 'Choose...' || $isNewCounty || $regLists[0]['$city'] == '')
-            {
+            } //There is a State and a County
+            else if ($regLists[0]['$city'] == 'Choose...' || $isNewCounty || $regLists[0]['$city'] == '') {
                 $mergeTable = new PendingCountyMerge();
                 $mergeTable->countyID = $regLists[0]['$countyId'];
                 $regArea = $regLists[0]['$county'];
             }
             //There is a city. The code will not call the post unless there is at
             //least a State selected, so this assumes there will always be a state.
-            else if($regLists[0]['$city'] != 'Choose...' || $isNewCity || $regLists[0]['$city'] != ''){
+            else if ($regLists[0]['$city'] != 'Choose...' || $isNewCity || $regLists[0]['$city'] != '') {
                 $mergeTable = new PendingCityMerge();
                 $mergeTable->cityID = $regLists[0]['$cityId'];
                 $regArea = $regLists[0]['$city'];
@@ -196,18 +195,17 @@ class DatabaseHelper {
             $mergeTable->comments = $regList['$comments'];
 
             try {
-                foreach ($regList['$destinationId'] as $destination){
+                foreach ($regList['$destinationId'] as $destination) {
                     $mergeTableToSave = clone $mergeTable;
                     $mergeTableToSave->destinationID = $destination;
-                    if($mergeTableToSave->save() == false)
-                    {
+                    if ($mergeTableToSave->save() == false) {
                         $codesLink->delete();
                         $permitLink->delete();
                         $incentivesLink->delete();
                         $moreInfoLink->delete();
                     }
                 }
-            } catch (Exception $exception){
+            } catch (Exception $exception) {
                 return $exception->getMessage();// return "A API error occurred.";
             }
         }
@@ -222,10 +220,24 @@ class DatabaseHelper {
 
         $city = new CityMerge();
         $cityToApprove = City::where("city_id", $pending->cityID)->get()->first();
-        if($cityToApprove)
-        {
-            if(!$cityToApprove->is_approved)
-            {
+
+        //grabs the existing city submission w/ pending source id and destination
+        $cityMerge = CityMerge::where([
+            ['sourceID', '=', $pending->sourceID],
+            ['destinationID', '=', $pending->destinationID],
+        ])->get();
+
+        //if cityMerge is populated, then this submission already exists. Block approval
+        if (count($cityMerge) > 0) {
+            $source = ReuseNode::where("node_id", $pending->sourceID)->get()->first();
+            $destination = ReuseNode::where("node_id", $pending->destinationID)->get()->first();
+            throw new Exception("The city '$cityToApprove->stateName' already has a submission with the source
+                '$source->node_name' and destination '$destination->node_name'.
+                To replace the existing submission, delete the existing submission and approve the new one. ");
+        }
+
+        if ($cityToApprove) {
+            if (!$cityToApprove->is_approved) {
                 $cityToApprove->is_approved = true;
                 $cityToApprove->save();
             }
@@ -258,10 +270,26 @@ class DatabaseHelper {
 
         $state = new StateMerge();
         $stateToApprove = State::where("state_id", $pending->stateID)->get()->first();
-        if($stateToApprove)
-        {
-            if(!$stateToApprove->is_approved)
-            {
+
+        //grabs the existing state submission w/ pending source id and destination
+        $stateMerge = StateMerge::where([
+            ['sourceID', '=', $pending->sourceID],
+            ['destinationID', '=', $pending->destinationID],
+        ])->get();
+
+        //if stateMerge is populated, then this submission already exists. Block approval
+        if (count($stateMerge) > 0) {
+            $source = ReuseNode::where("node_id", $pending->sourceID)->get()->first();
+            $destination = ReuseNode::where("node_id", $pending->destinationID)->get()->first();
+            //throw new Exception("$stateMerge");
+            throw new Exception("The state '$stateToApprove->stateName' already has a submission with the source
+                '$source->node_name' and destination '$destination->node_name'.
+                To replace the existing submission, delete the existing submission and approve the new one. ");
+        }
+
+
+        if ($stateToApprove) {
+            if (!$stateToApprove->is_approved) {
                 $stateToApprove->is_approved = true;
                 $stateToApprove->save();
             }
@@ -293,10 +321,24 @@ class DatabaseHelper {
         $pending = PendingCountyMerge::find($request->id);
         $county = new CountyMerge();
         $countyToApprove = County::where("county_id", $pending->countyID)->get()->first();
-        if($countyToApprove)
-        {
-            if(!$countyToApprove->is_approved)
-            {
+
+        //grabs the existing county submission w/ pending source id and destination
+        $countyMerge = CountyMerge::where([
+            ['sourceID', '=', $pending->sourceID],
+            ['destinationID', '=', $pending->destinationID],
+        ])->get();
+
+        //if countyMerge is populated, then this submission already exists. Block approval
+        if (count($countyMerge) > 0) {
+            $source = ReuseNode::where("node_id", $pending->sourceID)->get()->first();
+            $destination = ReuseNode::where("node_id", $pending->destinationID)->get()->first();
+            throw new Exception("The county '$countyToApprove->stateName' already has a submission with the source
+                '$source->node_name' and destination '$destination->node_name'.
+                To replace the existing submission, delete the existing submission and approve the new one. ");
+        }
+
+        if ($countyToApprove) {
+            if (!$countyToApprove->is_approved) {
                 $countyToApprove->is_approved = true;
                 $countyToApprove->save();
             }
@@ -334,15 +376,13 @@ class DatabaseHelper {
         $newLocationId = -1;
         $newLocation = "";
 
-        if($request->city > -1){
+        if ($request->city > -1) {
             $newLocationId = $request->city;
             $newLocation = "city";
-        }
-        elseif ($request->county > -1){
+        } elseif ($request->county > -1) {
             $newLocationId = $request->county;
             $newLocation = "county";
-        }
-        else {
+        } else {
             $newLocationId = $request->state;
             $newLocation = "state";
         }
@@ -369,11 +409,12 @@ class DatabaseHelper {
 
 
     // We trust that the new location Id matches the $type (city / county / state)
-    public static function createNewReuseItemFromOtherItem($state, $type, $newItemLocationId, $oldItem) {
+    public static function createNewReuseItemFromOtherItem($state, $type, $newItemLocationId, $oldItem)
+    {
 
         //Make the new item
-        if($state === "pending"){
-            switch ($type){
+        if ($state === "pending") {
+            switch ($type) {
                 case "city":
                     $item = new PendingCityMerge();
                     $item->cityID = $newItemLocationId;
@@ -390,7 +431,7 @@ class DatabaseHelper {
                     $item = null;
             }
         } else {
-            switch ($type){
+            switch ($type) {
                 case "city":
                     $item = new CityMerge();
                     $item->cityID = $newItemLocationId;
@@ -422,7 +463,6 @@ class DatabaseHelper {
     }
 
 
-
     //Returns the new item as a object
     public static function moveReuseItemBetweenMergeTables($type, $state, $itemId, $locationToMoveItemTo, $newLocationId)
     {
@@ -434,7 +474,7 @@ class DatabaseHelper {
             $item = DatabaseHelper::createNewReuseItemFromOtherItem($state, $locationToMoveItemTo, $newLocationId, $oldItem);
             self::deleteItem($state, $oldItem);
             return $item;
-        } catch(Exception $err) {
+        } catch (Exception $err) {
             throw new Exception(err);
         }
 
@@ -520,7 +560,7 @@ class DatabaseHelper {
         $incentivesLink = new Links();
         $moreInfoLink = new Links();
 
-        if (strlen(trim($regList['$codesLink'])) == 0){
+        if (strlen(trim($regList['$codesLink'])) == 0) {
             $mergeTable->codes = null;
         } else {
             $holdingVar = Links::where('linkText', $regList['$codesLink'])->get();
@@ -534,7 +574,7 @@ class DatabaseHelper {
             $mergeTable->codes = $codesLink->link_id;
         }
 
-        if (strlen(trim($regList['$permitLink'])) == 0){
+        if (strlen(trim($regList['$permitLink'])) == 0) {
             $mergeTable->permit = null;
         } else {
             $holdingVar = Links::where('linkText', $regList['$permitLink'])->get();
@@ -549,7 +589,7 @@ class DatabaseHelper {
             $mergeTable->permit = $permitLink->link_id;
         }
 
-        if (strlen(trim($regList['$incentivesLink'])) == 0){
+        if (strlen(trim($regList['$incentivesLink'])) == 0) {
             $mergeTable->incentives = null;
         } else {
             $holdingVar = Links::where('linkText', $regList['$incentivesLink'])->get();
@@ -563,7 +603,7 @@ class DatabaseHelper {
             $mergeTable->incentives = $incentivesLink->link_id;
         }
 
-        if (strlen(trim($regList['$moreInfoLink'])) == 0){
+        if (strlen(trim($regList['$moreInfoLink'])) == 0) {
             $mergeTable->moreInfo = null;
         } else {
             $holdingVar = Links::where('linkText', $regList['$moreInfoLink'])->get();
