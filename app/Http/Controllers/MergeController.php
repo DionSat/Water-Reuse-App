@@ -25,9 +25,6 @@ class MergeController extends Controller
             $errorMsg = MergeController::DB_ERROR_MSG.$e->getMessage();
             return redirect()->route('userStateView')->with(['alert' => 'danger', 'alertMessage' => $errorMsg]);        }
     }
-    function on_error($num, $str, $file, $line) {
-        print "Encountered error $num in $file, line $line: $str\n";
-    }
 
     public function addStateMergeSubmit(Request $request)
     {
