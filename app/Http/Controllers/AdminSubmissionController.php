@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\DatabaseHelper;
 use App\State;
 use App\User;
 use Illuminate\Http\Requests;
@@ -11,6 +12,9 @@ use Illuminate\Http\Request;
 use App\PendingStateMerge;
 use App\PendingCityMerge;
 use App\PendingCountyMerge;
+use App\StateMerge;
+use App\CityMerge;
+use App\CountyMerge;
 
 class AdminSubmissionController extends Controller
 {
@@ -18,6 +22,8 @@ class AdminSubmissionController extends Controller
     public function all()
     {
         $user = Auth::user();
+
+        //pending submissions
         $stateSubmissions = PendingStateMerge::all();
         $countySubmissions = PendingCountyMerge::all();
         $citySubmissions = PendingCityMerge::all();
@@ -31,7 +37,21 @@ class AdminSubmissionController extends Controller
         $locationCards[] = ["title" => "County Submissions", "count" => $countyNumber, "view" => route("userCountyView")];
         $locationCards[] = ["title" => "City Submissions", "count" => $cityNumber, "view" => route("userCityView")];
 
-        return view('adminUserSubmission.userSubmissionOverview', compact('user', 'locationCards', 'stateSubmissions', 'citySubmissions', 'countySubmissions'));
+        //existing (approved) submissions
+        $stateMergeSubmissions = StateMerge::all();
+        $countyMergeSubmissions = CountyMerge::all();
+        $cityMergeSubmissions = CityMerge::all();
+
+        $stateMergeNumber = $stateMergeSubmissions->count();
+        $countyMergeNumber = $countyMergeSubmissions->count();
+        $cityMergeNumber = $cityMergeSubmissions->count();
+
+        $mergeCards = [];
+        $mergeCards[] = ["title" => "State Submissions", "count" => $stateMergeNumber, "view" => route("approvedStateView")];
+        $mergeCards[] = ["title" => "County Submissions", "count" => $countyMergeNumber, "view" => route("approvedCountyView")];
+        $mergeCards[] = ["title" => "City Submissions", "count" => $cityMergeNumber, "view" => route("approvedCityView")];
+
+        return view('adminUserSubmission.userSubmissionOverview', compact('user', 'locationCards', 'stateSubmissions', 'citySubmissions', 'countySubmissions', 'mergeCards'));
     }
 
     public function userState()
@@ -91,6 +111,45 @@ class AdminSubmissionController extends Controller
     {
         $submissions = PendingCityMerge::where('id', $request->itemid)->get();
         return view('adminUserSubmission.userSubmissionItem', compact( 'submissions'));
+    }
+
+    public function approvedStateView(Request $request)
+    {
+        $stateSubmissions = StateMerge::with(['user', 'source', 'destination', 'state'])->get()->sortByDesc("created_at")->groupBy('state.stateName');
+        return view('adminUserSubmission.approvedStateSubmissions', compact('stateSubmissions'));
+    }
+
+    public function approvedCountyView(Request $request)
+    {
+        $countySubmissions = CountyMerge::with(['user', 'source', 'destination', 'county', 'county.state'])->get()->sortByDesc("created_at")->groupBy('county.countyName');
+        $countySubmissions = $countySubmissions->mapWithKeys(function ($item, $key) {
+            if(!empty($item)){
+                $stateName = ", ".$item[0]->county->state->stateName;
+            } else {
+                $stateName = "";
+            }
+            return [$key.$stateName => $item];
+        });
+
+        return view('adminUserSubmission.approvedCountySubmissions', compact('countySubmissions'));
+    }
+
+    public function approvedCityView(Request $request)
+    {
+        $citySubmissions = CityMerge::with(['user', 'source', 'destination', 'city', 'city.county', 'city.county.state'])->get()->sortByDesc("created_at")->groupBy('city.cityName');;
+
+        $citySubmissions = $citySubmissions->mapWithKeys(function ($item, $key) {
+            if(!empty($item)){
+                $stateName = ", ".$item[0]->city->county->state->stateName;
+                $countyName = ", ".$item[0]->city->county->countyName." County";
+            } else {
+                $stateName = "";
+                $countyName = "";
+            }
+            return [$key.$countyName.$stateName => $item];
+        });
+
+        return view('adminUserSubmission.approvedCitySubmissions', compact('citySubmissions'));
     }
 
 }
