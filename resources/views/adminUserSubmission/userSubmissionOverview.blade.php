@@ -21,7 +21,9 @@
                 </div>
             @endforeach
         </div>
-    <hr>
+
+        <hr class="mt-5">
+
         <h2 class="text-center my-3"> Approved User Submissions by Location </h2>
         <div class="text-center text-muted">These re-use submissions are approved and shown to users in search results.</div>
         <div class="container mt-5">
@@ -32,7 +34,7 @@
                             <div class="card-body">
                                 <div class="text-center">
                                     <h4 class="card-title">{{$card["title"]}}</h4>
-                                    <h2 class=" text-muted lead"> {{$card["count"]}} Pending </h2>
+                                    <h2 class=" text-muted lead"> {{$card["count"]}} Approved </h2>
                                 </div>
                             </div>
                             <div class="card-footer">
