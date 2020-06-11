@@ -34,7 +34,6 @@ Route::middleware(['auth', 'banned'])->group(function () {
     Route::get('/submission/edit/{type?}/{state?}/{itemId?}', 'UserSubmissionController@submissionEdit')->name('submissionEdit');
     Route::post('/submission/edit/{type?}/{state?}/{itemId?}', 'UserSubmissionController@submissionEditSubmit')->name('submissionEditUpdate');
 
-    Route::post('/submissions/delete', 'UserSubmissionController@deleteItem')->name('deleteItem');
 
     Route::get('/account', 'AccountController@view')->name('account');
     Route::get('/accountUpdate', 'AccountController@getUpdatePage')->name('updatePage');
@@ -70,19 +69,26 @@ Route::prefix('admin')->middleware(['auth','admin','banned'])->group(function ()
     Route::get('/userSubmission/userCitySubmissionItem/{itemid?}', 'AdminSubmissionController@userCityView')->name('userCitySubmissionItem');
     Route::post('/userSubmission/userCitySubmission/add', 'MergeController@addCityMergeSubmit')->name('addCityMergeSubmit');
     Route::post('/userSubmission/userCitySubmission/delete', 'MergeController@deleteCityMerge')->name('cityDelete');
+    //approved
+    Route::get('/userSubmission/approvedCitySubmission', 'AdminSubmissionController@approvedCityView')->name('approvedCityView');
 
     //user state submissions Routes
     Route::get('/userSubmission/userStateSubmission', 'AdminSubmissionController@userState')->name('userStateView');
     Route::get('/userSubmission/userStateSubmissionItem/{itemid?}', 'AdminSubmissionController@userStateView')->name('userStateSubmissionItem');
     Route::post('/userSubmission/userStateSubmission/add', 'MergeController@addStateMergeSubmit')->name('addStateMergeSubmit');
     Route::post('/userSubmission/userStateSubmission/delete', 'MergeController@deleteStateMerge')->name('stateDelete');
+    //approved
+    Route::get('/userSubmission/approvedStateSubmission', 'AdminSubmissionController@approvedStateView')->name('approvedStateView');
 
     //user county submissions Routes
     Route::get('/userSubmission/userCountySubmission', 'AdminSubmissionController@userCounty')->name('userCountyView');
     Route::get('/userSubmission/userCountySubmissionItem/{itemid?}', 'AdminSubmissionController@userCountyView')->name('userCountySubmissionItem');
     Route::post('/userSubmission/userCountySubmission/add', 'MergeController@addCountyMergeSubmit')->name('addCountyMergeSubmit');
     Route::post('/userSubmission/userCountySubmission/delete', 'MergeController@deleteCountyMerge')->name('countyDelete');
+    //approved
+    Route::get('/userSubmission/approvedCountySubmission', 'AdminSubmissionController@approvedCountyView')->name('approvedCountyView');
 
+    Route::post('/userSubmission/deleteApprovedItem', 'AdminSubmissionController@deleteApprovedItem')->name('deleteApprovedItem');
     // Database CRUD Page Routes
     Route::prefix('database')->namespace('DataControllers')->group(function (){
 
