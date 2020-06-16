@@ -157,30 +157,40 @@
         let source = sourceSelect.val();
         let destination = destinationSelect.val();
 
-        if(source === "all")
+        if(source === "all"){
             $(".reuse-row[data-source][data-destination='"+destination+"']").show();
-        else
+            $(".reuse-row[data-source][data-destination='"+destination+"']").removeClass("hidden-item");
+        }
+        else{
             $(".reuse-row[data-source!='"+source+"']").hide();
+            $(".reuse-row[data-source!='"+source+"']").addClass("hidden-item");
+        }
 
-        if(destination === "all")
+        if(destination === "all"){
             $(".reuse-row[data-destination][data-source='"+source+"']").show();
-        else
+            $(".reuse-row[data-destination][data-source='"+source+"']").removeClass("hidden-item");
+        }
+        else{
             $(".reuse-row[data-destination!='"+destination+"']").hide();
+            $(".reuse-row[data-destination!='"+destination+"']").addClass("hidden-item");
+        }
 
-        if(source === "all" && destination === "all")
+        if(source === "all" && destination === "all"){
             $(".reuse-row").show();
+            $(".reuse-row").removeClass("hidden-item");
+        }
 
         showHiddenMessage();
     }
 
     function showHiddenMessage(){
-        let numberOfCityRows = cityCollapse.find("tr:visible").not(".hidden-rows-row").not(".table-head").length;
+        let numberOfCityRows = cityCollapse.find("tr.reuse-row").not(".hidden-item").length;
         let cityMessageRowDisplayed = cityCollapse.find(".hidden-rows-row").length === 1;
 
-        let numberOfCountyRows = countyCollapse.find("tr:visible").not(".hidden-rows-row").not(".table-head").length;
+        let numberOfCountyRows = countyCollapse.find("tr.reuse-row").not(".hidden-item").length;
         let countyMessageRowDisplayed = countyCollapse.find(".hidden-rows-row").length === 1;
 
-        let numberOfStateRows = stateCollapse.find("tr:visible").not(".hidden-rows-row").not(".table-head").length;
+        let numberOfStateRows = stateCollapse.find("tr.reuse-row").not(".hidden-item").length;
         let stateMessageRowDisplayed = stateCollapse.find(".hidden-rows-row").length === 1;
 
         var rowsHiddenMessage = "<tr class='hidden-rows-row'><td colspan='12'> <h1> <span class='badge badge-secondary'> Rows hidden by filter </span></td></tr>";
