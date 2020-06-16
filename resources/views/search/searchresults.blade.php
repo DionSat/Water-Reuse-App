@@ -40,12 +40,12 @@
                 <div class="list-group-item">
                     <div id="cityHeader" class="d-flex justify-content-between align-items-center pointer" data-toggle="collapse" data-target="#cityCollapse">
                     <span class="font-25">
-                        <i id="cityGroupIcon" class="fas fa-chevron-right fa-rotate-90 p-1"></i> {{$city->cityName}}
+                        <i id="cityGroupIcon" class="fas fa-chevron-right p-1"></i> {{$city->cityName}}
                     </span>
 
-                        <h3><span class="badge badge-primary">{{$cityRules->count()}} {{$cityRules->count() == 1 ? "Reuse Rule" : "Reuse Rules"}}</span> </h3>
+                        <h3><span class="badge badge-primary"> <span id="cityReuseCount">{{$cityRules->count()}}</span> {{$cityRules->count() == 1 ? "Reuse Rule" : "Reuse Rules"}}</span> </h3>
                     </div>
-                    <div id="cityCollapse" class="collapsible collapse p-4 overflow-auto show" data-level="city">
+                    <div id="cityCollapse" class="collapsible collapse p-4 overflow-auto" data-level="city">
                         @if($cityRules->count() == 0)
                             <h2 class="text-center">No reuse rules stored for {{$city->cityName}}!</h2>
                         @else
@@ -61,9 +61,9 @@
                         <i id="countyGroupIcon" class="fas fa-chevron-right {{$lowestLevel == "county" ? "fa-rotate-90" : ""}} p-1"></i> {{$county->countyName}}
                     </span>
 
-                        <h3><span class="badge badge-primary">{{$countyRules->count()}} {{$countyRules->count() == 1 ? "Reuse Rule" : "Reuse Rules"}}</span> </h3>
+                        <h3><span class="badge badge-primary"> <span id="countyReuseCount">{{$countyRules->count()}}</span> {{$countyRules->count() == 1 ? "Reuse Rule" : "Reuse Rules"}}</span> </h3>
                     </div>
-                    <div id="countyCollapse" class="collapsible collapse p-4 overflow-auto {{$lowestLevel == "county" ? "show" : ""}}" data-level="county">
+                    <div id="countyCollapse" class="collapsible collapse p-4 overflow-auto" data-level="county">
                         @if($countyRules->count() == 0)
                             <h2 class="text-center">No reuse rules stored for {{$county->countyName}} county!</h2>
                         @else
@@ -78,9 +78,9 @@
                         <i id="stateGroupIcon" class="fas fa-chevron-right {{$lowestLevel == "state" ? "fa-rotate-90" : ""}} p-1"></i> {{$state->stateName}}
                     </span>
 
-                        <h3><span class="badge badge-primary">{{$stateRules->count()}} {{$stateRules->count() == 1 ? "Reuse Rule" : "Reuse Rules"}}</span> </h3>
+                        <h3><span class="badge badge-primary"> <span id="stateReuseCount">{{$stateRules->count()}}</span> {{$stateRules->count() == 1 ? "Reuse Rule" : "Reuse Rules"}}</span> </h3>
                     </div>
-                    <div id="stateCollapse" class="collapsible collapse p-4 overflow-auto {{$lowestLevel == "state" ? "show" : ""}}" data-level="state">
+                    <div id="stateCollapse" class="collapsible collapse p-4 overflow-auto" data-level="state">
                         @if($stateRules->count() == 0)
                             <h2 class="text-center">No reuse rules stored for {{$state->stateName}}!</h2>
                         @else
@@ -192,6 +192,11 @@
 
         let numberOfStateRows = stateCollapse.find("tr.reuse-row").not(".hidden-item").length;
         let stateMessageRowDisplayed = stateCollapse.find(".hidden-rows-row").length === 1;
+
+        //Update the section labels
+        $("#cityReuseCount").html(numberOfCityRows);
+        $("#countyReuseCount").html(numberOfCountyRows);
+        $("#stateReuseCount").html(numberOfStateRows);
 
         var rowsHiddenMessage = "<tr class='hidden-rows-row'><td colspan='12'> <h1> <span class='badge badge-secondary'> Rows hidden by filter </span></td></tr>";
 
