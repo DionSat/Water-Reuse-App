@@ -61,20 +61,23 @@ class Links extends Model
     }
 
     public function checkSelfIfValidAutomatic(){
+        $reqResult = "";
         //Check if the link was updated (checked) more than 14 days ago
         if($this->getCreatedAtAsCarbon() < Carbon::now()->subDays(14)){
-            $this->status = LinkCheckerService::checkIfLinkIsValid($this->linkText);
+            $reqResult = LinkCheckerService::checkIfLinkIsValid($this->linkText);
+            $this->status = $reqResult["status"];
             $this->touch(); //Update timestamp if no change
             $this->save();
         }
-        return $this->status;
+        return $reqResult;
     }
 
     public function checkSelfIfValid(){
-        $this->status = LinkCheckerService::checkIfLinkIsValid($this->linkText);
+        $reqResult = LinkCheckerService::checkIfLinkIsValid($this->linkText);
+        $this->status = $reqResult["status"];
         $this->save();
         $this->touch(); //Update timestamp if no change
-        return $this->status;
+        return $reqResult;
     }
 
     public function getTimeCheckedAsString(){
