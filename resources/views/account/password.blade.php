@@ -19,7 +19,7 @@
         <form action="{{route('changePassword')}}" method="POST" >
             {{csrf_field()}}
             <div class="row mt-3 mb-5">
-                <div class="col-md-4 mx-auto">
+                <div class="col-md-6 mx-auto">
                     <div class="card h-100 shadow mx-auto text-center">
                         <div class="card-header">
                             <h3>Change password</h3>
@@ -46,7 +46,7 @@
                             <div class="d-flex">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <label class="input-group-text">Verify password</label>
+                                        <label class="input-group-text">Verify new password</label>
                                     </div>
                                     <input type="password" id="pw2" name="newPW2" class="form-control" aria-label="Default"
                                            aria-describedby="inputGroup-sizing-default" placeholder="New password" onkeyup="validate()">
@@ -54,7 +54,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <div class="row">
+                            <div class="row d-flex justify-content-center">
                                 <div class="col-md-6">
                                         <button id="btnSubmit" type="submit" class="btn btn-success btn-large btn-block"><i
                                                 class="fas fa-edit"></i>
