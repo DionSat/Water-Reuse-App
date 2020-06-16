@@ -58,7 +58,7 @@
                 <div class="list-group-item">
                     <div id="countyHeader" class="d-flex justify-content-between align-items-center pointer {{$lowestLevel == "county" ? "" : "collapsed"}}" data-toggle="collapse" data-target="#countyCollapse">
                     <span class="font-25">
-                        <i id="countyGroupIcon" class="fas fa-chevron-right {{$lowestLevel == "county" ? "fa-rotate-90" : ""}} p-1"></i> {{$county->countyName}}
+                        <i id="countyGroupIcon" class="fas fa-chevron-right p-1"></i> {{$county->countyName}}
                     </span>
 
                         <h3><span class="badge badge-primary"> <span id="countyReuseCount">{{$countyRules->count()}}</span> {{$countyRules->count() == 1 ? "Reuse Rule" : "Reuse Rules"}}</span> </h3>
@@ -75,7 +75,7 @@
                 <div class="list-group-item">
                     <div id="stateHeader" class="d-flex justify-content-between align-items-center pointer" data-toggle="collapse" data-target="#stateCollapse">
                     <span class="font-25">
-                        <i id="stateGroupIcon" class="fas fa-chevron-right {{$lowestLevel == "state" ? "fa-rotate-90" : ""}} p-1"></i> {{$state->stateName}}
+                        <i id="stateGroupIcon" class="fas fa-chevron-right p-1"></i> {{$state->stateName}}
                     </span>
 
                         <h3><span class="badge badge-primary"> <span id="stateReuseCount">{{$stateRules->count()}}</span> {{$stateRules->count() == 1 ? "Reuse Rule" : "Reuse Rules"}}</span> </h3>
