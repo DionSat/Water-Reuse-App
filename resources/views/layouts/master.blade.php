@@ -49,9 +49,9 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container-fluid mx-0 mx-md-2 mx-lg-4 py-1">
+            <div class="container-fluid mx-0 mx-lg-2 py-1 px-0">
                 <a class="navbar-brand px-md-0 pb-md-0" href="{{ url('/') }}">
-                    Water Reuse Directory
+                    Water Reuse Permit App
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

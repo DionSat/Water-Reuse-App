@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-9 mx-auto">
                 <div class="jumbotron bg-white text-center">
-                    <h1 class="display-4 main-title">Water Reuse Directory</h1>
+                    <h1 class="display-4 main-title">Water Reuse Permit App</h1>
                     <p class="lead"> A database of crowdsourced and verified re-use regulations. </p>
                     <hr class="my-4">
                     <p>In a time where access to usable water is becoming more scarce, enabling people to re-use water properly is a important step to take.</p>
