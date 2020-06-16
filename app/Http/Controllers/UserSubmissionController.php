@@ -121,6 +121,10 @@ class UserSubmissionController extends Controller
 
         $submission = DatabaseHelper::getReuseItemByIdStateAndType($request->type, $request->state, $request->id);
 
+        if(($submission->user_id !== Auth::user()->id) && Auth::user()->is_admin === false){
+            return redirect()->back()->with(['alert' => 'danger', 'alertMessage' => "Please don't try to delete other people's submissions!"]);
+        }
+
         DatabaseHelper::deleteItem($request->state, $submission);
 
         return redirect($request->back)->with(['alert' => 'success', 'alertMessage' => 'The submission has been deleted.']);

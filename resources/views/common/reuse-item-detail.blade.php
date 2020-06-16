@@ -65,7 +65,6 @@
             <thead>
             <tr>
                 <th scope="row" colspan="1">Types</th>
-                <th scope="col" colspan="1">Title</th>
                 <th scope="col" colspan="3">Url</th>
                 <th scope="col" colspan="1">Link State</th>
             </tr>
@@ -74,13 +73,6 @@
             <tr>
                  <td>
                     Codes
-                </td>
-                <td>
-                    @if(empty($item->codesObj->linkText))
-                        N/A
-                    @else
-                        {{$item->codesObj->name ?? "Code Link"}}
-                    @endif
                 </td>
                 <td colspan="3">
                     @if(empty($item->codesObj->linkText))
@@ -103,13 +95,6 @@
                 <td>
                     Permits
                 </td>
-                <td>
-                    @if(empty($item->permitObj->linkText))
-                        N/A
-                    @else
-                        {{$item->permitObj->name ?? "Code Link"}}
-                    @endif
-                </td>
                 <td colspan="3">
                     @if(empty($item->permitObj->linkText))
                         N/A
@@ -130,13 +115,6 @@
             <tr>
                 <td>
                     Incentives
-                </td>
-                <td>
-                    @if(empty($item->incentivesObj->linkText))
-                        N/A
-                    @else
-                        {{$item->incentivesObj->name ?? "Code Link"}}
-                    @endif
                 </td>
                 <td colspan="3">
                     @if(empty($item->incentivesObj->linkText))
@@ -159,13 +137,6 @@
             <tr>
                 <td>
                     More Info
-                </td>
-                <td>
-                    @if(empty($item->moreInfoObj->linkText))
-                        N/A
-                    @else
-                        {{$item->moreInfoObj->name ?? "Code Link"}}
-                    @endif
                 </td>
                 <td colspan="3">
                     @if(empty($item->moreInfoObj->linkText))

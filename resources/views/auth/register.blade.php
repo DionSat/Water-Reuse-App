@@ -2,7 +2,7 @@
 @section('body')
     <div class="container">
         <h3 class="my-3 text-center">
-            Create a Water Reuse Directory Account
+            Create a Water Reuse Permit App Account
         </h3>
         <hr>
         <form method="POST" action="{{ route('register') }}" class="mt-5">

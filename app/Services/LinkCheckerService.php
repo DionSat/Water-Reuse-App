@@ -12,13 +12,14 @@ class LinkCheckerService {
     // Returns link status
     public static function checkAndUpdateLinkStatusById($linkId, $forceLinkToBeCheckedNow) {
         $link = Links::find($linkId);
+        $statusValue = [];
 
         if($forceLinkToBeCheckedNow)
-            $link->checkSelfIfValid();
+            $statusValue = $link->checkSelfIfValid();
         else
-            $link->checkSelfIfValidAutomatic();
+            $statusValue = $link->checkSelfIfValidAutomatic();
 
-        return $link->status;
+        return "<strong>".$statusValue["status"]."</strong>".". Accompanying message: ".$statusValue["message"];
     }
 
     public static function validateUrl($url){
@@ -43,12 +44,15 @@ class LinkCheckerService {
             // If link is valid - we get a response
             $response = $client->request('HEAD', $linkUrl);
             // If the reponse has a 200 status code - link is valid
-            return ($response->getStatusCode() === 200) ? "valid" : "broken";
+            return ["status" => ($response->getStatusCode() === 200) ? "valid" : "broken",
+                "message" => ($response->getStatusCode() === 200) ? "Website returned a status code indicating a successful response when pinged."
+                    : "Website returned a non-successful status code of: ".$response->getStatusCode()." - ".$response->getReasonPhrase()];
 
         } catch (RequestException $exception){
             // Guzzle throws a exception on 404 errors
             // If we get a 404, we know the link is bad, otherwise we don't know what went wrong
-            return ($exception->getCode() === 404) ? "broken" : "unknown";
+            return ["status" => ($exception->getCode() === 404) ? "broken" : "unknown",
+                "message" => "The ping to the website failed completely with code: ".$exception->getCode()." - ".$exception->getResponse()->getReasonPhrase()];
         }
     }
 

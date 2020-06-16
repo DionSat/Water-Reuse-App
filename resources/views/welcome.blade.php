@@ -6,7 +6,7 @@
             <div class="col-md-9 mx-auto">
                 <div class="card">
                     <div class="card-title jumbotron bg-white text-center">
-                        <h1>Welcome to the Water Reuse Directory!</h1>
+                        <h1>Welcome to the Water Reuse Permit App!</h1>
                         <div class="card-subtitle">
                             <h2>You have successfully logged in.</h2>
                         </div>
