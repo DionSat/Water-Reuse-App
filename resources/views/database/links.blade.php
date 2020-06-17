@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('body')
-    <div class="container">
+    <div class="container-fluid">
         <div class="row my-3 d-flex justify-content-between">
             <div class="col-md-2">
                 <a href="{{route("admin")}}" class="btn btn-primary d-block"> <i class="fas fa-arrow-circle-left"></i> Dashboard </a>
@@ -26,9 +26,8 @@
                 <table class="table w-auto mx-auto mt-4 text-center">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Link Text</th>
+                        <th scope="col">ID #</th>
+                        <th scope="col">Link URL</th>
                         <th scope="col">Status</th>
                         <th scope="col">Last Checked</th>
                         <th scope="col" colspan="2">Actions</th>
@@ -38,9 +37,10 @@
 
                     @foreach($links as $link)
                         <tr>
-                            <th scope="row">{{$loop->index+1}}</th>
-                            <td>{{$link->name}}</td>
-                            <td>{{$link->linkText}}</td>
+                            <th scope="row">{{$link->link_id}}</th>
+                            <td>
+                                <a target="_blank" rel="noopener noreferrer" href="{{$link->getSelfAsHttpLink()}}">{{$link->linkText}}</a>
+                            </td>
                             <td>{!! $link->getStatusTextBadge() !!}</td>
                             <td>{{$link->getTimeCheckedAsString()}}</td>
                             <td>
