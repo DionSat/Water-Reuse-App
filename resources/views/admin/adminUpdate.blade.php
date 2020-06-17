@@ -53,20 +53,26 @@
                                             </td>
                                             <td>{{$user->email}}</td>
                                             <td>
-                                                <span style="font-size: 1em; color: red;">
-                                                @if($user->can_contact === false)<i class="fas fa-times"></i>@endif
-                                                </span>
-                                                <span style="font-size: 1em; color: green;">
-                                                @if($user->can_contact === true) <i class="fas fa-check"></i> @endif
-                                                </span>
+                                                @if($user->can_contact === true)
+                                                    <span style="font-size: 1em; color: green;">
+                                                        <i class="fas fa-check"></i>
+                                                    </span>
+                                                @else
+                                                    <span style="font-size: 1em; color: red;">
+                                                        <i class="fas fa-times"></i>
+                                                    </span>
+                                                @endif
                                             </td>
                                             <td>
-                                                <span style="font-size: 1em; color: red;">
-                                                @if($user->is_admin === false)<i class="fas fa-times" ></i>@endif
-                                                </span>
-                                                <span style="font-size: 1em; color: green;">
-                                                @if($user->is_admin === true) <i class="fas fa-check"></i> @endif
-                                                </span>
+                                                @if($user->is_admin === true)
+                                                    <span style="font-size: 1em; color: green;">
+                                                        <i class="fas fa-check"></i>
+                                                    </span>
+                                                @else
+                                                    <span style="font-size: 1em; color: red;">
+                                                        <i class="fas fa-times" ></i>
+                                                    </span>
+                                                @endif
                                             </td>
                                             <td>
                                                 <form action={{ route('updateUser') }} method="POST">
