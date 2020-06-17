@@ -38,7 +38,7 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <a href="{{$card["view"]}}" class="btn btn-primary d-block"> <i class="fas fa-edit"></i> View </a>
+                                <a href="{{$card["view"]}}" class="btn btn-success d-block"> <i class="fas fa-eye"></i> View </a>
                             </div>
                         </div>
                     </div>
