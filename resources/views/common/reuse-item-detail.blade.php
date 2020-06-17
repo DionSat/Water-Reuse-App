@@ -78,7 +78,7 @@
                     @if(empty($item->codesObj->linkText))
                         N/A
                     @else
-                        <a target="_blank" rel="noopener noreferrer" href="{{$item->codesObj->linkText}}">{{$item->codesObj->linkText}}</a>
+                        <a target="_blank" rel="noopener noreferrer" href="{{$item->codesObj->getSelfAsHttpLink()}}">{{$item->codesObj->linkText}}</a>
                     @endif
                 </td>
                 <td>
@@ -99,7 +99,7 @@
                     @if(empty($item->permitObj->linkText))
                         N/A
                     @else
-                        <a target="_blank" rel="noopener noreferrer" href="{{$item->permitObj->linkText}}">{{$item->permitObj->linkText}}</a>
+                        <a target="_blank" rel="noopener noreferrer" href="{{$item->permitObj->getSelfAsHttpLink()}}">{{$item->permitObj->linkText}}</a>
                     @endif
                 </td>
                 <td>
@@ -120,7 +120,7 @@
                     @if(empty($item->incentivesObj->linkText))
                         N/A
                     @else
-                        <a target="_blank" rel="noopener noreferrer" href="{{$item->incentivesObj->linkText}}">{{$item->incentivesObj->linkText}}</a>
+                        <a target="_blank" rel="noopener noreferrer" href="{{$item->incentivesObj->getSelfAsHttpLink()}}">{{$item->incentivesObj->linkText}}</a>
                     @endif
                 </td>
                 <td>
@@ -142,7 +142,7 @@
                     @if(empty($item->moreInfoObj->linkText))
                         N/A
                     @else
-                        <a target="_blank" rel="noopener noreferrer" href="{{$item->moreInfoObj->linkText}}">{{$item->moreInfoObj->linkText}}</a>
+                        <a target="_blank" rel="noopener noreferrer" href="{{$item->moreInfoObj->getSelfAsHttpLink()}}">{{$item->moreInfoObj->linkText}}</a>
                     @endif
                 </td>
                 <td>

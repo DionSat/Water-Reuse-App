@@ -60,6 +60,15 @@ class Links extends Model
         return "<span class=\"badge badge-".$badgeColor."\"> ".$statusText."</span>";
     }
 
+    public function getSelfAsHttpLink(){
+        if(substr( $this->linkText, 0, 7 ) === "http://" || substr( $this->linkText, 0, 8 ) === "https://"){
+            return $this->linkText;
+        } else {
+            //Return string with http:// appended
+            return "http://".$this->linkText;
+        }
+    }
+
     public function checkSelfIfValidAutomatic(){
         $reqResult = "";
         //Check if the link was updated (checked) more than 14 days ago
