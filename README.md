@@ -1,8 +1,14 @@
-<p align="center"><img src="./WaterReuseDirectory.png" width="400"></p>
+<p align="center"><img src="./WaterReuseDirectory.png"></p>
 
 ## About This Project
 
-This project was developed by the Winter-Spring 2020 Capstone team, consisting of: 
+This project was developed for the non-profit Recode (https://www.recodenow.org/). 
+It is a web application to record and store various "water reuse rules", providing a central place 
+to record how and where water can be re-used. Each reuse rule also links to the pertinent city, county or 
+state codes.  
+ 
+
+This application was developed by the Winter-Spring 2020 Capstone team at Portland State University, consisting of: 
 
 - Dmitri Murphy 
 - Tyler Race
@@ -14,11 +20,18 @@ This project was developed by the Winter-Spring 2020 Capstone team, consisting o
 
 ## How to Run the Project Locally
 
-Instruction here... 
+To run the project locally, please see the [Laravel installation instructions](https://laravel.com/docs/7.x/installation) to first install Laravel on your machine.
+
+After installing Composer and Laravel, and cloning the project, it can be served locally by running the command `php artisan serve` in the project directory.  
+
+The following two sections are taken from the Laravel Readme file: 
 
 ## About Laravel (framework used for this project)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects. Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Laravel is a PHP web application framework with expressive, elegant syntax. 
+We believe development must be an enjoyable and creative experience to be truly fulfilling. 
+Laravel takes the pain out of development by easing common tasks used in many web projects. 
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
 
 ## Learning Laravel
