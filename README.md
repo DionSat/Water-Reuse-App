@@ -3,7 +3,7 @@
 ## About This Project
 
 This project was developed for the non-profit Recode (https://www.recodenow.org/). 
-It is a web application to record and store various "water reuse rules", providing a central place 
+It is a web application to record and store various "water reuse rules," providing a central place 
 to record how and where water can be re-used. Each reuse rule also links to the pertinent city, county or 
 state codes.  
  
