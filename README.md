@@ -1,5 +1,9 @@
 <p align="center"><img src="./WaterReuseDirectory.png"></p>
 
+## Deployed Website 
+
+The production version of this website is running at: https://www.waterreuseapp.org/
+
 ## About This Project
 
 This project was developed for the non-profit Recode (https://www.recodenow.org/). 
