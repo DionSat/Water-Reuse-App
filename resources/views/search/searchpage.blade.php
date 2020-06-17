@@ -114,7 +114,7 @@
 
 
 @push("js")
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="{{ URL::asset('/libraries/axios.min.js') }}"></script>
     <script>
 
         $(".initial-selection").hover(function () {

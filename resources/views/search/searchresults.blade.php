@@ -118,7 +118,7 @@
 
 
 @push("js")
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="{{ URL::asset('/libraries/axios.min.js') }}"></script>
 
 <script>
     // Fire off a event as the user navigates away to check the link
