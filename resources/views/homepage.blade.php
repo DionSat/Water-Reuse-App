@@ -107,7 +107,7 @@
         }
 
         #app {
-            background: url("img/output1080.gif");
+            background: url("img/mainBackground.png");
             background-size: cover;
             height: 100%;
             overflow: scroll;
