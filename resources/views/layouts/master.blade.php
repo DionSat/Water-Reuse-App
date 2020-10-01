@@ -85,7 +85,7 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link mx-md-2 px-md-0 pb-md-0" href="https://www.recodenow.org/donate-test-page" > <i class="fas fa-hands-helping"></i> Donate</a>
+                            <a class="nav-link mx-md-2 px-md-0 pb-md-0" href="https://www.recodenow.org/donate/" target="_blank"> <i class="fas fa-hands-helping"></i> Donate</a>
                         </li>
                         <!-- Authentication Links -->
                         @guest
