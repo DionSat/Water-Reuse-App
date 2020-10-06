@@ -6,7 +6,7 @@
             <a href="{{route("search")}}" class="btn btn-primary col-md-2 mb-4 float-left"> <i class="fas fa-arrow-circle-left"></i>
                 Search Again
             </a>
-            <a href="" class="btn btn-primary col-md-2 mb-4 float-right"> <i class="fas fa-sitemap"></i>
+            <a href="{{route("search-diagram")}}" class="btn btn-primary col-md-2 mb-4 float-right"> <i class="fas fa-sitemap"></i>
                 View Diagram
             </a>
         </div>
