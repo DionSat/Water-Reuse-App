@@ -5,6 +5,9 @@
         <a href="{{route("search")}}" class="btn btn-primary col-md-2 mb-4"> <i class="fas fa-arrow-circle-left"></i>
             Search Again
         </a>
+        <a href="" class="btn btn-primary col-md-2 mb-4"> <i class="fas fa-sitemap"></i>
+            View Diagram
+        </a>
         <div class="card mb-3">
             <div class="card-body">
                 <h3 class="text-center"> {{$type}} Search Results </h3>
@@ -89,7 +92,7 @@
                     </div>
                 </div>
         </div>
-  
+
     </div>
 @endsection
 
