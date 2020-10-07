@@ -18,6 +18,11 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/info', 'HomeController@getInfo')->name('info');
 Route::get('/search', 'SearchController@mainPage')->name('search');
+// New web route to test out orgchart on the site //
+Route::get('/search_test_graph', function() {
+    return view('TestSearch/test_graph');
+});
+//================================================//
 Route::get('/search/query', 'SearchController@handleSubmit')->name('search-submit');
 
 Route::get('/submission/view/{type?}/{state?}/{itemId?}', 'UserSubmissionController@viewSubmission')->name("viewSubmission");
