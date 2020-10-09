@@ -26,13 +26,13 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-4">
-                                <a href="{{route('submission')}}" type="button" class="btn btn-secondary">Pending<span class="badge badge-light"> {{$pending}}</span></a>
+                                <a href="{{route('submission')}}" type="button" class="btn btn-secondary" title="Submissions that are pending">Pending<span class="badge badge-light"> {{$pending}}</span></a>
                             </div>
                             <div class="col-sm-4">
-                                <a href="{{route('submission')}}"  class="btn btn-success">Approved<span class="badge badge-light"> {{$approved}}</span></a>
+                                <a href="{{route('submission')}}"  class="btn btn-success" title="Submissions that have been approved">Approved<span class="badge badge-light"> {{$approved}}</span></a>
                             </div>
                             <div class="col-sm-4">
-                                <a href="{{route('submission')}}" class="btn btn-danger">Rejected<span class="badge badge-light"> {{$rejected}}</span></a>
+                                <a href="{{route('submission')}}" class="btn btn-danger" title="Submissions that have been rejected">Rejected<span class="badge badge-light"> {{$rejected}}</span></a>
                             </div>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                     <div class="card-body">
                         <div class="card-text">
                             <p>Information on using the website </p>
-                            <a href="{{route('info')}}" class="btn btn-primary">Info</a>
+                            <a href="{{route('info')}}" class="btn btn-primary" title="More information about the application">Info</a>
                         </div>
                     </div>
                 </div>
@@ -61,10 +61,10 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
-                                <a class="btn btn-dark" href="{{route('account')}}">View Account</a>
+                                <a class="btn btn-dark" href="{{route('account')}}" title="View/modify account details">View Account</a>
                             </div>
                             <div class="col-sm-6">
-                                <a class="btn btn-warning" href="{{route('submission')}}">Submissions</a>
+                                <a class="btn btn-warning" href="{{route('submission')}}" title="View your submissions">Submissions</a>
                             </div>
                         </div>
                     </div>
