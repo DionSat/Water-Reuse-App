@@ -25,6 +25,11 @@ Route::get('/search_test_graph', function() {
 //================================================//
 Route::get('/search/query', 'SearchController@handleSubmit')->name('search-submit');
 
+// Will change to interact w/ search SearchController and load request data.
+Route::get('/search/diagram', function (){
+    return view('search.searchDiagram');
+})->name('search-diagram');
+
 Route::get('/submission/view/{type?}/{state?}/{itemId?}', 'UserSubmissionController@viewSubmission')->name("viewSubmission");
 
 //Registered User Routes

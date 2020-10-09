@@ -2,13 +2,18 @@
 
 @section('body')
     <div class="container">
-        <a href="{{route("search")}}" class="btn btn-primary col-md-2 mb-4"> <i class="fas fa-arrow-circle-left"></i>
-            Search Again
-        </a>
+        <div class="navbar">
+            <a href="{{route("search")}}" class="btn btn-primary col-md-2 mb-4 float-left"> <i class="fas fa-arrow-circle-left"></i>
+                Search Again
+            </a>
+            <a href="{{route("search-diagram")}}" class="btn btn-primary col-md-2 mb-4 float-right"> <i class="fas fa-sitemap"></i>
+                View Diagram
+            </a>
+        </div>
         <div class="card mb-3">
             <div class="card-body">
                 <h3 class="text-center"> {{$type}} Search Results </h3>
-                <div class="text-center">To narrow down results to just the reuse paths that you are intrested in, you can use the filter options below.</div>
+                <div class="text-center">To narrow down results to just the reuse paths that you are interested in, you can use the filter options below.</div>
                 <div class="mt-3 row d-flex justify-content-center">
                     <div class="form-group col-md-4 text-center">
                         <label for="sourceSelect"> <strong> Source </strong> </label>
@@ -89,7 +94,7 @@
                     </div>
                 </div>
         </div>
-  
+
     </div>
 @endsection
 
