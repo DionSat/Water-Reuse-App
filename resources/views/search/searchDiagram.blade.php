@@ -2,7 +2,6 @@
 
 @section('body')
     <script src="{{ URL::asset('/libraries/orgchart.js') }}"></script>
-    <link rel="stylesheet" href="{{ URL::asset('css/InteractiveGraph/interactive_graph.css') }}">
     <div class="container">
         <div class="navbar">
             <a href="{{route("search")}}" class="btn btn-primary col-md-2 mb-4 float-left"> <i class="fas fa-arrow-circle-left"></i>
@@ -91,3 +90,86 @@
 
     </div>
 @endsection
+
+@push("css")
+    <style>
+        html, body {
+            margin: 0px;
+            padding: 0px;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            text-align: center;
+            font-family: Helvetica;
+        }
+
+        #tree {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+
+        [node-id] circle {
+            fill: #0991d0;
+        }
+
+        .field_0 {
+            font-family: Impact;
+            text-transform: uppercase;
+            fill: #a3a3a3;
+        }
+
+        .field_1 {
+            fill: #a3a3a3;
+        }
+
+        [link-id] path {
+            stroke: #0991d0;
+        }
+
+        [link-id='[1][2]'] path {
+            stroke: #750000;
+        }
+
+        [link-id='[1][3]'] path {
+            stroke: #750000;
+        }
+
+        [link-id='[1][4]'] path {
+            stroke: #750000;
+        }
+
+        [link-id='[1][5]'] path {
+            stroke: #750000;
+        }
+
+        [link-id='[1][6]'] path {
+            stroke: #750000;
+        }
+
+        [control-expcoll-id] circle {
+            fill: #750000;
+        }
+
+        [control-expcoll-id='3'] circle {
+            fill: #016e25;
+        }
+
+        [control-node-menu-id] circle {
+            fill: #bfbfbf;
+        }
+
+        #tree>svg {
+            background-color: #2E2E2E;
+        }
+
+        .bg-search-table {
+            background-color: #2E2E2E !important;
+        }
+
+        .bg-search-table input {
+            background-color: #2E2E2E !important;
+        }
+    </style>
+@endpush
