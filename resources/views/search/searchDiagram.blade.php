@@ -1,6 +1,8 @@
 @extends('layouts.master')
 
 @section('body')
+    <script src="{{ URL::asset('/libraries/orgchart.js') }}"></script>
+    <link rel="stylesheet" href="{{ URL::asset('css/InteractiveGraph/interactive_graph.css') }}">
     <div class="container">
         <div class="navbar">
             <a href="{{route("search")}}" class="btn btn-primary col-md-2 mb-4 float-left"> <i class="fas fa-arrow-circle-left"></i>
@@ -10,7 +12,6 @@
                 <i class="fas fa-clipboard-list"></i> List Option
             </a>
         </div>
-        <script src="{{ URL::asset('/libraries/orgchart.js') }}"></script>
         <div class="card mb-3">
             <div class="card-body">
                 <div style="width:100%; height:700px;" id="orgchart"/>
@@ -71,9 +72,17 @@
                             img_0: "img"
                         },
                         nodes: [
-                            { id: 1, name: "Condensate", title: "First Use Water", img: "Images/RAIN-01.jpg" },
-                            { id: 2, pid: 1, name: "Kitchen Sink", title: "Pathway Blocked", img: "Images/app_KITCHEN SINK.jpg"},
-                            { id: 3, pid: 1, name: "Kitchen Sink + Disposer", title: "Pathway Blocked", img: "Images/app_KITCHEN SINK.jpg" }
+                            {id: 1, name: "Condensate", img: "{{ URL::asset('img/water sources_1.jpg') }}"},
+                            {id: 2, pid: 1, name: "Kitchen Sink", img: "{{ URL::asset('img/app_KITCHEN SINK.jpg') }}"},
+                            {id: 3, pid: 1, name: "Kitchen Sink + Disposer", img: "{{ URL::asset('img/app_KITCHEN SINK.jpg') }}"},
+                            {id: 4, pid: 1, name: "Dishwasher", img: "{{ URL::asset('img/app_DISHWASHER.jpg') }}"},
+                            {id: 5, pid: 1, name: "Lavatory", img: "{{ URL::asset('img/app_LAVATORY.jpg') }}"},
+                            {id: 6, pid: 1, name: "Tub + Shower", img: "{{ URL::asset('img/app_TUB-SHOWER.jpg') }}"},
+                            {id: 7, pid: 1, name: "Fire Suppression", img: "{{ URL::asset('img/app_FIRE.jpg') }}"},
+                            {id: 8, pid: 1, name: "Clothes Washer", img: "{{ URL::asset('img/app_CLOTHS WASHER.jpg') }}"},
+                            {id: 9, pid: 1, name: "Toilet", img: "{{ URL::asset('img/toilet.png') }}"},
+                            {id: 10, pid: 1, name: "Composting Toilet", img: "{{ URL::asset('img/toilet.png') }}"},
+                            {id: 11, pid: 1, name: "Urinal", img: "{{ URL::asset('img/app_LAVATORY.jpg') }}"}
                         ]
                     });
                 </script>
