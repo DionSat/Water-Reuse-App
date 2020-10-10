@@ -39,7 +39,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
             <div class="container-fluid mx-0 mx-lg-2 py-1 px-0">
                 <a class="navbar-brand px-md-0 pb-md-0" href="{{ url('/') }}" title="Back to the home page">
                     Water Reuse Permit App
