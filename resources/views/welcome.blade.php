@@ -40,17 +40,6 @@
             </div>
             <div class="col-md-3">
                 <div class="card h-100 text-center">
-                    <div class="card-header"><h3>Information</h3></div>
-                    <div class="card-body">
-                        <div class="card-text">
-                            <p>Information on using the website </p>
-                            <a href="{{route('info')}}" class="btn btn-primary" title="More information about the application">Info</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card h-100 text-center">
                     <div class="card-header">
                         <h3>Links</h3>
                     </div>
@@ -60,12 +49,9 @@
                             <p>Quick navigation</p>
                         </div>
                         <div class="row">
-                            <div class="col-sm-6">
-                                <a class="btn btn-dark" href="{{route('account')}}" title="View/modify account details">View Account</a>
-                            </div>
-                            <div class="col-sm-6">
-                                <a class="btn btn-warning" href="{{route('submission')}}" title="View your submissions">Submissions</a>
-                            </div>
+                            <a class="btn btn-primary btn-block" href="{{route('account')}}">View Account</a>
+                            <a class="btn btn-primary btn-block" href="{{route('submission')}}">Submissions</a>
+                            <a class="btn btn-primary btn-block" href="{{route('info')}}">Website Information</a>
                         </div>
                     </div>
                 </div>
