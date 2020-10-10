@@ -15,57 +15,49 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-3">
+            <div class="col-md-9 col-lg-4 my-3 my-lg-0">
                 <div class="card h-100 text-center">
                     <div class="card-header">
                         <h3>Overview</h3>
                     </div>
                     <div class="card-body text-center">
                         <div class="card-text">
-                            <p>Status of your submission items</p>
+                            <p>Item Submission Status</p>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <a href="{{route('submission')}}" type="button" class="btn btn-secondary" title="Submissions that are pending">Pending<span class="badge badge-light"> {{$pending}}</span></a>
-                            </div>
-                            <div class="col-sm-4">
-                                <a href="{{route('submission')}}"  class="btn btn-success" title="Submissions that have been approved">Approved<span class="badge badge-light"> {{$approved}}</span></a>
-                            </div>
-                            <div class="col-sm-4">
-                                <a href="{{route('submission')}}" class="btn btn-danger" title="Submissions that have been rejected">Rejected<span class="badge badge-light"> {{$rejected}}</span></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card h-100 text-center">
-                    <div class="card-header"><h3>Information</h3></div>
-                    <div class="card-body">
-                        <div class="card-text">
-                            <p>Information on using the website </p>
-                            <a href="{{route('info')}}" class="btn btn-primary" title="More information about the application">Info</a>
+                        <div class="row justify-content-around statusButtons">
+                            <a href="{{route('submission')}}"  class="btn btn-success">Approved
+                                <div>
+                                    <h3><span class="badge badge-light"> {{$approved}}</span></h3>
+                                </div>
+                            </a>
+                            <a href="{{route('submission')}}" type="button" class="btn btn-secondary">Pending
+                                <div>
+                                    <h3><span class="badge badge-light"> {{$pending}}</span></h3>
+                                </div>
+                            </a>
+                            <a href="{{route('submission')}}" class="btn btn-danger">Rejected
+                                <div>
+                                    <h3><span class="badge badge-light"> {{$rejected}}</span></h3>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-9 col-lg-4">
                 <div class="card h-100 text-center">
                     <div class="card-header">
-                        <h3>Links</h3>
+                        <h3>Navigation</h3>
                     </div>
 
                     <div class="card-body justify-content-center">
                         <div class="card-text">
-                            <p>Quick navigation</p>
+                            <p>Quick Links</p>
                         </div>
                         <div class="row">
-                            <div class="col-sm-6">
-                                <a class="btn btn-dark" href="{{route('account')}}" title="View/modify account details">View Account</a>
-                            </div>
-                            <div class="col-sm-6">
-                                <a class="btn btn-warning" href="{{route('submission')}}" title="View your submissions">Submissions</a>
-                            </div>
+                            <a class="btn btn-primary btn-block" href="{{route('account')}}">View Account</a>
+                            <a class="btn btn-primary btn-block" href="{{route('submission')}}">Submissions</a>
+                            <a class="btn btn-primary btn-block" href="{{route('info')}}">Website Information</a>
                         </div>
                     </div>
                 </div>
@@ -80,6 +72,18 @@
     body{
         background: url("img/bird-s-eye-view-of-ocean-during-daytime-2707756.jpg");
         background-size: cover;
+    }
+
+    .statusButtons > a {
+        font-size: 20px;
+        width: 30%;
+    }
+
+    @media (max-width: 414px) {
+        .statusButtons > a {
+            font-size: 16px;
+            width: 30%;
+        }
     }
 </style>
 @endpush
