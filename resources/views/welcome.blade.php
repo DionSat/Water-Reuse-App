@@ -22,7 +22,7 @@
                     </div>
                     <div class="card-body text-center">
                         <div class="card-text">
-                            <p>Status of your submission items</p>
+                            <p>Item Submission Status</p>
                         </div>
                         <div class="row justify-content-around statusButtons">
                             <a href="{{route('submission')}}"  class="btn btn-success">Approved
@@ -47,12 +47,12 @@
             <div class="col-md-9 col-lg-4">
                 <div class="card h-100 text-center">
                     <div class="card-header">
-                        <h3>Links</h3>
+                        <h3>Navigation</h3>
                     </div>
 
                     <div class="card-body justify-content-center">
                         <div class="card-text">
-                            <p>Quick navigation</p>
+                            <p>Quick Links</p>
                         </div>
                         <div class="row">
                             <a class="btn btn-primary btn-block" href="{{route('account')}}">View Account</a>
