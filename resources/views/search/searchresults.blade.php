@@ -35,7 +35,17 @@
             </div>
         </div>
 
-        <div class="list-group">
+        <div class="list-group">  <!--TODO: Donate popup writen, find where to put it-->
+            @if($DonatePopUp)
+                <h2 class="text-center">Please take time to donate.</h2>
+                <a href="https://www.recodenow.org/donate/" class="btn btn-primary col-md-2 mb-4"><i class="fas fa-hands-helping" aria-hidden="true"></i>
+                    Donate
+                </a>
+                <a class="btn btn-primary col-md-2 mb-4">
+                    Continue
+                </a>
+            @endif
+
             @if($lowestLevel == "city")
                 <div class="list-group-item">
                     <div id="cityHeader" class="d-flex justify-content-between align-items-center pointer" data-toggle="collapse" data-target="#cityCollapse">
@@ -89,7 +99,7 @@
                     </div>
                 </div>
         </div>
-  
+
     </div>
 @endsection
 
@@ -121,8 +131,13 @@
 <script src="{{ URL::asset('/libraries/axios.min.js') }}"></script>
 
 <script>
+    // Add in popup wall for donation
+
+    var DonatePopUp = true;
+
     // Fire off a event as the user navigates away to check the link
     // The link is only checked if it hasn't been updated in last 14 days
+
     $(".link-button").click(function (event) {
         axios.post("{{route("check-link-api")}}", {
             link_id: $(this).attr("data-linkid")
