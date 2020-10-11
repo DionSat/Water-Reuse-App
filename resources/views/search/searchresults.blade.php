@@ -34,7 +34,7 @@
                 </div>
             </div>
         </div>
-        @if($DonatePopUp)
+        @if(true) <!-- Donate Card -->
             <div class="card mb-3">
                 <div class="card-body">
                     <h2 class="text-center">Please take time to donate.</h2>
@@ -136,10 +136,6 @@
 <script src="{{ URL::asset('/libraries/axios.min.js') }}"></script>
 
 <script>
-    // Add in popup wall for donation
-
-    var DonatePopUp = true;
-
     // Fire off a event as the user navigates away to check the link
     // The link is only checked if it hasn't been updated in last 14 days
 
