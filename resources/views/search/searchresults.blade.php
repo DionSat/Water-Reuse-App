@@ -34,17 +34,25 @@
                 </div>
             </div>
         </div>
+        @if($DonatePopUp)
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h2 class="text-center">Please take time to donate.</h2>
+                    <div class="mt-3 row d-flex justify-content-center">
+                        <a class="btn btn-primary col-md-2 mb-4" href="https://www.recodenow.org/donate/" style="margin-right:5px;"><i class="fas fa-hands-helping" aria-hidden="true"></i>
+                            Donate
+                        </a>
 
+                        <a class="btn btn-primary col-md-2 mb-4 text-light" style="margin-left:5px;">
+                            Continue
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        @endif
         <div class="list-group">  <!--TODO: Donate popup writen, find where to put it-->
-            @if($DonatePopUp)
-                <h2 class="text-center">Please take time to donate.</h2>
-                <a href="https://www.recodenow.org/donate/" class="btn btn-primary col-md-2 mb-4"><i class="fas fa-hands-helping" aria-hidden="true"></i>
-                    Donate
-                </a>
-                <a class="btn btn-primary col-md-2 mb-4">
-                    Continue
-                </a>
-            @endif
+
 
             @if($lowestLevel == "city")
                 <div class="list-group-item">
