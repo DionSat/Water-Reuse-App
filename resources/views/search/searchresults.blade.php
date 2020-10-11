@@ -39,7 +39,7 @@
                 <div class="card-body">
                     <h2 class="text-center">Please take time to donate.</h2>
                     <div class="mt-3 row d-flex justify-content-center">
-                        <a class="btn btn-primary col-md-2 mb-4" href="https://www.recodenow.org/donate/" style="margin-right:5px;"><i class="fas fa-hands-helping" aria-hidden="true"></i>
+                        <a class="btn btn-primary col-md-2 mb-4" href="https://www.recodenow.org/donate/" target="_blank" rel="noopener noreferrer" style="margin-right:5px;"><i class="fas fa-hands-helping" aria-hidden="true"></i>
                             Donate
                         </a>
                         <a class="btn btn-primary col-md-2 mb-4 text-light" style="margin-left:5px;">
