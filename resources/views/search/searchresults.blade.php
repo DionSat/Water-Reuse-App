@@ -42,7 +42,6 @@
                         <a class="btn btn-primary col-md-2 mb-4" href="https://www.recodenow.org/donate/" style="margin-right:5px;"><i class="fas fa-hands-helping" aria-hidden="true"></i>
                             Donate
                         </a>
-
                         <a class="btn btn-primary col-md-2 mb-4 text-light" style="margin-left:5px;">
                             Continue
                         </a>
@@ -51,9 +50,7 @@
                 </div>
             </div>
         @endif
-        <div class="list-group">  <!--TODO: Donate popup writen, find where to put it-->
-
-
+        <div class="list-group">
             @if($lowestLevel == "city")
                 <div class="list-group-item">
                     <div id="cityHeader" class="d-flex justify-content-between align-items-center pointer" data-toggle="collapse" data-target="#cityCollapse">
