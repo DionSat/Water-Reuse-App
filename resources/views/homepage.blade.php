@@ -3,7 +3,7 @@
 @section('body')
     <div class="container-fluid main-content">
         <div class="row">
-            <div class="col-md-9 mx-auto">
+            <div class="col-md-8 col-lg-9 mx-auto">
                 <div class="jumbotron bg-white text-center">
                     <h1 class="display-4 main-title">Water Reuse Permit App</h1>
                     <p class="lead"> A database of crowdsourced and verified re-use regulations. </p>
@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-3">
+            <div class="col-md-4  col-lg-3">
                 <div class="card h-100">
                     <div class="card-body">
                         <div class="card-title text-center">
@@ -30,7 +30,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4 col-lg-3">
                 <div class="card mt-3 mt-md-0 h-100">
                     <div class="card-body">
                         <div class="card-title text-center">
@@ -58,8 +58,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="card mt-4 mt-md-0 h-100">
+            <div class="col-lg-3">
+                <div class="card mx-md-5 mt-4 mx-lg-0 mt-lg-0 h-100">
                     <div class="card-body">
                         <div class="card-title text-center">
                             <h5 class="card-title">  A Recode Project  </h5>
