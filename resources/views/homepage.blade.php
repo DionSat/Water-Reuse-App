@@ -43,7 +43,7 @@
                                 Lookup Reuse Regulations
                             </a>
                             <hr class="mt-5">
-                            <h5 class="lead mt-4">Contibute your knowledge by adding to our database.</h5>
+                            <h5 class="lead mt-4">Contribute your knowledge by adding to our database.</h5>
                             @if(Auth::check())
                                 <a class="btn btn-primary btn-block mb-4" href="{{route("userSubmission")}}">
                                     Submit a Regulation
@@ -58,15 +58,15 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3">
-                <div class="card mx-md-5 mt-4 mx-lg-0 mt-lg-0 h-100">
+            <div class="col-md-8 col-lg-3">
+                <div class="card mt-4 mt-lg-0 h-100">
                     <div class="card-body">
                         <div class="card-title text-center">
                             <h5 class="card-title">  A Recode Project  </h5>
                         </div>
                         <hr>
                         <div class="card-text text-center">
-                            <img src="img/recode-logo.jpg" class="img-fluid">
+                            <img src="img/recode-logo.jpg" class="img-fluid" alt="ReCode logo">
                             <h5 class="lead mt-5">A project backed by the Recode non-profit organization.</h5>
                             <a class="btn btn-success btn-block mt-4" href="https://www.recodenow.org/">
                                 Visit Recode
