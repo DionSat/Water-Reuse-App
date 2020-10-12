@@ -49,41 +49,79 @@
                         <hr>
                         <form method="GET" action="{{route("search-submit")}}" class="text-center">
                             {{ csrf_field() }}
+                            <!--my code-->
+                                <div class="col-md-12">
+                                    <div class="accordion" id="accordionExample">
+                                        <div class="card" style="border: none; ">
+                                            <div class="card" id="headingOne">
+                                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" style="font-size: 20px; color: black; text-decoration:none">
+                                                        <strong>Search by State County City</strong>
+                                                    </button>
+                                            </div>
+                                            <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                                <div class="card" style="margin-top: 40px; border: none">
+                                                    <div class="form-group row">
+                                                        <label for="stateSelect" class="col-md-3 col-form-label col-form-label-lg"> <strong> State </strong> </label>
+                                                        <div class="col-md-8">
+                                                            <select id="stateSelect" name="state_id" class="form-control form-control-lg">
+                                                                <option value="-1" disabled selected>Select a state</option>
+                                                                @foreach($states as $state)
+                                                                    @if($state->is_approved)
+                                                                        <option value="{{$state->state_id}}">{{$state->stateName}}</option>
+                                                                    @endif
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="countySelect" class="col-md-3 col-form-label col-form-label-lg"> <strong> County </strong> </label>
+                                                        <div class="col-md-8">
+                                                            <i id="countySpinner" class="fas fa-spinner fa-pulse mt-2 d-none"></i>
+                                                            <select id="countySelect" name="county_id" class="form-control form-control-lg">
+                                                                <option value="-1" disabled selected>Select a state first</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="citySelect" class="col-md-3 col-form-label col-form-label-lg"> <strong> City </strong> </label>
+                                                        <div class="col-md-8">
+                                                            <i id="citySpinner" class="fas fa-spinner fa-pulse mt-2 d-none"></i>
+                                                            <select id="citySelect" name="city_id" class="form-control form-control-lg">
+                                                                <option value="-1" disabled selected>Select a county first</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <input id="searchType" name="searchType" class="d-none" type="text" value="residential">
+                                                    <button id="searchButton" class="btn btn-primary btn-lg btn-block" style="margin-top: 20px;margin-bottom: 20px;" type="submit" disabled="true"> <i class="fas fa-search"></i> Search </button>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                            <div class="form-group row">
-                                <label for="stateSelect" class="col-md-3 col-form-label col-form-label-lg"> <strong> State </strong> </label>
-                                <div class="col-md-9">
-                                    <select id="stateSelect" name="state_id" class="form-control form-control-lg">
-                                        <option value="-1" disabled selected>Select a state</option>
-                                        @foreach($states as $state)
-                                            @if($state->is_approved)
-                                                <option value="{{$state->state_id}}">{{$state->stateName}}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
+                                        <div class="card" style="border: none">
+                                            <div class="card" id="headingTwo">
+                                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" style="font-size: 20px; color:black; text-decoration:none">
+                                                        <strong>Search by Address</strong>
+                                                    </button>
+                                            </div>
+                                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample" >
+                                                <div class="card" style="border: none;margin-top: 40px">
+                                                    <form>
+                                                        <div class="form-group row">
+                                                            <label for="AddressInput" class="col-md-3 col-form-label col-form-label-lg"><strong>Address</strong></label>
+                                                            <div class="col-md-9">
+                                                                <input type="text" class="form-control" id="AddressInput" placeholder="Input what you want to Search">
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <input id="searchType" name="searchType" class="d-none" type="text" value="residential">
+                                                <button id="searchAddressButton" class="btn btn-primary btn-lg btn-block" style="margin-top: 20px;margin-bottom: 20px;" type="submit" disabled="true"> <i class="fas fa-search"></i> Search </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="countySelect" class="col-md-3 col-form-label col-form-label-lg"> <strong> County </strong> </label>
-                                <div class="col-md-9">
-                                    <i id="countySpinner" class="fas fa-spinner fa-pulse mt-2 d-none"></i>
-                                    <select id="countySelect" name="county_id" class="form-control form-control-lg">
-                                        <option value="-1" disabled selected>Select a state first</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="citySelect" class="col-md-3 col-form-label col-form-label-lg"> <strong> City </strong> </label>
-                                <div class="col-md-9">
-                                    <i id="citySpinner" class="fas fa-spinner fa-pulse mt-2 d-none"></i>
-                                    <select id="citySelect" name="city_id" class="form-control form-control-lg">
-                                        <option value="-1" disabled selected>Select a county first</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <input id="searchType" name="searchType" class="d-none" type="text" value="residential">
-                            <button id="searchButton" class="btn btn-primary btn-lg btn-block mt-5" type="submit" disabled="true"> <i class="fas fa-search"></i> Search </button>
-                         </form>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -144,6 +182,15 @@
                 $("#searchType").attr("value","residential");
                 $("#search-title").text("Searching for Residential Locations");
             }
+        });
+
+        $("#AddressInput").on('input',function (){
+            initSearch();
+        });
+        function initSearch() {
+            $("#searchAddressButton").removeAttr("disabled");
+        }
+        $("#searchAddressButton").click(function (){
         });
 
         function enableSearch() {
