@@ -112,9 +112,39 @@
                                                 <!--Address Form-->
                                                 <form>
                                                     <div class="form-group row">
-                                                        <label for="AddressInput" class="col-md-3 col-form-label col-form-label-lg"><strong>Address</strong></label>
-                                                        <div class="col-md-9">
-                                                            <input type="text" class="form-control" id="AddressInput" placeholder="Input what you want to Search">
+                                                        <label for="StreetAddressInput" class="col-md-4 col-form-label col-form-label-lg"><strong>Street Address</strong></label>
+                                                        <div class="col-md-7">
+                                                            <input type="text" class="form-control" id="StreetAddressInput" placeholder="9155">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="RouteInput" class="col-md-4 col-form-label col-form-label-lg"><strong>Route</strong></label>
+                                                        <div class="col-md-7">
+                                                            <input type="text" class="form-control" id="RouteInput" placeholder="Southwest Barnes Road">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="CityInput" class="col-md-4 col-form-label col-form-label-lg"><strong>City</strong></label>
+                                                        <div class="col-md-7">
+                                                            <input type="text" class="form-control" id="CityInput" placeholder="Portland">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="StateInput" class="col-md-4 col-form-label col-form-label-lg"><strong>State</strong></label>
+                                                        <div class="col-md-7">
+                                                            <input type="text" class="form-control" id="StateInput" placeholder="OR">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="ZipCodeInput" class="col-md-4 col-form-label col-form-label-lg"><strong>Zip Code</strong></label>
+                                                        <div class="col-md-7">
+                                                            <input type="text" class="form-control" id="ZipCodeInput" placeholder="97225">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="CountryInput" class="col-md-4 col-form-label col-form-label-lg"><strong>Country</strong></label>
+                                                        <div class="col-md-7">
+                                                            <input type="text" class="form-control" id="CountryInput" placeholder="United States">
                                                         </div>
                                                     </div>
                                                 </form>
