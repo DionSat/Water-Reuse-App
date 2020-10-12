@@ -114,37 +114,37 @@
                                                     <div class="form-group row">
                                                         <label for="StreetAddressInput" class="col-md-4 col-form-label col-form-label-lg"><strong>Street Address</strong></label>
                                                         <div class="col-md-7">
-                                                            <input type="text" class="form-control" id="StreetAddressInput" placeholder="Type your Street Address">
+                                                            <input type="text" class="form-control" id="StreetAddressInput" placeholder="Type the Street Address">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label for="RouteInput" class="col-md-4 col-form-label col-form-label-lg"><strong>Route</strong></label>
                                                         <div class="col-md-7">
-                                                            <input type="text" class="form-control" id="RouteInput" placeholder="Type your Route">
+                                                            <input type="text" class="form-control" id="RouteInput" placeholder="Type the Route">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label for="CityInput" class="col-md-4 col-form-label col-form-label-lg"><strong>City</strong></label>
                                                         <div class="col-md-7">
-                                                            <input type="text" class="form-control" id="CityInput" placeholder="Type your City">
+                                                            <input type="text" class="form-control" id="CityInput" placeholder="Type the City">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label for="StateInput" class="col-md-4 col-form-label col-form-label-lg"><strong>State</strong></label>
                                                         <div class="col-md-7">
-                                                            <input type="text" class="form-control" id="StateInput" placeholder="Type your State">
+                                                            <input type="text" class="form-control" id="StateInput" placeholder="Type the State">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label for="ZipCodeInput" class="col-md-4 col-form-label col-form-label-lg"><strong>Zip Code</strong></label>
                                                         <div class="col-md-7">
-                                                            <input type="text" class="form-control" id="ZipCodeInput" placeholder="Type your Zip Code">
+                                                            <input type="text" class="form-control" id="ZipCodeInput" placeholder="Type the Zip Code">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label for="CountryInput" class="col-md-4 col-form-label col-form-label-lg"><strong>Country</strong></label>
                                                         <div class="col-md-7">
-                                                            <input type="text" class="form-control" id="CountryInput" placeholder="Type your Country">
+                                                            <input type="text" class="form-control" id="CountryInput" placeholder="Type the Country">
                                                         </div>
                                                     </div>
                                                 </form>
