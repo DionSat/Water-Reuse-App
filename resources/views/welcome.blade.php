@@ -79,10 +79,15 @@
         width: 30%;
     }
 
-    @media (max-width: 414px) {
+    @media (max-width: 350px)  {
+        .statusButtons > a {
+            font-size: 13px;
+        }
+    }
+
+    @media (min-width: 351px) and (max-width: 768px)  {
         .statusButtons > a {
             font-size: 16px;
-            width: 30%;
         }
     }
 </style>
