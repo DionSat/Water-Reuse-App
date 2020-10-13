@@ -22,6 +22,17 @@ This application was developed by the Winter-Spring 2020 Capstone team at Portla
 - Jubal Gonzalez-Santos
 - Steven Schulze
 
+Continued development was done by by the Summer-Fall 2020 Capstone team at Portland State University, consisting of:
+
+- Dion Satcher
+- Jonathan Bral
+- Carl Bunt
+- Robin Gearn
+- Tianhui Liang
+- Liam Rotchford
+- Simon Van Eeden
+- Daniel Wheeler
+
 ## How to Run the Project Locally
 
 To run the project locally, please see the [Laravel installation instructions](https://laravel.com/docs/7.x/installation) to first install Laravel on your machine.
