@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-9 col-lg-4 my-3 my-lg-0">
+            <div class="col-md-9 col-lg-5 my-3 my-lg-0">
                 <div class="card h-100 text-center">
                     <div class="card-header">
                         <h3>Overview</h3>
@@ -44,7 +44,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-9 col-lg-4">
+            <div class="col-md-9 col-lg-5">
                 <div class="card h-100 text-center">
                     <div class="card-header">
                         <h3>Navigation</h3>
@@ -71,7 +71,8 @@
 <style>
     body{
         background: url("img/bird-s-eye-view-of-ocean-during-daytime-2707756.jpg");
-        background-size: cover;
+        object-fit: cover;
+        background-repeat: no-repeat;
     }
 
     .statusButtons > a {
@@ -79,10 +80,15 @@
         width: 30%;
     }
 
-    @media (max-width: 414px) {
+    @media (max-width: 350px)  {
+        .statusButtons > a {
+            font-size: 13px;
+        }
+    }
+
+    @media (min-width: 351px) and (max-width: 768px)  {
         .statusButtons > a {
             font-size: 16px;
-            width: 30%;
         }
     }
 </style>
