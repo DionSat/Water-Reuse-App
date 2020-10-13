@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-9 col-lg-4 my-3 my-lg-0">
+            <div class="col-md-9 col-lg-5 my-3 my-lg-0">
                 <div class="card h-100 text-center">
                     <div class="card-header">
                         <h3>Overview</h3>
@@ -44,7 +44,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-9 col-lg-4">
+            <div class="col-md-9 col-lg-5">
                 <div class="card h-100 text-center">
                     <div class="card-header">
                         <h3>Navigation</h3>
