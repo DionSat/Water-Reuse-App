@@ -71,7 +71,8 @@
 <style>
     body{
         background: url("img/bird-s-eye-view-of-ocean-during-daytime-2707756.jpg");
-        background-size: cover;
+        object-fit: cover;
+        background-repeat: no-repeat;
     }
 
     .statusButtons > a {
