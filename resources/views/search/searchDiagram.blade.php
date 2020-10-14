@@ -66,22 +66,21 @@
                             remove:{text: "Remove"}
                         },
                         nodeBinding: {
-                            field_0: "name",
-                            field_1: "title",
+                            field_0: "Name",
                             img_0: "img"
                         },
                         nodes: [
-                            {id: 1, name: "Condensate", img: "{{ URL::asset('img/water sources_1.jpg') }}"},
-                            {id: 2, pid: 1, name: "Kitchen Sink", img: "{{ URL::asset('img/app_KITCHEN SINK.jpg') }}"},
-                            {id: 3, pid: 1, name: "Kitchen Sink + Disposer", img: "{{ URL::asset('img/app_KITCHEN SINK.jpg') }}"},
-                            {id: 4, pid: 1, name: "Dishwasher", img: "{{ URL::asset('img/app_DISHWASHER.jpg') }}"},
-                            {id: 5, pid: 1, name: "Lavatory", img: "{{ URL::asset('img/app_LAVATORY.jpg') }}"},
-                            {id: 6, pid: 1, name: "Tub + Shower", img: "{{ URL::asset('img/app_TUB-SHOWER.jpg') }}"},
-                            {id: 7, pid: 1, name: "Fire Suppression", img: "{{ URL::asset('img/app_FIRE.jpg') }}"},
-                            {id: 8, pid: 1, name: "Clothes Washer", img: "{{ URL::asset('img/app_CLOTHS WASHER.jpg') }}"},
-                            {id: 9, pid: 1, name: "Toilet", img: "{{ URL::asset('img/toilet.png') }}"},
-                            {id: 10, pid: 1, name: "Composting Toilet", img: "{{ URL::asset('img/toilet.png') }}"},
-                            {id: 11, pid: 1, name: "Urinal", img: "{{ URL::asset('img/app_LAVATORY.jpg') }}"}
+                            {id: 1, Name: "Condensate", img: "{{ URL::asset('img/water sources_1.jpg') }}"},
+                            {id: 2, pid: 1, Name: "Kitchen Sink", img: "{{ URL::asset('img/app_KITCHEN SINK.jpg') }}"},
+                            {id: 3, pid: 1, Name: "Kitchen Sink + Disposer", img: "{{ URL::asset('img/app_KITCHEN SINK.jpg') }}"},
+                            {id: 4, pid: 1, Name: "Dishwasher", img: "{{ URL::asset('img/app_DISHWASHER.jpg') }}"},
+                            {id: 5, pid: 1, Name: "Lavatory", img: "{{ URL::asset('img/app_LAVATORY.jpg') }}"},
+                            {id: 6, pid: 1, Name: "Tub + Shower", img: "{{ URL::asset('img/app_TUB-SHOWER.jpg') }}"},
+                            {id: 7, pid: 1, Name: "Fire Suppression", img: "{{ URL::asset('img/app_FIRE.jpg') }}"},
+                            {id: 8, pid: 1, Name: "Clothes Washer", img: "{{ URL::asset('img/app_CLOTHS WASHER.jpg') }}"},
+                            {id: 9, pid: 1, Name: "Toilet", img: "{{ URL::asset('img/toilet.png') }}"},
+                            {id: 10, pid: 1, Name: "Composting Toilet", img: "{{ URL::asset('img/toilet.png') }}"},
+                            {id: 11, pid: 1, Name: "Urinal", img: "{{ URL::asset('img/app_LAVATORY.jpg') }}"}
                         ]
                     });
                 </script>
