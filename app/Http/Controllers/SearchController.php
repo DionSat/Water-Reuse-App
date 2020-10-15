@@ -17,7 +17,7 @@ use App\Services\LinkCheckerService;
 class SearchController extends Controller
 {
     public function mainPage(){
-        
+
         $states = State::all()->sortBy("stateName");
         return view("search.searchpage", compact('states'));
     }
@@ -52,6 +52,38 @@ class SearchController extends Controller
         $destinations = ReuseNode::destinations();
         $type = $request->searchType === "residential" ? "Residential" : "Commercial";
 
-        return view("search.searchresults", compact('stateRules', 'countyRules', 'cityRules', 'lowestLevel', 'city', 'county', 'state', 'sources', 'destinations', 'type'));
+        return view("search.searchresults", compact('request', 'stateRules', 'countyRules', 'cityRules', 'lowestLevel', 'city', 'county', 'state', 'sources', 'destinations', 'type'));
+    }
+
+    public function handleSubmitDiagram(Request $request){
+        $countyRules = new Collection();
+        $cityRules = new Collection();
+        $state = State::find($request->state_id);
+        $county = null;
+        $city = null;
+        $lowestLevel = "state";
+
+        $stateRules = StateMerge::with(['state', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])
+            ->where("stateID", $request->state_id)->where("location_type", $request->searchType)->get();
+        if(isset($request->county_id)){
+            $countyRules = CountyMerge::with(['county', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])
+                ->where("countyID", $request->county_id)->where("location_type", $request->searchType)->get();
+            $lowestLevel = "county";
+            $county = County::find($request->county_id);
+        }
+
+        if(isset($request->city_id)) {
+            $cityRules = CityMerge::with(['city', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])
+                ->where("cityID", $request->city_id)->where("location_type", $request->searchType)->get();
+            $lowestLevel = "city";
+            $city = City::find($request->city_id);
+        }
+
+        // Get all the sources and destinations
+        $sources = ReuseNode::sources();
+        $destinations = ReuseNode::destinations();
+        $type = $request->searchType === "residential" ? "Residential" : "Commercial";
+
+        return view("search.searchDiagram", compact('request', 'stateRules', 'countyRules', 'cityRules', 'lowestLevel', 'city', 'county', 'state', 'sources', 'destinations', 'type'));
     }
 }
