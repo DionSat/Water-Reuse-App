@@ -16,13 +16,13 @@
                 <div style="width:100%; height:700px;" id="orgchart"/>
                 <script>
 
-                    var chart = new OrgChart(document.getElementById("orgchart"), {
-                        //template: "myTemplate",
+                        var chart = new OrgChart(document.getElementById("orgchart"), {
                         template: "ana",
                         enableSearch: false,
                         menu: {
                             pdf: {
                                 text: "Export PDF",
+                                icon: OrgChart.icon.pdf(24,24, '#7A7A7A'),
                                 onClick: preview
                             },
                             png: { text: "Export PNG" },
@@ -32,7 +32,14 @@
                         nodeMenu:{
                             pdf: { text: "Export PDF" },
                             png: { text: "Export PNG" },
-                            svg: { text: "Export SVG" }
+                            svg: { text: "Export SVG" },
+                            csv: { text: "Export CSV" }
+                        },
+                        toolbar: {
+                            fullScreen: true,
+                            zoom: true,
+                            fit: true,
+                            expandAll: true
                         },
                         nodeBinding: {
                             field_0: "Name",
@@ -54,6 +61,7 @@
                     });
 
                     function preview(){
+
                         OrgChart.pdfPrevUI.show(chart, {
                             format: 'A4'
                         });
@@ -77,54 +85,6 @@
             text-align: center;
             font-family: Helvetica;
             overflow-y: scroll;
-        }
-
-        [node-id] circle {
-            fill: #0991d0;
-        }
-
-        [link-id] path {
-            stroke: #0991d0;
-        }
-
-        [link-id='[1][2]'] path {
-            stroke: #750000;
-        }
-
-        [link-id='[1][3]'] path {
-            stroke: #750000;
-        }
-
-        [link-id='[1][4]'] path {
-            stroke: #750000;
-        }
-
-        [link-id='[1][5]'] path {
-            stroke: #750000;
-        }
-
-        [link-id='[1][6]'] path {
-            stroke: #750000;
-        }
-
-        [control-expcoll-id] circle {
-            fill: #750000;
-        }
-
-        [control-expcoll-id='3'] circle {
-            fill: #016e25;
-        }
-
-        [control-node-menu-id] circle {
-            fill: #bfbfbf;
-        }
-
-        #tree>svg {
-            background-color: #2E2E2E;
-        }
-
-        .bg-search-table input {
-            background-color: #2E2E2E !important;
         }
     </style>
 @endpush
