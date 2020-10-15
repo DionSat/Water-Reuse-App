@@ -16,7 +16,12 @@
                 <div style="width:100%; height:700px;" id="orgchart"/>
                 <script>
 
-                        var chart = new OrgChart(document.getElementById("orgchart"), {
+                        OrgChart.toolbarUI.expandAllIcon = '<i  class="fas fa-layer-group fa-2x fa-fw" title="Expand Diagram"></i>';
+                        OrgChart.toolbarUI.fitIcon = '<i class="fas fa-expand fa-2x fa-fw" title="Auto Fit Diagram"></i>';
+                        OrgChart.toolbarUI.zoomOutIcon = '<i class="fas fa-search-minus fa-2x fa-fw" title="Zoom Out"></i>';
+                        OrgChart.toolbarUI.zoomInIcon = '<i class="fas fa-search-plus fa-2x fa-fw" title="Zoom In"></i>';
+
+                        let chart = new OrgChart(document.getElementById("orgchart"), {
                         template: "ana",
                         enableSearch: false,
                         menu: {
@@ -36,7 +41,6 @@
                             csv: { text: "Export CSV" }
                         },
                         toolbar: {
-                            fullScreen: true,
                             zoom: true,
                             fit: true,
                             expandAll: true
@@ -86,5 +90,11 @@
             font-family: Helvetica;
             overflow-y: scroll;
         }
+
+        i.fas {
+            border: 2px solid #6c757d;
+            line-height: inherit;
+        }
+
     </style>
 @endpush
