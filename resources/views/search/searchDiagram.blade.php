@@ -72,10 +72,14 @@
                             string_icons[i] = b64;
                         }
 
-                        OrgChart.toolbarUI.expandAllIcon = '<i  class="fas fa-layer-group fa-2x fa-fw" title="Expand Diagram"></i>';
-                        OrgChart.toolbarUI.fitIcon = '<i class="fas fa-expand fa-2x fa-fw" title="Auto Fit Diagram"></i>';
-                        OrgChart.toolbarUI.zoomOutIcon = '<i class="fas fa-search-minus fa-2x fa-fw" title="Zoom Out"></i>';
-                        OrgChart.toolbarUI.zoomInIcon = '<i class="fas fa-search-plus fa-2x fa-fw" title="Zoom In"></i>';
+
+                        OrgChart.toolbarUI.expandAllIcon = '<i  class="tb fas fa-layer-group fa-2x fa-fw" title="Expand Diagram"></i>';
+                        OrgChart.toolbarUI.fitIcon = '<i class="tb fas fa-expand fa-2x fa-fw" title="Auto Fit Diagram"></i>';
+                        OrgChart.toolbarUI.zoomOutIcon = '<i class="tb fas fa-search-minus fa-2x fa-fw" title="Zoom Out"></i>';
+                        OrgChart.toolbarUI.zoomInIcon = '<i class="tb fas fa-search-plus fa-2x fa-fw" title="Zoom In"></i>';
+
+                        OrgChart.templates.ana.link = '<path stroke-linejoin="round" stroke="#AFD4FE" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
+                            '<path class="path" stroke-width="4" fill="none" stroke="#ffffff" stroke-dasharray="10"  d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>';
 
                         let chart = new OrgChart(document.getElementById("orgchart"), {
                             template: "ana",
@@ -83,18 +87,18 @@
                             menu: {
                                 pdf: {
                                     text: "Export PDF",
-                                    icon: OrgChart.icon.pdf(24,24, '#7A7A7A'),
+                                    icon: OrgChart.icon.pdf(24, 24, '#7A7A7A'),
                                     onClick: preview
                                 },
-                                png: { text: "Export PNG" },
-                                svg: { text: "Export SVG" },
-                                csv: { text: "Export CSV" }
+                                png: {text: "Export PNG"},
+                                svg: {text: "Export SVG"},
+                                csv: {text: "Export CSV"}
                             },
-                            nodeMenu:{
-                                pdf: { text: "Export PDF" },
-                                png: { text: "Export PNG" },
-                                svg: { text: "Export SVG" },
-                                csv: { text: "Export CSV" }
+                            nodeMenu: {
+                                pdf: {text: "Export PDF"},
+                                png: {text: "Export PNG"},
+                                svg: {text: "Export SVG"},
+                                csv: {text: "Export CSV"}
                             },
                             toolbar: {
                                 zoom: true,
@@ -107,19 +111,53 @@
                             },
                             nodes: [
                                 {id: 1, Name: "Condensate", img: "data:image/jpeg;base64," + string_icons[0]},
-                                {id: 2, pid: 1, Name: "Kitchen Sink", img: "data:image/jpeg;base64," + string_icons[1]},
-                                {id: 3, pid: 1, Name: "Kitchen Sink + Disposer", img: "data:image/jpeg;base64," + string_icons[2]},
-                                {id: 4, pid: 1, Name: "Dishwasher", img: "data:image/jpeg;base64," + string_icons[3]},
+                                {
+                                    id: 2,
+                                    pid: 1,
+                                    Name: "Kitchen Sink",
+                                    img: "data:image/jpeg;base64," + string_icons[1]
+                                },
+                                {
+                                    id: 3,
+                                    pid: 1,
+                                    Name: "Kitchen Sink + Disposer",
+                                    img: "data:image/jpeg;base64," + string_icons[2]
+                                },
+                                {
+                                    id: 4,
+                                    pid: 1,
+                                    Name: "Dishwasher",
+                                    img: "data:image/jpeg;base64," + string_icons[3]
+                                },
                                 {id: 5, pid: 1, Name: "Lavatory", img: "data:image/jpeg;base64," + string_icons[4]},
-                                {id: 6, pid: 1, Name: "Tub + Shower", img: "data:image/jpeg;base64," + string_icons[5]},
-                                {id: 7, pid: 1, Name: "Fire Suppression", img: "data:image/jpeg;base64," + string_icons[6]},
-                                {id: 8, pid: 1, Name: "Clothes Washer", img: "data:image/jpeg;base64," + string_icons[7]},
+                                {
+                                    id: 6,
+                                    pid: 1,
+                                    Name: "Tub + Shower",
+                                    img: "data:image/jpeg;base64," + string_icons[5]
+                                },
+                                {
+                                    id: 7,
+                                    pid: 1,
+                                    Name: "Fire Suppression",
+                                    img: "data:image/jpeg;base64," + string_icons[6]
+                                },
+                                {
+                                    id: 8,
+                                    pid: 1,
+                                    Name: "Clothes Washer",
+                                    img: "data:image/jpeg;base64," + string_icons[7]
+                                },
                                 {id: 9, pid: 1, Name: "Toilet", img: "data:image/jpeg;base64," + string_icons[8]},
-                                {id: 10, pid: 1, Name: "Composting Toilet", img: "data:image/jpeg;base64," + string_icons[9]},
+                                {
+                                    id: 10,
+                                    pid: 1,
+                                    Name: "Composting Toilet",
+                                    img: "data:image/jpeg;base64," + string_icons[9]
+                                },
                                 {id: 11, pid: 1, Name: "Urinal", img: "data:image/jpeg;base64," + string_icons[10]}
                             ]
                         });
-
                         function preview(){
 
                             OrgChart.pdfPrevUI.show(chart, {
@@ -148,10 +186,27 @@
             overflow-y: auto;
         }
 
-        i.fas {
+        i.tb {
             border: 2px solid #6c757d;
             line-height: inherit;
         }
+
+        .path {
+            animation: dash 5s linear infinite;
+
+        }
+
+        @keyframes dash {
+            from {
+                stroke-dashoffset: 100;
+                opacity: 1;
+            }
+            to {
+                stroke-dashoffset: 0;
+                opacity: 0;
+            }
+        }
+
 
     </style>
 @endpush
