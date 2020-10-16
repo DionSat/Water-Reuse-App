@@ -145,7 +145,7 @@
             overflow: hidden;
             text-align: center;
             font-family: Helvetica;
-            overflow-y: scroll;
+            overflow-y: auto;
         }
 
         i.fas {
