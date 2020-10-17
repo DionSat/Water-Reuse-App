@@ -2,7 +2,6 @@
 
 @section('body')
     <script src="{{ URL::asset('/libraries/orgchart.js') }}"></script>
-    <canvas id="myCanvas" width="578" height="200"></canvas>
     <div class="container">
         <div class="navbar">
             <a href="{{route("search")}}" class="btn btn-primary col-md-2 mb-4 float-left"> <i class="fas fa-arrow-circle-left"></i>
@@ -14,6 +13,18 @@
         </div>
         <div class="card mb-3">
             <div class="card-body">
+                <div class="legend-content">
+                    <div>
+                        <div style="background-color:#039BE5;"></div>  Manager
+                    </div>
+                    <div>
+                        <div style="background-color:#F57C00;"></div>  Sales
+                    </div>
+                    <div>
+                        <div style="background-color:#FFCA28;"></div>  IT
+                    </div>
+                </div>
+
                 <div style="width:100%; height:700px;" id="orgchart"/>
                 <script>
                     //Load all the icon images into an array
@@ -158,6 +169,41 @@
                                 {id: 11, pid: 1, Name: "Urinal", img: "data:image/jpeg;base64," + string_icons[10]}
                             ]
                         });
+
+                        /*chart.editUI.on('field', function(sender, args){
+
+                            //      On the seachResults.blade they utilize @ include inside the divs of the locations
+                            //      they want to inset the table on which is held in seachResultTable.blade
+                            //      If I can make my own version of the table but only have it on a per
+                            //      single row basis based on the name, then I can pull in the already created / linked
+                            //      buttons they have made. Then using this chart.editUI.on function I can insert in the
+                            //      link buttons without having to hardcode anything!ee
+
+
+                            if (args.type == 'details' && args.name == 'company')
+                                var txt = args.field.querySelector('input');
+                                var txtVal = txt.value;
+                                if (txt){
+
+                                    var permitBtn = document.createElement('a');
+                                    var linkText = document.createTextNode("BALKANGraph.com");
+                                    a.appendChild(linkText);
+                                    a.title = "my title text";
+                                    a.href = "https://balkangraph.com/";
+                                    a.target = "_blank";
+
+
+                                    var parent = args.field.querySelector('div');
+                                    var br = document.createElement("br");
+                                    parent.appendChild(br);
+                                    parent.appendChild(a);
+
+                                    txt.remove();
+
+                                }
+                            }
+                        });*/
+
                         function preview(){
 
                             OrgChart.pdfPrevUI.show(chart, {
@@ -169,7 +215,6 @@
                 </script>
             </div>
         </div>
-
     </div>
 @endsection
 
@@ -189,6 +234,22 @@
         i.tb {
             border: 2px solid #6c757d;
             line-height: inherit;
+        }
+
+        .legend-content{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            margin: 0 0 10px 10px;
+        }
+
+        /* To adjust the circles to lines by removing the border radius and adjusting the width and heightl5671
+        */
+        .legend-content > div > div {
+            width: 16px;
+            height:16px;
+            display: inline-block;
+            border-radius: 15px;
         }
 
         .path {
