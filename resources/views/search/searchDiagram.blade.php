@@ -15,13 +15,22 @@
             <div class="card-body">
                 <div class="legend-content">
                     <div>
-                        <div style="background-color:#039BE5;"></div>  Manager
+                        <div style="background-color:#00cdcd;"></div>  First Use Water
                     </div>
                     <div>
-                        <div style="background-color:#F57C00;"></div>  Sales
+                        <div style="background-color:#8c8c8c;"></div>  Greywater
                     </div>
                     <div>
-                        <div style="background-color:#FFCA28;"></div>  IT
+                        <div style="background-color:#666666;"></div>  Sewage
+                    </div>
+                    <div>
+                        <div style="background-color:#69d500;"></div>  No Permit Required
+                    </div>
+                    <div>
+                        <div style="background-color:#ff8c00;"></div>  Pathway Not Addressed
+                    </div>
+                    <div>
+                        <div style="background-color:#ff0000;"></div>  Pathway Blocked
                     </div>
                 </div>
 
@@ -95,6 +104,7 @@
                         let chart = new OrgChart(document.getElementById("orgchart"), {
                             template: "ana",
                             enableSearch: false,
+                            align: OrgChart.ORIENTATION,
                             menu: {
                                 pdf: {
                                     text: "Export PDF",
@@ -240,16 +250,14 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            margin: 0 0 10px 10px;
+            margin: 0 0 50px 20px;
         }
 
-        /* To adjust the circles to lines by removing the border radius and adjusting the width and heightl5671
-        */
         .legend-content > div > div {
-            width: 16px;
-            height:16px;
             display: inline-block;
-            border-radius: 15px;
+            width: 30px;
+            height:8px;
+            margin-bottom: 2px;
         }
 
         .path {
