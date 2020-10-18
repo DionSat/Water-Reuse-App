@@ -17,11 +17,14 @@ use App\Services\LinkCheckerService;
 class SearchController extends Controller
 {
     public function mainPage(){
-        
+
         $states = State::all()->sortBy("stateName");
         return view("search.searchpage", compact('states'));
     }
 
+    public function searchDiagram(){
+        return view("search.searchDiagram");
+    }
 
     public function handleSubmit(Request $request){
         $countyRules = new Collection();
@@ -53,5 +56,11 @@ class SearchController extends Controller
         $type = $request->searchType === "residential" ? "Residential" : "Commercial";
 
         return view("search.searchresults", compact('stateRules', 'countyRules', 'cityRules', 'lowestLevel', 'city', 'county', 'state', 'sources', 'destinations', 'type'));
+    }
+
+    // Parses user-input into searchable query
+    public function handleAddress(Request $request){
+        $address_string = $request->addressInput;
+        echo $address_string;
     }
 }
