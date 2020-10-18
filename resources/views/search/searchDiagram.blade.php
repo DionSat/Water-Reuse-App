@@ -11,6 +11,22 @@
                 <i class="fas fa-clipboard-list"></i> List Option
             </a>
         </div>
+        <div class="container">
+            <div class="tree-navbar">
+                    <script src="https://balkangraph.com/js/latest/OrgChart.js"></script>
+                    <button class="btn btn-primary fas search-btn">Kitchen Sink</button>
+                    <button class="btn btn-primary fas search-btn">Kitchen Sink + Disposer</button>
+                    <button class="btn btn-primary fas search-btn">Dishwasher</button>
+                    <button class="btn btn-primary fas search-btn">Lavatory</button>
+                    <button class="btn btn-primary fas search-btn">Tub + Shower</button>
+                    <button class="btn btn-primary fas search-btn">Fire Suppression</button>
+                    <button class="btn btn-primary fas search-btn">Clothes Washer</button>
+                    <button class="btn btn-primary fas search-btn">Toilet</button>
+                    <button class="btn btn-primary fas search-btn">Composting Toilet</button>
+                    <button class="btn btn-primary fas search-btn">Urinal</button>
+                    <div id="tree"></div>
+            </div>
+        </div>
         <div class="card mb-3">
             <div class="card-body">
                 <div style="width:100%; height:700px;" id="orgchart"/>
@@ -84,6 +100,17 @@
                             {id: 11, pid: 1, name: "Urinal", img: "{{ URL::asset('img/app_LAVATORY.jpg') }}"}
                         ]
                     });
+
+                    var elements = document.getElementsByClassName("search-btn");
+                    for (var i = 0; i < elements.length; i++) {
+                        elements[i].addEventListener("click", function () {
+                            var searchname = this.innerHTML;
+                            var result = chart.find(searchname);
+                            for (var j = 0; j < result.length; j++) {
+                                chart.center(result[j].id);
+                            }
+                        });
+                    }
                 </script>
             </div>
         </div>
