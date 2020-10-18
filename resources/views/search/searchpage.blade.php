@@ -47,21 +47,21 @@
                     <div class="search mt-3">
                         <h3 id="search-title" class="text-center">Search for Location </h3>
                         <hr>
-                        <form method="GET" action="{{route("search-submit")}}" class="text-center">
-                            {{ csrf_field() }}
-                            <div class="col-md-12">
-                                <div class="accordion" id="accordionExample">
-                                    <!--Search by S.C.C.-->
-                                    <div class="card" style="border: none; ">
-                                        <!--button name-->
-                                        <div class="card" id="headingOne">
-                                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" style="font-size: 20px; color: black; text-decoration:none">
-                                                <strong>Search by State County City</strong>
-                                            </button>
-                                        </div>
-                                        <!--search page-->
-                                        <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                            <div class="card" style="margin-top: 40px; border: none">
+                        <div class="col-md-12">
+                            <div class="accordion" id="accordionExample">
+                                <!--Search by S.C.C.-->
+                                <div class="card" style="border: none; ">
+                                    <!--button name-->
+                                    <div class="card" id="headingOne">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" style="font-size: 20px; color: black; text-decoration:none">
+                                            <strong>Search by State County City</strong>
+                                        </button>
+                                    </div>
+                                    <!--search page-->
+                                    <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                        <div class="card" style="margin-top: 40px; border: none">
+                                            <form method="GET" action="{{route("search-submit")}}" class="text-center">
+                                                {{ csrf_field() }}
                                                 <div class="form-group row">
                                                     <label for="stateSelect" class="col-md-3 col-form-label col-form-label-lg"> <strong> State </strong> </label>
                                                     <div class="col-md-8">
@@ -95,21 +95,24 @@
                                                 </div>
                                                 <input id="searchType" name="searchType" class="d-none" type="text" value="residential">
                                                 <button id="searchButton" class="btn btn-primary btn-lg btn-block" style="margin-top: 20px;margin-bottom: 20px;" type="submit" disabled="true"> <i class="fas fa-search"></i> Search </button>
-                                            </div>
+                                            </form>
                                         </div>
                                     </div>
-                                    <!--Search by Address-->
-                                    <div class="card" style="border: none">
-                                        <!--button name-->
-                                        <div class="card" id="headingTwo">
-                                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" style="font-size: 20px; color:black; text-decoration:none">
-                                                <strong>Search by Address</strong>
-                                            </button>
-                                        </div>
-                                        <!--Address Search page-->
-                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample" >
-                                            <div class="card" style="border: none;margin-top: 40px">
-                                                <!--Address Form-->
+                                </div>
+                                <!--Search by Address-->
+                                <div class="card" style="border: none">
+                                    <!--button name-->
+                                    <div class="card" id="headingTwo">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" style="font-size: 20px; color:black; text-decoration:none">
+                                            <strong>Search by Address</strong>
+                                        </button>
+                                    </div>
+                                    <!--Address Search page-->
+                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample" >
+                                        <form class="card" style="border: none;margin-top: 40px">
+                                            <form method="GET" action="{{route("search-submit")}}" class="text-center">
+                                            {{ csrf_field() }}
+                                            <!--Address Form-->
                                                 <form>
                                                     <div class="form-group row">
                                                         <label for="StreetAddressInput" class="col-md-4 col-form-label col-form-label-lg"><strong>Street Address</strong></label>
@@ -148,15 +151,15 @@
                                                         </div>
                                                     </div>
                                                 </form>
-                                            </div>
-                                            <input id="searchType" name="searchType" class="d-none" type="text" value="residential">
-                                            <button id="searchAddressButton" class="btn btn-primary btn-lg btn-block" style="margin-top: 20px;margin-bottom: 20px;" type="submit" disabled="true"> <i class="fas fa-search"></i> Search </button>
-                                        </div>
+                                            </form>
+                                        </form>
+                                        <input id="searchType" name="searchType" class="d-none" type="text" value="residential">
+                                        <button id="searchAddressButton" class="btn btn-primary btn-lg btn-block" style="margin-top: 20px;margin-bottom: 20px;" type="submit" disabled="true"> <i class="fas fa-search"></i> Search </button>
                                     </div>
                                 </div>
-
                             </div>
-                        </form>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -191,13 +194,13 @@
     <script>
 
         $(".initial-selection").hover(function () {
-            $(this).removeClass("border-dark");
-            $(this).addClass("shadow bg-primary text-light border-none");
-        },
-        function () {
-            $(this).removeClass("shadow bg-primary text-light border-none");
-            $(this).addClass("border-dark");
-        });
+                $(this).removeClass("border-dark");
+                $(this).addClass("shadow bg-primary text-light border-none");
+            },
+            function () {
+                $(this).removeClass("shadow bg-primary text-light border-none");
+                $(this).addClass("border-dark");
+            });
 
         $(".selection-card").click(function () {
             $(".type-selector").hide();
