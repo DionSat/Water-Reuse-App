@@ -14,16 +14,16 @@
         <div class="container">
             <div class="tree-navbar">
                     <script src="https://balkangraph.com/js/latest/OrgChart.js"></script>
-                    <button class="btn btn-primary fas search-btn">Kitchen Sink</button>
-                    <button class="btn btn-primary fas search-btn">Kitchen Sink + Disposer</button>
-                    <button class="btn btn-primary fas search-btn">Dishwasher</button>
-                    <button class="btn btn-primary fas search-btn">Lavatory</button>
-                    <button class="btn btn-primary fas search-btn">Tub + Shower</button>
-                    <button class="btn btn-primary fas search-btn">Fire Suppression</button>
-                    <button class="btn btn-primary fas search-btn">Clothes Washer</button>
-                    <button class="btn btn-primary fas search-btn">Toilet</button>
-                    <button class="btn btn-primary fas search-btn">Composting Toilet</button>
-                    <button class="btn btn-primary fas search-btn">Urinal</button>
+                    <button class="btn btn-primary fas search-btn" title="Kitchen Sink"><img src="/img/app_KITCHEN SINK.jpg" height=30px width=30px/></button>
+                    <button class="btn btn-primary fas search-btn" title="Kitchen Sink + Disposer"><img src="/img/app_KITCHEN SINK.jpg" height=30px width=30px/></button>
+                    <button class="btn btn-primary fas search-btn" title="Dishwasher"><img src="/img/app_DISHWASHER.jpg" height=30px width=30px/></button>
+                    <button class="btn btn-primary fas search-btn" title="Lavatory"><img src="/img/app_LAVATORY.jpg" height=30px width=30px/></button>
+                    <button class="btn btn-primary fas search-btn" title="Tub + Shower"><img src="/img/app_TUB-SHOWER.jpg" height=30px width=30px/></button>
+                    <button class="btn btn-primary fas search-btn" title="Fire Suppression"><img src="/img/app_FIRE.jpg" height=30px width=30px/></button>
+                    <button class="btn btn-primary fas search-btn" title="Clothes Washer"><img src="/img/app_CLOTHS WASHER.jpg" height=30px width=30px/></button>
+                    <button class="btn btn-primary fas search-btn" title="Toilet"><img src="/img/toilet.png" height=30px width=30px/></button>
+                    <button class="btn btn-primary fas search-btn" title="Composting Toilet"><img src="/img/toilet.png" height=30px width=30px/></button>
+                    <button class="btn btn-primary fas search-btn" title="Urinal"><img src="/img/app_LAVATORY.jpg" height=30px width=30px/></button>
                     <div id="tree"></div>
             </div>
         </div>
@@ -104,7 +104,7 @@
                     var elements = document.getElementsByClassName("search-btn");
                     for (var i = 0; i < elements.length; i++) {
                         elements[i].addEventListener("click", function () {
-                            var searchname = this.innerHTML;
+                            var searchname = this.title;
                             var result = chart.find(searchname);
                             for (var j = 0; j < result.length; j++) {
                                 chart.center(result[j].id);
