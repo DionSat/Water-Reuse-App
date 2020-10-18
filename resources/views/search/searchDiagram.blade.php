@@ -18,7 +18,7 @@
                         <div style="background-color:#00cdcd;"></div>  First Use Water
                     </div>
                     <div>
-                        <div style="background-color:#8c8c8c;"></div>  Greywater
+                        <div style="background-color:#c6c6c6"></div>  Greywater
                     </div>
                     <div>
                         <div style="background-color:#666666;"></div>  Sewage
