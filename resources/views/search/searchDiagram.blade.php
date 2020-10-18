@@ -92,15 +92,17 @@
                             string_icons[i] = b64;
                         }
 
-
+                        /* Zoom Toolbar Icons */
                         OrgChart.toolbarUI.expandAllIcon = '<i  class="tb fas fa-layer-group fa-2x fa-fw" title="Expand Diagram"></i>';
                         OrgChart.toolbarUI.fitIcon = '<i class="tb fas fa-expand fa-2x fa-fw" title="Auto Fit Diagram"></i>';
                         OrgChart.toolbarUI.zoomOutIcon = '<i class="tb fas fa-search-minus fa-2x fa-fw" title="Zoom Out"></i>';
                         OrgChart.toolbarUI.zoomInIcon = '<i class="tb fas fa-search-plus fa-2x fa-fw" title="Zoom In"></i>';
 
-                        OrgChart.templates.ana.link = '<path stroke-linejoin="round" stroke="#AFD4FE" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
-                            '<path class="path" stroke-width="4" fill="none" stroke="#ffffff" stroke-dasharray="10"  d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>';
+                        /* Link Animations */
+                        OrgChart.templates.ana.link = '<path class="backgroundPath" stroke-linejoin="round" stroke="#00cdcd" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
+                            '<path class="dashPath" stroke-width="4" fill="none" stroke="#ffffff" stroke-dasharray="10"  d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>';
 
+                        /* Chart */
                         let chart = new OrgChart(document.getElementById("orgchart"), {
                             template: "ana",
                             enableSearch: false,
@@ -132,88 +134,20 @@
                             },
                             nodes: [
                                 {id: 1, Name: "Condensate", img: "data:image/jpeg;base64," + string_icons[0]},
-                                {
-                                    id: 2,
-                                    pid: 1,
-                                    Name: "Kitchen Sink",
-                                    img: "data:image/jpeg;base64," + string_icons[1]
-                                },
-                                {
-                                    id: 3,
-                                    pid: 1,
-                                    Name: "Kitchen Sink + Disposer",
-                                    img: "data:image/jpeg;base64," + string_icons[2]
-                                },
-                                {
-                                    id: 4,
-                                    pid: 1,
-                                    Name: "Dishwasher",
-                                    img: "data:image/jpeg;base64," + string_icons[3]
-                                },
+                                {id: 2, pid: 1, Name: "Kitchen Sink", img: "data:image/jpeg;base64," + string_icons[1]                              },
+                                {id: 3, pid: 1, Name: "Kitchen Sink + Disposer", img: "data:image/jpeg;base64," + string_icons[2]},
+                                {id: 4, pid: 1, Name: "Dishwasher", img: "data:image/jpeg;base64," + string_icons[3]},
                                 {id: 5, pid: 1, Name: "Lavatory", img: "data:image/jpeg;base64," + string_icons[4]},
-                                {
-                                    id: 6,
-                                    pid: 1,
-                                    Name: "Tub + Shower",
-                                    img: "data:image/jpeg;base64," + string_icons[5]
-                                },
-                                {
-                                    id: 7,
-                                    pid: 1,
-                                    Name: "Fire Suppression",
-                                    img: "data:image/jpeg;base64," + string_icons[6]
-                                },
-                                {
-                                    id: 8,
-                                    pid: 1,
-                                    Name: "Clothes Washer",
-                                    img: "data:image/jpeg;base64," + string_icons[7]
-                                },
+                                {id: 6, pid: 1, Name: "Tub + Shower", img: "data:image/jpeg;base64," + string_icons[5]},
+                                {id: 7, pid: 1, Name: "Fire Suppression", img: "data:image/jpeg;base64," + string_icons[6]},
+                                {id: 8, pid: 1, Name: "Clothes Washer", img: "data:image/jpeg;base64," + string_icons[7]                                },
                                 {id: 9, pid: 1, Name: "Toilet", img: "data:image/jpeg;base64," + string_icons[8]},
-                                {
-                                    id: 10,
-                                    pid: 1,
-                                    Name: "Composting Toilet",
-                                    img: "data:image/jpeg;base64," + string_icons[9]
-                                },
+                                {id: 10, pid: 1, Name: "Composting Toilet", img: "data:image/jpeg;base64," + string_icons[9]},
                                 {id: 11, pid: 1, Name: "Urinal", img: "data:image/jpeg;base64," + string_icons[10]}
                             ]
                         });
 
-                        /*chart.editUI.on('field', function(sender, args){
-
-                            //      On the seachResults.blade they utilize @ include inside the divs of the locations
-                            //      they want to inset the table on which is held in seachResultTable.blade
-                            //      If I can make my own version of the table but only have it on a per
-                            //      single row basis based on the name, then I can pull in the already created / linked
-                            //      buttons they have made. Then using this chart.editUI.on function I can insert in the
-                            //      link buttons without having to hardcode anything!ee
-
-
-                            if (args.type == 'details' && args.name == 'company')
-                                var txt = args.field.querySelector('input');
-                                var txtVal = txt.value;
-                                if (txt){
-
-                                    var permitBtn = document.createElement('a');
-                                    var linkText = document.createTextNode("BALKANGraph.com");
-                                    a.appendChild(linkText);
-                                    a.title = "my title text";
-                                    a.href = "https://balkangraph.com/";
-                                    a.target = "_blank";
-
-
-                                    var parent = args.field.querySelector('div');
-                                    var br = document.createElement("br");
-                                    parent.appendChild(br);
-                                    parent.appendChild(a);
-
-                                    txt.remove();
-
-                                }
-                            }
-                        });*/
-
+                        /* PDF Export Preview */
                         function preview(){
 
                             OrgChart.pdfPrevUI.show(chart, {
@@ -241,11 +175,13 @@
             overflow-y: auto;
         }
 
+        /* Zoom Icons CSS */
         i.tb {
             border: 2px solid #6c757d;
             line-height: inherit;
         }
 
+        /* Legend Key Outer Container */
         .legend-content{
             position: absolute;
             bottom: 0;
@@ -253,6 +189,7 @@
             margin: 0 0 50px 20px;
         }
 
+        /* Legend Key Inner Container */
         .legend-content > div > div {
             display: inline-block;
             width: 30px;
@@ -260,11 +197,21 @@
             margin-bottom: 2px;
         }
 
-        .path {
+        /* Water Use Paths Animation */
+        .dashPath {
             animation: dash 5s linear infinite;
-
         }
 
+        /* Blocked Paths Animation */
+        [link-id='[1][2]'] .backgroundPath,
+        [link-id='[1][3]'] .backgroundPath,
+        [link-id='[1][4]'] .backgroundPath,
+        [link-id='[1][5]'] .backgroundPath,
+        [link-id='[1][6]'] .backgroundPath {
+            stroke: #ff0000;
+        }
+
+        /* Link Animation ~ Dash Type */
         @keyframes dash {
             from {
                 stroke-dashoffset: 100;
@@ -272,10 +219,9 @@
             }
             to {
                 stroke-dashoffset: 0;
-                opacity: 0;
+                opacity: 1;
             }
         }
-
 
     </style>
 @endpush
