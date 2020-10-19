@@ -13,12 +13,14 @@
             <div class="tab-pane fade show active" id="nav-searchGuest" role="tabpanel" aria-labelledby="nav-searchGuest-tab">
                 <h2>How to Search for a Regulation</h2>
                 <p>1. Navigate to the <a href="{{ route('search') }}" target="_blank"> Search </a>page</p>
+                <img src="img/search_start.gif">
                 <p>2. Select either 'Commercial' or 'Residential'</p>
-                <img src="img/searchExample.png">
-                <p>3. First select a state in the dropdown menu, then you can either search only by state, or by county or city by selecting them in the dropdown menu.</p>
-                <img src="img/searchExample1.png">
-                <p>4. After selecting the region you wish to search for, click on the 'Search' button.</p>
-                <img src="img/searchExample2.png">
+                <img src="img/searchExampleGIF2.gif">
+                <p>Choose between either searching by Address or Searching by County, City, State</p>
+                <img src="img/undermaintenance.png">
+                <h3> Search by County, City, State</h3>
+                <p>3. First select a state in the dropdown menu, then you can either search only by state, or by county or city by selecting them in the dropdown menu. After selecting the region you wish to search for, click on the 'Search' button.</p>
+                <img src="img/searchExampleGIF3.gif">
                 <p>5. At this point, you can either scroll through the search results, or narrow them down by selecting a source and destination in the dropdown menues.</p>
                 <img src="img/searchExample3.png">
                 <h4>Disclaimer</h4>
@@ -169,7 +171,7 @@
                                 <p>3. You should now see a list of regulations awaiting approval. To review the submission, click the 'view' button, to decline the submission click the 'Decline' button and to approve the submission, click the 'Approve' button.</p>
                                 <img class="smallRec" src="img/regulationExample1.png"></img>
                                 <h4>Disclamer</h4>
-                                <p>The system is set up in a way that if you approve a new or non-existing area, this area will be created.</h4>
+                                <p>The system is set up in a way that if you approve a new or non-existing area, this area will be created.</p>
                                 </br>
                                 </br>
                                 <a href="#nav-tab-admin">Back to Top</a>
