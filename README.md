@@ -35,7 +35,7 @@ Continued development was done by by the Summer-Fall 2020 Capstone team at Portl
 
 ## How to Run the Project Locally
 
-To run the project locally, please see the [Laravel installation instructions](https://laravel.com/docs/7.x/installation) to first install Laravel on your machine. Laravel requires [composer](https://getcomposer.org/download/) to inisialize the PHP webserver. 
+To run the project locally, please see the [Laravel installation instructions](https://laravel.com/docs/7.x/installation) to first install Laravel on your machine. Laravel requires [composer](https://getcomposer.org/download/) to initialize the PHP webserver. 
 
 After installing Composer and Laravel, and cloning the project, it can be served locally by running the command `php artisan serve` in the project directory.  
 
