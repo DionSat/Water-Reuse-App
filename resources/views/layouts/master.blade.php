@@ -25,6 +25,7 @@
         }
         a.nav-link:hover:not(.active):not(.dropdown-toggle){
             border-bottom: 2px solid #a9a3a3;
+
         }
         a.nav-link:not(.active){
             border-bottom: 2px solid white;
@@ -65,19 +66,24 @@
 
                         @auth
                         <li class="nav-item">
-                            <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "userSubmission") active @endif" href="{{ route('userSubmission') }}" title="Go to the submissions page">{{ __('Submit a New Regulation') }}</a>
+                            <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "userSubmission") active @endif" href="{{ route('userSubmission') }}" title="Go to the submissions page">{{ __('Submit Regulation') }}</a>
                         </li>
                         @endauth
 
                         @if (Auth::check() && Auth::user()->is_admin)
-                            <li class="nav-item pl-3">
-                                <span class="nav-link mx-md-2 px-md-0 pb-md-0">Admin:</span>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "admin") active @endif" href="{{ route('admin') }}" title="Adminitration page for application"><i class="fas fa-tachometer-alt"></i> Dashboard </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "adminUserSubmissionView") active @endif" href="{{ route('adminUserSubmissionView') }}" title="View approved and pending submissions"><i class="fas fa-bars"></i> Submissions </a>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAdminMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Expand for administrator menu">
+                                    Admin
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownAdminMenuLink">
+                                    <a class="dropdown-item @if (Route::current()->getName() == "admin") active @endif" href="{{ route('admin') }}" title="Adminitration page for application">
+                                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                                    </a>
+                                    <a class="dropdown-item @if (Route::current()->getName() == "adminUserSubmissionView") active @endif" href="{{ route('adminUserSubmissionView') }}" title="View approved and pending submissions">
+                                        <i class="fas fa-bars"></i> Submissions
+                                    </a>
+                                </div>
                             </li>
 
                         @endif
