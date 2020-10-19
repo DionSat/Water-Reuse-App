@@ -170,7 +170,7 @@
                                     <img class="smallRec" src="img/banExample1.png"></img>
                                     <p>4. Once you have found the user you wish to ban, click the 'ban user' button.</p>
                                     <img class="smallRec" src="img/banExample2.png"></img>
-                                    <p>5. You should now recieve a message showing that the user was succesfully banned, and they will not appear in the list of users.</p>
+                                    <p>5. You should now receive a message showing that the user was succesfully banned, and they will not appear in the list of users.</p>
                                     <img class="smallRec" src="img/banExample3.png"></img>
                                     <p>7. You can then 'unban' a user under the 'Banned Users' view of the Administrator Dashboard.</p>
                                     <img src="img/banExample4.png"></img>
