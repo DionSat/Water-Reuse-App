@@ -77,7 +77,7 @@
                                     Admin
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownAdminMenuLink">
-                                    <a class="dropdown-item @if (Route::current()->getName() == "admin") active @endif" href="{{ route('admin') }}" title="Adminitration page for application">
+                                    <a class="dropdown-item @if (Route::current()->getName() == "admin") active @endif" href="{{ route('admin') }}" title="Administration page for application">
                                         <i class="fas fa-tachometer-alt"></i> Dashboard
                                     </a>
                                     <a class="dropdown-item @if (Route::current()->getName() == "adminUserSubmissionView") active @endif" href="{{ route('adminUserSubmissionView') }}" title="View approved and pending submissions">
