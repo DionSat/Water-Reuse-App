@@ -22,7 +22,7 @@ This application was developed by the Winter-Spring 2020 Capstone team at Portla
 - Jubal Gonzalez-Santos
 - Steven Schulze
 
-Continued development was done by by the Summer-Fall 2020 Capstone team at Portland State University, consisting of:
+Continued development was done by the Summer-Fall 2020 Capstone team at Portland State University, consisting of:
 
 - Dion Satcher
 - Jonathan Bral
