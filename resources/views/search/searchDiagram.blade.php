@@ -130,21 +130,50 @@
                             },
                             nodeBinding: {
                                 field_0: "Name",
+                                field_1: "Links",
                                 img_0: "img"
                             },
                             nodes: [
-                                {id: 1, Name: "Condensate", img: "data:image/jpeg;base64," + string_icons[0]},
-                                {id: 2, pid: 1, Name: "Kitchen Sink", img: "data:image/jpeg;base64," + string_icons[1]                              },
-                                {id: 3, pid: 1, Name: "Kitchen Sink + Disposer", img: "data:image/jpeg;base64," + string_icons[2]},
-                                {id: 4, pid: 1, Name: "Dishwasher", img: "data:image/jpeg;base64," + string_icons[3]},
-                                {id: 5, pid: 1, Name: "Lavatory", img: "data:image/jpeg;base64," + string_icons[4]},
-                                {id: 6, pid: 1, Name: "Tub + Shower", img: "data:image/jpeg;base64," + string_icons[5]},
-                                {id: 7, pid: 1, Name: "Fire Suppression", img: "data:image/jpeg;base64," + string_icons[6]},
-                                {id: 8, pid: 1, Name: "Clothes Washer", img: "data:image/jpeg;base64," + string_icons[7]                                },
-                                {id: 9, pid: 1, Name: "Toilet", img: "data:image/jpeg;base64," + string_icons[8]},
-                                {id: 10, pid: 1, Name: "Composting Toilet", img: "data:image/jpeg;base64," + string_icons[9]},
-                                {id: 11, pid: 1, Name: "Urinal", img: "data:image/jpeg;base64," + string_icons[10]}
+                                {id: 1, Name: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[0]},
+                                {id: 2, pid: 1, Name: "Kitchen Sink", Links: "", img: "data:image/jpeg;base64," + string_icons[1]                              },
+                                {id: 3, pid: 1, Name: "Kitchen Sink + Disposer", Links: "", img: "data:image/jpeg;base64," + string_icons[2]},
+                                {id: 4, pid: 1, Name: "Dishwasher", Links: "", img: "data:image/jpeg;base64," + string_icons[3]},
+                                {id: 5, pid: 1, Name: "Lavatory", Links: "", img: "data:image/jpeg;base64," + string_icons[4]},
+                                {id: 6, pid: 1, Name: "Tub + Shower", Links: "", img: "data:image/jpeg;base64," + string_icons[5]},
+                                {id: 7, pid: 1, Name: "Fire Suppression", Links: "", img: "data:image/jpeg;base64," + string_icons[6]},
+                                {id: 8, pid: 1, Name: "Clothes Washer", Links: "", img: "data:image/jpeg;base64," + string_icons[7]                                },
+                                {id: 9, pid: 1, Name: "Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
+                                {id: 10, pid: 1, Name: "Composting Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
+                                {id: 11, pid: 1, Name: "Urinal", Links: "", img: "data:image/jpeg;base64," + string_icons[10]}
                             ]
+                        });
+
+                        /* Node Details Button Links */
+                        chart.editUI.on('field', function(sender, args){
+                            if (args.type == 'details' && args.name == 'Links'){
+
+                                var txt = args.field.querySelector('input');
+                                if (txt){
+                                    var linkLabels = ["Code", "Permit", "Incentive", "More Info"];
+                                    var parent = args.field.querySelector('div');
+                                    var br = document.createElement("br");
+                                    parent.appendChild(br);
+
+                                    linkLabels.forEach((linkName) => {
+                                        var a = document.createElement('a');
+                                        var linkText = document.createTextNode(linkName);
+                                        a.appendChild(linkText);
+                                        a.className = "btn btn-primary";
+                                        a.style.cssText = "margin: 15px 6px 0 6px;";
+                                        a.title = linkName;
+                                        a.href = "";
+                                        a.target = "_blank";
+                                        parent.appendChild(a);
+                                    });
+
+                                    txt.remove();
+                                }
+                            }
                         });
 
                         /* PDF Export Preview */
@@ -224,4 +253,26 @@
         }
 
     </style>
+@endpush
+
+@push("js")
+    <script src="{{ URL::asset('/libraries/axios.min.js') }}"></script>
+
+    <script>
+        // Fire off a event as the user navigates away to check the link
+        // The link is only checked if it hasn't been updated in last 14 days
+        $(".link-button").click(function (event) {
+            axios.post("{{route("check-link-api")}}", {
+                link_id: $(this).attr("data-linkid")
+            })
+                .then(function (response) {
+                    console.log(response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        });
+    </script>
+
+
 @endpush
