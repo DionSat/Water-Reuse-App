@@ -19,8 +19,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/info', 'HomeController@getInfo')->name('info');
 Route::get('/search', 'SearchController@mainPage')->name('search');
 Route::get('/search/query', 'SearchController@handleSubmit')->name('search-submit');
-
-Route::get('/search/query1', 'SearchController@handleAddress')->name('search-address');
+Route::get('/search/query-address', 'SearchController@handleAddress')->name('search-address');
 
 // Will change to interact w/ search SearchController and load request data.
 Route::get('/search/diagram', 'SearchController@searchDiagram')->name('search-diagram');

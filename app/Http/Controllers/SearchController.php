@@ -67,18 +67,20 @@ class SearchController extends Controller
 
     // API Request for geocode data
     public function addressData($address_string){
-        $request_url = "https://rapidapi.p.rapidapi.com/Geocode";
+        $request_url = "http://www.mapquestapi.com/geocoding/v1/address";
         $client = new \GuzzleHttp\Client();
         $response = $client->request('GET', $request_url, [
             'query' => [
-                'address' => $address_string,
-                'language' => 'en',
-                'country' => 'US'],
-            'headers' => [
-                'x-rapidapi-host' => 'trueway-geocoding.p.rapidapi.com',
-                'x-rapidapi-key' => env("TW_API_KEY")
+                'key' => env('MQ_API_KEY'),
+                'location' => $address_string,
+                'thumpsMaps' => false,
+                'maxResults' => 1,
+                'outFormat' => 'json'
             ]
         ]);
+
+        // Resource for checking address validation
+        // https://developer.mapquest.com/forum/how-detect-invalid-address
         return $response->getBody();
     }
 }
