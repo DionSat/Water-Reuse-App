@@ -7,7 +7,7 @@
             <a href="{{route("search")}}" class="btn btn-primary col-md-2 mb-4 float-left"> <i class="fas fa-arrow-circle-left"></i>
                 Search Again
             </a>
-            <a href="{{route("search-submit")}}?state_id=1&county_id=1&city_id=1&searchType=residential" class="btn btn-primary col-md-2 mb-4 float-right">
+            <a href="{{route("search-submit")}}?state_id={{$request->state_id}}&county_id={{$request->county_id}}&city_id={{$request->city_id}}&searchType={{$request->searchType}}" class="btn btn-primary col-md-2 mb-4 float-right">
                 <i class="fas fa-clipboard-list"></i> List Option
             </a>
         </div>
@@ -29,88 +29,188 @@
         </div>
         <div class="card mb-3">
             <div class="card-body">
+                <div class="legend-content">
+                    <div>
+                        <div style="background-color:#00cdcd;"></div>  First Use Water
+                    </div>
+                    <div>
+                        <div style="background-color:#c6c6c6"></div>  Greywater
+                    </div>
+                    <div>
+                        <div style="background-color:#666666;"></div>  Sewage
+                    </div>
+                    <div>
+                        <div style="background-color:#69d500;"></div>  No Permit Required
+                    </div>
+                    <div>
+                        <div style="background-color:#ff8c00;"></div>  Pathway Not Addressed
+                    </div>
+                    <div>
+                        <div style="background-color:#ff0000;"></div>  Pathway Blocked
+                    </div>
+                </div>
+
                 <div style="width:100%; height:700px;" id="orgchart"/>
                 <script>
-                    OrgChart.templates.myTemplate = Object.assign({}, OrgChart.templates.ana);
-                    OrgChart.templates.myTemplate.size = [200, 200];
-                    OrgChart.templates.myTemplate.node = '<circle cx="100" cy="100" r="100" fill="#4D4D4D" stroke-width="1" stroke="#1C1C1C"></circle>';
+                    //Load all the icon images into an array
+                    var icons = new Array();
+                    icons[0] = new Image();
+                    icons[0].src = "{{ asset('img/water sources_1.jpg') }}";
+                    icons[1] = new Image();
+                    icons[1].src = "{{ URL::asset('img/app_KITCHEN SINK.jpg') }}";
+                    icons[2] = new Image();
+                    icons[2].src = "{{ URL::asset('img/app_KITCHEN SINK.jpg') }}";
+                    icons[3] = new Image();
+                    icons[3].src = "{{ URL::asset('img/app_DISHWASHER.jpg') }}";
+                    icons[4] = new Image();
+                    icons[4].src = "{{ URL::asset('img/app_LAVATORY.jpg') }}";
+                    icons[5] = new Image();
+                    icons[5].src = "{{ URL::asset('img/app_TUB-SHOWER.jpg') }}";
+                    icons[6] = new Image();
+                    icons[6].src = "{{ URL::asset('img/app_FIRE.jpg') }}";
+                    icons[7] = new Image();
+                    icons[7].src = "{{ URL::asset('img/app_CLOTHS WASHER.jpg') }}";
+                    icons[8] = new Image();
+                    icons[8].src = "{{ URL::asset('img/toilet.png') }}";
+                    icons[9] = new Image();
+                    icons[9].src = "{{ URL::asset('img/toilet.png') }}";
+                    icons[10] = new Image();
+                    icons[10].src = "{{ URL::asset('img/app_LAVATORY.jpg') }}";
+                    var imageCount = icons.length;
+                    var imagesLoaded = 0;
 
-                    OrgChart.templates.myTemplate.ripple = {
-                        radius: 100,
-                        color: "#0890D3",
-                        rect: null
-                    };
+                    //Use a for loop to load all the images one by one till all them are loaded
+                    //Then call the allLoaded function to execute your script
+                    for(var i=0; i<imageCount; i++){
+                        icons[i].onload = function(){
+                            imagesLoaded++;
+                            if(imagesLoaded == imageCount){
+                                allLoaded(icons, imageCount);
+                            }
+                        }
+                    }
 
-                    OrgChart.templates.myTemplate.link =
-                        '<path stroke="#aeaeae" stroke-width="3px" fill="none" link-id="[{id}][{child-id}]" d="M{xa},{ya} C{xb},{yb} {xc},{yc} {xd},{yd}" />';
+                    //This function runs when all the images are loaded and passes in the icons array and the number of icons
+                    function allLoaded(icons, imageCount){
+                        var string_icons = new Array();
+                        for(var i=0; i<imageCount; i++){
+                            var canvas = document.createElement('canvas'),
+                                ctx = canvas.getContext('2d');
 
-                    OrgChart.templates.myTemplate.field_0 = '<text style="font-size: 18px;" fill="#ffffff" x="100" y="90" text-anchor="middle">{val}</text>';
-                    OrgChart.templates.myTemplate.field_1 = '<text style="font-size: 12px;" fill="#ffffff" x="100" y="60" text-anchor="middle">{val}</text>';
+                            canvas.height = icons[i].naturalHeight;
+                            canvas.width = icons[i].naturalWidth;
+                            ctx.drawImage(icons[i], 0, 0);
 
-                    OrgChart.templates.myTemplate.img_0 = '<clipPath id="ulaImg"><circle cx="100" cy="150" r="40"></circle></clipPath><image preserveAspectRatio="xMidYMid slice" clip-path="url(#ulaImg)" xlink:href="{val}" x="60" y="110"  width="80" height="80"></image>';
+                            // Unfortunately, we cannot keep the original image type, so all images will be converted to PNG
+                            // For this reason, we cannot get the original Base64 string
+                            var uri = canvas.toDataURL('image/png'),
+                                b64 = uri.replace(/^data:image.+;base64,/, '');
+                            string_icons[i] = b64;
+                        }
 
-                    OrgChart.templates.myTemplate.edge = '<path  stroke="#686868" stroke-width="1px" fill="none" edge-id="[{id}][{child-id}]" d="M{xa},{ya} C{xb},{yb} {xc},{yc} {xd},{yd}"/>';
+                        /* Zoom Toolbar Icons */
+                        OrgChart.toolbarUI.expandAllIcon = '<i  class="tb fas fa-layer-group fa-2x fa-fw" title="Expand Diagram"></i>';
+                        OrgChart.toolbarUI.fitIcon = '<i class="tb fas fa-expand fa-2x fa-fw" title="Auto Fit Diagram"></i>';
+                        OrgChart.toolbarUI.zoomOutIcon = '<i class="tb fas fa-search-minus fa-2x fa-fw" title="Zoom Out"></i>';
+                        OrgChart.toolbarUI.zoomInIcon = '<i class="tb fas fa-search-plus fa-2x fa-fw" title="Zoom In"></i>';
 
-                    OrgChart.templates.myTemplate.plus =
-                        '<rect x="0" y="0" width="36" height="36" rx="12" ry="12" fill="#2E2E2E" stroke="#aeaeae" stroke-width="1"></rect>'
-                        + '<line x1="4" y1="18" x2="32" y2="18" stroke-width="1" stroke="#aeaeae"></line>'
-                        + '<line x1="18" y1="4" x2="18" y2="32" stroke-width="1" stroke="#aeaeae"></line>';
+                        /* Link Animations */
+                        OrgChart.templates.ana.link = '<path class="backgroundPath" stroke-linejoin="round" stroke="#00cdcd" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
+                            '<path class="dashPath" stroke-width="4" fill="none" stroke="#ffffff" stroke-dasharray="10"  d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>';
 
-                    OrgChart.templates.myTemplate.minus =
-                        '<rect x="0" y="0" width="36" height="36" rx="12" ry="12" fill="#2E2E2E" stroke="#aeaeae" stroke-width="1"></rect>'
-                        + '<line x1="4" y1="18" x2="32" y2="18" stroke-width="1" stroke="#aeaeae"></line>';
-
-                    OrgChart.templates.myTemplate.expandCollapseSize = 36;
-
-                    OrgChart.templates.myTemplate.nodeMenuButton = '<g style="cursor:pointer;" transform="matrix(1,0,0,1,93,15)" control-node-menu-id="{id}"><rect x="-4" y="-10" fill="#000000" fill-opacity="0" width="22" height="22"></rect><line x1="0" y1="0" x2="0" y2="10" stroke-width="2" stroke="#0890D3" /><line x1="7" y1="0" x2="7" y2="10" stroke-width="2" stroke="#0890D3" /><line x1="14" y1="0" x2="14" y2="10" stroke-width="2" stroke="#0890D3" /></g>';
-
-                    OrgChart.templates.myTemplate.exportMenuButton = '<div style="position:absolute;right:{p}px;top:{p}px; width:40px;height:50px;cursor:pointer;" control-export-menu=""><hr style="background-color: #0890D3; height: 3px; border: none;"><hr style="background-color: #0890D3; height: 3px; border: none;"><hr style="background-color: #0890D3; height: 3px; border: none;"></div>';
-
-                    OrgChart.templates.myTemplate.pointer = '<g data-pointer="pointer" transform="matrix(0,0,0,0,100,100)"><g transform="matrix(0.3,0,0,0.3,-17,-17)"><polygon fill="#0890D3" points="53.004,173.004 53.004,66.996 0,120"/><polygon fill="#0890D3" points="186.996,66.996 186.996,173.004 240,120"/><polygon fill="#0890D3" points="66.996,53.004 173.004,53.004 120,0"/><polygon fill="#0890D3" points="120,240 173.004,186.996 66.996,186.996"/><circle fill="#0890D3" cx="120" cy="120" r="30"/></g></g>';
-
-                    var chart = new OrgChart(document.getElementById("orgchart"), {
-                        template: "myTemplate",
-                        enableSearch: false,
-                        nodeMenu:{
-                            add:{text: "Add"},
-                            edit:{text: "Edit"},
-                            remove:{text: "Remove"}
-                        },
-                        nodeMenu:{
-                            svg:{text: "Add"},
-                            csv:{text: "Edit"},
-                            remove:{text: "Remove"}
-                        },
-                        nodeBinding: {
-                            field_0: "name",
-                            field_1: "title",
-                            img_0: "img"
-                        },
-                        nodes: [
-                            {id: 1, name: "Condensate", img: "{{ URL::asset('img/water sources_1.jpg') }}"},
-                            {id: 2, pid: 1, name: "Kitchen Sink", img: "{{ URL::asset('img/app_KITCHEN SINK.jpg') }}"},
-                            {id: 3, pid: 1, name: "Kitchen Sink + Disposer", img: "{{ URL::asset('img/app_KITCHEN SINK.jpg') }}"},
-                            {id: 4, pid: 1, name: "Dishwasher", img: "{{ URL::asset('img/app_DISHWASHER.jpg') }}"},
-                            {id: 5, pid: 1, name: "Lavatory", img: "{{ URL::asset('img/app_LAVATORY.jpg') }}"},
-                            {id: 6, pid: 1, name: "Tub + Shower", img: "{{ URL::asset('img/app_TUB-SHOWER.jpg') }}"},
-                            {id: 7, pid: 1, name: "Fire Suppression", img: "{{ URL::asset('img/app_FIRE.jpg') }}"},
-                            {id: 8, pid: 1, name: "Clothes Washer", img: "{{ URL::asset('img/app_CLOTHS WASHER.jpg') }}"},
-                            {id: 9, pid: 1, name: "Toilet", img: "{{ URL::asset('img/toilet.png') }}"},
-                            {id: 10, pid: 1, name: "Composting Toilet", img: "{{ URL::asset('img/toilet.png') }}"},
-                            {id: 11, pid: 1, name: "Urinal", img: "{{ URL::asset('img/app_LAVATORY.jpg') }}"}
-                        ]
-                    });
-
-                    var elements = document.getElementsByClassName("search-btn");
-                    for (var i = 0; i < elements.length; i++) {
-                        elements[i].addEventListener("click", function () {
-                            chart.center(this.value);
+                        /* Chart */
+                        let chart = new OrgChart(document.getElementById("orgchart"), {
+                            template: "ana",
+                            enableSearch: false,
+                            align: OrgChart.ORIENTATION,
+                            menu: {
+                                pdf: {
+                                    text: "Export PDF",
+                                    icon: OrgChart.icon.pdf(24, 24, '#7A7A7A'),
+                                    onClick: preview
+                                },
+                                png: {text: "Export PNG"},
+                                svg: {text: "Export SVG"},
+                                csv: {text: "Export CSV"}
+                            },
+                            nodeMenu: {
+                                pdf: {text: "Export PDF"},
+                                png: {text: "Export PNG"},
+                                svg: {text: "Export SVG"},
+                                csv: {text: "Export CSV"}
+                            },
+                            toolbar: {
+                                zoom: true,
+                                fit: true,
+                                expandAll: true
+                            },
+                            nodeBinding: {
+                                field_0: "Name",
+                                field_1: "Links",
+                                img_0: "img"
+                            },
+                            nodes: [
+                                {id: 1, Name: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[0]},
+                                {id: 2, pid: 1, Name: "Kitchen Sink", Links: "", img: "data:image/jpeg;base64," + string_icons[1]                              },
+                                {id: 3, pid: 1, Name: "Kitchen Sink + Disposer", Links: "", img: "data:image/jpeg;base64," + string_icons[2]},
+                                {id: 4, pid: 1, Name: "Dishwasher", Links: "", img: "data:image/jpeg;base64," + string_icons[3]},
+                                {id: 5, pid: 1, Name: "Lavatory", Links: "", img: "data:image/jpeg;base64," + string_icons[4]},
+                                {id: 6, pid: 1, Name: "Tub + Shower", Links: "", img: "data:image/jpeg;base64," + string_icons[5]},
+                                {id: 7, pid: 1, Name: "Fire Suppression", Links: "", img: "data:image/jpeg;base64," + string_icons[6]},
+                                {id: 8, pid: 1, Name: "Clothes Washer", Links: "", img: "data:image/jpeg;base64," + string_icons[7]                                },
+                                {id: 9, pid: 1, Name: "Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
+                                {id: 10, pid: 1, Name: "Composting Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
+                                {id: 11, pid: 1, Name: "Urinal", Links: "", img: "data:image/jpeg;base64," + string_icons[10]}
+                            ]
                         });
+
+                        /* Node Details Button Links */
+                        chart.editUI.on('field', function(sender, args){
+                            if (args.type == 'details' && args.name == 'Links'){
+
+                                var txt = args.field.querySelector('input');
+                                if (txt){
+                                    var linkLabels = ["Code", "Permit", "Incentive", "More Info"];
+                                    var parent = args.field.querySelector('div');
+                                    var br = document.createElement("br");
+                                    parent.appendChild(br);
+
+                                    linkLabels.forEach((linkName) => {
+                                        var a = document.createElement('a');
+                                        var linkText = document.createTextNode(linkName);
+                                        a.appendChild(linkText);
+                                        a.className = "btn btn-primary";
+                                        a.style.cssText = "margin: 15px 6px 0 6px;";
+                                        a.title = linkName;
+                                        a.href = "";
+                                        a.target = "_blank";
+                                        parent.appendChild(a);
+                                    });
+
+                                    txt.remove();
+                                }
+                            }
+                        });
+
+                        /* PDF Export Preview */
+                        function preview(){
+
+                            OrgChart.pdfPrevUI.show(chart, {
+                                format: 'A4'
+                            });
+                        }
+
+                        /* Link the buttons to the chart */
+                        var elements = document.getElementsByClassName("search-btn");
+                        for (var i = 0; i < elements.length; i++) {
+                            elements[i].addEventListener("click", function () {
+                                chart.center(this.value);
+                            });
+                        }
                     }
                 </script>
             </div>
         </div>
-
     </div>
 @endsection
 
@@ -124,75 +224,78 @@
             overflow: hidden;
             text-align: center;
             font-family: Helvetica;
+            overflow-y: auto;
         }
 
-        #tree {
-            width: 100%;
-            height: 100%;
-            position: relative;
+        /* Zoom Icons CSS */
+        i.tb {
+            border: 2px solid #6c757d;
+            line-height: inherit;
         }
 
-
-        [node-id] circle {
-            fill: #0991d0;
+        /* Legend Key Outer Container */
+        .legend-content{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            margin: 0 0 50px 20px;
         }
 
-        .field_0 {
-            font-family: Impact;
-            text-transform: uppercase;
-            fill: #a3a3a3;
+        /* Legend Key Inner Container */
+        .legend-content > div > div {
+            display: inline-block;
+            width: 30px;
+            height:8px;
+            margin-bottom: 2px;
         }
 
-        .field_1 {
-            fill: #a3a3a3;
+        /* Water Use Paths Animation */
+        .dashPath {
+            animation: dash 5s linear infinite;
         }
 
-        [link-id] path {
-            stroke: #0991d0;
+        /* Blocked Paths Animation */
+        [link-id='[1][2]'] .backgroundPath,
+        [link-id='[1][3]'] .backgroundPath,
+        [link-id='[1][4]'] .backgroundPath,
+        [link-id='[1][5]'] .backgroundPath,
+        [link-id='[1][6]'] .backgroundPath {
+            stroke: #ff0000;
         }
 
-        [link-id='[1][2]'] path {
-            stroke: #750000;
+        /* Link Animation ~ Dash Type */
+        @keyframes dash {
+            from {
+                stroke-dashoffset: 100;
+                opacity: 1;
+            }
+            to {
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
         }
 
-        [link-id='[1][3]'] path {
-            stroke: #750000;
-        }
-
-        [link-id='[1][4]'] path {
-            stroke: #750000;
-        }
-
-        [link-id='[1][5]'] path {
-            stroke: #750000;
-        }
-
-        [link-id='[1][6]'] path {
-            stroke: #750000;
-        }
-
-        [control-expcoll-id] circle {
-            fill: #750000;
-        }
-
-        [control-expcoll-id='3'] circle {
-            fill: #016e25;
-        }
-
-        [control-node-menu-id] circle {
-            fill: #bfbfbf;
-        }
-
-        #tree>svg {
-            background-color: #2E2E2E;
-        }
-
-        .bg-search-table {
-            background-color: #2E2E2E !important;
-        }
-
-        .bg-search-table input {
-            background-color: #2E2E2E !important;
-        }
     </style>
+@endpush
+
+@push("js")
+    <script src="{{ URL::asset('/libraries/axios.min.js') }}"></script>
+
+    <script>
+        // Fire off a event as the user navigates away to check the link
+        // The link is only checked if it hasn't been updated in last 14 days
+        $(".link-button").click(function (event) {
+            axios.post("{{route("check-link-api")}}", {
+                link_id: $(this).attr("data-linkid")
+            })
+                .then(function (response) {
+                    console.log(response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        });
+    </script>
+
+
 @endpush
