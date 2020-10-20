@@ -60,7 +60,7 @@ class SearchController extends Controller
         return view("search.searchresults", compact('stateRules', 'countyRules', 'cityRules', 'lowestLevel', 'city', 'county', 'state', 'sources', 'destinations', 'type'));
     }
 
-    // Parses user-input into searchable query
+    // Returns address-based search result
     public function handleAddress(Request $request){
         $address_string = $request->addressInput;
         $address_info = json_decode($this->addressData($address_string), true);
@@ -125,7 +125,7 @@ class SearchController extends Controller
             ]
         ]);
 
-        // Resource for checking address validation
+        // TODO Resource for checking address validation
         // https://developer.mapquest.com/forum/how-detect-invalid-address
         return $response->getBody();
     }
