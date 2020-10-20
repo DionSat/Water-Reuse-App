@@ -64,7 +64,6 @@ class SearchController extends Controller
     public function handleAddress(Request $request){
         $address_string = $request->addressInput;
         $address_info = json_decode($this->addressData($address_string), true);
-
         // TODO Improve error handling
         $stateIndex = $address_info["results"][0]["locations"][0]["adminArea3"];
 
@@ -78,17 +77,23 @@ class SearchController extends Controller
         $cityRules = new Collection();
         $state = State::where('stateName', $stateName)->first();
 
-        $county = null;
+        if(!$address_info["results"][0]["locations"][0]["adminArea4"]) {
+            $county = null;
+        } else{
+            $countyName = $address_info["results"][0]["locations"][0]["adminArea4"];
+            $countyName = explode(' ', trim($countyName))[0];
+            $county = County::where('countyName', 'LIKE', "{$countyName}%")->first();
+        }
+
         $city = null;
         $lowestLevel = "state";
 
         $stateRules = StateMerge::with(['state', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])
             ->where("stateID", $state->state_id)->where("location_type", $request->searchType)->get();
-        if(isset($request->county_id)){
+        if($county){
             $countyRules = CountyMerge::with(['county', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])
-                ->where("countyID", $request->county_id)->where("location_type", $request->searchType)->get();
+                ->where("countyID", $county->county_id)->where("location_type", $request->searchType)->get();
             $lowestLevel = "county";
-            $county = County::find($request->county_id);
         }
 
         if(isset($request->city_id)) {
@@ -108,7 +113,6 @@ class SearchController extends Controller
 
     // API Request for geocode data
     public function addressData($address_string){
-
         $request_url = "http://www.mapquestapi.com/geocoding/v1/address";
         $client = new \GuzzleHttp\Client();
         $response = $client->request('GET', $request_url, [
