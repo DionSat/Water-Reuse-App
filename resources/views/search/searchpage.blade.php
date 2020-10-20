@@ -115,7 +115,7 @@
                                                 <div class="card" style="border: none;margin-top: 40px">
                                                         <div class="form-group row">
                                                             <div class="col-md">
-                                                                <input type="text" class="form-control" id="StreetAddressInput" name="addressInput" placeholder="Ex. 111 SW Main St. Portland OR 97209">
+                                                                <input type="text" class="form-control" id="StreetAddressInput" name="addressInput" placeholder="Ex. 111 SW Main St. Portland OR 97209" required>
                                                             </div>
                                                         </div>
                                                 </div>

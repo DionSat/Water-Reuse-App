@@ -61,6 +61,24 @@ class SearchController extends Controller
     // Parses user-input into searchable query
     public function handleAddress(Request $request){
         $address_string = $request->addressInput;
-        echo $address_string;
+        $address_info = json_decode($this->addressData($address_string), true);
+        dd($address_info);
+    }
+
+    // API Request for geocode data
+    public function addressData($address_string){
+        $request_url = "https://rapidapi.p.rapidapi.com/Geocode";
+        $client = new \GuzzleHttp\Client();
+        $response = $client->request('GET', $request_url, [
+            'query' => [
+                'address' => $address_string,
+                'language' => 'en',
+                'country' => 'US'],
+            'headers' => [
+                'x-rapidapi-host' => 'trueway-geocoding.p.rapidapi.com',
+                'x-rapidapi-key' => env("TW_API_KEY")
+            ]
+        ]);
+        return $response->getBody();
     }
 }
