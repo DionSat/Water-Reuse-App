@@ -10,6 +10,7 @@ use App\State;
 use App\StateMerge;
 use App\CountyMerge;
 use App\CityMerge;
+use http\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use App\Services\LinkCheckerService;
@@ -63,12 +64,18 @@ class SearchController extends Controller
     public function handleAddress(Request $request){
         $address_string = $request->addressInput;
         $address_info = json_decode($this->addressData($address_string), true);
-        // TODO Check for empty string
+
+        // TODO Improve error handling
         $stateIndex = $address_info["results"][0]["locations"][0]["adminArea3"];
+
+        try{
+            $stateName = $this->states[$stateIndex];
+        } catch(\ErrorException $exception){
+            return back()->withError($exception->getMessage())->withInput();
+        }
 
         $countyRules = new Collection();
         $cityRules = new Collection();
-        $stateName = $this->states[$stateIndex];
         $state = State::where('stateName', $stateName)->first();
 
         $county = null;
@@ -101,21 +108,6 @@ class SearchController extends Controller
 
     // API Request for geocode data
     public function addressData($address_string){
-        /*
-        $request_url = "https://rapidapi.p.rapidapi.com/Geocode";
-        $client = new \GuzzleHttp\Client();
-        $response = $client->request('GET', $request_url, [
-            'query' => [
-                'address' => $address_string,
-                'language' => 'en',
-                'country' => 'US'
-            ],
-            'headers' => [
-                'x-rapidapi-host' => 'trueway-geocoding.p.rapidapi.com',
-                'x-rapidapi-key' => env("TW_API_KEY")
-            ]
-        ]);
-        */
 
         $request_url = "http://www.mapquestapi.com/geocoding/v1/address";
         $client = new \GuzzleHttp\Client();
