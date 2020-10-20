@@ -3,7 +3,7 @@
 @section('body')
     <div class="container-fluid main-content">
         <div class="row">
-            <div class="col-md-9 mx-auto">
+            <div class="col-md-8 col-lg-9 mx-auto">
                 <div class="jumbotron bg-white text-center">
                     <h1 class="display-4 main-title">Water Reuse Permit App</h1>
                     <p class="lead"> A database of crowdsourced and verified re-use regulations. </p>
@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-3">
+            <div class="col-md-4  col-lg-3">
                 <div class="card h-100">
                     <div class="card-body">
                         <div class="card-title text-center">
@@ -30,7 +30,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4 col-lg-3">
                 <div class="card mt-3 mt-md-0 h-100">
                     <div class="card-body">
                         <div class="card-title text-center">
@@ -43,7 +43,7 @@
                                 Lookup Reuse Regulations
                             </a>
                             <hr class="mt-5">
-                            <h5 class="lead mt-4">Contibute your knowledge by adding to our database.</h5>
+                            <h5 class="lead mt-4">Contribute your knowledge by adding to our database.</h5>
                             @if(Auth::check())
                                 <a class="btn btn-primary btn-block mb-4" href="{{route("userSubmission")}}">
                                     Submit a Regulation
@@ -58,15 +58,15 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="card mt-4 mt-md-0 h-100">
+            <div class="col-md-8 col-lg-3">
+                <div class="card mt-4 mt-lg-0 h-100">
                     <div class="card-body">
                         <div class="card-title text-center">
                             <h5 class="card-title">  A Recode Project  </h5>
                         </div>
                         <hr>
                         <div class="card-text text-center">
-                            <img src="img/recode-logo.jpg" class="img-fluid">
+                            <img src="img/recode-logo.jpg" class="img-fluid" alt="ReCode logo">
                             <h5 class="lead mt-5">A project backed by the Recode non-profit organization.</h5>
                             <a class="btn btn-success btn-block mt-4" href="https://www.recodenow.org/" target="_blank" rel="noopener noreferrer">
                                 Visit Recode

@@ -85,35 +85,35 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link mx-md-2 px-md-0 pb-md-0" href="https://www.recodenow.org/donate/" target="_blank" rel="noopener noreferrer"> <i class="fas fa-hands-helping"></i> Donate</a>
+                            <a class="nav-link mx-md-2 px-md-0 pb-md-0" href="https://www.recodenow.org/donate/" title="Help us to improve!" target="_blank"> <i class="fas fa-hands-helping"></i> Donate</a>
                         </li>
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "login") active @endif" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "login") active @endif" href="{{ route('login') }}" title="Login to make submissions">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "register") active @endif" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "register") active @endif" href="{{ route('register') }}" title="Create an account to make submissions">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
 
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link pb-md-0 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link pb-md-0 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre title="Expand for more details">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
-                                    <a class="dropdown-item" href="{{ route('submission') }}">
+                                    <a class="dropdown-item" href="{{ route('submission') }}" title="View your submissions">
                                         My Submissions
                                     </a>
-                                    <a class ="dropdown-item" href=" {{ route('account') }}">
+                                    <a class ="dropdown-item" href=" {{ route('account') }}" title="View/modify account details">
                                         Account
 
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item" href="{{ route('logout') }}" title="Logout of your account"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         Logout
