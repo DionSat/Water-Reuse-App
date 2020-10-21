@@ -11,6 +11,22 @@
                 <i class="fas fa-clipboard-list"></i> List Option
             </a>
         </div>
+        <div class="container">
+            <div class="tree-navbar">
+                    <script src="https://balkangraph.com/js/latest/OrgChart.js"></script>
+                    <button class="btn btn-primary fas search-btn" value="2" title="Kitchen Sink"><img src="/img/app_KITCHEN SINK.jpg" height=30px width=30px/></button>
+                    <button class="btn btn-primary fas search-btn" value="3" title="Kitchen Sink + Disposer"><img src="/img/app_KITCHEN SINK.jpg" height=30px width=30px/></button>
+                    <button class="btn btn-primary fas search-btn" value="4" title="Dishwasher"><img src="/img/app_DISHWASHER.jpg" height=30px width=30px/></button>
+                    <button class="btn btn-primary fas search-btn" value="5" title="Lavatory"><img src="/img/app_LAVATORY.jpg" height=30px width=30px/></button>
+                    <button class="btn btn-primary fas search-btn" value="6" title="Tub + Shower"><img src="/img/app_TUB-SHOWER.jpg" height=30px width=30px/></button>
+                    <button class="btn btn-primary fas search-btn" value="7" title="Fire Suppression"><img src="/img/app_FIRE.jpg" height=30px width=30px/></button>
+                    <button class="btn btn-primary fas search-btn" value="8" title="Clothes Washer"><img src="/img/app_CLOTHS WASHER.jpg" height=30px width=30px/></button>
+                    <button class="btn btn-primary fas search-btn" value="9" title="Toilet"><img src="/img/toilet.png" height=30px width=30px/></button>
+                    <button class="btn btn-primary fas search-btn" value="10" title="Composting Toilet"><img src="/img/toilet.png" height=30px width=30px/></button>
+                    <button class="btn btn-primary fas search-btn" value="11" title="Urinal"><img src="/img/app_LAVATORY.jpg" height=30px width=30px/></button>
+                    <div id="tree"></div>
+            </div>
+        </div>
         <div class="card mb-3">
             <div class="card-body">
                 <div class="legend-content">
@@ -183,8 +199,15 @@
                                 format: 'A4'
                             });
                         }
-                    }
 
+                        /* Link the buttons to the chart */
+                        var elements = document.getElementsByClassName("search-btn");
+                        for (var i = 0; i < elements.length; i++) {
+                            elements[i].addEventListener("click", function () {
+                                chart.center(this.value);
+                            });
+                        }
+                    }
                 </script>
             </div>
         </div>
