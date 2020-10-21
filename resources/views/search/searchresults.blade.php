@@ -40,15 +40,15 @@
             </div>
         </div>
         @if(true) <!-- Donate Card -->
-            <div class="card mb-3">
-                <div class="card-body">
+            <div class="modal fade" id="DonateCard" role="dialog">
+                <div class="modal-dialog">
                     <h2 class="text-center">Please take time to donate.</h2>
                     <div class="mt-3 row d-flex justify-content-center">
                         <a class="btn btn-primary col-md-2 mb-4" href="https://www.recodenow.org/donate/" target="_blank" rel="noopener noreferrer" style="margin-right:5px;"><i class="fas fa-hands-helping" aria-hidden="true"></i>
                             Donate
                         </a>
-                        <a class="btn btn-primary col-md-2 mb-4 text-light" style="margin-left:5px;">
-                            Continue
+                        <a id="CloseBtn" class="btn btn-primary col-md-2 mb-4 text-light" style="margin-left:5px;">
+                            No thank you
                         </a>
 
                     </div>
@@ -242,5 +242,17 @@
 
 </script>
 
+<!-- Script to close donate popup. Maybe move it later -->
+<script>
+    $(function (){
+        $("#DonateCard").modal("toggle");
+    })
+
+    $(function () {
+        $("#CloseBtn").click(function () {
+            $("#DonateCard").modal("hide");
+        });
+    });
+</script>
 
 @endpush
