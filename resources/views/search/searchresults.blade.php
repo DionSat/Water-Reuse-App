@@ -39,22 +39,25 @@
                 </div>
             </div>
         </div>
-        @if(true) <!-- Donate Card -->
+        <!-- Donate Card -->
             <div class="modal fade" id="DonateCard" role="dialog">
                 <div class="modal-dialog">
-                    <h2 class="text-center">Please take time to donate.</h2>
-                    <div class="mt-3 row d-flex justify-content-center">
-                        <a class="btn btn-primary col-md-2 mb-4" href="https://www.recodenow.org/donate/" target="_blank" rel="noopener noreferrer" style="margin-right:5px;"><i class="fas fa-hands-helping" aria-hidden="true"></i>
-                            Donate
-                        </a>
-                        <a id="CloseBtn" class="btn btn-primary col-md-2 mb-4 text-light" style="margin-left:5px;">
-                            No thank you
-                        </a>
-
+                    <div class="modal-content">
+                        <div class="modal-body mb-3">
+                            <h2 class="text-center">Please take time to donate.</h2>
+                        </div>
+                        <div class="card-footer mt-3 row d-flex justify-content-center">
+                            <a class="btn btn-primary col-md mb-4" href="https://www.recodenow.org/donate/" target="_blank" rel="noopener noreferrer" style="margin-right:5px;"><i class="fas fa-hands-helping" aria-hidden="true"></i>
+                                Donate
+                            </a>
+                            <a id="CloseBtn" class="btn btn-primary col-md mb-4 text-light" style="margin-left:5px;">
+                                No thank you
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        @endif
+        <!-- /Donate Card -->
         <div class="list-group">
             @if($lowestLevel == "city")
                 <div class="list-group-item">
@@ -242,7 +245,7 @@
 
 </script>
 
-<!-- Script to close donate popup. Maybe move it later -->
+<!-- Script for donate card -->
 <script>
     $(function (){
         $("#DonateCard").modal("toggle");
