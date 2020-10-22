@@ -51,6 +51,15 @@
                 </div>
 
                 <div style="width:100%; height:700px;" id="orgchart"/>
+                <!-- This part just to see the city result-->
+                <div class="card">
+                    @foreach($cityRules as $cityRules)
+                        {{$cityRules->destination->node_name}}
+                        {{$cityRules->allowed->allowed_id}}
+                    @endforeach
+                </div>
+                <!-- my idea -> if($cityRules->destination->node_name == $name(such as Kitchen Sink)  && $cityRules->allowed->allowed_id == 1)
+                    add tags:['available'] to the node that name is $name-->
                 <script>
                     //Load all the icon images into an array
                     var icons = new Array();
@@ -151,7 +160,7 @@
                             },
                             nodes: [
                                 {id: 1, Name: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[0]},
-                                {id: 2, pid: 1, Name: "Kitchen Sink", Links: "", img: "data:image/jpeg;base64," + string_icons[1]                              },
+                                {id: 2, pid: 1, Name: "Kitchen Sink", Links: "", img: "data:image/jpeg;base64," + string_icons[1],},<!-- tags:['available']},-->
                                 {id: 3, pid: 1, Name: "Kitchen Sink + Disposer", Links: "", img: "data:image/jpeg;base64," + string_icons[2]},
                                 {id: 4, pid: 1, Name: "Dishwasher", Links: "", img: "data:image/jpeg;base64," + string_icons[3]},
                                 {id: 5, pid: 1, Name: "Lavatory", Links: "", img: "data:image/jpeg;base64," + string_icons[4]},
@@ -208,10 +217,13 @@
                             });
                         }
                     }
+
                 </script>
             </div>
         </div>
     </div>
+
+
 @endsection
 
 @push("css")
@@ -225,6 +237,18 @@
             text-align: center;
             font-family: Helvetica;
             overflow-y: auto;
+        }
+        #tree {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+       /*color*/
+        .available rect{
+            stroke: blue;
+        }
+        .not_available rect{
+            stroke: grey;
         }
 
         /* Zoom Icons CSS */
@@ -275,6 +299,21 @@
             }
         }
 
+        [control-node-menu-id] circle {
+            fill: #bfbfbf;
+        }
+
+        #tree>svg {
+            background-color: #2E2E2E;
+        }
+
+        .bg-search-table {
+            background-color: #2E2E2E !important;
+        }
+
+        .bg-search-table input {
+            background-color: #2E2E2E !important;
+        }
     </style>
 @endpush
 
