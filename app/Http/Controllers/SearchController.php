@@ -138,6 +138,7 @@ class SearchController extends Controller
         return $response->getBody();
     }
 
+    // TODO Implement into DB schema to eliminate ugly hard-coding
     protected $states = [
         'AL'=>'Alabama',
         'AK'=>'Alaska',
