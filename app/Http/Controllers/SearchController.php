@@ -69,10 +69,11 @@ class SearchController extends Controller
     }
 
     // Returns address-based search result
-    public function handleAddress(Request $request){
-        $address_string = $request->addressInput;
+    public function handleAddress(Request $addressRequest){
+        $address_string = $addressRequest->addressInput;
         $address_info = json_decode($this->addressData($address_string), true);
         // TODO Improve error handling
+        // sets stateIndex to state abbreviation Ex. Oregon = OR
         $stateIndex = $address_info["results"][0]["locations"][0]["adminArea3"];
 
         try{
@@ -97,25 +98,26 @@ class SearchController extends Controller
         $lowestLevel = "state";
 
         $stateRules = StateMerge::with(['state', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])
-            ->where("stateID", $state->state_id)->where("location_type", $request->searchType)->get();
+            ->where("stateID", $state->state_id)->where("location_type", $addressRequest->searchType)->get();
         if($county){
             $countyRules = CountyMerge::with(['county', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])
-                ->where("countyID", $county->county_id)->where("location_type", $request->searchType)->get();
+                ->where("countyID", $county->county_id)->where("location_type", $addressRequest->searchType)->get();
             $lowestLevel = "county";
         }
 
-        if(isset($request->city_id)) {
+        if(isset($addressRequest->city_id)) {
             $cityRules = CityMerge::with(['city', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])
-                ->where("cityID", $request->city_id)->where("location_type", $request->searchType)->get();
+                ->where("cityID", $addressRequest->city_id)->where("location_type", $addressRequest->searchType)->get();
             $lowestLevel = "city";
-            $city = City::find($request->city_id);
+            $city = City::find($addressRequest->city_id);
         }
 
         // Get all the sources and destinations
         $sources = ReuseNode::sources();
         $destinations = ReuseNode::destinations();
-        $type = $request->searchType === "residential" ? "Residential" : "Commercial";
+        $type = $addressRequest->searchType === "residential" ? "Residential" : "Commercial";
 
+        $request = $addressRequest;
         return view("search.searchresults", compact('request','stateRules', 'countyRules', 'cityRules', 'lowestLevel', 'city', 'county', 'state', 'sources', 'destinations', 'type'));
     }
 
