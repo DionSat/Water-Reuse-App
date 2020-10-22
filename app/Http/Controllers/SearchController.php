@@ -17,13 +17,21 @@ use App\Services\LinkCheckerService;
 class SearchController extends Controller
 {
     public function mainPage(){
-        
+
         $states = State::all()->sortBy("stateName");
         return view("search.searchpage", compact('states'));
     }
 
-
     public function handleSubmit(Request $request){
+        return view("search.searchresults", $this->handle($request));
+    }
+
+    public function handleSubmitDiagram(Request $request){
+        return view("search.searchDiagram", $this->handle($request));
+    }
+
+
+    public function handle(Request $request){
         $countyRules = new Collection();
         $cityRules = new Collection();
         $state = State::find($request->state_id);
@@ -52,6 +60,6 @@ class SearchController extends Controller
         $destinations = ReuseNode::destinations();
         $type = $request->searchType === "residential" ? "Residential" : "Commercial";
 
-        return view("search.searchresults", compact('stateRules', 'countyRules', 'cityRules', 'lowestLevel', 'city', 'county', 'state', 'sources', 'destinations', 'type'));
+        return compact('request', 'stateRules', 'countyRules', 'cityRules', 'lowestLevel', 'city', 'county', 'state', 'sources', 'destinations', 'type');
     }
 }

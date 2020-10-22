@@ -68,7 +68,7 @@
                         <div class="card-text text-center">
                             <img src="img/recode-logo.jpg" class="img-fluid" alt="ReCode logo">
                             <h5 class="lead mt-5">A project backed by the Recode non-profit organization.</h5>
-                            <a class="btn btn-success btn-block mt-4" href="https://www.recodenow.org/">
+                            <a class="btn btn-success btn-block mt-4" href="https://www.recodenow.org/" target="_blank" rel="noopener noreferrer">
                                 Visit Recode
                             </a>
                         </div>
