@@ -15,6 +15,7 @@
             <div class="card-body">
                 <div style="width:100%; height:700px;" id="orgchart"/>
                 <script>
+<<<<<<< Updated upstream
                     OrgChart.templates.myTemplate = Object.assign({}, OrgChart.templates.ana);
                     OrgChart.templates.myTemplate.size = [200, 200];
                     OrgChart.templates.myTemplate.node = '<circle cx="100" cy="100" r="100" fill="#4D4D4D" stroke-width="1" stroke="#1C1C1C"></circle>';
@@ -84,11 +85,174 @@
                             {id: 11, pid: 1, name: "Urinal", img: "{{ URL::asset('img/app_LAVATORY.jpg') }}"}
                         ]
                     });
+=======
+                    //Load all the icon images into an array
+                    var icons = new Array();
+                    icons[0] = new Image();
+                    icons[0].src = "{{ asset('img/water sources_1.jpg') }}";
+                    icons[1] = new Image();
+                    icons[1].src = "{{ URL::asset('img/app_KITCHEN SINK.jpg') }}";
+                    icons[2] = new Image();
+                    icons[2].src = "{{ URL::asset('img/app_KITCHEN SINK.jpg') }}";
+                    icons[3] = new Image();
+                    icons[3].src = "{{ URL::asset('img/app_DISHWASHER.jpg') }}";
+                    icons[4] = new Image();
+                    icons[4].src = "{{ URL::asset('img/app_LAVATORY.jpg') }}";
+                    icons[5] = new Image();
+                    icons[5].src = "{{ URL::asset('img/app_TUB-SHOWER.jpg') }}";
+                    icons[6] = new Image();
+                    icons[6].src = "{{ URL::asset('img/app_FIRE.jpg') }}";
+                    icons[7] = new Image();
+                    icons[7].src = "{{ URL::asset('img/app_CLOTHS WASHER.jpg') }}";
+                    icons[8] = new Image();
+                    icons[8].src = "{{ URL::asset('img/toilet.png') }}";
+                    icons[9] = new Image();
+                    icons[9].src = "{{ URL::asset('img/toilet.png') }}";
+                    icons[10] = new Image();
+                    icons[10].src = "{{ URL::asset('img/app_LAVATORY.jpg') }}";
+                    var imageCount = icons.length;
+                    var imagesLoaded = 0;
+
+                    //Use a for loop to load all the images one by one till all them are loaded
+                    //Then call the allLoaded function to execute your script
+                    for(var i=0; i<imageCount; i++){
+                        icons[i].onload = function(){
+                            imagesLoaded++;
+                            if(imagesLoaded == imageCount){
+                                allLoaded(icons, imageCount);
+                            }
+                        }
+                    }
+
+                    //This function runs when all the images are loaded and passes in the icons array and the number of icons
+                    function allLoaded(icons, imageCount){
+                        var string_icons = new Array();
+                        for(var i=0; i<imageCount; i++){
+                            var canvas = document.createElement('canvas'),
+                                ctx = canvas.getContext('2d');
+
+                            canvas.height = icons[i].naturalHeight;
+                            canvas.width = icons[i].naturalWidth;
+                            ctx.drawImage(icons[i], 0, 0);
+
+                            // Unfortunately, we cannot keep the original image type, so all images will be converted to PNG
+                            // For this reason, we cannot get the original Base64 string
+                            var uri = canvas.toDataURL('image/png'),
+                                b64 = uri.replace(/^data:image.+;base64,/, '');
+                            string_icons[i] = b64;
+                        }
+
+                        /* Zoom Toolbar Icons */
+                        OrgChart.toolbarUI.expandAllIcon = '<i  class="tb fas fa-layer-group fa-2x fa-fw" title="Expand Diagram"></i>';
+                        OrgChart.toolbarUI.fitIcon = '<i class="tb fas fa-expand fa-2x fa-fw" title="Auto Fit Diagram"></i>';
+                        OrgChart.toolbarUI.zoomOutIcon = '<i class="tb fas fa-search-minus fa-2x fa-fw" title="Zoom Out"></i>';
+                        OrgChart.toolbarUI.zoomInIcon = '<i class="tb fas fa-search-plus fa-2x fa-fw" title="Zoom In"></i>';
+
+                        /* Link Animations */
+                        OrgChart.templates.ana.link = '<path class="backgroundPath" stroke-linejoin="round" stroke="#00cdcd" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
+                            '<path class="dashPath" stroke-width="4" fill="none" stroke="#ffffff" stroke-dasharray="10"  d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>';
+
+                        /* Chart */
+                        let chart = new OrgChart(document.getElementById("orgchart"), {
+                            template: "ana",
+                            enableSearch: false,
+                            align: OrgChart.ORIENTATION,
+                            menu: {
+                                pdf: {
+                                    text: "Export PDF",
+                                    icon: OrgChart.icon.pdf(24, 24, '#7A7A7A'),
+                                    onClick: preview
+                                },
+                                png: {text: "Export PNG"},
+                                svg: {text: "Export SVG"},
+                                csv: {text: "Export CSV"}
+                            },
+                            nodeMenu: {
+                                pdf: {text: "Export PDF"},
+                                png: {text: "Export PNG"},
+                                svg: {text: "Export SVG"},
+                                csv: {text: "Export CSV"}
+                            },
+                            toolbar: {
+                                zoom: true,
+                                fit: true,
+                                expandAll: true
+                            },
+                            nodeBinding: {
+                                field_0: "Name",
+                                field_1: "Links",
+                                img_0: "img"
+                            },
+                            nodes: [
+                                {id: 1, Name: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[0]},
+                                {id: 2, pid: 1, Name: "Kitchen Sink", Links: "", img: "data:image/jpeg;base64," + string_icons[1],},<!-- tags:['available']},-->
+                                {id: 3, pid: 1, Name: "Kitchen Sink + Disposer", Links: "", img: "data:image/jpeg;base64," + string_icons[2]},
+                                {id: 4, pid: 1, Name: "Dishwasher", Links: "", img: "data:image/jpeg;base64," + string_icons[3]},
+                                {id: 5, pid: 1, Name: "Lavatory", Links: "", img: "data:image/jpeg;base64," + string_icons[4]},
+                                {id: 6, pid: 1, Name: "Tub + Shower", Links: "", img: "data:image/jpeg;base64," + string_icons[5]},
+                                {id: 7, pid: 1, Name: "Fire Suppression", Links: "", img: "data:image/jpeg;base64," + string_icons[6]},
+                                {id: 8, pid: 1, Name: "Clothes Washer", Links: "", img: "data:image/jpeg;base64," + string_icons[7]                                },
+                                {id: 9, pid: 1, Name: "Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
+                                {id: 10, pid: 1, Name: "Composting Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
+                                {id: 11, pid: 1, Name: "Urinal", Links: "", img: "data:image/jpeg;base64," + string_icons[10]}
+                            ]
+                        });
+
+                        /* Node Details Button Links */
+                        chart.editUI.on('field', function(sender, args){
+                            if (args.type == 'details' && args.name == 'Links'){
+
+                                var txt = args.field.querySelector('input');
+                                if (txt){
+                                    var linkLabels = ["Code", "Permit", "Incentive", "More Info"];
+                                    var parent = args.field.querySelector('div');
+                                    var br = document.createElement("br");
+                                    parent.appendChild(br);
+
+                                    linkLabels.forEach((linkName) => {
+                                        var a = document.createElement('a');
+                                        var linkText = document.createTextNode(linkName);
+                                        a.appendChild(linkText);
+                                        a.className = "btn btn-primary";
+                                        a.style.cssText = "margin: 15px 6px 0 6px;";
+                                        a.title = linkName;
+                                        a.href = "";
+                                        a.target = "_blank";
+                                        parent.appendChild(a);
+                                    });
+
+                                    txt.remove();
+                                }
+                            }
+                        });
+
+                        /* PDF Export Preview */
+                        function preview(){
+
+                            OrgChart.pdfPrevUI.show(chart, {
+                                format: 'A4'
+                            });
+                        }
+                    }
+
+>>>>>>> Stashed changes
                 </script>
             </div>
         </div>
 
     </div>
+
+    <!-- This part just to see the city result-->
+    <div class="card">
+        @foreach($cityRules as $cityRules)
+            {{$cityRules->destination->node_name}}
+            {{$cityRules->allowed->allowed_id}}
+        @endforeach
+    </div>
+        <!-- my idea -> if($cityRules->destination->node_name == $name(such as Kitchen Sink)  && $cityRules->allowed->allowed_id == 1)
+            add tags:['available'] to the node that name is $name-->
+
+
 @endsection
 
 @push("css")
@@ -103,10 +267,25 @@
             font-family: Helvetica;
         }
 
+<<<<<<< Updated upstream
         #tree {
             width: 100%;
             height: 100%;
             position: relative;
+=======
+       /*color*/
+        .available rect{
+            stroke: blue;
+        }
+        .not_available rect{
+            stroke: grey;
+        }
+
+        /* Zoom Icons CSS */
+        i.tb {
+            border: 2px solid #6c757d;
+            line-height: inherit;
+>>>>>>> Stashed changes
         }
 
 
@@ -160,6 +339,7 @@
             fill: #bfbfbf;
         }
 
+<<<<<<< Updated upstream
         #tree>svg {
             background-color: #2E2E2E;
         }
@@ -173,3 +353,6 @@
         }
     </style>
 @endpush
+=======
+@endpush
+>>>>>>> Stashed changes
