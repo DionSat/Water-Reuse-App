@@ -6,7 +6,7 @@
             <a href="{{route("search")}}" class="btn btn-primary col-md-2 mb-4 float-left"> <i class="fas fa-arrow-circle-left"></i>
                 Search Again
             </a>
-            <a href="{{route("search-diagram")}}" class="btn btn-primary col-md-2 mb-4 float-right"> <i class="fas fa-sitemap"></i>
+            <a href="{{route("search-diagram")}}?state_id={{$request->state_id}}&county_id={{$request->county_id}}&city_id={{$request->city_id}}&searchType={{$request->searchType}}" class="btn btn-primary col-md-2 mb-4 float-right"> <i class="fas fa-sitemap"></i>
                 View Diagram
             </a>
         </div>
@@ -39,7 +39,25 @@
                 </div>
             </div>
         </div>
-
+        <!-- Donate Card -->
+            <div class="modal fade" id="DonateCard" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body mb-3">
+                            <h2 class="text-center">Please take time to donate.</h2>
+                        </div>
+                        <div class="card-footer mt-3 row d-flex justify-content-center">
+                            <a class="btn btn-primary col-md mb-4" href="https://www.recodenow.org/donate/" target="_blank" rel="noopener noreferrer" style="margin-right:5px;"><i class="fas fa-hands-helping" aria-hidden="true"></i>
+                                Donate
+                            </a>
+                            <a id="CloseBtn" class="btn btn-primary col-md mb-4 text-light" style="margin-left:5px;">
+                                No thank you
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- /Donate Card -->
         <div class="list-group">
             @if($lowestLevel == "city")
                 <div class="list-group-item">
@@ -128,6 +146,7 @@
 <script>
     // Fire off a event as the user navigates away to check the link
     // The link is only checked if it hasn't been updated in last 14 days
+
     $(".link-button").click(function (event) {
         axios.post("{{route("check-link-api")}}", {
             link_id: $(this).attr("data-linkid")
@@ -226,5 +245,17 @@
 
 </script>
 
+<!-- Script for donate card -->
+<script>
+    $(function (){
+        $("#DonateCard").modal("toggle");
+    })
+
+    $(function () {
+        $("#CloseBtn").click(function () {
+            $("#DonateCard").modal("hide");
+        });
+    });
+</script>
 
 @endpush

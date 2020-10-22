@@ -22,9 +22,20 @@ This application was developed by the Winter-Spring 2020 Capstone team at Portla
 - Jubal Gonzalez-Santos
 - Steven Schulze
 
+Continued development was done by the Summer-Fall 2020 Capstone team at Portland State University, consisting of:
+
+- Dion Satcher
+- Jonathan Bral
+- Carl Bunt
+- Robin Gearn
+- Tianhui Liang
+- Liam Rotchford
+- Simon Van Eeden
+- Daniel Wheeler
+
 ## How to Run the Project Locally
 
-To run the project locally, please see the [Laravel installation instructions](https://laravel.com/docs/7.x/installation) to first install Laravel on your machine.
+To run the project locally, please see the [Laravel installation instructions](https://laravel.com/docs/7.x/installation) to first install Laravel on your machine. Laravel requires [composer](https://getcomposer.org/download/) to initialize the PHP webserver. 
 
 After installing Composer and Laravel, and cloning the project, it can be served locally by running the command `php artisan serve` in the project directory.  
 

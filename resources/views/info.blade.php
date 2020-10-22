@@ -13,14 +13,22 @@
             <div class="tab-pane fade show active" id="nav-searchGuest" role="tabpanel" aria-labelledby="nav-searchGuest-tab">
                 <h2>How to Search for a Regulation</h2>
                 <p>1. Navigate to the <a href="{{ route('search') }}" target="_blank"> Search </a>page</p>
+                <img src="img/search_start.gif">
                 <p>2. Select either 'Commercial' or 'Residential'</p>
-                <img src="img/searchExample.png">
-                <p>3. First select a state in the dropdown menu, then you can either search only by state, or by county or city by selecting them in the dropdown menu.</p>
-                <img src="img/searchExample1.png">
-                <p>4. After selecting the region you wish to search for, click on the 'Search' button.</p>
-                <img src="img/searchExample2.png">
-                <p>5. At this point, you can either scroll through the search results, or narrow them down by selecting a source and destination in the dropdown menues.</p>
-                <img src="img/searchExample3.png">
+                <img src="img/searchExampleGIF2.gif">
+                <p>Choose between either searching by Address or Searching by County, City, State</p>
+                <img src="img/undermaintenance.png">
+                <h4> Search by County, City, State</h4>
+                <p>First select a state in the dropdown menu, then you can either search only by state, or by county or city by selecting them in the dropdown menu. After selecting the region you wish to search for, click on the 'Search' button.</p>
+                <img src="img/searchExampleGIF3.gif">
+                <h4> Search Result</h4>
+                <p><b>Tabular Result:</b> The results page will show a tabular results for the incentives, codes, and permits of the City, County State. </p>
+                <img src="img/searchExampleGIF4.gif">
+                <p>To narrow down the results even further you can select a source and destination in the dropdown menues.</p>
+                <img src="img/searchExampleGIF5.gif">
+                <p><b>Graphical Result:</b> To view the graphical result: click on the top right button View Diagram. </p>
+                <img src="img/view_diagramExample.png">
+                <h5>To Be Continued...</h5>
                 <h4>Disclaimer</h4>
                 <p>If the state, county or city does not have any water reuse information, or if the state, county or city is not present in the search dropdown menus, this does not mean there are no regulations. It just means they have not been added to this site. Please search your local government web pages to find the water reuse information you need. After finding that information, it would be helpful to us if you <a href="{{ route('register') }}">register</a> to become a contributor, and add this regulation to our site.</p>
                 <a href="#nav-tab-base">Back to Top</a>
@@ -49,17 +57,25 @@
             <div class="tab-pane fade show active" id="nav-search" role="tabpanel" aria-labelledby="nav-search-tab">
                 <h2>How to Search for a Regulation</h2>
                 <p>1. Navigate to the <a href="{{ route('search') }}" target="_blank"> Search </a>page</p>
+                <img src="img/search_start.gif">
                 <p>2. Select either 'Commercial' or 'Residential'</p>
-                <img src="img/searchExample.png">
-                <p>3. First select a state in the dropdown menu, then you can either search only by state, or by county or city by selecting them in the dropdown menu.</p>
-                <img src="img/searchExample1.png">
-                <p>4. After selecting the region you wish to search for, click on the 'Search' button.</p>
-                <img src="img/searchExample2.png">
-                <p>5. At this point, you can either scroll through the search results, or narrow them down by selecting a source and destination in the dropdown menus.</p>
-                <img src="img/searchExample3.png">
+                <img src="img/searchExampleGIF2.gif">
+                <p>Choose between either searching by Address or Searching by County, City, State</p>
+                <img src="img/undermaintenance.png">
+                <h4> Search by County, City, State</h4>
+                <p>First select a state in the dropdown menu, then you can either search only by state, or by county or city by selecting them in the dropdown menu. After selecting the region you wish to search for, click on the 'Search' button.</p>
+                <img src="img/searchExampleGIF3.gif">
+                <h4> Search Result</h4>
+                <p><b>Tabular Result:</b> The results page will show a tabular results for the incentives, codes, and permits of the City, County State. </p>
+                <img src="img/searchExampleGIF4.gif">
+                <p>To narrow down the results even further you can select a source and destination in the dropdown menues.</p>
+                <img src="img/searchExampleGIF5.gif">
+                <p><b>Graphical Result:</b> To view the graphical result: click on the top right button View Diagram. </p>
+                <img src="img/view_diagramExample.png">
+                <h5>To Be Continued...</h5>
                 <h4>Disclaimer</h4>
-                <p>If the state, county or city does not have any water reuse information, or if the state, county or city is not present in the search dropdown menus, this does not mean there are no regulations. It just means they have not been added to this site. Please search your local government web pages to find the water reuse information you need. After finding that information, it would be helpful to us if you <a href="{{ route('userSubmission') }}">add</a> it to the site.</p>
-                <a href="#nav-tab-admin">Back to Top</a>
+                <p>If the state, county or city does not have any water reuse information, or if the state, county or city is not present in the search dropdown menus, this does not mean there are no regulations. It just means they have not been added to this site. Please search your local government web pages to find the water reuse information you need. After finding that information, it would be helpful to us if you <a href="{{ route('register') }}">register</a> to become a contributor, and add this regulation to our site.</p>
+                <a href="#nav-tab-base">Back to Top</a>
             </div>
             <div class="tab-pane fade" id="nav-addReg" role="tabpanel" aria-labelledby="nav-addReg-tab">
                 <h2>Add a New Regulation</h2>
@@ -154,7 +170,7 @@
                                     <img class="smallRec" src="img/banExample1.png"></img>
                                     <p>4. Once you have found the user you wish to ban, click the 'ban user' button.</p>
                                     <img class="smallRec" src="img/banExample2.png"></img>
-                                    <p>5. You should now recieve a message showing that the user was succesfully banned, and they will not appear in the list of users.</p>
+                                    <p>5. You should now receive a message showing that the user was succesfully banned, and they will not appear in the list of users.</p>
                                     <img class="smallRec" src="img/banExample3.png"></img>
                                     <p>7. You can then 'unban' a user under the 'Banned Users' view of the Administrator Dashboard.</p>
                                     <img src="img/banExample4.png"></img>
@@ -169,7 +185,7 @@
                                 <p>3. You should now see a list of regulations awaiting approval. To review the submission, click the 'view' button, to decline the submission click the 'Decline' button and to approve the submission, click the 'Approve' button.</p>
                                 <img class="smallRec" src="img/regulationExample1.png"></img>
                                 <h4>Disclamer</h4>
-                                <p>The system is set up in a way that if you approve a new or non-existing area, this area will be created.</h4>
+                                <p>The system is set up in a way that if you approve a new or non-existing area, this area will be created.</p>
                                 </br>
                                 </br>
                                 <a href="#nav-tab-admin">Back to Top</a>
@@ -214,17 +230,25 @@
             <div class="tab-pane fade show active" id="nav-searchContrib" role="tabpanel" aria-labelledby="nav-search-tab">
                 <h2>How to Search for a Regulation</h2>
                 <p>1. Navigate to the <a href="{{ route('search') }}" target="_blank"> Search </a>page</p>
+                <img src="img/search_start.gif">
                 <p>2. Select either 'Commercial' or 'Residential'</p>
-                <img src="img/searchExample.png">
-                <p>3. First select a state in the dropdown menu, then you can either search only by state, or by county or city by selecting them in the dropdown menu.</p>
-                <img src="img/searchExample1.png">
-                <p>4. After selecting the region you wish to search for, click on the 'Search' button.</p>
-                <img src="img/searchExample2.png">
-                <p>5. At this point, you can either scroll through the search results, or narrow them down by selecting a source and destination in the dropdown menues.</p>
-                <img src="img/searchExample3.png">
+                <img src="img/searchExampleGIF2.gif">
+                <p>Choose between either searching by Address or Searching by County, City, State</p>
+                <img src="img/undermaintenance.png">
+                <h4> Search by County, City, State</h4>
+                <p>First select a state in the dropdown menu, then you can either search only by state, or by county or city by selecting them in the dropdown menu. After selecting the region you wish to search for, click on the 'Search' button.</p>
+                <img src="img/searchExampleGIF3.gif">
+                <h4> Search Result</h4>
+                <p><b>Tabular Result:</b> The results page will show a tabular results for the incentives, codes, and permits of the City, County State. </p>
+                <img src="img/searchExampleGIF4.gif">
+                <p>To narrow down the results even further you can select a source and destination in the dropdown menues.</p>
+                <img src="img/searchExampleGIF5.gif">
+                <p><b>Graphical Result:</b> To view the graphical result: click on the top right button View Diagram. </p>
+                <img src="img/view_diagramExample.png">
+                <h5>To Be Continued...</h5>
                 <h4>Disclaimer</h4>
-                <p>If the state, county or city does not have any water reuse information, or if the state, county or city is not present in the search dropdown menus, this does not mean there are no regulations. It just means they have not been added to this site. Please search your local government web pages to find the water reuse information you need. After you find the information, if would be helpful if you <a href="{{ route('userSubmission') }}">add</a> it to the site.</p>
-                <a href="#nav-tab-mid">Back to Top</a>
+                <p>If the state, county or city does not have any water reuse information, or if the state, county or city is not present in the search dropdown menus, this does not mean there are no regulations. It just means they have not been added to this site. Please search your local government web pages to find the water reuse information you need. After finding that information, it would be helpful to us if you <a href="{{ route('register') }}">register</a> to become a contributor, and add this regulation to our site.</p>
+                <a href="#nav-tab-base">Back to Top</a>
             </div>
             <div class="tab-pane fade" id="nav-addRegContrib" role="tabpanel" aria-labelledby="nav-addRegContrib-tab">
                 <h2>Add a New Regulation</h2>
