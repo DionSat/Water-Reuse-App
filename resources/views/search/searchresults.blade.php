@@ -44,10 +44,14 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-body mb-3">
-                            <h2 class="text-center">Please take time to donate.</h2>
+                            <div class="text-center">
+                                <img src="/img/recode-logo.jpg" height=75% width=75%/>
+                            </div>
+                            Recode's work to legalize sustainability and spur the adoption of more water-saving technologies depends on the generosity of individuals from across the country who recognize the critical role Recode can play in catalyzing change. Please consider making a donation.
                         </div>
                         <div class="card-footer mt-3 row d-flex justify-content-center">
-                            <a class="btn btn-primary col-md mb-4" href="https://www.recodenow.org/donate/" target="_blank" rel="noopener noreferrer" style="margin-right:5px;"><i class="fas fa-hands-helping" aria-hidden="true"></i>
+                            <a id="CloseBtn" class="btn btn-primary col-md mb-4" href="https://www.recodenow.org/donate/" target="_blank" rel="noopener noreferrer" style="margin-right:5px;">
+                                <i class="fas fa-hands-helping" aria-hidden="true"></i>
                                 Donate
                             </a>
                             <a id="CloseBtn" class="btn btn-primary col-md mb-4 text-light" style="margin-left:5px;">
