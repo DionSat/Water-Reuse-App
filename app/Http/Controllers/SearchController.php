@@ -116,7 +116,7 @@ class SearchController extends Controller
         $destinations = ReuseNode::destinations();
         $type = $request->searchType === "residential" ? "Residential" : "Commercial";
 
-        return view("search.searchresults", compact('stateRules', 'countyRules', 'cityRules', 'lowestLevel', 'city', 'county', 'state', 'sources', 'destinations', 'type'));
+        return view("search.searchresults", compact('request','stateRules', 'countyRules', 'cityRules', 'lowestLevel', 'city', 'county', 'state', 'sources', 'destinations', 'type'));
     }
 
     // API Request for geocode data
