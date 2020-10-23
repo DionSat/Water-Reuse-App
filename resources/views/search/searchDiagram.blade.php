@@ -155,10 +155,14 @@
                             },
                             nodes: [
                                 /* Water Sources Root */
-                                {id: 0, Name: "Water Resources", Links: "", img: "data:image/jpeg;base64," + string_icons[0]"},
+                                {id: 0, Name: "Water Resources", Links: "", img: "data:image/jpeg;base64," + string_icons[0]},
                                 /* Level 2 Water Sources */
                                 {id: 1, pid: 0, Name: "Condensate", Links: "", img: ""},
-                                {id: 2, pid: 0, Name: "Harvested Rain Water", Links: "", img: ""},
+                                {id: 2, pid: 0, Name: "Harvested Rainwater", Links: "", img: ""},
+                                {id: 3, pid: 0, Name: "Stormwater Runoff", Links: "", img: ""},
+                                {id: 4, pid: 0, Name: "Surface Water", Links: "", img: ""},
+                                {id: 5, pid: 0, Name: "Shallow Groundwater", Links: "", img: ""},
+                                {id: 6, pid: 0, Name: "Aquifer", Links: "", img: ""},
 
 
                             ]
