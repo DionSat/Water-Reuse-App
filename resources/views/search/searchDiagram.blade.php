@@ -149,18 +149,18 @@
                                 field_1: "Links",
                                 img_0: "img"
                             },
+                            collapse: {
+                                level: 2,
+                                allChildren: true
+                            },
                             nodes: [
-                                {id: 1, Name: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[0]},
-                                {id: 2, pid: 1, Name: "Kitchen Sink", Links: "", img: "data:image/jpeg;base64," + string_icons[1]                              },
-                                {id: 3, pid: 1, Name: "Kitchen Sink + Disposer", Links: "", img: "data:image/jpeg;base64," + string_icons[2]},
-                                {id: 4, pid: 1, Name: "Dishwasher", Links: "", img: "data:image/jpeg;base64," + string_icons[3]},
-                                {id: 5, pid: 1, Name: "Lavatory", Links: "", img: "data:image/jpeg;base64," + string_icons[4]},
-                                {id: 6, pid: 1, Name: "Tub + Shower", Links: "", img: "data:image/jpeg;base64," + string_icons[5]},
-                                {id: 7, pid: 1, Name: "Fire Suppression", Links: "", img: "data:image/jpeg;base64," + string_icons[6]},
-                                {id: 8, pid: 1, Name: "Clothes Washer", Links: "", img: "data:image/jpeg;base64," + string_icons[7]                                },
-                                {id: 9, pid: 1, Name: "Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
-                                {id: 10, pid: 1, Name: "Composting Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
-                                {id: 11, pid: 1, Name: "Urinal", Links: "", img: "data:image/jpeg;base64," + string_icons[10]}
+                                /* Water Sources Root */
+                                {id: 0, Name: "Water Resources", Links: "", img: "data:image/jpeg;base64," + string_icons[0]"},
+                                /* Level 2 Water Sources */
+                                {id: 1, pid: 0, Name: "Condensate", Links: "", img: ""},
+                                {id: 2, pid: 0, Name: "Harvested Rain Water", Links: "", img: ""},
+
+
                             ]
                         });
 
@@ -255,6 +255,7 @@
         }
 
         /* Blocked Paths Animation */
+            /* Condensation */
         [link-id='[1][2]'] .backgroundPath,
         [link-id='[1][3]'] .backgroundPath,
         [link-id='[1][4]'] .backgroundPath,
