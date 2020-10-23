@@ -86,6 +86,12 @@ class SearchController extends Controller
         $cityRules = new Collection();
         $state = State::where('stateName', $stateName)->first();
 
+        // Adds attribute to request
+        $addressRequest->request->add([
+            'state_id' => $state->state_id
+        ]);
+
+        // Populates county if found
         if(!$address_info["results"][0]["locations"][0]["adminArea4"]) {
             $county = null;
         } else{
@@ -94,7 +100,15 @@ class SearchController extends Controller
             $county = County::where('countyName', 'LIKE', "{$countyName}%")->first();
         }
 
-        $city = null;
+        // Populates city if found
+        if(!$address_info["results"][0]["locations"][0]["adminArea5"]) {
+            $city = null;
+        } else{
+            $cityName = $address_info["results"][0]["locations"][0]["adminArea5"];
+            $cityName = explode(' ', trim($cityName))[0];
+            $city = City::where('cityName', 'LIKE', "{$cityName}%")->first();
+        }
+
         $lowestLevel = "state";
 
         $stateRules = StateMerge::with(['state', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])
@@ -103,13 +117,21 @@ class SearchController extends Controller
             $countyRules = CountyMerge::with(['county', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])
                 ->where("countyID", $county->county_id)->where("location_type", $addressRequest->searchType)->get();
             $lowestLevel = "county";
+            // Adds attribute to request
+            $addressRequest->request->add([
+                'county_id' => $county->county_id
+            ]);
         }
 
-        if(isset($addressRequest->city_id)) {
+        if($city) {
             $cityRules = CityMerge::with(['city', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])
-                ->where("cityID", $addressRequest->city_id)->where("location_type", $addressRequest->searchType)->get();
+                ->where("cityID", $city->city_id)->where("location_type", $addressRequest->searchType)->get();
             $lowestLevel = "city";
-            $city = City::find($addressRequest->city_id);
+            $city = City::find($city->city_id);
+            // Adds attribute to request
+            $addressRequest->request->add([
+                'city_id' => $city->city_id
+            ]);
         }
 
         // Get all the sources and destinations
