@@ -338,16 +338,17 @@
         /* Pathway Not Addressed Paths Animation */
             /* Condensation (None) */
             /* Harvested Rainwater */
-        /*[link-id='[2][7]'] .backgroundPath,
-        [link-id='[2][7]'] .backgroundPath,*/
+        [link-id='[2][24]'] .backgroundPath,
+        [link-id='[2][25]'] .backgroundPath,
             /* Stormwater Runoff */
+        [link-id='[3][34]'] .backgroundPath,
+        [link-id='[3][36]'] .backgroundPath
             /* Surface Water (None) */
             /* Shallow Groundwater (None) */
             /* Aquifer (None) */
-       /* [link-id='[1][7]'] .backgroundPath,
         {
             stroke: #ff8c00;
-        }*/
+        }
 
         /* Blocked Paths Animation */
             /* Condensation */
