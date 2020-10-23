@@ -163,7 +163,7 @@
                                 {id: 4, pid: 0, Name: "Surface Water", Links: "", img: ""},
                                 {id: 5, pid: 0, Name: "Shallow Groundwater", Links: "", img: ""},
                                 {id: 6, pid: 0, Name: "Aquifer", Links: "", img: ""},
-
+                                /* Level 3 Child Nodes */
                                 /* Condensate Child Nodes */
                                 {id: 7, pid: 1, Name: "Kitchen Sink", Links: "", img: "data:image/jpeg;base64," + string_icons[1]},
                                 {id: 8, pid: 1, Name: "Kitchen Sink + Disposer", Links: "", img: "data:image/jpeg;base64," + string_icons[2]},
@@ -325,14 +325,35 @@
 
         /* Blocked Paths Animation */
             /* Condensation */
-        /*[link-id='[1][2]'] .backgroundPath,
-        [link-id='[1][3]'] .backgroundPath,
-        [link-id='[1][4]'] .backgroundPath,
-        [link-id='[1][5]'] .backgroundPath,
-        [link-id='[1][6]'] .backgroundPath {
+        [link-id='[1][7]'] .backgroundPath,
+        [link-id='[1][8]'] .backgroundPath,
+        [link-id='[1][9]'] .backgroundPath,
+        [link-id='[1][10]'] .backgroundPath,
+        [link-id='[1][11]'] .backgroundPath,
+            /* Harvested Rainwater ( No Blocks ) */
+            /* Stormwater Runoff */
+        [link-id='[3][27]'] .backgroundPath,
+        [link-id='[3][28]'] .backgroundPath,
+        [link-id='[3][29]'] .backgroundPath,
+        [link-id='[3][30]'] .backgroundPath,
+        [link-id='[3][31]'] .backgroundPath,
+            /* Surface Water ( No Blocks ) */
+            /* Shallow Groundwater */
+        [link-id='[5][47]'] .backgroundPath,
+        [link-id='[5][48]'] .backgroundPath,
+        [link-id='[5][49]'] .backgroundPath,
+        [link-id='[5][50]'] .backgroundPath,
+        [link-id='[5][51]'] .backgroundPath,
+        [link-id='[5][52]'] .backgroundPath,
+        [link-id='[5][53]'] .backgroundPath,
+        [link-id='[5][54]'] .backgroundPath,
+        [link-id='[5][55]'] .backgroundPath,
+        [link-id='[5][56]'] .backgroundPath
+            /* Aquifer ( No Blocks ) */
+        {
             stroke: #ff0000;
         }
-*/
+
         /* Link Animation ~ Dash Type */
         @keyframes dash {
             from {
