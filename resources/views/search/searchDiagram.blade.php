@@ -336,6 +336,7 @@
         }
 
         /* Pathway Not Addressed Paths Animation */
+        /* Note that .backgroundPath must be kept in, however intelliJ will note it as unused but the class for the path animations is created on page load */
             /* Condensation (None) */
             /* Harvested Rainwater */
         [link-id='[2][24]'] .backgroundPath,
@@ -351,6 +352,7 @@
         }
 
         /* Blocked Paths Animation */
+        /* Note that .backgroundPath must be kept in, however intelliJ will note it as unused but the class for the path animations is created on page load */
             /* Condensation */
         [link-id='[1][7]'] .backgroundPath,
         [link-id='[1][8]'] .backgroundPath,
