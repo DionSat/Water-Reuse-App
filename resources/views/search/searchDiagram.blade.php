@@ -20,10 +20,11 @@
                     <button class="btn btn-primary fas search-btn" value="5" title="Lavatory"><img src="/img/app_LAVATORY.jpg" height=30px width=30px/></button>
                     <button class="btn btn-primary fas search-btn" value="6" title="Tub + Shower"><img src="/img/app_TUB-SHOWER.jpg" height=30px width=30px/></button>
                     <button class="btn btn-primary fas search-btn" value="7" title="Fire Suppression"><img src="/img/app_FIRE.jpg" height=30px width=30px/></button>
-                    <button class="btn btn-primary fas search-btn" value="8" title="Clothes Washer"><img src="/img/app_CLOTHS WASHER.jpg" height=30px width=30px/></button>
-                    <button class="btn btn-primary fas search-btn" value="9" title="Toilet"><img src="/img/toilet.png" height=30px width=30px/></button>
-                    <button class="btn btn-primary fas search-btn" value="10" title="Composting Toilet"><img src="/img/toilet.png" height=30px width=30px/></button>
-                    <button class="btn btn-primary fas search-btn" value="11" title="Urinal"><img src="/img/app_LAVATORY.jpg" height=30px width=30px/></button>
+                    <button class="btn btn-primary fas search-btn" value="8" title="Mechanical Cooling"><img src="/img/app_MECHANICAL.jpg" height=30px width=30px/></button>
+                    <button class="btn btn-primary fas search-btn" value="9" title="Clothes Washer"><img src="/img/app_CLOTHS WASHER.jpg" height=30px width=30px/></button>
+                    <button class="btn btn-primary fas search-btn" value="10" title="Toilet"><img src="/img/toilet.png" height=30px width=30px/></button>
+                    <button class="btn btn-primary fas search-btn" value="11" title="Composting Toilet"><img src="/img/toilet.png" height=30px width=30px/></button>
+                    <button class="btn btn-primary fas search-btn" value="12" title="Urinal"><img src="/img/app_LAVATORY.jpg" height=30px width=30px/></button>
                     <div id="tree"></div>
             </div>
         </div>
@@ -155,7 +156,7 @@
                             },
                             nodes: [
                                 /* Water Sources Root */
-                                {id: 0, Name: "Water Sources", Links: "", img: "data:image/jpeg;base64," + string_icons[0]},
+                                {id: 0, Name: "Water Sources", img: "data:image/jpeg;base64," + string_icons[0]},
                                 /* Level 2 Water Sources */
                                 {id: 1, pid: 0, Name: "Condensate", Links: "", img: ""},
                                 {id: 2, pid: 0, Name: "Harvested Rainwater", Links: "", img: ""},
@@ -247,10 +248,10 @@
 
                         /* Node Details Button Links */
                         chart.editUI.on('field', function(sender, args){
-                            if (args.type == 'details' && args.name == 'Links'){
+                            if (args.type == 'details' && args.name == 'Links') {
 
-                                var txt = args.field.querySelector('input');
-                                if (txt){
+                               var txt = args.field.querySelector('input');
+                                if (txt) {
                                     var linkLabels = ["Code", "Permit", "Incentive", "More Info"];
                                     var parent = args.field.querySelector('div');
                                     var br = document.createElement("br");
