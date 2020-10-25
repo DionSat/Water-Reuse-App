@@ -57,6 +57,9 @@
                     for(var i = 0; i < stateRules.length; i++) {
                         state_dest.push(stateRules[i].destination.node_name);
                     }
+                    for(var i = 0; i < state_dest.length; i++) {
+                        console.log(state_dest[i]);
+                    }
                     //Load all the icon images into an array
 
                     var icons = new Array();
@@ -126,12 +129,9 @@
 
                         OrgChart.templates.not_available = Object.assign({}, OrgChart.templates.ana);
 
-                        OrgChart.templates.not_available.node =
-                            '<rect cx="100" cy="100" r="100" fill="#4D4D4D" stroke-width="1" stroke="#1C1C1C"></rect>';
-
                         var nodes = [
                             {id: 1, Name: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[0]},
-                            {id: 2, pid: 1, Name: "Kitchen Sink", Links: "", img: "data:image/jpeg;base64," + string_icons[1],},<!-- tags:['available']},-->
+                            {id: 2, pid: 1, Name: "Kitchen Sink", Links: "", img: "data:image/jpeg;base64," + string_icons[1],},
                             {id: 3, pid: 1, Name: "Kitchen Sink + Disposer", Links: "", img: "data:image/jpeg;base64," + string_icons[2]},
                             {id: 4, pid: 1, Name: "Dishwasher", Links: "", img: "data:image/jpeg;base64," + string_icons[3]},
                             {id: 5, pid: 1, Name: "Lavatory", Links: "", img: "data:image/jpeg;base64," + string_icons[4]},
@@ -139,17 +139,14 @@
                             {id: 7, pid: 1, Name: "Fire Suppression", Links: "", img: "data:image/jpeg;base64," + string_icons[6]},
                             {id: 8, pid: 1, Name: "Clothes Washer", Links: "", img: "data:image/jpeg;base64," + string_icons[7]                                },
                             {id: 9, pid: 1, Name: "Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
-                            {id: 10, pid: 1, Name: "Composting Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
+                            {id: 10, pid: 1, Name: "Toilet (Composting)", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
                             {id: 11, pid: 1, Name: "Urinal", Links: "", img: "data:image/jpeg;base64," + string_icons[10]}
                         ]
 
                         for(var i = 0; i < nodes.length; i++) {
-                            nodes[i].tags = ["not_available"]
-                        }
-
-                        for(var i = 0; i < nodes.length; i++) {
-                            if(state_dest.includes(nodes[i].name)) {
-                                node.tags = ["available"]
+                            if(state_dest.includes(nodes[i].Name) !== true) {
+                                nodes[i].tags = ["available"];
+                                console.log(nodes[i].Name);
                             }
                         }
 
@@ -159,14 +156,11 @@
                             template: "ana",
                             enableSearch: false,
                             align: OrgChart.ORIENTATION,
-                            tags: {
+                            /*tags: {
                                 not_available: {
                                     template: "not_available"
-                                },
-                                available: {
-                                    template: "ana"
                                 }
-                            },
+                            },*/
                             menu: {
                                 pdf: {
                                     text: "Export PDF",
@@ -270,7 +264,7 @@
         .node.available rect{
             stroke: blue;
         }
-        .node.not_available rect{
+        .node.not_avail rect{
             stroke: #808080;
         }
 
