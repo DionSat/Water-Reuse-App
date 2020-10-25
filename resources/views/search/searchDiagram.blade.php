@@ -51,17 +51,14 @@
                 </div>
 
                 <div style="width:100%; height:700px;" id="orgchart"/>
-                <!-- This part just to see the city result-->
-                <div class="card">
-                    @foreach($cityRules as $cityRules)
-                        {{$cityRules->destination->node_name}}
-                        {{$cityRules->allowed->allowed_id}}
-                    @endforeach
-                </div>
-                <!-- my idea -> if($cityRules->destination->node_name == $name(such as Kitchen Sink)  && $cityRules->allowed->allowed_id == 1)
-                    add tags:['available'] to the node that name is $name-->
                 <script>
+                    var state_dest = [];
+                    var stateRules = {!! json_encode($stateRules, JSON_HEX_TAG) !!};
+                    for(var i = 0; i < stateRules.length; i++) {
+                        state_dest.push(stateRules[i].destination.node_name);
+                    }
                     //Load all the icon images into an array
+
                     var icons = new Array();
                     icons[0] = new Image();
                     icons[0].src = "{{ asset('img/water sources_1.jpg') }}";
@@ -127,11 +124,49 @@
                         OrgChart.templates.ana.link = '<path class="backgroundPath" stroke-linejoin="round" stroke="#00cdcd" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
                             '<path class="dashPath" stroke-width="4" fill="none" stroke="#ffffff" stroke-dasharray="10"  d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>';
 
+                        OrgChart.templates.not_available = Object.assign({}, OrgChart.templates.ana);
+
+                        OrgChart.templates.not_available.node =
+                            '<rect cx="100" cy="100" r="100" fill="#4D4D4D" stroke-width="1" stroke="#1C1C1C"></rect>';
+
+                        var nodes = [
+                            {id: 1, Name: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[0]},
+                            {id: 2, pid: 1, Name: "Kitchen Sink", Links: "", img: "data:image/jpeg;base64," + string_icons[1],},<!-- tags:['available']},-->
+                            {id: 3, pid: 1, Name: "Kitchen Sink + Disposer", Links: "", img: "data:image/jpeg;base64," + string_icons[2]},
+                            {id: 4, pid: 1, Name: "Dishwasher", Links: "", img: "data:image/jpeg;base64," + string_icons[3]},
+                            {id: 5, pid: 1, Name: "Lavatory", Links: "", img: "data:image/jpeg;base64," + string_icons[4]},
+                            {id: 6, pid: 1, Name: "Tub + Shower", Links: "", img: "data:image/jpeg;base64," + string_icons[5]},
+                            {id: 7, pid: 1, Name: "Fire Suppression", Links: "", img: "data:image/jpeg;base64," + string_icons[6]},
+                            {id: 8, pid: 1, Name: "Clothes Washer", Links: "", img: "data:image/jpeg;base64," + string_icons[7]                                },
+                            {id: 9, pid: 1, Name: "Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
+                            {id: 10, pid: 1, Name: "Composting Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
+                            {id: 11, pid: 1, Name: "Urinal", Links: "", img: "data:image/jpeg;base64," + string_icons[10]}
+                        ]
+
+                        for(var i = 0; i < nodes.length; i++) {
+                            nodes[i].tags = ["not_available"]
+                        }
+
+                        for(var i = 0; i < nodes.length; i++) {
+                            if(state_dest.includes(nodes[i].name)) {
+                                node.tags = ["available"]
+                            }
+                        }
+
+
                         /* Chart */
                         let chart = new OrgChart(document.getElementById("orgchart"), {
                             template: "ana",
                             enableSearch: false,
                             align: OrgChart.ORIENTATION,
+                            tags: {
+                                not_available: {
+                                    template: "not_available"
+                                },
+                                available: {
+                                    template: "ana"
+                                }
+                            },
                             menu: {
                                 pdf: {
                                     text: "Export PDF",
@@ -158,19 +193,7 @@
                                 field_1: "Links",
                                 img_0: "img"
                             },
-                            nodes: [
-                                {id: 1, Name: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[0]},
-                                {id: 2, pid: 1, Name: "Kitchen Sink", Links: "", img: "data:image/jpeg;base64," + string_icons[1],},<!-- tags:['available']},-->
-                                {id: 3, pid: 1, Name: "Kitchen Sink + Disposer", Links: "", img: "data:image/jpeg;base64," + string_icons[2]},
-                                {id: 4, pid: 1, Name: "Dishwasher", Links: "", img: "data:image/jpeg;base64," + string_icons[3]},
-                                {id: 5, pid: 1, Name: "Lavatory", Links: "", img: "data:image/jpeg;base64," + string_icons[4]},
-                                {id: 6, pid: 1, Name: "Tub + Shower", Links: "", img: "data:image/jpeg;base64," + string_icons[5]},
-                                {id: 7, pid: 1, Name: "Fire Suppression", Links: "", img: "data:image/jpeg;base64," + string_icons[6]},
-                                {id: 8, pid: 1, Name: "Clothes Washer", Links: "", img: "data:image/jpeg;base64," + string_icons[7]                                },
-                                {id: 9, pid: 1, Name: "Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
-                                {id: 10, pid: 1, Name: "Composting Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
-                                {id: 11, pid: 1, Name: "Urinal", Links: "", img: "data:image/jpeg;base64," + string_icons[10]}
-                            ]
+                            nodes: nodes
                         });
 
                         /* Node Details Button Links */
@@ -244,11 +267,11 @@
             position: relative;
         }
        /*color*/
-        .available rect{
+        .node.available rect{
             stroke: blue;
         }
-        .not_available rect{
-            stroke: grey;
+        .node.not_available rect{
+            stroke: #808080;
         }
 
         /* Zoom Icons CSS */
