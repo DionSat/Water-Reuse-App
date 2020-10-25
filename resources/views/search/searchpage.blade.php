@@ -196,6 +196,17 @@
             $("#searchAddressButton").removeAttr("disabled");
         }
         $("#searchAddressButton").click(function (){
+            var MQ_URL = "http://www.mapquestapi.com/geocoding/v1/address?key=r01gT8AoeW5W7mu2atIhnYOVOVk6VTWg&street=1600+Pennsylvania+Ave+NW&city=Washington&state=DC&postalCode=20500";
+
+            var settings = {
+                "url": MQ_URL,
+                "method": "POST",
+                "timeout": 0,
+            };
+
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+            });
             //need to work
             //when click the searchAddressButton, ...
         });
