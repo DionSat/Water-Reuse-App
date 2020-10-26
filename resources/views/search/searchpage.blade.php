@@ -8,7 +8,7 @@
                 <div class="col-md-4">
                     <div class="card text-center selection-card commercial border-dark initial-selection">
                         <div class="card-body" title="Search commercial regulations">
-                            <img class="img-fluid" src="{{url('/img/commercial-icon.png')}}" alt="Commercial Icon"/>
+                            <img class="display-icon" src="{{url('/img/commercial-icon.png')}}" alt="Commercial Icon"/>
                             <h1> Commercial </h1>
                         </div>
                     </div>
@@ -16,7 +16,7 @@
                 <div class="col-md-4 mt-3 mt-md-0">
                     <div class="card text-center selection-card residential border-dark initial-selection">
                         <div class="card-body" title="Search residential regulations">
-                            <img class="img-fluid" src="{{url('/img/residential-icon.png')}}" alt="Residential Icon"/>
+                            <img class="display-icon" src="{{url('/img/residential-icon.png')}}" alt="Residential Icon"/>
                             <h1> Residential </h1>
                         </div>
                     </div>
