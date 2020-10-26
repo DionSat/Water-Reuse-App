@@ -193,6 +193,8 @@
             initSearch();
         });
         function initSearch() {
+            $("#searchAddressButton").removeAttr("disabled");
+        }
         $("#searchAddressButton").click(function (){
             var MQ_URL = "http://www.mapquestapi.com/geocoding/v1/address?key=" + MQ_API_KEY +
                 "&location=" + document.forms["item"]["StreetAddressInput"];
