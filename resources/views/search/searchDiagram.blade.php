@@ -129,6 +129,14 @@
 
                         OrgChart.templates.not_available = Object.assign({}, OrgChart.templates.ana);
 
+                        OrgChart.templates.not_available.node =
+                            '<rect x="0" y="0" height="120" width="250" fill="#808080" stroke-width="1" stroke="#808080" rx="5" ry="5"></rect>'
+
+                        OrgChart.templates.not_available.link = '<path class="backgroundPath" stroke-linejoin="round" stroke="#00cdcd" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
+                            '<path class="dashPath" stroke-width="4" fill="none" stroke="#ffffff" stroke-dasharray="10"  d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>';
+
+
+
                         var nodes = [
                             {id: 1, Name: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[0]},
                             {id: 2, pid: 1, Name: "Kitchen Sink", Links: "", img: "data:image/jpeg;base64," + string_icons[1],},
@@ -145,7 +153,7 @@
 
                         for(var i = 0; i < nodes.length; i++) {
                             if(state_dest.includes(nodes[i].Name) !== true) {
-                                nodes[i].tags = ["available"];
+                                nodes[i].tags = ["not_available"];
                                 console.log(nodes[i].Name);
                             }
                         }
@@ -156,11 +164,11 @@
                             template: "ana",
                             enableSearch: false,
                             align: OrgChart.ORIENTATION,
-                            /*tags: {
+                            tags: {
                                 not_available: {
                                     template: "not_available"
                                 }
-                            },*/
+                            },
                             menu: {
                                 pdf: {
                                     text: "Export PDF",
