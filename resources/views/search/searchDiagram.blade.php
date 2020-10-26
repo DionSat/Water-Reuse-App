@@ -159,90 +159,76 @@
                                 {id: 0, Name: "Water Sources", img: "data:image/jpeg;base64," + string_icons[0]},
                                 /* Level 2 Water Sources */
                                 {id: 1, pid: 0, Name: "Condensate", Links: "", img: ""},
-                                {id: 2, pid: 0, Name: "Harvested Rainwater", Links: "", img: ""},
+                                {id: 2, pid: 0, Name: "Precipitation", Links: "", img: ""},
                                 {id: 3, pid: 0, Name: "Stormwater Runoff", Links: "", img: ""},
-                                {id: 4, pid: 0, Name: "Surface Water", Links: "", img: ""},
-                                {id: 5, pid: 0, Name: "Shallow Groundwater", Links: "", img: ""},
-                                {id: 6, pid: 0, Name: "Aquifer", Links: "", img: ""},
+                                {id: 4, pid: 0, Name: "Surface / Shallow Ground Water", Links: "", img: ""},
+                                {id: 5, pid: 0, Name: "Ground Water", Links: "", img: ""},
 
                                 /* Level 3 Child Nodes */
                                 /* Condensate Child Nodes */
-                                {id: 7, pid: 1, Name: "Kitchen Sink", Links: "", img: "data:image/jpeg;base64," + string_icons[1]},
-                                {id: 8, pid: 1, Name: "Kitchen Sink + Disposer", Links: "", img: "data:image/jpeg;base64," + string_icons[2]},
-                                {id: 9, pid: 1, Name: "Dishwasher", Links: "", img: "data:image/jpeg;base64," + string_icons[3]},
-                                {id: 10, pid: 1, Name: "Lavatory", Links: "", img: "data:image/jpeg;base64," + string_icons[4]},
-                                {id: 11, pid: 1, Name: "Tub + Shower", Links: "", img: "data:image/jpeg;base64," + string_icons[5]},
-                                {id: 12, pid: 1, Name: "Fire Suppression", Links: "", img: "data:image/jpeg;base64," + string_icons[6]},
-                                {id: 13, pid: 1, Name: "Mechanical Cooling", Links: "", img: "data:image/jpeg;base64," + string_icons[7]},
-                                {id: 14, pid: 1, Name: "Clothes Washer", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
-                                {id: 15, pid: 1, Name: "Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
-                                {id: 16, pid: 1, Name: "Composting Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[10]},
-                                {id: 17, pid: 1, Name: "Urinal", Links: "", img: "data:image/jpeg;base64," + string_icons[11]},
+                                {id: 6, pid: 1, Name: "Kitchen Sink", Links: "", img: "data:image/jpeg;base64," + string_icons[1]},
+                                {id: 7, pid: 1, Name: "Kitchen Sink + Disposer", Links: "", img: "data:image/jpeg;base64," + string_icons[2]},
+                                {id: 8, pid: 1, Name: "Dishwasher", Links: "", img: "data:image/jpeg;base64," + string_icons[3]},
+                                {id: 9, pid: 1, Name: "Lavatory", Links: "", img: "data:image/jpeg;base64," + string_icons[4]},
+                                {id: 10, pid: 1, Name: "Tub + Shower", Links: "", img: "data:image/jpeg;base64," + string_icons[5]},
+                                {id: 11, pid: 1, Name: "Fire Suppression", Links: "", img: "data:image/jpeg;base64," + string_icons[6]},
+                                {id: 12, pid: 1, Name: "Mechanical Cooling", Links: "", img: "data:image/jpeg;base64," + string_icons[7]},
+                                {id: 13, pid: 1, Name: "Clothes Washer", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
+                                {id: 14, pid: 1, Name: "Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
+                                {id: 15, pid: 1, Name: "Composting Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[10]},
+                                {id: 16, pid: 1, Name: "Urinal", Links: "", img: "data:image/jpeg;base64," + string_icons[11]},
 
-                                /* Harvested Rainwater Child Nodes */
-                                {id: 18, pid: 2, Name: "Kitchen Sink", Links: "", img: "data:image/jpeg;base64," + string_icons[1]},
-                                {id: 19, pid: 2, Name: "Kitchen Sink + Disposer", Links: "", img: "data:image/jpeg;base64," + string_icons[2]},
-                                {id: 20, pid: 2, Name: "Dishwasher", Links: "", img: "data:image/jpeg;base64," + string_icons[3]},
-                                {id: 21, pid: 2, Name: "Lavatory", Links: "", img: "data:image/jpeg;base64," + string_icons[4]},
-                                {id: 22, pid: 2, Name: "Tub + Shower", Links: "", img: "data:image/jpeg;base64," + string_icons[5]},
-                                {id: 23, pid: 2, Name: "Fire Suppression", Links: "", img: "data:image/jpeg;base64," + string_icons[6]},
-                                {id: 24, pid: 2, Name: "Mechanical Cooling", Links: "", img: "data:image/jpeg;base64," + string_icons[7]},
-                                {id: 25, pid: 2, Name: "Clothes Washer", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
-                                {id: 26, pid: 2, Name: "Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
-                                {id: 27, pid: 2, Name: "Composting Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[10]},
-                                {id: 28, pid: 2, Name: "Urinal", Links: "", img: "data:image/jpeg;base64," + string_icons[11]},
+                                /* Precipitation Child Nodes */
+                                {id: 17, pid: 2, Name: "Kitchen Sink", Links: "", img: "data:image/jpeg;base64," + string_icons[1]},
+                                {id: 18, pid: 2, Name: "Kitchen Sink + Disposer", Links: "", img: "data:image/jpeg;base64," + string_icons[2]},
+                                {id: 19, pid: 2, Name: "Dishwasher", Links: "", img: "data:image/jpeg;base64," + string_icons[3]},
+                                {id: 20, pid: 2, Name: "Lavatory", Links: "", img: "data:image/jpeg;base64," + string_icons[4]},
+                                {id: 21, pid: 2, Name: "Tub + Shower", Links: "", img: "data:image/jpeg;base64," + string_icons[5]},
+                                {id: 22, pid: 2, Name: "Fire Suppression", Links: "", img: "data:image/jpeg;base64," + string_icons[6]},
+                                {id: 23, pid: 2, Name: "Mechanical Cooling", Links: "", img: "data:image/jpeg;base64," + string_icons[7]},
+                                {id: 24, pid: 2, Name: "Clothes Washer", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
+                                {id: 25, pid: 2, Name: "Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
+                                {id: 26, pid: 2, Name: "Composting Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[10]},
+                                {id: 27, pid: 2, Name: "Urinal", Links: "", img: "data:image/jpeg;base64," + string_icons[11]},
 
                                 /* Stormwater Runoff Child Nodes */
-                                {id: 29, pid: 3, Name: "Kitchen Sink", Links: "", img: "data:image/jpeg;base64," + string_icons[1]},
-                                {id: 30, pid: 3, Name: "Kitchen Sink + Disposer", Links: "", img: "data:image/jpeg;base64," + string_icons[2]},
-                                {id: 31, pid: 3, Name: "Dishwasher", Links: "", img: "data:image/jpeg;base64," + string_icons[3]},
-                                {id: 32, pid: 3, Name: "Lavatory", Links: "", img: "data:image/jpeg;base64," + string_icons[4]},
-                                {id: 33, pid: 3, Name: "Tub + Shower", Links: "", img: "data:image/jpeg;base64," + string_icons[5]},
-                                {id: 34, pid: 3, Name: "Fire Suppression", Links: "", img: "data:image/jpeg;base64," + string_icons[6]},
-                                {id: 35, pid: 3, Name: "Mechanical Cooling", Links: "", img: "data:image/jpeg;base64," + string_icons[7]},
-                                {id: 36, pid: 3, Name: "Clothes Washer", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
-                                {id: 37, pid: 3, Name: "Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
-                                {id: 38, pid: 3, Name: "Composting Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[10]},
-                                {id: 39, pid: 3, Name: "Urinal", Links: "", img: "data:image/jpeg;base64," + string_icons[11]},
+                                {id: 28, pid: 3, Name: "Kitchen Sink", Links: "", img: "data:image/jpeg;base64," + string_icons[1]},
+                                {id: 29, pid: 3, Name: "Kitchen Sink + Disposer", Links: "", img: "data:image/jpeg;base64," + string_icons[2]},
+                                {id: 30, pid: 3, Name: "Dishwasher", Links: "", img: "data:image/jpeg;base64," + string_icons[3]},
+                                {id: 31, pid: 3, Name: "Lavatory", Links: "", img: "data:image/jpeg;base64," + string_icons[4]},
+                                {id: 32, pid: 3, Name: "Tub + Shower", Links: "", img: "data:image/jpeg;base64," + string_icons[5]},
+                                {id: 33, pid: 3, Name: "Fire Suppression", Links: "", img: "data:image/jpeg;base64," + string_icons[6]},
+                                {id: 34, pid: 3, Name: "Mechanical Cooling", Links: "", img: "data:image/jpeg;base64," + string_icons[7]},
+                                {id: 35, pid: 3, Name: "Clothes Washer", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
+                                {id: 36, pid: 3, Name: "Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
+                                {id: 37, pid: 3, Name: "Composting Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[10]},
+                                {id: 38, pid: 3, Name: "Urinal", Links: "", img: "data:image/jpeg;base64," + string_icons[11]},
 
-                                /* Surface Water Child Nodes */
-                                {id: 40, pid: 4, Name: "Kitchen Sink", Links: "", img: "data:image/jpeg;base64," + string_icons[1]},
-                                {id: 41, pid: 4, Name: "Kitchen Sink + Disposer", Links: "", img: "data:image/jpeg;base64," + string_icons[2]},
-                                {id: 42, pid: 4, Name: "Dishwasher", Links: "", img: "data:image/jpeg;base64," + string_icons[3]},
-                                {id: 43, pid: 4, Name: "Lavatory", Links: "", img: "data:image/jpeg;base64," + string_icons[4]},
-                                {id: 44, pid: 4, Name: "Tub + Shower", Links: "", img: "data:image/jpeg;base64," + string_icons[5]},
-                                {id: 45, pid: 4, Name: "Fire Suppression", Links: "", img: "data:image/jpeg;base64," + string_icons[6]},
-                                {id: 46, pid: 4, Name: "Mechanical Cooling", Links: "", img: "data:image/jpeg;base64," + string_icons[7]},
-                                {id: 47, pid: 4, Name: "Clothes Washer", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
-                                {id: 48, pid: 4, Name: "Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
-                                {id: 49, pid: 4, Name: "Composting Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[10]},
-                                {id: 50, pid: 4, Name: "Urinal", Links: "", img: "data:image/jpeg;base64," + string_icons[11]},
+                                /* Surface / Shallow Ground Water Child Nodes */
+                                {id: 39, pid: 4, Name: "Kitchen Sink", Links: "", img: "data:image/jpeg;base64," + string_icons[1]},
+                                {id: 40, pid: 4, Name: "Kitchen Sink + Disposer", Links: "", img: "data:image/jpeg;base64," + string_icons[2]},
+                                {id: 41, pid: 4, Name: "Dishwasher", Links: "", img: "data:image/jpeg;base64," + string_icons[3]},
+                                {id: 42, pid: 4, Name: "Lavatory", Links: "", img: "data:image/jpeg;base64," + string_icons[4]},
+                                {id: 43, pid: 4, Name: "Tub + Shower", Links: "", img: "data:image/jpeg;base64," + string_icons[5]},
+                                {id: 44, pid: 4, Name: "Fire Suppression", Links: "", img: "data:image/jpeg;base64," + string_icons[6]},
+                                {id: 45, pid: 4, Name: "Mechanical Cooling", Links: "", img: "data:image/jpeg;base64," + string_icons[7]},
+                                {id: 46, pid: 4, Name: "Clothes Washer", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
+                                {id: 47, pid: 4, Name: "Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
+                                {id: 48, pid: 4, Name: "Composting Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[10]},
+                                {id: 49, pid: 4, Name: "Urinal", Links: "", img: "data:image/jpeg;base64," + string_icons[11]},
 
-                                /* Shallow Groundwater Child Nodes */
-                                {id: 51, pid: 5, Name: "Kitchen Sink", Links: "", img: "data:image/jpeg;base64," + string_icons[1]},
-                                {id: 52, pid: 5, Name: "Kitchen Sink + Disposer", Links: "", img: "data:image/jpeg;base64," + string_icons[2]},
-                                {id: 53, pid: 5, Name: "Dishwasher", Links: "", img: "data:image/jpeg;base64," + string_icons[3]},
-                                {id: 54, pid: 5, Name: "Lavatory", Links: "", img: "data:image/jpeg;base64," + string_icons[4]},
-                                {id: 55, pid: 5, Name: "Tub + Shower", Links: "", img: "data:image/jpeg;base64," + string_icons[5]},
-                                {id: 56, pid: 5, Name: "Fire Suppression", Links: "", img: "data:image/jpeg;base64," + string_icons[6]},
-                                {id: 57, pid: 5, Name: "Mechanical Cooling", Links: "", img: "data:image/jpeg;base64," + string_icons[7]},
-                                {id: 58, pid: 5, Name: "Clothes Washer", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
-                                {id: 59, pid: 5, Name: "Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
-                                {id: 60, pid: 5, Name: "Composting Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[10]},
-                                {id: 61, pid: 5, Name: "Urinal", Links: "", img: "data:image/jpeg;base64," + string_icons[11]},
-
-                                /* Aquifer Child Nodes */
-                                {id: 62, pid: 6, Name: "Kitchen Sink", Links: "", img: "data:image/jpeg;base64," + string_icons[1]},
-                                {id: 63, pid: 6, Name: "Kitchen Sink + Disposer", Links: "", img: "data:image/jpeg;base64," + string_icons[2]},
-                                {id: 64, pid: 6, Name: "Dishwasher", Links: "", img: "data:image/jpeg;base64," + string_icons[3]},
-                                {id: 65, pid: 6, Name: "Lavatory", Links: "", img: "data:image/jpeg;base64," + string_icons[4]},
-                                {id: 66, pid: 6, Name: "Tub + Shower", Links: "", img: "data:image/jpeg;base64," + string_icons[5]},
-                                {id: 67, pid: 6, Name: "Fire Suppression", Links: "", img: "data:image/jpeg;base64," + string_icons[6]},
-                                {id: 68, pid: 6, Name: "Mechanical Cooling", Links: "", img: "data:image/jpeg;base64," + string_icons[7]},
-                                {id: 69, pid: 6, Name: "Clothes Washer", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
-                                {id: 70, pid: 6, Name: "Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
-                                {id: 71, pid: 6, Name: "Composting Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[10]},
-                                {id: 72, pid: 6, Name: "Urinal", Links: "", img: "data:image/jpeg;base64," + string_icons[11]}
+                                /* Ground Water Child Nodes */
+                                {id: 50, pid: 5, Name: "Kitchen Sink", Links: "", img: "data:image/jpeg;base64," + string_icons[1]},
+                                {id: 51, pid: 5, Name: "Kitchen Sink + Disposer", Links: "", img: "data:image/jpeg;base64," + string_icons[2]},
+                                {id: 52, pid: 5, Name: "Dishwasher", Links: "", img: "data:image/jpeg;base64," + string_icons[3]},
+                                {id: 53, pid: 5, Name: "Lavatory", Links: "", img: "data:image/jpeg;base64," + string_icons[4]},
+                                {id: 54, pid: 5, Name: "Tub + Shower", Links: "", img: "data:image/jpeg;base64," + string_icons[5]},
+                                {id: 54, pid: 5, Name: "Fire Suppression", Links: "", img: "data:image/jpeg;base64," + string_icons[6]},
+                                {id: 55, pid: 5, Name: "Mechanical Cooling", Links: "", img: "data:image/jpeg;base64," + string_icons[7]},
+                                {id: 56, pid: 5, Name: "Clothes Washer", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
+                                {id: 57, pid: 5, Name: "Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
+                                {id: 58, pid: 5, Name: "Composting Toilet", Links: "", img: "data:image/jpeg;base64," + string_icons[10]},
+                                {id: 59, pid: 5, Name: "Urinal", Links: "", img: "data:image/jpeg;base64," + string_icons[11]}
                             ]
                         });
 
@@ -339,15 +325,14 @@
         /* Pathway Not Addressed Paths Animation */
         /* Note that .backgroundPath must be kept in, however intelliJ will note it as unused but the class for the path animations is created on page load */
             /* Condensation (None) */
-            /* Harvested Rainwater */
+            /* Precipitation */
+        [link-id='[2][23]'] .backgroundPath,
         [link-id='[2][24]'] .backgroundPath,
-        [link-id='[2][25]'] .backgroundPath,
             /* Stormwater Runoff */
-        [link-id='[3][34]'] .backgroundPath,
-        [link-id='[3][36]'] .backgroundPath
-            /* Surface Water (None) */
-            /* Shallow Groundwater (None) */
-            /* Aquifer (None) */
+        [link-id='[3][33]'] .backgroundPath,
+        [link-id='[3][35]'] .backgroundPath
+            /* Surface / Shallow Ground Water (None) */
+            /* Ground Water (None) */
         {
             stroke: #ff8c00;
         }
@@ -355,32 +340,20 @@
         /* Blocked Paths Animation */
         /* Note that .backgroundPath must be kept in, however intelliJ will note it as unused but the class for the path animations is created on page load */
             /* Condensation */
+        [link-id='[1][6]'] .backgroundPath,
         [link-id='[1][7]'] .backgroundPath,
         [link-id='[1][8]'] .backgroundPath,
         [link-id='[1][9]'] .backgroundPath,
         [link-id='[1][10]'] .backgroundPath,
-        [link-id='[1][11]'] .backgroundPath,
-            /* Harvested Rainwater ( No Blocks ) */
+            /* Precipitation ( No Blocks ) */
             /* Stormwater Runoff */
+        [link-id='[3][28]'] .backgroundPath,
         [link-id='[3][29]'] .backgroundPath,
         [link-id='[3][30]'] .backgroundPath,
         [link-id='[3][31]'] .backgroundPath,
-        [link-id='[3][32]'] .backgroundPath,
-        [link-id='[3][33]'] .backgroundPath,
-            /* Surface Water ( No Blocks ) */
-            /* Shallow Groundwater */
-        [link-id='[5][51]'] .backgroundPath,
-        [link-id='[5][52]'] .backgroundPath,
-        [link-id='[5][53]'] .backgroundPath,
-        [link-id='[5][54]'] .backgroundPath,
-        [link-id='[5][55]'] .backgroundPath,
-        [link-id='[5][56]'] .backgroundPath,
-        [link-id='[5][57]'] .backgroundPath,
-        [link-id='[5][58]'] .backgroundPath,
-        [link-id='[5][59]'] .backgroundPath,
-        [link-id='[5][60]'] .backgroundPath,
-        [link-id='[5][61]'] .backgroundPath
-            /* Aquifer ( No Blocks ) */
+        [link-id='[3][32]'] .backgroundPath
+            /* Surface / Shallow Ground Water ( No Blocks ) */
+            /* Ground Water ( No Blocks ) */
         {
             stroke: #ff0000;
         }
