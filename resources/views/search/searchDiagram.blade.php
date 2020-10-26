@@ -53,12 +53,19 @@
                 <div style="width:100%; height:700px;" id="orgchart"/>
                 <script>
                     var state_dest = [];
+                    var county_dest = [];
+                    var city_dest = [];
                     var stateRules = {!! json_encode($stateRules, JSON_HEX_TAG) !!};
+                    var countyRules = {!! json_encode($countyRules, JSON_HEX_TAG) !!};
+                    var cityRules = {!! json_encode($cityRules, JSON_HEX_TAG) !!};
                     for(var i = 0; i < stateRules.length; i++) {
                         state_dest.push(stateRules[i].destination.node_name);
                     }
-                    for(var i = 0; i < state_dest.length; i++) {
-                        console.log(state_dest[i]);
+                    for(var i = 0; i < countyRules.length; i++) {
+                        state_dest.push(countyRules[i].destination.node_name);
+                    }
+                    for(var i = 0; i < cityRules.length; i++) {
+                        state_dest.push(cityRules[i].destination.node_name);
                     }
                     //Load all the icon images into an array
 
@@ -127,6 +134,7 @@
                         OrgChart.templates.ana.link = '<path class="backgroundPath" stroke-linejoin="round" stroke="#00cdcd" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
                             '<path class="dashPath" stroke-width="4" fill="none" stroke="#ffffff" stroke-dasharray="10"  d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>';
 
+                        /* Custom Template to not available nodes*/
                         OrgChart.templates.not_available = Object.assign({}, OrgChart.templates.ana);
 
                         OrgChart.templates.not_available.node =
@@ -151,8 +159,9 @@
                             {id: 11, pid: 1, Name: "Urinal", Links: "", img: "data:image/jpeg;base64," + string_icons[10]}
                         ]
 
+                        /* Look for nodes that are not in the rules*/
                         for(var i = 0; i < nodes.length; i++) {
-                            if(state_dest.includes(nodes[i].Name) !== true) {
+                            if(state_dest.includes(nodes[i].Name) !== true && county_dest.includes(nodes[i].Name) !== true && city_dest.includes(nodes[i].Name) !== true) {
                                 nodes[i].tags = ["not_available"];
                                 console.log(nodes[i].Name);
                             }
