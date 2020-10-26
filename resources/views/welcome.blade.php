@@ -10,6 +10,9 @@
                         <div class="card-subtitle">
                             <h2>You have successfully logged in.</h2>
                         </div>
+                        <a class="btn btn-warning" href="{{route("info")}}">
+                            Tutorial
+                        </a>
                     </div>
                 </div>
             </div>
