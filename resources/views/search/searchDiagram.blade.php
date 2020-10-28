@@ -176,6 +176,29 @@
                                     var br = document.createElement("br");
                                     parent.appendChild(br);
 
+                                    var card = document.createElement('a')
+                                    card.className ="card";
+                                    parent.appendChild(card)
+                                    card.style.cssText = "margin:6px 0 0 0;";
+
+                                    var a = document.createElement('a');
+                                    var linkText = document.createTextNode("City");
+                                    a.appendChild(linkText);
+                                    a.className = "card btn";
+                                    a.style.cssText = "text-align:center;";
+                                    a.title = "city";
+                                    a.type = "button";
+                                    a.toggle = "collapse";
+                                    a.href = "#collapseOne";
+                                    card.appendChild(a);
+
+                                    var b= document.createElement('a');
+                                    b.className = "card collapse in";
+                                    b.id = "collapseOne";
+                                    b.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;";
+                                    b.target = "_blank";
+                                    card.appendChild(b)
+
                                     var a = document.createElement('a');
                                     var linkText = document.createTextNode("Code")
                                     a.appendChild(linkText);
@@ -185,12 +208,11 @@
                                     if (<?php echo $cityRules->count()?> == 0){
                                         a.href = "";
                                     }
-                                    else
-                                    {
+                                    else{
                                         a.href = "<?php echo $cityRules[0]->codesObj->linkText ?>";
                                     }
                                     a.target = "_blank";
-                                    parent.appendChild(a);
+                                    b.appendChild(a);
 
                                     var a = document.createElement('a');
                                     var linkText = document.createTextNode("Permit")
@@ -198,15 +220,14 @@
                                     a.className = "btn btn-primary";
                                     a.style.cssText = "margin: 15px 6px 0 6px;";
                                     a.title = "Permit";
-                                   if (<?php echo $cityRules->count()?> == 0){
+                                    if (<?php echo $cityRules->count()?> == 0){
                                         a.href = "";
                                     }
-                                    else
-                                    {
+                                    else{
                                         a.href = "<?php echo $cityRules[0]->permitObj->linkText ?>";
                                     }
                                     a.target = "_blank";
-                                    parent.appendChild(a);
+                                    b.appendChild(a)
 
                                     var a = document.createElement('a');
                                     var linkText = document.createTextNode("Incentive")
@@ -217,29 +238,143 @@
                                     if (<?php echo $cityRules->count()?> == 0){
                                         a.href = "";
                                     }
-                                    else
-                                    {
+                                    else{
                                         a.href = "<?php echo $cityRules[0]->incentivesObj->linkText ?>";
                                     }
                                     a.target = "_blank";
-                                    parent.appendChild(a);
+                                    b.appendChild(a)
 
-                                    parent.appendChild(a);
                                     var a = document.createElement('a');
                                     var linkText = document.createTextNode("More Info")
                                     a.appendChild(linkText);
                                     a.className = "btn btn-primary";
                                     a.style.cssText = "margin: 15px 6px 0 6px;";
                                     a.title = "More Info";
-                                   if (<?php echo $cityRules->count()?> == 0){
+                                    if (<?php echo $cityRules->count()?> == 0){
                                         a.href = "";
                                     }
-                                    else
-                                    {
+                                    else{
                                         a.href = "<?php echo $cityRules[0]->moreInfoObj->linkText ?>";
                                     }
                                     a.target = "_blank";
-                                    parent.appendChild(a);
+                                    b.appendChild(a)
+
+                                    //county
+                                    var card = document.createElement('a')
+                                    card.className ="card";
+                                    parent.appendChild(card)
+
+                                    var a = document.createElement('a');
+                                    var linkText = document.createTextNode("County");
+                                    a.appendChild(linkText);
+                                    a.className = "card btn";
+                                    a.style.cssText = "text-align:center;";
+                                    a.toggle ="collapse";
+                                    a.title = "county";
+                                    a.href = "#collapseTwo";
+                                    card.appendChild(a);
+
+                                    var b= document.createElement('a');
+                                    b.className = "card collapse";
+                                    b.id = "collapseTwo";
+                                    b.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;";
+                                    b.target = "_blank";
+                                    card.appendChild(b)
+
+                                    var a = document.createElement('a');
+                                    var linkText = document.createTextNode("Code")
+                                    a.appendChild(linkText);
+                                    a.className = "btn btn-primary";
+                                    a.style.cssText = "margin: 15px 6px 0 6px;";
+                                    a.title = "Code";
+                                    a.target = "_blank";
+                                    b.appendChild(a);
+
+                                    var a = document.createElement('a');
+                                    var linkText = document.createTextNode("Permit")
+                                    a.appendChild(linkText);
+                                    a.className = "btn btn-primary";
+                                    a.style.cssText = "margin: 15px 6px 0 6px;";
+                                    a.title = "Permit";
+                                    a.target = "_blank";
+                                    b.appendChild(a)
+
+                                    var a = document.createElement('a');
+                                    var linkText = document.createTextNode("Incentive")
+                                    a.appendChild(linkText);
+                                    a.className = "btn btn-primary";
+                                    a.style.cssText = "margin: 15px 6px 0 6px;";
+                                    a.title = "Incentive";
+                                    a.target = "_blank";
+                                    b.appendChild(a)
+
+                                    var a = document.createElement('a');
+                                    var linkText = document.createTextNode("More Info")
+                                    a.appendChild(linkText);
+                                    a.className = "btn btn-primary";
+                                    a.style.cssText = "margin: 15px 6px 0 6px;";
+                                    a.title = "More Info";
+                                    a.target = "_blank";
+                                    b.appendChild(a)
+
+                                    //state
+                                    var card = document.createElement('a')
+                                    card.className ="card";
+                                    parent.appendChild(card)
+                                    card.style.cssText = "margin:0 0 6px 0;";
+
+                                    var a = document.createElement('a');
+                                    var linkText = document.createTextNode("State");
+                                    a.appendChild(linkText);
+                                    a.className = "card btn";
+                                    a.style.cssText = "text-align:center;";
+                                    a.toggle ="collapse";
+                                    a.title = "state";
+                                    a.href = "#collapseThree";
+                                    card.appendChild(a);
+
+                                    var b= document.createElement('a');
+                                    b.className = "card collapse";
+                                    b.id = "collapseThree";
+                                    b.style.cssText = "text-align:center;border:none;float:left;display:inline;margin: 10px 0;";
+                                    b.target = "_blank";
+                                    card.appendChild(b)
+
+                                    var a = document.createElement('a');
+                                    var linkText = document.createTextNode("Code")
+                                    a.appendChild(linkText);
+                                    a.className = "btn btn-primary";
+                                    a.style.cssText = "margin: 15px 6px 0 6px;";
+                                    a.title = "Code";
+                                    a.target = "_blank";
+                                    b.appendChild(a);
+
+                                    var a = document.createElement('a');
+                                    var linkText = document.createTextNode("Permit")
+                                    a.appendChild(linkText);
+                                    a.className = "btn btn-primary";
+                                    a.style.cssText = "margin: 15px 6px 0 6px;";
+                                    a.title = "Permit";
+                                    a.target = "_blank";
+                                    b.appendChild(a)
+
+                                    var a = document.createElement('a');
+                                    var linkText = document.createTextNode("Incentive")
+                                    a.appendChild(linkText);
+                                    a.className = "btn btn-primary";
+                                    a.style.cssText = "margin: 15px 6px 0 6px;";
+                                    a.title = "Incentive";
+                                    a.target = "_blank";
+                                    b.appendChild(a)
+
+                                    var a = document.createElement('a');
+                                    var linkText = document.createTextNode("More Info")
+                                    a.appendChild(linkText);
+                                    a.className = "btn btn-primary";
+                                    a.style.cssText = "margin: 15px 6px 0 6px;";
+                                    a.title = "More Info";
+                                    a.target = "_blank";
+                                    b.appendChild(a)
 
                                     txt.remove();
                                 }
