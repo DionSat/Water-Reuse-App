@@ -458,6 +458,8 @@
                                 condensateNotAllowedNodes.push(reusenode[i]);
                             }
                         }
+
+                        /* Switch all the nodes from each source to grey if it is in the NotAllowedNodes */
                         for(var i = 8; i < nodes.length; i++) {
                             if(nodes[i].pid === 1) {
                                 for(var j = 0; j < condensateNotAllowedNodes.length; j++){
