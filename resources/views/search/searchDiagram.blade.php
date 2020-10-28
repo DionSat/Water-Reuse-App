@@ -171,24 +171,7 @@
 
                                 var txt = args.field.querySelector('input');
                                 if (txt){
-                                    //var linkLabels = ["Code", "Permit", "Incentive", "More Info"];
-                                    //var parent = args.field.querySelector('div');
-                                    //var br = document.createElement("br");
-                                    //parent.appendChild(br);
-                                    /*
-                                    linkLabels.forEach((linkName) => {
-                                        var a = document.createElement('a');
-                                        var linkText = document.createTextNode(linkName);
-                                        a.appendChild(linkText);
-                                        a.className = "btn btn-primary";
-                                        a.style.cssText = "margin: 15px 6px 0 6px;";
-                                        a.title = linkName;
-                                        //a.href = "{$rule->codesObj->linkText}}";
-                                        a.href = "";
-                                        a.target = "_blank";
-                                        parent.appendChild(a);
-                                    });
-                                    */
+                                   
                                     var parent = args.field.querySelector('div');
                                     var br = document.createElement("br");
                                     parent.appendChild(br);
@@ -260,14 +243,6 @@
         </div>
     </div>
 
-    <div class="card">
-        @foreach($cityRules as $cityRules)
-            {{$cityRules->codesObj->linkText}};
-            {{$cityRules->permitObj->linkText}}
-            {{$cityRules->incentivesObj->linkText}}
-            {{$cityRules->moreInfoObj->linkText}}
-        @endforeach
-    </div>
 @endsection
 
 @push("css")
