@@ -57,19 +57,22 @@
                     var state_dest = [];
                     var county_dest = [];
                     var city_dest = [];
-                    var stateRules = {!! json_encode($stateRules, JSON_HEX_TAG) !!};
-                    var countyRules = {!! json_encode($countyRules, JSON_HEX_TAG) !!};
-                    var cityRules = {!! json_encode($cityRules, JSON_HEX_TAG) !!};
-                    for(var i = 0; i < stateRules.length; i++) {
-                        state_dest.push(stateRules[i].destination.node_name);
+                    var stateRules = {!! json_encode($stateRules, JSON_HEX_TAG) !!};            // get the state regulations that are allowed
+                    var countyRules = {!! json_encode($countyRules, JSON_HEX_TAG) !!};          // get the county regulations that are allowed
+                    var cityRules = {!! json_encode($cityRules, JSON_HEX_TAG) !!};              // get the city regulations that are allowed
+                    var sources = {!! json_encode($sources, JSON_HEX_TAG) !!};                  // get the source nodes from the database
+                    var destinations = {!! json_encode($destinations, JSON_HEX_TAG) !!};        // get the destination nodes from the database
+                    var reusenode = [];                                                         //array to hold all the node names
+                    /* Add the destination nodes not in sources into the sources array */
+                    for(var i = 0; i < destinations.length; i++) {
+                        if(destinations[i].node_id > 15){
+                            sources.push(destinations[i])
+                        }
                     }
-                    for(var i = 0; i < countyRules.length; i++) {
-                        state_dest.push(countyRules[i].destination.node_name);
+                    /* Add all the node names to an array */
+                    for(var i = 0; i < sources.length; i++) {
+                        reusenode.push(sources[i].node_name);
                     }
-                    for(var i = 0; i < cityRules.length; i++) {
-                        state_dest.push(cityRules[i].destination.node_name);
-                    }
-                    //Load all the icon images into an array
 
                     var icons = new Array();
                     icons[0] = new Image();
@@ -262,13 +265,244 @@
                             /* Water Facility Child Nodes ( None ) */
                         ]
 
-                        /* Look for nodes that are not in the rules*/
-                        for(var i = 0; i < nodes.length; i++) {
-                            if(state_dest.includes(nodes[i].Name) !== true && county_dest.includes(nodes[i].Name) !== true && city_dest.includes(nodes[i].Name) !== true) {
-                                nodes[i].tags = ["not_available"];
-                                console.log(nodes[i].Name);
+                        /* Variables for the state, county, city allowed and blocked reusenodes */
+                        var stateSurfaceWaterAllowed = [];
+                        var stateShallowGroundWaterAllowed = [];
+                        var stateGroundWaterAllowed = [];
+                        var stateStormWaterAllowed = [];
+                        var statePrecipiationAllowed = [];
+                        var stateCondensateAllowed = [];
+                        var stateSurfaceWaterBlocked = [];
+                        var stateShallowGroundWaterBlocked = [];
+                        var stateGroundWaterBlocked = [];
+                        var stateStormWaterBlocked = [];
+                        var statePrecipiationBlocked = [];
+                        var stateCondensateBlocked = [];
+                        var countySurfaceWaterAllowed = [];
+                        var countyShallowGroundWaterAllowed = [];
+                        var countyGroundWaterAllowed = [];
+                        var countyStormWaterAllowed = [];
+                        var countyPrecipiationAllowed = [];
+                        var countyCondensateAllowed = [];
+                        var countySurfaceWaterBlocked = [];
+                        var countyShallowGroundWaterBlocked = [];
+                        var countyGroundWaterBlocked = [];
+                        var countyStormWaterBlocked = [];
+                        var countyPrecipiationBlocked = [];
+                        var countyCondensateBlocked = [];
+                        var citySurfaceWaterAllowed = [];
+                        var cityShallowGroundWaterAllowed = [];
+                        var cityGroundWaterAllowed = [];
+                        var cityStormWaterAllowed = [];
+                        var cityPrecipiationAllowed = [];
+                        var cityCondensateAllowed = [];
+                        var citySurfaceWaterBlocked = [];
+                        var cityShallowGroundWaterBlocked = [];
+                        var cityGroundWaterBlocked = [];
+                        var cityStormWaterBlocked = [];
+                        var cityPrecipiationBlocked = [];
+                        var cityCondensateBlocked = [];
+
+                        /* Look at the allowed nodes for the state depending on the water source */
+                        for(var i = 0; i < stateRules.length; i++) {
+                            if(stateRules[i].source.node_name === 'Surface Water') {
+                                stateSurfaceWaterAllowed.push(stateRules[i].destination.node_name);
+                            }
+                            if(stateRules[i].source.node_name === 'Shallow Groundwater') {
+                                stateShallowGroundWaterAllowed.push(stateRules[i].destination.node_name);
+                            }
+                            if(stateRules[i].source.node_name === 'Ground Water') {
+                                stateGroundWaterAllowed.push(stateRules[i].destination.node_name);
+                            }
+                            if(stateRules[i].source.node_name === 'Stormwater Runoff') {
+                                stateStormWaterAllowed.push(stateRules[i].destination.node_name);
+                            }
+                            if(stateRules[i].source.node_name === 'Precipitation') {
+                                statePrecipiationAllowed.push(stateRules[i].destination.node_name);
+                            }
+                            if(stateRules[i].source.node_name === 'Condensate') {
+                                stateCondensateAllowed.push(stateRules[i].destination.node_name);
                             }
                         }
+
+                        /* Look at complete list of reusenode and find nodes that are not allowed */
+                        for(var i = 0; i < reusenode.length; i++) {
+                            if(stateSurfaceWaterAllowed.includes(reusenode[i]) !== true) {
+                                stateSurfaceWaterBlocked.push(reusenode[i]);
+                            }
+                            if(stateShallowGroundWaterAllowed.includes(reusenode[i]) !== true) {
+                                stateShallowGroundWaterBlocked.push(reusenode[i]);
+                            }
+                            if(stateGroundWaterAllowed.includes(reusenode[i]) !== true) {
+                                stateGroundWaterBlocked.push(reusenode[i]);
+                            }
+                            if(stateStormWaterAllowed.includes(reusenode[i]) !== true) {
+                                stateStormWaterBlocked.push(reusenode[i]);
+                            }
+                            if(statePrecipiationAllowed.includes(reusenode[i]) !== true) {
+                                statePrecipiationBlocked.push(reusenode[i]);
+                            }
+                            if(stateCondensateAllowed.includes(reusenode[i]) !== true) {
+                                stateCondensateBlocked.push(reusenode[i]);
+                            }
+                        }
+                        /* Look at the allowed nodes for the county depending on the water source */
+                        for(var i = 0; i < countyRules.length; i++) {
+                            if(countyRules[i].source.node_name === 'Surface Water') {
+                                countySurfaceWaterAllowed.push(countyRules[i].destination.node_name);
+                            }
+                            if(countyRules[i].source.node_name === 'Shallow Groundwater') {
+                                countyShallowGroundWaterAllowed.push(countyRules[i].destination.node_name);
+                            }
+                            if(countyRules[i].source.node_name === 'Ground Water') {
+                                countyGroundWaterAllowed.push(countyRules[i].destination.node_name);
+                            }
+                            if(countyRules[i].source.node_name === 'Stormwater Runoff') {
+                                countyStormWaterAllowed.push(countyRules[i].destination.node_name);
+                            }
+                            if(countyRules[i].source.node_name === 'Precipitation') {
+                                countyPrecipiationAllowed.push(countyRules[i].destination.node_name);
+                            }
+                            if(countyRules[i].source.node_name === 'Condensate') {
+                                countyCondensateAllowed.push(countyRules[i].destination.node_name);
+                            }
+                        }
+
+                        /* Look at complete list of reusenode and find nodes that are not allowed */
+                        for(var i = 0; i < reusenode.length; i++) {
+                            if(countySurfaceWaterAllowed.includes(reusenode[i]) !== true) {
+                                countySurfaceWaterBlocked.push(reusenode[i]);
+                            }
+                            if(countyShallowGroundWaterAllowed.includes(reusenode[i]) !== true) {
+                                countyShallowGroundWaterBlocked.push(reusenode[i]);
+                            }
+                            if(countyGroundWaterAllowed.includes(reusenode[i]) !== true) {
+                                countyGroundWaterBlocked.push(reusenode[i]);
+                            }
+                            if(countyStormWaterAllowed.includes(reusenode[i]) !== true) {
+                                countyStormWaterBlocked.push(reusenode[i]);
+                            }
+                            if(countyPrecipiationAllowed.includes(reusenode[i]) !== true) {
+                                countyPrecipiationBlocked.push(reusenode[i]);
+                            }
+                            if(countyCondensateAllowed.includes(reusenode[i]) !== true) {
+                                countyCondensateBlocked.push(reusenode[i]);
+                            }
+                        }
+                        /* Look at the allowed nodes for the city depending on the water source */
+                        for(var i = 0; i < cityRules.length; i++) {
+                            if(cityRules[i].source.node_name === 'Surface Water') {
+                                citySurfaceWaterAllowed.push(cityRules[i].destination.node_name);
+                            }
+                            if(cityRules[i].source.node_name === 'Shallow Groundwater') {
+                                cityShallowGroundWaterAllowed.push(cityRules[i].destination.node_name);
+                            }
+                            if(cityRules[i].source.node_name === 'Ground Water') {
+                                cityGroundWaterAllowed.push(cityRules[i].destination.node_name);
+                            }
+                            if(cityRules[i].source.node_name === 'Stormwater Runoff') {
+                                cityStormWaterAllowed.push(cityRules[i].destination.node_name);
+                            }
+                            if(cityRules[i].source.node_name === 'Precipitation') {
+                                cityPrecipiationAllowed.push(cityRules[i].destination.node_name);
+                            }
+                            if(cityRules[i].source.node_name === 'Condensate') {
+                                cityCondensateAllowed.push(cityRules[i].destination.node_name);
+                            }
+                        }
+
+                        /* Look at complete list of reusenode and find nodes that are not allowed */
+                        for(var i = 0; i < reusenode.length; i++) {
+                            if(citySurfaceWaterAllowed.includes(reusenode[i]) !== true) {
+                                citySurfaceWaterBlocked.push(reusenode[i]);
+                            }
+                            if(cityShallowGroundWaterAllowed.includes(reusenode[i]) !== true) {
+                                cityShallowGroundWaterBlocked.push(reusenode[i]);
+                            }
+                            if(cityGroundWaterAllowed.includes(reusenode[i]) !== true) {
+                                cityGroundWaterBlocked.push(reusenode[i]);
+                            }
+                            if(cityStormWaterAllowed.includes(reusenode[i]) !== true) {
+                                cityStormWaterBlocked.push(reusenode[i]);
+                            }
+                            if(cityPrecipiationAllowed.includes(reusenode[i]) !== true) {
+                                cityPrecipiationBlocked.push(reusenode[i]);
+                            }
+                            if(cityCondensateAllowed.includes(reusenode[i]) !== true) {
+                                cityCondensateBlocked.push(reusenode[i]);
+                            }
+                        }
+                        surfaceWaterNotAllowedNodes = []
+                        shallowGroundWaterNotAllowedNodes = []
+                        groundWaterNotAllowedNodes = []
+                        stormWaterNotAllowedNodes = []
+                        precipiationNotAllowedNodes = []
+                        condensateNotAllowedNodes = []
+                        for(var i = 0; i < reusenode.length; i++) {
+                            if(stateSurfaceWaterBlocked.includes(reusenode[i]) && countySurfaceWaterBlocked.includes(reusenode[i]) && citySurfaceWaterBlocked.includes(reusenode[i])) {
+                                surfaceWaterNotAllowedNodes.push(reusenode[i]);
+                            }
+                            if(stateShallowGroundWaterBlocked.includes(reusenode[i]) && countyShallowGroundWaterBlocked.includes(reusenode[i]) && cityShallowGroundWaterBlocked.includes(reusenode[i])) {
+                                shallowGroundWaterNotAllowedNodes.push(reusenode[i]);
+                            }
+                            if(stateGroundWaterBlocked.includes(reusenode[i]) && countyGroundWaterBlocked.includes(reusenode[i]) && cityGroundWaterBlocked.includes(reusenode[i])) {
+                                groundWaterNotAllowedNodes.push(reusenode[i]);
+                            }
+                            if(stateStormWaterBlocked.includes(reusenode[i]) && countyStormWaterBlocked.includes(reusenode[i]) && cityStormWaterBlocked.includes(reusenode[i])) {
+                                stormWaterNotAllowedNodes.push(reusenode[i]);
+                            }
+                            if(statePrecipiationBlocked.includes(reusenode[i]) && countyPrecipiationBlocked.includes(reusenode[i]) && cityPrecipiationBlocked.includes(reusenode[i])) {
+                                precipiationNotAllowedNodes.push(reusenode[i]);
+                            }
+                            if(stateCondensateBlocked.includes(reusenode[i]) && countyCondensateBlocked.includes(reusenode[i]) && cityCondensateBlocked.includes(reusenode[i])) {
+                                condensateNotAllowedNodes.push(reusenode[i]);
+                            }
+                        }
+                        for(var i = 8; i < nodes.length; i++) {
+                            if(nodes[i].pid === 1) {
+                                for(var j = 0; j < condensateNotAllowedNodes.length; j++){
+                                    if(nodes[i].Name === condensateNotAllowedNodes[j]) {
+                                        nodes[i].tags = ['not_available']
+                                    }
+                                }
+                            }
+                            if(nodes[i].pid === 2) {
+                                for(var j = 0; j < precipiationNotAllowedNodes.length; j++){
+                                    if(nodes[i].Name === precipiationNotAllowedNodes[j]) {
+                                        nodes[i].tags = ['not_available']
+                                    }
+                                }
+                            }
+                            if(nodes[i].pid === 3) {
+                                for(var j = 0; j < stormWaterNotAllowedNodes.length; j++){
+                                    if(nodes[i].Name === stormWaterNotAllowedNodes[j]) {
+                                        nodes[i].tags = ['not_available']
+                                    }
+                                }
+                            }
+                            if(nodes[i].pid === 4) {
+                                for(var j = 0; j < surfaceWaterNotAllowedNodes.length; j++){
+                                    if(nodes[i].Name === surfaceWaterNotAllowedNodes[j]) {
+                                        nodes[i].tags = ['not_available']
+                                    }
+                                }
+                            }
+                            if(nodes[i].pid === 5) {
+                                for(var j = 0; j < shallowGroundWaterNotAllowedNodes.length; j++){
+                                    if(nodes[i].Name === shallowGroundWaterNotAllowedNodes[j]) {
+                                        nodes[i].tags = ['not_available']
+                                    }
+                                }
+                            }
+                            if(nodes[i].pid === 6) {
+                                for(var j = 0; j < groundWaterNotAllowedNodes.length; j++){
+                                    if(nodes[i].Name === groundWaterNotAllowedNodes[j]) {
+                                        nodes[i].tags = ['not_available']
+                                    }
+                                }
+                            }
+                        }
+                        console.log(cityStormWaterBlocked)
 
 
                         /* Chart */
@@ -424,57 +658,6 @@
         /* Water Use Paths Animation */
         .dashPath {
             animation: dash 5s linear infinite;
-        }
-
-        /* Pathway Not Addressed Paths Animation */
-        /* Note that .backgroundPath must be kept in, however intelliJ will note it as unused but the class for the path animations is created on page load */
-            /* Condensation (None) */
-            /* Precipitation */
-        [link-id='[2][25]'] .backgroundPath,
-        [link-id='[2][26]'] .backgroundPath,
-            /* Stormwater Runoff */
-        [link-id='[3][35]'] .backgroundPath,
-        [link-id='[3][37]'] .backgroundPath
-            /* Surface Water (None) */
-            /* Shallow Ground Water (None) */
-            /* Ground Water (None) */
-            /* Water Facility (None) */
-        {
-            stroke: #ff8c00;
-        }
-
-        /* Blocked Paths Animation */
-        /* Note that .backgroundPath must be kept in, however intelliJ will note it as unused but the class for the path animations is created on page load */
-            /* Condensation */
-        [link-id='[1][8]'] .backgroundPath,
-        [link-id='[1][9]'] .backgroundPath,
-        [link-id='[1][10]'] .backgroundPath,
-        [link-id='[1][11]'] .backgroundPath,
-        [link-id='[1][12]'] .backgroundPath,
-            /* Precipitation ( No Blocks ) */
-            /* Stormwater Runoff */
-        [link-id='[3][30]'] .backgroundPath,
-        [link-id='[3][31]'] .backgroundPath,
-        [link-id='[3][32]'] .backgroundPath,
-        [link-id='[3][33]'] .backgroundPath,
-        [link-id='[3][34]'] .backgroundPath
-            /* Surface Water ( No Blocks ) */
-            /* Shallow Ground Water */
-        [link-id='[5][52]'] .backgroundPath,
-        [link-id='[5][53]'] .backgroundPath,
-        [link-id='[5][54]'] .backgroundPath,
-        [link-id='[5][55]'] .backgroundPath,
-        [link-id='[5][56]'] .backgroundPath,
-        [link-id='[5][57]'] .backgroundPath,
-        [link-id='[5][58]'] .backgroundPath,
-        [link-id='[5][59]'] .backgroundPath,
-        [link-id='[5][60]'] .backgroundPath,
-        [link-id='[5][61]'] .backgroundPath,
-        [link-id='[5][62]'] .backgroundPath
-            /* Ground Water ( No Blocks ) */
-            /* Water Facility (None) */
-        {
-            stroke: #ff0000;
         }
 
         /* Link Animation ~ Dash Type */
