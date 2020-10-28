@@ -31,26 +31,6 @@
         </div>
         <div class="card mb-3">
             <div class="card-body">
-                <div class="legend-content">
-                    <div>
-                        <div style="background-color:#00cdcd;"></div>  First Use Water
-                    </div>
-                    <div>
-                        <div style="background-color:#c6c6c6"></div>  Greywater
-                    </div>
-                    <div>
-                        <div style="background-color:#666666;"></div>  Sewage
-                    </div>
-                    <div>
-                        <div style="background-color:#69d500;"></div>  No Permit Required
-                    </div>
-                    <div>
-                        <div style="background-color:#ff8c00;"></div>  Pathway Not Addressed
-                    </div>
-                    <div>
-                        <div style="background-color:#ff0000;"></div>  Pathway Blocked
-                    </div>
-                </div>
 
                 <div style="width:100%; height:700px;" id="orgchart"/>
                 <script>
@@ -641,22 +621,6 @@
         i.tb {
             border: 2px solid #6c757d;
             line-height: inherit;
-        }
-
-        /* Legend Key Outer Container */
-        .legend-content{
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            margin: 0 0 50px 20px;
-        }
-
-        /* Legend Key Inner Container */
-        .legend-content > div > div {
-            display: inline-block;
-            width: 30px;
-            height:8px;
-            margin-bottom: 2px;
         }
 
         /* Water Use Paths Animation */
