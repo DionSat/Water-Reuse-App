@@ -165,13 +165,13 @@
                         /* Custom template for nodes that may have path */
                         OrgChart.templates.possible_pathway = Object.assign({}, OrgChart.templates.ana);
 
+                        //ff8c00
+
                         OrgChart.templates.possible_pathway.node =
                             '<rect x="0" y="0" height="120" width="250" fill="#ff8c00" stroke-width="1" stroke="#808080" rx="5" ry="5"></rect>'
 
                         OrgChart.templates.possible_pathway.link = '<path class="backgroundPath" stroke-linejoin="round" stroke="#00cc99" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
                             '<path class="dashPath" stroke-width="4" fill="none" stroke="#ffffff" stroke-dasharray="10"  d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>';
-
-
 
                         var nodes = [
                             /* Water Sources Root */
@@ -179,9 +179,9 @@
                             /* Level 2 Water Sources */
                             {id: 1, pid: 0, Name: "Condensate", Source: "Water Sources", Links: "", img: "data:image/jpeg;base64," + string_icons[1]},
                             {id: 2, pid: 0, Name: "Precipitation", Source: "Water Sources", Links: "", img: "data:image/jpeg;base64," + string_icons[2]},
-                            {id: 3, pid: 0, Name: "Stormwater Runoff", Source: "Water Sources", Links: "", img: "data:image/jpeg;base64," + string_icons[3]},
+                            {id: 3, pid: 0, Name: "Storm Water Runoff", Source: "Water Sources", Links: "", img: "data:image/jpeg;base64," + string_icons[3]},
                             {id: 4, pid: 0, Name: "Surface Water", Source: "Water Sources", Links: "", img: "data:image/jpeg;base64," + string_icons[4]},
-                            {id: 5, pid: 0, Name: "Shallow Groundwater", Source: "Water Sources", Links: "", img: "data:image/jpeg;base64," + string_icons[5]},
+                            {id: 5, pid: 0, Name: "Shallow Ground Water", Source: "Water Sources", Links: "", img: "data:image/jpeg;base64," + string_icons[5]},
                             {id: 6, pid: 0, Name: "Ground Water", Source: "Water Sources", Links: "", img: "data:image/jpeg;base64," + string_icons[6]},
                             {id: 7, pid: 0, Name: "Water Facility/ Purveyor", Source: "Water Sources", Links: "", img: "data:image/jpeg;base64," + string_icons[7]},
 
@@ -278,40 +278,14 @@
                         var stateShallowGroundWaterAllowed = [];
                         var stateGroundWaterAllowed = [];
                         var stateStormWaterAllowed = [];
-                        var statePrecipiationAllowed = [];
+                        var stateprecipitationAllowed = [];
                         var stateCondensateAllowed = [];
                         var stateSurfaceWaterBlocked = [];
                         var stateShallowGroundWaterBlocked = [];
                         var stateGroundWaterBlocked = [];
                         var stateStormWaterBlocked = [];
-                        var statePrecipiationBlocked = [];
+                        var stateprecipitationBlocked = [];
                         var stateCondensateBlocked = [];
-
-                        /*var countySurfaceWaterAllowed = [];
-                        var countyShallowGroundWaterAllowed = [];
-                        var countyGroundWaterAllowed = [];
-                        var countyStormWaterAllowed = [];
-                        var countyPrecipiationAllowed = [];
-                        var countyCondensateAllowed = [];
-                        var countySurfaceWaterBlocked = [];
-                        var countyShallowGroundWaterBlocked = [];
-                        var countyGroundWaterBlocked = [];
-                        var countyStormWaterBlocked = [];
-                        var countyPrecipiationBlocked = [];
-                        var countyCondensateBlocked = [];
-
-                        var citySurfaceWaterAllowed = [];
-                        var cityShallowGroundWaterAllowed = [];
-                        var cityGroundWaterAllowed = [];
-                        var cityStormWaterAllowed = [];
-                        var cityPrecipiationAllowed = [];
-                        var cityCondensateAllowed = [];
-                        var citySurfaceWaterBlocked = [];
-                        var cityShallowGroundWaterBlocked = [];
-                        var cityGroundWaterBlocked = [];
-                        var cityStormWaterBlocked = [];
-                        var cityPrecipiationBlocked = [];
-                        var cityCondensateBlocked = [];*/
 
                         /* Look at the allowed nodes for the state depending on the water source */
                         for(var i = 0; i < stateRules.length; i++) {
@@ -328,7 +302,7 @@
                                 stateStormWaterAllowed.push(stateRules[i].destination.node_name);
                             }
                             if(stateRules[i].source.node_name === 'Precipitation') {
-                                statePrecipiationAllowed.push(stateRules[i].destination.node_name);
+                                stateprecipitationAllowed.push(stateRules[i].destination.node_name);
                             }
                             if(stateRules[i].source.node_name === 'Condensate') {
                                 stateCondensateAllowed.push(stateRules[i].destination.node_name);
@@ -349,104 +323,19 @@
                             if(stateStormWaterAllowed.includes(reusenode[i]) !== true) {
                                 stateStormWaterBlocked.push(reusenode[i]);
                             }
-                            if(statePrecipiationAllowed.includes(reusenode[i]) !== true) {
-                                statePrecipiationBlocked.push(reusenode[i]);
+                            if(stateprecipitationAllowed.includes(reusenode[i]) !== true) {
+                                stateprecipitationBlocked.push(reusenode[i]);
                             }
                             if(stateCondensateAllowed.includes(reusenode[i]) !== true) {
                                 stateCondensateBlocked.push(reusenode[i]);
                             }
                         }
-                        /* Look at the allowed nodes for the county depending on the water source */
-                        /*for(var i = 0; i < countyRules.length; i++) {
-                            if(countyRules[i].source.node_name === 'Surface Water') {
-                                countySurfaceWaterAllowed.push(countyRules[i].destination.node_name);
-                            }
-                            if(countyRules[i].source.node_name === 'Shallow Groundwater') {
-                                countyShallowGroundWaterAllowed.push(countyRules[i].destination.node_name);
-                            }
-                            if(countyRules[i].source.node_name === 'Ground Water') {
-                                countyGroundWaterAllowed.push(countyRules[i].destination.node_name);
-                            }
-                            if(countyRules[i].source.node_name === 'Stormwater Runoff') {
-                                countyStormWaterAllowed.push(countyRules[i].destination.node_name);
-                            }
-                            if(countyRules[i].source.node_name === 'Precipitation') {
-                                countyPrecipiationAllowed.push(countyRules[i].destination.node_name);
-                            }
-                            if(countyRules[i].source.node_name === 'Condensate') {
-                                countyCondensateAllowed.push(countyRules[i].destination.node_name);
-                            }
-                        }
 
-                        /* Look at complete list of reusenode and find nodes that are not allowed
-                        for(var i = 0; i < reusenode.length; i++) {
-                            if(countySurfaceWaterAllowed.includes(reusenode[i]) !== true) {
-                                countySurfaceWaterBlocked.push(reusenode[i]);
-                            }
-                            if(countyShallowGroundWaterAllowed.includes(reusenode[i]) !== true) {
-                                countyShallowGroundWaterBlocked.push(reusenode[i]);
-                            }
-                            if(countyGroundWaterAllowed.includes(reusenode[i]) !== true) {
-                                countyGroundWaterBlocked.push(reusenode[i]);
-                            }
-                            if(countyStormWaterAllowed.includes(reusenode[i]) !== true) {
-                                countyStormWaterBlocked.push(reusenode[i]);
-                            }
-                            if(countyPrecipiationAllowed.includes(reusenode[i]) !== true) {
-                                countyPrecipiationBlocked.push(reusenode[i]);
-                            }
-                            if(countyCondensateAllowed.includes(reusenode[i]) !== true) {
-                                countyCondensateBlocked.push(reusenode[i]);
-                            }
-                        }
-                        /* Look at the allowed nodes for the city depending on the water source
-                        for(var i = 0; i < cityRules.length; i++) {
-                            if(cityRules[i].source.node_name === 'Surface Water') {
-                                citySurfaceWaterAllowed.push(cityRules[i].destination.node_name);
-                            }
-                            if(cityRules[i].source.node_name === 'Shallow Groundwater') {
-                                cityShallowGroundWaterAllowed.push(cityRules[i].destination.node_name);
-                            }
-                            if(cityRules[i].source.node_name === 'Ground Water') {
-                                cityGroundWaterAllowed.push(cityRules[i].destination.node_name);
-                            }
-                            if(cityRules[i].source.node_name === 'Stormwater Runoff') {
-                                cityStormWaterAllowed.push(cityRules[i].destination.node_name);
-                            }
-                            if(cityRules[i].source.node_name === 'Precipitation') {
-                                cityPrecipiationAllowed.push(cityRules[i].destination.node_name);
-                            }
-                            if(cityRules[i].source.node_name === 'Condensate') {
-                                cityCondensateAllowed.push(cityRules[i].destination.node_name);
-                            }
-                        }
-
-                        /* Look at complete list of reusenode and find nodes that are not allowed
-                        for(var i = 0; i < reusenode.length; i++) {
-                            if(citySurfaceWaterAllowed.includes(reusenode[i]) !== true) {
-                                citySurfaceWaterBlocked.push(reusenode[i]);
-                            }
-                            if(cityShallowGroundWaterAllowed.includes(reusenode[i]) !== true) {
-                                cityShallowGroundWaterBlocked.push(reusenode[i]);
-                            }
-                            if(cityGroundWaterAllowed.includes(reusenode[i]) !== true) {
-                                cityGroundWaterBlocked.push(reusenode[i]);
-                            }
-                            if(cityStormWaterAllowed.includes(reusenode[i]) !== true) {
-                                cityStormWaterBlocked.push(reusenode[i]);
-                            }
-                            if(cityPrecipiationAllowed.includes(reusenode[i]) !== true) {
-                                cityPrecipiationBlocked.push(reusenode[i]);
-                            }
-                            if(cityCondensateAllowed.includes(reusenode[i]) !== true) {
-                                cityCondensateBlocked.push(reusenode[i]);
-                            }
-                        }*/
                         surfaceWaterNotAllowedNodes = []
                         shallowGroundWaterNotAllowedNodes = []
                         groundWaterNotAllowedNodes = []
                         stormWaterNotAllowedNodes = []
-                        precipiationNotAllowedNodes = []
+                        precipitationNotAllowedNodes = []
                         condensateNotAllowedNodes = []
                         for(var i = 0; i < reusenode.length; i++) {
                             if(stateSurfaceWaterBlocked.includes(reusenode[i])) {
@@ -461,8 +350,8 @@
                             if(stateStormWaterBlocked.includes(reusenode[i])) {
                                 stormWaterNotAllowedNodes.push(reusenode[i]);
                             }
-                            if(statePrecipiationBlocked.includes(reusenode[i])) {
-                                precipiationNotAllowedNodes.push(reusenode[i]);
+                            if(stateprecipitationBlocked.includes(reusenode[i])) {
+                                precipitationNotAllowedNodes.push(reusenode[i]);
                             }
                             if(stateCondensateBlocked.includes(reusenode[i])) {
                                 condensateNotAllowedNodes.push(reusenode[i]);
@@ -479,8 +368,8 @@
                                 }
                             }
                             if(nodes[i].pid === 2) {
-                                for(var j = 0; j < precipiationNotAllowedNodes.length; j++){
-                                    if(nodes[i].Name === precipiationNotAllowedNodes[j]) {
+                                for(var j = 0; j < precipitationNotAllowedNodes.length; j++){
+                                    if(nodes[i].Name === precipitationNotAllowedNodes[j]) {
                                         nodes[i].tags = ['PathwayBlocked']
                                     }
                                 }
