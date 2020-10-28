@@ -278,6 +278,7 @@
                         var stateStormWaterBlocked = [];
                         var statePrecipiationBlocked = [];
                         var stateCondensateBlocked = [];
+
                         var countySurfaceWaterAllowed = [];
                         var countyShallowGroundWaterAllowed = [];
                         var countyGroundWaterAllowed = [];
@@ -290,6 +291,7 @@
                         var countyStormWaterBlocked = [];
                         var countyPrecipiationBlocked = [];
                         var countyCondensateBlocked = [];
+
                         var citySurfaceWaterAllowed = [];
                         var cityShallowGroundWaterAllowed = [];
                         var cityGroundWaterAllowed = [];
