@@ -471,35 +471,35 @@
                             if(nodes[i].pid === 2) {
                                 for(var j = 0; j < precipiationNotAllowedNodes.length; j++){
                                     if(nodes[i].Name === precipiationNotAllowedNodes[j]) {
-                                        nodes[i].tags = ['not_available']
+                                        nodes[i].tags = ['PathwayBlocked']
                                     }
                                 }
                             }
                             if(nodes[i].pid === 3) {
                                 for(var j = 0; j < stormWaterNotAllowedNodes.length; j++){
                                     if(nodes[i].Name === stormWaterNotAllowedNodes[j]) {
-                                        nodes[i].tags = ['not_available']
+                                        nodes[i].tags = ['PathwayBlocked']
                                     }
                                 }
                             }
                             if(nodes[i].pid === 4) {
                                 for(var j = 0; j < surfaceWaterNotAllowedNodes.length; j++){
                                     if(nodes[i].Name === surfaceWaterNotAllowedNodes[j]) {
-                                        nodes[i].tags = ['not_available']
+                                        nodes[i].tags = ['PathwayBlocked']
                                     }
                                 }
                             }
                             if(nodes[i].pid === 5) {
                                 for(var j = 0; j < shallowGroundWaterNotAllowedNodes.length; j++){
                                     if(nodes[i].Name === shallowGroundWaterNotAllowedNodes[j]) {
-                                        nodes[i].tags = ['not_available']
+                                        nodes[i].tags = ['PathwayBlocked']
                                     }
                                 }
                             }
                             if(nodes[i].pid === 6) {
                                 for(var j = 0; j < groundWaterNotAllowedNodes.length; j++){
                                     if(nodes[i].Name === groundWaterNotAllowedNodes[j]) {
-                                        nodes[i].tags = ['not_available']
+                                        nodes[i].tags = ['PathwayBlocked']
                                     }
                                 }
                             }
@@ -514,7 +514,7 @@
                             searchFields: ["Name", "ParentName", "img"],
                             align: OrgChart.ORIENTATION,
                             tags: {
-                                not_available: {
+                                PathwayBlocked: {
                                     template: "not_available"
                                 }
                             },
