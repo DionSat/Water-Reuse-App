@@ -182,7 +182,13 @@
                                     a.className = "btn btn-primary";
                                     a.style.cssText = "margin: 15px 6px 0 6px;";
                                     a.title = "Code";
-                                    a.href = "<?php echo $cityRules[0]->codesObj->linkText ?>";
+                                    if (<?php echo $cityRules->count()?> == 0){
+                                        a.href = "";
+                                    }
+                                    else
+                                    {
+                                        a.href = "<?php echo $cityRules[0]->codesObj->linkText ?>";
+                                    }
                                     a.target = "_blank";
                                     parent.appendChild(a);
 
@@ -192,7 +198,13 @@
                                     a.className = "btn btn-primary";
                                     a.style.cssText = "margin: 15px 6px 0 6px;";
                                     a.title = "Permit";
-                                    a.href = "<?php echo $cityRules[0]->permitObj->linkText ?>";
+                                   if (<?php echo $cityRules->count()?> == 0){
+                                        a.href = "";
+                                    }
+                                    else
+                                    {
+                                        a.href = "<?php echo $cityRules[0]->permitObj->linkText ?>";
+                                    }
                                     a.target = "_blank";
                                     parent.appendChild(a);
 
@@ -202,7 +214,13 @@
                                     a.className = "btn btn-primary";
                                     a.style.cssText = "margin: 15px 6px 0 6px;";
                                     a.title = "Incentive";
-                                    a.href = "<?php echo $cityRules[0]->incentivesObj->linkText ?>";
+                                    if (<?php echo $cityRules->count()?> == 0){
+                                        a.href = "";
+                                    }
+                                    else
+                                    {
+                                        a.href = "<?php echo $cityRules[0]->incentivesObj->linkText ?>";
+                                    }
                                     a.target = "_blank";
                                     parent.appendChild(a);
 
@@ -213,7 +231,13 @@
                                     a.className = "btn btn-primary";
                                     a.style.cssText = "margin: 15px 6px 0 6px;";
                                     a.title = "More Info";
-                                    a.href = "<?php echo $cityRules[0]->moreInfoObj->linkText ?>";
+                                   if (<?php echo $cityRules->count()?> == 0){
+                                        a.href = "";
+                                    }
+                                    else
+                                    {
+                                        a.href = "<?php echo $cityRules[0]->moreInfoObj->linkText ?>";
+                                    }
                                     a.target = "_blank";
                                     parent.appendChild(a);
 
