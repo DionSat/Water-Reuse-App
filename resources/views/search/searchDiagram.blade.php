@@ -154,12 +154,21 @@
                             '<path class="dashPath" stroke-width="4" fill="none" stroke="#ffffff" stroke-dasharray="10"  d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>';
 
                         /* Custom Template to not available nodes*/
-                        OrgChart.templates.not_available = Object.assign({}, OrgChart.templates.ana);
+                        OrgChart.templates.no_regulation = Object.assign({}, OrgChart.templates.ana);
 
-                        OrgChart.templates.not_available.node =
+                        OrgChart.templates.no_regulation.node =
                             '<rect x="0" y="0" height="120" width="250" fill="#ff0000" stroke-width="1" stroke="#808080" rx="5" ry="5"></rect>'
 
-                        OrgChart.templates.not_available.link = '<path class="backgroundPath" stroke-linejoin="round" stroke="#00cc99" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
+                        OrgChart.templates.no_regulation.link = '<path class="backgroundPath" stroke-linejoin="round" stroke="#00cc99" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
+                            '<path class="dashPath" stroke-width="4" fill="none" stroke="#ffffff" stroke-dasharray="10"  d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>';
+
+                        /* Custom template for nodes that may have path */
+                        OrgChart.templates.possible_pathway = Object.assign({}, OrgChart.templates.ana);
+
+                        OrgChart.templates.possible_pathway.node =
+                            '<rect x="0" y="0" height="120" width="250" fill="#ff8c00" stroke-width="1" stroke="#808080" rx="5" ry="5"></rect>'
+
+                        OrgChart.templates.possible_pathway.link = '<path class="backgroundPath" stroke-linejoin="round" stroke="#00cc99" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
                             '<path class="dashPath" stroke-width="4" fill="none" stroke="#ffffff" stroke-dasharray="10"  d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>';
 
 
@@ -278,7 +287,7 @@
                         var statePrecipiationBlocked = [];
                         var stateCondensateBlocked = [];
 
-                        var countySurfaceWaterAllowed = [];
+                        /*var countySurfaceWaterAllowed = [];
                         var countyShallowGroundWaterAllowed = [];
                         var countyGroundWaterAllowed = [];
                         var countyStormWaterAllowed = [];
@@ -302,7 +311,7 @@
                         var cityGroundWaterBlocked = [];
                         var cityStormWaterBlocked = [];
                         var cityPrecipiationBlocked = [];
-                        var cityCondensateBlocked = [];
+                        var cityCondensateBlocked = [];*/
 
                         /* Look at the allowed nodes for the state depending on the water source */
                         for(var i = 0; i < stateRules.length; i++) {
@@ -348,7 +357,7 @@
                             }
                         }
                         /* Look at the allowed nodes for the county depending on the water source */
-                        for(var i = 0; i < countyRules.length; i++) {
+                        /*for(var i = 0; i < countyRules.length; i++) {
                             if(countyRules[i].source.node_name === 'Surface Water') {
                                 countySurfaceWaterAllowed.push(countyRules[i].destination.node_name);
                             }
@@ -369,7 +378,7 @@
                             }
                         }
 
-                        /* Look at complete list of reusenode and find nodes that are not allowed */
+                        /* Look at complete list of reusenode and find nodes that are not allowed
                         for(var i = 0; i < reusenode.length; i++) {
                             if(countySurfaceWaterAllowed.includes(reusenode[i]) !== true) {
                                 countySurfaceWaterBlocked.push(reusenode[i]);
@@ -390,7 +399,7 @@
                                 countyCondensateBlocked.push(reusenode[i]);
                             }
                         }
-                        /* Look at the allowed nodes for the city depending on the water source */
+                        /* Look at the allowed nodes for the city depending on the water source
                         for(var i = 0; i < cityRules.length; i++) {
                             if(cityRules[i].source.node_name === 'Surface Water') {
                                 citySurfaceWaterAllowed.push(cityRules[i].destination.node_name);
@@ -412,7 +421,7 @@
                             }
                         }
 
-                        /* Look at complete list of reusenode and find nodes that are not allowed */
+                        /* Look at complete list of reusenode and find nodes that are not allowed
                         for(var i = 0; i < reusenode.length; i++) {
                             if(citySurfaceWaterAllowed.includes(reusenode[i]) !== true) {
                                 citySurfaceWaterBlocked.push(reusenode[i]);
@@ -432,7 +441,7 @@
                             if(cityCondensateAllowed.includes(reusenode[i]) !== true) {
                                 cityCondensateBlocked.push(reusenode[i]);
                             }
-                        }
+                        }*/
                         surfaceWaterNotAllowedNodes = []
                         shallowGroundWaterNotAllowedNodes = []
                         groundWaterNotAllowedNodes = []
@@ -440,22 +449,22 @@
                         precipiationNotAllowedNodes = []
                         condensateNotAllowedNodes = []
                         for(var i = 0; i < reusenode.length; i++) {
-                            if(stateSurfaceWaterBlocked.includes(reusenode[i]) && countySurfaceWaterBlocked.includes(reusenode[i]) && citySurfaceWaterBlocked.includes(reusenode[i])) {
+                            if(stateSurfaceWaterBlocked.includes(reusenode[i])) {
                                 surfaceWaterNotAllowedNodes.push(reusenode[i]);
                             }
-                            if(stateShallowGroundWaterBlocked.includes(reusenode[i]) && countyShallowGroundWaterBlocked.includes(reusenode[i]) && cityShallowGroundWaterBlocked.includes(reusenode[i])) {
+                            if(stateShallowGroundWaterBlocked.includes(reusenode[i])) {
                                 shallowGroundWaterNotAllowedNodes.push(reusenode[i]);
                             }
-                            if(stateGroundWaterBlocked.includes(reusenode[i]) && countyGroundWaterBlocked.includes(reusenode[i]) && cityGroundWaterBlocked.includes(reusenode[i])) {
+                            if(stateGroundWaterBlocked.includes(reusenode[i])) {
                                 groundWaterNotAllowedNodes.push(reusenode[i]);
                             }
-                            if(stateStormWaterBlocked.includes(reusenode[i]) && countyStormWaterBlocked.includes(reusenode[i]) && cityStormWaterBlocked.includes(reusenode[i])) {
+                            if(stateStormWaterBlocked.includes(reusenode[i])) {
                                 stormWaterNotAllowedNodes.push(reusenode[i]);
                             }
-                            if(statePrecipiationBlocked.includes(reusenode[i]) && countyPrecipiationBlocked.includes(reusenode[i]) && cityPrecipiationBlocked.includes(reusenode[i])) {
+                            if(statePrecipiationBlocked.includes(reusenode[i])) {
                                 precipiationNotAllowedNodes.push(reusenode[i]);
                             }
-                            if(stateCondensateBlocked.includes(reusenode[i]) && countyCondensateBlocked.includes(reusenode[i]) && cityCondensateBlocked.includes(reusenode[i])) {
+                            if(stateCondensateBlocked.includes(reusenode[i])) {
                                 condensateNotAllowedNodes.push(reusenode[i]);
                             }
                         }
@@ -465,7 +474,7 @@
                             if(nodes[i].pid === 1) {
                                 for(var j = 0; j < condensateNotAllowedNodes.length; j++){
                                     if(nodes[i].Name === condensateNotAllowedNodes[j]) {
-                                        nodes[i].tags = ['not_available']
+                                        nodes[i].tags = ['no_regulation']
                                     }
                                 }
                             }
@@ -505,9 +514,17 @@
                                 }
                             }
                         }
-                        console.log(cityStormWaterBlocked)
+                        console.log(stateRules);
 
-
+                        for(var i = 0; i < stateRules.length; i++) {
+                            if(stateRules[i].allowed.allowed_id === 2) {
+                                for(var j = 0; j < nodes.length; j++) {
+                                    if(stateRules[i].source.node_name === nodes[j].Source && stateRules[i].destination.node_name === nodes[j].Name) {
+                                        nodes[j].tags = ['PathwayNotAddressed']
+                                    }
+                                }
+                            }
+                        }
 
 
                         /* Chart */
@@ -518,7 +535,10 @@
                             align: OrgChart.ORIENTATION,
                             tags: {
                                 PathwayBlocked: {
-                                    template: "not_available"
+                                    template: "no_regulation"
+                                },
+                                PathwayNotAddressed: {
+                                    template: "possible_pathway"
                                 }
                             },
                             menu: {
