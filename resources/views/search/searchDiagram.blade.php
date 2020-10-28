@@ -164,17 +164,18 @@
                             ]
                         });
 
+
                         /* Node Details Button Links */
                         chart.editUI.on('field', function(sender, args){
                             if (args.type == 'details' && args.name == 'Links'){
 
                                 var txt = args.field.querySelector('input');
                                 if (txt){
-                                    var linkLabels = ["Code", "Permit", "Incentive", "More Info"];
-                                    var parent = args.field.querySelector('div');
-                                    var br = document.createElement("br");
-                                    parent.appendChild(br);
-
+                                    //var linkLabels = ["Code", "Permit", "Incentive", "More Info"];
+                                    //var parent = args.field.querySelector('div');
+                                    //var br = document.createElement("br");
+                                    //parent.appendChild(br);
+                                    /*
                                     linkLabels.forEach((linkName) => {
                                         var a = document.createElement('a');
                                         var linkText = document.createTextNode(linkName);
@@ -182,10 +183,56 @@
                                         a.className = "btn btn-primary";
                                         a.style.cssText = "margin: 15px 6px 0 6px;";
                                         a.title = linkName;
+                                        //a.href = "{$rule->codesObj->linkText}}";
                                         a.href = "";
                                         a.target = "_blank";
                                         parent.appendChild(a);
                                     });
+                                    */
+                                    var parent = args.field.querySelector('div');
+                                    var br = document.createElement("br");
+                                    parent.appendChild(br);
+
+                                    var a = document.createElement('a');
+                                    var linkText = document.createTextNode("Code")
+                                    a.appendChild(linkText);
+                                    a.className = "btn btn-primary";
+                                    a.style.cssText = "margin: 15px 6px 0 6px;";
+                                    a.title = "Code";
+                                    a.href = "<?php echo $cityRules[0]->codesObj->linkText ?>";
+                                    a.target = "_blank";
+                                    parent.appendChild(a);
+
+                                    var a = document.createElement('a');
+                                    var linkText = document.createTextNode("Permit")
+                                    a.appendChild(linkText);
+                                    a.className = "btn btn-primary";
+                                    a.style.cssText = "margin: 15px 6px 0 6px;";
+                                    a.title = "Permit";
+                                    a.href = "<?php echo $cityRules[0]->permitObj->linkText ?>";
+                                    a.target = "_blank";
+                                    parent.appendChild(a);
+
+                                    var a = document.createElement('a');
+                                    var linkText = document.createTextNode("Incentive")
+                                    a.appendChild(linkText);
+                                    a.className = "btn btn-primary";
+                                    a.style.cssText = "margin: 15px 6px 0 6px;";
+                                    a.title = "Incentive";
+                                    a.href = "<?php echo $cityRules[0]->incentivesObj->linkText ?>";
+                                    a.target = "_blank";
+                                    parent.appendChild(a);
+
+                                    parent.appendChild(a);
+                                    var a = document.createElement('a');
+                                    var linkText = document.createTextNode("More Info")
+                                    a.appendChild(linkText);
+                                    a.className = "btn btn-primary";
+                                    a.style.cssText = "margin: 15px 6px 0 6px;";
+                                    a.title = "More Info";
+                                    a.href = "<?php echo $cityRules[0]->moreInfoObj->linkText ?>";
+                                    a.target = "_blank";
+                                    parent.appendChild(a);
 
                                     txt.remove();
                                 }
@@ -211,6 +258,15 @@
                 </script>
             </div>
         </div>
+    </div>
+
+    <div class="card">
+        @foreach($cityRules as $cityRules)
+            {{$cityRules->codesObj->linkText}};
+            {{$cityRules->permitObj->linkText}}
+            {{$cityRules->incentivesObj->linkText}}
+            {{$cityRules->moreInfoObj->linkText}}
+        @endforeach
     </div>
 @endsection
 
