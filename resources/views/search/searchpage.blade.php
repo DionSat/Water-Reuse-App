@@ -5,7 +5,7 @@
         <div class="type-selector">
             <h3 class="text-center mt-5"> Select the property type: </h3>
             <div class="row justify-content-center mt-0 mt-md-5">
-                <div class="col-md-4">
+                <div class="col-md-5 col-lg-4">
                     <div class="card text-center selection-card commercial border-dark initial-selection">
                         <div class="card-body" title="Search commercial regulations">
                             <img class="display-icon" src="{{url('/img/commercial-icon.png')}}" alt="Commercial Icon"/>
@@ -13,7 +13,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mt-3 mt-md-0">
+                <div class="col-md-5 col-lg-4 mt-3 mt-md-0">
                     <div class="card text-center selection-card residential border-dark initial-selection">
                         <div class="card-body" title="Search residential regulations">
                             <img class="display-icon" src="{{url('/img/residential-icon.png')}}" alt="Residential Icon"/>
@@ -47,116 +47,85 @@
                     <div class="search mt-3">
                         <h3 id="search-title" class="text-center">Search for Location </h3>
                         <hr>
-                        <form method="GET" action="{{route("search-submit")}}" class="text-center">
-                            {{ csrf_field() }}
                             <div class="col-md-12">
                                 <div class="accordion" id="accordionExample">
-                                    <!--Search by S.C.C.-->
-                                    <div class="card" style="border: none; ">
-                                        <!--button name-->
-                                        <div class="card" id="headingOne">
-                                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" style="font-size: 20px; color: black; text-decoration:none">
-                                                <strong>Search by State County City</strong>
-                                            </button>
-                                        </div>
-                                        <!--search page-->
-                                        <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                            <div class="card" style="margin-top: 40px; border: none">
-                                                <div class="form-group row">
-                                                    <label for="stateSelect" class="col-md-3 col-form-label col-form-label-lg"> <strong> State </strong> </label>
-                                                    <div class="col-md-8">
-                                                        <select id="stateSelect" name="state_id" class="form-control form-control-lg">
-                                                            <option value="-1" disabled selected>Select a state</option>
-                                                            @foreach($states as $state)
-                                                                @if($state->is_approved)
-                                                                    <option value="{{$state->state_id}}">{{$state->stateName}}</option>
-                                                                @endif
-                                                            @endforeach
-                                                        </select>
+                                    <form method="GET" action="{{route("search-submit")}}" class="text-center">
+                                        {{ csrf_field() }}
+                                        <!--Search by S.C.C.-->
+                                            <div class="card" style="border: none; ">
+                                                <!--button name-->
+                                                <div class="card" id="headingOne">
+                                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" style="font-size: 20px; color: black; text-decoration:none">
+                                                        <strong>Search by State County City</strong>
+                                                    </button>
+                                                </div>
+                                                <!--search page-->
+                                                <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                                    <div class="card" style="margin-top: 40px; border: none">
+                                                        <div class="form-group row">
+                                                            <label for="stateSelect" class="col-md-3 col-form-label col-form-label-lg"> <strong> State </strong> </label>
+                                                            <div class="col-md-8">
+                                                                <select id="stateSelect" name="state_id" class="form-control form-control-lg">
+                                                                    <option value="-1" disabled selected>Select a state</option>
+                                                                    @foreach($states as $state)
+                                                                        @if($state->is_approved)
+                                                                            <option value="{{$state->state_id}}">{{$state->stateName}}</option>
+                                                                        @endif
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label for="countySelect" class="col-md-3 col-form-label col-form-label-lg"> <strong> County </strong> </label>
+                                                            <div class="col-md-8">
+                                                                <i id="countySpinner" class="fas fa-spinner fa-pulse mt-2 d-none"></i>
+                                                                <select id="countySelect" name="county_id" class="form-control form-control-lg">
+                                                                    <option value="-1" disabled selected>Select a state first</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label for="citySelect" class="col-md-3 col-form-label col-form-label-lg"> <strong> City </strong> </label>
+                                                            <div class="col-md-8">
+                                                                <i id="citySpinner" class="fas fa-spinner fa-pulse mt-2 d-none"></i>
+                                                                <select id="citySelect" name="city_id" class="form-control form-control-lg">
+                                                                    <option value="-1" disabled selected>Select a county first</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <input id="searchType" name="searchType" class="d-none" type="text" value="residential">
+                                                        <button id="searchButton" class="btn btn-primary btn-lg btn-block" style="margin-top: 20px;margin-bottom: 20px;" type="submit" disabled="true"> <i class="fas fa-search"></i> Search </button>
                                                     </div>
                                                 </div>
-                                                <div class="form-group row">
-                                                    <label for="countySelect" class="col-md-3 col-form-label col-form-label-lg"> <strong> County </strong> </label>
-                                                    <div class="col-md-8">
-                                                        <i id="countySpinner" class="fas fa-spinner fa-pulse mt-2 d-none"></i>
-                                                        <select id="countySelect" name="county_id" class="form-control form-control-lg">
-                                                            <option value="-1" disabled selected>Select a state first</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="citySelect" class="col-md-3 col-form-label col-form-label-lg"> <strong> City </strong> </label>
-                                                    <div class="col-md-8">
-                                                        <i id="citySpinner" class="fas fa-spinner fa-pulse mt-2 d-none"></i>
-                                                        <select id="citySelect" name="city_id" class="form-control form-control-lg">
-                                                            <option value="-1" disabled selected>Select a county first</option>
-                                                        </select>
-                                                    </div>
+                                            </div>
+                                    </form>
+                                    <!--Search by Address-->
+                                    <!--Address Form-->
+                                    <form method="GET" action="{{ route("search-address") }}">
+                                        {{ csrf_field() }}
+                                        <div class="card" style="border: none">
+                                            <!--button name-->
+                                            <div class="card" id="headingTwo">
+                                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" style="font-size: 20px; color:black; text-decoration:none">
+                                                    <strong>Search by Address</strong>
+                                                </button>
+                                            </div>
+                                            <!--Address Search page-->
+                                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample" >
+                                                <div class="card" style="border: none;margin-top: 40px">
+                                                        <div class="form-group row">
+                                                            <div class="col-md">
+                                                                <input type="text" class="form-control" id="StreetAddressInput" name="addressInput" placeholder="Ex. 1631 Southwest 12th Ave, Portland, OR 97209" required>
+                                                            </div>
+                                                        </div>
                                                 </div>
                                                 <input id="searchType" name="searchType" class="d-none" type="text" value="residential">
-                                                <button id="searchButton" class="btn btn-primary btn-lg btn-block" style="margin-top: 20px;margin-bottom: 20px;" type="submit" disabled="true"> <i class="fas fa-search"></i> Search </button>
+                                                <button id="searchAddressButton" class="btn btn-primary btn-lg btn-block" style="margin-top: 20px;margin-bottom: 20px;" type="submit" disabled="true"> <i class="fas fa-search"></i> Search </button>
                                             </div>
                                         </div>
-                                    </div>
-                                    <!--Search by Address-->
-                                    <div class="card" style="border: none">
-                                        <!--button name-->
-                                        <div class="card" id="headingTwo">
-                                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" style="font-size: 20px; color:black; text-decoration:none">
-                                                <strong>Search by Address</strong>
-                                            </button>
-                                        </div>
-                                        <!--Address Search page-->
-                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample" >
-                                            <div class="card" style="border: none;margin-top: 40px">
-                                                <!--Address Form-->
-                                                <form>
-                                                    <div class="form-group row">
-                                                        <label for="StreetAddressInput" class="col-md-4 col-form-label col-form-label-lg"><strong>Street Address</strong></label>
-                                                        <div class="col-md-7">
-                                                            <input type="text" class="form-control" id="StreetAddressInput" placeholder="Type the Street Address">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label for="RouteInput" class="col-md-4 col-form-label col-form-label-lg"><strong>Route</strong></label>
-                                                        <div class="col-md-7">
-                                                            <input type="text" class="form-control" id="RouteInput" placeholder="Type the Route">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label for="CityInput" class="col-md-4 col-form-label col-form-label-lg"><strong>City</strong></label>
-                                                        <div class="col-md-7">
-                                                            <input type="text" class="form-control" id="CityInput" placeholder="Type the City">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label for="StateInput" class="col-md-4 col-form-label col-form-label-lg"><strong>State</strong></label>
-                                                        <div class="col-md-7">
-                                                            <input type="text" class="form-control" id="StateInput" placeholder="Type the State">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label for="ZipCodeInput" class="col-md-4 col-form-label col-form-label-lg"><strong>Zip Code</strong></label>
-                                                        <div class="col-md-7">
-                                                            <input type="text" class="form-control" id="ZipCodeInput" placeholder="Type the Zip Code">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label for="CountryInput" class="col-md-4 col-form-label col-form-label-lg"><strong>Country</strong></label>
-                                                        <div class="col-md-7">
-                                                            <input type="text" class="form-control" id="CountryInput" placeholder="Type the Country">
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <input id="searchType" name="searchType" class="d-none" type="text" value="residential">
-                                            <button id="searchAddressButton" class="btn btn-primary btn-lg btn-block" style="margin-top: 20px;margin-bottom: 20px;" type="submit" disabled="true"> <i class="fas fa-search"></i> Search </button>
-                                        </div>
-                                    </div>
+                                    </form>
                                 </div>
-
                             </div>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -220,7 +189,7 @@
         });
 
         //if type something in text area, init the search button
-        $("#AddressInput").on('input',function (){
+        $("#StreetAddressInput").on('input',function (){
             initSearch();
         });
         function initSearch() {

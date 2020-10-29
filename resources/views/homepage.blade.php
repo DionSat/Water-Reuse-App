@@ -9,6 +9,9 @@
                     <p class="lead"> A database of crowdsourced and verified re-use regulations. </p>
                     <hr class="my-4">
                     <p>In a time where access to usable water is becoming more scarce, enabling people to re-use water properly is a important step to take.</p>
+                    <a class="btn btn-warning" href="{{route("info")}}">
+                        Tutorial
+                    </a>
                 </div>
             </div>
         </div>

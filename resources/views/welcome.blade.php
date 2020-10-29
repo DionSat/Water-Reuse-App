@@ -10,6 +10,9 @@
                         <div class="card-subtitle">
                             <h2>You have successfully logged in.</h2>
                         </div>
+                        <a class="btn btn-warning" href="{{route("info")}}">
+                            Tutorial
+                        </a>
                     </div>
                 </div>
             </div>
@@ -70,7 +73,8 @@
 @push('css')
 <style>
     body{
-        background: url("img/bird-s-eye-view-of-ocean-during-daytime-2707756.jpg");
+        background: url("img/mainBackground.png");
+        background-size: cover;
         object-fit: cover;
         background-repeat: no-repeat;
     }

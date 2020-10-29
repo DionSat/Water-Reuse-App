@@ -58,7 +58,7 @@
                             </li>
                         @endauth
                         <li class="nav-item">
-                            <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "info") active @endif" href="{{ route('info') }}" title="More information about the application"> Information </a>
+                            <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "info") active @endif" href="{{ route('info') }}" title="More information about the application"> Tutorial </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link mx-md-2 px-md-0 pb-md-0  @if (Route::current()->getName() == "search") active @endif" href="{{ route('search') }}" title="Search water reuse permit information">Search</a>
