@@ -172,7 +172,7 @@
                                 var txt = args.field.querySelector('input');
                                 if (txt){
                                    
-    var parent = args.field.querySelector('div');
+									var parent = args.field.querySelector('div');
                                     var br = document.createElement("br");
                                     parent.appendChild(br);
 
@@ -191,9 +191,15 @@
                                     h1.id = "heading";
                                     card.appendChild(h1);
 
-                                    //just have one active now
                                     h1.addEventListener('click',function(){
-                                        b1.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;";
+                                        if(b1.style.display === "none"){
+                                            b1.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;";
+                                            b2.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                                            b3.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                                        }
+                                        else{
+                                            b1.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                                        }
                                     })
 
                                     var b1= document.createElement('a'); //card 1 body
@@ -278,7 +284,14 @@
                                     card.appendChild(h2);
 
                                     h2.addEventListener('click',function(){
-                                        b2.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;";
+                                        if(b2.style.display === "none"){
+                                            b2.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;";
+                                            b1.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                                            b3.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                                        }
+                                        else{
+                                            b2.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                                        }
                                     })
 
                                     var b2= document.createElement('a'); // card 2 body
@@ -340,7 +353,14 @@
                                     card.appendChild(h3);
 
                                     h3.addEventListener('click',function(){
-                                        b3.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;";
+                                        if(b3.style.display === "none"){
+                                            b3.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;";
+                                            b1.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                                            b2.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                                        }
+                                        else{
+                                            b3.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                                        }
                                     })
 
                                     var b3= document.createElement('a');  //card 3 body
@@ -385,9 +405,9 @@
                                     a.title = "More Info";
                                     a.target = "_blank";
                                     b3.appendChild(a)
-
-
-                                    txt.remove();
+									
+									txt.remove();
+									
                                 }
                             }
                         });
