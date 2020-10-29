@@ -172,7 +172,7 @@
                                 var txt = args.field.querySelector('input');
                                 if (txt){
                                    
-                                    var parent = args.field.querySelector('div');
+    var parent = args.field.querySelector('div');
                                     var br = document.createElement("br");
                                     parent.appendChild(br);
 
@@ -181,23 +181,27 @@
                                     parent.appendChild(card)
                                     card.style.cssText = "margin:6px 0 0 0;";
 
-                                    var a = document.createElement('a');
+                                    var h1 = document.createElement('btn');  //card 1 head
                                     var linkText = document.createTextNode("City");
-                                    a.appendChild(linkText);
-                                    a.className = "card btn";
-                                    a.style.cssText = "text-align:center;";
-                                    a.title = "city";
-                                    a.type = "button";
-                                    a.toggle = "collapse";
-                                    a.href = "#collapseOne";
-                                    card.appendChild(a);
+                                    h1.appendChild(linkText);
+                                    h1.className = "card btn";
+                                    h1.style.cssText = "text-align:center;";
+                                    h1.title = "city";
+                                    h1.type = "button";
+                                    h1.id = "heading";
+                                    card.appendChild(h1);
 
-                                    var b= document.createElement('a');
-                                    b.className = "card collapse in";
-                                    b.id = "collapseOne";
-                                    b.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;";
-                                    b.target = "_blank";
-                                    card.appendChild(b)
+                                    //just have one active now
+                                    h1.addEventListener('click',function(){
+                                        b1.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;";
+                                    })
+
+                                    var b1= document.createElement('a'); //card 1 body
+                                    b1.className = "card body";
+                                    b1.id =  "body";
+                                    b1.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                                    b1.target = "_blank";
+                                    card.appendChild(b1)
 
                                     var a = document.createElement('a');
                                     var linkText = document.createTextNode("Code")
@@ -212,7 +216,7 @@
                                         a.href = "<?php echo $cityRules[0]->codesObj->linkText ?>";
                                     }
                                     a.target = "_blank";
-                                    b.appendChild(a);
+                                    b1.appendChild(a);
 
                                     var a = document.createElement('a');
                                     var linkText = document.createTextNode("Permit")
@@ -227,7 +231,7 @@
                                         a.href = "<?php echo $cityRules[0]->permitObj->linkText ?>";
                                     }
                                     a.target = "_blank";
-                                    b.appendChild(a)
+                                    b1.appendChild(a)
 
                                     var a = document.createElement('a');
                                     var linkText = document.createTextNode("Incentive")
@@ -242,7 +246,7 @@
                                         a.href = "<?php echo $cityRules[0]->incentivesObj->linkText ?>";
                                     }
                                     a.target = "_blank";
-                                    b.appendChild(a)
+                                    b1.appendChild(a)
 
                                     var a = document.createElement('a');
                                     var linkText = document.createTextNode("More Info")
@@ -257,29 +261,32 @@
                                         a.href = "<?php echo $cityRules[0]->moreInfoObj->linkText ?>";
                                     }
                                     a.target = "_blank";
-                                    b.appendChild(a)
+                                    b1.appendChild(a)
 
                                     //county
                                     var card = document.createElement('a')
                                     card.className ="card";
                                     parent.appendChild(card)
 
-                                    var a = document.createElement('a');
+                                    var h2 = document.createElement('btn'); //card 2 head
                                     var linkText = document.createTextNode("County");
-                                    a.appendChild(linkText);
-                                    a.className = "card btn";
-                                    a.style.cssText = "text-align:center;";
-                                    a.toggle ="collapse";
-                                    a.title = "county";
-                                    a.href = "#collapseTwo";
-                                    card.appendChild(a);
+                                    h2.appendChild(linkText);
+                                    h2.className = "card btn";
+                                    h2.style.cssText = "text-align:center;";
+                                    h2.title = "county";
+                                    h2.id = "heading";
+                                    card.appendChild(h2);
 
-                                    var b= document.createElement('a');
-                                    b.className = "card collapse";
-                                    b.id = "collapseTwo";
-                                    b.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;";
-                                    b.target = "_blank";
-                                    card.appendChild(b)
+                                    h2.addEventListener('click',function(){
+                                        b2.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;";
+                                    })
+
+                                    var b2= document.createElement('a'); // card 2 body
+                                    b2.className = "card body";
+                                    b2.id = "body";
+                                    b2.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                                    b2.target = "_blank";
+                                    card.appendChild(b2)
 
                                     var a = document.createElement('a');
                                     var linkText = document.createTextNode("Code")
@@ -288,7 +295,7 @@
                                     a.style.cssText = "margin: 15px 6px 0 6px;";
                                     a.title = "Code";
                                     a.target = "_blank";
-                                    b.appendChild(a);
+                                    b2.appendChild(a);
 
                                     var a = document.createElement('a');
                                     var linkText = document.createTextNode("Permit")
@@ -297,7 +304,7 @@
                                     a.style.cssText = "margin: 15px 6px 0 6px;";
                                     a.title = "Permit";
                                     a.target = "_blank";
-                                    b.appendChild(a)
+                                    b2.appendChild(a)
 
                                     var a = document.createElement('a');
                                     var linkText = document.createTextNode("Incentive")
@@ -306,7 +313,7 @@
                                     a.style.cssText = "margin: 15px 6px 0 6px;";
                                     a.title = "Incentive";
                                     a.target = "_blank";
-                                    b.appendChild(a)
+                                    b2.appendChild(a)
 
                                     var a = document.createElement('a');
                                     var linkText = document.createTextNode("More Info")
@@ -315,7 +322,7 @@
                                     a.style.cssText = "margin: 15px 6px 0 6px;";
                                     a.title = "More Info";
                                     a.target = "_blank";
-                                    b.appendChild(a)
+                                    b2.appendChild(a)
 
                                     //state
                                     var card = document.createElement('a')
@@ -323,22 +330,25 @@
                                     parent.appendChild(card)
                                     card.style.cssText = "margin:0 0 6px 0;";
 
-                                    var a = document.createElement('a');
+                                    var h3 = document.createElement('btn'); //card 3 head
                                     var linkText = document.createTextNode("State");
-                                    a.appendChild(linkText);
-                                    a.className = "card btn";
-                                    a.style.cssText = "text-align:center;";
-                                    a.toggle ="collapse";
-                                    a.title = "state";
-                                    a.href = "#collapseThree";
-                                    card.appendChild(a);
+                                    h3.appendChild(linkText);
+                                    h3.className = "card btn";
+                                    h3.style.cssText = "text-align:center;";
+                                    h3.id = "heading";
+                                    h3.title = "state";
+                                    card.appendChild(h3);
 
-                                    var b= document.createElement('a');
-                                    b.className = "card collapse";
-                                    b.id = "collapseThree";
-                                    b.style.cssText = "text-align:center;border:none;float:left;display:inline;margin: 10px 0;";
-                                    b.target = "_blank";
-                                    card.appendChild(b)
+                                    h3.addEventListener('click',function(){
+                                        b3.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;";
+                                    })
+
+                                    var b3= document.createElement('a');  //card 3 body
+                                    b3.className = "card body";
+                                    b3.id = "body";
+                                    b3.style.cssText = "text-align:center;border:none;float:left;display:inline;margin: 10px 0; display:none;";
+                                    b3.target = "_blank";
+                                    card.appendChild(b3)
 
                                     var a = document.createElement('a');
                                     var linkText = document.createTextNode("Code")
@@ -347,7 +357,7 @@
                                     a.style.cssText = "margin: 15px 6px 0 6px;";
                                     a.title = "Code";
                                     a.target = "_blank";
-                                    b.appendChild(a);
+                                    b3.appendChild(a);
 
                                     var a = document.createElement('a');
                                     var linkText = document.createTextNode("Permit")
@@ -356,7 +366,7 @@
                                     a.style.cssText = "margin: 15px 6px 0 6px;";
                                     a.title = "Permit";
                                     a.target = "_blank";
-                                    b.appendChild(a)
+                                    b3.appendChild(a)
 
                                     var a = document.createElement('a');
                                     var linkText = document.createTextNode("Incentive")
@@ -365,7 +375,7 @@
                                     a.style.cssText = "margin: 15px 6px 0 6px;";
                                     a.title = "Incentive";
                                     a.target = "_blank";
-                                    b.appendChild(a)
+                                    b3.appendChild(a)
 
                                     var a = document.createElement('a');
                                     var linkText = document.createTextNode("More Info")
@@ -374,7 +384,8 @@
                                     a.style.cssText = "margin: 15px 6px 0 6px;";
                                     a.title = "More Info";
                                     a.target = "_blank";
-                                    b.appendChild(a)
+                                    b3.appendChild(a)
+
 
                                     txt.remove();
                                 }
