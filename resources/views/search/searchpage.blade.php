@@ -5,7 +5,7 @@
         <div class="type-selector">
             <h3 class="text-center mt-5"> Select the property type: </h3>
             <div class="row justify-content-center mt-0 mt-md-5">
-                <div class="col-md-4">
+                <div class="col-md-5 col-lg-4">
                     <div class="card text-center selection-card commercial border-dark initial-selection">
                         <div class="card-body" title="Search commercial regulations">
                             <img class="display-icon" src="{{url('/img/commercial-icon.png')}}" alt="Commercial Icon"/>
@@ -13,7 +13,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mt-3 mt-md-0">
+                <div class="col-md-5 col-lg-4 mt-3 mt-md-0">
                     <div class="card text-center selection-card residential border-dark initial-selection">
                         <div class="card-body" title="Search residential regulations">
                             <img class="display-icon" src="{{url('/img/residential-icon.png')}}" alt="Residential Icon"/>
