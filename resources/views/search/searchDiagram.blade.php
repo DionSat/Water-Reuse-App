@@ -15,16 +15,17 @@
             <div class="tree-navbar">
                     <script src="https://balkangraph.com/js/latest/OrgChart.js"></script>
                     <button class="btn btn-primary fas search-btn" value="Kitchen Sink" title="Kitchen Sink"><img src="/img/app_KITCHEN SINK.jpg" height=30px width=30px/></button>
-                    <button class="btn btn-primary fas search-btn" value="Kitchen Sink + Disposer" title="Kitchen Sink + Disposer"><img src="/img/app_KITCHEN SINK.jpg" height=30px width=30px/></button>
+                    <button class="btn btn-primary fas search-btn" value="Food Disposer" title="Food Disposer"><img src="/img/app_KITCHEN SINK.jpg" height=30px width=30px/></button>
                     <button class="btn btn-primary fas search-btn" value="Dishwasher" title="Dishwasher"><img src="/img/app_DISHWASHER.jpg" height=30px width=30px/></button>
                     <button class="btn btn-primary fas search-btn" value="Lavatory" title="Lavatory"><img src="/img/app_LAVATORY.jpg" height=30px width=30px/></button>
-                    <button class="btn btn-primary fas search-btn" value="Tub + Shower" title="Tub + Shower"><img src="/img/app_TUB-SHOWER.jpg" height=30px width=30px/></button>
+                    <button class="btn btn-primary fas search-btn" value="Tub & Shower" title="Tub & Shower"><img src="/img/app_TUB-SHOWER.jpg" height=30px width=30px/></button>
                     <button class="btn btn-primary fas search-btn" value="Fire Suppression" title="Fire Suppression"><img src="/img/app_FIRE.jpg" height=30px width=30px/></button>
-                    <button class="btn btn-primary fas search-btn" value="Mechanical Cooling" title="Mechanical Cooling"><img src="/img/app_MECHANICAL.jpg" height=30px width=30px/></button>
+                    <button class="btn btn-primary fas search-btn" value="Mechanical Cooling / P-Trap Prime" title="Mechanical Cooling / P-Trap Prime"><img src="/img/app_MECHANICAL.jpg" height=30px width=30px/></button>
                     <button class="btn btn-primary fas search-btn" value="Clothes Washer" title="Clothes Washer"><img src="/img/app_CLOTHS WASHER.jpg" height=30px width=30px/></button>
                     <button class="btn btn-primary fas search-btn" value="Toilet" title="Toilet"><img src="/img/toilet.png" height=30px width=30px/></button>
-                    <button class="btn btn-primary fas search-btn" value="Composting Toilet" title="Composting Toilet"><img src="/img/toilet.png" height=30px width=30px/></button>
+                    <button class="btn btn-primary fas search-btn" value="Toilet (Composting)" title="Toilet (Composting)"><img src="/img/toilet.png" height=30px width=30px/></button>
                     <button class="btn btn-primary fas search-btn" value="Urinal" title="Urinal"><img src="/img/app_LAVATORY.jpg" height=30px width=30px/></button>
+                    <button class="btn btn-primary fas search-btn" value="Urinal (Waterless / Diverted)" title="Urinal (Waterless / Diverted)"><img src="/img/app_LAVATORY.jpg" height=30px width=30px/></button>
                     <div id="tree"></div>
             </div>
         </div>
@@ -47,13 +48,31 @@
                         <div style="background-color:#ff8c00;"></div>  Pathway Not Addressed
                     </div>
                     <div>
-                        <div style="background-color:#ff0000;"></div>  Pathway Blocked
+                        <div style="background-color:#ff0000;"></div>  Pathway Blocked / No Regulations
                     </div>
                 </div>
-
                 <div style="width:100%; height:700px;" id="orgchart"/>
                 <script>
-                    //Load all the icon images into an array
+                    var state_dest = [];
+                    var county_dest = [];
+                    var city_dest = [];
+                    var stateRules = {!! json_encode($stateRules, JSON_HEX_TAG) !!};            // get the state regulations that are allowed
+                    var countyRules = {!! json_encode($countyRules, JSON_HEX_TAG) !!};          // get the county regulations that are allowed
+                    var cityRules = {!! json_encode($cityRules, JSON_HEX_TAG) !!};              // get the city regulations that are allowed
+                    var sources = {!! json_encode($sources, JSON_HEX_TAG) !!};                  // get the source nodes from the database
+                    var destinations = {!! json_encode($destinations, JSON_HEX_TAG) !!};        // get the destination nodes from the database
+                    var reusenode = [];                                                         //array to hold all the node names
+                    /* Add the destination nodes not in sources into the sources array */
+                    for(var i = 0; i < destinations.length; i++) {
+                        if(destinations[i].node_id > 15){
+                            sources.push(destinations[i])
+                        }
+                    }
+                    /* Add all the node names to an array */
+                    for(var i = 0; i < sources.length; i++) {
+                        reusenode.push(sources[i].node_name);
+                    }
+
                     var icons = new Array();
                     icons[0] = new Image();
                     icons[0].src = "{{ asset('img/water sources_1.jpg') }}";
@@ -131,15 +150,286 @@
                         OrgChart.toolbarUI.zoomInIcon = '<i class="tb fas fa-search-plus fa-2x fa-fw" title="Zoom In"></i>';
 
                         /* Link Animations */
-                        OrgChart.templates.ana.link = '<path class="backgroundPath" stroke-linejoin="round" stroke="#00cdcd" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
+                        OrgChart.templates.ana.link = '<path class="backgroundPath" stroke-linejoin="round" stroke="#00cc99" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
                             '<path class="dashPath" stroke-width="4" fill="none" stroke="#ffffff" stroke-dasharray="10"  d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>';
+
+                        /* Custom Template to not available nodes*/
+                        OrgChart.templates.no_regulation = Object.assign({}, OrgChart.templates.ana);
+
+                        OrgChart.templates.no_regulation.node =
+                            '<rect x="0" y="0" height="120" width="250" fill="#ff0000" stroke-width="1" stroke="#808080" rx="5" ry="5"></rect>'
+
+                        OrgChart.templates.no_regulation.link = '<path class="backgroundPath" stroke-linejoin="round" stroke="#00cc99" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
+                            '<path class="dashPath" stroke-width="4" fill="none" stroke="#ffffff" stroke-dasharray="10"  d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>';
+
+                        /* Custom template for nodes that may have path */
+                        OrgChart.templates.possible_pathway = Object.assign({}, OrgChart.templates.ana);
+
+                        //ff8c00
+
+                        OrgChart.templates.possible_pathway.node =
+                            '<rect x="0" y="0" height="120" width="250" fill="#ff8c00" stroke-width="1" stroke="#808080" rx="5" ry="5"></rect>'
+
+                        OrgChart.templates.possible_pathway.link = '<path class="backgroundPath" stroke-linejoin="round" stroke="#00cc99" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
+                            '<path class="dashPath" stroke-width="4" fill="none" stroke="#ffffff" stroke-dasharray="10"  d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>';
+
+                        var nodes = [
+                            /* Water Sources Root */
+                            {id: 0, Name: "Water Sources", img: "data:image/jpeg;base64," + string_icons[0]},
+                            /* Level 2 Water Sources */
+                            {id: 1, pid: 0, Name: "Condensate", Source: "Water Sources", Links: "", img: "data:image/jpeg;base64," + string_icons[1]},
+                            {id: 2, pid: 0, Name: "Precipitation", Source: "Water Sources", Links: "", img: "data:image/jpeg;base64," + string_icons[2]},
+                            {id: 3, pid: 0, Name: "Storm Water Runoff", Source: "Water Sources", Links: "", img: "data:image/jpeg;base64," + string_icons[3]},
+                            {id: 4, pid: 0, Name: "Surface Water", Source: "Water Sources", Links: "", img: "data:image/jpeg;base64," + string_icons[4]},
+                            {id: 5, pid: 0, Name: "Shallow Ground Water", Source: "Water Sources", Links: "", img: "data:image/jpeg;base64," + string_icons[5]},
+                            {id: 6, pid: 0, Name: "Ground Water", Source: "Water Sources", Links: "", img: "data:image/jpeg;base64," + string_icons[6]},
+                            {id: 7, pid: 0, Name: "Water Facility/ Purveyor", Source: "Water Sources", Links: "", img: "data:image/jpeg;base64," + string_icons[7]},
+
+                            /* Level 3 Child Nodes */
+                            /* Condensate Child Nodes */
+                            {id: 8, pid: 1, Name: "Kitchen Sink", Source: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
+                            {id: 9, pid: 1, Name: "Food Disposer", Source: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
+                            {id: 10, pid: 1, Name: "Dishwasher", Source: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[10]},
+                            {id: 11, pid: 1, Name: "Lavatory", Source: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[11]},
+                            {id: 12, pid: 1, Name: "Tub & Shower", Source: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[12]},
+                            {id: 13, pid: 1, Name: "Fire Suppression", Source: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[13]},
+                            {id: 14, pid: 1, Name: "Mechanical Cooling / P-Trap Prime", Source: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[14]},
+                            {id: 15, pid: 1, Name: "Clothes Washer", Source: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[15]},
+                            {id: 16, pid: 1, Name: "Toilet", Source: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[16]},
+                            {id: 17, pid: 1, Name: "Toilet (Composting)", Source: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[17]},
+                            {id: 18, pid: 1, Name: "Urinal", Source: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[18]},
+                            {id: 19, pid: 1, Name: "Urinal (Waterless / Diverted)", Source: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[18]},
+
+                            /* Precipitation Child Nodes */
+                            {id: 20, pid: 2, Name: "Kitchen Sink", Source: "Precipitation", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
+                            {id: 21, pid: 2, Name: "Food Disposer", Source: "Precipitation", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
+                            {id: 22, pid: 2, Name: "Dishwasher", Source: "Precipitation", Links: "", img: "data:image/jpeg;base64," + string_icons[10]},
+                            {id: 23, pid: 2, Name: "Lavatory", Source: "Precipitation", Links: "", img: "data:image/jpeg;base64," + string_icons[11]},
+                            {id: 24, pid: 2, Name: "Tub & Shower", Source: "Precipitation", Links: "", img: "data:image/jpeg;base64," + string_icons[12]},
+                            {id: 25, pid: 2, Name: "Fire Suppression", Source: "Precipitation", Links: "", img: "data:image/jpeg;base64," + string_icons[13]},
+                            {id: 26, pid: 2, Name: "Mechanical Cooling / P-Trap Prime", Source: "Precipitation", Links: "", img: "data:image/jpeg;base64," + string_icons[14]},
+                            {id: 27, pid: 2, Name: "Clothes Washer", Source: "Precipitation", Links: "", img: "data:image/jpeg;base64," + string_icons[15]},
+                            {id: 28, pid: 2, Name: "Toilet", Source: "Precipitation", Links: "", img: "data:image/jpeg;base64," + string_icons[16]},
+                            {id: 29, pid: 2, Name: "Toilet (Composting)", Source: "Precipitation", Links: "", img: "data:image/jpeg;base64," + string_icons[17]},
+                            {id: 30, pid: 2, Name: "Urinal", Source: "Precipitation", Links: "", img: "data:image/jpeg;base64," + string_icons[18]},
+                            {id: 31, pid: 2, Name: "Urinal (Waterless / Diverted)", Source: "Precipitation", Links: "", img: "data:image/jpeg;base64," + string_icons[18]},
+
+                            /* Stormwater Runoff Child Nodes */
+                            {id: 32, pid: 3, Name: "Kitchen Sink", Source: "Stormwater Runoff", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
+                            {id: 33, pid: 3, Name: "Food Disposer", Source: "Stormwater Runoff", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
+                            {id: 34, pid: 3, Name: "Dishwasher", Source: "Stormwater Runoff", Links: "", img: "data:image/jpeg;base64," + string_icons[10]},
+                            {id: 35, pid: 3, Name: "Lavatory", Source: "Stormwater Runoff", Links: "", img: "data:image/jpeg;base64," + string_icons[11]},
+                            {id: 36, pid: 3, Name: "Tub & Shower", Source: "Stormwater Runoff", Links: "", img: "data:image/jpeg;base64," + string_icons[12]},
+                            {id: 37, pid: 3, Name: "Fire Suppression", Source: "Stormwater Runoff", Links: "", img: "data:image/jpeg;base64," + string_icons[13]},
+                            {id: 38, pid: 3, Name: "Mechanical Cooling / P-Trap Prime", Source: "Stormwater Runoff", Links: "", img: "data:image/jpeg;base64," + string_icons[14]},
+                            {id: 39, pid: 3, Name: "Clothes Washer", Source: "Stormwater Runoff", Links: "", img: "data:image/jpeg;base64," + string_icons[15]},
+                            {id: 40, pid: 3, Name: "Toilet", Source: "Stormwater Runoff", Links: "", img: "data:image/jpeg;base64," + string_icons[16]},
+                            {id: 41, pid: 3, Name: "Toilet (Composting)", Source: "Stormwater Runoff", Links: "", img: "data:image/jpeg;base64," + string_icons[17]},
+                            {id: 42, pid: 3, Name: "Urinal", Source: "Stormwater Runoff", Links: "", img: "data:image/jpeg;base64," + string_icons[18]},
+                            {id: 43, pid: 3, Name: "Urinal (Waterless / Diverted)", Source: "Stormwater Runoff", Links: "", img: "data:image/jpeg;base64," + string_icons[18]},
+
+                            /* Surface Water Child Nodes */
+                            {id: 44, pid: 4, Name: "Kitchen Sink", Source: "Surface Water", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
+                            {id: 45, pid: 4, Name: "Food Disposer", Source: "Surface Water", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
+                            {id: 46, pid: 4, Name: "Dishwasher", Source: "Surface Water", Links: "", img: "data:image/jpeg;base64," + string_icons[10]},
+                            {id: 47, pid: 4, Name: "Lavatory", Source: "Surface Water", Links: "", img: "data:image/jpeg;base64," + string_icons[11]},
+                            {id: 48, pid: 4, Name: "Tub & Shower", Source: "Surface Water", Links: "", img: "data:image/jpeg;base64," + string_icons[12]},
+                            {id: 49, pid: 4, Name: "Fire Suppression", Source: "Surface Water", Links: "", img: "data:image/jpeg;base64," + string_icons[13]},
+                            {id: 50, pid: 4, Name: "Mechanical Cooling / P-Trap Prime", Source: "Surface Water", Links: "", img: "data:image/jpeg;base64," + string_icons[14]},
+                            {id: 51, pid: 4, Name: "Clothes Washer", Source: "Surface Water", Links: "", img: "data:image/jpeg;base64," + string_icons[15]},
+                            {id: 52, pid: 4, Name: "Toilet", Source: "Surface Water", Links: "", img: "data:image/jpeg;base64," + string_icons[16]},
+                            {id: 53, pid: 4, Name: "Toilet (Composting)", Source: "Surface Water", Links: "", img: "data:image/jpeg;base64," + string_icons[17]},
+                            {id: 54, pid: 4, Name: "Urinal", Source: "Surface Water", Links: "", img: "data:image/jpeg;base64," + string_icons[18]},
+                            {id: 55, pid: 4, Name: "Urinal (Waterless / Diverted)", Source: "Surface Water", Links: "", img: "data:image/jpeg;base64," + string_icons[18]},
+
+                            /* Shallow Groundwater Child Nodes */
+                            {id: 56, pid: 5, Name: "Kitchen Sink", Source: "Shallow Groundwater", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
+                            {id: 57, pid: 5, Name: "Food Disposer", Source: "Shallow Groundwater", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
+                            {id: 58, pid: 5, Name: "Dishwasher", Source: "Shallow Groundwater", Links: "", img: "data:image/jpeg;base64," + string_icons[10]},
+                            {id: 59, pid: 5, Name: "Lavatory", Source: "Shallow Groundwater", Links: "", img: "data:image/jpeg;base64," + string_icons[11]},
+                            {id: 60, pid: 5, Name: "Tub & Shower", Source: "Shallow Groundwater", Links: "", img: "data:image/jpeg;base64," + string_icons[12]},
+                            {id: 61, pid: 5, Name: "Fire Suppression", Source: "Shallow Groundwater", Links: "", img: "data:image/jpeg;base64," + string_icons[13]},
+                            {id: 62, pid: 5, Name: "Mechanical Cooling / P-Trap Prime", Source: "Shallow Groundwater", Links: "", img: "data:image/jpeg;base64," + string_icons[14]},
+                            {id: 63, pid: 5, Name: "Clothes Washer", Source: "Shallow Groundwater", Links: "", img: "data:image/jpeg;base64," + string_icons[15]},
+                            {id: 64, pid: 5, Name: "Toilet", Source: "Shallow Groundwater", Links: "", img: "data:image/jpeg;base64," + string_icons[16]},
+                            {id: 65, pid: 5, Name: "Toilet (Composting)", Source: "Shallow Groundwater", Links: "", img: "data:image/jpeg;base64," + string_icons[17]},
+                            {id: 66, pid: 5, Name: "Urinal", Source: "Shallow Groundwater", Links: "", img: "data:image/jpeg;base64," + string_icons[18]},
+                            {id: 67, pid: 5, Name: "Urinal (Waterless / Diverted)", Source: "Shallow Groundwater", Links: "", img: "data:image/jpeg;base64," + string_icons[18]},
+
+                            /* Ground Water Child Nodes */
+                            {id: 68, pid: 6, Name: "Kitchen Sink", Source: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
+                            {id: 69, pid: 6, Name: "Food Disposer", Source: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
+                            {id: 70, pid: 6, Name: "Dishwasher", Source: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[10]},
+                            {id: 71, pid: 6, Name: "Lavatory", Source: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[11]},
+                            {id: 72, pid: 6, Name: "Tub & Shower", Source: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[12]},
+                            {id: 73, pid: 6, Name: "Fire Suppression", Source: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[13]},
+                            {id: 74, pid: 6, Name: "Mechanical Cooling / P-Trap Prime", Source: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[14]},
+                            {id: 75, pid: 6, Name: "Clothes Washer", Source: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[15]},
+                            {id: 76, pid: 6, Name: "Toilet", Source: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[16]},
+                            {id: 77, pid: 6, Name: "Toilet (Composting)", Source: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[17]},
+                            {id: 78, pid: 6, Name: "Urinal", Source: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[18]},
+                            {id: 79, pid: 6, Name: "Urinal (Waterless / Diverted)", Source: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[18]}
+
+                            /* Water Facility Child Nodes ( None ) */
+                        ]
+
+                        /* Variables for the state, county, city allowed and blocked reusenodes */
+                        var stateSurfaceWaterAllowed = [];
+                        var stateShallowGroundWaterAllowed = [];
+                        var stateGroundWaterAllowed = [];
+                        var stateStormWaterAllowed = [];
+                        var stateprecipitationAllowed = [];
+                        var stateCondensateAllowed = [];
+                        var stateSurfaceWaterBlocked = [];
+                        var stateShallowGroundWaterBlocked = [];
+                        var stateGroundWaterBlocked = [];
+                        var stateStormWaterBlocked = [];
+                        var stateprecipitationBlocked = [];
+                        var stateCondensateBlocked = [];
+
+                        /* Look at the allowed nodes for the state depending on the water source */
+                        for(var i = 0; i < stateRules.length; i++) {
+                            if(stateRules[i].source.node_name === 'Surface Water') {
+                                stateSurfaceWaterAllowed.push(stateRules[i].destination.node_name);
+                            }
+                            if(stateRules[i].source.node_name === 'Shallow Groundwater') {
+                                stateShallowGroundWaterAllowed.push(stateRules[i].destination.node_name);
+                            }
+                            if(stateRules[i].source.node_name === 'Ground Water') {
+                                stateGroundWaterAllowed.push(stateRules[i].destination.node_name);
+                            }
+                            if(stateRules[i].source.node_name === 'Stormwater Runoff') {
+                                stateStormWaterAllowed.push(stateRules[i].destination.node_name);
+                            }
+                            if(stateRules[i].source.node_name === 'Precipitation') {
+                                stateprecipitationAllowed.push(stateRules[i].destination.node_name);
+                            }
+                            if(stateRules[i].source.node_name === 'Condensate') {
+                                stateCondensateAllowed.push(stateRules[i].destination.node_name);
+                            }
+                        }
+
+                        /* Look at complete list of reusenode and find nodes that are not allowed */
+                        for(var i = 0; i < reusenode.length; i++) {
+                            if(stateSurfaceWaterAllowed.includes(reusenode[i]) !== true) {
+                                stateSurfaceWaterBlocked.push(reusenode[i]);
+                            }
+                            if(stateShallowGroundWaterAllowed.includes(reusenode[i]) !== true) {
+                                stateShallowGroundWaterBlocked.push(reusenode[i]);
+                            }
+                            if(stateGroundWaterAllowed.includes(reusenode[i]) !== true) {
+                                stateGroundWaterBlocked.push(reusenode[i]);
+                            }
+                            if(stateStormWaterAllowed.includes(reusenode[i]) !== true) {
+                                stateStormWaterBlocked.push(reusenode[i]);
+                            }
+                            if(stateprecipitationAllowed.includes(reusenode[i]) !== true) {
+                                stateprecipitationBlocked.push(reusenode[i]);
+                            }
+                            if(stateCondensateAllowed.includes(reusenode[i]) !== true) {
+                                stateCondensateBlocked.push(reusenode[i]);
+                            }
+                        }
+
+                        surfaceWaterNotAllowedNodes = []
+                        shallowGroundWaterNotAllowedNodes = []
+                        groundWaterNotAllowedNodes = []
+                        stormWaterNotAllowedNodes = []
+                        precipitationNotAllowedNodes = []
+                        condensateNotAllowedNodes = []
+                        for(var i = 0; i < reusenode.length; i++) {
+                            if(stateSurfaceWaterBlocked.includes(reusenode[i])) {
+                                surfaceWaterNotAllowedNodes.push(reusenode[i]);
+                            }
+                            if(stateShallowGroundWaterBlocked.includes(reusenode[i])) {
+                                shallowGroundWaterNotAllowedNodes.push(reusenode[i]);
+                            }
+                            if(stateGroundWaterBlocked.includes(reusenode[i])) {
+                                groundWaterNotAllowedNodes.push(reusenode[i]);
+                            }
+                            if(stateStormWaterBlocked.includes(reusenode[i])) {
+                                stormWaterNotAllowedNodes.push(reusenode[i]);
+                            }
+                            if(stateprecipitationBlocked.includes(reusenode[i])) {
+                                precipitationNotAllowedNodes.push(reusenode[i]);
+                            }
+                            if(stateCondensateBlocked.includes(reusenode[i])) {
+                                condensateNotAllowedNodes.push(reusenode[i]);
+                            }
+                        }
+
+                        /* Switch all the nodes from each source to grey if it is in the NotAllowedNodes */
+                        for(var i = 8; i < nodes.length; i++) {
+                            if(nodes[i].pid === 1) {
+                                for(var j = 0; j < condensateNotAllowedNodes.length; j++){
+                                    if(nodes[i].Name === condensateNotAllowedNodes[j]) {
+                                        nodes[i].tags = ['no_regulation']
+                                    }
+                                }
+                            }
+                            if(nodes[i].pid === 2) {
+                                for(var j = 0; j < precipitationNotAllowedNodes.length; j++){
+                                    if(nodes[i].Name === precipitationNotAllowedNodes[j]) {
+                                        nodes[i].tags = ['PathwayBlocked']
+                                    }
+                                }
+                            }
+                            if(nodes[i].pid === 3) {
+                                for(var j = 0; j < stormWaterNotAllowedNodes.length; j++){
+                                    if(nodes[i].Name === stormWaterNotAllowedNodes[j]) {
+                                        nodes[i].tags = ['PathwayBlocked']
+                                    }
+                                }
+                            }
+                            if(nodes[i].pid === 4) {
+                                for(var j = 0; j < surfaceWaterNotAllowedNodes.length; j++){
+                                    if(nodes[i].Name === surfaceWaterNotAllowedNodes[j]) {
+                                        nodes[i].tags = ['PathwayBlocked']
+                                    }
+                                }
+                            }
+                            if(nodes[i].pid === 5) {
+                                for(var j = 0; j < shallowGroundWaterNotAllowedNodes.length; j++){
+                                    if(nodes[i].Name === shallowGroundWaterNotAllowedNodes[j]) {
+                                        nodes[i].tags = ['PathwayBlocked']
+                                    }
+                                }
+                            }
+                            if(nodes[i].pid === 6) {
+                                for(var j = 0; j < groundWaterNotAllowedNodes.length; j++){
+                                    if(nodes[i].Name === groundWaterNotAllowedNodes[j]) {
+                                        nodes[i].tags = ['PathwayBlocked']
+                                    }
+                                }
+                            }
+                        }
+                        console.log(stateRules);
+
+                        for(var i = 0; i < stateRules.length; i++) {
+                            if(stateRules[i].allowed.allowed_id === 2) {
+                                for(var j = 0; j < nodes.length; j++) {
+                                    if(stateRules[i].source.node_name === nodes[j].Source && stateRules[i].destination.node_name === nodes[j].Name) {
+                                        nodes[j].tags = ['PathwayNotAddressed']
+                                    }
+                                }
+                            }
+                        }
+
 
                         /* Chart */
                         let chart = new OrgChart(document.getElementById("orgchart"), {
                             template: "ana",
                             enableSearch: true,
-                            searchFields: ["Name", "ParentName", "img"],
+                            searchFields: ["Name", "Source", "img"],
                             align: OrgChart.ORIENTATION,
+                            tags: {
+                                PathwayBlocked: {
+                                    template: "no_regulation"
+                                },
+                                PathwayNotAddressed: {
+                                    template: "possible_pathway"
+                                }
+                            },
                             menu: {
                                 pdf: {
                                     text: "Export PDF",
@@ -162,107 +452,16 @@
                             },
                             nodeBinding: {
                                 field_0: "Name",
-                                field_1: "Links",
+                                field_1: "Source",
+                                field_2: "Links",
                                 img_0: "img",
-                                alt_0: "ParentName"
                             },
                             collapse: {
                                 level: 2,
                                 allChildren: true
                             },
-                            nodes: [
-                                /* Water Sources Root */
-                                {id: 0, Name: "Water Sources", img: "data:image/jpeg;base64," + string_icons[0]},
-                                /* Level 2 Water Sources */
-                                {id: 1, pid: 0, Name: "Condensate", ParentName: "Water Sources", Links: "", img: "data:image/jpeg;base64," + string_icons[1]},
-                                {id: 2, pid: 0, Name: "Precipitation", ParentName: "Water Sources", Links: "", img: "data:image/jpeg;base64," + string_icons[2]},
-                                {id: 3, pid: 0, Name: "Stormwater Runoff", ParentName: "Water Sources", Links: "", img: "data:image/jpeg;base64," + string_icons[3]},
-                                {id: 4, pid: 0, Name: "Surface Water", ParentName: "Water Sources", Links: "", img: "data:image/jpeg;base64," + string_icons[4]},
-                                {id: 5, pid: 0, Name: "Shallow Groundwater", ParentName: "Water Sources", Links: "", img: "data:image/jpeg;base64," + string_icons[5]},
-                                {id: 6, pid: 0, Name: "Ground Water", ParentName: "Water Sources", Links: "", img: "data:image/jpeg;base64," + string_icons[6]},
-                                {id: 7, pid: 0, Name: "Water Facility/ Purveyor", ParentName: "Water Sources", Links: "", img: "data:image/jpeg;base64," + string_icons[7]},
 
-                                /* Level 3 Child Nodes */
-                                /* Condensate Child Nodes */
-                                {id: 8, pid: 1, Name: "Kitchen Sink", ParentName: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
-                                {id: 9, pid: 1, Name: "Kitchen Sink + Disposer", ParentName: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
-                                {id: 10, pid: 1, Name: "Dishwasher", ParentName: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[10]},
-                                {id: 11, pid: 1, Name: "Lavatory", ParentName: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[11]},
-                                {id: 12, pid: 1, Name: "Tub + Shower", ParentName: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[12]},
-                                {id: 13, pid: 1, Name: "Fire Suppression", ParentName: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[13]},
-                                {id: 14, pid: 1, Name: "Mechanical Cooling", ParentName: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[14]},
-                                {id: 15, pid: 1, Name: "Clothes Washer", ParentName: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[15]},
-                                {id: 16, pid: 1, Name: "Toilet", ParentName: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[16]},
-                                {id: 17, pid: 1, Name: "Composting Toilet", ParentName: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[17]},
-                                {id: 18, pid: 1, Name: "Urinal", ParentName: "Condensate", Links: "", img: "data:image/jpeg;base64," + string_icons[18]},
-
-                                /* Precipitation Child Nodes */
-                                {id: 19, pid: 2, Name: "Kitchen Sink", ParentName: "Precipitation", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
-                                {id: 20, pid: 2, Name: "Kitchen Sink + Disposer", ParentName: "Precipitation", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
-                                {id: 21, pid: 2, Name: "Dishwasher", ParentName: "Precipitation", Links: "", img: "data:image/jpeg;base64," + string_icons[10]},
-                                {id: 22, pid: 2, Name: "Lavatory", ParentName: "Precipitation", Links: "", img: "data:image/jpeg;base64," + string_icons[11]},
-                                {id: 23, pid: 2, Name: "Tub + Shower", ParentName: "Precipitation", Links: "", img: "data:image/jpeg;base64," + string_icons[12]},
-                                {id: 24, pid: 2, Name: "Fire Suppression", ParentName: "Precipitation", Links: "", img: "data:image/jpeg;base64," + string_icons[13]},
-                                {id: 25, pid: 2, Name: "Mechanical Cooling", ParentName: "Precipitation", Links: "", img: "data:image/jpeg;base64," + string_icons[14]},
-                                {id: 26, pid: 2, Name: "Clothes Washer", ParentName: "Precipitation", Links: "", img: "data:image/jpeg;base64," + string_icons[15]},
-                                {id: 27, pid: 2, Name: "Toilet", ParentName: "Precipitation", Links: "", img: "data:image/jpeg;base64," + string_icons[16]},
-                                {id: 28, pid: 2, Name: "Composting Toilet", ParentName: "Precipitation", Links: "", img: "data:image/jpeg;base64," + string_icons[17]},
-                                {id: 29, pid: 2, Name: "Urinal", ParentName: "Precipitation", Links: "", img: "data:image/jpeg;base64," + string_icons[18]},
-
-                                /* Stormwater Runoff Child Nodes */
-                                {id: 30, pid: 3, Name: "Kitchen Sink", ParentName: "Stormwater Runoff", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
-                                {id: 31, pid: 3, Name: "Kitchen Sink + Disposer", ParentName: "Stormwater Runoff", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
-                                {id: 32, pid: 3, Name: "Dishwasher", ParentName: "Stormwater Runoff", Links: "", img: "data:image/jpeg;base64," + string_icons[10]},
-                                {id: 33, pid: 3, Name: "Lavatory", ParentName: "Stormwater Runoff", Links: "", img: "data:image/jpeg;base64," + string_icons[11]},
-                                {id: 34, pid: 3, Name: "Tub + Shower", ParentName: "Stormwater Runoff", Links: "", img: "data:image/jpeg;base64," + string_icons[12]},
-                                {id: 35, pid: 3, Name: "Fire Suppression", ParentName: "Stormwater Runoff", Links: "", img: "data:image/jpeg;base64," + string_icons[13]},
-                                {id: 36, pid: 3, Name: "Mechanical Cooling", ParentName: "Stormwater Runoff", Links: "", img: "data:image/jpeg;base64," + string_icons[14]},
-                                {id: 37, pid: 3, Name: "Clothes Washer", ParentName: "Stormwater Runoff", Links: "", img: "data:image/jpeg;base64," + string_icons[15]},
-                                {id: 38, pid: 3, Name: "Toilet", ParentName: "Stormwater Runoff", Links: "", img: "data:image/jpeg;base64," + string_icons[16]},
-                                {id: 39, pid: 3, Name: "Composting Toilet", ParentName: "Stormwater Runoff", Links: "", img: "data:image/jpeg;base64," + string_icons[17]},
-                                {id: 40, pid: 3, Name: "Urinal", ParentName: "Stormwater Runoff", Links: "", img: "data:image/jpeg;base64," + string_icons[18]},
-
-                                /* Surface Water Child Nodes */
-                                {id: 41, pid: 4, Name: "Kitchen Sink", ParentName: "Surface Water", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
-                                {id: 42, pid: 4, Name: "Kitchen Sink + Disposer", ParentName: "Surface Water", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
-                                {id: 43, pid: 4, Name: "Dishwasher", ParentName: "Surface Water", Links: "", img: "data:image/jpeg;base64," + string_icons[10]},
-                                {id: 44, pid: 4, Name: "Lavatory", ParentName: "Surface Water", Links: "", img: "data:image/jpeg;base64," + string_icons[11]},
-                                {id: 45, pid: 4, Name: "Tub + Shower", ParentName: "Surface Water", Links: "", img: "data:image/jpeg;base64," + string_icons[12]},
-                                {id: 46, pid: 4, Name: "Fire Suppression", ParentName: "Surface Water", Links: "", img: "data:image/jpeg;base64," + string_icons[13]},
-                                {id: 47, pid: 4, Name: "Mechanical Cooling", ParentName: "Surface Water", Links: "", img: "data:image/jpeg;base64," + string_icons[14]},
-                                {id: 48, pid: 4, Name: "Clothes Washer", ParentName: "Surface Water", Links: "", img: "data:image/jpeg;base64," + string_icons[15]},
-                                {id: 49, pid: 4, Name: "Toilet", ParentName: "Surface Water", Links: "", img: "data:image/jpeg;base64," + string_icons[16]},
-                                {id: 50, pid: 4, Name: "Composting Toilet", ParentName: "Surface Water", Links: "", img: "data:image/jpeg;base64," + string_icons[17]},
-                                {id: 51, pid: 4, Name: "Urinal", ParentName: "Surface Water", Links: "", img: "data:image/jpeg;base64," + string_icons[18]},
-
-                                /* Shallow Groundwater Child Nodes */
-                                {id: 52, pid: 5, Name: "Kitchen Sink", ParentName: "Shallow Groundwater", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
-                                {id: 53, pid: 5, Name: "Kitchen Sink + Disposer", ParentName: "Shallow Groundwater", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
-                                {id: 54, pid: 5, Name: "Dishwasher", ParentName: "Shallow Groundwater", Links: "", img: "data:image/jpeg;base64," + string_icons[10]},
-                                {id: 55, pid: 5, Name: "Lavatory", ParentName: "Shallow Groundwater", Links: "", img: "data:image/jpeg;base64," + string_icons[11]},
-                                {id: 56, pid: 5, Name: "Tub + Shower", ParentName: "Shallow Groundwater", Links: "", img: "data:image/jpeg;base64," + string_icons[12]},
-                                {id: 57, pid: 5, Name: "Fire Suppression", ParentName: "Shallow Groundwater", Links: "", img: "data:image/jpeg;base64," + string_icons[13]},
-                                {id: 58, pid: 5, Name: "Mechanical Cooling", ParentName: "Shallow Groundwater", Links: "", img: "data:image/jpeg;base64," + string_icons[14]},
-                                {id: 59, pid: 5, Name: "Clothes Washer", ParentName: "Shallow Groundwater", Links: "", img: "data:image/jpeg;base64," + string_icons[15]},
-                                {id: 60, pid: 5, Name: "Toilet", ParentName: "Shallow Groundwater", Links: "", img: "data:image/jpeg;base64," + string_icons[16]},
-                                {id: 61, pid: 5, Name: "Composting Toilet", ParentName: "Shallow Groundwater", Links: "", img: "data:image/jpeg;base64," + string_icons[17]},
-                                {id: 62, pid: 5, Name: "Urinal", ParentName: "Shallow Groundwater", Links: "", img: "data:image/jpeg;base64," + string_icons[18]},
-
-                                /* Ground Water Child Nodes */
-                                {id: 63, pid: 6, Name: "Kitchen Sink", ParentName: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[8]},
-                                {id: 64, pid: 6, Name: "Kitchen Sink + Disposer", ParentName: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[9]},
-                                {id: 65, pid: 6, Name: "Dishwasher", ParentName: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[10]},
-                                {id: 66, pid: 6, Name: "Lavatory", ParentName: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[11]},
-                                {id: 67, pid: 6, Name: "Tub + Shower", ParentName: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[12]},
-                                {id: 68, pid: 6, Name: "Fire Suppression", ParentName: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[13]},
-                                {id: 69, pid: 6, Name: "Mechanical Cooling", ParentName: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[14]},
-                                {id: 70, pid: 6, Name: "Clothes Washer", ParentName: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[15]},
-                                {id: 71, pid: 6, Name: "Toilet", ParentName: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[16]},
-                                {id: 72, pid: 6, Name: "Composting Toilet", ParentName: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[17]},
-                                {id: 73, pid: 6, Name: "Urinal", ParentName: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[18]}
-
-                                /* Water Facility Child Nodes ( None ) */
-                            ]
+                            nodes: nodes
                         });
 
                         /* Node Details Button Links */
@@ -302,22 +501,25 @@
                         }
 
                         /* Link the buttons to the chart */
+                        /* Link the buttons to the chart */
                         var elements = document.getElementsByClassName("search-btn");
                         for (let i = 0; i < elements.length; i++) {
                             elements[i].addEventListener("click", function () {
                                 let searchname = this.value;
                                 let result = chart.find(searchname);
-
                                 if (result.length > 1) {
                                     chart.searchUI.find(searchname);
                                 }
                             });
                         }
                     }
+
                 </script>
             </div>
         </div>
     </div>
+
+
 @endsection
 
 @push("css")
@@ -331,6 +533,18 @@
             text-align: center;
             font-family: Helvetica;
             overflow-y: auto;
+        }
+        #tree {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+       /*color*/
+        .node.available rect{
+            stroke: blue;
+        }
+        .node.not_avail rect{
+            stroke: #808080;
         }
 
         /* Zoom Icons CSS */
@@ -346,7 +560,6 @@
             left: 0;
             margin: 0 0 50px 20px;
         }
-
         /* Legend Key Inner Container */
         .legend-content > div > div {
             display: inline-block;
@@ -358,57 +571,6 @@
         /* Water Use Paths Animation */
         .dashPath {
             animation: dash 5s linear infinite;
-        }
-
-        /* Pathway Not Addressed Paths Animation */
-        /* Note that .backgroundPath must be kept in, however intelliJ will note it as unused but the class for the path animations is created on page load */
-            /* Condensation (None) */
-            /* Precipitation */
-        [link-id='[2][25]'] .backgroundPath,
-        [link-id='[2][26]'] .backgroundPath,
-            /* Stormwater Runoff */
-        [link-id='[3][35]'] .backgroundPath,
-        [link-id='[3][37]'] .backgroundPath
-            /* Surface Water (None) */
-            /* Shallow Ground Water (None) */
-            /* Ground Water (None) */
-            /* Water Facility (None) */
-        {
-            stroke: #ff8c00;
-        }
-
-        /* Blocked Paths Animation */
-        /* Note that .backgroundPath must be kept in, however intelliJ will note it as unused but the class for the path animations is created on page load */
-            /* Condensation */
-        [link-id='[1][8]'] .backgroundPath,
-        [link-id='[1][9]'] .backgroundPath,
-        [link-id='[1][10]'] .backgroundPath,
-        [link-id='[1][11]'] .backgroundPath,
-        [link-id='[1][12]'] .backgroundPath,
-            /* Precipitation ( No Blocks ) */
-            /* Stormwater Runoff */
-        [link-id='[3][30]'] .backgroundPath,
-        [link-id='[3][31]'] .backgroundPath,
-        [link-id='[3][32]'] .backgroundPath,
-        [link-id='[3][33]'] .backgroundPath,
-        [link-id='[3][34]'] .backgroundPath
-            /* Surface Water ( No Blocks ) */
-            /* Shallow Ground Water */
-        [link-id='[5][52]'] .backgroundPath,
-        [link-id='[5][53]'] .backgroundPath,
-        [link-id='[5][54]'] .backgroundPath,
-        [link-id='[5][55]'] .backgroundPath,
-        [link-id='[5][56]'] .backgroundPath,
-        [link-id='[5][57]'] .backgroundPath,
-        [link-id='[5][58]'] .backgroundPath,
-        [link-id='[5][59]'] .backgroundPath,
-        [link-id='[5][60]'] .backgroundPath,
-        [link-id='[5][61]'] .backgroundPath,
-        [link-id='[5][62]'] .backgroundPath
-            /* Ground Water ( No Blocks ) */
-            /* Water Facility (None) */
-        {
-            stroke: #ff0000;
         }
 
         /* Link Animation ~ Dash Type */
@@ -423,6 +585,21 @@
             }
         }
 
+        [control-node-menu-id] circle {
+            fill: #bfbfbf;
+        }
+
+        #tree>svg {
+            background-color: #2E2E2E;
+        }
+
+        .bg-search-table {
+            background-color: #2E2E2E !important;
+        }
+
+        .bg-search-table input {
+            background-color: #2E2E2E !important;
+        }
     </style>
 @endpush
 
