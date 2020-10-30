@@ -34,22 +34,19 @@
             <div class="card-body">
                 <div class="legend-content">
                     <div>
-                        <div style="background-color:#00cdcd;"></div>  First Use Water
-                    </div>
-                    <div>
-                        <div style="background-color:#c6c6c6"></div>  Greywater
-                    </div>
-                    <div>
-                        <div style="background-color:#666666;"></div>  Sewage
-                    </div>
-                    <div>
-                        <div style="background-color:#69d500;"></div>  No Permit Required
+                        <div style="background-color:#00cdcd;"></div>  Pathway Allowed
                     </div>
                     <div>
                         <div style="background-color:#ff8c00;"></div>  Pathway Not Addressed
                     </div>
                     <div>
                         <div style="background-color:#ff0000;"></div>  Pathway Blocked / No Regulations
+                    </div>
+                    <div>
+                        <div style="background-color:#9a9a9a;"></div>  Greywater
+                    </div>
+                    <div>
+                        <div style="background-color:#373737;"></div>  Sewage
                     </div>
                 </div>
                 <div style="width:100%; height:700px;" id="orgchart"/>
@@ -544,7 +541,7 @@
         }
        /*color*/
         .node.available rect{
-            stroke: blue;
+            stroke: #00cdcd;
         }
         .node.not_avail rect{
             stroke: #808080;
