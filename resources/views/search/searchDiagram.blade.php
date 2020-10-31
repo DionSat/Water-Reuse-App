@@ -268,9 +268,106 @@
                             {id: 82, pid: 6, Name: "Toilet (Composting)", Source: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[15]},
                             {id: 83, pid: 6, Name: "Toilet (Source Separated)", Source: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[15]},
                             {id: 84, pid: 6, Name: "Urinal", Source: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[16]},
-                            {id: 85, pid: 6, Name: "Urinal (Waterless / Diverted)", Source: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[16]}
+                            {id: 85, pid: 6, Name: "Urinal (Waterless / Diverted)", Source: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[16]},
 
                             /* Water Facility Child Nodes ( None ) */
+
+                            /*
+
+                            Greywater & Sewage Parent Nodes (Children of Reuse Option Nodes)
+
+                            */
+
+                            /* Greywater & Sewage Parent Nodes ~ Condensate */
+                            {id: -1, pid: 8, Name: "Greywater", Source: "Kitchen Sink ~ Condensate", Links: "", img: ""},
+                            {id: -2, pid: 8, Name: "Sewage", Source: "Kitchen Sink ~ Condensate", Links: "", img: ""},
+                            {id: -3, pid: 9, Name: "Greywater", Source: "Food Disposer ~ Condensate", Links: "", img: ""},
+                            {id: -4, pid: 9, Name: "Sewage", Source: "Food Disposer ~ Condensate", Links: "", img: ""},
+                            {id: -5, pid: 10, Name: "Greywater", Source: "Dishwasher ~ Condensate", Links: "", img: ""},
+                            {id: -6, pid: 10, Name: "Sewage", Source: "Dishwasher ~ Condensate", Links: "", img: ""},
+                            {id: -7, pid: 11, Name: "Greywater", Source: "Lavatory ~ Condensate", Links: "", img: ""},
+                            {id: -8, pid: 11, Name: "Sewage", Source: "Lavatory ~ Condensate", Links: "", img: ""},
+                            {id: -9, pid: 12, Name: "Greywater", Source: "Tub & Shower ~ Condensate", Links: "", img: ""},
+                            {id: -10, pid: 12, Name: "Sewage", Source: "Tub & Shower ~ Condensate", Links: "", img: ""},
+                            {id: -11, pid: 13, Name: "Greywater", Source: "Fire Suppression ~ Condensate", Links: "", img: ""},
+                            {id: -12, pid: 13, Name: "Sewage", Source: "Fire Suppression ~ Condensate", Links: "", img: ""},
+                            {id: -13, pid: 14, Name: "Greywater", Source: "Mechanical Cooling / P-Trap Prime ~ Condensate", Links: "", img: ""},
+                            {id: -14, pid: 14, Name: "Sewage", Source: "Mechanical Cooling / P-Trap Prime ~ Condensate", Links: "", img: ""},
+                            {id: -15, pid: 15, Name: "Greywater", Source: "Clothes Washer ~ Condensate", Links: "", img: ""},
+                            {id: -16, pid: 15, Name: "Sewage", Source: "Clothes Washer ~ Condensate", Links: "", img: ""},
+                            {id: -17, pid: 16, Name: "Greywater", Source: "Toilet ~ Condensate", Links: "", img: ""},
+                            {id: -18, pid: 16, Name: "Sewage", Source: "Toilet ~ Condensate", Links: "", img: ""},
+                            {id: -19, pid: 17, Name: "Greywater", Source: "Toilet (Composting) ~ Condensate", Links: "", img: ""},
+                            {id: -20, pid: 17, Name: "Sewage", Source: "Toilet (Composting) ~ Condensate", Links: "", img: ""},
+                            {id: -21, pid: 18, Name: "Greywater", Source: "Toilet (Source Separated) ~ Condensate", Links: "", img: ""},
+                            {id: -22, pid: 18, Name: "Sewage", Source: "Toilet (Source Separated) ~ Condensate", Links: "", img: ""},
+                            {id: -23, pid: 19, Name: "Greywater", Source: "Urinal ~ Condensate", Links: "", img: ""},
+                            {id: -24, pid: 19, Name: "Sewage", Source: "Urinal ~ Condensate", Links: "", img: ""},
+                            {id: -25, pid: 20, Name: "Greywater", Source: "Urinal (Waterless / Diverted) ~ Condensate", Links: "", img: ""},
+                            {id: -26, pid: 20, Name: "Sewage", Source: "Urinal (Waterless / Diverted) ~ Condensate", Links: "", img: ""},
+
+                            /* Greywater & Sewage Parent Nodes ~ Precipitation */
+                            {id: -27, pid: 21, Name: "Greywater", Source: "Kitchen Sink ~ Precipitation", Links: "", img: ""},
+                            {id: -28, pid: 21, Name: "Sewage", Source: "Kitchen Sink ~ Precipitation", Links: "", img: ""},
+                            {id: -29, pid: 22, Name: "Greywater", Source: "Food Disposer ~ Precipitation", Links: "", img: ""},
+                            {id: -30, pid: 22, Name: "Sewage", Source: "Food Disposer ~ Precipitation", Links: "", img: ""},
+                            {id: -31, pid: 23, Name: "Greywater", Source: "Dishwasher ~ Precipitation", Links: "", img: ""},
+                            {id: -32, pid: 23, Name: "Sewage", Source: "Dishwasher ~ Precipitation", Links: "", img: ""},
+                            {id: -33, pid: 24, Name: "Greywater", Source: "Lavatory ~ Precipitation", Links: "", img: ""},
+                            {id: -34, pid: 24, Name: "Sewage", Source: "Lavatory ~ Precipitation", Links: "", img: ""},
+                            {id: -35, pid: 25, Name: "Greywater", Source: "Tub & Shower ~ Precipitation", Links: "", img: ""},
+                            {id: -36, pid: 25, Name: "Sewage", Source: "Tub & Shower ~ Precipitation", Links: "", img: ""},
+                            {id: -37, pid: 26, Name: "Greywater", Source: "Fire Suppression ~ Precipitation", Links: "", img: ""},
+                            {id: -38, pid: 26, Name: "Sewage", Source: "Fire Suppression ~ Precipitation", Links: "", img: ""},
+                            {id: -39, pid: 27, Name: "Greywater", Source: "Mechanical Cooling / P-Trap Prime ~ Precipitation", Links: "", img: ""},
+                            {id: -40, pid: 27, Name: "Sewage", Source: "Mechanical Cooling / P-Trap Prime ~ Precipitation", Links: "", img: ""},
+                            {id: -41, pid: 28, Name: "Greywater", Source: "Clothes Washer ~ Precipitation", Links: "", img: ""},
+                            {id: -42, pid: 28, Name: "Sewage", Source: "Clothes Washer ~ Precipitation", Links: "", img: ""},
+                            {id: -43, pid: 29, Name: "Greywater", Source: "Toilet ~ Precipitation", Links: "", img: ""},
+                            {id: -44, pid: 29, Name: "Sewage", Source: "Toilet ~ Precipitation", Links: "", img: ""},
+                            {id: -45, pid: 30, Name: "Greywater", Source: "Toilet (Composting) ~ Precipitation", Links: "", img: ""},
+                            {id: -46, pid: 30, Name: "Sewage", Source: "Toilet (Composting) ~ Precipitation", Links: "", img: ""},
+                            {id: -47, pid: 31, Name: "Greywater", Source: "Toilet (Source Separated) ~ Precipitation", Links: "", img: ""},
+                            {id: -48, pid: 31, Name: "Sewage", Source: "Toilet (Source Separated) ~ Precipitation", Links: "", img: ""},
+                            {id: -49, pid: 32, Name: "Greywater", Source: "Urinal ~ Precipitation", Links: "", img: ""},
+                            {id: -50, pid: 32, Name: "Sewage", Source: "Urinal ~ Precipitation", Links: "", img: ""},
+                            {id: -51, pid: 33, Name: "Greywater", Source: "Urinal (Waterless / Diverted) ~ Precipitation", Links: "", img: ""},
+                            {id: -52, pid: 33, Name: "Sewage", Source: "Urinal (Waterless / Diverted) ~ Precipitation", Links: "", img: ""},
+
+                            /* Greywater & Sewage Parent Nodes ~ Stormwater Runoff */
+                            {id: -53, pid: 34, Name: "Greywater", Source: "Kitchen Sink ~ Stormwater Runoff", Links: "", img: ""},
+                            {id: -54, pid: 34, Name: "Sewage", Source: "Kitchen Sink ~ Stormwater Runoff", Links: "", img: ""},
+                            {id: -55, pid: 35, Name: "Greywater", Source: "Food Disposer ~ Stormwater Runoff", Links: "", img: ""},
+                            {id: -56, pid: 35, Name: "Sewage", Source: "Food Disposer ~ Stormwater Runoff", Links: "", img: ""},
+                            {id: -57, pid: 36, Name: "Greywater", Source: "Dishwasher ~ Stormwater Runoff", Links: "", img: ""},
+                            {id: -58, pid: 36, Name: "Sewage", Source: "Dishwasher ~ Stormwater Runoff", Links: "", img: ""},
+                            {id: -59, pid: 37, Name: "Greywater", Source: "Lavatory ~ Stormwater Runoff", Links: "", img: ""},
+                            {id: -60, pid: 37, Name: "Sewage", Source: "Lavatory ~ Stormwater Runoff", Links: "", img: ""},
+                            {id: -61, pid: 38, Name: "Greywater", Source: "Tub & Shower ~ Stormwater Runoff", Links: "", img: ""},
+                            {id: -62, pid: 38, Name: "Sewage", Source: "Tub & Shower ~ Stormwater Runoff", Links: "", img: ""},
+                            {id: -63, pid: 39, Name: "Greywater", Source: "Fire Suppression ~ Stormwater Runoff", Links: "", img: ""},
+                            {id: -64, pid: 39, Name: "Sewage", Source: "Fire Suppression ~ Stormwater Runoff", Links: "", img: ""},
+                            {id: -65, pid: 40, Name: "Greywater", Source: "Mechanical Cooling / P-Trap Prime ~ Stormwater Runoff", Links: "", img: ""},
+                            {id: -66, pid: 40, Name: "Sewage", Source: "Mechanical Cooling / P-Trap Prime ~ Stormwater Runoff", Links: "", img: ""},
+                            {id: -67, pid: 41, Name: "Greywater", Source: "Clothes Washer ~ Stormwater Runoff", Links: "", img: ""},
+                            {id: -68, pid: 41, Name: "Sewage", Source: "Clothes Washer ~ Stormwater Runoff", Links: "", img: ""},
+                            {id: -69, pid: 42, Name: "Greywater", Source: "Toilet ~ Stormwater Runoff", Links: "", img: ""},
+                            {id: -70, pid: 42, Name: "Sewage", Source: "Toilet ~ Stormwater Runoff", Links: "", img: ""},
+                            {id: -71, pid: 43, Name: "Greywater", Source: "Toilet (Composting) ~ Stormwater Runoff", Links: "", img: ""},
+                            {id: -72, pid: 43, Name: "Sewage", Source: "Toilet (Composting) ~ Stormwater Runoff", Links: "", img: ""},
+                            {id: -73, pid: 44, Name: "Greywater", Source: "Toilet (Source Separated) ~ Stormwater Runoff", Links: "", img: ""},
+                            {id: -74, pid: 44, Name: "Sewage", Source: "Toilet (Source Separated) ~ Stormwater Runoff", Links: "", img: ""},
+                            {id: -75, pid: 45, Name: "Greywater", Source: "Urinal ~ Stormwater Runoff", Links: "", img: ""},
+                            {id: -76, pid: 45, Name: "Sewage", Source: "Urinal ~ Stormwater Runoff", Links: "", img: ""},
+                            {id: -77, pid: 46, Name: "Greywater", Source: "Urinal (Waterless / Diverted) ~ Stormwater Runoff", Links: "", img: ""},
+                            {id: -78, pid: 46, Name: "Sewage", Source: "Urinal (Waterless / Diverted) ~ Stormwater Runoff", Links: "", img: ""},
+
+                            /* Greywater & Sewage Parent Nodes ~ Surface Water */
+                            /* Greywater & Sewage Parent Nodes ~ Shallow Groundwater */
+                            /* Greywater & Sewage Parent Nodes ~ Ground Water */
+                            /* Greywater & Sewage Parent Nodes ~ Water Facility */
+
+
                         ]
 
                         /* Variables for the state, county, city allowed and blocked reuse nodes */
