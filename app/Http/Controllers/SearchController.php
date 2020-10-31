@@ -72,9 +72,21 @@ class SearchController extends Controller
     public function handleAddress(Request $addressRequest){
         $address_string = $addressRequest->addressInput;
         $address_info = json_decode($this->addressData($address_string), true);
+        // dump($address_info);
         // TODO Improve error handling
         // sets stateIndex to state abbreviation Ex. Oregon = OR
         $stateIndex = $address_info["results"][0]["locations"][0]["adminArea3"];
+
+        if ($stateIndex != "OR") {
+            dump("Could not find location in Oregon");
+            return back();
+        }
+
+        $QualityCode = $address_info["results"][0]["locations"][0]["geocodeQualityCode"];
+        if ($QualityCode[3] != 'A') {
+            dump("Location ambiguous");
+            return back();
+        }
 
         try{
             $stateName = $this->states[$stateIndex];
