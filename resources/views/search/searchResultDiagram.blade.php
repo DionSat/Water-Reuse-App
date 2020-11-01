@@ -126,14 +126,18 @@
 
                 /* Custom template for nodes that may have path */
                 OrgChart.templates.possible_pathway = Object.assign({}, OrgChart.templates.ana);
-
-                //ff8c00
-
                 OrgChart.templates.possible_pathway.node =
                     '<rect x="0" y="0" height="120" width="250" fill="#ff8c00" stroke-width="1" stroke="#808080" rx="5" ry="5"></rect>'
 
                 OrgChart.templates.possible_pathway.link = '<path class="backgroundPath" stroke-linejoin="round" stroke="#00cc99" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
                     '<path class="dashPath" stroke-width="4" fill="none" stroke="#ffffff" stroke-dasharray="10"  d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>';
+
+                /* Greywater & Sewage Custom Nodes */
+                OrgChart.templates.greywater = Object.assign({}, OrgChart.templates.ana);
+                OrgChart.templates.greywater.node = '<rect x="0" y="0" height="125" width="255" rx="40px" fill="#9a9a9a"></rect>';
+                OrgChart.templates.sewage = Object.assign({}, OrgChart.templates.ana);
+                OrgChart.templates.sewage.node = '<rect x="0" y="0" height="125" width="255" rx="40px" fill="#373737"></rect>';
+
 
                 var nodes = [
                     /* Water Sources Root */
@@ -586,6 +590,12 @@
                         },
                         PathwayNotAddressed: {
                             template: "possible_pathway"
+                        },
+                        Greywater: {
+                            template: "greywater"
+                        },
+                        Sewage: {
+                            template: "sewage"
                         }
                     },
                     menu: {

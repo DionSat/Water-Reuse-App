@@ -80,15 +80,6 @@
             margin-bottom: 2px;
         }
 
-        /* Greywater & Sewage node color */
-        .node.Greywater rect {
-            fill: #9a9a9a;
-        }
-
-        .node.Sewage rect {
-            fill: #373737;
-        }
-
         /* Water Use Paths Animation */
         .dashPath {
             animation: dash 5s linear infinite;
