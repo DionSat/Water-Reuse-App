@@ -120,7 +120,7 @@
                                                         </div>
                                                 </div>
                                                 <input id="searchType" name="searchType" class="d-none" type="text" value="residential">
-                                                <button id="searchAddressButton" class="btn btn-primary btn-lg btn-block" style="margin-top: 20px;margin-bottom: 20px;" type="submit" disabled="true"> <i class="fas fa-search"></i> Search </button>
+                                                <button id="searchAddressButton" class="btn btn-primary btn-lg btn-block" style="margin-top: 20px;margin-bottom: 20px;" type="submit"> <i class="fas fa-search"></i> Search </button>
                                             </div>
                                         </div>
                                     </form>
@@ -196,9 +196,21 @@
             $("#searchAddressButton").removeAttr("disabled");
         }
         $("#searchAddressButton").click(function (){
-            //need to work
-            //when click the searchAddressButton, ...
-        });
+            var MQ_URL = "http://www.mapquestapi.com/geocoding/v1/address?key=" + MQ_API_KEY +
+                "&location=" + document.forms["item"]["StreetAddressInput"];
+
+            //alert(MQ_URL);
+
+            var settings = {
+                "url": MQ_URL,
+                "method": "POST",
+                "timeout": 0,
+            };
+
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+            });
+        });}
 
         function enableSearch() {
             $("#searchButton").removeAttr("disabled");
