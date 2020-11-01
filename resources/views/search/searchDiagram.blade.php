@@ -275,7 +275,7 @@
                             /*
 
                             Greywater & Sewage Parent Nodes (Children of Reuse Option Nodes)
-
+                                Note: id's are in negative since they aren't full node options (just parent section holders)
                             */
 
                             /* Greywater & Sewage Parent Nodes ~ Condensate */
@@ -450,6 +450,18 @@
 
 
                         ]
+
+                        for (var i = 0; i < nodes.length; i++) {
+                            var node = nodes[i];
+                            switch (node.Name) {
+                                case "Greywater":
+                                    node.tags = ["Greywater"];
+                                    break;
+                                case "Sewage":
+                                    node.tags = ["Sewage"];
+                                    break;
+                            }
+                        }
 
                         /* Variables for the state, county, city allowed and blocked reuse nodes */
                         var stateSurfaceWaterAllowed = [];
@@ -744,6 +756,15 @@
             width: 30px;
             height:8px;
             margin-bottom: 2px;
+        }
+
+        /* Greywater & Sewage node color */
+        .node.Greywater rect {
+            fill: #9a9a9a;
+        }
+
+        .node.Sewage rect {
+            fill: #373737;
         }
 
         /* Water Use Paths Animation */
