@@ -7,6 +7,10 @@
                 {{ session('status') }}
             </div>
         @endif
+        <div class="card col-8 mx-auto" style="border: none; text-align: center" >
+            <h2>Account page</h2>
+            <br/>
+        </div>
         <div class="card col-8 mx-auto">
             <div class="card-body">
                 <table class="table table-striped">
@@ -76,7 +80,7 @@
                     </button>
                     <button type="button" onclick="window.location='{{ route("password") }}'"
                             class="btn btn-primary">
-                        Change password
+                        Change PASSWORD
                     </button>
                 </div>
             </div>
