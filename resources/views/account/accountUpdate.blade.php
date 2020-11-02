@@ -7,6 +7,10 @@
                 {{ session('nothing') }}
             </div>
         @endif
+        <div class="card" style="border: none; text-align: center">
+            <h3>Account Update</h3>
+            <br>
+        </div>
         <form action={{ route('updateAccount') }} method="POST">
             {{ csrf_field() }}
             <div class="form-group">
@@ -25,11 +29,8 @@
                         <input type="text" class="form-control" name="countryCode" value="{{$user->countryCode}}">
                     </div>
                     <div class="form-group col-md-2">
-                        <label
-                            for="inputPhone">Phone Number</label><input type="tel" class="form-control"
-                                                                        name="inputPhone"
-                                                                        pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
-                                                                        value="{{$user->phoneNumber}}">
+                        <nobr><label for="inputPhone">Phone Number</label></nobr>
+                        <input type="tel" class="form-control" name="inputPhone" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" value="{{$user->phoneNumber}}">
                     </div>
                 </div>
                 <div class="form-row">
@@ -126,28 +127,29 @@
                         <label for="RecodeUse">Reason for Recode Usage</label>
                         <input type="text" class="form-control" name="RecodeUse" placeholder="Why do you use Recode?">
                     </div>
-                </div>
-                <div class="form-row col-6" id="contactButton">
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <div class="form col-md-6">
+                        <p>Permission to contact </p>
+
                         @if($user->can_contact === true)
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="contact" value="true" checked> Yes
+                            <label>
+                                <input type="radio" name="radio" value="true" checked>
                             </label>
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="contact" value="false"> No
+                            Yes
+                            <label>
+                                <input type="radio" name="radio" value="false">
                             </label>
+                            No
                         @else
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="contact" value="true"> Yes
+                            <label>
+                                <input type="radio" name="radio" value="true">
                             </label>
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="contact" value="false" checked> No
+                            Yes
+                            <label>
+                                <input type="radio" name="radio" value="false" checked>
                             </label>
+                            No
                         @endif
                     </div>
-                    <span id="contactLabel">Permission to contact </span>
-                    {{--<input class="form-check-input" type="checkbox" id="contactCheck" name="contact" value="{{$user->can_contact}}"> --}}
-                    {{--<label class="form-check-label" for="contactCheck">We can contact you</label> --}}
                 </div>
 
                 <div class="form row p-3">
