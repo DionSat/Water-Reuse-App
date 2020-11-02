@@ -80,13 +80,15 @@ class SearchController extends Controller
             dump("Location ambiguous");
             return back();
         }
+        // Check to ensure location is within the US
+        $CountryCode = $address_info["results"][0]["locations"][0]["adminArea1"];
+        if ($CountryCode != "US") {
+            dump("Could not find location in the United States");
+            return back();
+        }
 
         // sets stateIndex to state abbreviation Ex. Oregon = OR
         $stateIndex = $address_info["results"][0]["locations"][0]["adminArea3"];
-        if ($stateIndex != "OR") {
-            dump("Could not find location in Oregon");
-            return back();
-        }
 
         try{
             $stateName = $this->states[$stateIndex];
