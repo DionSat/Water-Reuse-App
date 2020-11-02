@@ -76,7 +76,10 @@ class SearchController extends Controller
         // TODO Improve error handling
         // Functioning bad results filtering. Maybe improve action.
         $QualityCode = $address_info["results"][0]["locations"][0]["geocodeQualityCode"];
-        if ($QualityCode[3] != 'A') {
+        echo '<script>';
+        echo 'console.log('. json_encode($QualityCode) .')';
+        echo '</script>';
+        if (($QualityCode[4] == 'X'|| $QualityCode[4] == 'C') && ($QualityCode[3] == 'X'|| $QualityCode[3] == 'C') && ($QualityCode[2] == 'X'|| $QualityCode[2] == 'C')) {
             dump("Location ambiguous");
             return back();
         }
