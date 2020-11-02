@@ -11,7 +11,7 @@
                 <i class="fas fa-clipboard-list"></i> List Option
             </a>
         </div>
-        <div class="container">
+        <div class="container"  style="display: flex; justify-content: center; align-items: center; margin-bottom: 5px;">
             <div class="tree-navbar">
                     <script src="https://balkangraph.com/js/latest/OrgChart.js"></script>
                     <button class="btn btn-primary fas search-btn" value="Kitchen Sink" title="Kitchen Sink"><img src="/img/app_KITCHEN SINK.jpg" height=30px width=30px/></button>
@@ -27,15 +27,6 @@
                     <button class="btn btn-primary fas search-btn" value="Toilet (Source Separated)" title="Toilet (Source Separated)"><img src="/img/toilet.png" height=30px width=30px/></button>
                     <button class="btn btn-primary fas search-btn" value="Urinal" title="Urinal"><img src="/img/app_LAVATORY.jpg" height=30px width=30px/></button>
                     <button class="btn btn-primary fas search-btn" value="Urinal (Waterless / Diverted)" title="Urinal (Waterless / Diverted)"><img src="/img/app_LAVATORY.jpg" height=30px width=30px/></button>
-                    <div class="disposialNav" style="margin-top: 8px; margin-bottom: 8px">
-                        <button class="btn btn-secondary fas search-btn" value="Subsurface Irrigation" title="Subsurface Irrigation"><img src=" " height=30px width=30px/></button>
-                        <button class="btn btn-secondary fas search-btn" value="Surface Irrigation" title="Surface Irrigation"><img src=" " height=30px width=30px/></button>
-                        <button class="btn btn-secondary fas search-btn" value="Injection Well" title="Injection Well"><img src=" " height=30px width=30px/></button>
-                        <button class="btn btn-secondary fas search-btn" value="Bioswale" title="Bioswale"><img src=" " height=30px width=30px/></button>
-                        <button class="btn btn-secondary fas search-btn" value="Agriculture (Non-Food)" title="Agriculture (Non-Food)"><img src=" " height=30px width=30px/></button>
-                        <button class="btn btn-secondary fas search-btn" value="Agriculture (Food)" title="Agriculture (Food)"><img src=" " height=30px width=30px/></button>
-                        <button class="btn btn-secondary fas search-btn" value="Water Treatment Facility" title="Urinal (Waterless / Diverted)"><img src="/img/water-supplier.jpg" height=30px width=30px/></button>
-                    </div>
             </div>
         </div>
         @include("search/searchResultDiagram")
