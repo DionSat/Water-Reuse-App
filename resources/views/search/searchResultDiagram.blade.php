@@ -149,7 +149,6 @@
                     {id: 4, pid: 0, Name: "Surface Water", Source: "Water Sources", Links: "", img: "data:image/jpeg;base64," + string_icons[4]},
                     {id: 5, pid: 0, Name: "Shallow Ground Water", Source: "Water Sources", Links: "", img: "data:image/jpeg;base64," + string_icons[5]},
                     {id: 6, pid: 0, Name: "Ground Water", Source: "Water Sources", Links: "", img: "data:image/jpeg;base64," + string_icons[6]},
-                    {id: 7, pid: 0, Name: "Water Facility / Purveyor", Source: "Water Sources", Links: "", img: "data:image/jpeg;base64," + string_icons[7]},
 
                     /* Level 3 Child Nodes */
                     /* Condensate Child Nodes */
@@ -241,8 +240,6 @@
                     {id: 83, pid: 6, Name: "Toilet (Source Separated)", Source: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[15]},
                     {id: 84, pid: 6, Name: "Urinal", Source: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[16]},
                     {id: 85, pid: 6, Name: "Urinal (Waterless / Diverted)", Source: "Ground Water", Links: "", img: "data:image/jpeg;base64," + string_icons[16]},
-
-                    /* Water Facility Child Nodes ( None ) */
 
                     /*
 
@@ -420,8 +417,6 @@
                     {id: -154, pid: 84, Name: "Sewage", Source: "Urinal ", Links: "", img: ""},
                     {id: -155, pid: 85, Name: "Greywater", Source: "Urinal (Waterless / Diverted) ", Links: "", img: ""},
                     {id: -156, pid: 85, Name: "Sewage", Source: "Urinal (Waterless / Diverted) ", Links: "", img: ""},
-
-                    /* Greywater & Sewage Parent Nodes ~ Water Facility ( None ) */
 
                     /*
 
@@ -1619,7 +1614,6 @@
                     {id: 1103, pid: -156, Name: "Agriculture (Food)", Source: "Sewage", Links: "", img: ""},
                     {id: 1104, pid: -156, Name: "Water Treatment Facility", Source: "Sewage", Links: "", img: ""}
 
-                    /* Water Facility / Purveyour (No Greywater / Sewage Path currently) */
                 ]
 
                 for (var i = 0; i < nodes.length; i++) {
