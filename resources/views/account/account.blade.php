@@ -13,7 +13,7 @@
         </div>
         <div class="card col-8 mx-auto">
             <div class="card-body">
-                <table class="table">
+                <table class="table table-responsive">
                     <tbody>
 
                     <tr>
