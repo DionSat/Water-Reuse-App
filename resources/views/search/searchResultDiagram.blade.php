@@ -1875,11 +1875,11 @@
                             a.className = "btn btn-primary";
                             a.style.cssText = "margin: 15px 6px 0 6px;";
                             a.title = "Code";
-                            if (<?php echo $cityRules->count()?> == 0){
+                            if ({!! json_encode($cityRules->count(), JSON_HEX_TAG) !!} == 0){
                                 a.href = "";
                             }
-                        else{
-                                a.href = "<?php echo $cityRules[0]->codesObj->linkText ?>";
+                            else {
+                                a.href = {!! json_encode($cityRules[0]->incentivesObj->linkText, JSON_HEX_TAG) !!};
                             }
                             a.target = "_blank";
                             b1.appendChild(a);
@@ -1890,11 +1890,11 @@
                             a.className = "btn btn-primary";
                             a.style.cssText = "margin: 15px 6px 0 6px;";
                             a.title = "Permit";
-                            if (<?php echo $cityRules->count()?> == 0){
+                            if ({!! json_encode($cityRules->count(), JSON_HEX_TAG) !!} == 0){
                                 a.href = "";
                             }
                         else{
-                                a.href = "<?php echo $cityRules[0]->permitObj->linkText ?>";
+                                a.href = {!! json_encode($cityRules[0]->incentivesObj->linkText, JSON_HEX_TAG) !!};
                             }
                             a.target = "_blank";
                             b1.appendChild(a)
@@ -1905,11 +1905,11 @@
                             a.className = "btn btn-primary";
                             a.style.cssText = "margin: 15px 6px 0 6px;";
                             a.title = "Incentive";
-                            if (<?php echo $cityRules->count()?> == 0){
+                            if ({!! json_encode($cityRules->count(), JSON_HEX_TAG) !!} == 0){
                                 a.href = "";
                             }
                         else{
-                                a.href = "<?php echo $cityRules[0]->incentivesObj->linkText ?>";
+                                a.href = {!! json_encode($cityRules[0]->incentivesObj->linkText, JSON_HEX_TAG) !!};
                             }
                             a.target = "_blank";
                             b1.appendChild(a)
@@ -1920,11 +1920,11 @@
                             a.className = "btn btn-primary";
                             a.style.cssText = "margin: 15px 6px 0 6px;";
                             a.title = "More Info";
-                            if (<?php echo $cityRules->count()?> == 0){
+                            if ({!! json_encode($cityRules->count(), JSON_HEX_TAG) !!} == 0){
                                 a.href = "";
                             }
                         else{
-                                a.href = "<?php echo $cityRules[0]->moreInfoObj->linkText ?>";
+                                a.href = {!! json_encode($cityRules[0]->incentivesObj->linkText, JSON_HEX_TAG) !!};
                             }
                             a.target = "_blank";
                             b1.appendChild(a)
