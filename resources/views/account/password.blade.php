@@ -22,36 +22,17 @@
                 <div class="col-md-6 mx-auto">
                     <div class="card h-100 shadow mx-auto text-center">
                         <div class="card-header">
-                            <h3>Change password</h3>
+                            <h3>Change PASSWORD</h3>
                         </div>
                         <div class="card-body">
-                            <div class="d-flex">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <label class="input-group-text">Old password</label>
-                                    </div>
-                                    <input type="password" id="Oldpw" name="oldPW" class="form-control" aria-label="Default"
-                                           aria-describedby="inputGroup-sizing-default"  placeholder="Old password">
-                                </div>
-                            </div>
-                            <div class="d-flex">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <label class="input-group-text">New password</label>
-                                    </div>
-                                    <input type="password" id="pw" name="newPW" class="form-control" aria-label="Default"
-                                           aria-describedby="inputGroup-sizing-default"  onkeyup="validate()" placeholder="New password">
-                                </div>
-                            </div>
-                            <div class="d-flex">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <label class="input-group-text">Verify new password</label>
-                                    </div>
-                                    <input type="password" id="pw2" name="newPW2" class="form-control" aria-label="Default"
-                                           aria-describedby="inputGroup-sizing-default" placeholder="New password" onkeyup="validate()">
-                                </div>
-                            </div>
+                            <form>
+                                <label for="oldPW"><b>Old password</b></label>
+                                <input type="text" id="oldPW" name="OldPassword" placeholder="type old password">
+                                <label for="newPW"><b>New password</b></label>
+                                <input type="password" id="newPW" name="NewPassword" onkeyup="validate()" placeholder="type new password">
+                                <label for="verifyPW"><b>Verify new password</b></label>
+                                <input type="password" id="verifyPW" name="VerifyPassword" onkeyup="validate()" placeholder="type new password again">
+                            </form>
                         </div>
                         <div class="card-footer">
                             <div class="row d-flex justify-content-center">
@@ -84,4 +65,28 @@
           document.getElementById("btnSubmit").disabled = false;
       }
   </script>
+@endpush
+
+@push("css")
+    <style>
+        label{
+            width: 40%;
+        }
+        input[type=text],input[type=password], select {
+            width: 55%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        @media (max-width: 400px) {
+            label{
+                width:100%;
+            }
+            input[type=text],input[type=password],select{
+                width:100%;
+            }
+        }
+    </style>
 @endpush
