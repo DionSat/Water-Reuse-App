@@ -24,28 +24,27 @@
                         @endif
                         <div class="container">
                             <div class="row justify-content-between">
-                                <div class="col-lg-4 form-group">
-                                    <label for="search"> Search Current Page:</label>
-                                    <input type="text" id="search">
+                                <div class="col-lg-5">
+                                    <label for="search control-label"> Search Current Page:</label>
+                                    <input type="text" id="search" class="form-control">
                                 </div>
-                                <form action={{route('searchUsers', ["type" => "banList"])}} method="GET">
+                                <form class="col-lg-5"
+                                      action={{route('searchUsers', ["type" => "banList"])}} method="GET">
                                     {{ csrf_field() }}
                                     <label for="searchDB">Search Database:</label>
                                     <div class="input-group">
-                                        <input type="text" id="searchDB" name="search">
+                                        <input type="text" id="searchDB" name="search" class="form-control">
                                         <div class="input-group-append">
-                                            <button type="submit" class="btn btn-primary" >
-                                                Go
-                                            </button>
+                                            <button type="submit" class="btn btn-primary"> Go </button>
                                         </div>
                                     </div>
                                 </form>
+                                @if (!$userListHome)
+                                    <button class="btn btn-primary"
+                                            onclick="window.location='{{ route('banList') }}'">Clear
+                                    </button>
+                                @endif
                             </div>
-                            @if (!$userListHome)
-                                <button class="btn btn-primary"
-                                        onclick="window.location='{{ route('banList') }}'">Clear
-                                </button>
-                            @endif
                         </div>
                         </center>
                         <table id="userTable" class="table table-responsive-lg">

@@ -24,8 +24,8 @@
                         @endif
                         <div class="container">
                             <div class="row justify-content-between">
-                                <div class="col-lg-4 form-group">
-                                    <label for="search">Search Current Page:</label>
+                                <div class="col-lg-5 ">
+                                    <label for="search control-label">Search Current Page:</label>
                                     <input type="text" id="search" class="form-control">
                                 </div>
                                 <form class="col-lg-5"
