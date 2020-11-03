@@ -13,7 +13,7 @@
             </div>
         </div>
         <h2 class="text-center"> States </h2>
-        <table class="table w-50 mx-auto mt-4">
+        <table class="table-responsive w-50 mx-auto mt-4">
             <thead>
             <tr>
                 <th scope="col">#</th>

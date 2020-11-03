@@ -11,7 +11,7 @@
             </div>
         </div>
         <h2 class="text-center"> Cities </h2>
-        <table class="table">
+        <table class="table table-responsive-lg">
             <thead>
             <tr>
                 <th scope="col">#</th>

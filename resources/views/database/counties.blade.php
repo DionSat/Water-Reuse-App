@@ -11,7 +11,7 @@
             </div>
         </div>
         <h2 class="text-center"> Counties </h2>
-        <table class="table w-75 mt-4 mx-auto">
+        <table class="table table-responsive-lg w-75 mt-4 mx-auto">
             <thead>
             <tr>
                 <th scope="col">#</th>
