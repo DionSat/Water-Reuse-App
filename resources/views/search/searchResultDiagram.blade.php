@@ -1827,28 +1827,247 @@
 
                 /* Node Details Button Links */
                 chart.editUI.on('field', function(sender, args){
-                    if (args.type == 'details' && args.name == 'Links') {
+                    if (args.type == 'details' && args.name == 'Links'){
 
                         var txt = args.field.querySelector('input');
-                        if (txt) {
-                            var linkLabels = ["Code", "Permit", "Incentive", "More Info"];
+                        if (txt){
+
                             var parent = args.field.querySelector('div');
                             var br = document.createElement("br");
                             parent.appendChild(br);
 
-                            linkLabels.forEach((linkName) => {
-                                var a = document.createElement('a');
-                                var linkText = document.createTextNode(linkName);
-                                a.appendChild(linkText);
-                                a.className = "btn btn-primary";
-                                a.style.cssText = "margin: 15px 6px 0 6px;";
-                                a.title = linkName;
+                            var card = document.createElement('a')
+                            card.className ="card";
+                            parent.appendChild(card)
+                            card.style.cssText = "margin:6px 0 0 0;";
+
+                            var h1 = document.createElement('btn');  //card 1 head
+                            var linkText = document.createTextNode("City");
+                            h1.appendChild(linkText);
+                            h1.className = "card btn";
+                            h1.style.cssText = "text-align:center;";
+                            h1.title = "city";
+                            h1.type = "button";
+                            h1.id = "heading";
+                            card.appendChild(h1);
+
+                            h1.addEventListener('click',function(){
+                                if(b1.style.display === "none"){
+                                    b1.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;";
+                                    b2.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                                    b3.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                                }
+                                else{
+                                    b1.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                                }
+                            })
+
+                            var b1= document.createElement('a'); //card 1 body
+                            b1.className = "card body";
+                            b1.id =  "body";
+                            b1.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                            b1.target = "_blank";
+                            card.appendChild(b1)
+
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("Code")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "Code";
+                            if (<?php echo $cityRules->count()?> == 0){
                                 a.href = "";
-                                a.target = "_blank";
-                                parent.appendChild(a);
-                            });
+                            }
+                        else{
+                                a.href = "<?php echo $cityRules[0]->codesObj->linkText ?>";
+                            }
+                            a.target = "_blank";
+                            b1.appendChild(a);
+
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("Permit")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "Permit";
+                            if (<?php echo $cityRules->count()?> == 0){
+                                a.href = "";
+                            }
+                        else{
+                                a.href = "<?php echo $cityRules[0]->permitObj->linkText ?>";
+                            }
+                            a.target = "_blank";
+                            b1.appendChild(a)
+
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("Incentive")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "Incentive";
+                            if (<?php echo $cityRules->count()?> == 0){
+                                a.href = "";
+                            }
+                        else{
+                                a.href = "<?php echo $cityRules[0]->incentivesObj->linkText ?>";
+                            }
+                            a.target = "_blank";
+                            b1.appendChild(a)
+
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("More Info")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "More Info";
+                            if (<?php echo $cityRules->count()?> == 0){
+                                a.href = "";
+                            }
+                        else{
+                                a.href = "<?php echo $cityRules[0]->moreInfoObj->linkText ?>";
+                            }
+                            a.target = "_blank";
+                            b1.appendChild(a)
+
+                            //county
+                            var card = document.createElement('a')
+                            card.className ="card";
+                            parent.appendChild(card)
+
+                            var h2 = document.createElement('btn'); //card 2 head
+                            var linkText = document.createTextNode("County");
+                            h2.appendChild(linkText);
+                            h2.className = "card btn";
+                            h2.style.cssText = "text-align:center;";
+                            h2.title = "county";
+                            h2.id = "heading";
+                            card.appendChild(h2);
+
+                            h2.addEventListener('click',function(){
+                                if(b2.style.display === "none"){
+                                    b2.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;";
+                                    b1.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                                    b3.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                                }
+                                else{
+                                    b2.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                                }
+                            })
+
+                            var b2= document.createElement('a'); // card 2 body
+                            b2.className = "card body";
+                            b2.id = "body";
+                            b2.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                            b2.target = "_blank";
+                            card.appendChild(b2)
+
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("Code")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "Code";
+                            a.target = "_blank";
+                            b2.appendChild(a);
+
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("Permit")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "Permit";
+                            a.target = "_blank";
+                            b2.appendChild(a)
+
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("Incentive")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "Incentive";
+                            a.target = "_blank";
+                            b2.appendChild(a)
+
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("More Info")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "More Info";
+                            a.target = "_blank";
+                            b2.appendChild(a)
+
+                            //state
+                            var card = document.createElement('a')
+                            card.className ="card";
+                            parent.appendChild(card)
+                            card.style.cssText = "margin:0 0 6px 0;";
+
+                            var h3 = document.createElement('btn'); //card 3 head
+                            var linkText = document.createTextNode("State");
+                            h3.appendChild(linkText);
+                            h3.className = "card btn";
+                            h3.style.cssText = "text-align:center;";
+                            h3.id = "heading";
+                            h3.title = "state";
+                            card.appendChild(h3);
+
+                            h3.addEventListener('click',function(){
+                                if(b3.style.display === "none"){
+                                    b3.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;";
+                                    b1.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                                    b2.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                                }
+                                else{
+                                    b3.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                                }
+                            })
+
+                            var b3= document.createElement('a');  //card 3 body
+                            b3.className = "card body";
+                            b3.id = "body";
+                            b3.style.cssText = "text-align:center;border:none;float:left;display:inline;margin: 10px 0; display:none;";
+                            b3.target = "_blank";
+                            card.appendChild(b3)
+
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("Code")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "Code";
+                            a.target = "_blank";
+                            b3.appendChild(a);
+
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("Permit")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "Permit";
+                            a.target = "_blank";
+                            b3.appendChild(a)
+
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("Incentive")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "Incentive";
+                            a.target = "_blank";
+                            b3.appendChild(a)
+
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("More Info")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "More Info";
+                            a.target = "_blank";
+                            b3.appendChild(a)
 
                             txt.remove();
+
                         }
                     }
                 });
