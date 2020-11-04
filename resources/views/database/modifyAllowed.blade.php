@@ -16,12 +16,12 @@
             <h3 class="card-title">Current Text</h3>
             <h4 class="card-subtitle">{{$allowed->allowedText}}</h4>
             <div class="d-flex mt-3">
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <label class="pr-3" for="newAllowed">New Text</label>
+              <div class="row mb-3">
+                <label class="col-form-label" for="newAllowed">New Text</label>
+                <div class="col">
+                  <input type="text" name="newValue" class="form-control" id="newAllowed" aria-label="Default"
+                         value="{{$allowed->allowedText}}">
                 </div>
-                <input type="text" name="newValue" class="form-control" id="newAllowed" aria-label="Default"
-                       value="{{$allowed->allowedText}}">
               </div>
               <input type="text" name="allowed_id" value="{{$allowed->allowed_id}}" hidden>
             </div>
