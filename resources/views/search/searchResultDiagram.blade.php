@@ -138,7 +138,6 @@
                 OrgChart.templates.sewage = Object.assign({}, OrgChart.templates.ana);
                 OrgChart.templates.sewage.node = '<rect x="0" y="0" height="125" width="255" rx="40px" fill="#373737"></rect>';
 
-
                 var nodes = [
                     /* Water Sources Root */
                     {id: 0, Name: "Water Sources", img: "data:image/jpeg;base64," + string_icons[0]},
@@ -1714,11 +1713,11 @@
                 }
 
                 /* Switch all the nodes from each source to grey if it is in the NotAllowedNodes */
-                for(var i = 8; i < nodes.length; i++) {
+                for(var i = 7; i < nodes.length; i++) {
                     if(nodes[i].pid === 1) {
-                        for(var j = 0; j < condensateNotAllowedNodes.length; j++){
+                        for(var j = 0; j < condensateNotAllowedNodes.length; j++) {
                             if(nodes[i].Name === condensateNotAllowedNodes[j]) {
-                                nodes[i].tags = ['no_regulation']
+                                nodes[i].tags = ['PathwayBlocked']
                             }
                         }
                     }
@@ -1758,7 +1757,6 @@
                         }
                     }
                 }
-                console.log(stateRules);
 
                 for(var i = 0; i < stateRules.length; i++) {
                     if(stateRules[i].allowed.allowed_id === 2) {
@@ -1827,26 +1825,439 @@
 
                 /* Node Details Button Links */
                 chart.editUI.on('field', function(sender, args){
-                    if (args.type == 'details' && args.name == 'Links') {
+
+                    var stateCodeLinks = null;
+                    var statePermitLinks = null;
+                    var stateIncentivesLinks = null;
+                    var stateInfoLinks = null;
+                    var countyCodeLinks = null;
+                    var countyPermitLinks = null;
+                    var countyIncentivesLinks = null;
+                    var countyInfoLinks = null;
+                    var cityCodeLinks = null;
+                    var cityPermitLinks = null;
+                    var cityIncentivesLinks = null;
+                    var cityInfoLinks = null;
+                    let stateRuleIndex = null;
+                    let countyRuleIndex = null;
+                    let cityRuleIndex = null;
+
+                    // State Links
+                    for(var i = 0; i < nodes.length; i++) {
+                        if(sender.node.id == nodes[i].id) {
+                            for(var j = 0; j < stateRules.length; j++) {
+                                if(stateRules[j].source.node_name == nodes[i].Source && stateRules[j].destination.node_name == nodes[i].Name) {
+                                    stateRuleIndex = j;
+                                    if(stateRules[j].codes_obj) {
+                                        stateCodeLinks = stateRules[j].codes_obj.linkText;
+                                    }
+                                    if(stateRules[j].permit_obj) {
+                                        statePermitLinks = stateRules[j].permit_obj.linkText;
+                                    }
+                                    if(stateRules[j].incentives_obj) {
+                                        stateIncentivesLinks = stateRules[j].incentives_obj.linkText;
+                                    }
+                                    if(stateRules[j].more_info_obj) {
+                                        stateInfoLinks = stateRules[j].more_info_obj.linkText;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // County Links
+                    for(var i = 0; i < nodes.length; i++) {
+                        if(sender.node.id == nodes[i].id) {
+                            for(var j = 0; j < countyRules.length; j++) {
+                                if(countyRules[j].source.node_name == nodes[i].Source && countyRules[j].destination.node_name == nodes[i].Name) {
+                                    countyRuleIndex = j;
+                                    if(countyRules[j].codes_obj) {
+                                        countyCodeLinks = countyRules[j].codes_obj.linkText;
+                                    }
+                                    if(countyRules[j].permit_obj) {
+                                        countyPermitLinks = countyRules[j].permit_obj.linkText;
+                                    }
+                                    if(countyRules[j].incentives_obj) {
+                                        countyIncentivesLinks = countyRules[j].incentives_obj.linkText;
+                                    }
+                                    if(countyRules[j].more_info_obj) {
+                                        countyInfoLinks = countyRules[j].more_info_obj.linkText;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // City Links
+                    for(var i = 0; i < nodes.length; i++) {
+                        if(sender.node.id == nodes[i].id) {
+                            for(var j = 0; j < cityRules.length; j++) {
+                                if(cityRules[j].source.node_name == nodes[i].Source && cityRules[j].destination.node_name == nodes[i].Name) {
+                                    cityRuleIndex = j;
+                                    if(cityRules[j].codes_obj) {
+                                        cityCodeLinks = cityRules[j].codes_obj.linkText;
+                                    }
+                                    if(cityRules[j].permit_obj) {
+                                        cityPermitLinks = cityRules[j].permit_obj.linkText;
+                                    }
+                                    if(cityRules[j].incentives_obj) {
+                                        cityIncentivesLinks = cityRules[j].incentives_obj.linkText;
+                                    }
+                                    if(cityRules[j].more_info_obj) {
+                                        cityInfoLinks = cityRules[j].more_info_obj.linkText;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if (args.type == 'details' && args.name == 'Links'){
 
                         var txt = args.field.querySelector('input');
-                        if (txt) {
-                            var linkLabels = ["Code", "Permit", "Incentive", "More Info"];
+                        if (txt){
+
                             var parent = args.field.querySelector('div');
                             var br = document.createElement("br");
                             parent.appendChild(br);
 
-                            linkLabels.forEach((linkName) => {
-                                var a = document.createElement('a');
-                                var linkText = document.createTextNode(linkName);
-                                a.appendChild(linkText);
-                                a.className = "btn btn-primary";
-                                a.style.cssText = "margin: 15px 6px 0 6px;";
-                                a.title = linkName;
-                                a.href = "";
-                                a.target = "_blank";
-                                parent.appendChild(a);
-                            });
+                            var card = document.createElement('a')
+                            card.className ="card";
+                            parent.appendChild(card)
+                            card.style.cssText = "margin:6px 0 0 0;";
+
+                            var h1 = document.createElement('btn');  //card 1 head
+                            var linkText = document.createTextNode("City");
+                            h1.appendChild(linkText);
+                            h1.className = "card btn";
+                            h1.style.cssText = "text-align:center;";
+                            h1.title = "city";
+                            h1.type = "button";
+                            h1.id = "heading";
+                            card.appendChild(h1);
+
+                            h1.addEventListener('click',function(){
+                                if(b1.style.display === "none"){
+                                    b1.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;";
+                                    b2.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                                    b3.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                                }
+                                else{
+                                    b1.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                                }
+                            })
+
+                            var b1= document.createElement('a'); //card 1 body
+                            b1.className = "card body";
+                            b1.id =  "body";
+                            b1.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                            b1.target = "_blank";
+                            card.appendChild(b1)
+
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("Code")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "Code";
+                            if (cityCodeLinks == null){
+                                a.className = "btn btn-primary disabled";
+                            }
+                            else{
+                                a.href = cityCodeLinks;
+                            }
+                            a.target = "_blank";
+                            b1.appendChild(a);
+
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("Permit")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "Permit";
+                            if (cityPermitLinks == null){
+                                a.className = "btn btn-primary disabled";
+                            }
+                            else{
+                                a.href = cityPermitLinks;
+                            }
+                            a.target = "_blank";
+                            b1.appendChild(a)
+
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("Incentive")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "Incentive";
+                            if (cityIncentivesLinks == null){
+                                a.className = "btn btn-primary disabled";
+                            }
+                            else{
+                                a.href = cityIncentivesLinks;
+                            }
+                            a.target = "_blank";
+                            b1.appendChild(a)
+
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("More Info")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "More Info";
+                            if (cityInfoLinks == null){
+                                a.className = "btn btn-primary disabled";
+                            }
+                            else{
+                                a.href = cityInfoLinks;
+                            }
+                            a.target = "_blank";
+                            b1.appendChild(a)
+
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("View")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "Code";
+                            if (cityRuleIndex == null){
+                                a.className = "btn btn-primary disabled";
+                            }
+                            else{
+                                var url = "{{ route('viewSubmission', [":type", ":state", ":itemId", "back" => url()->full()]) }}"
+                                url = url.replace(':type', "city");
+                                if(cityRules[cityRuleIndex].city.is_approved == true) {
+                                    url = url.replace(':state', "approved");
+                                }
+                                url = url.replace(':itemId', cityRules[cityRuleIndex].id);
+                                a.href = url;
+                            }
+                            a.target = "_blank";
+                            b1.appendChild(a);
+
+                            //county
+                            var card = document.createElement('a')
+                            card.className ="card";
+                            parent.appendChild(card)
+
+                            var h2 = document.createElement('btn'); //card 2 head
+                            var linkText = document.createTextNode("County");
+                            h2.appendChild(linkText);
+                            h2.className = "card btn";
+                            h2.style.cssText = "text-align:center;";
+                            h2.title = "county";
+                            h2.id = "heading";
+                            card.appendChild(h2);
+
+                            h2.addEventListener('click',function(){
+                                if(b2.style.display === "none"){
+                                    b2.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;";
+                                    b1.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                                    b3.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                                }
+                                else{
+                                    b2.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                                }
+                            })
+
+                            var b2= document.createElement('a'); // card 2 body
+                            b2.className = "card body";
+                            b2.id = "body";
+                            b2.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                            b2.target = "_blank";
+                            card.appendChild(b2)
+
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("Code")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "Code";
+                            if (countyCodeLinks == null){
+                                a.className = "btn btn-primary disabled";
+                            }
+                            else{
+                                a.href = countyCodeLinks;
+                            }
+                            a.target = "_blank";
+                            b2.appendChild(a);
+
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("Permit")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "Permit";
+                            if (countyPermitLinks == null){
+                                a.className = "btn btn-primary disabled";
+                            }
+                            else{
+                                a.href = countyPermitLinks;
+                            }
+                            a.target = "_blank";
+                            b2.appendChild(a)
+
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("Incentive")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "Incentive";
+                            if (countyIncentivesLinks == null){
+                                a.className = "btn btn-primary disabled";
+                            }
+                            else{
+                                a.href = countyIncentivesLinks;
+                            }
+                            a.target = "_blank";
+                            b2.appendChild(a)
+
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("More Info")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "More Info";
+                            if (countyInfoLinks == null){
+                                a.className = "btn btn-primary disabled";
+                            }
+                            else{
+                                a.href = countyInfoLinks;
+                            }
+                            a.target = "_blank";
+                            b2.appendChild(a)
+
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("View")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "Code";
+                            if (countyRuleIndex == null){
+                                a.className = "btn btn-primary disabled";
+                            }
+                            else{
+                                var url = "{{ route('viewSubmission', [":type", ":state", ":itemId", "back" => url()->full()]) }}"
+                                url = url.replace(':type', "county");
+                                if(countyRules[countyRuleIndex].county.is_approved == true) {
+                                    url = url.replace(':state', "approved");
+                                }
+                                url = url.replace(':itemId', countyRules[countyRuleIndex].id);
+                                a.href = url;
+                            }
+                            a.target = "_blank";
+                            b2.appendChild(a);
+
+                            //state
+                            var card = document.createElement('a')
+                            card.className ="card";
+                            parent.appendChild(card)
+                            card.style.cssText = "margin:0 0 6px 0;";
+
+                            var h3 = document.createElement('btn'); //card 3 head
+                            var linkText = document.createTextNode("State");
+                            h3.appendChild(linkText);
+                            h3.className = "card btn";
+                            h3.style.cssText = "text-align:center;";
+                            h3.id = "heading";
+                            h3.title = "state";
+                            card.appendChild(h3);
+
+                            h3.addEventListener('click',function(){
+                                if(b3.style.display === "none"){
+                                    b3.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;";
+                                    b1.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                                    b2.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                                }
+                                else{
+                                    b3.style.cssText = "text-align:center;border:none;float:left;display:inline; margin: 10px 0;display:none";
+                                }
+                            })
+
+                            var b3= document.createElement('a');  //card 3 body
+                            b3.className = "card body";
+                            b3.id = "body";
+                            b3.style.cssText = "text-align:center;border:none;float:left;display:inline;margin: 10px 0; display:none;";
+                            b3.target = "_blank";
+                            card.appendChild(b3)
+
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("Code")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "Code";
+                            if (stateCodeLinks == null){
+                                a.className = "btn btn-primary disabled";
+                            }
+                            else{
+                                a.href = stateCodeLinks;
+                            }
+                            a.target = "_blank";
+                            b3.appendChild(a);
+
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("Permit")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "Permit";
+                            if (statePermitLinks == null){
+                                a.className = "btn btn-primary disabled";
+                            }
+                            else{
+                                a.href = statePermitLinks;
+                            }
+                            a.target = "_blank";
+                            b3.appendChild(a)
+
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("Incentive")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "Incentive";
+                            if (stateIncentivesLinks == null){
+                                a.className = "btn btn-primary disabled";
+                            }
+                            else{
+                                a.href = stateIncentivesLinks;
+                            }
+                            a.target = "_blank";
+                            b3.appendChild(a)
+
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("More Info")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "More Info";
+                            if (stateInfoLinks == null){
+                                a.className = "btn btn-primary disabled";
+                            }
+                            else{
+                                a.href = stateInfoLinks;
+                            }
+                            a.target = "_blank";
+                            b3.appendChild(a)
+
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("View")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "Code";
+                            if (stateRuleIndex == null){
+                                a.className = "btn btn-primary disabled";
+                            }
+                            else{
+                                var url = "{{ route('viewSubmission', [":type", ":state", ":itemId", "back" => url()->full()]) }}"
+                                url = url.replace(':type', "state");
+                                if(stateRules[stateRuleIndex].state.is_approved == true) {
+                                    url = url.replace(':state', "approved");
+                                }
+                                url = url.replace(':itemId', stateRules[stateRuleIndex].id);
+                                a.href = url;
+                            }
+                            a.target = "_blank";
+                            b3.appendChild(a);
 
                             txt.remove();
                         }

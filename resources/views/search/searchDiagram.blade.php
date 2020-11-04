@@ -71,6 +71,7 @@
             left: 0;
             margin: 0 0 50px 20px;
         }
+
         /* Legend Key Inner Container */
         .legend-content > div > div {
             display: inline-block;
