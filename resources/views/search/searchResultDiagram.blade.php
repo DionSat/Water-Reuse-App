@@ -1838,15 +1838,19 @@
                     var cityPermitLinks = null;
                     var cityIncentivesLinks = null;
                     var cityInfoLinks = null;
+                    let stateRuleIndex = null;
+                    let countyRuleIndex = null;
+                    let cityRuleIndex = null;
+
                     // State Links
                     for(var i = 0; i < nodes.length; i++) {
                         if(sender.node.id == nodes[i].id) {
                             for(var j = 0; j < stateRules.length; j++) {
                                 if(stateRules[j].source.node_name == nodes[i].Source && stateRules[j].destination.node_name == nodes[i].Name) {
+                                    stateRuleIndex = j;
                                     if(stateRules[j].codes_obj) {
                                         stateCodeLinks = stateRules[j].codes_obj.linkText;
                                     }
-                                    console.log(stateRules[j]);
                                     if(stateRules[j].permit_obj) {
                                         statePermitLinks = stateRules[j].permit_obj.linkText;
                                     }
@@ -1865,10 +1869,10 @@
                         if(sender.node.id == nodes[i].id) {
                             for(var j = 0; j < countyRules.length; j++) {
                                 if(countyRules[j].source.node_name == nodes[i].Source && countyRules[j].destination.node_name == nodes[i].Name) {
+                                    countyRuleIndex = j;
                                     if(countyRules[j].codes_obj) {
                                         countyCodeLinks = countyRules[j].codes_obj.linkText;
                                     }
-                                    console.log(countyRules[j]);
                                     if(countyRules[j].permit_obj) {
                                         countyPermitLinks = countyRules[j].permit_obj.linkText;
                                     }
@@ -1887,10 +1891,10 @@
                         if(sender.node.id == nodes[i].id) {
                             for(var j = 0; j < cityRules.length; j++) {
                                 if(cityRules[j].source.node_name == nodes[i].Source && cityRules[j].destination.node_name == nodes[i].Name) {
+                                    cityRuleIndex = j;
                                     if(cityRules[j].codes_obj) {
                                         cityCodeLinks = cityRules[j].codes_obj.linkText;
                                     }
-                                    console.log(cityRules[j]);
                                     if(cityRules[j].permit_obj) {
                                         cityPermitLinks = cityRules[j].permit_obj.linkText;
                                     }
@@ -1953,7 +1957,6 @@
                             a.className = "btn btn-primary";
                             a.style.cssText = "margin: 15px 6px 0 6px;";
                             a.title = "Code";
-                            console.log(cityCodeLinks);
                             if (cityCodeLinks == null){
                                 a.className = "btn btn-primary disabled";
                             }
@@ -2007,6 +2010,27 @@
                             }
                             a.target = "_blank";
                             b1.appendChild(a)
+
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("View")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "Code";
+                            if (cityRuleIndex == null){
+                                a.className = "btn btn-primary disabled";
+                            }
+                            else{
+                                var url = "{{ route('viewSubmission', [":type", ":state", ":itemId", "back" => url()->full()]) }}"
+                                url = url.replace(':type', "city");
+                                if(cityRules[cityRuleIndex].city.is_approved == true) {
+                                    url = url.replace(':state', "approved");
+                                }
+                                url = url.replace(':itemId', cityRules[cityRuleIndex].id);
+                                a.href = url;
+                            }
+                            a.target = "_blank";
+                            b1.appendChild(a);
 
                             //county
                             var card = document.createElement('a')
@@ -2100,6 +2124,27 @@
                             a.target = "_blank";
                             b2.appendChild(a)
 
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("View")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "Code";
+                            if (countyRuleIndex == null){
+                                a.className = "btn btn-primary disabled";
+                            }
+                            else{
+                                var url = "{{ route('viewSubmission', [":type", ":state", ":itemId", "back" => url()->full()]) }}"
+                                url = url.replace(':type', "county");
+                                if(countyRules[countyRuleIndex].county.is_approved == true) {
+                                    url = url.replace(':state', "approved");
+                                }
+                                url = url.replace(':itemId', countyRules[countyRuleIndex].id);
+                                a.href = url;
+                            }
+                            a.target = "_blank";
+                            b2.appendChild(a);
+
                             //state
                             var card = document.createElement('a')
                             card.className ="card";
@@ -2192,6 +2237,27 @@
                             }
                             a.target = "_blank";
                             b3.appendChild(a)
+
+                            var a = document.createElement('a');
+                            var linkText = document.createTextNode("View")
+                            a.appendChild(linkText);
+                            a.className = "btn btn-primary";
+                            a.style.cssText = "margin: 15px 6px 0 6px;";
+                            a.title = "Code";
+                            if (stateRuleIndex == null){
+                                a.className = "btn btn-primary disabled";
+                            }
+                            else{
+                                var url = "{{ route('viewSubmission', [":type", ":state", ":itemId", "back" => url()->full()]) }}"
+                                url = url.replace(':type', "state");
+                                if(stateRules[stateRuleIndex].state.is_approved == true) {
+                                    url = url.replace(':state', "approved");
+                                }
+                                url = url.replace(':itemId', stateRules[stateRuleIndex].id);
+                                a.href = url;
+                            }
+                            a.target = "_blank";
+                            b3.appendChild(a);
 
                             txt.remove();
                         }
