@@ -138,7 +138,6 @@
                 OrgChart.templates.sewage = Object.assign({}, OrgChart.templates.ana);
                 OrgChart.templates.sewage.node = '<rect x="0" y="0" height="125" width="255" rx="40px" fill="#373737"></rect>';
 
-
                 var nodes = [
                     /* Water Sources Root */
                     {id: 0, Name: "Water Sources", img: "data:image/jpeg;base64," + string_icons[0]},
@@ -1714,11 +1713,11 @@
                 }
 
                 /* Switch all the nodes from each source to grey if it is in the NotAllowedNodes */
-                for(var i = 8; i < nodes.length; i++) {
+                for(var i = 7; i < nodes.length; i++) {
                     if(nodes[i].pid === 1) {
-                        for(var j = 0; j < condensateNotAllowedNodes.length; j++){
+                        for(var j = 0; j < condensateNotAllowedNodes.length; j++) {
                             if(nodes[i].Name === condensateNotAllowedNodes[j]) {
-                                nodes[i].tags = ['no_regulation']
+                                nodes[i].tags = ['PathwayBlocked']
                             }
                         }
                     }
@@ -1758,7 +1757,6 @@
                         }
                     }
                 }
-                console.log(stateRules);
 
                 for(var i = 0; i < stateRules.length; i++) {
                     if(stateRules[i].allowed.allowed_id === 2) {
@@ -1827,6 +1825,86 @@
 
                 /* Node Details Button Links */
                 chart.editUI.on('field', function(sender, args){
+
+                    var stateCodeLinks = null;
+                    var statePermitLinks = null;
+                    var stateIncentivesLinks = null;
+                    var stateInfoLinks = null;
+                    var countyCodeLinks = null;
+                    var countyPermitLinks = null;
+                    var countyIncentivesLinks = null;
+                    var countyInfoLinks = null;
+                    var cityCodeLinks = null;
+                    var cityPermitLinks = null;
+                    var cityIncentivesLinks = null;
+                    var cityInfoLinks = null;
+                    // State Links
+                    for(var i = 0; i < nodes.length; i++) {
+                        if(sender.node.id == nodes[i].id) {
+                            for(var j = 0; j < stateRules.length; j++) {
+                                if(stateRules[j].source.node_name == nodes[i].Source && stateRules[j].destination.node_name == nodes[i].Name) {
+                                    if(stateRules[j].codes_obj) {
+                                        stateCodeLinks = stateRules[j].codes_obj.linkText;
+                                    }
+                                    console.log(stateRules[j]);
+                                    if(stateRules[j].permit_obj) {
+                                        statePermitLinks = stateRules[j].permit_obj.linkText;
+                                    }
+                                    if(stateRules[j].incentives_obj) {
+                                        stateIncentivesLinks = stateRules[j].incentives_obj.linkText;
+                                    }
+                                    if(stateRules[j].more_info_obj) {
+                                        stateInfoLinks = stateRules[j].more_info_obj.linkText;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // State Links
+                    for(var i = 0; i < nodes.length; i++) {
+                        if(sender.node.id == nodes[i].id) {
+                            for(var j = 0; j < countyRules.length; j++) {
+                                if(countyRules[j].source.node_name == nodes[i].Source && countyRules[j].destination.node_name == nodes[i].Name) {
+                                    if(countyRules[j].codes_obj) {
+                                        countyCodeLinks = countyRules[j].codes_obj.linkText;
+                                    }
+                                    console.log(countyRules[j]);
+                                    if(countyRules[j].permit_obj) {
+                                        countyPermitLinks = countyRules[j].permit_obj.linkText;
+                                    }
+                                    if(countyRules[j].incentives_obj) {
+                                        countyIncentivesLinks = countyRules[j].incentives_obj.linkText;
+                                    }
+                                    if(countyRules[j].more_info_obj) {
+                                        countyInfoLinks = countyRules[j].more_info_obj.linkText;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // State Links
+                    for(var i = 0; i < nodes.length; i++) {
+                        if(sender.node.id == nodes[i].id) {
+                            for(var j = 0; j < cityRules.length; j++) {
+                                if(cityRules[j].source.node_name == nodes[i].Source && cityRules[j].destination.node_name == nodes[i].Name) {
+                                    if(cityRules[j].codes_obj) {
+                                        cityCodeLinks = cityRules[j].codes_obj.linkText;
+                                    }
+                                    console.log(cityRules[j]);
+                                    if(cityRules[j].permit_obj) {
+                                        cityPermitLinks = cityRules[j].permit_obj.linkText;
+                                    }
+                                    if(cityRules[j].incentives_obj) {
+                                        cityIncentivesLinks = cityRules[j].incentives_obj.linkText;
+                                    }
+                                    if(cityRules[j].more_info_obj) {
+                                        cityInfoLinks = cityRules[j].more_info_obj.linkText;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
                     if (args.type == 'details' && args.name == 'Links'){
 
                         var txt = args.field.querySelector('input');
@@ -1875,11 +1953,12 @@
                             a.className = "btn btn-primary";
                             a.style.cssText = "margin: 15px 6px 0 6px;";
                             a.title = "Code";
-                            if ({!! json_encode($cityRules->count(), JSON_HEX_TAG) !!} == 0){
-                                a.href = "";
+                            console.log(cityCodeLinks);
+                            if (cityCodeLinks == null){
+                                a.className = "btn btn-primary disabled";
                             }
-                            else {
-                                a.href = {!! json_encode($cityRules[0]->incentivesObj->linkText, JSON_HEX_TAG) !!};
+                            else{
+                                a.href = cityCodeLinks;
                             }
                             a.target = "_blank";
                             b1.appendChild(a);
@@ -1890,11 +1969,11 @@
                             a.className = "btn btn-primary";
                             a.style.cssText = "margin: 15px 6px 0 6px;";
                             a.title = "Permit";
-                            if ({!! json_encode($cityRules->count(), JSON_HEX_TAG) !!} == 0){
-                                a.href = "";
+                            if (cityPermitLinks == null){
+                                a.className = "btn btn-primary disabled";
                             }
-                        else{
-                                a.href = {!! json_encode($cityRules[0]->incentivesObj->linkText, JSON_HEX_TAG) !!};
+                            else{
+                                a.href = cityPermitLinks;
                             }
                             a.target = "_blank";
                             b1.appendChild(a)
@@ -1905,11 +1984,11 @@
                             a.className = "btn btn-primary";
                             a.style.cssText = "margin: 15px 6px 0 6px;";
                             a.title = "Incentive";
-                            if ({!! json_encode($cityRules->count(), JSON_HEX_TAG) !!} == 0){
-                                a.href = "";
+                            if (cityIncentivesLinks == null){
+                                a.className = "btn btn-primary disabled";
                             }
-                        else{
-                                a.href = {!! json_encode($cityRules[0]->incentivesObj->linkText, JSON_HEX_TAG) !!};
+                            else{
+                                a.href = cityIncentivesLinks;
                             }
                             a.target = "_blank";
                             b1.appendChild(a)
@@ -1920,11 +1999,11 @@
                             a.className = "btn btn-primary";
                             a.style.cssText = "margin: 15px 6px 0 6px;";
                             a.title = "More Info";
-                            if ({!! json_encode($cityRules->count(), JSON_HEX_TAG) !!} == 0){
-                                a.href = "";
+                            if (cityInfoLinks == null){
+                                a.className = "btn btn-primary disabled";
                             }
-                        else{
-                                a.href = {!! json_encode($cityRules[0]->incentivesObj->linkText, JSON_HEX_TAG) !!};
+                            else{
+                                a.href = cityInfoLinks;
                             }
                             a.target = "_blank";
                             b1.appendChild(a)
@@ -1967,6 +2046,12 @@
                             a.className = "btn btn-primary";
                             a.style.cssText = "margin: 15px 6px 0 6px;";
                             a.title = "Code";
+                            if (countyCodeLinks == null){
+                                a.className = "btn btn-primary disabled";
+                            }
+                            else{
+                                a.href = countyCodeLinks;
+                            }
                             a.target = "_blank";
                             b2.appendChild(a);
 
@@ -1976,6 +2061,12 @@
                             a.className = "btn btn-primary";
                             a.style.cssText = "margin: 15px 6px 0 6px;";
                             a.title = "Permit";
+                            if (countyPermitLinks == null){
+                                a.className = "btn btn-primary disabled";
+                            }
+                            else{
+                                a.href = countyPermitLinks;
+                            }
                             a.target = "_blank";
                             b2.appendChild(a)
 
@@ -1985,6 +2076,12 @@
                             a.className = "btn btn-primary";
                             a.style.cssText = "margin: 15px 6px 0 6px;";
                             a.title = "Incentive";
+                            if (countyIncentivesLinks == null){
+                                a.className = "btn btn-primary disabled";
+                            }
+                            else{
+                                a.href = countyIncentivesLinks;
+                            }
                             a.target = "_blank";
                             b2.appendChild(a)
 
@@ -1994,6 +2091,12 @@
                             a.className = "btn btn-primary";
                             a.style.cssText = "margin: 15px 6px 0 6px;";
                             a.title = "More Info";
+                            if (countyInfoLinks == null){
+                                a.className = "btn btn-primary disabled";
+                            }
+                            else{
+                                a.href = countyInfoLinks;
+                            }
                             a.target = "_blank";
                             b2.appendChild(a)
 
@@ -2036,6 +2139,12 @@
                             a.className = "btn btn-primary";
                             a.style.cssText = "margin: 15px 6px 0 6px;";
                             a.title = "Code";
+                            if (stateCodeLinks == null){
+                                a.className = "btn btn-primary disabled";
+                            }
+                            else{
+                                a.href = stateCodeLinks;
+                            }
                             a.target = "_blank";
                             b3.appendChild(a);
 
@@ -2045,6 +2154,12 @@
                             a.className = "btn btn-primary";
                             a.style.cssText = "margin: 15px 6px 0 6px;";
                             a.title = "Permit";
+                            if (statePermitLinks == null){
+                                a.className = "btn btn-primary disabled";
+                            }
+                            else{
+                                a.href = statePermitLinks;
+                            }
                             a.target = "_blank";
                             b3.appendChild(a)
 
@@ -2054,6 +2169,12 @@
                             a.className = "btn btn-primary";
                             a.style.cssText = "margin: 15px 6px 0 6px;";
                             a.title = "Incentive";
+                            if (stateIncentivesLinks == null){
+                                a.className = "btn btn-primary disabled";
+                            }
+                            else{
+                                a.href = stateIncentivesLinks;
+                            }
                             a.target = "_blank";
                             b3.appendChild(a)
 
@@ -2063,11 +2184,16 @@
                             a.className = "btn btn-primary";
                             a.style.cssText = "margin: 15px 6px 0 6px;";
                             a.title = "More Info";
+                            if (stateInfoLinks == null){
+                                a.className = "btn btn-primary disabled";
+                            }
+                            else{
+                                a.href = stateInfoLinks;
+                            }
                             a.target = "_blank";
                             b3.appendChild(a)
 
                             txt.remove();
-
                         }
                     }
                 });
