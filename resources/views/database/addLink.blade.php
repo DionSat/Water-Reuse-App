@@ -15,7 +15,7 @@
             <div class="card-body mt-3">
               <div class="row justify-content-center">
                 <div class="form-row">
-                  <label class="col-md-5 col-form-label text-md-right" for="name"> Link Name </label>
+                  <label class="col-md-4 col-form-label text-md-right" for="name"> Link Name </label>
                   <div class="col-md-7">
                     <input type="text" class="form-control" id="name" name="name" placeholder="New link Name">
                   </div>
@@ -23,7 +23,7 @@
               </div>
               <div class="row justify-content-center mt-2 mt-md-4">
                 <div class="form-row">
-                  <label class="col-md-5 col-form-label text-md-right" for="link"> Link URL </label>
+                  <label class="col-md-4 col-form-label text-md-right" for="link"> Link URL </label>
                   <div class="col-md-7">
                     <input type="text" class="form-control" id="link" name="link" placeholder="New link URL">
                   </div>
