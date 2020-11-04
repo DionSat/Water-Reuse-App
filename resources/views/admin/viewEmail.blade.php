@@ -20,7 +20,7 @@
                                         {{ session('nothing') }}
                                     </div>
                                 @endif
-                                    <table id="userTable" class="table">
+                                    <table id="userTable" class="table table-responsive-lg">
                                         <thead>
                                         <tr>
                                             <th scope="col">#</th>
@@ -75,7 +75,7 @@
                                         </thead>
                                         <tbody>
                                         @foreach($canBeEmailed as $user)
-                                            <tr class="list" id="{{$user->id}}">                                       
+                                            <tr class="list" id="{{$user->id}}">
                                                 <th scope="row">{{$loop->iteration++}}</th>
                                                 <td><a href="{{route('viewUser',['user_id' => $user->id])}}">{{$user->name}}</a>
                                                 </td>

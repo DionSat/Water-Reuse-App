@@ -5,9 +5,9 @@
         <div class="row my-3">
             <a href="{{url()->previous()}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> Back </a>
         </div>
-        <div class="card col-8 mx-auto">
+        <div class="card col-md-8 mx-auto">
             <div class="card-body">
-                <table class="table table-striped">
+                <table class="table table-striped table-responsive-lg">
                     <tbody>
                     <tr>
                         <th scope="row">Name</th>
