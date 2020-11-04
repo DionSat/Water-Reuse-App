@@ -17,13 +17,13 @@
                         <h4>{{$county->countyName}}</h4>
                     </div>
                     <div class="card-body">
-                        <div class="d-flex">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-default">New Name</span>
-                                </div>
-                                <input type="text" name="newCountyValue" class="form-control" aria-label="Default"
+                        <div class="d-flex justify-content-center">
+                            <div class="row mb-3">
+                                    <label class="col-form-label" for="newCountyName">New Name</label>
+                                <div class="col">
+                                <input type="text" name="newCountyValue" class="form-control" id="newCountyName" aria-label="Default"
                                        aria-describedby="inputGroup-sizing-default" value="{{$county->countyName}}">
+                            </div>
                             </div>
                             <input type="text" name="county_id" value="{{$county->county_id}}" hidden>
                         </div>
@@ -31,7 +31,7 @@
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-md-6">
-                                <button type="submit" class="btn btn-success btn-large btn-block"><i class="fas fa-edit"></i> Edit </button>
+                                <button type="submit" class="btn btn-success btn-large btn-block"><i class="fas fa-edit"></i> Save </button>
                             </div>
                         </div>
                     </div>
