@@ -1860,7 +1860,7 @@
                             }
                         }
                     }
-                    // State Links
+                    // County Links
                     for(var i = 0; i < nodes.length; i++) {
                         if(sender.node.id == nodes[i].id) {
                             for(var j = 0; j < countyRules.length; j++) {
@@ -1882,7 +1882,7 @@
                             }
                         }
                     }
-                    // State Links
+                    // City Links
                     for(var i = 0; i < nodes.length; i++) {
                         if(sender.node.id == nodes[i].id) {
                             for(var j = 0; j < cityRules.length; j++) {
