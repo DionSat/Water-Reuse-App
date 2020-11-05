@@ -11,27 +11,40 @@
             </nav>
             <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-searchGuest" role="tabpanel" aria-labelledby="nav-searchGuest-tab">
-                <h2>How to Search for a Regulation</h2>
-                <p>1. Navigate to the <a href="{{ route('search') }}" target="_blank"> Search </a>page</p>
-                <img src="img/search_start.gif">
-                <p>2. Select either 'Commercial' or 'Residential'</p>
-                <img src="img/searchExampleGIF2.gif">
-                <p>Choose between either searching by Address or Searching by County, City, State</p>
-                <img src="img/undermaintenance.png">
-                <h4> Search by County, City, State</h4>
-                <p>First select a state in the dropdown menu, then you can either search only by state, or by county or city by selecting them in the dropdown menu. After selecting the region you wish to search for, click on the 'Search' button.</p>
-                <img src="img/searchExampleGIF3.gif">
-                <h4> Search Result</h4>
-                <p><b>Tabular Result:</b> The results page will show a tabular results for the incentives, codes, and permits of the City, County State. </p>
-                <img src="img/searchExampleGIF4.gif">
-                <p>To narrow down the results even further you can select a source and destination in the dropdown menues.</p>
-                <img src="img/searchExampleGIF5.gif">
-                <p><b>Graphical Result:</b> To view the graphical result: click on the top right button View Diagram. </p>
-                <img src="img/view_diagramExample.png">
-                <h5>To Be Continued...</h5>
-                <h4>Disclaimer</h4>
-                <p>If the state, county or city does not have any water reuse information, or if the state, county or city is not present in the search dropdown menus, this does not mean there are no regulations. It just means they have not been added to this site. Please search your local government web pages to find the water reuse information you need. After finding that information, it would be helpful to us if you <a href="{{ route('register') }}">register</a> to become a contributor, and add this regulation to our site.</p>
-                <a href="#nav-tab-base">Back to Top</a>
+              <h2>How to Search for a Regulation</h2>
+              <p>1. Navigate to the <a href="{{ route('search') }}" target="_blank"> Search </a>page</p>
+              <img src="img/search_start.gif">
+              <p>2. Select either 'Commercial' or 'Residential'</p>
+              <img src="img/searchExampleGIF2.gif">
+              <p>Choose between either searching by Address or Searching by County, City, State</p>
+              <img src="img/searchExampleGIF10.gif">
+              <h4> Search by County, City, State</h4>
+              <p>First select a state in the dropdown menu, then you can either search only by state, or by county or city by selecting them in the dropdown menu. After selecting the region you wish to search for, click on the 'Search' button.</p>
+              <img src="img/searchExampleGIF3.gif">
+              <h4> Search Result</h4>
+              <p><b>Tabular Result:</b> The results page will show a tabular results for the incentives, codes, and permits of the City, County State. </p>
+              <img src="img/searchExampleGIF4.gif">
+              <p>To narrow down the results even further you can select a source and destination in the dropdown menues.</p>
+              <img src="img/searchExampleGIF5.gif">
+              <p><b>Graphical Result:</b> To view the graphical result: click on the top right button View Diagram. </p>
+              <img src="img/view_diagramExample.png">
+              <p>This graphic shows the pathways from water source(such as Precipitation) to water destination(such as Toilet). Each node represents a Destination while its parents or nodes above it represents their source. To move the graphic around simply click and drag. </p>
+              <img src="img/searchExampleGraph.png">
+              <p>For information on the county, and city regulation for that destination, simply click on the card/node for links for the Incentives, Permit, Code, Submission View and More Information of the City, County and State. Click on City, County or State to show the Links</p>
+              <img src="img/searchExampleGIF9.gif">
+              <p>To expand the pathways from Source to Destination. Simply click on the plus sign to expand and click it again to collapse the pathways </p>
+              <img src="img/searchExampleGIF6.gif">
+              <p>The graphic displays the state level pathway status of the destinations. The legends correspond to the Pathway status of the destinations. <p style="color:#00cdcd"> Pathway Allowed</p>  The pathway is valid and has no problems for water reuse. <p style="color:#ff8c00">Pathway Not Addressed</p> Uncertain if the pathway is allowed for water reuse. <p style="color:#ff0000">Pathway Blocked / No Regulation</p> The destination for that card/node has no current regulations for it state level or water reuse is blocked. <p style="color:#9a9a9a">Grey Water</p> The destinations under the card/node represent the grey water pathways. <p style="color:#373737">Black Water</p> The destinations under the card/node represent the black water pathways. </p>
+              <img src="img/searchExampleGraph2.png">
+              <p>For easy to use search, you can use the search box at the top left of the graphic to type in a destination. It will then display a list of sources or pathways to that destination. You may also use the button at the top of the graphic automatically type in the search. Then select the source, destination you would like displayed. </p>
+              <img src="img/searchExampleGIF7.gif">
+              <p>You can also download and export the graphic as a pdf, csv, png or svg. By clicking the bars on the top right corner of the graphic</p>
+              <img src="img/searchExampleGraph3.png">
+              <p>Lastly the graphic has three other useful commands. Zoom In , Zoom Out and Fit the Graphic so the screen. </p>
+              <img src="img/searchExampleGIF8.gif">
+              <h4>Disclaimer</h4>
+              <p>If the state, county or city does not have any water reuse information, or if the state, county or city is not present in the search dropdown menus or the graphic card/node is red or the buttons are all disabled for the City, County, State, this does not mean there are no regulations. It just means they have not been added to this site. Please search your local government web pages to find the water reuse information you need. After finding that information, it would be helpful to us if you <a href="{{ route('register') }}">register</a> to become a contributor, and add this regulation to our site.</p>
+              <a href="#nav-tab-base">Back to Top</a>
             </div>
             <div class="tab-pane fade" id="nav-register" role="tabpanel" aria-labelledby="nav-register-tab">
                 <h2>Register to Add Water Reuse Regulations</h2>
@@ -55,27 +68,40 @@
             </nav>
             <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-search" role="tabpanel" aria-labelledby="nav-search-tab">
-                <h2>How to Search for a Regulation</h2>
-                <p>1. Navigate to the <a href="{{ route('search') }}" target="_blank"> Search </a>page</p>
-                <img src="img/search_start.gif">
-                <p>2. Select either 'Commercial' or 'Residential'</p>
-                <img src="img/searchExampleGIF2.gif">
-                <p>Choose between either searching by Address or Searching by County, City, State</p>
-                <img src="img/undermaintenance.png">
-                <h4> Search by County, City, State</h4>
-                <p>First select a state in the dropdown menu, then you can either search only by state, or by county or city by selecting them in the dropdown menu. After selecting the region you wish to search for, click on the 'Search' button.</p>
-                <img src="img/searchExampleGIF3.gif">
-                <h4> Search Result</h4>
-                <p><b>Tabular Result:</b> The results page will show a tabular results for the incentives, codes, and permits of the City, County State. </p>
-                <img src="img/searchExampleGIF4.gif">
-                <p>To narrow down the results even further you can select a source and destination in the dropdown menues.</p>
-                <img src="img/searchExampleGIF5.gif">
-                <p><b>Graphical Result:</b> To view the graphical result: click on the top right button View Diagram. </p>
-                <img src="img/view_diagramExample.png">
-                <h5>To Be Continued...</h5>
-                <h4>Disclaimer</h4>
-                <p>If the state, county or city does not have any water reuse information, or if the state, county or city is not present in the search dropdown menus, this does not mean there are no regulations. It just means they have not been added to this site. Please search your local government web pages to find the water reuse information you need. After finding that information, it would be helpful to us if you <a href="{{ route('register') }}">register</a> to become a contributor, and add this regulation to our site.</p>
-                <a href="#nav-tab-base">Back to Top</a>
+              <h2>How to Search for a Regulation</h2>
+              <p>1. Navigate to the <a href="{{ route('search') }}" target="_blank"> Search </a>page</p>
+              <img src="img/search_start.gif">
+              <p>2. Select either 'Commercial' or 'Residential'</p>
+              <img src="img/searchExampleGIF2.gif">
+              <p>Choose between either searching by Address or Searching by County, City, State</p>
+              <img src="img/searchExampleGIF10.gif">
+              <h4> Search by County, City, State</h4>
+              <p>First select a state in the dropdown menu, then you can either search only by state, or by county or city by selecting them in the dropdown menu. After selecting the region you wish to search for, click on the 'Search' button.</p>
+              <img src="img/searchExampleGIF3.gif">
+              <h4> Search Result</h4>
+              <p><b>Tabular Result:</b> The results page will show a tabular results for the incentives, codes, and permits of the City, County State. </p>
+              <img src="img/searchExampleGIF4.gif">
+              <p>To narrow down the results even further you can select a source and destination in the dropdown menues.</p>
+              <img src="img/searchExampleGIF5.gif">
+              <p><b>Graphical Result:</b> To view the graphical result: click on the top right button View Diagram. </p>
+              <img src="img/view_diagramExample.png">
+              <p>This graphic shows the pathways from water source(such as Precipitation) to water destination(such as Toilet). Each node represents a Destination while its parents or nodes above it represents their source. To move the graphic around simply click and drag. </p>
+              <img src="img/searchExampleGraph.png">
+              <p>For information on the county, and city regulation for that destination, simply click on the card/node for links for the Incentives, Permit, Code, Submission View and More Information of the City, County and State. Click on City, County or State to show the Links</p>
+              <img src="img/searchExampleGIF9.gif">
+              <p>To expand the pathways from Source to Destination. Simply click on the plus sign to expand and click it again to collapse the pathways </p>
+              <img src="img/searchExampleGIF6.gif">
+              <p>The graphic displays the state level pathway status of the destinations. The legends correspond to the Pathway status of the destinations. <p style="color:#00cdcd"> Pathway Allowed</p>  The pathway is valid and has no problems for water reuse. <p style="color:#ff8c00">Pathway Not Addressed</p> Uncertain if the pathway is allowed for water reuse. <p style="color:#ff0000">Pathway Blocked / No Regulation</p> The destination for that card/node has no current regulations for it state level or water reuse is blocked. <p style="color:#9a9a9a">Grey Water</p> The destinations under the card/node represent the grey water pathways. <p style="color:#373737">Black Water</p> The destinations under the card/node represent the black water pathways. </p>
+              <img src="img/searchExampleGraph2.png">
+              <p>For easy to use search, you can use the search box at the top left of the graphic to type in a destination. It will then display a list of sources or pathways to that destination. You may also use the button at the top of the graphic automatically type in the search. Then select the source, destination you would like displayed. </p>
+              <img src="img/searchExampleGIF7.gif">
+              <p>You can also download and export the graphic as a pdf, csv, png or svg. By clicking the bars on the top right corner of the graphic</p>
+              <img src="img/searchExampleGraph3.png">
+              <p>Lastly the graphic has three other useful commands. Zoom In , Zoom Out and Fit the Graphic so the screen. </p>
+              <img src="img/searchExampleGIF8.gif">
+              <h4>Disclaimer</h4>
+              <p>If the state, county or city does not have any water reuse information, or if the state, county or city is not present in the search dropdown menus or the graphic card/node is red or the buttons are all disabled for the City, County, State, this does not mean there are no regulations. It just means they have not been added to this site. Please search your local government web pages to find the water reuse information you need. After finding that information, it would be helpful to us if you <a href="{{ route('register') }}">register</a> to become a contributor, and add this regulation to our site.</p>
+              <a href="#nav-tab-base">Back to Top</a>
             </div>
             <div class="tab-pane fade" id="nav-addReg" role="tabpanel" aria-labelledby="nav-addReg-tab">
                 <h2>Add a New Regulation</h2>
@@ -228,27 +254,40 @@
             </nav>
             <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-searchContrib" role="tabpanel" aria-labelledby="nav-search-tab">
-                <h2>How to Search for a Regulation</h2>
-                <p>1. Navigate to the <a href="{{ route('search') }}" target="_blank"> Search </a>page</p>
-                <img src="img/search_start.gif">
-                <p>2. Select either 'Commercial' or 'Residential'</p>
-                <img src="img/searchExampleGIF2.gif">
-                <p>Choose between either searching by Address or Searching by County, City, State</p>
-                <img src="img/undermaintenance.png">
-                <h4> Search by County, City, State</h4>
-                <p>First select a state in the dropdown menu, then you can either search only by state, or by county or city by selecting them in the dropdown menu. After selecting the region you wish to search for, click on the 'Search' button.</p>
-                <img src="img/searchExampleGIF3.gif">
-                <h4> Search Result</h4>
-                <p><b>Tabular Result:</b> The results page will show a tabular results for the incentives, codes, and permits of the City, County State. </p>
-                <img src="img/searchExampleGIF4.gif">
-                <p>To narrow down the results even further you can select a source and destination in the dropdown menues.</p>
-                <img src="img/searchExampleGIF5.gif">
-                <p><b>Graphical Result:</b> To view the graphical result: click on the top right button View Diagram. </p>
-                <img src="img/view_diagramExample.png">
-                <h5>To Be Continued...</h5>
-                <h4>Disclaimer</h4>
-                <p>If the state, county or city does not have any water reuse information, or if the state, county or city is not present in the search dropdown menus, this does not mean there are no regulations. It just means they have not been added to this site. Please search your local government web pages to find the water reuse information you need. After finding that information, it would be helpful to us if you <a href="{{ route('register') }}">register</a> to become a contributor, and add this regulation to our site.</p>
-                <a href="#nav-tab-base">Back to Top</a>
+              <h2>How to Search for a Regulation</h2>
+              <p>1. Navigate to the <a href="{{ route('search') }}" target="_blank"> Search </a>page</p>
+              <img src="img/search_start.gif">
+              <p>2. Select either 'Commercial' or 'Residential'</p>
+              <img src="img/searchExampleGIF2.gif">
+              <p>Choose between either searching by Address or Searching by County, City, State</p>
+              <img src="img/searchExampleGIF10.gif">
+              <h4> Search by County, City, State</h4>
+              <p>First select a state in the dropdown menu, then you can either search only by state, or by county or city by selecting them in the dropdown menu. After selecting the region you wish to search for, click on the 'Search' button.</p>
+              <img src="img/searchExampleGIF3.gif">
+              <h4> Search Result</h4>
+              <p><b>Tabular Result:</b> The results page will show a tabular results for the incentives, codes, and permits of the City, County State. </p>
+              <img src="img/searchExampleGIF4.gif">
+              <p>To narrow down the results even further you can select a source and destination in the dropdown menues.</p>
+              <img src="img/searchExampleGIF5.gif">
+              <p><b>Graphical Result:</b> To view the graphical result: click on the top right button View Diagram. </p>
+              <img src="img/view_diagramExample.png">
+              <p>This graphic shows the pathways from water source(such as Precipitation) to water destination(such as Toilet). Each node represents a Destination while its parents or nodes above it represents their source. To move the graphic around simply click and drag. </p>
+              <img src="img/searchExampleGraph.png">
+              <p>For information on the county, and city regulation for that destination, simply click on the card/node for links for the Incentives, Permit, Code, Submission View and More Information of the City, County and State. Click on City, County or State to show the Links</p>
+              <img src="img/searchExampleGIF9.gif">
+              <p>To expand the pathways from Source to Destination. Simply click on the plus sign to expand and click it again to collapse the pathways </p>
+              <img src="img/searchExampleGIF6.gif">
+              <p>The graphic displays the state level pathway status of the destinations. The legends correspond to the Pathway status of the destinations. <p style="color:#00cdcd"> Pathway Allowed</p>  The pathway is valid and has no problems for water reuse. <p style="color:#ff8c00">Pathway Not Addressed</p> Uncertain if the pathway is allowed for water reuse. <p style="color:#ff0000">Pathway Blocked / No Regulation</p> The destination for that card/node has no current regulations for it state level or water reuse is blocked. <p style="color:#9a9a9a">Grey Water</p> The destinations under the card/node represent the grey water pathways. <p style="color:#373737">Black Water</p> The destinations under the card/node represent the black water pathways. </p>
+              <img src="img/searchExampleGraph2.png">
+              <p>For easy to use search, you can use the search box at the top left of the graphic to type in a destination. It will then display a list of sources or pathways to that destination. You may also use the button at the top of the graphic automatically type in the search. Then select the source, destination you would like displayed. </p>
+              <img src="img/searchExampleGIF7.gif">
+              <p>You can also download and export the graphic as a pdf, csv, png or svg. By clicking the bars on the top right corner of the graphic</p>
+              <img src="img/searchExampleGraph3.png">
+              <p>Lastly the graphic has three other useful commands. Zoom In , Zoom Out and Fit the Graphic so the screen. </p>
+              <img src="img/searchExampleGIF8.gif">
+              <h4>Disclaimer</h4>
+              <p>If the state, county or city does not have any water reuse information, or if the state, county or city is not present in the search dropdown menus or the graphic card/node is red or the buttons are all disabled for the City, County, State, this does not mean there are no regulations. It just means they have not been added to this site. Please search your local government web pages to find the water reuse information you need. After finding that information, it would be helpful to us if you <a href="{{ route('register') }}">register</a> to become a contributor, and add this regulation to our site.</p>
+              <a href="#nav-tab-base">Back to Top</a>
             </div>
             <div class="tab-pane fade" id="nav-addRegContrib" role="tabpanel" aria-labelledby="nav-addRegContrib-tab">
                 <h2>Add a New Regulation</h2>
