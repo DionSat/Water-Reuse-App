@@ -124,13 +124,13 @@ class AdminController extends Controller
         $searchInput = $request->search;
         $searchInput = '%'.$searchInput.'%';
 
-        $users = User::where('name', 'ILIKE',$searchInput)
-            ->orWhere('email','ILIKE',$searchInput)
-            ->orWhere('streetAddress','ILIKE',$searchInput)
-            ->orWhere('city','ILIKE',$searchInput)
-            ->orWhere('state','ILIKE',$searchInput)
-            ->orWhere('company','ILIKE',$searchInput)
-            ->orWhere('jobTitle','ILIKE',$searchInput)
+        $users = User::where('name', 'LIKE',$searchInput)
+            ->orWhere('email','LIKE',$searchInput)
+            ->orWhere('streetAddress','LIKE',$searchInput)
+            ->orWhere('city','LIKE',$searchInput)
+            ->orWhere('state','LIKE',$searchInput)
+            ->orWhere('company','LIKE',$searchInput)
+            ->orWhere('jobTitle','LIKE',$searchInput)
             ->orderBy('id')
             ->paginate(10);
 
