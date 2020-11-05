@@ -59,7 +59,6 @@ class SearchController extends Controller
             $lowestLevel = "city";
             $city = City::find($request->city_id);
         }
-
         // Get all the sources and destinations
         $sources = ReuseNode::sources();
         $destinations = ReuseNode::destinations();
