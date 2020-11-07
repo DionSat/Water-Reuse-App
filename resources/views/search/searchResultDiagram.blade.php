@@ -132,11 +132,13 @@
                 OrgChart.templates.possible_pathway.link = '<path class="backgroundPath" stroke-linejoin="round" stroke="#00cc99" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
                     '<path class="dashPath" stroke-width="4" fill="none" stroke="#ffffff" stroke-dasharray="10"  d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>';
 
-                /* Greywater & Sewage Custom Nodes */
+                /* Greywater / Sewage / Water Sources Custom Nodes */
                 OrgChart.templates.greywater = Object.assign({}, OrgChart.templates.ana);
                 OrgChart.templates.greywater.node = '<rect x="0" y="0" height="125" width="255" rx="40px" fill="#9a9a9a"></rect>';
                 OrgChart.templates.sewage = Object.assign({}, OrgChart.templates.ana);
                 OrgChart.templates.sewage.node = '<rect x="0" y="0" height="125" width="255" rx="40px" fill="#373737"></rect>';
+                OrgChart.templates.watersourcesRoot = Object.assign({}, OrgChart.templates.ana);
+                OrgChart.templates.watersourcesRoot.node = '<rect x="0" y="0" height="125" width="255" rx="40px" fill="#039be5"></rect>';
 
                 var nodes = [
                     /* Water Sources Root */
@@ -1624,6 +1626,9 @@
                         case "Sewage":
                             node.tags = ["Sewage"];
                             break;
+                        case "Water Sources":
+                          node.tags = ["WaterSources"];
+                          break;
                     }
                 }
 
@@ -1787,6 +1792,9 @@
                         },
                         Sewage: {
                             template: "sewage"
+                        },
+                        WaterSources: {
+                            template:"watersourcesRoot"
                         }
                     },
                     menu: {
