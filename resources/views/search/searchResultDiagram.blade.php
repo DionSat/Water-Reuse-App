@@ -1957,7 +1957,7 @@
                             a.className = "btn btn-primary";
                             a.style.cssText = "margin: 15px 6px 0 6px;";
                             a.title = "Code";
-                            if (cityCodeLinks == null){
+                            if (cityCodeLinks == null || cityCodeLinks == ""){
                                 a.className = "btn btn-primary disabled";
                             }
                             else{
@@ -1972,7 +1972,7 @@
                             a.className = "btn btn-primary";
                             a.style.cssText = "margin: 15px 6px 0 6px;";
                             a.title = "Permit";
-                            if (cityPermitLinks == null){
+                            if (cityPermitLinks == null || cityPermitLinks == ""){
                                 a.className = "btn btn-primary disabled";
                             }
                             else{
@@ -1987,7 +1987,7 @@
                             a.className = "btn btn-primary";
                             a.style.cssText = "margin: 15px 6px 0 6px;";
                             a.title = "Incentive";
-                            if (cityIncentivesLinks == null){
+                            if (cityIncentivesLinks == null || cityIncentivesLinks == ""){
                                 a.className = "btn btn-primary disabled";
                             }
                             else{
@@ -2002,7 +2002,7 @@
                             a.className = "btn btn-primary";
                             a.style.cssText = "margin: 15px 6px 0 6px;";
                             a.title = "More Info";
-                            if (cityInfoLinks == null){
+                            if (cityInfoLinks == null || cityInfoLinks == ""){
                                 a.className = "btn btn-primary disabled";
                             }
                             else{
@@ -2070,7 +2070,7 @@
                             a.className = "btn btn-primary";
                             a.style.cssText = "margin: 15px 6px 0 6px;";
                             a.title = "Code";
-                            if (countyCodeLinks == null){
+                            if (countyCodeLinks == null || countyCodeLinks == ""){
                                 a.className = "btn btn-primary disabled";
                             }
                             else{
@@ -2085,7 +2085,7 @@
                             a.className = "btn btn-primary";
                             a.style.cssText = "margin: 15px 6px 0 6px;";
                             a.title = "Permit";
-                            if (countyPermitLinks == null){
+                            if (countyPermitLinks == null || countyPermitLinks == ""){
                                 a.className = "btn btn-primary disabled";
                             }
                             else{
@@ -2100,7 +2100,7 @@
                             a.className = "btn btn-primary";
                             a.style.cssText = "margin: 15px 6px 0 6px;";
                             a.title = "Incentive";
-                            if (countyIncentivesLinks == null){
+                            if (countyIncentivesLinks == null || countyIncentivesLinks == ""){
                                 a.className = "btn btn-primary disabled";
                             }
                             else{
@@ -2115,7 +2115,7 @@
                             a.className = "btn btn-primary";
                             a.style.cssText = "margin: 15px 6px 0 6px;";
                             a.title = "More Info";
-                            if (countyInfoLinks == null){
+                            if (countyInfoLinks == null || countyInfoLinks == ""){
                                 a.className = "btn btn-primary disabled";
                             }
                             else{
@@ -2184,7 +2184,7 @@
                             a.className = "btn btn-primary";
                             a.style.cssText = "margin: 15px 6px 0 6px;";
                             a.title = "Code";
-                            if (stateCodeLinks == null){
+                            if (stateCodeLinks == null || stateCodeLinks == ""){
                                 a.className = "btn btn-primary disabled";
                             }
                             else{
@@ -2199,7 +2199,7 @@
                             a.className = "btn btn-primary";
                             a.style.cssText = "margin: 15px 6px 0 6px;";
                             a.title = "Permit";
-                            if (statePermitLinks == null){
+                            if (statePermitLinks == null || statePermitLinks == ""){
                                 a.className = "btn btn-primary disabled";
                             }
                             else{
@@ -2214,7 +2214,7 @@
                             a.className = "btn btn-primary";
                             a.style.cssText = "margin: 15px 6px 0 6px;";
                             a.title = "Incentive";
-                            if (stateIncentivesLinks == null){
+                            if (stateIncentivesLinks == null || stateIncentivesLinks == ""){
                                 a.className = "btn btn-primary disabled";
                             }
                             else{
@@ -2229,7 +2229,7 @@
                             a.className = "btn btn-primary";
                             a.style.cssText = "margin: 15px 6px 0 6px;";
                             a.title = "More Info";
-                            if (stateInfoLinks == null){
+                            if (stateInfoLinks == null || stateInfoLinks == ""){
                                 a.className = "btn btn-primary disabled";
                             }
                             else{
