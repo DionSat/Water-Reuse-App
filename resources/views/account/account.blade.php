@@ -7,7 +7,7 @@
                 {{ session('status') }}
             </div>
         @endif
-        <div class="card col-8 mx-auto" style="border: none; text-align: center" >
+        <div class="card col-8 mx-auto" style="border: none; text-align: center; background-color: transparent; color: white;" >
             <h2>Account page</h2>
             <br/>
         </div>

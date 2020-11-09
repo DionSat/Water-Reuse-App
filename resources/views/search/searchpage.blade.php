@@ -3,7 +3,7 @@
 @section('body')
     <div class="container">
         <div class="type-selector">
-            <h3 class="text-center mt-5"> Select the property type: </h3>
+            <h3 class="text-center mt-5" style="color: white"> Select the property type: </h3>
             <div class="row justify-content-center mt-0 mt-md-5">
                 <div class="col-md-5 col-lg-4">
                     <div class="card text-center selection-card commercial border-dark initial-selection">
