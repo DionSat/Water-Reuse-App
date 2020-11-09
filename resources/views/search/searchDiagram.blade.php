@@ -3,9 +3,18 @@
 @section('body')
     <script src="{{ URL::asset('/libraries/orgchart.js') }}"></script>
     <div class="container">
+      <div class="row justify-content-center">
+        <h1 class="font-weight-bold">State Regulation Diagram</h1>
+      </div>
+      <div class="row justify-content-center mb-4">
+        <h6>For City & County Regulations Click On Diagram Card</h6>
+      </div>
         <div class="navbar">
             <a href="{{route("search")}}" class="btn btn-primary col-md-2 mb-4 float-left"> <i class="fas fa-arrow-circle-left"></i>
                 Search Again
+            </a>
+            <a class="btn btn-warning col-md-2 float-center mb-4" target="_blank" href="{{route("info")}}">
+                Tutorial
             </a>
             <a href="{{route("search-submit")}}?state_id={{$request->state_id}}&county_id={{$request->county_id}}&city_id={{$request->city_id}}&searchType={{$request->searchType}}" class="btn btn-primary col-md-2 mb-4 float-right">
                 <i class="fas fa-clipboard-list"></i> List Option
