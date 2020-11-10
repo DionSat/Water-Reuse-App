@@ -3,11 +3,8 @@
 @section('body')
     <script src="{{ URL::asset('/libraries/orgchart.js') }}"></script>
     <div class="container">
-      <div class="row justify-content-center">
-        <h1 class="font-weight-bold">State Regulation Diagram</h1>
-      </div>
       <div class="row justify-content-center mb-4">
-        <h6>For City & County Regulations Click On Diagram Card</h6>
+        <h1 class="font-weight-bold">Water Reuse Map</h1>
       </div>
         <div class="navbar">
             <a href="{{route("search")}}" class="btn btn-primary col-md-2 mb-4 float-left"> <i class="fas fa-arrow-circle-left"></i>
