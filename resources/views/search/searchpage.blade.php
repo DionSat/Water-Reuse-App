@@ -44,7 +44,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="search mt-3">
+                    <hr class="search mt-3">
                         <h3 id="search-title" class="text-center">Search for Location </h3>
                         <hr>
                             <div class="col-md-12">
@@ -93,7 +93,7 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <input id="searchType" name="searchType" class="d-none" type="text" value="residential">
+                                                        <input class="searchType" name="searchType" class="d-none" type="hidden" value="residential">
                                                         <button id="searchButton" class="btn btn-primary btn-lg btn-block" style="margin-top: 20px;margin-bottom: 20px;" type="submit" disabled="true"> <i class="fas fa-search"></i> Search </button>
                                                     </div>
                                                 </div>
@@ -119,7 +119,7 @@
                                                             </div>
                                                         </div>
                                                 </div>
-                                                <input id="searchType" name="searchType" class="d-none" type="text" value="residential">
+                                                <input class="searchType" name="searchType" class="d-none" type="hidden" value="residential">
                                                 <button id="searchAddressButton" class="btn btn-primary btn-lg btn-block" style="margin-top: 20px;margin-bottom: 20px;" type="submit" disabled="true"> <i class="fas fa-search"></i> Search </button>
                                             </div>
                                         </div>
@@ -176,14 +176,14 @@
                 $(".commercial").addClass("bg-primary text-light border-none");
                 $(".residential").removeClass("bg-primary text-light");
                 $(".residential").addClass("border-dark");
-                $("#searchType").attr("value","commercial");
+                $(".searchType").attr("value","commercial");
                 $("#search-title").text("Searching for Commercial Locations");
             } else {
                 $(".residential").removeClass("border-dark");
                 $(".residential").addClass("bg-primary text-light border-none");
                 $(".commercial").removeClass("bg-primary text-light");
                 $(".commercial").addClass("border-dark");
-                $("#searchType").attr("value","residential");
+                $(".searchType").attr("value","residential");
                 $("#search-title").text("Searching for Residential Locations");
             }
         });
