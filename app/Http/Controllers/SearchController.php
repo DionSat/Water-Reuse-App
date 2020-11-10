@@ -76,6 +76,12 @@ class SearchController extends Controller
         $address_string = $addressRequest->addressInput;
         $address_info = json_decode($this->addressData($address_string), true);
 
+        // Checks if no locations have been found
+        // Returns error message if true
+        if($address_info["results"][0]["locations"] == null){
+          return back()->with('error', 'Invalid input. No location found.');
+        }
+
         // TODO Improve error handling
         // Functioning bad results filtering. Maybe improve action.
         $QualityCode = $address_info["results"][0]["locations"][0]["geocodeQualityCode"];

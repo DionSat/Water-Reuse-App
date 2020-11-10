@@ -129,6 +129,14 @@
                     </div>
                 </div>
             </div>
+            @if(session()->has('error'))
+              <div class="alert alert-dismissible alert-danger mt-md-5">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <strong> {{ session()->get('error') }} </strong>
+              </div>
+            @endif
         </div>
     </div>
 @endsection
@@ -192,9 +200,11 @@
         $("#StreetAddressInput").on('input',function (){
             initSearch();
         });
+
         function initSearch() {
             $("#searchAddressButton").removeAttr("disabled");
         }
+
         $("#searchAddressButton").click(function (){
             //need to work
             //when click the searchAddressButton, ...
