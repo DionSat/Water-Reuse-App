@@ -2,7 +2,7 @@
     <div class="card-body">
         <div class="legend-content">
             <div>
-                <div style="background-color:#00cdcd;"></div>  Pathway Allowed
+                <div style="background-color:#039be5;"></div>  Pathway Allowed
             </div>
             <div>
                 <div style="background-color:#ff8c00;"></div>  Pathway Not Addressed
