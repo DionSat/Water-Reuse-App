@@ -5,17 +5,15 @@
                 <div style="background-color:#039be5;"></div>  Pathway Allowed
             </div>
             <div>
-                <div style="background-color:#ff8c00;"></div>  Pathway Not Addressed
+                <div style="background-color:#ff8c00;"></div>  Pathway Possible
             </div>
             <div>
-                <div style="background-color:#ff0000;"></div>  Pathway Blocked / No Regulations
+                <div style="background-color:#ff0000;"></div>  Pathway Blocked
             </div>
             <div>
-                <div style="background-color:#9a9a9a;"></div>  Greywater
+                <div style="background-color:#9a9a9a;"></div>  No Information
             </div>
-            <div>
-                <div style="background-color:#373737;"></div>  Sewage
-            </div>
+
         </div>
         <div style="width:100%; height:700px;" id="orgchart"/>
         <script>
