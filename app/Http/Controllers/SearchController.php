@@ -82,27 +82,25 @@ class SearchController extends Controller
           return back()->with('error', 'Invalid input. No location found.');
         }
 
-        // TODO Improve error handling
         // Functioning bad results filtering. Maybe improve action.
         $QualityCode = $address_info["results"][0]["locations"][0]["geocodeQualityCode"];
         if (($QualityCode[4] == 'X'|| $QualityCode[4] == 'C') && ($QualityCode[3] == 'X'|| $QualityCode[3] == 'C') && ($QualityCode[2] == 'X'|| $QualityCode[2] == 'C')) {
-            dump("Location ambiguous");
-            return back();
+            return back()->with('error', 'Location ambiguous');
         }
         // Check to ensure location is within the US
         $CountryCode = $address_info["results"][0]["locations"][0]["adminArea1"];
         if ($CountryCode != "US") {
-            dump("Could not find location in the United States");
-            return back();
+            return back()->with('error', 'Could not find location in the United States');
         }
 
         // sets stateIndex to state abbreviation Ex. Oregon = OR
         $stateIndex = $address_info["results"][0]["locations"][0]["adminArea3"];
 
+        // Checks for valid state
         try{
             $stateName = $this->states[$stateIndex];
         } catch(\ErrorException $exception){
-            return back()->withError($exception->getMessage())->withInput();
+            return back()->with('error', 'Invalid input. No location found.');
         }
 
         $countyRules = new Collection();
