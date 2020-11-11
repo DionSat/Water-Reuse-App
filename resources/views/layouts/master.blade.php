@@ -20,7 +20,7 @@
     <!-- Styles -->
     {{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
     <style>
-        body{
+        body {
             background-image: url('../img/mainBackground.png');
             background-size: cover;
             object-fit: cover;
