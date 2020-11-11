@@ -22,95 +22,97 @@
                 {{ session('nothing') }}
               </div>
             @endif
-              <div class="d-md-flex justify-content-between">
-                <div class="col-lg-5 ">
-                  <label for="search control-label">Search Current Page:</label>
-                  <input type="text" id="search" class="form-control">
-                </div>
-                <form class="col-lg-5"
-                      action={{route('searchUsers', ["type" => "update"])}} method="GET">
-                  {{ csrf_field() }}
-                  <label for="searchDB">Search Database:</label>
-                  <div class="input-group">
-                    <input type="text" id="searchDB" name="search" class="form-control">
-                    <div class="input-group-append">
-                      <button type="submit" class="btn btn-primary">Go</button>
-                    </div>
-                  </div>
-                </form>
-                @if (!$userListHome)
-                    <button class="btn btn-primary h-50 align-self-md-end float-right float-md-none mt-1 mt-md-0"
-                            onclick="window.location='{{ route('getUsers') }}'">Clear
-                    </button>
-                @endif
+            <div class="d-md-flex justify-content-between">
+              <div class="col-lg-5 ">
+                <label for="search control-label">Search Current Page:</label>
+                <input type="text" id="search" class="form-control">
               </div>
-            <table id="userTable" class="table table-responsive">
-              <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Contact</th>
-                <th scope="col">Admin</th>
-                <th scope="col">Toggle Admin</th>
-                <th scope="col">Ban User</th>
-              </tr>
-              </thead>
-              <tbody>
-              @foreach($users as $user)
-                <!--13 is tha ascii value for return and in php its "\r"-->
-                <tr data-toggle="tooltip" data-placement="bottom"
-                    title="Company: {{$user->company}} &#13Job Title: {{$user->jobTitle}} &#13City: {{$user->city}} &#13State: {{$user->state}}">
-                  <th scope="row">{{$user->id}}</th>
-                  <td><a href="{{route('viewUser',['user_id' => $user->id])}}">{{$user->name}}</a>
-                  </td>
-                  <td>{{$user->email}}</td>
-                  <td>
-                    @if($user->can_contact === true)
-                      <span style="font-size: 1em; color: green;">
-                                                        <i class="fas fa-check"></i>
-                                                    </span>
-                    @else
-                      <span style="font-size: 1em; color: red;">
-                                                        <i class="fas fa-times"></i>
-                                                    </span>
-                    @endif
-                  </td>
-                  <td>
-                    @if($user->is_admin === true)
-                      <span style="font-size: 1em; color: green;">
-                                                        <i class="fas fa-check"></i>
-                                                    </span>
-                    @else
-                      <span style="font-size: 1em; color: red;">
-                                                        <i class="fas fa-times"></i>
-                                                    </span>
-                    @endif
-                  </td>
-                  <td>
-                    <form action={{ route('updateUser') }} method="POST">
-                      {{ csrf_field() }}
-                      <input type="number" name="userId" style="display: none;"
-                             value={{$user->id}}>
-                      <button type="submit" class="btn btn-primary">
-                        {{ __('Toggle Admin') }}
-                      </button>
-                    </form>
-                  </td>
-                  <td>
-                    <form action={{ route('toggleBanUser') }} method="POST">
-                      {{ csrf_field() }}
-                      <input type="number" name="userId" style="display: none;"
-                             value={{$user->id}}>
-                      <button type="submit" class="btn btn-primary">
-                        Ban User
-                      </button>
-                    </form>
-                  </td>
+              <form class="col-lg-5"
+                    action={{route('searchUsers', ["type" => "update"])}} method="GET">
+                {{ csrf_field() }}
+                <label for="searchDB">Search Database:</label>
+                <div class="input-group">
+                  <input type="text" id="searchDB" name="search" class="form-control">
+                  <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Go</button>
+                  </div>
+                </div>
+              </form>
+              @if (!$userListHome)
+                <button class="btn btn-primary h-50 align-self-md-end float-right float-md-none mt-1 mt-md-0"
+                        onclick="window.location='{{ route('getUsers') }}'">Clear
+                </button>
+              @endif
+            </div>
+            <div class="table-responsive">
+              <table id="userTable" class="table">
+                <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Contact</th>
+                  <th scope="col">Admin</th>
+                  <th scope="col">Toggle Admin</th>
+                  <th scope="col">Ban User</th>
                 </tr>
-              @endforeach
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                @foreach($users as $user)
+                  <!--13 is tha ascii value for return and in php its "\r"-->
+                  <tr data-toggle="tooltip" data-placement="bottom"
+                      title="Company: {{$user->company}} &#13Job Title: {{$user->jobTitle}} &#13City: {{$user->city}} &#13State: {{$user->state}}">
+                    <th scope="row">{{$user->id}}</th>
+                    <td><a href="{{route('viewUser',['user_id' => $user->id])}}">{{$user->name}}</a>
+                    </td>
+                    <td>{{$user->email}}</td>
+                    <td>
+                      @if($user->can_contact === true)
+                        <span style="font-size: 1em; color: green;">
+                                                        <i class="fas fa-check"></i>
+                                                    </span>
+                      @else
+                        <span style="font-size: 1em; color: red;">
+                                                        <i class="fas fa-times"></i>
+                                                    </span>
+                      @endif
+                    </td>
+                    <td>
+                      @if($user->is_admin === true)
+                        <span style="font-size: 1em; color: green;">
+                                                        <i class="fas fa-check"></i>
+                                                    </span>
+                      @else
+                        <span style="font-size: 1em; color: red;">
+                                                        <i class="fas fa-times"></i>
+                                                    </span>
+                      @endif
+                    </td>
+                    <td>
+                      <form action={{ route('updateUser') }} method="POST">
+                        {{ csrf_field() }}
+                        <input type="number" name="userId" style="display: none;"
+                               value={{$user->id}}>
+                        <button type="submit" class="btn btn-primary">
+                          {{ __('Toggle Admin') }}
+                        </button>
+                      </form>
+                    </td>
+                    <td>
+                      <form action={{ route('toggleBanUser') }} method="POST">
+                        {{ csrf_field() }}
+                        <input type="number" name="userId" style="display: none;"
+                               value={{$user->id}}>
+                        <button type="submit" class="btn btn-primary">
+                          Ban User
+                        </button>
+                      </form>
+                    </td>
+                  </tr>
+                @endforeach
+                </tbody>
+              </table>
+            </div>
           </div>
           <div class="row mt-1">
                             <span class="mx-auto">

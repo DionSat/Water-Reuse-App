@@ -45,8 +45,9 @@
               @endif
             </div>
             </center>
-            <table id="userTable" class="table table-responsive-lg">
-              <thead>
+              <div class="table-responsive">
+                <table id="userTable" class="table">
+                <thead>
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
