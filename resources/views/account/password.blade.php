@@ -35,12 +35,18 @@
                             </form>
                         </div>
                         <div class="card-footer">
-                            <div class="row d-flex justify-content-center">
-                                <div class="col-md-6">
-                                        <button id="btnSubmit" type="submit" class="btn btn-success btn-large btn-block"><i
-                                                class="fas fa-edit"></i>
-                                            Save
-                                        </button>
+                            <div class="row">
+                                <div class="col-md-6" style="display: inline-block;">
+                                    <button id="btnSubmit" type="submit" class="btn btn-success btn-large btn-block">
+                                        <i class="fas fa-edit"></i>
+                                        Save
+                                    </button>
+                                </div>
+                                <div class="col-md-6" style="display:inline-block;">
+                                        <button id="btnBack" type="button" class="btn btn-success btn-large btn-block" onclick="window.location='{{ route("account") }}'">
+                                            <i class="fas fa-edit"></i>
+                                        Back
+                                    </button>
                                 </div>
                             </div>
                         </div>

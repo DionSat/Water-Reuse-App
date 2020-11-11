@@ -45,17 +45,20 @@ class SearchController extends Controller
         $lowestLevel = "state";
 
         $stateRules = StateMerge::with(['state', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])
-                                        ->where("stateID", $request->state_id)->where("location_type", $request->searchType)->get();
+                                        ->where("stateID", $request->state_id)->where("location_type", $request->searchType)
+                                        ->orderBy('sourceID', 'DESC')->orderBy('destinationID', 'DESC')->get();
         if(isset($request->county_id)){
             $countyRules = CountyMerge::with(['county', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])
-                ->where("countyID", $request->county_id)->where("location_type", $request->searchType)->get();
+                ->where("countyID", $request->county_id)->where("location_type", $request->searchType)
+                ->orderBy('sourceID', 'DESC')->orderBy('destinationID', 'DESC')->get();
             $lowestLevel = "county";
             $county = County::find($request->county_id);
         }
 
         if(isset($request->city_id)) {
             $cityRules = CityMerge::with(['city', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])
-                ->where("cityID", $request->city_id)->where("location_type", $request->searchType)->get();
+                ->where("cityID", $request->city_id)->where("location_type", $request->searchType)
+                ->orderBy('sourceID', 'DESC')->orderBy('destinationID', 'DESC')->get();
             $lowestLevel = "city";
             $city = City::find($request->city_id);
         }
@@ -73,27 +76,31 @@ class SearchController extends Controller
         $address_string = $addressRequest->addressInput;
         $address_info = json_decode($this->addressData($address_string), true);
 
-        // TODO Improve error handling
+        // Checks if no locations have been found
+        // Returns error message if true
+        if($address_info["results"][0]["locations"] == null){
+          return back()->with('error', 'Invalid input. No location found.');
+        }
+
         // Functioning bad results filtering. Maybe improve action.
         $QualityCode = $address_info["results"][0]["locations"][0]["geocodeQualityCode"];
         if (($QualityCode[4] == 'X'|| $QualityCode[4] == 'C') && ($QualityCode[3] == 'X'|| $QualityCode[3] == 'C') && ($QualityCode[2] == 'X'|| $QualityCode[2] == 'C')) {
-            dump("Location ambiguous");
-            return back();
+            return back()->with('error', 'Location ambiguous');
         }
         // Check to ensure location is within the US
         $CountryCode = $address_info["results"][0]["locations"][0]["adminArea1"];
         if ($CountryCode != "US") {
-            dump("Could not find location in the United States");
-            return back();
+            return back()->with('error', 'Could not find location in the United States');
         }
 
         // sets stateIndex to state abbreviation Ex. Oregon = OR
         $stateIndex = $address_info["results"][0]["locations"][0]["adminArea3"];
 
+        // Checks for valid state
         try{
             $stateName = $this->states[$stateIndex];
         } catch(\ErrorException $exception){
-            return back()->withError($exception->getMessage())->withInput();
+            return back()->with('error', 'Invalid input. No location found.');
         }
 
         $countyRules = new Collection();
