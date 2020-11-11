@@ -4,7 +4,8 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <h3 style="text-align: center">Submit a New Water Reuse Regulation</h3>
+                <h3 style="text-align: center; color:white;" >Submit a New Water Reuse Regulation</h3>
+                <br>
                 <div class="card">
                     <div class="card-header">Location</div>
                     <div class="card-body">

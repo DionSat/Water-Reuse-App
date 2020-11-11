@@ -7,7 +7,7 @@
                 {{ session('nothing') }}
             </div>
         @endif
-        <div class="card" style="border: none; text-align: center">
+        <div class="card" style="border: none; text-align: center;color: white; background-color: transparent;">
             <h3>Account Update</h3>
             <br>
         </div>
@@ -134,26 +134,27 @@
                             <label>
                                 <input type="radio" name="radio" value="true" checked>
                             </label>
-                            Yes
+                            <p style="display: inline">Yes</p>
                             <label>
                                 <input type="radio" name="radio" value="false">
                             </label>
-                            No
+                            <p style="display: inline">No</ps>
                         @else
                             <label>
                                 <input type="radio" name="radio" value="true">
                             </label>
-                            Yes
+                            <p style="display: inline">Yes</p>
                             <label>
                                 <input type="radio" name="radio" value="false" checked>
                             </label>
-                            No
+                            <p style="display: inline">No</p>
                         @endif
                     </div>
                 </div>
 
                 <div class="form row p-3">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary" style="margin-right: 30px">Save</button>
+                    <button type="button" class="btn btn-primary" onclick="window.location='{{ route("account") }}'" >Back</button>
                 </div>
             </div>
         </form>
@@ -169,6 +170,12 @@
         #contactLabel {
             font-size: 20px;
             padding-left: 20px;
+        }
+        label{
+            color: white;
+        }
+        p{
+            color: white;
         }
     </style>
 @endpush
