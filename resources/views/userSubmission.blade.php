@@ -92,12 +92,12 @@
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="waterDestination0">Water Destination</label>
-                                        <select id="waterDestination0" class="form-control" multiple size="2">
+                                        <select id="waterDestination0" class="form-control" multiple size="3">
                                             <option value="choose" disabled>Choose...</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="allowed0">Reuse Allowed?</label>
+                                        <label for="allowed0">Path Allowed?</label>
                                         <select id="allowed0" class="form-control">
                                             <option value="choose" disabled>Choose...</option>
                                         </select>
