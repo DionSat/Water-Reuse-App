@@ -997,143 +997,11 @@
                     }
                 }
 
-
-
-                /* Variables for the state, county, city allowed and blocked reuse nodes */
-                /*var stateSurfaceWaterAllowed = [];
-                var stateShallowGroundWaterAllowed = [];
-                var stateGroundWaterAllowed = [];
-                var stateStormWaterAllowed = [];
-                var stateprecipitationAllowed = [];
-                var stateCondensateAllowed = [];
-                var stateSurfaceWaterBlocked = [];
-                var stateShallowGroundWaterBlocked = [];
-                var stateGroundWaterBlocked = [];
-                var stateStormWaterBlocked = [];
-                var stateprecipitationBlocked = [];
-                var stateCondensateBlocked = [];
-
-                /* Look at the allowed nodes for the city depending on the water source
-                for(var i = 0; i < cityRules.length; i++) {
-                    if(cityRules[i].source.node_name === 'Surface Water') {
-                        citySurfaceWaterAllowed.push(cityRules[i].destination.node_name);
-                    }
-                    if(cityRules[i].source.node_name === 'Shallow Groundwater') {
-                        cityShallowGroundWaterAllowed.push(cityRules[i].destination.node_name);
-                    }
-                    if(cityRules[i].source.node_name === 'Ground Water') {
-                        cityGroundWaterAllowed.push(cityRules[i].destination.node_name);
-                    }
-                    if(cityRules[i].source.node_name === 'Stormwater Runoff') {
-                        cityStormWaterAllowed.push(cityRules[i].destination.node_name);
-                    }
-                    if(cityRules[i].source.node_name === 'Precipitation') {
-                        cityprecipitationAllowed.push(cityRules[i].destination.node_name);
-                    }
-                    if(cityRules[i].source.node_name === 'Condensate') {
-                        cityCondensateAllowed.push(cityRules[i].destination.node_name);
-                    }
-                }
-
-                /* Look at complete list of reusenode and find nodes that are not allowed
-                for(var i = 0; i < reusenode.length; i++) {
-                    if(citySurfaceWaterAllowed.includes(reusenode[i]) !== true) {
-                        citySurfaceWaterBlocked.push(reusenode[i]);
-                    }
-                    if(cityShallowGroundWaterAllowed.includes(reusenode[i]) !== true) {
-                        cityShallowGroundWaterBlocked.push(reusenode[i]);
-                    }
-                    if(cityGroundWaterAllowed.includes(reusenode[i]) !== true) {
-                        cityGroundWaterBlocked.push(reusenode[i]);
-                    }
-                    if(cityStormWaterAllowed.includes(reusenode[i]) !== true) {
-                        cityStormWaterBlocked.push(reusenode[i]);
-                    }
-                    if(cityprecipitationAllowed.includes(reusenode[i]) !== true) {
-                        cityprecipitationBlocked.push(reusenode[i]);
-                    }
-                    if(cityCondensateAllowed.includes(reusenode[i]) !== true) {
-                        cityCondensateBlocked.push(reusenode[i]);
-                    }
-                }
-
-                surfaceWaterNotAllowedNodes = []
-                shallowGroundWaterNotAllowedNodes = []
-                groundWaterNotAllowedNodes = []
-                stormWaterNotAllowedNodes = []
-                precipitationNotAllowedNodes = []
-                condensateNotAllowedNodes = []
-                for(var i = 0; i < reusenode.length; i++) {
-                    if(citySurfaceWaterBlocked.includes(reusenode[i])) {
-                        surfaceWaterNotAllowedNodes.push(reusenode[i]);
-                    }
-                    if(cityShallowGroundWaterBlocked.includes(reusenode[i])) {
-                        shallowGroundWaterNotAllowedNodes.push(reusenode[i]);
-                    }
-                    if(cityGroundWaterBlocked.includes(reusenode[i])) {
-                        groundWaterNotAllowedNodes.push(reusenode[i]);
-                    }
-                    if(cityStormWaterBlocked.includes(reusenode[i])) {
-                        stormWaterNotAllowedNodes.push(reusenode[i]);
-                    }
-                    if(cityprecipitationBlocked.includes(reusenode[i])) {
-                        precipitationNotAllowedNodes.push(reusenode[i]);
-                    }
-                    if(cityCondensateBlocked.includes(reusenode[i])) {
-                        condensateNotAllowedNodes.push(reusenode[i]);
-                    }
-                }
-
-                /* Switch all the nodes from each source to grey if it is in the NotAllowedNodes
-                for(var i = 7; i < nodes.length; i++) {
-                    if(nodes[i].pid === 1) {
-                        for(var j = 0; j < condensateNotAllowedNodes.length; j++) {
-                            if(nodes[i].Name === condensateNotAllowedNodes[j]) {
-                                nodes[i].tags = ['PathwayBlocked']
-                            }
-                        }
-                    }
-                    if(nodes[i].pid === 2) {
-                        for(var j = 0; j < precipitationNotAllowedNodes.length; j++){
-                            if(nodes[i].Name === precipitationNotAllowedNodes[j]) {
-                                nodes[i].tags = ['PathwayBlocked']
-                            }
-                        }
-                    }
-                    if(nodes[i].pid === 3) {
-                        for(var j = 0; j < stormWaterNotAllowedNodes.length; j++){
-                            if(nodes[i].Name === stormWaterNotAllowedNodes[j]) {
-                                nodes[i].tags = ['PathwayBlocked']
-                            }
-                        }
-                    }
-                    if(nodes[i].pid === 4) {
-                        for(var j = 0; j < surfaceWaterNotAllowedNodes.length; j++){
-                            if(nodes[i].Name === surfaceWaterNotAllowedNodes[j]) {
-                                nodes[i].tags = ['PathwayBlocked']
-                            }
-                        }
-                    }
-                    if(nodes[i].pid === 5) {
-                        for(var j = 0; j < shallowGroundWaterNotAllowedNodes.length; j++){
-                            if(nodes[i].Name === shallowGroundWaterNotAllowedNodes[j]) {
-                                nodes[i].tags = ['PathwayBlocked']
-                            }
-                        }
-                    }
-                    if(nodes[i].pid === 6) {
-                        for(var j = 0; j < groundWaterNotAllowedNodes.length; j++){
-                            if(nodes[i].Name === groundWaterNotAllowedNodes[j]) {
-                                nodes[i].tags = ['PathwayBlocked']
-                            }
-                        }
-                    }
-                }*/
                 var cityRuleExist = false;
                 var countyRuleExist = false;
                 var stateRuleExist = false;
 
-                for(var i = 7; i < nodes.length; i++) {
+                for(var i = 0; i < nodes.length; i++) {
                   for(var j = 0; j < cityRules.length; j++) {
                     if(cityRules[j].source.node_name === nodes[i].Source && cityRules[j].destination.node_name === nodes[i].Name) {
                       if(cityRules[j].allowed.allowed_id === 2) {
@@ -1177,16 +1045,6 @@
                   if(stateRuleExist === false && countyRuleExist === false && cityRuleExist === false) {
                     //to be added later
                   }
-                }
-
-                for(var i = 0; i < cityRules.length; i++) {
-                    if(cityRules[i].allowed.allowed_id === 2) {
-                        for(var j = 0; j < nodes.length; j++) {
-                            if(cityRules[i].source.node_name === nodes[j].Source && cityRules[i].destination.node_name === nodes[j].Name) {
-                                nodes[j].tags = ['PathwayNotAddressed']
-                            }
-                        }
-                    }
                 }
 
 
