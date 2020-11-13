@@ -128,13 +128,13 @@
                 OrgChart.templates.ana.link = '<path class="backgroundPath" stroke-linejoin="round" stroke="#00cc99" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
                     '<path class="dashPath" stroke-width="4" fill="none" stroke="#ffffff" stroke-dasharray="10"  d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>';
 
-                /* Custom Template to not available nodes*/
-                OrgChart.templates.no_regulation = Object.assign({}, OrgChart.templates.ana);
+                /* Custom Template to blocked nodes*/
+                OrgChart.templates.pathway_blocked = Object.assign({}, OrgChart.templates.ana);
 
-                OrgChart.templates.no_regulation.node =
+                OrgChart.templates.pathway_blocked.node =
                     '<rect x="0" y="0" height="120" width="250" fill="#ff0000" stroke-width="1" stroke="#808080" rx="5" ry="5"></rect>'
 
-                OrgChart.templates.no_regulation.link = '<path class="backgroundPath" stroke-linejoin="round" stroke="#00cc99" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
+                OrgChart.templates.pathway_blocked.link = '<path class="backgroundPath" stroke-linejoin="round" stroke="#00cc99" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
                     '<path class="dashPath" stroke-width="4" fill="none" stroke="#ffffff" stroke-dasharray="10"  d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>';
 
                 /* Custom template for nodes that may have path */
@@ -997,8 +997,10 @@
                     }
                 }
 
+
+
                 /* Variables for the state, county, city allowed and blocked reuse nodes */
-                var stateSurfaceWaterAllowed = [];
+                /*var stateSurfaceWaterAllowed = [];
                 var stateShallowGroundWaterAllowed = [];
                 var stateGroundWaterAllowed = [];
                 var stateStormWaterAllowed = [];
@@ -1011,47 +1013,47 @@
                 var stateprecipitationBlocked = [];
                 var stateCondensateBlocked = [];
 
-                /* Look at the allowed nodes for the state depending on the water source */
-                for(var i = 0; i < stateRules.length; i++) {
-                    if(stateRules[i].source.node_name === 'Surface Water') {
-                        stateSurfaceWaterAllowed.push(stateRules[i].destination.node_name);
+                /* Look at the allowed nodes for the city depending on the water source
+                for(var i = 0; i < cityRules.length; i++) {
+                    if(cityRules[i].source.node_name === 'Surface Water') {
+                        citySurfaceWaterAllowed.push(cityRules[i].destination.node_name);
                     }
-                    if(stateRules[i].source.node_name === 'Shallow Groundwater') {
-                        stateShallowGroundWaterAllowed.push(stateRules[i].destination.node_name);
+                    if(cityRules[i].source.node_name === 'Shallow Groundwater') {
+                        cityShallowGroundWaterAllowed.push(cityRules[i].destination.node_name);
                     }
-                    if(stateRules[i].source.node_name === 'Ground Water') {
-                        stateGroundWaterAllowed.push(stateRules[i].destination.node_name);
+                    if(cityRules[i].source.node_name === 'Ground Water') {
+                        cityGroundWaterAllowed.push(cityRules[i].destination.node_name);
                     }
-                    if(stateRules[i].source.node_name === 'Stormwater Runoff') {
-                        stateStormWaterAllowed.push(stateRules[i].destination.node_name);
+                    if(cityRules[i].source.node_name === 'Stormwater Runoff') {
+                        cityStormWaterAllowed.push(cityRules[i].destination.node_name);
                     }
-                    if(stateRules[i].source.node_name === 'Precipitation') {
-                        stateprecipitationAllowed.push(stateRules[i].destination.node_name);
+                    if(cityRules[i].source.node_name === 'Precipitation') {
+                        cityprecipitationAllowed.push(cityRules[i].destination.node_name);
                     }
-                    if(stateRules[i].source.node_name === 'Condensate') {
-                        stateCondensateAllowed.push(stateRules[i].destination.node_name);
+                    if(cityRules[i].source.node_name === 'Condensate') {
+                        cityCondensateAllowed.push(cityRules[i].destination.node_name);
                     }
                 }
 
-                /* Look at complete list of reusenode and find nodes that are not allowed */
+                /* Look at complete list of reusenode and find nodes that are not allowed
                 for(var i = 0; i < reusenode.length; i++) {
-                    if(stateSurfaceWaterAllowed.includes(reusenode[i]) !== true) {
-                        stateSurfaceWaterBlocked.push(reusenode[i]);
+                    if(citySurfaceWaterAllowed.includes(reusenode[i]) !== true) {
+                        citySurfaceWaterBlocked.push(reusenode[i]);
                     }
-                    if(stateShallowGroundWaterAllowed.includes(reusenode[i]) !== true) {
-                        stateShallowGroundWaterBlocked.push(reusenode[i]);
+                    if(cityShallowGroundWaterAllowed.includes(reusenode[i]) !== true) {
+                        cityShallowGroundWaterBlocked.push(reusenode[i]);
                     }
-                    if(stateGroundWaterAllowed.includes(reusenode[i]) !== true) {
-                        stateGroundWaterBlocked.push(reusenode[i]);
+                    if(cityGroundWaterAllowed.includes(reusenode[i]) !== true) {
+                        cityGroundWaterBlocked.push(reusenode[i]);
                     }
-                    if(stateStormWaterAllowed.includes(reusenode[i]) !== true) {
-                        stateStormWaterBlocked.push(reusenode[i]);
+                    if(cityStormWaterAllowed.includes(reusenode[i]) !== true) {
+                        cityStormWaterBlocked.push(reusenode[i]);
                     }
-                    if(stateprecipitationAllowed.includes(reusenode[i]) !== true) {
-                        stateprecipitationBlocked.push(reusenode[i]);
+                    if(cityprecipitationAllowed.includes(reusenode[i]) !== true) {
+                        cityprecipitationBlocked.push(reusenode[i]);
                     }
-                    if(stateCondensateAllowed.includes(reusenode[i]) !== true) {
-                        stateCondensateBlocked.push(reusenode[i]);
+                    if(cityCondensateAllowed.includes(reusenode[i]) !== true) {
+                        cityCondensateBlocked.push(reusenode[i]);
                     }
                 }
 
@@ -1062,27 +1064,27 @@
                 precipitationNotAllowedNodes = []
                 condensateNotAllowedNodes = []
                 for(var i = 0; i < reusenode.length; i++) {
-                    if(stateSurfaceWaterBlocked.includes(reusenode[i])) {
+                    if(citySurfaceWaterBlocked.includes(reusenode[i])) {
                         surfaceWaterNotAllowedNodes.push(reusenode[i]);
                     }
-                    if(stateShallowGroundWaterBlocked.includes(reusenode[i])) {
+                    if(cityShallowGroundWaterBlocked.includes(reusenode[i])) {
                         shallowGroundWaterNotAllowedNodes.push(reusenode[i]);
                     }
-                    if(stateGroundWaterBlocked.includes(reusenode[i])) {
+                    if(cityGroundWaterBlocked.includes(reusenode[i])) {
                         groundWaterNotAllowedNodes.push(reusenode[i]);
                     }
-                    if(stateStormWaterBlocked.includes(reusenode[i])) {
+                    if(cityStormWaterBlocked.includes(reusenode[i])) {
                         stormWaterNotAllowedNodes.push(reusenode[i]);
                     }
-                    if(stateprecipitationBlocked.includes(reusenode[i])) {
+                    if(cityprecipitationBlocked.includes(reusenode[i])) {
                         precipitationNotAllowedNodes.push(reusenode[i]);
                     }
-                    if(stateCondensateBlocked.includes(reusenode[i])) {
+                    if(cityCondensateBlocked.includes(reusenode[i])) {
                         condensateNotAllowedNodes.push(reusenode[i]);
                     }
                 }
 
-                /* Switch all the nodes from each source to grey if it is in the NotAllowedNodes */
+                /* Switch all the nodes from each source to grey if it is in the NotAllowedNodes
                 for(var i = 7; i < nodes.length; i++) {
                     if(nodes[i].pid === 1) {
                         for(var j = 0; j < condensateNotAllowedNodes.length; j++) {
@@ -1126,12 +1128,61 @@
                             }
                         }
                     }
+                }*/
+                var cityRuleExist = false;
+                var countyRuleExist = false;
+                var stateRuleExist = false;
+
+                for(var i = 7; i < nodes.length; i++) {
+                  for(var j = 0; j < cityRules.length; j++) {
+                    if(cityRules[j].source.node_name === nodes[i].Source && cityRules[j].destination.node_name === nodes[i].Name) {
+                      if(cityRules[j].allowed.allowed_id === 2) {
+                        nodes[j].tags = ['PathwayNotAddressed']
+                        cityRuleExist = true;
+                      }
+                      if(cityRules[j].allowed.allowed_id === 3) {
+                        nodes[j].tags = ['PathwayBlocked']
+                        cityRuleExist = true;
+                      }
+                    }
+                  }
+                  if(cityRuleExist === false) {
+                    for(var j = 0; j < countyRules.length; j++) {
+                      if(countyRules[j].source.node_name === nodes[i].Source && countyRules[j].destination.node_name === nodes[i].Name) {
+                        if(countyRules[j].allowed.allowed_id === 2) {
+                          nodes[j].tags = ['PathwayNotAddressed']
+                          countyRuleExist = true;
+                        }
+                        if(countyRules[j].allowed.allowed_id === 3) {
+                          nodes[j].tags = ['PathwayBlocked']
+                          countyRuleExist = true;
+                        }
+                      }
+                    }
+                  }
+                  if(countyRuleExist === false && cityRuleExist === false) {
+                    for(var j = 0; j < stateRules.length; j++) {
+                      if(stateRules[j].source.node_name === nodes[i].Source && stateRules[j].destination.node_name === nodes[i].Name) {
+                        if(stateRules[j].allowed.allowed_id === 2) {
+                          nodes[j].tags = ['PathwayNotAddressed']
+                          stateRuleExist = true;
+                        }
+                        if(stateRules[j].allowed.allowed_id === 3) {
+                          nodes[j].tags = ['PathwayBlocked']
+                          stateRuleExist = true;
+                        }
+                      }
+                    }
+                  }
+                  if(stateRuleExist === false && countyRuleExist === false && cityRuleExist === false) {
+                    //to be added later
+                  }
                 }
 
-                for(var i = 0; i < stateRules.length; i++) {
-                    if(stateRules[i].allowed.allowed_id === 2) {
+                for(var i = 0; i < cityRules.length; i++) {
+                    if(cityRules[i].allowed.allowed_id === 2) {
                         for(var j = 0; j < nodes.length; j++) {
-                            if(stateRules[i].source.node_name === nodes[j].Source && stateRules[i].destination.node_name === nodes[j].Name) {
+                            if(cityRules[i].source.node_name === nodes[j].Source && cityRules[i].destination.node_name === nodes[j].Name) {
                                 nodes[j].tags = ['PathwayNotAddressed']
                             }
                         }
@@ -1147,7 +1198,7 @@
                     align: OrgChart.ORIENTATION,
                     tags: {
                         PathwayBlocked: {
-                            template: "no_regulation"
+                            template: "pathway_blocked"
                         },
                         PathwayNotAddressed: {
                             template: "possible_pathway"
