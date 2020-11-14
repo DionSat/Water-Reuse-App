@@ -1001,16 +1001,18 @@
                 var countyRuleExist = false;
                 var stateRuleExist = false;
 
-                for(var i = 0; i < nodes.length; i++) {
-                  for(var j = 0; j < cityRules.length; j++) {
-                    if(cityRules[j].source.node_name === nodes[i].Source && cityRules[j].destination.node_name === nodes[i].Name) {
-                      if(cityRules[j].allowed.allowed_id === 2) {
-                        nodes[j].tags = ['PathwayNotAddressed']
+                for(var i = 7; i < nodes.length; i++) {
+                  for (var j = 0; j < cityRules.length; j++) {
+                    if (cityRules[j].source.node_name === nodes[i].Source && cityRules[j].destination.node_name === nodes[i].Name) {
+                      if (cityRules[j].allowed.allowed_id === 2) {
+                        nodes[i].tags = ['PathwayNotAddressed']
                         cityRuleExist = true;
+                        break;
                       }
-                      if(cityRules[j].allowed.allowed_id === 3) {
-                        nodes[j].tags = ['PathwayBlocked']
+                      if (cityRules[j].allowed.allowed_id === 3) {
+                        nodes[i].tags = ['PathwayBlocked']
                         cityRuleExist = true;
+                        break;
                       }
                     }
                   }
@@ -1018,12 +1020,14 @@
                     for(var j = 0; j < countyRules.length; j++) {
                       if(countyRules[j].source.node_name === nodes[i].Source && countyRules[j].destination.node_name === nodes[i].Name) {
                         if(countyRules[j].allowed.allowed_id === 2) {
-                          nodes[j].tags = ['PathwayNotAddressed']
+                          nodes[i].tags = ['PathwayNotAddressed']
                           countyRuleExist = true;
+                          break;
                         }
                         if(countyRules[j].allowed.allowed_id === 3) {
-                          nodes[j].tags = ['PathwayBlocked']
+                          nodes[i].tags = ['PathwayBlocked']
                           countyRuleExist = true;
+                          break;
                         }
                       }
                     }
@@ -1032,12 +1036,14 @@
                     for(var j = 0; j < stateRules.length; j++) {
                       if(stateRules[j].source.node_name === nodes[i].Source && stateRules[j].destination.node_name === nodes[i].Name) {
                         if(stateRules[j].allowed.allowed_id === 2) {
-                          nodes[j].tags = ['PathwayNotAddressed']
+                          nodes[i].tags = ['PathwayNotAddressed']
                           stateRuleExist = true;
+                          break;
                         }
                         if(stateRules[j].allowed.allowed_id === 3) {
-                          nodes[j].tags = ['PathwayBlocked']
+                          nodes[i].tags = ['PathwayBlocked']
                           stateRuleExist = true;
+                          break;
                         }
                       }
                     }
