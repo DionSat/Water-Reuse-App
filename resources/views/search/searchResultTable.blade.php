@@ -21,17 +21,23 @@
                 </td>
                 <td class="align-middle">
                     @if($rule->permitObj !== null)
-                        <a target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary link-button" data-linkid="{{$rule->permitObj->link_id}}" href="{{$rule->permitObj->linkText}}">Permit</a>
+                        @if(isset($rule->permitObj->linkText) and $rule->permitObj->linkText !== '')
+                            <a target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary link-button" data-linkid="{{$rule->permitObj->link_id}}" href="{{$rule->permitObj->linkText}}">Permit</a>
+                        @endif
                     @endif
                 </td>
                 <td class="align-middle">
                     @if($rule->incentivesObj !== null)
-                        <a target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary link-button" data-linkid="{{$rule->incentivesObj->link_id}}" href="{{$rule->incentivesObj->linkText}}">Incentive</a>
+                        @if(isset($rule->incentivesObj->linkText) and $rule->incentivesObj->linkText !== '')
+                            <a target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary link-button" data-linkid="{{$rule->incentivesObj->link_id}}" href="{{$rule->incentivesObj->linkText}}">Incentive</a>
+                        @endif
                     @endif
                 </td>
                 <td class="align-middle">
                     @if($rule->moreInfoObj !== null)
-                        <a target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary link-button" data-linkid="{{$rule->moreInfoObj->link_id}}" href="{{$rule->moreInfoObj->linkText}}">More Info</a>
+                        @if(isset($rule->moreInfoObj->linkText) and $rule->moreInfoObj->linkText !== '')
+                            <a target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary link-button" data-linkid="{{$rule->moreInfoObj->link_id}}" href="{{$rule->moreInfoObj->linkText}}">More Info</a>
+                        @endif
                     @endif
                 </td>
                 <td class="align-middle">

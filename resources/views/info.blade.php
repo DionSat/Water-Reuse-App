@@ -317,6 +317,9 @@
 
 @push("css")
     <style>
+        .container {
+            color: white;
+        }
         .py-4 {
             text-align: center;
         }

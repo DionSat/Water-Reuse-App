@@ -10,35 +10,37 @@
     <hr>
     <div class="row">
       <div class="col-md-10 mx-auto">
-        <table id="userTable" class="table">
-          <thead>
-          <tr>
-            <th scope="col" class="text-center">User Id</th>
-            <th scope="col" class="text-center">Name</th>
-            <th scope="col" class="text-center">Frequency</th>
-            <th scope="col" class="text-center">Email</th>
-            <th scope="col" class="text-center">Action</th>
-          </tr>
-          </thead>
-          <tbody>
-          @foreach($currentScheduledEmails as $item)
-            <tr class="list" id="{{$item->user->id}}">
-              <th class="text-center">{{$item->user->id}}</th>
-              <td class="text-center"><a
-                  href="{{route('viewUser',['user_id' => $item->user->id])}}">{{$item->user->name}}</a></td>
-              <td class="text-center" scope="row">Every {{$item->send_interval}} day(s)</td>
-              <td class="text-center">{{$item->user->email}}</td>
-              <td class="text-center">
-                <form method="POST" action="{{route("scheduledEmailsSubmit")}}">
-                  {{ csrf_field() }}
-                  <input name="req_type" class="d-none" id="type" value="remove">
-                  <input name="item_id" class="d-none" id="type" value="{{$item->id}}">
-                  <button type="submit" class="btn btn-danger"> Remove</button>
-                </form>
-              </td>
-          @endforeach
-          </tbody>
-        </table>
+        <div class="table-responsive">
+          <table id="userTable" class="table">
+            <thead>
+            <tr>
+              <th scope="col" class="text-center">User Id</th>
+              <th scope="col" class="text-center">Name</th>
+              <th scope="col" class="text-center">Frequency</th>
+              <th scope="col" class="text-center">Email</th>
+              <th scope="col" class="text-center">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($currentScheduledEmails as $item)
+              <tr class="list" id="{{$item->user->id}}">
+                <th class="text-center">{{$item->user->id}}</th>
+                <td class="text-center"><a
+                    href="{{route('viewUser',['user_id' => $item->user->id])}}">{{$item->user->name}}</a></td>
+                <td class="text-center" scope="row">Every {{$item->send_interval}} day(s)</td>
+                <td class="text-center">{{$item->user->email}}</td>
+                <td class="text-center">
+                  <form method="POST" action="{{route("scheduledEmailsSubmit")}}">
+                    {{ csrf_field() }}
+                    <input name="req_type" class="d-none" id="type" value="remove">
+                    <input name="item_id" class="d-none" id="type" value="{{$item->id}}">
+                    <button type="submit" class="btn btn-danger"> Remove</button>
+                  </form>
+                </td>
+            @endforeach
+            </tbody>
+          </table>
+        </div>
 
         <h5 class="text-center mt-5">
           Schedule Another Summary Email

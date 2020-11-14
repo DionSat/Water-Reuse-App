@@ -262,3 +262,12 @@
     </div>
 
 @endsection
+
+
+@push("css")
+    <style>
+        h3,label{
+            color: white;
+        }
+    </style>
+@endpush

@@ -4,7 +4,8 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <h3 style="text-align: center">Submit a New Water Reuse Regulation</h3>
+                <h3 style="text-align: center; color:white;" >Submit a New Water Reuse Regulation</h3>
+                <br>
                 <div class="card">
                     <div class="card-header">Location</div>
                     <div class="card-body">
@@ -91,19 +92,19 @@
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="waterDestination0">Water Destination</label>
-                                        <select id="waterDestination0" class="form-control" multiple>
+                                        <select id="waterDestination0" class="form-control" multiple size="3">
                                             <option value="choose" disabled>Choose...</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="allowed0">Is Water Reuse From This Source Allowed?</label>
+                                        <label for="allowed0">Path Allowed?</label>
                                         <select id="allowed0" class="form-control">
                                             <option value="choose" disabled>Choose...</option>
                                         </select>
                                     </div>
                                 </div>
                                 <hr>
-                                <div class="form-row">
+                                <div class="form-row align-items-baseline">
                                     <div class="form-group col-md-3">
                                         <label for="codes0">Link to Codes (Optional)</label>
                                         <input type="text" class="form-control" id="codes0" placeholder="">

@@ -20,12 +20,17 @@
     <!-- Styles -->
     {{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
     <style>
+        body {
+            background-image: url('../img/mainBackground.png');
+            background-size: cover;
+            object-fit: cover;
+            background-repeat: no-repeat;
+        }
         a.active {
             border-bottom: 2px solid #272525;
         }
         a.nav-link:hover:not(.active):not(.dropdown-toggle){
             border-bottom: 2px solid #a9a3a3;
-
         }
         a.nav-link:not(.active){
             border-bottom: 2px solid white;
