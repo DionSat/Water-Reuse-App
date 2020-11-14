@@ -52,33 +52,33 @@
               <p>Lastly the graphic has three other useful commands. Zoom In , Zoom Out and Fit the Graphic so the screen. </p>
               <img src="img/searchExampleGIF8.gif">
               <h4>Disclaimer</h4>
-              <p>If the state, county or city does not have any water reuse information, or if the state, county or city is not present in the search dropdown menus or the graphic card/node is red or the buttons are all disabled for the City, County, State, this does not mean there are no regulations. It just means they have not been added to this site. Please search your local government web pages to find the water reuse information you need. After finding that information, it would be helpful to us if you <a href="{{ route('register') }}">register</a> to become a contributor, and add this regulation to our site.</p>
-              <a href="#nav-tab-base">Back to Top</a>
+              <p>If the state, county or city does not have any water reuse information, or if the state, county or city is not present in the search dropdown menus or the graphic card/node is red or the buttons are all disabled for the City, County, State, this does not mean there are no regulations. It just means they have not been added to this site. Please search your local government web pages to find the water reuse information you need. After finding that information, it would be helpful to us if you <a class="text-danger" href="{{ route('register') }}">register</a> to become a contributor, and add this regulation to our site.</p>
+              <a class="text-danger" href="#nav-tab-base">Back to Top</a>
             </div>
             <div class="tab-pane fade" id="nav-register" role="tabpanel" aria-labelledby="nav-register-tab">
                 <h2>Register to Add Water Reuse Regulations</h2>
-                <p>1. Navigate to the <a href="{{ route('register') }}" target="_blank">'Register' </a>page</p>
+                <p>1. Navigate to the <a class="text-danger" href="{{ route('register') }}" target="_blank">Registration </a>page</p>
                 <p>2. Enter in your name, a valid email address and a password.</p>
                 <img src="img/registerExample.png">
                 <p>3. At this point, you can either click the 'Register' button, or you can add more information about yourself before you register. This information is very helpful to us, but it is not necessary.</p>
                 <img src="img/registerExample1.png">
                 <p>3. After submitting your registration, you can add new water reuse regulations! Come back to the information page, as there will be new instructions on how to add a new regulation made available to you.</p>
-                <a href="#nav-tab-base">Back to Top</a>
+                <a class="text-danger" href="#nav-tab-base">Back to Top</a>
             </div>
         </div>
         @endguest
         @if (Auth::check() && Auth::user()->is_admin)
             <nav>
                 <div class="nav nav-tabs" id="nav-tab-admin" role="tablist">
-                    <a class="nav-item nav-link active" id="nav-search-tab" data-toggle="tab" href="#nav-search" role="tab" aria-controls="nav-search" aria-selected="true">Search for a Regulation</a>
-                    <a class="nav-item nav-link" id="nav-addReg-tab" data-toggle="tab" href="#nav-addReg" role="tab" aria-controls="nav-addReg" aria-selected="false">Add a New Regulation</a>
-                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Administrator Information</a>
+                    <a class="nav-item nav-link active text-danger" id="nav-search-tab" data-toggle="tab" href="#nav-search" role="tab" aria-controls="nav-search" aria-selected="true">Search for a Regulation</a>
+                    <a class="nav-item nav-link text-danger" id="nav-addReg-tab" data-toggle="tab" href="#nav-addReg" role="tab" aria-controls="nav-addReg" aria-selected="false">Add a New Regulation</a>
+                    <a class="nav-item nav-link text-danger" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Administrator Information</a>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-search" role="tabpanel" aria-labelledby="nav-search-tab">
               <h2>How to Search for a Regulation</h2>
-              <p>1. Navigate to the <a href="{{ route('search') }}" target="_blank"> Search </a>page</p>
+              <p>1. Navigate to the <a class="text-danger" href="{{ route('search') }}" target="_blank"> Search </a>page</p>
               <img src="img/search_start.gif">
               <p>2. Select either 'Commercial' or 'Residential'</p>
               <img src="img/searchExampleGIF2.gif">
@@ -109,12 +109,12 @@
               <p>Lastly the graphic has three other useful commands. Zoom In , Zoom Out and Fit the Graphic so the screen. </p>
               <img src="img/searchExampleGIF8.gif">
               <h4>Disclaimer</h4>
-              <p>If the state, county or city does not have any water reuse information, or if the state, county or city is not present in the search dropdown menus or the graphic card/node is red or the buttons are all disabled for the City, County, State, this does not mean there are no regulations. It just means they have not been added to this site. Please search your local government web pages to find the water reuse information you need. After finding that information, it would be helpful to us if you <a href="{{ route('register') }}">register</a> to become a contributor, and add this regulation to our site.</p>
-              <a href="#nav-tab-base">Back to Top</a>
+              <p>If the state, county or city does not have any water reuse information, or if the state, county or city is not present in the search dropdown menus or the graphic card/node is red or the buttons are all disabled for the City, County, State, this does not mean there are no regulations. It just means they have not been added to this site. Please search your local government web pages to find the water reuse information you need. After finding that information, it would be helpful to us if you <a class="text-danger" href="{{ route('register') }}">register</a> to become a contributor, and add this regulation to our site.</p>
+              <a class="text-danger" href="#nav-tab-base">Back to Top</a>
             </div>
             <div class="tab-pane fade" id="nav-addReg" role="tabpanel" aria-labelledby="nav-addReg-tab">
                 <h2>Add a New Regulation</h2>
-                <p>1. Navigate to the <a href="{{ route('userSubmission') }}" target="_blank">'Submit New Regulation' </a>page</p>
+                <p>1. Navigate to the <a class="text-danger" href="{{ route('userSubmission') }}" target="_blank">'Submit New Regulation' </a>page</p>
                 <p>2. At the very least, enter the State you wish to submit a regulation for. You can also select a County and City, but that is not a requirement.</p>
                 <img src="img/regSubmitExample.png">
                 <p>3. You may also enter a new county or city by clicking the 'Add A New State, County or City' button, and entering the new county and / or city name.</p>
@@ -128,7 +128,7 @@
                 <p>6. After submiting your new regulation, you should see a success message. If you receive an error, please contact the administrator to solve the issue.</p>
                 <img  src="img/regSubmitExample5.png">
                 <br>
-                <a href="#nav-tab-admin">Back to Top</a>
+                <a class="text-danger" href="#nav-tab-admin">Back to Top</a>
             </div>
 
                 <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
@@ -257,14 +257,14 @@
         @elseif(Auth::check())
         <nav>
                 <div class="nav nav-tabs" id="nav-tab-mid" role="tablist">
-                    <a class="nav-item nav-link active" id="nav-searchContrib-tab" data-toggle="tab" href="#nav-searchContrib" role="tab" aria-controls="nav-searchContrib" aria-selected="true">Search for a Regulation</a>
-                    <a class="nav-item nav-link" id="nav-addRegContrib-tab" data-toggle="tab" href="#nav-addRegContrib" role="tab" aria-controls="nav-addRegContrib" aria-selected="false">Add a New Regulation</a>
+                    <a class="nav-item nav-link active text-danger" id="nav-searchContrib-tab" data-toggle="tab" href="#nav-searchContrib" role="tab" aria-controls="nav-searchContrib" aria-selected="true">Search for a Regulation</a>
+                    <a class="nav-item nav-link text-danger" id="nav-addRegContrib-tab" data-toggle="tab" href="#nav-addRegContrib" role="tab" aria-controls="nav-addRegContrib" aria-selected="false">Add a New Regulation</a>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-searchContrib" role="tabpanel" aria-labelledby="nav-search-tab">
               <h2>How to Search for a Regulation</h2>
-              <p>1. Navigate to the <a href="{{ route('search') }}" target="_blank"> Search </a>page</p>
+              <p>1. Navigate to the <a class="text-danger" href="{{ route('search') }}" target="_blank"> Search </a>page</p>
               <img src="img/search_start.gif">
               <p>2. Select either 'Commercial' or 'Residential'</p>
               <img src="img/searchExampleGIF2.gif">
@@ -295,12 +295,12 @@
               <p>Lastly the graphic has three other useful commands. Zoom In , Zoom Out and Fit the Graphic so the screen. </p>
               <img src="img/searchExampleGIF8.gif">
               <h4>Disclaimer</h4>
-              <p>If the state, county or city does not have any water reuse information, or if the state, county or city is not present in the search dropdown menus or the graphic card/node is red or the buttons are all disabled for the City, County, State, this does not mean there are no regulations. It just means they have not been added to this site. Please search your local government web pages to find the water reuse information you need. After finding that information, it would be helpful to us if you <a href="{{ route('register') }}">register</a> to become a contributor, and add this regulation to our site.</p>
-              <a href="#nav-tab-base">Back to Top</a>
+              <p>If the state, county or city does not have any water reuse information, or if the state, county or city is not present in the search dropdown menus or the graphic card/node is red or the buttons are all disabled for the City, County, State, this does not mean there are no regulations. It just means they have not been added to this site. Please search your local government web pages to find the water reuse information you need. After finding that information, it would be helpful to us if you <a class="text-danger" href="{{ route('register') }}">register</a> to become a contributor, and add this regulation to our site.</p>
+              <a class="text-danger" href="#nav-tab-base">Back to Top</a>
             </div>
             <div class="tab-pane fade" id="nav-addRegContrib" role="tabpanel" aria-labelledby="nav-addRegContrib-tab">
                 <h2>Add a New Regulation</h2>
-                <p>1. Navigate to the <a href="{{ route('userSubmission') }}" target="_blank">'Submit New Regulation' </a>page</p>
+                <p>1. Navigate to the <a class="text-danger" href="{{ route('userSubmission') }}" target="_blank">'Submit New Regulation' </a>page</p>
                 <p>2. At the very least, enter the State you wish to submit a regulation for. You can also select a County and City, but that is not a requirement.</p>
                 <img src="img/regSubmitExample.png">
                 <p>3. You may also enter a new county or city by clicking the 'Add A New State, County or City' button, and entering the new county and / or city name.</p>
@@ -314,7 +314,7 @@
                 <p>6. After submiting your new regulation, you should see a success message. If you receive an error, please contact the administrator to solve the issue.</p>
                 <img  src="img/regSubmitExample5.png">
                 <br>
-                <a href="#nav-tab-mid">Back to Top</a>
+                <a class="text-danger" href="#nav-tab-mid">Back to Top</a>
             </div>
             </div>
         @endif
