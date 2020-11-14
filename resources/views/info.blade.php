@@ -2,17 +2,26 @@
 
 @section('body')
     <div class="container" id="container">
+      <style>
+        body{
+          background-image: url('../img/mainBackground.png');
+          background-size: cover;
+          object-fit: cover;
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+        }
+      </style>
         @guest
         <nav>
                 <div class="nav nav-tabs" id="nav-tab-base" role="tablist">
-                    <a class="nav-item nav-link active" id="nav-searchGuest-tab" data-toggle="tab" href="#nav-searchGuest" role="tab" aria-controls="nav-searchGuest" aria-selected="true">Search for a Regulation</a>
-                    <a class="nav-item nav-link" id="nav-register-tab" data-toggle="tab" href="#nav-register" role="tab" aria-controls="nav-register" aria-selected="false">Become a Contributor</a>
+                    <a class="nav-item nav-link active text-danger" id="nav-searchGuest-tab" data-toggle="tab" href="#nav-searchGuest" role="tab" aria-controls="nav-searchGuest" aria-selected="true">Search for a Regulation</a>
+                    <a class="nav-item nav-link text-danger" id="nav-register-tab" data-toggle="tab" href="#nav-register" role="tab" aria-controls="nav-register" aria-selected="false">Become a Contributor</a>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-searchGuest" role="tabpanel" aria-labelledby="nav-searchGuest-tab">
               <h2>How to Search for a Regulation</h2>
-              <p>1. Navigate to the <a href="{{ route('search') }}" target="_blank"> Search </a>page</p>
+              <p>1. Navigate to the <a class="text-danger" href="{{ route('search') }}" target="_blank"> Search </a>page</p>
               <img src="img/search_start.gif">
               <p>2. Select either 'Commercial' or 'Residential'</p>
               <img src="img/searchExampleGIF2.gif">
