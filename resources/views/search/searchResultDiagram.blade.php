@@ -157,6 +157,15 @@
                     '<path class="dashPath" stroke-width="4" fill="none" stroke="#ffffff" stroke-dasharray="10"  d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>';
                 OrgChart.templates.possible_pathway.img_1 = '<image preserveAspectRatio="xMidYMid slice" xlink:href="{val}" x="100" y="0" width="40" height="40"></image>';
 
+                /*Custom Template for nodes with no information */
+                OrgChart.templates.no_regulation = Object.assign({}, OrgChart.templates.ana);
+                OrgChart.templates.no_regulation.node =
+                  '<rect x="0" y="0" height="120" width="250" fill="#9a9a9a" stroke-width="1" stroke="#808080" rx="5" ry="5"></rect>'
+
+                OrgChart.templates.no_regulation.link = '<path class="backgroundPath" stroke-linejoin="round" stroke="#00cc99" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
+                  '<path class="dashPath" stroke-width="4" fill="none" stroke="#ffffff" stroke-dasharray="10"  d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>';
+                OrgChart.templates.no_regulation.img_1 = '<image preserveAspectRatio="xMidYMid slice" xlink:href="{val}" x="100" y="0" width="40" height="40"></image>';
+
                 /* ROOT PARENT CUSTOM NODE (Water Sources) */
                 OrgChart.templates.watersourcesRoot = Object.assign({}, OrgChart.templates.ana);
                 OrgChart.templates.watersourcesRoot.node = '<rect x="0" y="0" height="125" width="255" rx="40px" fill="#039be5"></rect>';
