@@ -32,6 +32,7 @@
           background: url('../img/mainBackground.png') no-repeat fixed center center;
           background-size: cover;
           transform: scaleY(-1);
+          filter: brightness(80%);
         }
         a.active {
             border-bottom: 2px solid #272525;
