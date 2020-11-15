@@ -76,7 +76,7 @@
 
             <div class="text-center mt-5">
                 <h3 class="mt-3 mb-0"> Optional Fields</h3>
-                <div class="text-muted"> This information isn't required, but would be very helpful to us. </div>
+                <div class="text-light"> This information isn't required, but would be very helpful to us. </div>
                 <hr>
             </div>
 
