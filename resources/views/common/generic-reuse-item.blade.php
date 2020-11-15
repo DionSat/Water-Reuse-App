@@ -32,8 +32,8 @@
                             </span>
                         </div>
                     @else
-                        <div class="text-center mt-5 text-center">
-                            <i class="fas fa-lock mx-auto"></i> Approved submissions cannot be edited or deleted.
+                        <div class="text-center mt-5 text-light">
+                            <i id="icon" class="fas fa-lock mx-auto"></i> Approved submissions cannot be edited or deleted.
                         </div>
                     @endif
                 @endauth
@@ -80,6 +80,10 @@
             background-size: cover;
             object-fit: cover;
             background-repeat: no-repeat;
+        }
+
+        #icon {
+          color: #FFF;
         }
     </style>
 @endpush
