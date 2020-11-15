@@ -2,7 +2,7 @@
 
 @section('body')
     <div class="container">
-        <h3 class="text-center" style="color: white">Heres what you submitted:</h3>
+        <h3 class="text-center" style="color: white">Submissions</h3>
         <br>
     <div class="card">
         <table class="table mt-4 mx-auto">
