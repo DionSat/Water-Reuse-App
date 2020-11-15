@@ -5,12 +5,12 @@
     <div class="row my-3">
             <a href="{{route("adminUserSubmissionView")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> All Submissions </a>
         </div>
-        <h2 class="text-center mb-4"> Pending City Submissions </h2>
+        <h2 class="text-center mb-4 text-light"> Pending City Submissions </h2>
         @foreach($citySubmissions as $cityName => $cityArray)
-            <div class="mx-auto">
+            <div class="mx-auto text-light">
                 <h3>{{$cityName}}</h3>
             </div>
-            <table class="table mt-4 mx-auto">
+            <table class="table mt-4 mx-auto text-light">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -58,3 +58,24 @@
         @endforeach
     </div>
 @endsection
+@push("css")
+  <style>
+
+    body::before {
+      content: "";
+      position: fixed;
+      width: 200%;
+      height: 200%;
+      top: -50%;
+      left: -50%;
+      z-index: -1;
+      background-size: cover;
+      background-image: url('https\3a //scontent.fhio2-1.fna.fbcdn.net/v/t15.5256-10/cp0/e15/q65/p600x600/20505009_401019313628316_6647662209365180416_n.jpg?_nc_cat\3d 102\26 ccb\3d 2\26 _nc_sid\3d ccf8b3\26 _nc_ohc\3d XdbCgFERuygAX-1bAXs\26 _nc_ht\3d scontent.fhio2-1.fna\26 oh\3d 11dfc9e7c7ba03c61b70c4b3b4f3bd0c\26 oe\3d 5FD1716B');
+      no-repeat fixed center center;
+      background-size: cover;
+      transform: scaleY(-1);
+      filter: brightness(80%);
+    }
+  </style>
+@endpush
+
