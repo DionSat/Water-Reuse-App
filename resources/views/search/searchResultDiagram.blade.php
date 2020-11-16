@@ -136,7 +136,7 @@
                 OrgChart.templates.ana.link = '<path class="backgroundPath" stroke-linejoin="round" stroke="#00cc99" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
                     '<path class="dashPath" stroke-width="4" fill="none" stroke="#ffffff" stroke-dasharray="10"  d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>';
 
-                OrgChart.templates.ana.img_1 = '<image preserveAspectRatio="xMidYMid slice" xlink:href="{val}" x="95" y="6" width="40" height="40"></image>';
+                OrgChart.templates.ana.img_1 = '<image preserveAspectRatio="xMidYMid slice" xlink:href="{val}" x="110" y="35" width="30" height="30"></image>';
 
                 /* Custom Template to blocked nodes*/
                 OrgChart.templates.pathway_blocked = Object.assign({}, OrgChart.templates.ana);
@@ -146,7 +146,7 @@
 
                 OrgChart.templates.pathway_blocked.link = '<path class="backgroundPath" stroke-linejoin="round" stroke="#00cc99" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
                     '<path class="dashPath" stroke-width="4" fill="none" stroke="#ffffff" stroke-dasharray="10"  d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>';
-                OrgChart.templates.pathway_blocked.img_1 = '<image preserveAspectRatio="xMidYMid slice" xlink:href="{val}" x="95" y="6" width="40" height="40"></image>';
+                OrgChart.templates.pathway_blocked.img_1 = '<image preserveAspectRatio="xMidYMid slice" xlink:href="{val}" x="110" y="35" width="30" height="30"></image>';
 
                 /* Custom template for nodes that may have path */
                 OrgChart.templates.possible_pathway = Object.assign({}, OrgChart.templates.ana);
@@ -155,7 +155,7 @@
 
                 OrgChart.templates.possible_pathway.link = '<path class="backgroundPath" stroke-linejoin="round" stroke="#00cc99" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
                     '<path class="dashPath" stroke-width="4" fill="none" stroke="#ffffff" stroke-dasharray="10"  d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>';
-                OrgChart.templates.possible_pathway.img_1 = '<image preserveAspectRatio="xMidYMid slice" xlink:href="{val}" x="95" y="6" width="40" height="40"></image>';
+                OrgChart.templates.possible_pathway.img_1 = '<image preserveAspectRatio="xMidYMid slice" xlink:href="{val}" x="110" y="35" width="30" height="30"></image>';
 
                 /*Custom Template for nodes with no information */
                 OrgChart.templates.no_regulation = Object.assign({}, OrgChart.templates.ana);
@@ -164,7 +164,7 @@
 
                 OrgChart.templates.no_regulation.link = '<path class="backgroundPath" stroke-linejoin="round" stroke="#00cc99" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
                   '<path class="dashPath" stroke-width="4" fill="none" stroke="#ffffff" stroke-dasharray="10"  d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>';
-                OrgChart.templates.no_regulation.img_1 = '<image preserveAspectRatio="xMidYMid slice" xlink:href="{val}" x="95" y="6" width="40" height="40"></image>';
+                OrgChart.templates.no_regulation.img_1 = '<image preserveAspectRatio="xMidYMid slice" xlink:href="{val}" x="110" y="35" width="30" height="30"></image>';
 
                 /* ROOT PARENT CUSTOM NODE (Water Sources) */
                 OrgChart.templates.watersourcesRoot = Object.assign({}, OrgChart.templates.ana);
