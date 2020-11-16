@@ -2,6 +2,7 @@
 
 @section('body')
     <script src="{{ URL::asset('/libraries/orgchart.js') }}"></script>
+    <script src="https://kit.fontawesome.com/9771ecc7b6.js" crossorigin="anonymous"></script>
     <div class="container">
       <div class="row justify-content-center mb-4">
         <h1 class="font-weight-bold text-light">Water Reuse Map</h1>
