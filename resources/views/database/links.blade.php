@@ -18,13 +18,15 @@
                 @endif
             </div>
         </div>
-        <h2 class="text-center text-light"> Links </h2>
+
         <div class="table-responsive text-align-center ">
             @if($links->count() === 0)
                 <hr>
                 <h3 class="text-center text-light"> No links {{$page === "broken" ? "broken" : ""}} found...</h3>
             @else
-                <table class="table w-auto mx-auto mt-4 text-center text-light">
+            <div class="card">
+              <div align="center" class="card-header"><h2>Links</h2></div>
+                <table class="table w-auto mx-auto mt-4 text-center">
                     <thead>
                     <tr>
                         <th scope="col">ID #</th>
@@ -67,6 +69,7 @@
                     @endforeach
                     </tbody>
                 </table>
+            </div>
             @endif
             <div class="d-flex justify-content-center">
                     {{ $links->links() }}
