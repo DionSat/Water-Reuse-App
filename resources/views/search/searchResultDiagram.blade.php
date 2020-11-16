@@ -1017,98 +1017,123 @@
                           break;
                     }
                 }
-
+                /* Variables to check if the regulation is in the database */
                 var cityRuleExist = false;
                 var countyRuleExist = false;
                 var stateRuleExist = false;
+                /* Variables to check if the regulation has any links */
                 var cityLinkExist = true;
                 var countyLinkExist = true;
                 var stateLinkExist = true;
 
+                // Traverse the nodes array for the graph
                 for(var i = 7; i < nodes.length; i++) {
+                  // Traverse the city regulations first
                   for (var j = 0; j < cityRules.length; j++) {
+                    // Check if the node on the graph is present in the city regulations
                     if (cityRules[j].source.node_name === nodes[i].Source && cityRules[j].destination.node_name === nodes[i].Name) {
+                      // Check if the city regulation is allowed
                       if (cityRules[j].allowed.allowed_id === 1) {
                         nodes[i].icon = ['data:image/jpeg;base64,' + string_icons[24]]
                         cityRuleExist = true;
                       }
+                      // Check if the city regulation is possibly allowed
                       else if (cityRules[j].allowed.allowed_id === 2) {
                         nodes[i].tags = ['PathwayNotAddressed']
                         nodes[i].icon = ['data:image/jpeg;base64,' + string_icons[27]]
                         cityRuleExist = true;
                         break;
                       }
+                      // Check if the city regulation is blocked
                       else if(cityRules[j].allowed.allowed_id === 3) {
                         nodes[i].tags = ['PathwayBlocked']
                         nodes[i].icon = ['data:image/jpeg;base64,' + string_icons[26]]
                         cityRuleExist = true;
                         break;
                       }
+                      // Check if the links are not populated and set the cityLinkExist to false if so
                       if(cityRules[j].codes_obj === null && cityRules[j].incentives_obj === null && cityRules[j].permit_obj && cityRules[j].more_info_obj === null) {
                         cityLinkExist = false;
                       }
                     }
+                    // cityRuleExist should stay false if there is not a match in the city regulations
                     else {
                       cityRuleExist = false;
                     }
                   }
+                  // Check if there was not a match in the city regulations
                   if(cityRuleExist === false) {
+                    // Traverse the county regulations
                     for(var j = 0; j < countyRules.length; j++) {
+                      // Check if the node on the graph is present in the county regulations
                       if(countyRules[j].source.node_name === nodes[i].Source && countyRules[j].destination.node_name === nodes[i].Name) {
+                        // Check if the county regulation is allowed
                         if (countyRules[j].allowed.allowed_id === 1) {
                           nodes[i].icon = ['data:image/jpeg;base64,' + string_icons[24]]
                           countyRuleExist = true;
                         }
+                        // Check if the county regulation is possibly allowed
                         else if (countyRules[j].allowed.allowed_id === 2) {
                           nodes[i].tags = ['PathwayNotAddressed']
                           nodes[i].icon = ['data:image/jpeg;base64,' + string_icons[27]]
                           countyRuleExist = true;
                           break;
                         }
+                        // Check if the county regulation is blocked
                         else if(countyRules[j].allowed.allowed_id === 3) {
                           nodes[i].tags = ['PathwayBlocked']
                           nodes[i].icon = ['data:image/jpeg;base64,' + string_icons[26]]
                           countyRuleExist = true;
                           break;
                         }
+                        // Check if the links are not populated and set the countyLinkExist to false if so
                         if(countyRules[j].codes_obj === null && countyRules[j].incentives_obj === null && countyRules[j].permit_obj && countyRules[j].more_info_obj === null) {
                           countyLinkExist = false;
                         }
                       }
+                      // countyRuleExist should stay false if there is not a match in the county regulations
                       else {
                         countyRuleExist = false;
                       }
                     }
                   }
+                  // Check if there was not a match in the city regulations and in the county regulations
                   if(countyRuleExist === false && cityRuleExist === false) {
+                    // Traverse the state regulations
                     for(var j = 0; j < stateRules.length; j++) {
+                      // Check if the node on the graph is present in the state regulations
                       if(stateRules[j].source.node_name === nodes[i].Source && stateRules[j].destination.node_name === nodes[i].Name) {
+                        // Check if the state regulation is allowed
                         if (stateRules[j].allowed.allowed_id === 1) {
                           nodes[i].icon = ['data:image/jpeg;base64,' + string_icons[24]]
                           stateRuleExist = true;
                         }
+                        // Check if the state regulation is possibly allowed
                         else if (stateRules[j].allowed.allowed_id === 2) {
                           nodes[i].tags = ['PathwayNotAddressed']
                           nodes[i].icon = ['data:image/jpeg;base64,' + string_icons[27]]
                           stateRuleExist = true;
                           break;
                         }
+                        // Check if the state regulation is blocked
                         else if(stateRules[j].allowed.allowed_id === 3) {
                           nodes[i].tags = ['PathwayBlocked']
                           nodes[i].icon = ['data:image/jpeg;base64,' + string_icons[26]]
                           stateRuleExist = true;
                           break;
                         }
+                        // Check if the links are not populated and set the stateLinkExist to false if so
                         if(stateRules[j].codes_obj === null && stateRules[j].incentives_obj === null && stateRules[j].permit_obj && stateRules[j].more_info_obj === null) {
                           stateLinkExist = false;
                         }
                       }
+                      // stateRuleExist should stay false if there is not a match in the state regulations
                       else {
                         stateRuleExist = false;
                       }
                     }
                   }
-                  console.log(stateRules[j]);
+                  // Check if the node does not have regulations for city, county and state OR if it has empty links for city, county and state
                   if((cityLinkExist === false && countyLinkExist === false && stateLinkExist === false) || (cityRuleExist === false && countyRuleExist === false && stateRuleExist === false)) {
                     nodes[i].icon = ['data:image/jpeg;base64,' + string_icons[25]]
                     nodes[i].tags = ['NoRegulation']
