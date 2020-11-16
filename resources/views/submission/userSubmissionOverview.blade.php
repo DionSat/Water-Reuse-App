@@ -3,7 +3,7 @@
 @section('body')
 
     <div class="container">
-        <h3 class="text-center text-white">Here's what you submitted:</h3>
+        <h3 class="text-center text-light">Submissions</h3>
         <br>
     <div class="card">
      <div class="table-responsive">

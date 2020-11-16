@@ -1,7 +1,8 @@
 @extends('layouts.master')
 
 @section('body')
-    <div class="container">
+  <link href=" {{ URL::asset('css/backgroundStyle.css') }}" rel="stylesheet">
+  <div class="container">
         <div class="row my-3 d-flex justify-content-between">
             <div class="col-md-3">
                 <a href="{{route("admin")}}" class="btn btn-primary d-block"> <i class="fas fa-arrow-circle-left"></i> Dashboard </a>
@@ -10,7 +11,8 @@
                 <a href="{{route("cityAdd")}}" class="btn btn-success d-block"> <i class="fas fa-plus-square"></i> Add New </a>
             </div>
         </div>
-        <h2 class="text-center"> Cities </h2>
+      <div class="card">
+        <div align="center" class="card-header"><h2>Cities</h2></div>
         <table class="table table-responsive-lg">
             <thead>
             <tr>
@@ -43,6 +45,7 @@
             @endforeach
             </tbody>
         </table>
+      </div>
         <div class="row mt-4">
             <span class="mx-auto">
                 {{ $cities->links() }}
@@ -51,3 +54,10 @@
     </div>
 
 @endsection
+
+@push("css")
+    <style>
+
+
+    </style>
+@endpush

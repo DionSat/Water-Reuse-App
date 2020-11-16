@@ -15,9 +15,9 @@
                         @include('common/reuse-item',['item'=>$item])
 
                             @if(isset($approved))
-                                <div class="text-center mt-5 text-center">
-                                    <i class="fas fa-lock mx-auto"></i> Approved submissions cannot be edited or deleted.
-                                </div>
+                                <span class="text-light text-center mt-5">
+                                    <i id="icon" class="fas fa-lock mx-auto"></i> Approved submissions cannot be edited or deleted.
+                                </span>
                             @else
                                 <span class="text-center">
                                         <a style="margin: 25px 10px 0px 10px" href="{{route('submissionEdit')."/".$type."/".$item->id}}" class="btn btn-primary"> Edit </a>
@@ -58,3 +58,11 @@
         </div>
     </div>
 @endsection
+
+@push("css")
+  <style>
+    #icon {
+      color: #FFF;
+    }
+  </style>
+@endpush

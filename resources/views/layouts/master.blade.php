@@ -20,11 +20,19 @@
     <!-- Styles -->
     {{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
     <style>
-        body {
-            background-image: url('../img/mainBackground.png');
-            background-size: cover;
-            object-fit: cover;
-            background-repeat: no-repeat;
+        body::before {
+          content: "";
+          position: fixed;
+          width: 200%;
+          height: 200%;
+          top: -50%;
+          left: -50%;
+          z-index: -1;
+          background-size: cover;
+          background: url('../img/mainBackground.png') no-repeat fixed center center;
+          background-size: cover;
+          transform: scaleY(-1);
+          filter: brightness(80%);
         }
         a.active {
             border-bottom: 2px solid #272525;

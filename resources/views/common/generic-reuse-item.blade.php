@@ -1,7 +1,8 @@
 @extends('layouts.master')
 
 @section('body')
-    <div class="container">
+  <link href=" {{ URL::asset('css/backgroundStyle.css') }}" rel="stylesheet">
+  <div class="container">
         <div class="row my-3">
             <a href="{{$backUrl}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> Back </a>
         </div>
@@ -36,8 +37,8 @@
                             </span>
                         </div>
                     @else
-                        <div class="text-center mt-5 text-center">
-                            <i class="fas fa-lock mx-auto"></i> Approved submissions cannot be edited or deleted.
+                        <div class="text-center mt-5 text-light">
+                            <i id="icon" class="fas fa-lock mx-auto"></i> Approved submissions cannot be edited or deleted.
                         </div>
                     @endif
                 @endauth
@@ -129,14 +130,3 @@
         @endauth
     @endauth
 @endsection
-
-@push("css")
-    <style>
-        .py-4{
-            background-image: url('https\3a //scontent.fhio2-1.fna.fbcdn.net/v/t15.5256-10/cp0/e15/q65/p600x600/20505009_401019313628316_6647662209365180416_n.jpg?_nc_cat\3d 102\26 ccb\3d 2\26 _nc_sid\3d ccf8b3\26 _nc_ohc\3d XdbCgFERuygAX-1bAXs\26 _nc_ht\3d scontent.fhio2-1.fna\26 oh\3d 11dfc9e7c7ba03c61b70c4b3b4f3bd0c\26 oe\3d 5FD1716B');
-            background-size: cover;
-            object-fit: cover;
-            background-repeat: no-repeat;
-        }
-    </style>
-@endpush

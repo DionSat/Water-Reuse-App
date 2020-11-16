@@ -1,7 +1,8 @@
 @extends('layouts.master')
 
 @section('body')
-    <div class="container">
+  <link href=" {{ URL::asset('css/backgroundStyle.css') }}" rel="stylesheet">
+  <div class="container">
         <div class="my-3">
             <a href="{{$backUrl}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i>
                 Back
@@ -309,4 +310,3 @@
 
     </script>
 @endpush
-

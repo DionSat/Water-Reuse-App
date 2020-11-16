@@ -4,7 +4,7 @@
     <script src="{{ URL::asset('/libraries/orgchart.js') }}"></script>
     <div class="container">
       <div class="row justify-content-center mb-4">
-        <h1 class="font-weight-bold">Water Reuse Map</h1>
+        <h1 class="font-weight-bold text-light">Water Reuse Map</h1>
       </div>
         <div class="navbar">
             <a href="{{route("search")}}" class="btn btn-primary col-md-2 mb-4 float-left"> <i class="fas fa-arrow-circle-left"></i>

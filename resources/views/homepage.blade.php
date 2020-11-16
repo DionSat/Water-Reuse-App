@@ -109,13 +109,6 @@
             height: 100%;
         }
 
-        #app {
-            background: url("img/mainBackground.png");
-            background-size: cover;
-            height: 100%;
-            overflow: scroll;
-        }
-
         .fa-ul>li {
             position: relative;
             margin-top: 25px;
