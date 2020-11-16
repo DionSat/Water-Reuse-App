@@ -262,8 +262,8 @@
             axios.get("{{route("cities-api")}}"+"/"+countySelect.value)
                 .then(function (response) {
                     hideCitySpinner();
-                    console.log(response.data);
-                    console.log(response.data.length);
+                    //console.log(response.data);
+                    //console.log(response.data.length);
                     if(response.data.length != 0){
                         $("#citySelect").html('<option id="chooseCounty" value="-1" disabled selected>Choose...</option>'+
                             response.data.sort(function (a,b) {

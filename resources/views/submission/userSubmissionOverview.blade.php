@@ -1,10 +1,12 @@
 @extends('layouts.master')
 
 @section('body')
+
     <div class="container">
-        <h3 class="text-center" style="color: white">Submissions</h3>
+        <h3 class="text-center text-light">Submissions</h3>
         <br>
     <div class="card">
+     <div class="table-responsive">
         <table class="table mt-4 mx-auto">
             <thead>
                 <tr>
@@ -33,11 +35,12 @@
                 @endforeach
             </tbody>
         </table>
+     </div>
     </div>
         <div class="row mt-4">
             <span class="mx-auto">
                 {{ $submissions->links() }}
             </span>
-        </div>
     </div>
+  </div>
 @endsection
