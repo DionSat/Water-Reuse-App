@@ -2,16 +2,16 @@
     <div class="card-body">
         <div class="legend-content">
             <div>
-                <div style="background-color:#039be5;"></div>  Pathway Allowed
+                <img src="{{ URL::asset('img/check-square-regular.png') }}" width="15" height="15"> <div style="background-color:#039be5;"></div>  Pathway Allowed
             </div>
             <div>
-                <div style="background-color:#ff8c00;"></div>  Pathway Possible
+              <img src="{{ URL::asset('img/question-circle-regular.png') }}" width="15" height="15"> <div style="background-color:#ff8c00;"></div>  Pathway Possible
             </div>
             <div>
-                <div style="background-color:#ff0000;"></div>  Pathway Blocked
+              <img src="{{ URL::asset('img/times-circle-regular.png') }}" width="15" height="15"> <div style="background-color:#ff0000;"></div>  Pathway Blocked
             </div>
             <div>
-                <div style="background-color:#9a9a9a;"></div>  No Information
+                <img src="{{ asset('img/circle-regular.png') }}" width="15" height="15"> <div style="background-color:#9a9a9a;"></div> No Information
             </div>
 
         </div>
@@ -136,7 +136,7 @@
                 OrgChart.templates.ana.link = '<path class="backgroundPath" stroke-linejoin="round" stroke="#00cc99" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
                     '<path class="dashPath" stroke-width="4" fill="none" stroke="#ffffff" stroke-dasharray="10"  d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>';
 
-                OrgChart.templates.ana.img_1 = '<image preserveAspectRatio="xMidYMid slice" xlink:href="{val}" x="100" y="0" width="40" height="40"></image>';
+                OrgChart.templates.ana.img_1 = '<image preserveAspectRatio="xMidYMid slice" xlink:href="{val}" x="95" y="6" width="40" height="40"></image>';
 
                 /* Custom Template to blocked nodes*/
                 OrgChart.templates.pathway_blocked = Object.assign({}, OrgChart.templates.ana);
@@ -146,7 +146,7 @@
 
                 OrgChart.templates.pathway_blocked.link = '<path class="backgroundPath" stroke-linejoin="round" stroke="#00cc99" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
                     '<path class="dashPath" stroke-width="4" fill="none" stroke="#ffffff" stroke-dasharray="10"  d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>';
-                OrgChart.templates.pathway_blocked.img_1 = '<image preserveAspectRatio="xMidYMid slice" xlink:href="{val}" x="100" y="0" width="40" height="40"></image>';
+                OrgChart.templates.pathway_blocked.img_1 = '<image preserveAspectRatio="xMidYMid slice" xlink:href="{val}" x="95" y="6" width="40" height="40"></image>';
 
                 /* Custom template for nodes that may have path */
                 OrgChart.templates.possible_pathway = Object.assign({}, OrgChart.templates.ana);
@@ -155,7 +155,7 @@
 
                 OrgChart.templates.possible_pathway.link = '<path class="backgroundPath" stroke-linejoin="round" stroke="#00cc99" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
                     '<path class="dashPath" stroke-width="4" fill="none" stroke="#ffffff" stroke-dasharray="10"  d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>';
-                OrgChart.templates.possible_pathway.img_1 = '<image preserveAspectRatio="xMidYMid slice" xlink:href="{val}" x="100" y="0" width="40" height="40"></image>';
+                OrgChart.templates.possible_pathway.img_1 = '<image preserveAspectRatio="xMidYMid slice" xlink:href="{val}" x="95" y="6" width="40" height="40"></image>';
 
                 /*Custom Template for nodes with no information */
                 OrgChart.templates.no_regulation = Object.assign({}, OrgChart.templates.ana);
@@ -164,7 +164,7 @@
 
                 OrgChart.templates.no_regulation.link = '<path class="backgroundPath" stroke-linejoin="round" stroke="#00cc99" stroke-width="10" fill="none" d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>' +
                   '<path class="dashPath" stroke-width="4" fill="none" stroke="#ffffff" stroke-dasharray="10"  d="M{xa},{ya} {xb},{yb} {xc},{yc} L{xd},{yd}"/>';
-                OrgChart.templates.no_regulation.img_1 = '<image preserveAspectRatio="xMidYMid slice" xlink:href="{val}" x="100" y="0" width="40" height="40"></image>';
+                OrgChart.templates.no_regulation.img_1 = '<image preserveAspectRatio="xMidYMid slice" xlink:href="{val}" x="95" y="6" width="40" height="40"></image>';
 
                 /* ROOT PARENT CUSTOM NODE (Water Sources) */
                 OrgChart.templates.watersourcesRoot = Object.assign({}, OrgChart.templates.ana);
@@ -1021,6 +1021,9 @@
                 var cityRuleExist = false;
                 var countyRuleExist = false;
                 var stateRuleExist = false;
+                var cityLinkExist = true;
+                var countyLinkExist = true;
+                var stateLinkExist = true;
 
                 for(var i = 7; i < nodes.length; i++) {
                   for (var j = 0; j < cityRules.length; j++) {
@@ -1041,6 +1044,12 @@
                         cityRuleExist = true;
                         break;
                       }
+                      if(cityRules[j].codes_obj === null && cityRules[j].incentives_obj === null && cityRules[j].permit_obj && cityRules[j].more_info_obj === null) {
+                        cityLinkExist = false;
+                      }
+                    }
+                    else {
+                      cityRuleExist = false;
                     }
                   }
                   if(cityRuleExist === false) {
@@ -1062,6 +1071,12 @@
                           countyRuleExist = true;
                           break;
                         }
+                        if(countyRules[j].codes_obj === null && countyRules[j].incentives_obj === null && countyRules[j].permit_obj && countyRules[j].more_info_obj === null) {
+                          countyLinkExist = false;
+                        }
+                      }
+                      else {
+                        countyRuleExist = false;
                       }
                     }
                   }
@@ -1084,11 +1099,19 @@
                           stateRuleExist = true;
                           break;
                         }
+                        if(stateRules[j].codes_obj === null && stateRules[j].incentives_obj === null && stateRules[j].permit_obj && stateRules[j].more_info_obj === null) {
+                          stateLinkExist = false;
+                        }
+                      }
+                      else {
+                        stateRuleExist = false;
                       }
                     }
                   }
-                  if(stateRuleExist === false && countyRuleExist === false && cityRuleExist === false) {
-                    //to be added later
+                  console.log(stateRules[j]);
+                  if((cityLinkExist === false && countyLinkExist === false && stateLinkExist === false) || (cityRuleExist === false && countyRuleExist === false && stateRuleExist === false)) {
+                    nodes[i].icon = ['data:image/jpeg;base64,' + string_icons[25]]
+                    nodes[i].tags = ['NoRegulation']
                   }
                 }
 
@@ -1108,6 +1131,9 @@
                         },
                         WaterSources: {
                             template:"watersourcesRoot"
+                        },
+                        NoRegulation: {
+                            template: "no_regulation"
                         }
                     },
                     menu: {
