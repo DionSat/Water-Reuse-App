@@ -31,7 +31,7 @@ class UserSubmissionController extends Controller
         $submissions = $submissions->merge(CountyMerge::where('user_id', $userId)->with(['county', 'source', 'destination', 'allowed', 'codesObj', 'incentivesObj', 'permitObj', 'moreInfoObj'])->get());
 
         $submissions = $submissions->sortByDesc('updated_at')->paginate(15);
-        
+
         return view('submission.userSubmissionOverview', compact('user', 'submissions'));
     }
 
@@ -40,16 +40,27 @@ class UserSubmissionController extends Controller
         $type = $request->type;
         $state = $request->state;
         $itemId = $request->itemId;
+        $returnItemType = null;
+        if(isset($request->returnItemType)){$returnItemType = $request->returnItemType;}
+        $returnItemState = null;
+        if(isset($request->returnItemState)){$returnItemState = $request->returnItemState;}
+        $returnItemId = null;
+        if(isset($request->returnItemId)){$returnItemId = $request->returnItemId;}
 
         if(empty($type) || empty($state) || empty($itemId))
             return back()->with(['alert' => 'danger', 'alertMessage' => 'Error loading the submission.']);
 
         //Otherwise, get the item from the database
-        $item = DatabaseHelper::getReuseItemByIdStateAndType($type, $state, $itemId);
+        if($returnItemId == null || $returnItemType == null || $returnItemState == null) {
+            $item = DatabaseHelper::getReuseItemByIdStateAndType($type, $state, $itemId);
+        }else{
+            $item = DatabaseHelper::getReuseItemByIdStateAndType($returnItemType, $returnItemState, $returnItemId);
+        }
+        $item2 = DatabaseHelper::getSimilarApprovedReuseItem($item);
 
         $backUrl = $request->back;
 
-        return view('common.generic-reuse-item', compact('user','item', 'type', 'state', 'backUrl'));
+        return view('common.generic-reuse-item', compact('user','item','item2', 'type', 'state', 'backUrl'));
     }
 
 
@@ -62,6 +73,12 @@ class UserSubmissionController extends Controller
         $type = $request->type;
         $state = $request->state;
         $itemId = $request->itemId;
+        $returnItemType = null;
+        if(isset($request->returnItemType)){$returnItemType = $request->returnItemType;}
+        $returnItemState = null;
+        if(isset($request->returnItemState)){$returnItemState = $request->returnItemState;}
+        $returnItemId = null;
+        if(isset($request->returnItemId)){$returnItemId = $request->returnItemId;}
         $submissionState = -1;
         $submissionCounty = -1;
         $submissionCity = -1;
@@ -98,16 +115,16 @@ class UserSubmissionController extends Controller
             return redirect()->back()->with(['alert' => 'danger', 'alertMessage' => "Please don't try to edit other people's submissions!"]);
         }
 
-        return view('submission.submissionEdit', compact('user', 'submission', 'states', 'counties', 'cities', 'type', 'submissionState', 'submissionCounty', 'submissionCity', 'allowed', 'backUrl', 'previousBackUrl'));
+        return view('submission.submissionEdit', compact('user', 'submission', 'states', 'counties', 'cities', 'type', 'submissionState', 'submissionCounty', 'submissionCity', 'allowed', 'backUrl', 'previousBackUrl', 'returnItemType', 'returnItemState', 'returnItemId'));
     }
 
     public function submissionEditSubmit(Request $request) {
         if (empty($request) || (($request->state == -1) == $request->source) == $request->destination)
-            return redirect()->route('submissionEdit', ['type' => $request->type, 'itemId' => $request->id])->with(['alert' => 'danger', 'alertMessage' => 'Error trying to update the submission.']);
+            return redirect()->route('submissionEdit', ['type' => $request->type, 'itemId' => $request->id, "returnItemId" => $request->returnId])->with(['alert' => 'danger', 'alertMessage' => 'Error trying to update the submission.']);
 
         try {
             $submission = DatabaseHelper::submissionEditSubmit($request);
-            return redirect()->route('viewSubmission', ["type" => $submission->getLocationType(), "state" => $submission->getStatus(), "itemId" => $submission->id, "back" => $request->back])
+            return redirect()->route('viewSubmission', ["type" => $submission->getLocationType(), "state" => $submission->getStatus(), "itemId" => $submission->id, "back" => $request->back, "returnItemType" => $request->returnItemType, "returnItemState" => $request->returnItemState, "returnItemId" => $request->returnItemId])
                                 ->with(['alert' => 'success', 'alertMessage' => 'The submission has been updated.']);
         } catch (Exception $e) {
             throw new Exception($e->getMessage());

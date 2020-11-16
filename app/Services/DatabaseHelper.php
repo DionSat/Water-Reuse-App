@@ -69,23 +69,64 @@ class DatabaseHelper {
 		public static function getSimilarApprovedReuseItem($fromItem) {
         $item = null;
         $itemId = $fromItem->id;
-        $state = $fromItem->getStatus();//maybe
-        $type = $fromItem->getLocationType();//maybe
+        $status = $fromItem->getStatus();
+        $type = $fromItem->getLocationType();
+        $locationType = $fromItem->location_type;
+        $cityID = null;
+        $countyID = null;
+        $stateID = null;
+        $source = $fromItem->source->node_id;
+        $destination = $fromItem->destination->node_id;
+        $allowed = $fromItem->allowed->allowed_id;
+        if(isset($fromItem->cityID)) {$cityID = $fromItem->city->city_id;}
+        if(isset($fromItem->countyID)) {$countyID = $fromItem->county->county_id;}
+        if(isset($fromItem->cityID)) {$countyID = $fromItem->city->county->county_id;}
+        if(isset($fromItem->stateID)) {$stateID = $fromItem->state->state_id;}
+        if(isset($fromItem->countyID)) {$stateID = $fromItem->county->state->state_id;}
+        if(isset($fromItem->cityID)) {$stateID = $fromItem->city->county->state->state_id;}
+
+        echo "From: ", $fromItem;
+        echo "itemID: ", $itemId;
+        echo "status: ", $status;//approved
+        echo "type: ", $type;//state
+        echo "location type: ", $locationType;//residential
+        echo "cityID: ", $cityID;
+        echo "countyID: ", $countyID;
+        echo "stateID: ", $stateID;
+        echo "source: ", $source;
+        echo "destination: ", $destination;
+        echo "allowed: ", $allowed;
 
         switch ($type){
             case "city":
-                $item = CityMerge::find($itemId);
+                $item = CityMerge::where([['location_type', '=', $locationType],
+                                          ['cityID', '=', $cityID],
+                                          ['id', '!=', $itemId],
+                                          ['sourceID', '=', $source],
+                                          ['destinationID', '=', $destination],
+                                          ['allowedID', '=', $allowed]])->first();
                 break;
             case "county":
-                $item = CountyMerge::find($itemId);
+                $item = CountyMerge::where([['location_type', '=', $locationType],
+                                          ['countyID', '=', $countyID],
+                                          ['id', '!=', $itemId],
+                                          ['sourceID', '=', $source],
+                                          ['destinationID', '=', $destination],
+                                          ['allowedID', '=', $allowed]])->first();
                 break;
             case "state":
-                $item = StateMerge::find($itemId);
+                $item = StateMerge::where([['location_type', '=', $locationType],
+                                          ['stateID', '=', $stateID],
+                                          ['id', '!=', $itemId],
+                                          ['sourceID', '=', $source],
+                                          ['destinationID', '=', $destination],
+                                          ['allowedID', '=', $allowed]])->first();
                 break;
             default:
                 $item = null;
         }
 
+        if(isset($item)){echo "New ID: ", $item->id;}
         return $item;
 		}
 
