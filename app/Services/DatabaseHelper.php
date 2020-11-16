@@ -85,18 +85,6 @@ class DatabaseHelper {
         if(isset($fromItem->countyID)) {$stateID = $fromItem->county->state->state_id;}
         if(isset($fromItem->cityID)) {$stateID = $fromItem->city->county->state->state_id;}
 
-        echo "From: ", $fromItem;
-        echo "itemID: ", $itemId;
-        echo "status: ", $status;//approved
-        echo "type: ", $type;//state
-        echo "location type: ", $locationType;//residential
-        echo "cityID: ", $cityID;
-        echo "countyID: ", $countyID;
-        echo "stateID: ", $stateID;
-        echo "source: ", $source;
-        echo "destination: ", $destination;
-        echo "allowed: ", $allowed;
-
         switch ($type){
             case "city":
                 $item = CityMerge::where([['location_type', '=', $locationType],
@@ -126,7 +114,6 @@ class DatabaseHelper {
                 $item = null;
         }
 
-        if(isset($item)){echo "New ID: ", $item->id;}
         return $item;
 		}
 
