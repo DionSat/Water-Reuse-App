@@ -215,7 +215,7 @@
         $("#inputState").change(function () {
             showCountySpinner();
             // Here we can see the currently selected state (the state_id is the value)
-            console.log(inputState.value);
+            //console.log(inputState.value);
 
             // delete each county
             $(".countyName").each(function () {
@@ -268,7 +268,7 @@
         $("#county").change(function () {
             showCitySpinner();
             // Here we can see the currently selected state (the state_id is the value)
-            console.log(county.value);
+            //console.log(county.value);
 
             // delete each city
             $(".cityName").each(function () {

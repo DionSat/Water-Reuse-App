@@ -92,19 +92,19 @@
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="waterDestination0">Water Destination</label>
-                                        <select id="waterDestination0" class="form-control" multiple>
+                                        <select id="waterDestination0" class="form-control" multiple size="3">
                                             <option value="choose" disabled>Choose...</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="allowed0">Is Water Reuse From This Source Allowed?</label>
+                                        <label for="allowed0">Path Allowed?</label>
                                         <select id="allowed0" class="form-control">
                                             <option value="choose" disabled>Choose...</option>
                                         </select>
                                     </div>
                                 </div>
                                 <hr>
-                                <div class="form-row">
+                                <div class="form-row align-items-baseline">
                                     <div class="form-group col-md-3">
                                         <label for="codes0">Link to Codes (Optional)</label>
                                         <input type="text" class="form-control" id="codes0" placeholder="">
@@ -250,7 +250,7 @@
             $("#codes" + numOfRegs).val($("#codes" + (numOfRegs - 1)).val());
             var url = $("#codes" + numOfRegs).val();
             domain = getDomain(url);
-            console.log(domain);
+            //console.log(domain);
             //$("#codeTitle" + numOfRegs).val($("#codeTitle" + (numOfRegs - 1)).val());
             $("#permitTitle" + numOfRegs).val($("#permitTitle" + (numOfRegs - 1)).val());
             $("#permits" + numOfRegs).val($("#permits" + (numOfRegs - 1)).val());
@@ -355,7 +355,7 @@
                 .then(function (response) {
                     if(response.data != $errorMessage && response.data != "County Already Exists, or There Was an Error on Loading New Area" || "State Already Exists, or There Was an Error on Loading New Area" || "City Already Exists, or There Was an Error on Loading New Area")
                     {
-                        console.log("'" + response.data + "'");
+                        //console.log("'" + response.data + "'");
                         Swal.fire({
                             title: 'You Did It!',
                             text: 'Your regulation request for ' + response.data + ' has been submitted. Please give our admin time to approve your submission.',
@@ -409,7 +409,7 @@
         $("#inputState").change(function () {
             showCountySpinner();
             // Here we can see the currently selected state (the state_id is the value)
-            console.log(inputState.value);
+            //console.log(inputState.value);
 
             // delete each county
             $(".countyName").each(function () {
@@ -455,7 +455,7 @@
         $("#county").change(function () {
             showCitySpinner();
             // Here we can see the currently selected state (the state_id is the value)
-            console.log(county.value);
+            //console.log(county.value);
 
             // delete each city
             $(".cityName").each(function () {

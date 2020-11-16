@@ -60,7 +60,7 @@
                 </h3>
             </div>
         </div>
-        <table class="table table-bordered">
+        <table class="table table-responsive-md table-bordered">
             <h3 class="text-left">Links</h3>
             <thead>
             <tr>

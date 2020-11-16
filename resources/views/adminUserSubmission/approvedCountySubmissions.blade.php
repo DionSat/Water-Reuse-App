@@ -36,11 +36,11 @@
                         <td>
                             <a href="{{route('viewSubmission', ["type" => $county->getLocationType(), "state" => $county->getStatus(), "itemId" => $county->id, "back" => url()->full()])}}" class="btn btn-primary"> View </a>
                         </td>
-
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        @endforeach
-    </div>
+            </tr>
+          @endforeach
+          </tbody>
+        </table>
+      </div>
+    @endforeach
+  </div>
 @endsection
