@@ -311,7 +311,7 @@
                 <img class="smallRec" src="img/regSubmitExample3.png">
                 <p>5. Either click "Submit" if you only have one source and destination, or click the "Add another regulation" button, and repeat steps 3 - 4.</p>
                 <img class="smallRec" src="img/regSubmitExample4.png">
-                <p>6. After submiting your new regulation, you should see a success message. If you receive an error, please contact the administrator to solve the issue.</p>
+                <p>6. After submitting your new regulation, you should see a success message. If you receive an error, please contact the administrator to solve the issue.</p>
                 <img  src="img/regSubmitExample5.png">
                 <br>
                 <a class="text-warning" href="#nav-tab-mid">Back to Top</a>
