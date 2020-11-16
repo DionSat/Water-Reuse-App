@@ -3,7 +3,7 @@
 @section('body')
 <div class="container">
     <a href="{{route("admin")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> Back </a>
-        <h3 class="text-center">Email Options</h3>
+        <h3 class="text-center" style="color: white">Email Options</h3>
             <hr>
                 <div class="row">
                     <div class="col-md-6">
