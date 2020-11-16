@@ -1056,10 +1056,6 @@
                         cityLinkExist = false;
                       }
                     }
-                    // cityRuleExist should stay false if there is not a match in the city regulations
-                    else {
-                      cityRuleExist = false;
-                    }
                   }
                   // Check if there was not a match in the city regulations
                   if(cityRuleExist === false) {
@@ -1090,10 +1086,6 @@
                         if(countyRules[j].codes_obj === null && countyRules[j].incentives_obj === null && countyRules[j].permit_obj && countyRules[j].more_info_obj === null) {
                           countyLinkExist = false;
                         }
-                      }
-                      // countyRuleExist should stay false if there is not a match in the county regulations
-                      else {
-                        countyRuleExist = false;
                       }
                     }
                   }
@@ -1127,10 +1119,6 @@
                           stateLinkExist = false;
                         }
                       }
-                      // stateRuleExist should stay false if there is not a match in the state regulations
-                      else {
-                        stateRuleExist = false;
-                      }
                     }
                   }
                   // Check if the node does not have regulations for city, county and state OR if it has empty links for city, county and state
@@ -1138,6 +1126,9 @@
                     nodes[i].icon = ['data:image/jpeg;base64,' + string_icons[25]]
                     nodes[i].tags = ['NoInformation']
                   }
+                  cityRuleExist = false;
+                  countyRuleExist = false;
+                  stateRuleExist = false;
                 }
 
 
