@@ -128,6 +128,9 @@
                             <input name="submissionState" style="display: none;" value={{$submission->getStatus()}}>
                             <input name="submissionType" style="display: none;" value="{{$type}}">
                             <input name="back" style="display: none;" value="{{$previousBackUrl}}">
+                            <input type="hidden" id="returnItemType" name="returnItemType" value="{{$returnItemType}}">
+                            <input type="hidden" id="returnItemState" name="returnItemState" value="{{$returnItemState}}">
+                            <input type="hidden" id="returnItemId" name="returnItemId" value="{{$returnItemId}}">
                             <button type="submit" class="btn btn-primary" id="submit"> Save </button>
 
                         </form>
