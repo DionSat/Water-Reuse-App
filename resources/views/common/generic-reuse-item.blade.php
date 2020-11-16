@@ -98,7 +98,7 @@
             </div>
         </div>
         @auth
-            @if(!empty($item2) && $item->user_id === Auth::user()->is_admin)
+            @if(!empty($item2) && Auth::user()->is_admin > 0)
                 <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
