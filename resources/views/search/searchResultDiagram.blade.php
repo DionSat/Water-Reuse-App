@@ -1039,7 +1039,7 @@
                       }
                       // Check if the city regulation is possibly allowed
                       else if (cityRules[j].allowed.allowed_id === 2) {
-                        nodes[i].tags = ['PathwayNotAddressed']
+                        nodes[i].tags = ['PossiblePathway']
                         nodes[i].icon = ['data:image/jpeg;base64,' + string_icons[27]]
                         cityRuleExist = true;
                         break;
@@ -1074,7 +1074,7 @@
                         }
                         // Check if the county regulation is possibly allowed
                         else if (countyRules[j].allowed.allowed_id === 2) {
-                          nodes[i].tags = ['PathwayNotAddressed']
+                          nodes[i].tags = ['PossiblePathway']
                           nodes[i].icon = ['data:image/jpeg;base64,' + string_icons[27]]
                           countyRuleExist = true;
                           break;
@@ -1110,7 +1110,7 @@
                         }
                         // Check if the state regulation is possibly allowed
                         else if (stateRules[j].allowed.allowed_id === 2) {
-                          nodes[i].tags = ['PathwayNotAddressed']
+                          nodes[i].tags = ['PossiblePathway']
                           nodes[i].icon = ['data:image/jpeg;base64,' + string_icons[27]]
                           stateRuleExist = true;
                           break;
@@ -1136,7 +1136,7 @@
                   // Check if the node does not have regulations for city, county and state OR if it has empty links for city, county and state
                   if((cityLinkExist === false && countyLinkExist === false && stateLinkExist === false) || (cityRuleExist === false && countyRuleExist === false && stateRuleExist === false)) {
                     nodes[i].icon = ['data:image/jpeg;base64,' + string_icons[25]]
-                    nodes[i].tags = ['NoRegulation']
+                    nodes[i].tags = ['NoInformation']
                   }
                 }
 
@@ -1151,13 +1151,13 @@
                         PathwayBlocked: {
                             template: "pathway_blocked"
                         },
-                        PathwayNotAddressed: {
+                        PossiblePathway: {
                             template: "possible_pathway"
                         },
                         WaterSources: {
                             template:"watersourcesRoot"
                         },
-                        NoRegulation: {
+                        NoInformation: {
                             template: "no_regulation"
                         }
                     },
