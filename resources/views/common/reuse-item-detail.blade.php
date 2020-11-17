@@ -35,7 +35,7 @@
                 <h3>State</h3>
                 <h5 class="text-muted">
                     @if(!empty($item))
-                        @if(isset($item->stateID)){{$item->state->stateName ?? "N/A"}}@endif 
+                        @if(isset($item->stateID)){{$item->state->stateName ?? "N/A"}}@endif
                         @if(isset($item->countyID)){{$item->county->state->stateName ?? "N/A"}}@endif
                         @if(isset($item->cityID)){{$item->city->county->state->stateName ?? "N/A"}}@endif
                     @else
@@ -60,7 +60,7 @@
                 </h3>
             </div>
         </div>
-        <table class="table table-bordered">
+        <table class="table table-responsive-md table-bordered">
             <h3 class="text-left">Links</h3>
             <thead>
             <tr>

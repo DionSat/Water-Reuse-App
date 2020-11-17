@@ -1,14 +1,15 @@
 @extends('layouts.master')
 
 @section('body')
-    <div class="container">
+  <link href=" {{ URL::asset('css/backgroundStyle.css') }}" rel="stylesheet">
+  <div class="container">
         <div class="row my-3">
             <a href="{{route("adminUserSubmissionView")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> All Submissions </a>
         </div>
-
-        <h2 class="text-center"> Approved State Submissions </h2>
+    <div class="card">
+      <div align="center" class="card-header"><h2>Approved State Submissions</h2></div>
         @foreach($stateSubmissions as $stateName => $stateArray)
-            <div class="mx-auto">
+            <div  align="left" class="mt-4 ml-2">
                 <h3>{{$stateName}}</h3>
             </div>
             <table class="table mt-4 mx-auto">
@@ -41,6 +42,5 @@
             </table>
         @endforeach
     </div>
-
-
+  </div>
 @endsection

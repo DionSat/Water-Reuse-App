@@ -1,15 +1,16 @@
 @extends('layouts.master')
 
 @section('body')
+  <link href=" {{ URL::asset('css/backgroundStyle.css') }}" rel="stylesheet">
   <div class="container">
     <a href="{{route("admin")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> Back </a>
-    <h3 class="text-center mt-5">Scheduled Emails</h3>
-    <div class="text-muted text-center"> The users listed below will receive a summary email however often they select.
-      Summary emails are sent out at 10am.
-    </div>
-    <hr>
     <div class="row">
       <div class="col-md-10 mx-auto">
+        <div class="card mt-5">
+          <div align="center" class="card-header"><h2>Scheduled Emails</h2></div>
+          <div class="text-center mt-2 mb-2"> The users listed below will receive a summary email however often they select.
+            Summary emails are sent out at 10am.
+          </div>
         <table id="userTable" class="table">
           <thead>
           <tr>
@@ -39,11 +40,11 @@
           @endforeach
           </tbody>
         </table>
+        </div>
 
-        <h5 class="text-center mt-5">
-          Schedule Another Summary Email
-        </h5>
-        <hr>
+        <div class="card mt-5">
+          <div align="center" class="card-header"><h2>Schedule Another Summary Email</h2></div>
+
         <form class="form mt-2" method="POST" action="{{route("scheduledEmailsSubmit")}}">
           {{ csrf_field() }}
           <div class="row">
@@ -76,13 +77,13 @@
           </div>
           <div class="row mt-1 justify-content-center">
             <div class="col-md-4">
-              <button type="submit" class="btn btn-success btn-block"><i class="fas fa-plus-circle"></i> Schedule
+              <button type="submit" class="btn btn-success btn-block mb-3"><i class="fas fa-plus-circle"></i> Schedule
               </button>
             </div>
           </div>
         </form>
+        </div>
       </div>
     </div>
   </div>
 @endsection
-

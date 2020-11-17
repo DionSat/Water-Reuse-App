@@ -2,11 +2,11 @@
 
 @section('body')
   <div class="container">
-    <h2 class="text-center my-4">Dashboard</h2>
+    <h2 class="text-center text-light my-4">Dashboard</h2>
     <hr>
 
     <div class="container" id="dbStatsPage">
-      <h3 class="mt-4">Locations</h3>
+      <h3 class="mt-4 text-light">Locations</h3>
       <hr>
       <div class="row">
         @foreach($locationCards as $card)
@@ -40,7 +40,7 @@
           </div>
         @endforeach
       </div>
-      <h3 class="mt-5">Nodes, Types, and Links</h3>
+      <h3 class="mt-5 text-light">Nodes, Types, and Links</h3>
       <hr>
 
       <div class="row mt-3">
@@ -140,7 +140,7 @@
 
 
     <div class="container" id="statsPage">
-      <h3 class="mt-4">User Management</h3>
+      <h3 class="mt-4 text-light">User Management</h3>
       <hr>
 
       <div class="row">

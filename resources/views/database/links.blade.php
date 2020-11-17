@@ -1,7 +1,8 @@
 @extends('layouts.master')
 
 @section('body')
-    <div class="container-fluid">
+  <link href=" {{ URL::asset('css/backgroundStyle.css') }}" rel="stylesheet">
+  <div class="container-fluid">
         <div class="row my-3 d-flex justify-content-between">
             <div class="col-md-3">
                 <a href="{{route("admin")}}" class="btn btn-primary d-block"> <i class="fas fa-arrow-circle-left"></i> Dashboard </a>
@@ -17,12 +18,14 @@
                 @endif
             </div>
         </div>
-        <h2 class="text-center"> Links </h2>
+
         <div class="table-responsive text-align-center ">
             @if($links->count() === 0)
                 <hr>
-                <h3 class="text-center"> No links {{$page === "broken" ? "broken" : ""}} found...</h3>
+                <h3 class="text-center text-light"> No links {{$page === "broken" ? "broken" : ""}} found...</h3>
             @else
+            <div class="card">
+              <div align="center" class="card-header"><h2>Links</h2></div>
                 <table class="table w-auto mx-auto mt-4 text-center">
                     <thead>
                     <tr>
@@ -66,6 +69,7 @@
                     @endforeach
                     </tbody>
                 </table>
+            </div>
             @endif
             <div class="d-flex justify-content-center">
                     {{ $links->links() }}
@@ -75,17 +79,3 @@
     </div>
 
 @endsection
-
-@push('css')
-    <style>
-        /*
-        .table th {
-            text-align: center;
-        }
-
-        .table td {
-            text-align: center;
-        }
-    </style>
-
-@endpush
