@@ -48,7 +48,7 @@
               <p>For easy to use search, you can use the search box at the top left of the graphic to type in a destination. It will then display a list of sources or pathways to that destination. You may also use the button at the top of the graphic automatically type in the search. Then select the source, destination you would like displayed. </p>
               <img src="img/searchExampleGIF7.gif">
               <p>You can also download and export the graphic as a pdf, csv, png or svg. By clicking the bars on the top right corner of the graphic</p>
-              <img src="img/searchExampleGraph3.png">
+              <img src="img/searchExampleGraph3.gif">
               <p>Lastly the graphic has three other useful commands. Zoom In , Zoom Out and Fit the Graphic so the screen. </p>
               <img src="img/searchExampleGIF8.gif">
               <h4>Disclaimer</h4>
@@ -105,7 +105,7 @@
               <p>For easy to use search, you can use the search box at the top left of the graphic to type in a destination. It will then display a list of sources or pathways to that destination. You may also use the button at the top of the graphic automatically type in the search. Then select the source, destination you would like displayed. </p>
               <img src="img/searchExampleGIF7.gif">
               <p>You can also download and export the graphic as a pdf, csv, png or svg. By clicking the bars on the top right corner of the graphic</p>
-              <img src="img/searchExampleGraph3.png">
+              <img src="img/searchExampleGraph3.gif">
               <p>Lastly the graphic has three other useful commands. Zoom In , Zoom Out and Fit the Graphic so the screen. </p>
               <img src="img/searchExampleGIF8.gif">
               <h4>Disclaimer</h4>
@@ -291,7 +291,7 @@
               <p>For easy to use search, you can use the search box at the top left of the graphic to type in a destination. It will then display a list of sources or pathways to that destination. You may also use the button at the top of the graphic automatically type in the search. Then select the source, destination you would like displayed. </p>
               <img src="img/searchExampleGIF7.gif">
               <p>You can also download and export the graphic as a pdf, csv, png or svg. By clicking the bars on the top right corner of the graphic</p>
-              <img src="img/searchExampleGraph3.png">
+              <img src="img/searchExampleGraph3.gif">
               <p>Lastly the graphic has three other useful commands. Zoom In , Zoom Out and Fit the Graphic so the screen. </p>
               <img src="img/searchExampleGIF8.gif">
               <h4>Disclaimer</h4>
