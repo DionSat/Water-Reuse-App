@@ -44,7 +44,7 @@
                 </h5>
             </div>
         </div>
-        <div class="d-flex flex-row justify-content-between mb-3 mx-3">
+        <div class="d-flex flex-row justify-content-lg-between flex-lg-nowrap mb-3 mx-3 flex-wrap justify-content-center">
             <div class="p-2 d-block">
                 <h3>Source</h3>
                 <h5 class="text-muted">{{$item->source->node_name ?? "N/A"}}</h5>
