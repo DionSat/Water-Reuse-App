@@ -1,20 +1,24 @@
-<div class="card mb-3">
+<div class="card col-12 mb-3">
     <div class="card-body">
         <div class="legend-content">
-            <div>
-                <img src="{{ URL::asset('img/check-square-regular.png') }}" width="15" height="15"> <div style="background-color:#039be5;"></div>  Pathway Allowed
+            <div class="row">
+                <img src="{{ URL::asset('img/check-square-regular.png') }}" width="15" height="15" class="mr-1">
+                <div class="mt-1 mr-1" style="background-color:#039be5;"></div>  Pathway Allowed
             </div>
-            <div>
-              <img src="{{ URL::asset('img/question-circle-regular.png') }}" width="15" height="15"> <div style="background-color:#ff8c00;"></div>  Pathway Possible
+            <div class="row">
+                <img src="{{ URL::asset('img/question-circle-regular.png') }}" width="15" height="15" class="mr-1">
+                <div class="mt-1 mr-1" style="background-color:#ff8c00;"></div>  Pathway Possible
             </div>
-            <div>
-              <img src="{{ URL::asset('img/times-circle-regular.png') }}" width="15" height="15"> <div style="background-color:#ff0000;"></div>  Pathway Blocked
+            <div class="row">
+                <img src="{{ URL::asset('img/times-circle-regular.png') }}" width="15" height="15" class="mr-1">
+                <div class="mt-1 mr-1" style="background-color:#ff0000;"></div>  Pathway Blocked
             </div>
-            <div>
-                <img src="{{ asset('img/circle-regular.png') }}" width="15" height="15"> <div style="background-color:#9a9a9a;"></div> No Information
+            <div class="row">
+                <img src="{{ asset('img/circle-regular.png') }}" width="15" height="15" class="mr-1">
+                <div class="mt-1 mr-1" style="background-color:#9a9a9a;"></div>  No Information
             </div>
-
         </div>
+
         <div style="width:100%; height:700px;" id="orgchart"/>
         <script>
             var state_dest = [];

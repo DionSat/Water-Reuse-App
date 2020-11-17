@@ -3,7 +3,7 @@
 @section('body')
     <script src="{{ URL::asset('/libraries/orgchart.js') }}"></script>
     <script src="https://kit.fontawesome.com/9771ecc7b6.js" crossorigin="anonymous"></script>
-    <div class="container">
+    <div class="container col-11" align="center">
       <div class="row justify-content-center mb-4">
         <h1 class="font-weight-bold text-light">Water Reuse Map</h1>
       </div>
@@ -37,7 +37,7 @@
             </div>
         </div>
         @include("search/searchResultDiagram")
-
+    </div>
 @endsection
 
 @push("css")
@@ -79,12 +79,10 @@
             margin: 0 0 50px 20px;
         }
 
-        /* Legend Key Inner Container */
+        /* Legend Key Inner Container*/
         .legend-content > div > div {
-            display: inline-block;
-            width: 30px;
-            height:8px;
-            margin-bottom: 2px;
+            width: 35px;
+            height:12px;
         }
 
         /* Water Use Paths Animation */
