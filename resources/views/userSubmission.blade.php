@@ -63,9 +63,6 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-md-8 d-flex align-items-center">
-                                    <button type="button" class="btn btn-secondary" id="addRegion"> Add A New State, County or City </button>
-                                </div>
                                <div class="col-md-4">
                                    <label for="city">Location Type</label>
                                    <select class="form-control" id="locationType" name="location_type">
