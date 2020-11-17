@@ -2,15 +2,6 @@
 
 @section('body')
     <div class="container" id="container">
-      <style>
-        body{
-          background-image: url('../img/mainBackground.png');
-          background-size: cover;
-          object-fit: cover;
-          background-repeat: no-repeat;
-          background-attachment: fixed;
-        }
-      </style>
         @guest
         <nav>
                 <div class="nav nav-tabs" id="nav-tab-base" role="tablist">
@@ -114,11 +105,11 @@
             </div>
             <div class="tab-pane fade" id="nav-addReg" role="tabpanel" aria-labelledby="nav-addReg-tab">
                 <h2>Add a New Regulation</h2>
-                <p>1. Navigate to the <a class="text-warning" href="{{ route('userSubmission') }}" target="_blank">'Submit New Regulation' </a>page</p>
+                <p>1. Navigate to the <a class="text-warning" href="{{ route('userSubmission') }}" target="_blank">'Submit Regulation' </a>page</p>
                 <p>2. At the very least, enter the State you wish to submit a regulation for. You can also select a County and City, but that is not a requirement.</p>
                 <img src="img/regSubmitExample.png">
                 <p>3. You may also enter a new county or city by clicking the 'Add A New State, County or City' button, and entering the new county and / or city name.</p>
-                <img src="img/regSubmitExample1.png">
+                <img src="img/regSubmitExample1.gif">
                 <p>3. Select a source and a destination, and select the water reuse allowance (is allowed, not allowed, maybe allowed).</p>
                 <img class="smallRec" src="img/regSubmitExample2.png">
                 <p>4. Add optional links to the water reuse regulation, and / or an optional comment about the regulation.</p>
@@ -243,11 +234,9 @@
                             <hr id="deleteArea">
                             <h2>Delete a State, County or City</h2>
                                 <p>1. Navigate to the <a class="text-warning" href="{{ route('admin') }}" target="_blank">'Administrator Dashboard' </a>page.</p>
-                                <p>2. Click on the 'Database' button to switch to the database view.</p>
+                                <p>2. Click on 'Manage' on the level you want to delete.</p>
                                 <img src="img/deleteExample.png"></img>
-                                <p>3. You should now see display boxes for Cities, Counties and States. If you wish to add a new area, click '+Add', but if you wish to edit or delete an area, click 'Manage'</p>
-                                <img src="img/deleteAreaExample.png"></img>
-                                <p>4. From the 'Manage' screen, you will see button options to either 'Delete', if you wish to remove an area, or 'Modify', if you just need to edit the area.</p>
+                                <p>3. From the 'Manage' screen, you will see button options to either 'Delete', if you wish to remove an area, or 'Modify', if you just need to edit the area.</p>
                                 <img src="img/deleteAreaExample1.png"></img>
                                 </br>
                                 <a class="text-warning" href="#nav-tab-admin">Back to Top</a>
@@ -300,11 +289,11 @@
             </div>
             <div class="tab-pane fade" id="nav-addRegContrib" role="tabpanel" aria-labelledby="nav-addRegContrib-tab">
                 <h2>Add a New Regulation</h2>
-                <p>1. Navigate to the <a class="text-warning" href="{{ route('userSubmission') }}" target="_blank">'Submit New Regulation' </a>page</p>
+                <p>1. Navigate to the <a class="text-warning" href="{{ route('userSubmission') }}" target="_blank">'Submit Regulation' </a>page</p>
                 <p>2. At the very least, enter the State you wish to submit a regulation for. You can also select a County and City, but that is not a requirement.</p>
                 <img src="img/regSubmitExample.png">
                 <p>3. You may also enter a new county or city by clicking the 'Add A New State, County or City' button, and entering the new county and / or city name.</p>
-                <img src="img/regSubmitExample1.png">
+                <img src="img/regSubmitExample1.gif">
                 <p>3. Select a source and a destination, and select the water reuse allowance (is allowed, not allowed, maybe allowed).</p>
                 <img class="smallRec" src="img/regSubmitExample2.png">
                 <p>4. Add optional links to the water reuse regulation, and / or an optional comment about the regulation.</p>
