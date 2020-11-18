@@ -133,20 +133,20 @@
 
                         @if($user->can_contact === true)
                             <label>
-                                <input type="radio" name="radio" value="true" checked>
+                                <input type="radio" name="contact" value="true" checked>
                             </label>
                             <p style="display: inline">Yes</p>
                             <label>
-                                <input type="radio" name="radio" value="false">
+                                <input type="radio" name="contact" value="false">
                             </label>
                             <p style="display: inline">No</p>
                         @else
                             <label>
-                                <input type="radio" name="radio" value="true">
+                                <input type="radio" name="contact" value="true">
                             </label>
                             <p style="display: inline">Yes</p>
                             <label>
-                                <input type="radio" name="radio" value="false" checked>
+                                <input type="radio" name="contact" value="false" checked>
                             </label>
                             <p style="display: inline">No</p>
                         @endif
