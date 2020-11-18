@@ -8,7 +8,7 @@
     <form method="POST" action="{{ route('register') }}" class="mt-5 form">
       @csrf
       <div class="form-row justify-content-center">
-        <div class="form-group col-md-5">
+        <div class="form-group col-lg-5">
           <label for="name">{{ __('Name') }}*</label>
 
           <input id="name" type="text"
@@ -21,7 +21,7 @@
                                 </span>
           @enderror
         </div>
-        <div class="form-group col-md-5">
+        <div class="form-group col-lg-5">
           <label for="email">{{ __('E-Mail Address') }}*</label>
           <input id="email" type="email"
                  class="form-control @error('email') is-invalid @enderror" name="email"
@@ -35,7 +35,7 @@
         </div>
       </div>
       <div class="form-row justify-content-center">
-        <div class="form-group col-md-5">
+        <div class="form-group col-lg-5">
           <label for="password">{{ __('Password') }}*</label>
           <input id="password" type="password"
                  class="form-control @error('password') is-invalid @enderror"
@@ -49,7 +49,7 @@
           @enderror
         </div>
 
-        <div class="form-group col-md-5">
+        <div class="form-group col-lg-5">
           <label for="password-confirm">{{ __('Confirm Password') }}*</label>
           <input id="password-confirm" type="password" class="form-control"
                  name="password_confirmation" required autocomplete="new-password">
@@ -64,20 +64,20 @@
       </div>
 
       <div class="form-row justify-content-center">
-        <div class="form-group col-md-5">
+        <div class="form-group col-lg-5">
           <label for="job">{{ __('Job Title') }}</label>
           <input id="jobTitle" type="text" class="form-control" name="jobTitle"
                  autocomplete="job-title">
         </div>
 
-        <div class="form-group col-md-5">
+        <div class="form-group col-lg-5">
           <label for="company">{{ __('Company') }}</label>
           <input id="company" type="text" class="form-control" name="company">
         </div>
       </div>
 
       <div class="form-row justify-content-center">
-        <div class="form-group col-md-5">
+        <div class="form-group col-lg-5">
           <label for="primaryAddress">{{ __('Street Address') }}</label>
           <input id="primaryAddress" type="text" class="form-control"
                  name="streetAddress"
@@ -89,7 +89,7 @@
           @enderror
         </div>
 
-        <div class="form-group col-md-5">
+        <div class="form-group col-lg-5">
           <label for="secondAddress">{{ __('Secondary Address (Apartment #, Room #, etc..)') }}</label>
           <input id="secondAddress" type="text" class="form-control"
                  name="streetAddress2">
@@ -97,7 +97,7 @@
       </div>
 
       <div class="form-row justify-content-center">
-        <div class="form-group col-md-5">
+        <div class="form-group col-lg-3">
           <label for="city">{{ __('City') }}</label>
           <input id="City" type="text"
                  class="form-control @error('city') is-invalid @enderror" name="city"
@@ -109,7 +109,7 @@
                             </span>
           @enderror
         </div>
-        <div class="form-group col-md-2">
+        <div class="form-group col-lg-1">
           <label for="state">{{ __('State') }}</label>
           <select class="form-control" name="state" id="state">
             <option value></option>
@@ -167,57 +167,48 @@
           </select>
         </div>
 
-        <div class="form-group col-md-3">
+        <div class="form-group col-lg-2">
           <label for="zipCode">{{ __('Zip Code') }}</label>
-            <input id="zipCode" type="number" class="form-control" name="zipCode"
-                   autocomplete="zip-code">
-            @error('zipCode')
-            <span class="invalid-feedback" role="alert">
+          <input id="zipCode" type="text" class="form-control" name="zipCode"
+                 autocomplete="zip-code" pattern="\d{5}-?(\d{4})?">
+          @error('zipCode')
+          <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
-            @enderror
-          </div>
+          @enderror
+        </div>
+
+        <div class="form-group col-lg-2">
+          <label for="countryCode">{{ __('Country Code') }}</label>
+          <input id="countryCode" type="text" class="form-control" name="countryCode">
+        </div>
+        <div class="form-group col-lg-2">
+          <label for="phone">{{ __('Phone number') }}</label>
+          <input id="phone" type="tel" class="form-control" name="phoneNumber">
+          @error('phone')
+          <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+          @enderror
         </div>
       </div>
 
-        <div class="form-group row">
-          <label for="reason"
-                 class="col-md-4 col-form-label text-md-right"> Why are you using this website? </label>
-          <div class="col-md-6">
-            <input id="reason" type="text" class="form-control" name="reason"
-                   autocomplete="reason">
-          </div>
+
+      <div class="form-row justify-content-center">
+        <div class="form-group col-lg-5">
+          <label for="reason"> Why are you using this website? </label>
+          <input id="reason" type="text" class="form-control" name="reason"
+                 autocomplete="reason">
         </div>
-
-
-        <div class="form-group row ">
-          <label for="countryCode"
-                 class="col-md-4 col-form-label text-md-right">{{ __('Country Code') }}</label>
-          <div class="col-md-2"><input id="countryCode" type="text" class="form-control"
-                                       name="countryCode"></div>
-          <label for="phone"
-                 class="col-sm-2 col-form-label text-md-right">{{ __('Phone number') }}</label>
-          <div class="col-md-2">
-            <input id="phone" type="tel" class="form-control" name="phoneNumber">
-            @error('phone')
-            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-            @enderror
+        <div class="form-group col-lg-5">
+          <p class="text-white">Permission to contact</p>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="contact" value="true" id="yes-contact" checked>
+            <label class="form-check-label" for="yes-contact">Yes</label>
           </div>
-        </div>
-
-        <div class="form-group row">
-          <div class="btn-group btn-group-toggle col-form-label col-sm-6 offset-md-4"
-               data-toggle="buttons">
-            <label class="btn btn-outline-success">
-              <input type="radio" name="contactOption" id="notifOn" autocomplete="off"
-                     value="1"> Contact me (email newsletter, etc..)
-            </label>
-            <label class="btn btn-outline-success">
-              <input type="radio" name="contactOption" id="notifOff" autocomplete="off"
-                     value="0" checked> Do not contact me
-            </label>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="contact" value="false" id="no-contact">
+            <label class="form-check-label" for="no-contact">No</label>
           </div>
           @error('contactOption')
           <span class="invalid-feedback" role="alert">
@@ -225,15 +216,12 @@
                             </span>
           @enderror
         </div>
+      </div>
 
-        <div class="form-group row mb-0 mt-5">
-          <div class="col-md-6 offset-md-4">
-            <button type="submit" class="btn btn-primary btn-block">
-              Register
-            </button>
-          </div>
-        </div>
 
+      <div class="form-row justify-content-center">
+        <button type="submit" class=" col-md-3 btn btn-primary btn-lg btn-block">Register</button>
+      </div>
     </form>
   </div>
 
