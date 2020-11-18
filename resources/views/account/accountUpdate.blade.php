@@ -119,7 +119,8 @@
                     </div>
                     <div class="form-group col-md-2">
                         <label for="inputZip">Zip</label>
-                        <input type="number" class="form-control" name="inputZip" value="{{$user->zipCode}}">
+                        <input type="text" class="form-control" name="inputZip" value="{{$user->zipCode}}" pattern="\d{5}-?(\d{4})?">
+{{--                      <input type="number" class="form-control" name="inputZip" value="{{$user->zipCode}}">--}}
                     </div>
                 </div>
                 <div class="form-row align-items-center">
@@ -127,7 +128,7 @@
                         <label for="RecodeUse">Reason for Recode Usage</label>
                         <input type="text" class="form-control" name="RecodeUse" placeholder="Why do you use Recode?">
                     </div>
-                    <div class="form col-md-6">
+                    <div class="form-group col-md-6">
                         <p>Permission to contact </p>
 
                         @if($user->can_contact === true)
@@ -138,7 +139,7 @@
                             <label>
                                 <input type="radio" name="radio" value="false">
                             </label>
-                            <p style="display: inline">No</ps>
+                            <p style="display: inline">No</p>
                         @else
                             <label>
                                 <input type="radio" name="radio" value="true">
