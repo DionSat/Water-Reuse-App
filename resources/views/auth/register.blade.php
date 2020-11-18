@@ -227,9 +227,9 @@
                         <div class="col-md-2"><input id="countryCode" type="text" class="form-control"
                                                      name="countryCode"></div>
                         <label for="phone"
-                               class="col-sm-2 col-form-label text-md-right">{{ __('Phone number') }}</label>
+                               class="col-sm-2 col-form-label text-md-right">{{ __('Phone number') }} (Format: xxxxxxxxxx) </label>
                         <div class="col-md-2">
-                            <input id="phone" type="tel" class="form-control" name="phoneNumber">
+                            <input id="phone" type="tel" class="form-control" name="phoneNumber" pattern="(([0-9]{3})([0-9]{3})([0-9]{4}))">
                             @error('phone')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
