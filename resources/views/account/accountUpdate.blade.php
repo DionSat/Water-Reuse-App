@@ -62,8 +62,8 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="inputState">State</label>
-                        <select name="inputState" class="form-control" value="{{$user->state}}">
-                            <option value></option>
+                        <select name="inputState" class="form-control">
+                          <option value="{{$user->state}}" selected>{{$user->state}}</option>
                             <option value="AL">AL</option>
                             <option value="AK">AK</option>
                             <option value="AR">AR</option>
@@ -120,7 +120,6 @@
                     <div class="form-group col-md-2">
                         <label for="inputZip">Zip</label>
                         <input type="text" class="form-control" name="inputZip" value="{{$user->zipCode}}" pattern="\d{5}-?(\d{4})?">
-{{--                      <input type="number" class="form-control" name="inputZip" value="{{$user->zipCode}}">--}}
                     </div>
                 </div>
                 <div class="form-row align-items-center">
@@ -138,29 +137,20 @@
                           <label class="form-check-label" for="yes-contact">Yes</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="contact" value="false" id="no-contact">
-                            <label class="form-check-label" for="no-contact">No</label>
-                          </div>
+                          <input class="form-check-input" type="radio" name="contact" value="false" id="no-contact">
+                          <label class="form-check-label" for="no-contact">No</label>
+                        </div>
 
-                        @else
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="contact" value="true" id="else-yes-contact">
-                            <label class="form-check-label" for="else-yes-contact">Yes</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="contact" value="false" id="else-no-contact" checked>
-                            <label class="form-check-label" for="else-no-contact">No</label>
-                          </div>
-{{--
-                            <label>
-                                <input type="radio" name="contact" value="true">
-                            </label>
-                            <p style="display: inline">Yes</p>
-                            <label>
-                                <input type="radio" name="contact" value="false" checked>
-                            </label>
-                            <p style="display: inline">No</p>
---}}
+                      @else
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="contact" value="true" id="else-yes-contact">
+                          <label class="form-check-label" for="else-yes-contact">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="contact" value="false" id="else-no-contact" checked>
+                          <label class="form-check-label" for="else-no-contact">No</label>
+                        </div>
+                        <label>
                         @endif
                     </div>
                 </div>
