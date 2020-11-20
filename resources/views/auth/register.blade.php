@@ -183,8 +183,8 @@
           <input id="countryCode" type="text" class="form-control" name="countryCode">
         </div>
         <div class="form-group col-lg-2">
-          <label for="phone">{{ __('Phone number') }}</label>
-          <input id="phone" type="tel" class="form-control" name="phoneNumber">
+          <label for="phone">{{ __('Phone number') }} </label>
+          <input id="phone" type="tel" class="form-control" name="phoneNumber" pattern="(([0-9]{3})([0-9]{3})([0-9]{4}))" placeholder="xxxxxxxxxx">
           @error('phone')
           <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
