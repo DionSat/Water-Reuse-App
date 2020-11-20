@@ -63,9 +63,6 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-md-8 d-flex align-items-center">
-                                    <button type="button" class="btn btn-secondary" id="addRegion"> Add A New State, County or City </button>
-                                </div>
                                <div class="col-md-4">
                                    <label for="city">Location Type</label>
                                    <select class="form-control" id="locationType" name="location_type">
@@ -250,7 +247,7 @@
             $("#codes" + numOfRegs).val($("#codes" + (numOfRegs - 1)).val());
             var url = $("#codes" + numOfRegs).val();
             domain = getDomain(url);
-            console.log(domain);
+            //console.log(domain);
             //$("#codeTitle" + numOfRegs).val($("#codeTitle" + (numOfRegs - 1)).val());
             $("#permitTitle" + numOfRegs).val($("#permitTitle" + (numOfRegs - 1)).val());
             $("#permits" + numOfRegs).val($("#permits" + (numOfRegs - 1)).val());
@@ -355,7 +352,7 @@
                 .then(function (response) {
                     if(response.data != $errorMessage && response.data != "County Already Exists, or There Was an Error on Loading New Area" || "State Already Exists, or There Was an Error on Loading New Area" || "City Already Exists, or There Was an Error on Loading New Area")
                     {
-                        console.log("'" + response.data + "'");
+                        //console.log("'" + response.data + "'");
                         Swal.fire({
                             title: 'You Did It!',
                             text: 'Your regulation request for ' + response.data + ' has been submitted. Please give our admin time to approve your submission.',
@@ -409,7 +406,7 @@
         $("#inputState").change(function () {
             showCountySpinner();
             // Here we can see the currently selected state (the state_id is the value)
-            console.log(inputState.value);
+            //console.log(inputState.value);
 
             // delete each county
             $(".countyName").each(function () {
@@ -455,7 +452,7 @@
         $("#county").change(function () {
             showCitySpinner();
             // Here we can see the currently selected state (the state_id is the value)
-            console.log(county.value);
+            //console.log(county.value);
 
             // delete each city
             $(".cityName").each(function () {

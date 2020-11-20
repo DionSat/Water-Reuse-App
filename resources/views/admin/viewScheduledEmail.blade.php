@@ -1,51 +1,50 @@
 @extends('layouts.master')
 
 @section('body')
+  <link href=" {{ URL::asset('css/backgroundStyle.css') }}" rel="stylesheet">
   <div class="container">
     <a href="{{route("admin")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> Back </a>
-    <h3 class="text-center mt-5">Scheduled Emails</h3>
-    <div class="text-muted text-center"> The users listed below will receive a summary email however often they select.
-      Summary emails are sent out at 10am.
-    </div>
-    <hr>
     <div class="row">
       <div class="col-md-10 mx-auto">
-        <div class="table-responsive">
-          <table id="userTable" class="table">
-            <thead>
-            <tr>
-              <th scope="col" class="text-center">User Id</th>
-              <th scope="col" class="text-center">Name</th>
-              <th scope="col" class="text-center">Frequency</th>
-              <th scope="col" class="text-center">Email</th>
-              <th scope="col" class="text-center">Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($currentScheduledEmails as $item)
-              <tr class="list" id="{{$item->user->id}}">
-                <th class="text-center">{{$item->user->id}}</th>
-                <td class="text-center"><a
-                    href="{{route('viewUser',['user_id' => $item->user->id])}}">{{$item->user->name}}</a></td>
-                <td class="text-center" scope="row">Every {{$item->send_interval}} day(s)</td>
-                <td class="text-center">{{$item->user->email}}</td>
-                <td class="text-center">
-                  <form method="POST" action="{{route("scheduledEmailsSubmit")}}">
-                    {{ csrf_field() }}
-                    <input name="req_type" class="d-none" id="type" value="remove">
-                    <input name="item_id" class="d-none" id="type" value="{{$item->id}}">
-                    <button type="submit" class="btn btn-danger"> Remove</button>
-                  </form>
-                </td>
-            @endforeach
-            </tbody>
-          </table>
+        <div class="card mt-5">
+          <div align="center" class="card-header"><h2>Scheduled Emails</h2></div>
+          <div class="text-center mt-2 mb-2"> The users listed below will receive a summary email however often they select.
+            Summary emails are sent out at 10am.
+          </div>
+        <table id="userTable" class="table">
+          <thead>
+          <tr>
+            <th scope="col" class="text-center">User Id</th>
+            <th scope="col" class="text-center">Name</th>
+            <th scope="col" class="text-center">Frequency</th>
+            <th scope="col" class="text-center">Email</th>
+            <th scope="col" class="text-center">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          @foreach($currentScheduledEmails as $item)
+            <tr class="list" id="{{$item->user->id}}">
+              <th class="text-center">{{$item->user->id}}</th>
+              <td class="text-center"><a
+                  href="{{route('viewUser',['user_id' => $item->user->id])}}">{{$item->user->name}}</a></td>
+              <td class="text-center" scope="row">Every {{$item->send_interval}} day(s)</td>
+              <td class="text-center">{{$item->user->email}}</td>
+              <td class="text-center">
+                <form method="POST" action="{{route("scheduledEmailsSubmit")}}">
+                  {{ csrf_field() }}
+                  <input name="req_type" class="d-none" id="type" value="remove">
+                  <input name="item_id" class="d-none" id="type" value="{{$item->id}}">
+                  <button type="submit" class="btn btn-danger"> Remove</button>
+                </form>
+              </td>
+          @endforeach
+          </tbody>
+        </table>
         </div>
 
-        <h5 class="text-center mt-5">
-          Schedule Another Summary Email
-        </h5>
-        <hr>
+        <div class="card mt-5">
+          <div align="center" class="card-header"><h2>Schedule Another Summary Email</h2></div>
+
         <form class="form mt-2" method="POST" action="{{route("scheduledEmailsSubmit")}}">
           {{ csrf_field() }}
           <div class="row">
@@ -78,13 +77,13 @@
           </div>
           <div class="row mt-1 justify-content-center">
             <div class="col-md-4">
-              <button type="submit" class="btn btn-success btn-block"><i class="fas fa-plus-circle"></i> Schedule
+              <button type="submit" class="btn btn-success btn-block mb-3"><i class="fas fa-plus-circle"></i> Schedule
               </button>
             </div>
           </div>
         </form>
+        </div>
       </div>
     </div>
   </div>
 @endsection
-

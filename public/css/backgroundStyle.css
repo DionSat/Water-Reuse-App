@@ -1,0 +1,14 @@
+body::before {
+  content: "";
+  position: fixed;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  z-index: -1;
+  background-size: cover;
+  background-image: url('../img/mainBackground.png');
+  no-repeat: fixed center center;
+  transform: scaleY(-1);
+  filter: brightness(80%);
+}

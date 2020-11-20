@@ -1,7 +1,8 @@
 @extends('layouts.master')
 
 @section('body')
-    <div class="container">
+  <link href=" {{ URL::asset('css/backgroundStyle.css') }}" rel="stylesheet">
+  <div class="container">
         <div class="my-3">
             <a href="{{$backUrl}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i>
                 Back
@@ -128,6 +129,9 @@
                             <input name="submissionState" style="display: none;" value={{$submission->getStatus()}}>
                             <input name="submissionType" style="display: none;" value="{{$type}}">
                             <input name="back" style="display: none;" value="{{$previousBackUrl}}">
+                            <input type="hidden" id="returnItemType" name="returnItemType" value="{{$returnItemType}}">
+                            <input type="hidden" id="returnItemState" name="returnItemState" value="{{$returnItemState}}">
+                            <input type="hidden" id="returnItemId" name="returnItemId" value="{{$returnItemId}}">
                             <button type="submit" class="btn btn-primary" id="submit"> Save </button>
 
                         </form>
@@ -214,7 +218,7 @@
         $("#inputState").change(function () {
             showCountySpinner();
             // Here we can see the currently selected state (the state_id is the value)
-            console.log(inputState.value);
+            //console.log(inputState.value);
 
             // delete each county
             $(".countyName").each(function () {
@@ -267,7 +271,7 @@
         $("#county").change(function () {
             showCitySpinner();
             // Here we can see the currently selected state (the state_id is the value)
-            console.log(county.value);
+            //console.log(county.value);
 
             // delete each city
             $(".cityName").each(function () {
@@ -306,4 +310,3 @@
 
     </script>
 @endpush
-
