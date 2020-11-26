@@ -1,14 +1,15 @@
 @extends('layouts.master')
 
 @section('body')
-    <div class="container" id="container">
+  <link href=" {{ URL::asset('css/tutorialPage.css') }}" rel="stylesheet">
+  <div class="container" id="container">
         @guest
         <nav>
-                <div class="nav nav-tabs" id="nav-tab-base" role="tablist">
-                    <a class="nav-item nav-link active text-danger" id="nav-searchGuest-tab" data-toggle="tab" href="#nav-searchGuest" role="tab" aria-controls="nav-searchGuest" aria-selected="true">Search for a Regulation</a>
-                    <a class="nav-item nav-link text-danger" id="nav-register-tab" data-toggle="tab" href="#nav-register" role="tab" aria-controls="nav-register" aria-selected="false">Become a Contributor</a>
-                </div>
-            </nav>
+          <div class="nav nav-tabs" id="nav-tab-base" role="tablist">
+              <a class="nav-item nav-link active text-danger" id="nav-searchGuest-tab" data-toggle="tab" href="#nav-searchGuest" role="tab" aria-controls="nav-searchGuest" aria-selected="true">Search for a Regulation</a>
+              <a class="nav-item nav-link text-danger" id="nav-register-tab" data-toggle="tab" href="#nav-register" role="tab" aria-controls="nav-register" aria-selected="false">Become a Contributor</a>
+          </div>
+        </nav>
             <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-searchGuest" role="tabpanel" aria-labelledby="nav-searchGuest-tab">
               <h2>How to Search for a Regulation</h2>
