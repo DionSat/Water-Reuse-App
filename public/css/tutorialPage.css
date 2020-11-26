@@ -2,3 +2,11 @@ img {
   border: 5px solid #FFFFFF !important;
   border-radius: 5px;
 }
+
+.nav-tabs > a.active {
+  color: #000 !important;
+}
+
+.nav-tabs > a:not(.active) {
+  color: #FFF !important;
+}
