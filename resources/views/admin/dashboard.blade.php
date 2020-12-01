@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('body')
+  <link href=" {{ URL::asset('css/backgroundStyle.css') }}" rel="stylesheet">
   <div class="container">
     <h2 class="text-center text-light my-4">Dashboard</h2>
     <hr>

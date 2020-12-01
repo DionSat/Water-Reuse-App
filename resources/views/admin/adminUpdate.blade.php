@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('body')
+  <link href=" {{ URL::asset('css/backgroundStyle.css') }}" rel="stylesheet">
   <div class="container">
     <div class="row my-3">
       <a href="{{route("admin")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> Back

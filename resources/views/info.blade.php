@@ -1,14 +1,15 @@
 @extends('layouts.master')
 
 @section('body')
-    <div class="container" id="container">
+  <link href=" {{ URL::asset('css/tutorialPage.css') }}" rel="stylesheet">
+  <div class="container" id="container">
         @guest
         <nav>
-                <div class="nav nav-tabs" id="nav-tab-base" role="tablist">
-                    <a class="nav-item nav-link active text-danger" id="nav-searchGuest-tab" data-toggle="tab" href="#nav-searchGuest" role="tab" aria-controls="nav-searchGuest" aria-selected="true">Search for a Regulation</a>
-                    <a class="nav-item nav-link text-danger" id="nav-register-tab" data-toggle="tab" href="#nav-register" role="tab" aria-controls="nav-register" aria-selected="false">Become a Contributor</a>
-                </div>
-            </nav>
+          <div class="nav nav-tabs" id="nav-tab-base" role="tablist">
+              <a class="nav-item nav-link active" id="nav-searchGuest-tab" data-toggle="tab" href="#nav-searchGuest" role="tab" aria-controls="nav-searchGuest" aria-selected="true">Search for a Regulation</a>
+              <a class="nav-item nav-link" id="nav-register-tab" data-toggle="tab" href="#nav-register" role="tab" aria-controls="nav-register" aria-selected="false">Become a Contributor</a>
+          </div>
+        </nav>
             <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-searchGuest" role="tabpanel" aria-labelledby="nav-searchGuest-tab">
               <h2>How to Search for a Regulation</h2>
@@ -61,9 +62,9 @@
         @if (Auth::check() && Auth::user()->is_admin)
             <nav>
                 <div class="nav nav-tabs" id="nav-tab-admin" role="tablist">
-                    <a class="nav-item nav-link active text-danger" id="nav-search-tab" data-toggle="tab" href="#nav-search" role="tab" aria-controls="nav-search" aria-selected="true">Search for a Regulation</a>
-                    <a class="nav-item nav-link text-danger" id="nav-addReg-tab" data-toggle="tab" href="#nav-addReg" role="tab" aria-controls="nav-addReg" aria-selected="false">Add a New Regulation</a>
-                    <a class="nav-item nav-link text-danger" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Administrator Information</a>
+                    <a class="nav-item nav-link active" id="nav-search-tab" data-toggle="tab" href="#nav-search" role="tab" aria-controls="nav-search" aria-selected="true">Search for a Regulation</a>
+                    <a class="nav-item nav-link" id="nav-addReg-tab" data-toggle="tab" href="#nav-addReg" role="tab" aria-controls="nav-addReg" aria-selected="false">Add a New Regulation</a>
+                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Administrator Information</a>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
@@ -246,8 +247,8 @@
         @elseif(Auth::check())
         <nav>
                 <div class="nav nav-tabs" id="nav-tab-mid" role="tablist">
-                    <a class="nav-item nav-link active text-danger" id="nav-searchContrib-tab" data-toggle="tab" href="#nav-searchContrib" role="tab" aria-controls="nav-searchContrib" aria-selected="true">Search for a Regulation</a>
-                    <a class="nav-item nav-link text-danger" id="nav-addRegContrib-tab" data-toggle="tab" href="#nav-addRegContrib" role="tab" aria-controls="nav-addRegContrib" aria-selected="false">Add a New Regulation</a>
+                    <a class="nav-item nav-link active" id="nav-searchContrib-tab" data-toggle="tab" href="#nav-searchContrib" role="tab" aria-controls="nav-searchContrib" aria-selected="true">Search for a Regulation</a>
+                    <a class="nav-item nav-link" id="nav-addRegContrib-tab" data-toggle="tab" href="#nav-addRegContrib" role="tab" aria-controls="nav-addRegContrib" aria-selected="false">Add a New Regulation</a>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">

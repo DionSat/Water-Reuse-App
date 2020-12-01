@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('body')
+  <link href=" {{ URL::asset('css/backgroundStyle.css') }}" rel="stylesheet">
   <div class="container">
     <a href="{{route("admin")}}" class="btn btn-primary col-md-2"> <i class="fas fa-arrow-circle-left"></i> Back </a>
         <h3 class="text-center" style="color: white">Email Options</h3>

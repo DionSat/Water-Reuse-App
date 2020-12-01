@@ -1,7 +1,8 @@
 @extends('layouts.master')
 
 @section('body')
-    <h2 class="text-center text-light my-3"> Pending User Submissions by Location </h2>
+  <link href=" {{ URL::asset('css/backgroundStyle.css') }}" rel="stylesheet">
+  <h2 class="text-center text-light my-3"> Pending User Submissions by Location </h2>
     <div class="text-center text-light">These re-use submissions are awaiting administrator approval and are not shown to users in search results.</div>
     <div class="container mt-5">
         <div class="row justify-content-center">
