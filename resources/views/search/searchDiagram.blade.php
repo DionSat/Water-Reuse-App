@@ -20,7 +20,6 @@
         </div>
         <div class="container"  style="display: flex; justify-content: center; align-items: center; margin-bottom: 5px;">
             <div class="tree-navbar">
-                    <script src="https://balkangraph.com/js/latest/OrgChart.js"></script>
                     <button class="btn btn-primary fas search-btn" value="Kitchen Sink" title="Kitchen Sink"><img src="/img/app_KITCHEN SINK.jpg" height=30px width=30px/></button>
                     <button class="btn btn-primary fas search-btn" value="Food Disposer" title="Food Disposer"><img src="/img/app_KITCHEN SINK.jpg" height=30px width=30px/></button>
                     <button class="btn btn-primary fas search-btn" value="Dishwasher" title="Dishwasher"><img src="/img/app_DISHWASHER.jpg" height=30px width=30px/></button>
